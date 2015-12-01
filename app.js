@@ -20,17 +20,17 @@ mongoose.connect(dbConfig.url);
 //AWS TO BE SET IN HEROKU NEVER IN APP ITSELF
 var AWS_ACCESS_KEY = process.env.S3_KEY;
 var AWS_SECRET_KEY = process.env.S3_SECRET;
-var S3_BUCKET = process.env.S3_BUCKET
+var S3_BUCKET = process.env.S3_BUCKET;
 
 
 var app = express();
 
 //REMOVE THIS AND RUN FROM BIN
-var debug = require('debug')('passport-mongo');
-app.set('port', process.env.PORT || 3000);
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
+//var debug = require('debug')('passport-mongo');
+//app.set('port', process.env.PORT || 3000);
+//var server = app.listen(app.get('port'), function() {
+//  debug('Express server listening on port ' + server.address().port);
+//});
 //////////////////////////////
 
 function compile(str, path) {
@@ -45,7 +45,8 @@ app.use(stylus.middleware(
     { src: __dirname + '/public'
       , compile: compile
     }
-))
+));
+
 //app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
