@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= "English in China"
+    //link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-social.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-fileinput.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/large/style.l.css' media="(min-width: 640px)")
+    link(rel='stylesheet', href='/stylesheets/mobile/style.m.css' media="(max-width: 640px)")
+    //link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
+    script(src="/javascripts/jquery-2.1.4.min.js")
+    script(src="/javascripts/bootstrap.min.js")
+    script(src="/javascripts/util.js")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+  body
+    include ./header.jade
+    //div.container
+    block content
+
+    include ./footer.jade

@@ -1,0 +1,29 @@
+extends layout
+block content
+    .container
+        div.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+            h1.text-center.login-title Sign in
+            .panel.panel-default
+                .panel-body.flat-body
+                    form(class='form-signin', action='/login', method='POST')
+                        .form-group
+                            label.control-label(for='Username') Username
+                            input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+                        .form-group
+                            label.control-label(for='Password') Password
+                            input(type='password', name='password' class='form-control', placeholder='Password', required)
+                        button.col-xs-4(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+                        span.clearfix
+                    .row.omb_row-sm-offset-3.omb_loginOr
+                        .col-xs-12.col-sm-12 Login using
+                            hr.omb_hrOr
+                    .form-group
+                        a(class='btn btn-social btn-facebook', href='/login/facebook') Facebook
+                        a(href='/login/twitter', class='btn btn-social btn-twitter') Twitter
+                .panel-footer
+                    a(href='/signup', class='text-center new-account') Create an account
+                #message
+                if message
+                    h1.text-center.error-message #{message}
+
+

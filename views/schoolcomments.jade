@@ -1,0 +1,13 @@
+block content
+   form(action='/insertcomment', method='POST')
+      .form-group
+         label.control-label(for='Comments') Comments
+         textarea(rows='4', name='comment', class='form-control', placeholder='Type your comment here',required)
+      input(type="hidden" name="school" value='#{school.id}')
+      button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
+      span.clearfix
+   each comment in comments
+      li.list-group-item
+         if comment.user
+            h3 #{comment.user.firstName} #{comment.user.lastName}
+         div #{comment.comment}

@@ -1,0 +1,18 @@
+extends layout
+block content
+    .container
+        include searchnavigation
+        div.row
+            div.col-sm-10.col-md-8
+                ul.list-group
+                    each school in schools
+                        li.list-group-item
+                            a(href="/school/#{school.id}")
+                                div.col-sm-4.col-md-4
+                                    img.img-responsive(width="100%", src="#{school.pictureUrl}")
+                            div
+                                a(href="/search/school?schoolInfo=&province=#{school.province}&city=-1")
+                                    h3 #{provinces[school.province]}
+                                h2.list-group-item-heading #{school.name}
+                                p.list-group-item-text #{school.description}
+

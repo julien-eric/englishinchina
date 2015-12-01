@@ -1,0 +1,33 @@
+extends layout
+block content
+    div.container
+        div.row
+            div.col-sm-6.col-md-4.col-md-offset-4
+                h1.text-center.login-title Registration Details
+                div.signup-wall
+                    form(class='form-signin', action='/signup', method='POST')
+                        .form-group
+                            label.control-label(for='Username') Username
+                            input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
+                        .form-group
+                            label.control-label(for='Password') Password
+                            input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
+                        .form-group
+                            label.control-label(for='Email') Email
+                            input(type='email', name='email', class='form-control', placeholder='Email',required)
+                        .form-group
+                            label.control-label(for='First Name') First Name
+                            input(type='text', name='firstName', class='form-control', placeholder='First Name',required)
+                        .form-group
+                            label.control-label(for='Last Name') Last Name
+                            input(type='text', name='lastName', class='form-control', placeholder='Last Name',required)
+                        img#preview.img-circle.col-sm-12(src="/images/default.png")
+                        input#avatarUrl(type="hidden" name="avatarUrl" value="/public/default.png")
+                        input#file_input(type="file")
+                        p Please select a file
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Register
+                        span.clearfix
+                        a(href='/home', class='extra-link') I already have an account
+                #message
+                    if message
+                        h1.text-center.error-message #{message}

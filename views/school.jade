@@ -1,0 +1,14 @@
+extends layout
+block content
+   div.school-page
+      div.container.school-background
+         .row
+            .school-image-container
+               img.img-responsive.school-image(width="100%", src="#{school.pictureUrl}")
+            div.col-sm-12.col-md-8
+               a(href="/search/school?schoolInfo=&province=#{school.province}&city=-1")
+                  h3 #{provinces[school.province]}
+               h1.login-title #{school.name}
+               span.clearfix
+               h4.login-title #{school.description}
+               include schoolcomments

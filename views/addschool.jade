@@ -1,0 +1,33 @@
+extends layout
+block content
+   div.container
+      div.row
+         div.col-sm-6.col-md-6.col-md-offset-3.col-sm-offset-3
+            h1.text-center.login-title School Registration Details
+            form(action='/addschool', method='POST')
+               .form-group
+                  label.control-label(for='Name') Name
+                  input(type='text', name='name', class='form-control', placeholder='School Name',required, autofocus)
+               .form-group
+                  label.control-label(for='Picture') Picture
+                  img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src="/images/default.png")
+                  input#avatarUrl(type="hidden" name="avatarUrl" value="/public/default.png")
+                  span(class="btn btn-default btn-file") Browse
+                     input#file_input(type="file")
+               .form-group
+                  label.control-label(for='Description') Description
+                  textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
+               .form-group
+                  label.control-label(for='Province') Province
+                  select.form-control(name="province")
+                     option(value="0") Anhui
+                     option(value="1") Fujian
+                     option(value="2") Gansu
+                     option(value="3") Guangdong
+                     option(value="4") Guizhou
+                     option(value="5") Hainan
+               button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
+               span.clearfix
+            #message
+               if message
+                  h1.text-center.error-message #{message}
