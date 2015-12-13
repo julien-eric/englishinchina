@@ -18,11 +18,29 @@ module.exports = {
         //var file = fs.createWriteStream('./public/images/' + filename);
         s3.getObject(s3_params,function(err, data){
             var gmImage = gm(data.Body);
-            gmImage.resize(200);
-            gmImage.write("./public/images/" + filename, function (err) {
-                console.log("ERROR" + err)
+            gmImage.resize(200).filesize({ bufferStream: true }, function(err, size){
+                gmImage.stream(function(err, stdout, stderr) {
+
+                    var filesize = parseInt(size.substring(0, size.length-3));
+
+                    var data = {
+                        Bucket: "englishinchina",
+                        Key: "THUMBNAIL" + filename,
+                        Body: stdout,
+                        ContentType: mime.lookup(filename),
+                        ContentLength : filesize
+                    };
+                    s3.putObject(data, function(err, res) {
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            console.log("done");
+                        }
+
+                    });
+                })
             });
-        //}).createReadStream().pipe(file);
         });
     },
 
