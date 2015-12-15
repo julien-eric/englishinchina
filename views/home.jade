@@ -9,7 +9,7 @@ block content
                         li.list-group-item
                             a(href="/school/#{school.id}")
                                 div.col-sm-4.col-md-4
-                                    img.img-responsive(width="100%", src="#{school.pictureUrl}")
+                                    img.img-responsive(width="100%", src="#{returnThumbnail(school.pictureUrl)}")
                             div
                                 a(href="/search/school?schoolInfo=&province=#{school.province}&city=-1")
                                     h3 #{provinces[school.province]}

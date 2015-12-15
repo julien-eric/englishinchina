@@ -4,7 +4,9 @@ var schools = require('../schools');
 var users = require('../users');
 var comments = require('../comments');
 var provinces = require('../provinces');
+var pictures = require('../pictures');
 var aws = require('aws-sdk');
+var url = require('url');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -62,7 +64,12 @@ module.exports = function(passport){
                 res.render('home', {
                     schools:schoolList,
                     user: req.user,
-                    provinces: provinces.provinces
+                    provinces: provinces.provinces,
+                    returnThumbnail: function(link){
+                            var hostname = link.substring(0, link.lastIndexOf('/'));
+                            var pathname = link.substring(link.lastIndexOf('/'));
+                            return hostname + "/th_" + pathname.substring(1);
+                        }
                 })
         });
     });
@@ -164,5 +171,22 @@ module.exports = function(passport){
         })
     });
 
+
+    /**********************************
+     //COMMENTS
+     ***********************************/
+    router.post('/pictureuploaded', function(req,res){
+        pictures.createResponsivePictures(req.query.url, req.query.filename, req.query.filesize, function(){
+            console.log("DAMN")
+        })
+    });
+
+
+
+
+
     return router;
+
+
+
 }
