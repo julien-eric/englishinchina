@@ -8,7 +8,7 @@ var dbConfig = require('./database');
 var mongoose = require('mongoose');
 var stylus = require('stylus');
 var schools = require('./schools');
-var gm = require('gm');
+var gm = require('/app/gm');
 
 // Connect to DB
 //mongoose.connect(dbConfig.url,function(){
