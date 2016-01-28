@@ -1,0 +1,27 @@
+if total>1
+   h4 Total #{total} Results
+   nav
+      ul.pagination.pagination-lg
+         if currentPage == 1
+            li.disabled
+               a(href="/#}" aria-label="Previous") &laquo;
+                  span(aria-hidden="true")
+         else
+            li
+               a(href="/page/#{Number(currentPage)-1}" aria-label="Previous") &laquo;
+                  span(aria-hidden="true")
+
+         - for (var i = 0; i < totalPages; ++i) {
+            if i+1 == currentPage
+               li.active
+                  a(href="/page/#{i+1}") #{i+1}
+                     span.sr-only (current)
+            else
+               li
+                  a(href="/page/#{i+1}") #{i+1}
+                     span.sr-only (current)
+         - }
+
+         li
+            a(href="/page/#{Number(currentPage)+1}" aria-label="Next") &raquo;
+               span(aria-hidden="true")

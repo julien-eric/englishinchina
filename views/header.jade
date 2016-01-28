@@ -1,4 +1,4 @@
-nav.navbar.navbar-default
+nav.navbar.navbar-default.navbar-custom
     .container.container-fluid
         // Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -7,7 +7,7 @@ nav.navbar.navbar-default
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.navbar-brand(href='/home') ENGLISHINCHINA
+            a.navbar-brand(href='/') ENGLISHINCHINA
         // Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
             ul.nav.navbar-nav
@@ -16,7 +16,7 @@ nav.navbar.navbar-default
                 //        | Home
                 //        span.sr-only (current)
                 li
-                    a(href='/addschool') New school
+                    a(href='/school/addschool') New school
                 //li.dropdown
                 //    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                 //        | Dropdown1
@@ -37,13 +37,15 @@ nav.navbar.navbar-default
             //SIGNIN OR USER DROPDOWN
             ul.nav.navbar-nav.navbar-right
                 if locals.user
+                    li.profile-picture
+                        div.img-circle(style="background-image: url('#{returnThumbnail(user.avatarUrl)}');")
                     li.dropdown
                         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                             | #{user.firstName} #{user.lastName}
                             span.caret
                         ul.dropdown-menu
                             li
-                                a(href='#') My Profile
+                                a(href='/user') My Profile
                             li
                                 a(href='#') Edit
                             li
@@ -53,4 +55,4 @@ nav.navbar.navbar-default
                                 a(href='/signout') Sign Out
                 else
                     li
-                        a(href='/home') Sign In
+                        a(href='/login') Sign In

@@ -1,18 +1,44 @@
 extends layout
 block content
+    if featured
+        .jumbotron.custom-jumbotron
+                .carousel.slide#myCarousel(data-ride="carousel")
+
+                    <!-- Indicators -->
+                    ol.carousel-indicators
+                        each featuredSchool, i in featured
+                            li(data-target="#myCarousel" data-slide-to="#{i}" class="#{i === 0 ? 'active' : ''}")
+
+                    .carousel-inner(role="listbox")
+                        each featuredSchool, i in featured
+                            .item.featured-school-item(class="#{i === 0 ? 'active' : ''}" style="background-image: url('#{returnLarge(featuredSchool.pictureUrl)}');")
+                                //img.img-responsive.featured-school(src="#{featuredSchool.pictureUrl}")
+                                .carousel-caption
+                                    h1 #{featuredSchool.name}
+                                    p
+                                        a.btn.btn-primary.btn-lg(href="/school/id/#{featuredSchool._id}" role="button") Learn more
+
+
+
     .container
         include searchnavigation
         div.row
-            div.col-sm-10.col-md-8
+            div.school-list-wrapper.col-sm-12.col-md-8
                 ul.list-group
                     each school in schools
-                        li.list-group-item
-                            a(href="/school/#{school.id}")
-                                div.col-sm-4.col-md-4
+                        li.list-group-item.school-list
+                            div.col-sm-5.col-md-5.school-list-image
+                                a(href="/school/id/#{school.id}")
                                     img.img-responsive(width="100%", src="#{returnThumbnail(school.pictureUrl)}")
-                            div
-                                a(href="/search/school?schoolInfo=&province=#{school.province}&city=-1")
-                                    h3 #{provinces[school.province]}
-                                h2.list-group-item-heading #{school.name}
-                                p.list-group-item-text #{school.description}
-
+                            div.col-sm-7.col-md-7.school-list-information
+                                a(href="/school/id/#{school.id}")
+                                    h2.list-group-item-heading #{school.name}
+                                a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1")
+                                    h4 China / #{school.province.name} / Dongying
+                                h5 Training School
+                                .rating(data-rate-value="#{roundToPoint5(school.averageRating)}")
+                                hr
+                                div.school-list-text
+                                    p.list-group-item-text #{school.description}
+                            .clearfix
+        include paginate

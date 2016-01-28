@@ -8,12 +8,16 @@ var dbConfig = require('./database');
 var mongoose = require('mongoose');
 var stylus = require('stylus');
 var schools = require('./schools');
-var gm = require('/app/gm');
+var provinces = require('./provinces');
+var provincesController = require('./controllers/provinces');
+var citiesController = require('./controllers/cities');
+var chinaDB = require('chinesecities');
 
 // Connect to DB
 //mongoose.connect(dbConfig.url,function(){
 //  /* Drop the DB */
-//  mongoose.connection.db.dropDatabase();
+//    mongoose.connection.db.dropDatabase();
+//    //mongoose.connection.db.dropCollection('Province', function(err, result) {});
 //});
 // Reset DB
 mongoose.connect(dbConfig.url);
@@ -22,7 +26,6 @@ mongoose.connect(dbConfig.url);
 var AWS_ACCESS_KEY = process.env.S3_KEY;
 var AWS_SECRET_KEY = process.env.S3_SECRET;
 var S3_BUCKET = process.env.S3_BUCKET;
-
 
 var app = express();
 
@@ -58,12 +61,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
-// TODO - Why Do we need this key ?
+
 app.use(expressSession({
-  cookie: { maxAge: 30* 60000 },
-  secret: 'mySecretKey',
-  saveUninitialized: true,
-  resave: true}));
+    cookie: { maxAge: 30* 60000 },
+    secret: 'mySecretKey',
+    saveUninitialized: true,
+    resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -77,7 +80,9 @@ var initPassport = require('./passport/init');
 initPassport(passport);
 
 var routes = require('./routes/index')(passport);
+var schoolRoutes = require('./routes/schools')(passport);
 app.use('/', routes);
+app.use('/school', schoolRoutes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -85,6 +90,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
 
 // development error handler
 // will print stacktrace
@@ -97,5 +104,13 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+
+
+//provincesController.initProvinces(provinces.provinces);
+var cities = chinaDB.py;
+citiesController.initCities(cities);
+//citiesController.fetchCities();
+
 
 module.exports = app;

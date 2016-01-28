@@ -1,5 +1,5 @@
 block content
-.container.container-fluid.col-sm-8.col-md-8.search-navigation
+.container.container-fluid.col-sm-12.col-md-8.search-navigation
    // Brand and toggle get grouped for better mobile display
    .navbar-header
       button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
@@ -9,25 +9,32 @@ block content
          span.icon-bar
    // Collect the nav links, forms, and other content for toggling
    .collapse.navbar-collapse#bs-example-navbar-collapse-1
-      form.navbar-form.navbar-left(role='search', action='/search/school', method='GET')
+      form.navbar-form.navbar-left(role='search', action='/school/search', method='GET')
          .form-group
             input.form-control(type='text', placeholder='School Name', name='schoolInfo',)
          .form-group
             .navbar-form.navbar-left(role='province')
-               select.form-control(name="province")
+               select#provinceSelect.form-control(name="province")
                   option(value="-1") Province
-                  option(value="0") Anhui
-                  option(value="1") Fujian
-                  option(value="2") Gansu
-                  option(value="3") Guangdong
-                  option(value="4") Guizhou
-                  option(value="5") Hainan
+                  option(value="-2") =============
+                  optgroup(label="Provinces")
+                     each province,i in provinces
+                        option(value=province.code) #{province.name} - #{province.chineseName}
+                  optgroup(label="Autonomous Regions")
+                     option(value=31) Guangxi
+                     option(value=32) Inner Mongolia
+                     option(value=33) Ningxia
+                     option(value=34) Tibet
+                     option(value=35) Xinjiang
+                  optgroup(label="Special Administrative Regions (SAR)")
+                     option(value=41) Hong Kong
+                     option(value=42) Macao (Macau)
          .form-group
             .navbar-form.navbar-left(role='city')
-               select.form-control(name="city")
+               select#citySelect.form-control(name="city")
                   option(value="-1") City
-                  option(value="0") Dongying
-                  option(value="1") Jinan
+                  //each city,i in cities
+                  //   option(value=i) #{city.pyName} - #{city.cnName}
          .navbar-form.navbar-right.col-md-4.col-sm-4.col-lg-4(role='search')
             button.btn.btn-primary.col-md-12(type='submit') Search
 

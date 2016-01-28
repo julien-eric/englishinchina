@@ -1,16 +1,22 @@
-$(document).ready(
-    function(){
-        (function () {
-        document.getElementById("file_input").onchange = function () {
-            var files = document.getElementById("file_input").files;
-            var file = files[0];
-            if (file == null) {
-                alert("No file selected.");
-            }
-            else {
-                get_signed_request(file);
-            }
-        };
+
+
+$(document).ready(function() {
+
+
+
+    (function () {
+        if(document.getElementById("file_input")){
+            document.getElementById("file_input").onchange = function () {
+                var files = document.getElementById("file_input").files;
+                var file = files[0];
+                if (file == null) {
+                    alert("No file selected.");
+                }
+                else {
+                    get_signed_request(file);
+                }
+            };
+        }
     })();
 
     function get_signed_request(file) {
@@ -30,11 +36,19 @@ $(document).ready(
         xhr.send();
     }
 
-
     function upload_file(file, signed_request, url) {
         var xhr = new XMLHttpRequest();
         xhr.open("PUT", signed_request);
         xhr.setRequestHeader('x-amz-acl', 'public-read');
+        xhr.upload.onprogress = function(event){
+            if (event.lengthComputable)
+            {
+                //evt.loaded the bytes browser receive
+                //evt.total the total bytes seted by the header
+                var percentComplete = (event.loaded / event.total)*100;
+                $("#progress-bar-picture").css('width', percentComplete+'%').attr('aria-valuenow', percentComplete);
+            }
+        }
         xhr.onload = function () {
             if (xhr.status === 200) {
                 document.getElementById("preview").src = url;
@@ -54,17 +68,72 @@ $(document).ready(
                 xhr2.send();
             }
         };
-        xhr.onerror = function () {
-            alert("Could not upload file.");
+        xhr.onerror = function (err) {
+            alert("Could not upload file." + err);
         };
         xhr.send(file);
     }
 
-    var returnThumbnail= function(url){
-        var a = document.createElement('a');
-        a.href = url;
-        var pathname = a.pathname;
-        var hostname = a.hostname;
-        return hostname + "/th_" + pathname.substring(1);
-    }
+
+    $('#provinceSelect').on('change', function() {
+        $.ajax({url: "/cities/" + this.value, success: function(results){
+            $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
+            var $element = $("#citySelect");
+            for(var i = 0; i <= results.length; i++){
+                $element.append($("<option></option>")
+                    .attr("value", results[i].code).text(results[i].pinyinName + " - " + results[i].chineseName));
+            }
+        }});
+    });
+
+    $(".rating").rate({
+        readonly: false
+    });
+    $(".rating").rate("destroy");
+    //Destroy makes it uninteractive, but doesn't remove the DOM elements.
+
+    var slider = new Slider('#ex1', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider2 = new Slider('#ex2', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider3 = new Slider('#ex3', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider4 = new Slider('#ex4', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider5 = new Slider('#ex5', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider6 = new Slider('#ex6', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider7 = new Slider('#ex7', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+    var slider8 = new Slider('#ex8', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+
+
 });
+
+
