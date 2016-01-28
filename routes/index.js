@@ -10,7 +10,6 @@ var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
 var provincesController = require('../controllers/provinces');
 var citiesController = require('../controllers/cities');
-var chinaDB = require('chinesecities');
 
 /************************************************************************************************************
  *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -54,7 +53,7 @@ module.exports = function(passport){
                         returnThumbnail: pictureinfo.returnThumbnail,
                         returnLarge: pictureinfo.returnLarge,
                         roundToPoint5: jadefunctions.roundToPoint5,
-                        cities: chinaDB.py,
+                        cities: {},
                         currentPage: 1,
                         total: count,
                         totalPages: ((count - (count%pageSize))/pageSize)+1

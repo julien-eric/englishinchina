@@ -11,7 +11,6 @@ var schools = require('./schools');
 var provinces = require('./provinces');
 var provincesController = require('./controllers/provinces');
 var citiesController = require('./controllers/cities');
-var chinaDB = require('chinesecities');
 
 // Connect to DB
 //mongoose.connect(dbConfig.url,function(){
@@ -108,8 +107,8 @@ if (app.get('env') === 'development') {
 
 
 //provincesController.initProvinces(provinces.provinces);
-var cities = chinaDB.py;
-citiesController.initCities(cities);
+//var cities = chinaDB.py;
+//citiesController.initCities(cities);
 //citiesController.fetchCities();
 
 
