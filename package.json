@@ -19,6 +19,7 @@
     "bcrypt-nodejs" : "*",
     "connect-flash": "^0.1.1",
     "stylus": "*",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "gm": "*"
   }
 }
