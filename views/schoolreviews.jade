@@ -1,24 +1,17 @@
 block content
-   //if locals.user
-   //   form(action='/insertcomment', method='POST')
-   //      .form-group
-   //         label.control-label(for='Comments') Comments
-   //         textarea(rows='4', name='comment', class='form-control', placeholder='Type your comment here',required)
-   //      input(type="hidden" name="school" value='#{school.id}')
-   //      button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
-   //      span.clearfix
-
+   span.clearfix
+   h2 Reviews
+   hr
    each review in reviews
       li.list-group-review.col-sm-10.col-md-4.col-lg-4
-         .image-holder
-            img.user-avatar(src="#{review.user.avatarUrl}")
+         .image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
          .user-information
             if review.user
-               .name #{review.user.firstName} #{review.user.lastName}
+               a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
                .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
          span.clearfix
          if review.average_rating
-            .rating(data-rate-value="#{roundToPoint5(review.average_rating)}")
+            .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
          div #{review.comment}
          h5
             a(href="#") Read More

@@ -33,9 +33,8 @@ module.exports = function(passport) {
                     school: school,
                     user: req.user,
                     reviews: jadefunctions.trunkSchoolReviews(reviews,200),
-                    roundToPoint5: jadefunctions.roundToPoint5,
-                    returnThumbnail: pictureinfo.returnThumbnail,
-                    returnLarge: pictureinfo.returnLarge
+                    jadefunctions: jadefunctions,
+                    pictureInfo: pictureinfo
                 });
             })
         });
@@ -50,8 +49,7 @@ module.exports = function(passport) {
             provincesController.fetchProvinces(function(provinces){
                 res.render('addschool', {
                     user: req.user,
-                    returnThumbnail: pictureinfo.returnThumbnail,
-                    returnLarge: pictureinfo.returnLarge,
+                    pictureInfo: pictureinfo,
                     provinces: provinces
                 });
             });
@@ -73,8 +71,7 @@ module.exports = function(passport) {
                                     reviews: reviews,
                                     provinces: provinces,
                                     roundToPoint5: jadefunctions.roundToPoint5,
-                                    returnThumbnail: pictureinfo.returnThumbnail,
-                                    returnLarge: pictureinfo.returnLarge
+                                    pictureInfo: pictureinfo
                                 });
                             })
                         });
@@ -87,10 +84,8 @@ module.exports = function(passport) {
      //REVIEWS
      ***********************************************************************************************************************************/
     /************************************************************************************************************
-     *searchSchool : Method for search all schools, it will return any school that has some of the information
-     * Param : Query, string that will be looked for as part of the schools name
-     * [Province] optional.
-     * [City] optional
+     *WriteReview : Page for users to write review for school specified by id
+     * Param : School id
      *************************************************************************************************************/
     router.get('/id/:id/writereview', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
@@ -99,7 +94,7 @@ module.exports = function(passport) {
             res.render('writereview', {
                 user: req.user,
                 school: school,
-                returnThumbnail: pictureinfo.returnThumbnail
+                pictureInfo: pictureinfo
             });
         });
     });
@@ -115,8 +110,18 @@ module.exports = function(passport) {
         reviews.insertReviewforSchool(req, function(schoolId, averageRating){
             reviews.findNumberofReviews(schoolId, function(numberOfReviews){
                 schools.updateSchoolRating(schoolId,averageRating,numberOfReviews);
-                console.log("Back")
-                //TODO Redirect to school
+                console.log("Back");
+                schools.findSchoolById(schoolId, function (school) {
+                    reviews.findReviews(school, function (reviews) {
+                        res.render('school', {
+                            school: school,
+                            user: req.user,
+                            reviews: reviews,
+                            pictureInfo: pictureinfo,
+                            jadefunctions: jadefunctions
+                        });
+                    })
+                });
             });
         })
     });
@@ -133,6 +138,9 @@ module.exports = function(passport) {
         var schoolInfo = req.query.schoolInfo;
         var province = req.query.province;
         var city = req.query.city;
+
+
+
         schools.searchSchools(schoolInfo, province, city, function (schoolList) {
             if (schoolList != undefined && schoolList.length > 0){
                 schoolList = jadefunctions.trunkSchoolDescription(schoolList);
@@ -142,9 +150,9 @@ module.exports = function(passport) {
                     schools: schoolList,
                     user: req.user,
                     provinces: provinces,
-                    returnThumbnail: pictureinfo.returnThumbnail,
-                    returnLarge: pictureinfo.returnLarge,
-                    roundToPoint5: jadefunctions.roundToPoint5
+                    pictureInfo: pictureinfo,
+                    searchQuery: schoolInfo,
+                    jadefunctions: jadefunctions
                 });
             });
         });

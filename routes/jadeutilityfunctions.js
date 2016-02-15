@@ -28,11 +28,36 @@ module.exports = {
         return reviews;
     },
 
+    returnNameforProvinceCode: function(code){
+        switch(code){
+            case 0:
+                return "Training School"
+            case 1:
+                return "Public School"
+            case 2:
+                return "Contractual Training School"
+
+        }
+
+    },
+
     /************************************************************************************************************
      *roundToPoint5 : Round to closest .5 for school ratings..
      *************************************************************************************************************/
     roundToPoint5 : function(rating){
         return (Math.round(rating*2))/2
+    },
+
+    /************************************************************************************************************
+     *capitalize: Capitalize first letter of a string
+     *************************************************************************************************************/
+    capitalize : function (str) {
+        var strVal = '';
+        str = str.split(' ');
+        for (var chr = 0; chr < str.length; chr++) {
+            strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+        }
+        return strVal
     }
 
 }

@@ -51,6 +51,17 @@ module.exports = {
                 callback(result);
             }
         });
+    },
+
+    cityByCode: function(cityCode, callback){
+        City.findOne({code:cityCode},function(err, result){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(result);
+            }
+        });
     }
 
 }

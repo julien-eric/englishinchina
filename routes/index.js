@@ -10,6 +10,7 @@ var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
 var provincesController = require('../controllers/provinces');
 var citiesController = require('../controllers/cities');
+var usersController = require('../controllers/users');
 
 /************************************************************************************************************
  *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -22,6 +23,8 @@ var isAuthenticated = function (req, res, next) {
     // if the user is not authenticated then redirect him to the login page
     res.redirect('/login');
 }
+
+
 
 
 module.exports = function(passport){
@@ -50,9 +53,8 @@ module.exports = function(passport){
                         schools:truckSchoolList,
                         user: req.user,
                         provinces: provinces,
-                        returnThumbnail: pictureinfo.returnThumbnail,
-                        returnLarge: pictureinfo.returnLarge,
-                        roundToPoint5: jadefunctions.roundToPoint5,
+                        pictureInfo: pictureinfo,
+                        jadefunctions: jadefunctions,
                         cities: {},
                         currentPage: 1,
                         total: count,
@@ -66,20 +68,21 @@ module.exports = function(passport){
     router.get('/page/:page', function(req, res){
         var page = req.params.page;
         var pageSize = 2;
-        schools.loadSchools(function(count, schoolList){
-            var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
-            res.render('home', {
-                schools:truckSchoolList,
-                user: req.user,
-                provinces: provinces.provinces,
-                returnThumbnail: pictureinfo.returnThumbnail,
-                returnLarge: pictureinfo.returnLarge,
-                roundToPoint5: jadefunctions.roundToPoint5,
-                currentPage: page,
-                total: count,
-                totalPages: ((count - (count%pageSize))/pageSize)+1
-            })
-        },pageSize, page-1);
+        provincesController.fetchProvinces(function(provinces) {
+            schools.loadSchools(function (count, schoolList) {
+                var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
+                res.render('home', {
+                    schools: truckSchoolList,
+                    user: req.user,
+                    provinces: provinces,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions,
+                    currentPage: page,
+                    total: count,
+                    totalPages: ((count - (count % pageSize)) / pageSize) + 1
+                })
+            }, pageSize, page - 1);
+        });
     });
 
 
@@ -153,9 +156,62 @@ module.exports = function(passport){
      * This method is not the general one to view a different user.
      *************************************************************************************************************/
     router.get('/user', isAuthenticated, function(req, res){
-        res.render('user', {
-            user: req.user,
-            provinces: provinces.provinces
+        reviews.findReviewsByUser(req.user._id, function(reviews){
+            res.render('user', {
+                user: req.user,
+                reviews: reviews,
+                pictureInfo: pictureinfo,
+                jadefunctions: jadefunctions
+            });
+        });
+    });
+
+    /************************************************************************************************************
+     *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
+     *************************************************************************************************************/
+    router.route('/user/edit')
+        .get(function(req, res){
+            usersController.findUserById(req.user._id, function(user){
+                res.render('edituser', {
+                    user: user,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions
+                });
+            });
+        })
+        .post(function(req,res){
+            usersController.updateUser(req, function(user){
+                res.render('edituser', {
+                    user: user,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions
+                });
+            });
+        });
+
+    router.route('/signup')
+        .get( function(req, res){
+            res.render('register',{message: req.flash('message')});
+        })
+        .post(passport.authenticate('signup', {
+            successRedirect: '/',
+            failureRedirect: '/signup',
+            failureFlash : true
+        }));
+
+    /************************************************************************************************************
+     *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
+     *************************************************************************************************************/
+    router.get('/user/:id', function(req, res){
+        usersController.findUserById(req.params.id, function(user){
+            reviews.findReviewsByUser(req.params.id, function(reviews){
+                res.render('user', {
+                    user: user,
+                    reviews: reviews,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions
+                });
+            });
         });
     });
 

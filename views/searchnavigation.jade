@@ -20,15 +20,6 @@ block content
                   optgroup(label="Provinces")
                      each province,i in provinces
                         option(value=province.code) #{province.name} - #{province.chineseName}
-                  optgroup(label="Autonomous Regions")
-                     option(value=31) Guangxi
-                     option(value=32) Inner Mongolia
-                     option(value=33) Ningxia
-                     option(value=34) Tibet
-                     option(value=35) Xinjiang
-                  optgroup(label="Special Administrative Regions (SAR)")
-                     option(value=41) Hong Kong
-                     option(value=42) Macao (Macau)
          .form-group
             .navbar-form.navbar-left(role='city')
                select#citySelect.form-control(name="city")

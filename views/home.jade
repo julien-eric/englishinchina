@@ -11,7 +11,7 @@ block content
 
                     .carousel-inner(role="listbox")
                         each featuredSchool, i in featured
-                            .item.featured-school-item(class="#{i === 0 ? 'active' : ''}" style="background-image: url('#{returnLarge(featuredSchool.pictureUrl)}');")
+                            .item.featured-school-item(class="#{i === 0 ? 'active' : ''}" style="background-image: url('#{pictureInfo.returnLarge(featuredSchool.pictureUrl)}');")
                                 //img.img-responsive.featured-school(src="#{featuredSchool.pictureUrl}")
                                 .carousel-caption
                                     h1 #{featuredSchool.name}
@@ -22,23 +22,34 @@ block content
 
     .container
         include searchnavigation
+        if searchQuery
+            h2 You have searched for #{searchQuery}
         div.row
             div.school-list-wrapper.col-sm-12.col-md-8
                 ul.list-group
-                    each school in schools
-                        li.list-group-item.school-list
-                            div.col-sm-5.col-md-5.school-list-image
-                                a(href="/school/id/#{school.id}")
-                                    img.img-responsive(width="100%", src="#{returnThumbnail(school.pictureUrl)}")
-                            div.col-sm-7.col-md-7.school-list-information
-                                a(href="/school/id/#{school.id}")
-                                    h2.list-group-item-heading #{school.name}
-                                a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1")
-                                    h4 China / #{school.province.name} / Dongying
-                                h5 Training School
-                                .rating(data-rate-value="#{roundToPoint5(school.averageRating)}")
-                                hr
-                                div.school-list-text
-                                    p.list-group-item-text #{school.description}
-                            .clearfix
+                    if schools
+                        each school in schools
+                            li.list-group-item.school-list
+                                div.col-sm-5.col-md-5.school-list-image
+                                    a(href="/school/id/#{school.id}")
+                                        img.img-responsive(width="100%", src="#{pictureInfo.returnThumbnail(school.pictureUrl)}")
+                                div.col-sm-7.col-md-7.school-list-information
+                                    a(href="/school/id/#{school.id}")
+                                        h2.list-group-item-heading #{school.name}
+                                    //a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1")
+                                    a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") China /
+                                    a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") #{school.province.name} /
+                                    if school.city
+                                        a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
+                                    else
+                                        a(href="/school/search?schoolInfo=&province=-1&city=1") Dongying
+
+                                    h5 #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+                                    .rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+                                    hr
+                                    div.school-list-text
+                                        p.list-group-item-text #{school.description}
+                                .clearfix
+                    else
+                        h2 No results
         include paginate

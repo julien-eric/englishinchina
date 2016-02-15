@@ -15,8 +15,9 @@ nav.navbar.navbar-default.navbar-custom
                 //    a(href='/home')
                 //        | Home
                 //        span.sr-only (current)
-                li
-                    a(href='/school/addschool') New school
+                if locals.user
+                    li
+                        a(href='/school/addschool') New school
                 //li.dropdown
                 //    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                 //        | Dropdown1
@@ -38,7 +39,7 @@ nav.navbar.navbar-default.navbar-custom
             ul.nav.navbar-nav.navbar-right
                 if locals.user
                     li.profile-picture
-                        div.img-circle(style="background-image: url('#{returnThumbnail(user.avatarUrl)}');")
+                        div.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                     li.dropdown
                         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                             | #{user.firstName} #{user.lastName}
@@ -47,7 +48,7 @@ nav.navbar.navbar-default.navbar-custom
                             li
                                 a(href='/user') My Profile
                             li
-                                a(href='#') Edit
+                                a(href='/user/edit') Edit
                             li
                                 a(href='#') Settings
                             li.divider(role='separator')

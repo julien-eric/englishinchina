@@ -1,5 +1,6 @@
 var School = require('./models/school');
 var provincesController = require('./controllers/provinces');
+var citiesController = require('./controllers/cities');
 
 module.exports = {
 
@@ -15,6 +16,7 @@ module.exports = {
         School.count({},function(err,count){
             School.find()
                 .populate("province")
+                .populate("city")
                 .limit(pageSize)
                 .skip(pageSize * page)
                 .exec(function(err,schools){
@@ -25,8 +27,10 @@ module.exports = {
 
     addSchool : function (req, callback) {
         provincesController.provinceByCode(req.body.province, function(province){
-            School.create({ user: req.user._id, name:req.body.name, description:req.body.description, province:province, pictureUrl: req.body.avatarUrl, averageRating:-1 }, function (err, newSchool){
-                callback(err, newSchool);
+            citiesController.cityByCode(req.body.city, function(city){
+                School.create({ user: req.user._id, name:req.body.name, description:req.body.description, schoolType: req.body.schoolType, province:province, city:city, pictureUrl: req.body.avatarUrl, averageRating:-1 }, function (err, newSchool){
+                        callback(err, newSchool);
+                });
             });
         });
 
@@ -56,18 +60,28 @@ module.exports = {
         });
     },
 
-    searchSchools : function(schoolInfo, province, city, callback){
-        if(province != -1){
-            School.
-                find({name: new RegExp(schoolInfo, "i")}).
-                populate("province").
-                where('province').equals(province).
-                limit(10).
-                exec(function(err,schoolList){callback(schoolList)});
+    searchSchools : function(schoolInfo, prov, city, callback){
+
+        if(prov != -1 && city != -1){
+
+        }
+
+        if(prov != -1){ //Province is specified
+            provincesController.provinceByCode(prov, function(provModel){
+                School.
+                    find({name: new RegExp(schoolInfo, "i")}).
+                    populate("province").
+                    populate("city").
+                    where('province').equals(provModel).
+                    limit(10).
+                    exec(function(err,schoolList){callback(schoolList)});
+            });
         }
         else{
-            School.
-                find({name: new RegExp(schoolInfo, "i")}).
+            School. //Province is not specified
+                find({name: new RegExp(schoolInfo,"i")}).
+                populate("province").
+                populate("city").
                 limit(10).
                 exec(function(err,schoolList){callback(schoolList)});
         }

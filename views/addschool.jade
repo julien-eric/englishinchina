@@ -18,22 +18,19 @@ block content
                   span(class="btn btn-default btn-file") Browse
                      input#file_input(type="file")
                .form-group
+                  label.control-label(for='location') Location
+                  .clearfix
                   .navbar-form.navbar-left(role='province')
-                     select.form-control(name="province")
+                     select#provinceSelect.form-control(name="province")
                         option(value="-1") Province
                         option(value="-2") =============
                         optgroup(label="Provinces")
-                           each province,i in provinces
-                              option(value=province.code) #{province.name}
-                        optgroup(label="Autonomous Regions")
-                           option(value=31) Guangxi
-                           option(value=32) Inner Mongolia
-                           option(value=33) Ningxia
-                           option(value=34) Tibet
-                           option(value=35) Xinjiang
-                        optgroup(label="Special Administrative Regions (SAR)")
-                           option(value=41) Hong Kong
-                           option(value=42) Macao (Macau)
+                        each province,i in provinces
+                           option(value=province.code) #{province.name} - #{province.chineseName}
+               .form-group
+                  .navbar-form.navbar-left(role='city')
+                     select#citySelect.form-control(name="city")
+                        option(value="-1") City
                .clearfix
                .form-group
                   label.control-label(for='TypeOfSchool') Type Of School

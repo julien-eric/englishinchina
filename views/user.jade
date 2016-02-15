@@ -3,7 +3,6 @@ block content
     div.container
         div.lift-content
             div.col-sm-12.col-md-8
+                .profile-image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                 h1.login-title #{user.firstName}
-                //span.clearfix
-                //h3 #{provinces[school.province]}
-                //h4.login-title #{school.description}
+                include schoolreviews

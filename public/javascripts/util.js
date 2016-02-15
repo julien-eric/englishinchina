@@ -3,6 +3,14 @@
 $(document).ready(function() {
 
 
+    function capitalize(str) {
+        strVal = '';
+        str = str.split(' ');
+        for (var chr = 0; chr < str.length; chr++) {
+            strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+        }
+        return strVal
+    }
 
     (function () {
         if(document.getElementById("file_input")){
@@ -75,16 +83,20 @@ $(document).ready(function() {
     }
 
 
+    $('#citySelect').prop('disabled', 'disabled');
     $('#provinceSelect').on('change', function() {
         $.ajax({url: "/cities/" + this.value, success: function(results){
             $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
             var $element = $("#citySelect");
             for(var i = 0; i <= results.length; i++){
                 $element.append($("<option></option>")
-                    .attr("value", results[i].code).text(results[i].pinyinName + " - " + results[i].chineseName));
+                    .attr("value", results[i].code).text(capitalize(results[i].pinyinName) + " - " + results[i].chineseName));
             }
         }});
+
+        $('#citySelect').prop('disabled', false);
     });
+
 
     $(".rating").rate({
         readonly: false

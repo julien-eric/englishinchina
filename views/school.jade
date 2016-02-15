@@ -3,14 +3,17 @@ block content
    div.school-page
       div.container.school-background
          .row
-            div(style="background-image: url('#{returnLarge(school.pictureUrl)}');").school-image-container
+            h1.login-title #{school.name}
+            div(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');").school-image-container
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
-               h1.login-title #{school.name}
+
+               h3 #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+               hr
                h4 China \ #{school.province.name} \ Dongying
                hr
-               #rating.rating(data-rate-value="#{roundToPoint5(school.averageRating)}")
+               #rating.rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
                if edit
                   h4
                      a(href="/school/edit/#{school.id}") edit
@@ -22,8 +25,6 @@ block content
                h4
                   a.btn.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Add Photos
                hr
-         h2 Reviews
-         hr
          include schoolreviews
          .clearfix
          if locals.user

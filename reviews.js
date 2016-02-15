@@ -54,6 +54,12 @@ module.exports = {
         });
     },
 
+    findReviewsByUser : function(userId, callback){
+        Review.find({objectType:0, user:userId}).populate("user").exec(function(err,comments){
+            callback(comments);
+        });
+    },
+
     findNumberofReviews : function(schoolId,callback){
         Review.find({objectType:0, foreignId:schoolId}).exec(function(err,comments){
             callback(comments.length);
