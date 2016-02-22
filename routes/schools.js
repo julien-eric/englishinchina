@@ -70,7 +70,7 @@ module.exports = function(passport) {
                                     user: req.user,
                                     reviews: reviews,
                                     provinces: provinces,
-                                    roundToPoint5: jadefunctions.roundToPoint5,
+                                    jadefunctions: jadefunctions,
                                     pictureInfo: pictureinfo
                                 });
                             })

@@ -45,7 +45,7 @@ module.exports = function(passport){
         });
         provincesController.fetchProvinces(function(provinces){
             schools.featuredSchools(function(featuredSchoolList){
-                var pageSize = 2;
+                var pageSize = 5;
                 schools.loadSchools(function(count, schoolList){
                     var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
                     res.render('home', {
@@ -68,7 +68,7 @@ module.exports = function(passport){
 
     router.get('/page/:page', function(req, res){
         var page = req.params.page;
-        var pageSize = 2;
+        var pageSize = 5;
         provincesController.fetchProvinces(function(provinces) {
             schools.loadSchools(function (count, schoolList) {
                 var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
