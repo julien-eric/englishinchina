@@ -19,6 +19,8 @@
     "bcrypt-nodejs" : "*",
     "connect-flash": "^0.1.1",
     "stylus": "*",
+    "jquery-bar-rating": "*",
+    "bootstrap-slider": "*",
     "aws-sdk": "*",
     "gm": "*",
     "mime": "*"

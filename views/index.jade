@@ -1,25 +1,31 @@
 extends layout
 block content
     .container
-        div.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
-            h1.text-center.login-title Sign in
+        div.login-form.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
             .panel.panel-default
                 .panel-body.flat-body
+                    h2.login-title English in China
                     form(class='form-signin', action='/login', method='POST')
-                        .form-group.col-sm-6.col-md-6.col-sm-offset-3.col-md-offset-3
-                            label.control-label(for='Username') Username
-                            input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
-                        .form-group
-                            label.control-label(for='Password') Password
-                            input(type='password', name='password' class='form-control', placeholder='Password', required)
-                        button.col-xs-4(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+                        .form-group.has-feedback
+                            //label.control-label(for='Username') Username
+                            input(type='text', name='username' class='form-control input-lg', placeholder='Username',required, autofocus)
+                            span.glyphicon.glyphicon-user.form-control-feedback
                         span.clearfix
-                    .row.omb_row-sm-offset-3.omb_loginOr
-                        .col-xs-12.col-sm-12 Login using
-                            hr.omb_hrOr
+                        .form-group.has-feedback
+                            //label.control-label(for='Password') Password
+                            input(type='password', name='password' class='form-control input-lg', placeholder='Password', required)
+                            span.glyphicon.glyphicon-lock.form-control-feedback
+                        a Forgot your password?
+                        span.clearfix
+                        button.login-button.col-xs-4(class='btn btn-lg btn-primary', type='submit') Login
+                    span.clearfix
+                    hr.dark-hr
+                    h4.login-title Social Login
                     .form-group
-                        a(class='btn btn-social btn-facebook', href='/login/facebook') Facebook
-                        a(href='/login/twitter', class='btn btn-social btn-twitter') Twitter
+                        a.social-login-link.col-xs-12.col-sm-6(href='/login/facebook')
+                            img.img-responsive.social-login(src="/images/fcb.gif")
+                        a.social-login-link.col-xs-12.col-sm-6(href='/login/twitter')
+                            img.img-responsive.social-login(src="/images/tw.gif")
                 .panel-footer
                     a(href='/signup', class='text-center new-account') Create an account
                 #message
