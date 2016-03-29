@@ -111,6 +111,11 @@ a h2.list-group-item-heading:hover {
   background-color: #fff;
   color: #fff;
   margin-bottom: 0px;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+  min-height: 60px;
+  z-index: 999;
 }
 .school-list-information {
   padding-top: 15px;
@@ -219,4 +224,18 @@ footer .container ul li {
 .login-button {
   border-radius: 0;
   margin-top: 10px;
+}
+.nav-logo {
+  height: 53px;
+  margin-top: 4px;
+  padding: 5px 10px 5px 10px;
+}
+.nav-brand {
+  height: 38px;
+  margin-top: 13px;
+  padding: 0px 10px 0 0;
+}
+.login-branding {
+  text-align: center;
+  padding: 20px 0 40px 0;
 }

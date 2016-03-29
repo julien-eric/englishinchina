@@ -4,7 +4,9 @@ block content
         div.login-form.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
             .panel.panel-default
                 .panel-body.flat-body
-                    h2.login-title English in China
+                    .login-branding
+                        img.nav-logo(src="/images/logo2.gif")
+                        img.nav-brand(src="/images/logo-name.gif")
                     form(class='form-signin', action='/login', method='POST')
                         .form-group.has-feedback
                             //label.control-label(for='Username') Username
