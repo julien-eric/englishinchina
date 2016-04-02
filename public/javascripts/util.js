@@ -12,6 +12,23 @@ $(document).ready(function() {
         return strVal
     }
 
+    (function setLightboxOnReadmore() {
+
+        var turnon = function(){
+            var element = $(this).closest(".list-group-review");
+            element.clone().appendTo("#lightboxcontent")
+            $("#lightbox").toggle();
+        };
+
+        var turnoff = function(){
+            var element = $("#lightboxcontent").empty();
+            $("#lightbox").toggle();
+        };
+
+        $(".readmore").click(turnon);
+        $("#lightbox").click(turnoff);
+    })();
+
     (function () {
         if(document.getElementById("file_input")){
             document.getElementById("file_input").onchange = function () {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var schools = require('../schools');
-var reviews = require('../reviews');
+var schools = require('../controllers/schools');
+var reviews = require('../controllers/reviews');
 var provincesController = require('../controllers/provinces');
 var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
@@ -32,7 +32,7 @@ module.exports = function(passport) {
                     edit: schoolOwner,
                     school: school,
                     user: req.user,
-                    reviews: jadefunctions.trunkSchoolReviews(reviews,200),
+                    reviews: reviews,
                     jadefunctions: jadefunctions,
                     pictureInfo: pictureinfo
                 });
@@ -46,7 +46,7 @@ module.exports = function(passport) {
      *************************************************************************************************************/
     router.route('/addschool')
         .get(function (req, res) {
-            provincesController.fetchProvinces(function(provinces){
+            provincesController.getAllProvinces(function(provinces){
                 res.render('addschool', {
                     user: req.user,
                     pictureInfo: pictureinfo,
@@ -62,7 +62,7 @@ module.exports = function(passport) {
                 }
                 else {
 
-                    provincesController.fetchProvinces(function(provinces){
+                    provincesController.getAllProvinces(function(provinces){
                         schools.findSchoolById(newSchool.id, function (school) {
                             reviews.findReviews(school, function (reviews) {
                                 res.render('school', {
@@ -145,7 +145,7 @@ module.exports = function(passport) {
             if (schoolList != undefined && schoolList.length > 0){
                 schoolList = jadefunctions.trunkSchoolDescription(schoolList);
             }
-            provincesController.fetchProvinces(function(provinces){
+            provincesController.getAllProvinces(function(provinces){
                 res.render('home', {
                     schools: schoolList,
                     user: req.user,

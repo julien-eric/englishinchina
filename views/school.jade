@@ -27,6 +27,9 @@ block content
                hr
          include schoolreviews
          .clearfix
-         if locals.user
-            h4
-               a.btn.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review
+         .btn-group
+               h4
+                  a.btn.btn-primary.btn-lg(href="#loadMoreReviews") Load More
+            if locals.user
+               h4
+                  a.btn.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review

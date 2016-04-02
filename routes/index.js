@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var schools = require('../schools');
-var reviews = require('../reviews');
+var schools = require('../controllers/schools');
+var reviews = require('../controllers/reviews');
 //var provinces = require('../provinces');
 var pictures = require('../pictures');
 var aws = require('aws-sdk');
@@ -40,10 +40,10 @@ module.exports = function(passport){
 
         //var cities = citiesController.citiesToPush;
         //var JSONized = JSON.stringify(cities);
-        citiesController.fetchCities(function(cities){
+        citiesController.getAllCities(function(cities){
             var a = 2;
         });
-        provincesController.fetchProvinces(function(provinces){
+        provincesController.getAllProvinces(function(provinces){
             schools.featuredSchools(function(featuredSchoolList){
                 var pageSize = 5;
                 schools.loadSchools(function(count, schoolList){
@@ -69,7 +69,7 @@ module.exports = function(passport){
     router.get('/page/:page', function(req, res){
         var page = req.params.page;
         var pageSize = 5;
-        provincesController.fetchProvinces(function(provinces) {
+        provincesController.getAllProvinces(function(provinces) {
             schools.loadSchools(function (count, schoolList) {
                 var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
                 res.render('home', {

@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var dbConfig = require('./database');
 var mongoose = require('mongoose');
 var stylus = require('stylus');
-var schools = require('./schools');
+var schools = require('./controllers/schools');
 var provinces = require('./provinces');
 var provincesController = require('./controllers/provinces');
 var citiesController = require('./controllers/cities');
@@ -103,13 +103,6 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
-
-
-//provincesController.initProvinces(provinces.provinces);
-//var cities = chinaDB.py;
-//citiesController.initCities(cities);
-//citiesController.fetchCities();
 
 
 module.exports = app;

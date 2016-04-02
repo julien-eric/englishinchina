@@ -11,7 +11,7 @@ module.exports = {
             ncity = citieslist[city];
             if(ncity.province == "")
                 ncity.province = ncity.cnName;
-            provincesController.provinceByChineseName(ncity, ncity.province, function(cityinfo, province){
+            provincesController.getProvinceByChineseName(ncity, ncity.province, function(cityinfo, province){
                 module.exports.citiesToPush.push({province:province, pinyinName: cityinfo.pyName, chineseName: cityinfo.cnName, code: cityinfo.code, x:cityinfo.x, y:cityinfo.y});
                 var a = 2;
             });
@@ -24,13 +24,13 @@ module.exports = {
                 console.log(err);
             }
             else{
-                console.log(result);
+                console.log("Pushing cities : " + result);
             }
         });
     },
 
     getCitiesByProvince: function(provinceCode,callback){
-        provincesController.provinceByCode(provinceCode, function(province){
+        provincesController.getProvinceByCode(provinceCode, function(province){
             City.find({province:province},function(err, result){
                 if(err){
                     console.log(err);
@@ -42,7 +42,7 @@ module.exports = {
         });
     },
 
-    fetchCities: function(callback){
+    getAllCities: function(callback){
         City.find(function(err, result){
             if(err){
                 console.log(err);
@@ -50,10 +50,10 @@ module.exports = {
             else{
                 callback(result);
             }
-        });
+        }).populate("province", "code");
     },
 
-    cityByCode: function(cityCode, callback){
+    getCityByCode: function(cityCode, callback){
         City.findOne({code:cityCode},function(err, result){
             if(err){
                 console.log(err);
@@ -63,5 +63,4 @@ module.exports = {
             }
         });
     }
-
 }

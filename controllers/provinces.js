@@ -7,31 +7,28 @@ var Province = require('../models/province');
 module.exports = {
 
     initProvinces : function(provincesList){
-        /*BatchInsert*/
         Province.create(provincesList,function(err, result){
             if(err){
                 console.log(err);
             }
             else{
-                console.log("SUCCESS");
                 console.log(result);
             }
         });
     },
 
-    fetchProvinces : function(callback){
-        /*BatchInsert*/
-        Province.find(function(err, result){
+    getAllProvinces : function(callback){
+        Province.find(function(err, provinces){
             if(err){
                 console.log(err);
             }
             else{
-                callback(result);
+                callback(provinces);
             }
         });
     },
 
-    provinceByCode : function(code, callback){
+    getProvinceByCode : function(code, callback){
         Province.findOne({code:code}).exec(function(err, province){
             if(err){
                 console.log(err)
@@ -42,7 +39,7 @@ module.exports = {
         });
     },
 
-    provinceByPinyinName : function(name, callback){
+    getProvinceByPinyinName : function(name, callback){
         Province.findOne({name:name}).exec(function(err, province){
             if(err){
                 console.log(err)
@@ -53,7 +50,7 @@ module.exports = {
         });
     },
 
-    provinceByChineseName : function(cityinfo, chineseName, callback){
+    getProvinceByChineseName : function(cityinfo, chineseName, callback){
         Province.findOne({chineseName:chineseName}).exec(function(err, province){
             if(err){
                 console.log(err)
@@ -63,5 +60,4 @@ module.exports = {
             }
         });
     }
-
 }

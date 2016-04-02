@@ -3,7 +3,7 @@ block content
    h2 Reviews
    hr
    each review in reviews
-      li.list-group-review.col-sm-10.col-md-4.col-lg-4
+      li.list-group-review.col-sm-10.col-md-3.col-lg-3(id="#{review._id}")
          .image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
          .user-information
             if review.user
@@ -12,7 +12,12 @@ block content
          span.clearfix
          if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
-         div #{review.comment}
+         .review-content #{review.comment}
          h5
-            a(href="#") Read More
+            span.glyphicon.glyphicon-resize-full
+            a.readmore(href="##{review._id}") Read More
+   #lightbox
+      p Click to close
+      #lightboxcontent
+
 

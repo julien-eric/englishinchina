@@ -1,13 +1,14 @@
-var School = require('./models/school');
-var provincesController = require('./controllers/provinces');
-var citiesController = require('./controllers/cities');
+var School = require('./../models/school');
+var provincesController = require('./provinces');
+var citiesController = require('./cities');
 
 module.exports = {
 
     featuredSchools: function(callback){
-        //TODO: Define How featured schools will be determined
+        //At the moment featured schools are schools with the highest ratings
         School.
             find().
+            sort({"averageRating": -1}).
             limit(3).
             exec(function(err,schoolList){callback(schoolList)});
     },
@@ -25,10 +26,10 @@ module.exports = {
         })
     },
 
-    addSchool : function (req, callback) {
-        provincesController.provinceByCode(req.body.province, function(province){
-            citiesController.cityByCode(req.body.city, function(city){
-                School.create({ user: req.user._id, name:req.body.name, description:req.body.description, schoolType: req.body.schoolType, province:province, city:city, pictureUrl: req.body.avatarUrl, averageRating:-1 }, function (err, newSchool){
+    addSchool : function (request, callback) {
+        provincesController.getProvinceByCode(request.body.province, function(province){
+            citiesController.getCityByCode(request.body.city, function(city){
+                School.create({ user: request.user._id, name:request.body.name, description:request.body.description, schoolType: request.body.schoolType, province:province, city:city, pictureUrl: request.body.avatarUrl, averageRating:-1 }, function (err, newSchool){
                         callback(err, newSchool);
                 });
             });
@@ -67,7 +68,7 @@ module.exports = {
         }
 
         if(prov != -1){ //Province is specified
-            provincesController.provinceByCode(prov, function(provModel){
+            provincesController.getProvinceByCode(prov, function(provModel){
                 School.
                     find({name: new RegExp(schoolInfo, "i")}).
                     populate("province").
@@ -93,7 +94,7 @@ module.exports = {
         });
     },
 
-    updateSchoolRating : function(schoolId, rating,numberOfReviews){
+    updateSchoolRating : function(schoolId, rating, numberOfReviews){
 
         var updateRating = function(rating){
             School.findOneAndUpdate({ _id : schoolId }, {averageRating:rating}, function(err, editedSchool){
@@ -118,5 +119,4 @@ module.exports = {
             updateRating(rating);
         }
     }
-
 }

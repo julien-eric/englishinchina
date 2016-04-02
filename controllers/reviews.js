@@ -1,7 +1,7 @@
 /**
  * Created by Julz on 11/28/2015.
  */
-var Review = require('./models/review');
+var Review = require('./../models/review');
 
 var calculateAverage= function(review){
     return (Number(review.cri_academicDisciplinarySupport) +
@@ -18,14 +18,14 @@ module.exports = {
 
     insertReviewforSchool: function(req, callback){
 
-
         var onReturn = function (err, object){
-            if (err) {
-                return handleError(err);
+            if(err){
+                console.log(err);
             }
-            var averageRating = calculateAverage(req.body);
-            callback(req.body.school,averageRating);
-
+            else{
+                var averageRating = calculateAverage(req.body);
+                callback(req.body.school,averageRating);
+            }
         };
 
         Review.create({
@@ -43,27 +43,38 @@ module.exports = {
             cri_pollution:req.body.cri_pollution,
             average_rating: calculateAverage(req.body)
             },onReturn);
-
-
     },
-
 
     findReviews : function(schoolId, callback){
-        Review.find({objectType:0, foreignId:schoolId}).populate("user").exec(function(err,comments){
-            callback(comments);
-        });
-    },
-
-    findReviewsByUser : function(userId, callback){
-        Review.find({objectType:0, user:userId}).populate("user").exec(function(err,comments){
-            callback(comments);
+        Review.find({objectType:0, foreignId:schoolId}).limit(6).populate("user").exec(function(err,comments){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(comments);
+            }
         });
     },
 
     findNumberofReviews : function(schoolId,callback){
         Review.find({objectType:0, foreignId:schoolId}).exec(function(err,comments){
-            callback(comments.length);
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(comments.length);
+            }
+        });
+    },
+
+    findReviewsByUser : function(userId, callback){
+        Review.find({objectType:0, user:userId}).populate("user").exec(function(err,comments){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(comments);
+            }
         });
     }
-
 }
