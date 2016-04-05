@@ -114,13 +114,31 @@ $(document).ready(function() {
         $('#citySelect').prop('disabled', false);
     });
 
+    $('#mycalendar1').monthly({
+        mode: 'picker',
+        target: '#mytarget1',
+        setWidth: '250px',
+        startHidden: true,
+        showTrigger: '#mytarget1',
+        stylePast: false,
+        disablePast: false
+    });
+
+    $('#mycalendar2').monthly({
+        mode: 'picker',
+        target: '#mytarget2',
+        setWidth: '250px',
+        startHidden: true,
+        showTrigger: '#mytarget2',
+        stylePast: false,
+        disablePast: false
+    });
 
     $(".rating").rate({
         readonly: false
     });
     $(".rating").rate("destroy");
     //Destroy makes it uninteractive, but doesn't remove the DOM elements.
-
     var slider = new Slider('#ex1', {
         formatter: function(value) {
             return 'Current value: ' + value;
@@ -162,6 +180,37 @@ $(document).ready(function() {
         }
     });
 
+    $("#ex1").on("slide", function(slideEvt) {
+        $("#ex1SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex2").on("slide", function(slideEvt) {
+        $("#ex2SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex3").on("slide", function(slideEvt) {
+        $("#ex3SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex4").on("slide", function(slideEvt) {
+        $("#ex4SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex5").on("slide", function(slideEvt) {
+        $("#ex5SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex6").on("slide", function(slideEvt) {
+        $("#ex6SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex7").on("slide", function(slideEvt) {
+        $("#ex7SliderVal").text(slideEvt.value);
+    });
+
+    $("#ex8").on("slide", function(slideEvt) {
+        $("#ex8SliderVal").text(slideEvt.value);
+    });
 
 });
 

@@ -120,11 +120,22 @@ a h2.list-group-item-heading:hover {
 .school-list-information {
   padding-top: 15px;
 }
-#ex1Slider .slider-selection {
-  background: #bababa;
+.slider-track .slider-selection {
+  background: #388577;
 }
-.criteria {
-  font-size: 20px;
+.slider-handle {
+  background: #666;
+  background-image: -webkit-linear-gradient(top, #666 0%, #999 100%) !important;
+  background-image: -o-linear-gradient(top, #666 0%, #999 100%) !important;
+  background-image: linear-gradient(to bottom, #666 0%, #999 100%) !important;
+  background-repeat: repeat-x;
+/*background-image: none !important;*/
+}
+.slider {
+  margin-left: 15px;
+}
+.writereviewformgroup {
+  padding-bottom: 65px;
 }
 .rating {
   font-size: 30px;
@@ -279,4 +290,7 @@ footer .container ul li {
   height: 100px;
   overflow: hidden;
   -webkit-box-shadow: inset 0px -10px 15px -2px #f0f0f0;
+}
+.float-left {
+  float: left;
 }
