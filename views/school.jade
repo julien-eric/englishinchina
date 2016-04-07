@@ -3,8 +3,11 @@ block content
    div.school-page
       div.container.school-background
          .row
-            h1.login-title #{school.name}
             div(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');").school-image-container
+               div.stick-to-bottom
+                  div.gradient-shadow
+                  h1.school-page-name #{school.name}
+                  #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
@@ -13,7 +16,6 @@ block content
                hr
                h4 China \ #{school.province.name} \ Dongying
                hr
-               #rating.rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
                if edit
                   h4
                      a(href="/school/edit/#{school.id}") edit
@@ -23,13 +25,13 @@ block content
 
                h2 Photos
                h4
-                  a.btn.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Add Photos
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Add Photos
                hr
          include schoolreviews
          .clearfix
          .btn-group
-               h4
-                  a.btn.btn-primary.btn-lg(href="#loadMoreReviews") Load More
+            h4
+               a.btn.btn-eic.btn-primary.btn-lg(href="#loadMoreReviews") Load More
             if locals.user
                h4
-                  a.btn.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review

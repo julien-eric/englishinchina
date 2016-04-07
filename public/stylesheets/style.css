@@ -46,21 +46,34 @@ footer {
 .search-navigation-search-input {
   width: 50%;
 }
+.contains-image {
+  max-height: 300px;
+  white-space: nowrap;
+/*overflow: hidden*/
+}
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
 .school-image-container {
+  height: 350px;
   overflow: hidden;
-  height: 400px;
+  width: 100%;
+  position: relative;
+  vertical-align: middle;
   border-top: solid 10px #000;
   border-bottom: solid 10px #000;
   background-position: center center;
 }
 .featured-school {
   overflow: hidden;
-  height: 500px;
+  height: 400px;
 /*border-bottom solid 10px black*/
   background-position: center center;
 }
 .featured-school-item {
-  height: 500px;
+  height: 400px;
   background-position: center center;
   background-size: cover;
 }
@@ -103,7 +116,7 @@ a h2.list-group-item-heading:hover {
 .custom-jumbotron {
   padding-top: 0;
   padding-bottom: 0;
-  margin-bottom: -20px;
+  margin-bottom: -70px;
 }
 .navbar-custom {
   border: 0px;
@@ -143,7 +156,11 @@ a h2.list-group-item-heading:hover {
 /*color #4cae4c*/
 }
 #rating {
-  font-size: 45px;
+  padding-left: 20px;
+}
+.overall-rating {
+  font-size: 36px;
+  padding-bottom: 10px;
 }
 .list-group-review {
   display: inline-table;
@@ -228,6 +245,37 @@ footer .container ul li {
 }
 .login-title {
   padding-bottom: 20px;
+}
+.school-page-name {
+  padding: 280px 0 0px 20px;
+  color: #fff;
+  font-size: 3em;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.stick-to-bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 10px;
+}
+.gradient-shadow {
+  position: absolute;
+  bottom: 0;
+  height: 150px;
+  width: 100%;
+  -webkit-box-shadow: inset 0px -150px 150px -100px #222;
+}
+.btn-eic,
+.btn-eic:visited {
+  background-color: #388577;
+  border: #388577;
+}
+.btn-eic:hover {
+  background-color: #34635a;
+}
+.btn-eic:active.btn-eic:hover {
+  background-color: #223f3a;
 }
 .dark-hr {
   border: solid 1px #ddd;
