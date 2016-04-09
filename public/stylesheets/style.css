@@ -339,6 +339,9 @@ footer .container ul li {
   overflow: hidden;
   -webkit-box-shadow: inset 0px -10px 15px -2px #f0f0f0;
 }
+.carousel-caption {
+  padding-bottom: 50px;
+}
 .float-left {
   float: left;
 }
