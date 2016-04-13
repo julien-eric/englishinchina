@@ -6,13 +6,17 @@ var Province = require('../models/province');
 
 module.exports = {
 
-    initProvinces : function(provincesList){
-        Province.create(provincesList,function(err, result){
-            if(err){
-                console.log(err);
-            }
-            else{
-                console.log(result);
+    initProvinces : function(provincesList, callback){
+        Province.count({},function(err,count){
+            if(count == 0){
+                Province.create(provincesList,function(err, result){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        callback(result);
+                    }
+                });
             }
         });
     },
@@ -50,8 +54,19 @@ module.exports = {
         });
     },
 
-    getProvinceByChineseName : function(cityinfo, chineseName, callback){
-        Province.findOne({chineseName:chineseName}).exec(function(err, province){
+    getProvinceByChineseName : function(cityinfo, provinceCode, callback){
+        Province.findOne({code:chineseName}).exec(function(err, province){
+            if(err){
+                console.log(err)
+            }
+            else{
+                callback(cityinfo, province);
+            }
+        });
+    },
+
+    helpInitCities : function(cityinfo, provinceCode, callback){
+        Province.findOne({code:provinceCode}).exec(function(err, province){
             if(err){
                 console.log(err)
             }

@@ -102,8 +102,10 @@ $(document).ready(function() {
 
     $('#citySelect').prop('disabled', 'disabled');
     $('#provinceSelect').on('change', function() {
+        $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
+        $('#citySelect').prop('disabled', 'disabled');
         $.ajax({url: "/cities/" + this.value, success: function(results){
-            $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
+            $('#citySelect').prop('disabled', false);
             var $element = $("#citySelect");
             for(var i = 0; i <= results.length; i++){
                 $element.append($("<option></option>")
@@ -111,7 +113,6 @@ $(document).ready(function() {
             }
         }});
 
-        $('#citySelect').prop('disabled', false);
     });
 
     $('#mycalendar1').monthly({

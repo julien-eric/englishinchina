@@ -3,6 +3,8 @@ block content
    div.container
       div.row
          div.col-sm-6.col-md-6.col-md-offset-3.col-sm-offset-3
+            .login-branding
+               img.signin-logo(src="/images/logo2.gif")
             h1.text-center.login-title School Registration Details
             form(action='/school/addschool', method='POST')
                .form-group
@@ -20,17 +22,14 @@ block content
                .form-group
                   label.control-label(for='location') Location
                   .clearfix
-                  .navbar-form.navbar-left(role='province')
-                     select#provinceSelect.form-control(name="province")
-                        option(value="-1") Province
-                        option(value="-2") =============
-                        optgroup(label="Provinces")
-                        each province,i in provinces
-                           option(value=province.code) #{province.name} - #{province.chineseName}
-               .form-group
-                  .navbar-form.navbar-left(role='city')
-                     select#citySelect.form-control(name="city")
-                        option(value="-1") City
+                  select#provinceSelect.form-control(name="province")
+                     option(value="-1") Province
+                     option(value="-2") =============
+                     optgroup(label="Provinces")
+                     each province,i in provinces
+                        option(value=province.code) #{province.name} - #{province.chineseName}
+                  select#citySelect.form-control(name="city")
+                     option(value="-1") City
                .clearfix
                .form-group
                   label.control-label(for='TypeOfSchool') Type Of School
@@ -41,7 +40,7 @@ block content
                .form-group
                   label.control-label(for='Description') Description
                   textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
-               button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
+               button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Submit
                span.clearfix
             #message
                if message

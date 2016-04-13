@@ -40,9 +40,9 @@ module.exports = function(passport){
 
         //var cities = citiesController.citiesToPush;
         //var JSONized = JSON.stringify(cities);
-        citiesController.getAllCities(function(cities){
-            var a = 2;
-        });
+        //citiesController.getAllCities(function(cities){
+        //    var a = 2;
+        //});
         provincesController.getAllProvinces(function(provinces){
             schools.featuredSchools(function(featuredSchoolList){
                 var pageSize = 5;
@@ -273,6 +273,5 @@ module.exports = function(passport){
             }
         });
     });
-
     return router;
 }

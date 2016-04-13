@@ -1,1 +1,4036 @@
-[{"_id":"56a88f7d5983c58423ef878b","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"tianjin","chineseName":"天津","code":101030100,"x":null,"y":null,"__v":0},{"_id":"56a88f7d5983c58423ef878d","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"shuangyashan","chineseName":"双鸭山","code":101051301,"x":478.1,"y":293.8,"__v":0},{"_id":"56a88f7d5983c58423ef878c","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"suihua","chineseName":"绥化","code":101050501,"x":323.65,"y":317.25,"__v":0},{"_id":"56a88f7d5983c58423ef878f","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"tonghua","chineseName":"通化","code":101060501,"x":341,"y":360,"__v":0},{"_id":"56a88f7d5983c58423ef878e","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"songyuan","chineseName":"松原","code":101060801,"x":200,"y":146,"__v":0},{"_id":"56a88f7d5983c58423ef8790","province":null,"pinyinName":"eerduosi","chineseName":"鄂尔多斯","code":101080701,"x":303,"y":390,"__v":0},{"_id":"56a88f7d5983c58423ef8795","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"yichun","chineseName":"伊春","code":101050801,"x":389.1,"y":259.05,"__v":0},{"_id":"56a88f7d5983c58423ef879a","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"daqing","chineseName":"大庆","code":101050901,"x":257,"y":348,"__v":0},{"_id":"56a88f7d5983c58423ef8792","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"changjiang","chineseName":"昌江","code":101310206,"x":173.65,"y":218.15,"__v":0},{"_id":"56a88f7d5983c58423ef8797","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"beijing","chineseName":"北京","code":101010100,"x":null,"y":null,"__v":0},{"_id":"56a88f7d5983c58423ef8791","province":null,"pinyinName":"chifeng","chineseName":"赤峰","code":101080601,"x":485,"y":275,"__v":0},{"_id":"56a88f7d5983c58423ef8796","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"qitaihe","chineseName":"七台河","code":101051002,"x":451.8,"y":336.05,"__v":0},{"_id":"56a88f7d5983c58423ef8794","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"daxinganling","chineseName":"大兴安岭","code":101050701,"x":186.35,"y":83.6,"__v":0},{"_id":"56a88f7d5983c58423ef8799","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"chongqing","chineseName":"重庆","code":101040100,"x":null,"y":null,"__v":0},{"_id":"56a88f7d5983c58423ef8793","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"baisha","chineseName":"白沙","code":101310207,"x":241.8,"y":232.7,"__v":0},{"_id":"56a88f7d5983c58423ef8798","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"heihe","chineseName":"黑河","code":101050601,"x":308.2,"y":205.45,"__v":0},{"_id":"56a88f7d5983c58423ef879f","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"mudanjiang","chineseName":"牡丹江","code":101050301,"x":443,"y":399,"__v":0},{"_id":"56a88f7d5983c58423ef879c","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"shanghai","chineseName":"上海","code":101020100,"x":null,"y":null,"__v":0},{"_id":"56a88f7d5983c58423ef87a1","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"yanbian","chineseName":"延边","code":101060312,"x":495,"y":229,"__v":0},{"_id":"56a88f7d5983c58423ef879b","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"lingshui","chineseName":"陵水","code":101310216,"x":355,"y":356,"__v":0},{"_id":"56a88f7d5983c58423ef87a4","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"jiamusi","chineseName":"佳木斯","code":101050401,"x":425.7,"y":294.85,"__v":0},{"_id":"56a88f7d5983c58423ef879e","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"haerbin","chineseName":"哈尔滨","code":101050101,"x":369.1,"y":361.8,"__v":0},{"_id":"56a88f7d5983c58423ef87a0","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"changchun","chineseName":"长春","code":101060101,"x":285,"y":161,"__v":0},{"_id":"56a88f7d5983c58423ef87a6","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"liaoyuan","chineseName":"辽源","code":101060701,"x":302,"y":300,"__v":0},{"_id":"56a88f7d5983c58423ef879d","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"qiqihaer","chineseName":"齐齐哈尔","code":101050201,"x":220.05,"y":303.55,"__v":0},{"_id":"56a88f7d5983c58423ef87ab","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"siping","chineseName":"四平","code":101060401,"x":235,"y":244,"__v":0},{"_id":"56a88f7d5983c58423ef87a2","province":null,"pinyinName":"baotou","chineseName":"包头","code":101080201,"x":317.65,"y":330.65,"__v":0},{"_id":"56a88f7d5983c58423ef87a5","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"baicheng","chineseName":"白城","code":101060601,"x":129,"y":118,"__v":0},{"_id":"56a88f7d5983c58423ef87aa","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"wuzhishan","chineseName":"五指山","code":101310222,"x":260,"y":297,"__v":0},{"_id":"56a88f7d5983c58423ef87a3","province":null,"pinyinName":"tongliao","chineseName":"通辽","code":101080501,"x":538,"y":269,"__v":0},{"_id":"56a88f7d5983c58423ef87a8","province":null,"pinyinName":"xilinguole","chineseName":"锡林郭勒","code":101080901,"x":405,"y":279,"__v":0},{"_id":"56a88f7d5983c58423ef87a7","province":null,"pinyinName":"bayannaoer","chineseName":"巴彦淖尔","code":101080801,"x":275,"y":346,"__v":0},{"_id":"56a88f7d5983c58423ef87ac","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"baishan","chineseName":"白山","code":101060901,"x":424,"y":318,"__v":0},{"_id":"56a88f7d5983c58423ef87b0","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"jixi","chineseName":"鸡西","code":101051101,"x":487.85,"y":357.75,"__v":0},{"_id":"56a88f7d5983c58423ef87af","province":{"_id":"56a879c04c7fd9141e6f8f83","code":7},"pinyinName":"hegang","chineseName":"鹤岗","code":101051201,"x":436,"y":256,"__v":0},{"_id":"56a88f7d5983c58423ef87ad","province":null,"pinyinName":"huhehaote","chineseName":"呼和浩特","code":101080101,"x":355,"y":375,"__v":0},{"_id":"56a88f7d5983c58423ef87b1","province":{"_id":"56a879c04c7fd9141e6f8f89","code":13},"pinyinName":"jilin","chineseName":"吉林","code":101060201,"x":372,"y":210,"__v":0},{"_id":"56a88f7d5983c58423ef87b5","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"ledong","chineseName":"乐东","code":101310221,"x":165.45,"y":349.05,"__v":0},{"_id":"56a88f7d5983c58423ef87ba","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"qiongzhong","chineseName":"琼中","code":101310208,"x":333.65,"y":266.35,"__v":0},{"_id":"56a88f7d5983c58423ef87b4","province":null,"pinyinName":"hulunbeier","chineseName":"呼伦贝尔","code":101081000,"x":510,"y":111,"__v":0},{"_id":"56a88f7d5983c58423ef87bf","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"tulufan","chineseName":"吐鲁番","code":101130501,"x":448,"y":219,"__v":0},{"_id":"56a88f7d5983c58423ef87c4","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"lasa","chineseName":"拉萨","code":101140101,"x":376,"y":282,"__v":0},{"_id":"56a88f7d5983c58423ef87b2","province":null,"pinyinName":"alashan","chineseName":"阿拉善","code":101081201,"x":171,"y":356,"__v":0},{"_id":"56a88f7d5983c58423ef87b7","province":null,"pinyinName":"wuhai","chineseName":"乌海","code":101080301,"x":253.7,"y":392.45,"__v":0},{"_id":"56a88f7d5983c58423ef87b9","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"chengmai","chineseName":"澄迈","code":101310204,"x":365.45,"y":127.25,"__v":0},{"_id":"56a88f7d5983c58423ef87be","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"kelamayi","chineseName":"克拉玛依","code":101130201,"x":325,"y":147,"__v":0},{"_id":"56a88f7d5983c58423ef87c3","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"benxi","chineseName":"本溪","code":101070501,"x":389,"y":212,"__v":0},{"_id":"56a88f7d5983c58423ef87c9","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"linxia","chineseName":"临夏","code":101161101,"x":382,"y":333,"__v":0},{"_id":"56a88f7d5983c58423ef87bc","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"lingao","chineseName":"临高","code":101310203,"x":310.9,"y":97.25,"__v":0},{"_id":"56a88f7d5983c58423ef87b6","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"baoting","chineseName":"保亭","code":101310214,"x":290,"y":361,"__v":0},{"_id":"56a88f7d5983c58423ef87c1","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"jinzhou","chineseName":"锦州","code":101070701,"x":212.5,"y":237.4,"__v":0},{"_id":"56a88f7d5983c58423ef87c6","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"haidong","chineseName":"海东","code":101150201,"x":574,"y":215,"__v":0},{"_id":"56a88f7d5983c58423ef87c8","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"zhangye","chineseName":"张掖","code":101160701,"x":290,"y":190,"__v":0},{"_id":"56a88f7d5983c58423ef87bb","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"sanya","chineseName":"三亚","code":101310201,"x":227,"y":390,"__v":0},{"_id":"56a88f7d5983c58423ef87c0","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"bayinguoleng","chineseName":"巴州","code":101130601,"x":376,"y":300,"__v":0},{"_id":"56a88f7d5983c58423ef87c5","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"yushu","chineseName":"玉树","code":101150601,"x":262,"y":314,"__v":0},{"_id":"56a88f7d5983c58423ef87ca","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"wanning","chineseName":"万宁","code":101310215,"x":420.9,"y":310.9,"__v":0},{"_id":"56a88f7d5983c58423ef87a9","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"dongfang","chineseName":"东方","code":101310202,"x":130,"y":270.9,"__v":0},{"_id":"56a88f7d5983c58423ef87ae","province":null,"pinyinName":"xingan","chineseName":"兴安","code":101081101,"x":510,"y":200,"__v":0},{"_id":"56a88f7d5983c58423ef87ce","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"fuxin","chineseName":"阜新","code":101070901,"x":227,"y":167,"__v":0},{"_id":"56a88f7d5983c58423ef87d3","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"huangnan","chineseName":"黄南","code":101150301,"x":530,"y":285,"__v":0},{"_id":"56a88f7d5983c58423ef87d8","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"baoding","chineseName":"保定","code":101090201,"x":277,"y":241,"__v":0},{"_id":"56a88f7d5983c58423ef87dd","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"shiyan","chineseName":"十堰","code":101201101,"x":197.3,"y":125.75,"__v":0},{"_id":"56a88f7d5983c58423ef87e2","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"shihezi","chineseName":"石河子","code":101130301,"x":335,"y":185,"__v":0},{"_id":"56a88f7d5983c58423ef87cd","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"hetian","chineseName":"和田","code":101131301,"x":232,"y":360,"__v":0},{"_id":"56a88f7d5983c58423ef87e7","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"xining","chineseName":"西宁","code":101150101,"x":540,"y":186,"__v":0},{"_id":"56a88f7d5983c58423ef87d2","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"haibei","chineseName":"海北","code":101150801,"x":486,"y":132,"__v":0},{"_id":"56a88f7d5983c58423ef87cb","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"boertala","chineseName":"博州","code":101131601,"x":260,"y":164,"__v":0},{"_id":"56a88f7d5983c58423ef87d7","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"longnan","chineseName":"陇南","code":101161001,"x":445,"y":411,"__v":0},{"_id":"56a88f7d5983c58423ef87d0","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"dandong","chineseName":"丹东","code":101070601,"x":420,"y":256,"__v":0},{"_id":"56a88f7d5983c58423ef87dc","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"luohe","chineseName":"漯河","code":101181501,"x":355,"y":276,"__v":0},{"_id":"56a88f7d5983c58423ef87d5","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"jinchang","chineseName":"金昌","code":101160601,"x":349,"y":216,"__v":0},{"_id":"56a88f7d5983c58423ef87e1","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"kezile","chineseName":"克州","code":101130503,"x":102,"y":294,"__v":0},{"_id":"56a88f7d5983c58423ef87da","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"jiyuan","chineseName":"济源","code":101181801,"x":249,"y":157,"__v":0},{"_id":"56a88f7d5983c58423ef87e6","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"linzhi","chineseName":"林芝","code":101140401,"x":479,"y":316,"__v":0},{"_id":"56a88f7d5983c58423ef87df","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"wenchang","chineseName":"文昌","code":101310212,"x":531,"y":83,"__v":0},{"_id":"56a88f7d5983c58423ef87e4","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"anshan","chineseName":"鞍山","code":101070301,"x":354,"y":288,"__v":0},{"_id":"56a88f7d5983c58423ef87cf","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"liaoyang","chineseName":"辽阳","code":101071001,"x":341,"y":217,"__v":0},{"_id":"56a88f7d5983c58423ef87e9","province":{"_id":"56a879c04c7fd9141e6f8f98","code":42},"pinyinName":"guyuan","chineseName":"固原","code":101170401,"x":316,"y":382,"__v":0},{"_id":"56a88f7d5983c58423ef87d4","province":{"_id":"56a879c04c7fd9141e6f8f98","code":42},"pinyinName":"wuzhong","chineseName":"吴忠","code":101170301,"x":332,"y":246,"__v":0},{"_id":"56a88f7d5983c58423ef87d9","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"xingtai","chineseName":"邢台","code":101090901,"x":265.45,"y":363,"__v":0},{"_id":"56a88f7d5983c58423ef87de","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"tunchang","chineseName":"屯昌","code":101310210,"x":372.75,"y":195,"__v":0},{"_id":"56a88f7d5983c58423ef87ec","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"zhangjiakou","chineseName":"张家口","code":101090301,"x":252.75,"y":138.15,"__v":0},{"_id":"56a88f7d5983c58423ef87eb","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"dingxi","chineseName":"定西","code":101160201,"x":420,"y":348,"__v":0},{"_id":"56a88f7d5983c58423ef87ee","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"handan","chineseName":"邯郸","code":101091001,"x":254.55,"y":404.55,"__v":0},{"_id":"56a88f7d5983c58423ef87f1","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"jingmen","chineseName":"荆门","code":101201401,"x":331.8,"y":247.25,"__v":0},{"_id":"56a88f7d5983c58423ef87f6","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"chenzhou","chineseName":"郴州","code":101250501,"x":440,"y":350,"__v":0},{"_id":"56a88f7d5983c58423ef87fb","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"chuzhou","chineseName":"滁州","code":101221101,"x":403.3,"y":217.9,"__v":0},{"_id":"56a88f7d5983c58423ef8800","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"xianyang","chineseName":"咸阳","code":101110200,"x":307,"y":313,"__v":0},{"_id":"56a88f7d5983c58423ef8805","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"guangan","chineseName":"广安","code":101270801,"x":450,"y":230,"__v":0},{"_id":"56a88f7d5983c58423ef880a","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"qiannan","chineseName":"黔南","code":101260401,"x":395.7,"y":295.95,"__v":0},{"_id":"56a88f7d5983c58423ef880f","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"shangrao","chineseName":"上饶","code":101240301,"x":438,"y":128,"__v":0},{"_id":"56a88f7d5983c58423ef8814","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"yangjiang","chineseName":"阳江","code":101281801,"x":226.55,"y":304.5,"__v":0},{"_id":"56a88f7d5983c58423ef87f0","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"kaifeng","chineseName":"开封","code":101180801,"x":383,"y":181,"__v":0},{"_id":"56a88f7d5983c58423ef8819","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"hezhou","chineseName":"贺州","code":101300701,"x":544.55,"y":193.6,"__v":0},{"_id":"56a88f7d5983c58423ef87f5","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"xiangtan","chineseName":"湘潭","code":101250201,"x":397,"y":213,"__v":0},{"_id":"56a88f7d5983c58423ef87fa","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"bozhou","chineseName":"亳州","code":101220901,"x":244,"y":145,"__v":0},{"_id":"56a88f7d5983c58423ef87f3","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"huangshi","chineseName":"黄石","code":101200601,"x":542.05,"y":336.05,"__v":0},{"_id":"56a88f7d5983c58423ef87ff","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"yuncheng","chineseName":"运城","code":101100801,"x":266,"y":408,"__v":0},{"_id":"56a88f7d5983c58423ef87f8","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"laiwu","chineseName":"莱芜","code":101121601,"x":265,"y":266,"__v":0},{"_id":"56a88f7d5983c58423ef8804","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"neijiang","chineseName":"内江","code":101271201,"x":407,"y":279,"__v":0},{"_id":"56a88f7d5983c58423ef87fd","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"datong","chineseName":"大同","code":101100201,"x":392,"y":110,"__v":0},{"_id":"56a88f7d5983c58423ef8809","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"bijie","chineseName":"毕节","code":101260701,"x":240,"y":210.9,"__v":0},{"_id":"56a88f7d5983c58423ef8802","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"panzhihua","chineseName":"攀枝花","code":101270201,"x":238,"y":406,"__v":0},{"_id":"56a88f7d5983c58423ef880e","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"xiamen","chineseName":"厦门","code":101230201,"x":316.55,"y":359.9,"__v":0},{"_id":"56a88f7d5983c58423ef8807","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"puer","chineseName":"普洱","code":101290901,"x":267.75,"y":339.3,"__v":0},{"_id":"56a88f7d5983c58423ef8813","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"daxing","chineseName":"大兴","code":101011100,"x":319,"y":400,"__v":0},{"_id":"56a88f7d5983c58423ef880c","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"taizhou1","chineseName":"台州","code":101210601,"x":459.65,"y":272.1,"__v":0},{"_id":"56a88f7d5983c58423ef8818","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"liuzhou","chineseName":"柳州","code":101300301,"x":398.95,"y":200.55,"__v":0},{"_id":"56a88f7d5983c58423ef8811","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"huairou","chineseName":"怀柔","code":101010500,"x":332,"y":142,"__v":0},{"_id":"56a88f7d5983c58423ef8816","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"shenzhen","chineseName":"深圳","code":101280601,"x":409,"y":257,"__v":0},{"_id":"56a88f7d5983c58423ef881b","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"ninghe","chineseName":"宁河","code":101030700,"x":391,"y":239,"__v":0},{"_id":"56a88f7d5983c58423ef87e3","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"panjin","chineseName":"盘锦","code":101071301,"x":267.75,"y":251.5,"__v":0},{"_id":"56a88f7d5983c58423ef881e","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"liangpingxian","chineseName":"梁平","code":101042300,"x":308,"y":186,"__v":0},{"_id":"56a88f7d5983c58423ef881d","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"hechuanshi","chineseName":"合川","code":101040300,"x":182,"y":240,"__v":0},{"_id":"56a88f7d5983c58423ef8822","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"qijiang","chineseName":"綦江","code":101043300,"x":221,"y":383,"__v":0},{"_id":"56a88f7d5983c58423ef8827","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"huludao","chineseName":"葫芦岛","code":101071401,"x":188.65,"y":301.35,"__v":0},{"_id":"56a88f7d5983c58423ef882c","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"guoluo","chineseName":"果洛","code":101150501,"x":452,"y":326,"__v":0},{"_id":"56a88f7d5983c58423ef8820","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"zhongxian","chineseName":"忠县","code":101042400,"x":337,"y":222,"__v":0},{"_id":"56a88f7d5983c58423ef8825","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"wulumuqi","chineseName":"乌鲁木齐","code":101130101,"x":408,"y":203,"__v":0},{"_id":"56a88f7d5983c58423ef882a","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"rikaze","chineseName":"日喀则","code":101140201,"x":258,"y":286,"__v":0},{"_id":"56a88f7d5983c58423ef882f","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"lanzhou","chineseName":"兰州","code":101160101,"x":386,"y":293,"__v":0},{"_id":"56a88f7d5983c58423ef87b3","province":null,"pinyinName":"wulanchabu","chineseName":"乌兰察布","code":101080401,"x":362.1,"y":335,"__v":0},{"_id":"56a88f7d5983c58423ef87b8","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"danzhou","chineseName":"儋州","code":101310205,"x":240.9,"y":133.6,"__v":0},{"_id":"56a88f7d5983c58423ef87bd","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"qionghai","chineseName":"琼海","code":101310211,"x":450,"y":231.8,"__v":0},{"_id":"56a88f7d5983c58423ef87c2","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"shenyang","chineseName":"沈阳","code":101070101,"x":316,"y":164,"__v":0},{"_id":"56a88f7d5983c58423ef87c7","province":{"_id":"56a879c04c7fd9141e6f8f98","code":42},"pinyinName":"zhongwei","chineseName":"中卫","code":101170501,"x":246,"y":245,"__v":0},{"_id":"56a88f7d5983c58423ef87cc","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"hami","chineseName":"哈密","code":101131201,"x":494,"y":196,"__v":0},{"_id":"56a88f7d5983c58423ef8823","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"anding","chineseName":"定安","code":101310209,"x":430,"y":170.9,"__v":0},{"_id":"56a88f7d5983c58423ef8828","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"dalian","chineseName":"大连","code":101070201,"x":272.1,"y":429.3,"__v":0},{"_id":"56a88f7d5983c58423ef8831","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"qinhuangdao","chineseName":"秦皇岛","code":101091101,"x":451,"y":155,"__v":0},{"_id":"56a88f7d5983c58423ef882d","province":{"_id":"56a879c04c7fd9141e6f8f98","code":42},"pinyinName":"yinchuan","chineseName":"银川","code":101170101,"x":314,"y":123,"__v":0},{"_id":"56a88f7d5983c58423ef8836","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"zhumadian","chineseName":"驻马店","code":101181601,"x":376,"y":325,"__v":0},{"_id":"56a88f7d5983c58423ef8832","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"cangzhou","chineseName":"沧州","code":101090701,"x":361,"y":288,"__v":0},{"_id":"56a88f7d5983c58423ef883b","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"huanggang","chineseName":"黄冈","code":101200501,"x":536.6,"y":268.85,"__v":0},{"_id":"56a88f7d5983c58423ef8840","province":{"_id":"56a879c04c7fd9141e6f8f81","code":5},"pinyinName":"haikou","chineseName":"海口","code":101310101,"x":451,"y":73,"__v":0},{"_id":"56a88f7d5983c58423ef8837","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"zhoukou","chineseName":"周口","code":101181401,"x":417,"y":250,"__v":0},{"_id":"56a88f7d5983c58423ef8834","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"sanmenxia","chineseName":"三门峡","code":101181701,"x":139,"y":216,"__v":0},{"_id":"56a88f7d5983c58423ef8845","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"yingkou","chineseName":"营口","code":101070801,"x":312,"y":306,"__v":0},{"_id":"56a88f7d5983c58423ef8839","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"jingzhou","chineseName":"荆州","code":101200801,"x":313.3,"y":333.9,"__v":0},{"_id":"56a88f7d5983c58423ef883e","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"binzhou","chineseName":"滨州","code":101121101,"x":280.8,"y":148.5,"__v":0},{"_id":"56a88f7d5983c58423ef87e8","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"geermu","chineseName":"格尔木","code":101150901,"x":278.6,"y":194.05,"__v":0},{"_id":"56a88f7d5983c58423ef884a","province":{"_id":"56a879c04c7fd9141e6f8f98","code":42},"pinyinName":"shizuishan","chineseName":"石嘴山","code":101170201,"x":341,"y":79,"__v":0},{"_id":"56a88f7d5983c58423ef8843","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"akesu","chineseName":"阿克苏","code":101130801,"x":248,"y":261,"__v":0},{"_id":"56a88f7d5983c58423ef87ed","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"langfang","chineseName":"廊坊","code":101090601,"x":331.75,"y":239.6,"__v":0},{"_id":"56a88f7d5983c58423ef884f","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"shijiazhuang","chineseName":"石家庄","code":101090101,"x":252,"y":310,"__v":0},{"_id":"56a88f7d5983c58423ef8848","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"changdu","chineseName":"昌都","code":101140501,"x":560,"y":271,"__v":0},{"_id":"56a88f7d5983c58423ef884d","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"qingyang","chineseName":"庆阳","code":101160401,"x":527,"y":309,"__v":0},{"_id":"56a88f7d5983c58423ef87d1","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"shannan","chineseName":"山南","code":101140301,"x":391,"y":337,"__v":0},{"_id":"56a88f7d5983c58423ef87d6","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"gannan","chineseName":"甘南","code":101161201,"x":368,"y":374,"__v":0},{"_id":"56a88f7d5983c58423ef87db","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"zhengzhou","chineseName":"郑州","code":101180101,"x":314,"y":185,"__v":0},{"_id":"56a88f7d5983c58423ef87e0","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"yili","chineseName":"伊犁","code":101131001,"x":257,"y":207,"__v":0},{"_id":"56a88f7d5983c58423ef8854","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"xiangfan","chineseName":"襄阳","code":101200201,"x":272.75,"y":179.05,"__v":0},{"_id":"56a88f7d5983c58423ef8852","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"shangqiu","chineseName":"商丘","code":101181001,"x":452,"y":192,"__v":0},{"_id":"56a88f7d5983c58423ef87f2","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"xiantao","chineseName":"仙桃","code":101201601,"x":410,"y":329,"__v":0},{"_id":"56a88f7d5983c58423ef87f7","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"jinan","chineseName":"济南","code":101120101,"x":224,"y":218,"__v":0},{"_id":"56a88f7d5983c58423ef87fc","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"wuhu","chineseName":"芜湖","code":101220301,"x":427.15,"y":326.3,"__v":0},{"_id":"56a88f7d5983c58423ef8801","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"ankang","chineseName":"安康","code":101110701,"x":333,"y":400,"__v":0},{"_id":"56a88f7d5983c58423ef8806","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"baoshan","chineseName":"宝山","code":101020300,"x":277,"y":173,"__v":0},{"_id":"56a88f7d5983c58423ef880b","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"shaoxing","chineseName":"绍兴","code":101210501,"x":371,"y":169,"__v":0},{"_id":"56a88f7d5983c58423ef8859","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"hengyang","chineseName":"衡阳","code":101250401,"x":401,"y":273,"__v":0},{"_id":"56a88f7d5983c58423ef885e","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"huainan","chineseName":"淮南","code":101220401,"x":285,"y":203,"__v":0},{"_id":"56a88f7d5983c58423ef8857","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"xiangxi","chineseName":"湘西","code":101251501,"x":196.2,"y":164.8,"__v":0},{"_id":"56a88f7d5983c58423ef885c","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"heze","chineseName":"菏泽","code":101121001,"x":115,"y":390,"__v":0},{"_id":"56a88f7d5983c58423ef8863","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"tongchuan","chineseName":"铜川","code":101111001,"x":325,"y":268,"__v":0},{"_id":"56a88f7d5983c58423ef8868","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"youyang","chineseName":"酉阳","code":101043400,"x":420,"y":369,"__v":0},{"_id":"56a88f7d5983c58423ef8861","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"taiyuan","chineseName":"太原","code":101100101,"x":324.15,"y":234.15,"__v":0},{"_id":"56a88f7d5983c58423ef8866","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"chengdu","chineseName":"成都","code":101270101,"x":324,"y":206,"__v":0},{"_id":"56a88f7d5983c58423ef886d","province":null,"pinyinName":"tainan","chineseName":"台南","code":101340203,"x":250.4,"y":317.65,"__v":0},{"_id":"56a88f7d5983c58423ef8872","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"zhangjiajie","chineseName":"张家界","code":101251101,"x":249,"y":98,"__v":0},{"_id":"56a88f7d5983c58423ef8877","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"qingdao","chineseName":"青岛","code":101120201,"x":487.85,"y":258,"__v":0},{"_id":"56a88f7d5983c58423ef887c","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"xinzhou","chineseName":"忻州","code":101101001,"x":323,"y":172,"__v":0},{"_id":"56a88f7d5983c58423ef886b","province":null,"pinyinName":"taoyuan","chineseName":"桃园","code":101340102,"x":326.3,"y":122.5,"__v":0},{"_id":"56a88f7d5983c58423ef8881","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"deyang","chineseName":"德阳","code":101272001,"x":360,"y":197,"__v":0},{"_id":"56a88f7d5983c58423ef8870","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"suizhou","chineseName":"随州","code":101201301,"x":390.9,"y":175.45,"__v":0},{"_id":"56a88f7d5983c58423ef8886","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"yuxi","chineseName":"玉溪","code":101290701,"x":323,"y":290,"__v":0},{"_id":"56a88f7d5983c58423ef8875","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"dongying","chineseName":"东营","code":101121201,"x":323,"y":109,"__v":0},{"_id":"56a88f7d5983c58423ef888b","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"nanping","chineseName":"南平","code":101230901,"x":305.7,"y":171.3,"__v":0},{"_id":"56a88f7d5983c58423ef887a","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"anqing","chineseName":"安庆","code":101220601,"x":312.2,"y":377.25,"__v":0},{"_id":"56a88f7d5983c58423ef887f","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"xian","chineseName":"西安","code":101110101,"x":340,"y":333,"__v":0},{"_id":"56a88f7d5983c58423ef8884","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"nujiang","chineseName":"怒江","code":101291201,"x":187,"y":161,"__v":0},{"_id":"56a88f7d5983c58423ef8889","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"jiaxing","chineseName":"嘉兴","code":101210301,"x":368,"y":73,"__v":0},{"_id":"56a88f7d5983c58423ef888e","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"xinyu","chineseName":"新余","code":101241001,"x":257,"y":208,"__v":0},{"_id":"56a88f7d5983c58423ef8890","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"shunyi","chineseName":"顺义","code":101010400,"x":360,"y":265,"__v":0},{"_id":"56a88f7d5983c58423ef8895","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"shanwei","chineseName":"汕尾","code":101282101,"x":492,"y":217,"__v":0},{"_id":"56a88f7d5983c58423ef889a","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"fangchenggang","chineseName":"防城港","code":101301401,"x":323.05,"y":439.05,"__v":0},{"_id":"56a88f7d5983c58423ef8893","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"qingyuan","chineseName":"清远","code":101281301,"x":313.3,"y":160.45,"__v":0},{"_id":"56a88f7d5983c58423ef8898","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"zhenjiang","chineseName":"镇江","code":101190301,"x":328,"y":339,"__v":0},{"_id":"56a88f7d5983c58423ef889f","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"qianjiangtujia","chineseName":"黔江","code":101041100,"x":410.85,"y":315.45,"__v":0},{"_id":"56a88f7d5983c58423ef88a4","province":{"_id":"56a879c04c7fd9141e6f8f9b","code":50},"pinyinName":"jiulong","chineseName":"九龙","code":101320102,"x":348,"y":241,"__v":0},{"_id":"56a88f7d5983c58423ef889d","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"dagang","chineseName":"大港","code":101031200,"x":356,"y":404,"__v":0},{"_id":"56a88f7d5983c58423ef88a2","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"rongchang","chineseName":"荣昌","code":101042700,"x":118,"y":333,"__v":0},{"_id":"56a88f7d5983c58423ef88a9","province":null,"pinyinName":"pingdong","chineseName":"屏东","code":101340205,"x":278.6,"y":379.4,"__v":0},{"_id":"56a88f7d5983c58423ef88ae","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"kunming","chineseName":"昆明","code":101290101,"x":356,"y":220,"__v":0},{"_id":"56a88f7d5983c58423ef88a7","province":null,"pinyinName":"miaoli","chineseName":"苗栗","code":101340402,"x":306.8,"y":196.2,"__v":0},{"_id":"56a88f7d5983c58423ef88b3","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"wenzhou","chineseName":"温州","code":101210701,"x":396,"y":364,"__v":0},{"_id":"56a88f7d5983c58423ef88ac","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"diqing","chineseName":"迪庆","code":101291301,"x":204,"y":91,"__v":0},{"_id":"56a88f7d5983c58423ef88b8","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"pinggu","chineseName":"平谷","code":101011500,"x":439,"y":232,"__v":0},{"_id":"56a88f7d5983c58423ef88b1","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"huzhou","chineseName":"湖州","code":101210201,"x":291,"y":71,"__v":0},{"_id":"56a88f7d5983c58423ef88b6","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"pingxiang","chineseName":"萍乡","code":101240901,"x":198,"y":238,"__v":0},{"_id":"56a88f7d5983c58423ef88bd","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"heyuan","chineseName":"河源","code":101281201,"x":442.55,"y":141.6,"__v":0},{"_id":"56a88f7d5983c58423ef88c2","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"xiqing","chineseName":"西青","code":101030500,"x":281,"y":330,"__v":0},{"_id":"56a88f7d5983c58423ef88c7","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"changshou","chineseName":"长寿","code":101041000,"x":265,"y":264,"__v":0},{"_id":"56a88f7d5983c58423ef88cc","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"fengxian","chineseName":"奉贤","code":101021000,"x":330,"y":330,"__v":0},{"_id":"56a88f7d5983c58423ef88bb","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"jiangmen","chineseName":"江门","code":101281101,"x":291,"y":285,"__v":0},{"_id":"56a88f7d5983c58423ef88c0","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"wuzhou","chineseName":"梧州","code":101300601,"x":538.8,"y":274.25,"__v":0},{"_id":"56a88f7d5983c58423ef88c5","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"wushanxian","chineseName":"巫山","code":101042000,"x":513.85,"y":134.4,"__v":0},{"_id":"56a88f7d5983c58423ef88ca","province":{"_id":"56a879c04c7fd9141e6f8f9b","code":50},"pinyinName":"xinjie","chineseName":"新界","code":101320103,"x":295,"y":181,"__v":0},{"_id":"56a88f7d5983c58423ef88cf","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"taizhou","chineseName":"泰州","code":101191201,"x":366,"y":269,"__v":0},{"_id":"56a88f7d5983c58423ef88d1","province":null,"pinyinName":"taidong","chineseName":"台东","code":101340204,"x":323.05,"y":351.25,"__v":0},{"_id":"56a88f7d5983c58423ef88d6","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"tangshan","chineseName":"唐山","code":101090501,"x":408,"y":180,"__v":0},{"_id":"56a88f7d5983c58423ef883c","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"yiyang","chineseName":"益阳","code":101250700,"x":349,"y":165,"__v":0},{"_id":"56a88f7d5983c58423ef8841","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"aletai","chineseName":"阿勒泰","code":101131401,"x":394,"y":92,"__v":0},{"_id":"56a88f7d5983c58423ef8846","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"tieling","chineseName":"铁岭","code":101071101,"x":371,"y":106,"__v":0},{"_id":"56a88f7d5983c58423ef884b","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"jiuquan","chineseName":"酒泉","code":101160801,"x":164,"y":118,"__v":0},{"_id":"56a88f7d5983c58423ef8850","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"anyang","chineseName":"安阳","code":101180201,"x":336,"y":54,"__v":0},{"_id":"56a88f7d5983c58423ef8855","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"tianmen","chineseName":"天门","code":101201501,"x":383,"y":286,"__v":0},{"_id":"56a88f7d5983c58423ef885a","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"dezhou","chineseName":"德州","code":101120401,"x":152.85,"y":166.95,"__v":0},{"_id":"56a88f7d5983c58423ef88d4","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"changzhou","chineseName":"常州","code":101191101,"x":338,"y":380,"__v":0},{"_id":"56a88f7d5983c58423ef88db","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"xinyang","chineseName":"信阳","code":101180601,"x":380.5,"y":393.5,"__v":0},{"_id":"56a88f7d5983c58423ef88d9","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"luoyang","chineseName":"洛阳","code":101180901,"x":236.35,"y":191.9,"__v":0},{"_id":"56a88f7d5983c58423ef88e0","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"weifang","chineseName":"潍坊","code":101120601,"x":367,"y":206,"__v":0},{"_id":"56a88f7d5983c58423ef88de","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"ezhou","chineseName":"鄂州","code":101200301,"x":510,"y":316.35,"__v":0},{"_id":"56a88f7d5983c58423ef88e5","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"shuozhou","chineseName":"朔州","code":101100901,"x":324,"y":127,"__v":0},{"_id":"56a88f7d5983c58423ef88e3","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"hefei","chineseName":"合肥","code":101220101,"x":328.5,"y":275.35,"__v":0},{"_id":"56a88f7d5983c58423ef88e8","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"weinan","chineseName":"渭南","code":101110501,"x":371,"y":274,"__v":0},{"_id":"56a88f7d5983c58423ef8810","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"fuzhou1","chineseName":"抚州","code":101240401,"x":356,"y":208,"__v":0},{"_id":"56a88f7d5983c58423ef8815","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"zhongshan","chineseName":"中山","code":101281701,"x":342.7,"y":255,"__v":0},{"_id":"56a88f7d5983c58423ef881a","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"yulin","chineseName":"玉林","code":101300901,"x":458.2,"y":360.9,"__v":0},{"_id":"56a88f7d5983c58423ef881f","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"wuxi","chineseName":"无锡","code":101190201,"x":400,"y":386,"__v":0},{"_id":"56a88f7d5983c58423ef8824","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"tacheng","chineseName":"塔城","code":101131101,"x":289,"y":107,"__v":0},{"_id":"56a88f7d5983c58423ef8829","province":{"_id":"56a879c04c7fd9141e6f8f8a","code":14},"pinyinName":"fushun","chineseName":"抚顺","code":101070401,"x":411,"y":163,"__v":0},{"_id":"56a88f7d5983c58423ef882e","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"jiayuguan","chineseName":"嘉峪关","code":101161401,"x":235,"y":166,"__v":0},{"_id":"56a88f7d5983c58423ef87e5","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"ali","chineseName":"阿里","code":101140701,"x":121,"y":119,"__v":0},{"_id":"56a88f7d5983c58423ef87ea","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"wuwei","chineseName":"武威","code":101160501,"x":382,"y":236,"__v":0},{"_id":"56a88f7d5983c58423ef885f","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"chaohu","chineseName":"巢湖","code":101221601,"x":373,"y":297,"__v":0},{"_id":"56a88f7d5983c58423ef87ef","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"jiaozuo","chineseName":"焦作","code":101181101,"x":297,"y":143,"__v":0},{"_id":"56a88f7d5983c58423ef8864","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"shangluo","chineseName":"商洛","code":101110601,"x":383,"y":346,"__v":0},{"_id":"56a88f7d5983c58423ef87f4","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"yueyang","chineseName":"岳阳","code":101251001,"x":429,"y":103,"__v":0},{"_id":"56a88f7d5983c58423ef88ea","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"mianyang","chineseName":"绵阳","code":101270401,"x":367.5,"y":153.95,"__v":0},{"_id":"56a88f7d5983c58423ef8833","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"hebi","chineseName":"鹤壁","code":101181201,"x":375,"y":99,"__v":0},{"_id":"56a88f7d5983c58423ef8838","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"shennongjia","chineseName":"神农架","code":101201201,"x":169,"y":221.8,"__v":0},{"_id":"56a88f7d5983c58423ef883d","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"zhuzhou","chineseName":"株洲","code":101250301,"x":446.65,"y":219,"__v":0},{"_id":"56a88f7d5983c58423ef8842","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"changji","chineseName":"昌吉","code":101130401,"x":369,"y":203,"__v":0},{"_id":"56a88f7d5983c58423ef8847","province":{"_id":"56a879c04c7fd9141e6f8f99","code":43},"pinyinName":"naqu","chineseName":"那曲","code":101140601,"x":316,"y":174,"__v":0},{"_id":"56a88f7d5983c58423ef8869","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"jiading","chineseName":"嘉定","code":101020500,"x":225,"y":184,"__v":0},{"_id":"56a88f7d5983c58423ef886e","province":{"_id":"56a879c04c7fd9141e6f8f9c","code":51},"pinyinName":"dangzai","chineseName":"氹仔岛","code":101330102,"x":320.9,"y":262.7,"__v":0},{"_id":"56a88f7d5983c58423ef8873","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"changsha","chineseName":"长沙","code":101250101,"x":418,"y":170,"__v":0},{"_id":"56a88f7d5983c58423ef8878","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"rizhao","chineseName":"日照","code":101121501,"x":399,"y":309,"__v":0},{"_id":"56a88f7d5983c58423ef887d","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"linfen","chineseName":"临汾","code":101100701,"x":276,"y":339,"__v":0},{"_id":"56a88f7d5983c58423ef8882","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"nanchong","chineseName":"南充","code":101270501,"x":427,"y":187,"__v":0},{"_id":"56a88f7d5983c58423ef8887","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"zunyi","chineseName":"遵义","code":101260201,"x":366.4,"y":164.8,"__v":0},{"_id":"56a88f7d5983c58423ef888c","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"longyan","chineseName":"龙岩","code":101230701,"x":223.3,"y":321.95,"__v":0},{"_id":"56a88f7d5983c58423ef8891","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"fengtai","chineseName":"丰台","code":101010900,"x":282.95,"y":361,"__v":0},{"_id":"56a88f7d5983c58423ef8896","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"baise","chineseName":"百色","code":101301001,"x":184.55,"y":245.45,"__v":0},{"_id":"56a88f7d5983c58423ef889b","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"baodi","chineseName":"宝坻","code":101030300,"x":335,"y":180,"__v":0},{"_id":"56a88f7d5983c58423ef88a0","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"wanzhou","chineseName":"万州","code":101041300,"x":380,"y":187,"__v":0},{"_id":"56a88f7d5983c58423ef88a5","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"songjiang","chineseName":"松江","code":101020900,"x":228,"y":296,"__v":0},{"_id":"56a88f7d5983c58423ef88aa","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"lianyungang","chineseName":"连云港","code":101191001,"x":267,"y":90,"__v":0},{"_id":"56a88f7d5983c58423ef88af","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"wenshan","chineseName":"文山","code":101290601,"x":434,"y":309,"__v":0},{"_id":"56a88f7d5983c58423ef88b4","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"putian","chineseName":"莆田","code":101230401,"x":365,"y":275,"__v":0},{"_id":"56a88f7d5983c58423ef88b9","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"shizhongxin","chineseName":"市中心","code":101020100,"x":289,"y":224,"__v":0},{"_id":"56a88f7d5983c58423ef88be","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"shantou","chineseName":"汕头","code":101280501,"x":566.45,"y":179.25,"__v":0},{"_id":"56a88f7d5983c58423ef88c3","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"jinnan","chineseName":"津南","code":101031000,"x":351,"y":349,"__v":0},{"_id":"56a88f7d5983c58423ef88c8","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"dazu","chineseName":"大足","code":101042600,"x":140,"y":295,"__v":0},{"_id":"56a88f7d5983c58423ef88ef","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"xishuangbanna","chineseName":"西双版纳","code":101291601,"x":260,"y":400,"__v":0},{"_id":"56a88f7d5983c58423ef88f4","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"jining","chineseName":"济宁","code":101120701,"x":191,"y":355,"__v":0},{"_id":"56a88f7d5983c58423ef88f9","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"yangquan","chineseName":"阳泉","code":101100301,"x":380,"y":222,"__v":0},{"_id":"56a88f7d5983c58423ef88fe","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"meishan","chineseName":"眉山","code":101271501,"x":324,"y":257,"__v":0},{"_id":"56a88f7d5983c58423ef8903","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"honghe","chineseName":"红河","code":101290301,"x":357,"y":328,"__v":0},{"_id":"56a88f7d5983c58423ef88ed","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"luzhou","chineseName":"泸州","code":101271001,"x":410,"y":323,"__v":0},{"_id":"56a88f7d5983c58423ef8908","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"ningde","chineseName":"宁德","code":101230301,"x":390,"y":137,"__v":0},{"_id":"56a88f7d5983c58423ef88f2","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"liaocheng","chineseName":"聊城","code":101121701,"x":119,"y":248,"__v":0},{"_id":"56a88f7d5983c58423ef890d","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"mentougou","chineseName":"门头沟","code":101011400,"x":167,"y":317.65,"__v":0},{"_id":"56a88f7d5983c58423ef88f7","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"maanshan","chineseName":"马鞍山","code":101220501,"x":428.2,"y":285.1,"__v":0},{"_id":"56a88f7d5983c58423ef88fc","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"hanzhong","chineseName":"汉中","code":101110801,"x":268,"y":375,"__v":0},{"_id":"56a88f7d5983c58423ef884c","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"baiyin","chineseName":"白银","code":101161301,"x":424.95,"y":281.85,"__v":0},{"_id":"56a88f7d5983c58423ef8901","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"dehong","chineseName":"德宏","code":101291501,"x":132,"y":264,"__v":0},{"_id":"56a88f7d5983c58423ef8851","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"xinxiang","chineseName":"新乡","code":101180301,"x":344,"y":126,"__v":0},{"_id":"56a88f7d5983c58423ef8906","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"hangzhou","chineseName":"杭州","code":101210101,"x":320.9,"y":130.1,"__v":0},{"_id":"56a88f7d5983c58423ef88cd","province":null,"pinyinName":"yilan","chineseName":"宜兰","code":101340104,"x":388.1,"y":156.1,"__v":0},{"_id":"56a88f7d5983c58423ef88d2","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"xuzhou","chineseName":"徐州","code":101190801,"x":119.25,"y":139.85,"__v":0},{"_id":"56a88f7d5983c58423ef88d7","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"hengshui","chineseName":"衡水","code":101090801,"x":313,"y":325,"__v":0},{"_id":"56a88f7d5983c58423ef88dc","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"yichang","chineseName":"宜昌","code":101200901,"x":227.25,"y":281.8,"__v":0},{"_id":"56a88f7d5983c58423ef8912","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"meizhou","chineseName":"梅州","code":101280401,"x":522.55,"y":110.45,"__v":0},{"_id":"56a88f7d5983c58423ef8917","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"qujing","chineseName":"曲靖","code":101290401,"x":405.45,"y":220.05,"__v":0},{"_id":"56a88f7d5983c58423ef891c","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"chongqingshi","chineseName":"重庆","code":101040100,"x":233,"y":324,"__v":0},{"_id":"56a88f7d5983c58423ef8921","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"bishan","chineseName":"璧山","code":101042900,"x":180,"y":327,"__v":0},{"_id":"56a88f7d5983c58423ef8926","province":null,"pinyinName":"taizhong","chineseName":"台中","code":101340401,"x":280.8,"y":217.9,"__v":0},{"_id":"56a88f7d5983c58423ef892b","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"lishui","chineseName":"丽水","code":101210801,"x":339.3,"y":311.15,"__v":0},{"_id":"56a88f7d5983c58423ef8930","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"changping","chineseName":"昌平","code":101010700,"x":261,"y":248,"__v":0},{"_id":"56a88f7d5983c58423ef8935","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"huizhou","chineseName":"惠州","code":101280301,"x":423.85,"y":214.65,"__v":0},{"_id":"56a88f7d5983c58423ef893a","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"beichen","chineseName":"北辰","code":101030600,"x":313,"y":255,"__v":0},{"_id":"56a88f7d5983c58423ef893f","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"shizhu","chineseName":"石柱","code":101042500,"x":372,"y":258,"__v":0},{"_id":"56a88f7d5983c58423ef8944","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"jinshan","chineseName":"金山","code":101020700,"x":240,"y":360,"__v":0},{"_id":"56a88f7d5983c58423ef8949","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"yancheng","chineseName":"盐城","code":101190701,"x":360,"y":169,"__v":0},{"_id":"56a88f7d5983c58423ef87f9","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"zaozhuang","chineseName":"枣庄","code":101121401,"x":264,"y":397,"__v":0},{"_id":"56a88f7d5983c58423ef87fe","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"lvliang","chineseName":"吕梁","code":101101100,"x":265,"y":268,"__v":0},{"_id":"56a88f7d5983c58423ef8803","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"leshan","chineseName":"乐山","code":101271401,"x":319,"y":297,"__v":0},{"_id":"56a88f7d5983c58423ef8808","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"zhaotong","chineseName":"昭通","code":101291001,"x":394.6,"y":124.65,"__v":0},{"_id":"56a88f7d5983c58423ef880d","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"sanming","chineseName":"三明","code":101230801,"x":259.1,"y":236.35,"__v":0},{"_id":"56a88f7d5983c58423ef8812","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"haidian","chineseName":"海淀","code":101010200,"x":264.5,"y":300.3,"__v":0},{"_id":"56a88f7d5983c58423ef8817","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"jieyang","chineseName":"揭阳","code":101281901,"x":526.8,"y":182,"__v":0},{"_id":"56a88f7d5983c58423ef881c","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"hangu","chineseName":"汉沽","code":101030800,"x":430,"y":271,"__v":0},{"_id":"56a88f7d5983c58423ef8821","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"tongnan","chineseName":"潼南","code":101042100,"x":144,"y":244,"__v":0},{"_id":"56a88f7d5983c58423ef8826","province":{"_id":"56a879c04c7fd9141e6f8f9a","code":44},"pinyinName":"kashi","chineseName":"喀什","code":101130901,"x":158,"y":316,"__v":0},{"_id":"56a88f7d5983c58423ef882b","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"haixi","chineseName":"海西","code":101150701,"x":374,"y":139.85,"__v":0},{"_id":"56a88f7d5983c58423ef8830","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"pingliang","chineseName":"平凉","code":101160301,"x":498,"y":347,"__v":0},{"_id":"56a88f7d5983c58423ef890b","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"yingtan","chineseName":"鹰潭","code":101241101,"x":389,"y":167,"__v":0},{"_id":"56a88f7d5983c58423ef8910","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"foshan","chineseName":"佛山","code":101280800,"x":308.7,"y":225,"__v":0},{"_id":"56a88f7d5983c58423ef8915","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"qinzhou","chineseName":"钦州","code":101301101,"x":376,"y":377,"__v":0},{"_id":"56a88f7d5983c58423ef891a","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"ningbo","chineseName":"宁波","code":101210401,"x":440,"y":148,"__v":0},{"_id":"56a88f7d5983c58423ef891f","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"dianjiang","chineseName":"���江","code":101042200,"x":289,"y":225,"__v":0},{"_id":"56a88f7d5983c58423ef8924","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"minhang","chineseName":"闵行","code":101020200,"x":291,"y":275,"__v":0},{"_id":"56a88f7d5983c58423ef8929","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"suqian","chineseName":"宿迁","code":101191301,"x":227,"y":175,"__v":0},{"_id":"56a88f7d5983c58423ef892e","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"yichun1","chineseName":"宜春","code":101240501,"x":259,"y":159,"__v":0},{"_id":"56a88f7d5983c58423ef8933","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"zhaoqing","chineseName":"肇庆","code":101280901,"x":275.35,"y":214.65,"__v":0},{"_id":"56a88f7d5983c58423ef8938","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"guigang","chineseName":"贵港","code":101300801,"x":417.35,"y":307.9,"__v":0},{"_id":"56a88f7d5983c58423ef893d","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"yunyangxian","chineseName":"云阳","code":101041700,"x":408,"y":139,"__v":0},{"_id":"56a88f7d5983c58423ef8942","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"xiushan","chineseName":"秀山","code":101043600,"x":436,"y":418,"__v":0},{"_id":"56a88f7d5983c58423ef8947","province":null,"pinyinName":"gaoxiong","chineseName":"高雄","code":101340201,"x":239.6,"y":385.95,"__v":0},{"_id":"56a88f7d5983c58423ef8835","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"xuchang","chineseName":"许昌","code":101180401,"x":330,"y":231,"__v":0},{"_id":"56a88f7d5983c58423ef883a","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"xiaogan","chineseName":"孝感","code":101200401,"x":424.55,"y":250,"__v":0},{"_id":"56a88f7d5983c58423ef883f","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"zibo","chineseName":"淄博","code":101120301,"x":290,"y":219,"__v":0},{"_id":"56a88f7d5983c58423ef8844","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"chaoyang","chineseName":"朝阳","code":101010300,"x":344.3,"y":317.65,"__v":0},{"_id":"56a88f7d5983c58423ef8849","province":{"_id":"56a879c04c7fd9141e6f8f8b","code":15},"pinyinName":"hainanzangzuzizhizhou","chineseName":"海南","code":101150401,"x":483,"y":229,"__v":0},{"_id":"56a88f7d5983c58423ef884e","province":{"_id":"56a879c04c7fd9141e6f8f82","code":6},"pinyinName":"chengde","chineseName":"承德","code":101090402,"x":396.75,"y":111.65,"__v":0},{"_id":"56a88f7d5983c58423ef8853","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"nanyang","chineseName":"南阳","code":101180701,"x":259.1,"y":314.4,"__v":0},{"_id":"56a88f7d5983c58423ef8858","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"huaihua","chineseName":"怀化","code":101251201,"x":217,"y":233,"__v":0},{"_id":"56a88f7d5983c58423ef8856","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"xianning","chineseName":"咸宁","code":101200701,"x":468.2,"y":368.15,"__v":0},{"_id":"56a88f7d5983c58423ef885b","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"weihai","chineseName":"威海","code":101121301,"x":602,"y":110,"__v":0},{"_id":"56a88f7d5983c58423ef8860","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"xuancheng","chineseName":"宣城","code":101221401,"x":465,"y":343,"__v":0},{"_id":"56a88f7d5983c58423ef8865","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"yaan","chineseName":"雅安","code":101271701,"x":282,"y":243,"__v":0},{"_id":"56a88f7d5983c58423ef886a","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"nanhui","chineseName":"浦东南汇","code":101020600,"x":396,"y":293,"__v":0},{"_id":"56a88f7d5983c58423ef886f","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"enshi","chineseName":"恩施","code":101201001,"x":99.1,"y":352.7,"__v":0},{"_id":"56a88f7d5983c58423ef8874","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"shaoyang","chineseName":"邵阳","code":101250901,"x":312.2,"y":253.65,"__v":0},{"_id":"56a88f7d5983c58423ef8879","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"bengbu","chineseName":"蚌埠","code":101220201,"x":318,"y":162,"__v":0},{"_id":"56a88f7d5983c58423ef887e","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"yan an","chineseName":"延安","code":101110300,"x":345,"y":208,"__v":0},{"_id":"56a88f7d5983c58423ef88e1","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"linyi","chineseName":"临沂","code":101120901,"x":338.25,"y":370.75,"__v":0},{"_id":"56a88f7d5983c58423ef88e6","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"jinzhong","chineseName":"晋中","code":101100401,"x":355,"y":258,"__v":0},{"_id":"56a88f7d5983c58423ef88eb","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"guangyuan","chineseName":"广元","code":101272101,"x":415,"y":131,"__v":0},{"_id":"56a88f7d5983c58423ef88f0","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"loudi","chineseName":"娄底","code":101250801,"x":319,"y":210,"__v":0},{"_id":"56a88f7d5983c58423ef88f5","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"suzhou1","chineseName":"宿州","code":101220701,"x":321,"y":105,"__v":0},{"_id":"56a88f7d5983c58423ef88fa","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"jincheng","chineseName":"晋城","code":101100601,"x":366.4,"y":384.85,"__v":0},{"_id":"56a88f7d5983c58423ef88ff","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"ziyang","chineseName":"资阳","code":101271301,"x":372,"y":245,"__v":0},{"_id":"56a88f7d5983c58423ef8904","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"tongren","chineseName":"铜仁","code":101260601,"x":525.8,"y":143.1,"__v":0},{"_id":"56a88f7d5983c58423ef8883","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"bazhong","chineseName":"巴中","code":101270901,"x":463,"y":145,"__v":0},{"_id":"56a88f7d5983c58423ef8888","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"anshun","chineseName":"安顺","code":101260301,"x":280,"y":301,"__v":0},{"_id":"56a88f7d5983c58423ef888d","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"jingdezhen","chineseName":"景德镇","code":101240801,"x":395,"y":74,"__v":0},{"_id":"56a88f7d5983c58423ef8892","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"maoming","chineseName":"茂名","code":101282001,"x":170.65,"y":317.55,"__v":0},{"_id":"56a88f7d5983c58423ef8897","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"huaian","chineseName":"淮安","code":101190901,"x":279,"y":190,"__v":0},{"_id":"56a88f7d5983c58423ef889c","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"dongli","chineseName":"东丽","code":101030400,"x":349,"y":303,"__v":0},{"_id":"56a88f7d5983c58423ef88a1","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"yubei","chineseName":"渝北","code":101040700,"x":233,"y":282,"__v":0},{"_id":"56a88f7d5983c58423ef88a6","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"chongming","chineseName":"崇明","code":101021100,"x":302,"y":80,"__v":0},{"_id":"56a88f7d5983c58423ef88ab","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"yibin","chineseName":"宜宾","code":101271101,"x":369,"y":333,"__v":0},{"_id":"56a88f7d5983c58423ef88b0","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"liupanshui","chineseName":"六盘水","code":101260801,"x":189.7,"y":265.6,"__v":0},{"_id":"56a88f7d5983c58423ef885d","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"huaibei","chineseName":"淮北","code":101221201,"x":276.45,"y":101.9,"__v":0},{"_id":"56a88f7d5983c58423ef8862","province":{"_id":"56a879c04c7fd9141e6f8f8e","code":18},"pinyinName":"changzhi","chineseName":"长治","code":101100501,"x":374,"y":330.65,"__v":0},{"_id":"56a88f7d5983c58423ef8867","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"suining","chineseName":"遂宁","code":101270701,"x":408,"y":224,"__v":0},{"_id":"56a88f7d5983c58423ef8909","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"quanzhou","chineseName":"泉州","code":101230501,"x":353.4,"y":326.3,"__v":0},{"_id":"56a88f7d5983c58423ef886c","province":null,"pinyinName":"zhanghua","chineseName":"彰化","code":101340403,"x":251.5,"y":237.4,"__v":0},{"_id":"56a88f7d5983c58423ef890e","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"fangshan","chineseName":"房山","code":101011200,"x":198,"y":386,"__v":0},{"_id":"56a88f7d5983c58423ef8871","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"wuhan","chineseName":"武汉","code":101200101,"x":472.75,"y":280,"__v":0},{"_id":"56a88f7d5983c58423ef8913","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"hechi","chineseName":"河池","code":101301201,"x":277.25,"y":193.6,"__v":0},{"_id":"56a88f7d5983c58423ef8876","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"yantai","chineseName":"烟台","code":101120501,"x":543.1,"y":94.3,"__v":0},{"_id":"56a88f7d5983c58423ef8918","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"guiyang","chineseName":"贵阳","code":101260101,"x":332.8,"y":256.9,"__v":0},{"_id":"56a88f7d5983c58423ef891d","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"fengduxian","chineseName":"丰都","code":101043000,"x":331,"y":272,"__v":0},{"_id":"56a88f7d5983c58423ef8922","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"pengshui","chineseName":"彭水","code":101043200,"x":371,"y":325,"__v":0},{"_id":"56a88f7d5983c58423ef8927","province":null,"pinyinName":"jiayi","chineseName":"嘉义","code":101340202,"x":286.2,"y":295.95,"__v":0},{"_id":"56a88f7d5983c58423ef892c","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"fuzhou","chineseName":"福州","code":101230101,"x":403.3,"y":215.75,"__v":0},{"_id":"56a88f7d5983c58423ef8931","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"shijingshan","chineseName":"石景山","code":101011000,"x":255,"y":341.5,"__v":0},{"_id":"56a88f7d5983c58423ef8936","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"chaozhou","chineseName":"潮州","code":101281501,"x":579,"y":137.45,"__v":0},{"_id":"56a88f7d5983c58423ef893b","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"tanggu","chineseName":"塘沽","code":101031100,"x":400,"y":319,"__v":0},{"_id":"56a88f7d5983c58423ef8940","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"tongliang","chineseName":"铜梁","code":101042800,"x":175,"y":282,"__v":0},{"_id":"56a88f7d5983c58423ef8945","province":null,"pinyinName":"xinzhu","chineseName":"新竹","code":101340103,"x":300.3,"y":151.75,"__v":0},{"_id":"56a88f7d5983c58423ef894a","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"nantong","chineseName":"南通","code":101190501,"x":450,"y":297,"__v":0},{"_id":"56a88f7d5983c58423ef88b5","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"jiujiang","chineseName":"九江","code":101240201,"x":294,"y":86,"__v":0},{"_id":"56a88f7d5983c58423ef88ba","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"zhanjiang","chineseName":"湛江","code":101281001,"x":137.7,"y":385.95,"__v":0},{"_id":"56a88f7d5983c58423ef88bf","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"chongzuo","chineseName":"崇左","code":101300201,"x":235.45,"y":363.6,"__v":0},{"_id":"56a88f7d5983c58423ef88c4","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"jiangjinshi","chineseName":"江津","code":101040500,"x":183,"y":368,"__v":0},{"_id":"56a88f7d5983c58423ef88c9","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"nanchuan","chineseName":"南川","code":101040400,"x":273,"y":345,"__v":0},{"_id":"56a88f7d5983c58423ef88ce","province":null,"pinyinName":"hualian","chineseName":"花莲","code":101340405,"x":368.6,"y":229.8,"__v":0},{"_id":"56a88f7d5983c58423ef887b","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"chizhou","chineseName":"池州","code":101221701,"x":363.15,"y":385.95,"__v":0},{"_id":"56a88f7d5983c58423ef8880","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"aba","chineseName":"阿坝","code":101271901,"x":276,"y":138,"__v":0},{"_id":"56a88f7d5983c58423ef8885","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"lincang","chineseName":"临沧","code":101291101,"x":203,"y":299,"__v":0},{"_id":"56a88f7d5983c58423ef88d3","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"yangzhou","chineseName":"扬州","code":101190601,"x":318.7,"y":294.85,"__v":0},{"_id":"56a88f7d5983c58423ef88d8","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"puyang","chineseName":"濮阳","code":101181301,"x":424,"y":80,"__v":0},{"_id":"56a88f7d5983c58423ef888a","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"jinhua","chineseName":"金华","code":101210901,"x":316,"y":237,"__v":0},{"_id":"56a88f7d5983c58423ef888f","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"yanqing","chineseName":"延庆","code":101010800,"x":232,"y":190.8,"__v":0},{"_id":"56a88f7d5983c58423ef8894","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"guangzhou","chineseName":"广州","code":101280101,"x":353,"y":196,"__v":0},{"_id":"56a88f7d5983c58423ef8899","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"nanning","chineseName":"南宁","code":101300101,"x":332,"y":309,"__v":0},{"_id":"56a88f7d5983c58423ef889e","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"fulingqu","chineseName":"涪陵","code":101041400,"x":277,"y":300,"__v":0},{"_id":"56a88f7d5983c58423ef88a3","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"wulong","chineseName":"武隆","code":101043100,"x":322,"y":328,"__v":0},{"_id":"56a88f7d5983c58423ef88a8","province":null,"pinyinName":"yunlin","chineseName":"云林","code":101340406,"x":243.9,"y":276.45,"__v":0},{"_id":"56a88f7d5983c58423ef88ad","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"dali","chineseName":"大理","code":101290201,"x":223,"y":198,"__v":0},{"_id":"56a88f7d5983c58423ef88b2","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"zhoushan","chineseName":"舟山","code":101211101,"x":480,"y":96,"__v":0},{"_id":"56a88f7d5983c58423ef88b7","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"ganzhou","chineseName":"赣州","code":101240701,"x":298,"y":345,"__v":0},{"_id":"56a88f7d5983c58423ef88bc","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"shaoguan","chineseName":"韶关","code":101280201,"x":352.6,"y":80,"__v":0},{"_id":"56a88f7d5983c58423ef88c1","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"jixian","chineseName":"蓟县","code":101031400,"x":320,"y":85,"__v":0},{"_id":"56a88f7d5983c58423ef88c6","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"fengjie","chineseName":"奉节","code":101041900,"x":461,"y":167,"__v":0},{"_id":"56a88f7d5983c58423ef88cb","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"pudong","chineseName":"浦东","code":101021300,"x":350,"y":220,"__v":0},{"_id":"56a88f7d5983c58423ef88d0","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"suzhou","chineseName":"苏州","code":101190401,"x":450,"y":388,"__v":0},{"_id":"56a88f7d5983c58423ef88d5","province":{"_id":"56a879c04c7fd9141e6f8f7e","code":2},"pinyinName":"tianshui","chineseName":"天水","code":101160901,"x":465,"y":368,"__v":0},{"_id":"56a88f7d5983c58423ef88da","province":{"_id":"56a879c04c7fd9141e6f8f84","code":8},"pinyinName":"pingdingshan","chineseName":"平顶山","code":101180501,"x":287,"y":249,"__v":0},{"_id":"56a88f7d5983c58423ef88df","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"changde","chineseName":"常德","code":101250601,"x":331.75,"y":121.4,"__v":0},{"_id":"56a88f7d5983c58423ef88e4","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"tongling","chineseName":"铜陵","code":101221301,"x":392.45,"y":346.9,"__v":0},{"_id":"56a88f7d5983c58423ef88e9","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"ganzi","chineseName":"甘孜","code":101271801,"x":152.85,"y":147.45,"__v":0},{"_id":"56a88f7d5983c58423ef88ee","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"lijiang","chineseName":"丽江","code":101291401,"x":259,"y":139,"__v":0},{"_id":"56a88f7d5983c58423ef88f3","province":{"_id":"56a879c04c7fd9141e6f8f8d","code":17},"pinyinName":"taian","chineseName":"泰安","code":101120801,"x":214,"y":291,"__v":0},{"_id":"56a88f7d5983c58423ef88f8","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"huangshan","chineseName":"黄山","code":101221001,"x":431.45,"y":426.05,"__v":0},{"_id":"56a88f7d5983c58423ef88fd","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"liangshan","chineseName":"凉山","code":101271601,"x":255,"y":353,"__v":0},{"_id":"56a88f7d5983c58423ef88dd","province":{"_id":"56a879c04c7fd9141e6f8f85","code":9},"pinyinName":"qianjiang","chineseName":"潜江","code":101201701,"x":355,"y":320,"__v":0},{"_id":"56a88f7d5983c58423ef88e2","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"fuyang","chineseName":"阜阳","code":101220801,"x":214,"y":191,"__v":0},{"_id":"56a88f7d5983c58423ef88e7","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"yulin1","chineseName":"榆林","code":101110401,"x":356,"y":119,"__v":0},{"_id":"56a88f7d5983c58423ef88ec","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"zigong","chineseName":"自贡","code":101270301,"x":364,"y":294,"__v":0},{"_id":"56a88f7d5983c58423ef88f1","province":{"_id":"56a879c04c7fd9141e6f8f86","code":10},"pinyinName":"yongzhou","chineseName":"永州","code":101251401,"x":355,"y":343,"__v":0},{"_id":"56a88f7d5983c58423ef88f6","province":{"_id":"56a879c04c7fd9141e6f8f7c","code":0},"pinyinName":"liuan","chineseName":"六安","code":101221501,"x":270,"y":268,"__v":0},{"_id":"56a88f7d5983c58423ef88fb","province":{"_id":"56a879c04c7fd9141e6f8f8c","code":16},"pinyinName":"baoji","chineseName":"宝鸡","code":101110901,"x":258,"y":311,"__v":0},{"_id":"56a88f7d5983c58423ef8900","province":{"_id":"56a879c04c7fd9141e6f8f8f","code":19},"pinyinName":"dazhou","chineseName":"达州","code":101270601,"x":488,"y":190,"__v":0},{"_id":"56a88f7d5983c58423ef8905","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"qiandongnan","chineseName":"黔东南","code":101260501,"x":442.3,"y":256.9,"__v":0},{"_id":"56a88f7d5983c58423ef890a","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"nanchang","chineseName":"南昌","code":101240101,"x":321,"y":138,"__v":0},{"_id":"56a88f7d5983c58423ef890f","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"yunfu","chineseName":"云浮","code":101281401,"x":225,"y":245,"__v":0},{"_id":"56a88f7d5983c58423ef8914","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"laibin","chineseName":"来宾","code":101300401,"x":400,"y":260,"__v":0},{"_id":"56a88f7d5983c58423ef8919","province":{"_id":"56a879c04c7fd9141e6f8f80","code":4},"pinyinName":"qianxinan","chineseName":"黔西南","code":101260901,"x":198.4,"y":396.75,"__v":0},{"_id":"56a88f7d5983c58423ef891e","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"chengkou","chineseName":"城口","code":101041600,"x":400,"y":58,"__v":0},{"_id":"56a88f7d5983c58423ef8923","province":{"_id":"56a879c04c7fd9141e6f8f9b","code":50},"pinyinName":"xianggang","chineseName":"香港岛","code":101320101,"x":362,"y":307,"__v":0},{"_id":"56a88f7d5983c58423ef8928","province":{"_id":"56a879c04c7fd9141e6f8f9c","code":51},"pinyinName":"aomen","chineseName":"澳门","code":101330101,"x":282.75,"y":98.15,"__v":0},{"_id":"56a88f7d5983c58423ef892d","province":{"_id":"56a879c04c7fd9141e6f8f7d","code":1},"pinyinName":"zhangzhou","chineseName":"漳州","code":101230601,"x":276.45,"y":381.6,"__v":0},{"_id":"56a88f7d5983c58423ef8932","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"tongzhou","chineseName":"通州","code":101010600,"x":374,"y":355,"__v":0},{"_id":"56a88f7d5983c58423ef8937","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"guilin","chineseName":"桂林","code":101300501,"x":469.4,"y":142,"__v":0},{"_id":"56a88f7d5983c58423ef893c","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"yongchuanshi","chineseName":"永川","code":101040200,"x":151,"y":350,"__v":0},{"_id":"56a88f7d5983c58423ef8941","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"wansheng","chineseName":"万盛","code":101040600,"x":260,"y":380,"__v":0},{"_id":"56a88f7d5983c58423ef8946","province":null,"pinyinName":"nantou","chineseName":"南投","code":101340404,"x":319.8,"y":258,"__v":0},{"_id":"56a88f7d5983c58423ef8902","province":{"_id":"56a879c04c7fd9141e6f8f90","code":20},"pinyinName":"chuxiong","chineseName":"楚雄","code":101290801,"x":294,"y":223,"__v":0},{"_id":"56a88f7d5983c58423ef8907","province":{"_id":"56a879c04c7fd9141e6f8f91","code":21},"pinyinName":"quzhou","chineseName":"衢州","code":101211001,"x":211,"y":280,"__v":0},{"_id":"56a88f7d5983c58423ef890c","province":{"_id":"56a879c04c7fd9141e6f8f92","code":30},"pinyinName":"miyun","chineseName":"密云","code":101011300,"x":394,"y":157,"__v":0},{"_id":"56a88f7d5983c58423ef8911","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"dongguan","chineseName":"东莞","code":101281601,"x":377,"y":234,"__v":0},{"_id":"56a88f7d5983c58423ef8916","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"wuqing","chineseName":"武清","code":101030200,"x":270,"y":228,"__v":0},{"_id":"56a88f7d5983c58423ef891b","province":{"_id":"56a879c04c7fd9141e6f8f93","code":31},"pinyinName":"jinghai","chineseName":"静海","code":101030900,"x":271,"y":375,"__v":0},{"_id":"56a88f7d5983c58423ef8920","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"beibei","chineseName":"北碚","code":101040800,"x":203,"y":281,"__v":0},{"_id":"56a88f7d5983c58423ef8925","province":null,"pinyinName":"taibei","chineseName":"台北","code":101340101,"x":361,"y":110.6,"__v":0},{"_id":"56a88f7d5983c58423ef892a","province":{"_id":"56a879c04c7fd9141e6f8f87","code":11},"pinyinName":"nanjing","chineseName":"南京","code":101190101,"x":278,"y":343,"__v":0},{"_id":"56a88f7d5983c58423ef892f","province":{"_id":"56a879c04c7fd9141e6f8f88","code":12},"pinyinName":"jian","chineseName":"吉安","code":101240601,"x":278.6,"y":246.1,"__v":0},{"_id":"56a88f7d5983c58423ef8934","province":{"_id":"56a879c04c7fd9141e6f8f7f","code":3},"pinyinName":"zhuhai","chineseName":"珠海","code":101280701,"x":340.55,"y":300,"__v":0},{"_id":"56a88f7d5983c58423ef8939","province":{"_id":"56a879c04c7fd9141e6f8f96","code":40},"pinyinName":"beihai","chineseName":"北海","code":101301301,"x":402,"y":427,"__v":0},{"_id":"56a88f7d5983c58423ef893e","province":{"_id":"56a879c04c7fd9141e6f8f95","code":33},"pinyinName":"kaixian","chineseName":"开县","code":101041500,"x":366,"y":127,"__v":0},{"_id":"56a88f7d5983c58423ef8943","province":{"_id":"56a879c04c7fd9141e6f8f94","code":32},"pinyinName":"qingpu","chineseName":"青浦","code":101020800,"x":190,"y":250,"__v":0},{"_id":"56a88f7d5983c58423ef8948","province":{"_id":"56a879c04c7fd9141e6f8f9c","code":51},"pinyinName":"luhuandao","chineseName":"路环岛","code":101330103,"x":339.1,"y":382.7,"__v":0}]
+module.exports = {
+    cities :
+    [{
+    "_id": "56a88f7d5983c58423ef878b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "tianjin",
+    "chineseName": "天津",
+    "code": 101030100,
+    "x": null,
+    "y": null,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef878d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "shuangyashan",
+    "chineseName": "双鸭山",
+    "code": 101051301,
+    "x": 478.1,
+    "y": 293.8,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef878c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "suihua",
+    "chineseName": "绥化",
+    "code": 101050501,
+    "x": 323.65,
+    "y": 317.25,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef878f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "tonghua",
+    "chineseName": "通化",
+    "code": 101060501,
+    "x": 341,
+    "y": 360,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef878e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "songyuan",
+    "chineseName": "松原",
+    "code": 101060801,
+    "x": 200,
+    "y": 146,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8790",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 41},
+    "pinyinName": "eerduosi",
+    "chineseName": "鄂尔多斯",
+    "code": 101080701,
+    "x": 303,
+    "y": 390,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8795",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "yichun",
+    "chineseName": "伊春",
+    "code": 101050801,
+    "x": 389.1,
+    "y": 259.05,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "daqing",
+    "chineseName": "大庆",
+    "code": 101050901,
+    "x": 257,
+    "y": 348,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8792",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "changjiang",
+    "chineseName": "昌江",
+    "code": 101310206,
+    "x": 173.65,
+    "y": 218.15,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8797",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "beijing",
+    "chineseName": "北京",
+    "code": 101010100,
+    "x": null,
+    "y": null,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8791",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 41},
+    "pinyinName": "chifeng",
+    "chineseName": "赤峰",
+    "code": 101080601,
+    "x": 485,
+    "y": 275,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8796",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "qitaihe",
+    "chineseName": "七台河",
+    "code": 101051002,
+    "x": 451.8,
+    "y": 336.05,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8794",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "daxinganling",
+    "chineseName": "大兴安岭",
+    "code": 101050701,
+    "x": 186.35,
+    "y": 83.6,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8799",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "chongqing",
+    "chineseName": "重庆",
+    "code": 101040100,
+    "x": null,
+    "y": null,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8793",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "baisha",
+    "chineseName": "白沙",
+    "code": 101310207,
+    "x": 241.8,
+    "y": 232.7,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8798",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "heihe",
+    "chineseName": "黑河",
+    "code": 101050601,
+    "x": 308.2,
+    "y": 205.45,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "mudanjiang",
+    "chineseName": "牡丹江",
+    "code": 101050301,
+    "x": 443,
+    "y": 399,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "shanghai",
+    "chineseName": "上海",
+    "code": 101020100,
+    "x": null,
+    "y": null,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "yanbian",
+    "chineseName": "延边",
+    "code": 101060312,
+    "x": 495,
+    "y": 229,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "lingshui",
+    "chineseName": "陵水",
+    "code": 101310216,
+    "x": 355,
+    "y": 356,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "jiamusi",
+    "chineseName": "佳木斯",
+    "code": 101050401,
+    "x": 425.7,
+    "y": 294.85,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "haerbin",
+    "chineseName": "哈尔滨",
+    "code": 101050101,
+    "x": 369.1,
+    "y": 361.8,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "changchun",
+    "chineseName": "长春",
+    "code": 101060101,
+    "x": 285,
+    "y": 161,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "liaoyuan",
+    "chineseName": "辽源",
+    "code": 101060701,
+    "x": 302,
+    "y": 300,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef879d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "qiqihaer",
+    "chineseName": "齐齐哈尔",
+    "code": 101050201,
+    "x": 220.05,
+    "y": 303.55,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ab",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "siping",
+    "chineseName": "四平",
+    "code": 101060401,
+    "x": 235,
+    "y": 244,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "baotou",
+    "chineseName": "包头",
+    "code": 101080201,
+    "x": 317.65,
+    "y": 330.65,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "baicheng",
+    "chineseName": "白城",
+    "code": 101060601,
+    "x": 129,
+    "y": 118,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87aa",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "wuzhishan",
+    "chineseName": "五指山",
+    "code": 101310222,
+    "x": 260,
+    "y": 297,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "tongliao",
+    "chineseName": "通辽",
+    "code": 101080501,
+    "x": 538,
+    "y": 269,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "xilinguole",
+    "chineseName": "锡林郭勒",
+    "code": 101080901,
+    "x": 405,
+    "y": 279,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "bayannaoer",
+    "chineseName": "巴彦淖尔",
+    "code": 101080801,
+    "x": 275,
+    "y": 346,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ac",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "baishan",
+    "chineseName": "白山",
+    "code": 101060901,
+    "x": 424,
+    "y": 318,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "jixi",
+    "chineseName": "鸡西",
+    "code": 101051101,
+    "x": 487.85,
+    "y": 357.75,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87af",
+    "province": {"_id": "56a879c04c7fd9141e6f8f83", "code": 7},
+    "pinyinName": "hegang",
+    "chineseName": "鹤岗",
+    "code": 101051201,
+    "x": 436,
+    "y": 256,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ad",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "huhehaote",
+    "chineseName": "呼和浩特",
+    "code": 101080101,
+    "x": 355,
+    "y": 375,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 13},
+    "pinyinName": "jilin",
+    "chineseName": "吉林",
+    "code": 101060201,
+    "x": 372,
+    "y": 210,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "ledong",
+    "chineseName": "乐东",
+    "code": 101310221,
+    "x": 165.45,
+    "y": 349.05,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ba",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "qiongzhong",
+    "chineseName": "琼中",
+    "code": 101310208,
+    "x": 333.65,
+    "y": 266.35,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "hulunbeier",
+    "chineseName": "呼伦贝尔",
+    "code": 101081000,
+    "x": 510,
+    "y": 111,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87bf",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "tulufan",
+    "chineseName": "吐鲁番",
+    "code": 101130501,
+    "x": 448,
+    "y": 219,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "lasa",
+    "chineseName": "拉萨",
+    "code": 101140101,
+    "x": 376,
+    "y": 282,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "alashan",
+    "chineseName": "阿拉善",
+    "code": 101081201,
+    "x": 171,
+    "y": 356,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f89", "code": 41},
+    "pinyinName": "wuhai",
+    "chineseName": "乌海",
+    "code": 101080301,
+    "x": 253.7,
+    "y": 392.45,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "chengmai",
+    "chineseName": "澄迈",
+    "code": 101310204,
+    "x": 365.45,
+    "y": 127.25,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87be",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "kelamayi",
+    "chineseName": "克拉玛依",
+    "code": 101130201,
+    "x": 325,
+    "y": 147,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "benxi",
+    "chineseName": "本溪",
+    "code": 101070501,
+    "x": 389,
+    "y": 212,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "linxia",
+    "chineseName": "临夏",
+    "code": 101161101,
+    "x": 382,
+    "y": 333,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87bc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "lingao",
+    "chineseName": "临高",
+    "code": 101310203,
+    "x": 310.9,
+    "y": 97.25,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87b6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "baoting",
+    "chineseName": "保亭",
+    "code": 101310214,
+    "x": 290,
+    "y": 361,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "jinzhou",
+    "chineseName": "锦州",
+    "code": 101070701,
+    "x": 212.5,
+    "y": 237.4,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "haidong",
+    "chineseName": "海东",
+    "code": 101150201,
+    "x": 574,
+    "y": 215,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "zhangye",
+    "chineseName": "张掖",
+    "code": 101160701,
+    "x": 290,
+    "y": 190,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87bb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "sanya",
+    "chineseName": "三亚",
+    "code": 101310201,
+    "x": 227,
+    "y": 390,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "bayinguoleng",
+    "chineseName": "巴州",
+    "code": 101130601,
+    "x": 376,
+    "y": 300,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87c5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "yushu",
+    "chineseName": "玉树",
+    "code": 101150601,
+    "x": 262,
+    "y": 314,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ca",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "wanning",
+    "chineseName": "万宁",
+    "code": 101310215,
+    "x": 420.9,
+    "y": 310.9,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87a9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "dongfang",
+    "chineseName": "东方",
+    "code": 101310202,
+    "x": 130,
+    "y": 270.9,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ae",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 41},
+    "pinyinName": "xingan",
+    "chineseName": "兴安",
+    "code": 101081101,
+    "x": 510,
+    "y": 200,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ce",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "fuxin",
+    "chineseName": "阜新",
+    "code": 101070901,
+    "x": 227,
+    "y": 167,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "huangnan",
+    "chineseName": "黄南",
+    "code": 101150301,
+    "x": 530,
+    "y": 285,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "baoding",
+    "chineseName": "保定",
+    "code": 101090201,
+    "x": 277,
+    "y": 241,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87dd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "shiyan",
+    "chineseName": "十堰",
+    "code": 101201101,
+    "x": 197.3,
+    "y": 125.75,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "shihezi",
+    "chineseName": "石河子",
+    "code": 101130301,
+    "x": 335,
+    "y": 185,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87cd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "hetian",
+    "chineseName": "和田",
+    "code": 101131301,
+    "x": 232,
+    "y": 360,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "xining",
+    "chineseName": "西宁",
+    "code": 101150101,
+    "x": 540,
+    "y": 186,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "haibei",
+    "chineseName": "海北",
+    "code": 101150801,
+    "x": 486,
+    "y": 132,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87cb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "boertala",
+    "chineseName": "博州",
+    "code": 101131601,
+    "x": 260,
+    "y": 164,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "longnan",
+    "chineseName": "陇南",
+    "code": 101161001,
+    "x": 445,
+    "y": 411,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "dandong",
+    "chineseName": "丹东",
+    "code": 101070601,
+    "x": 420,
+    "y": 256,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87dc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "luohe",
+    "chineseName": "漯河",
+    "code": 101181501,
+    "x": 355,
+    "y": 276,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "jinchang",
+    "chineseName": "金昌",
+    "code": 101160601,
+    "x": 349,
+    "y": 216,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "kezile",
+    "chineseName": "克州",
+    "code": 101130503,
+    "x": 102,
+    "y": 294,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87da",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "jiyuan",
+    "chineseName": "济源",
+    "code": 101181801,
+    "x": 249,
+    "y": 157,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "linzhi",
+    "chineseName": "林芝",
+    "code": 101140401,
+    "x": 479,
+    "y": 316,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87df",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "wenchang",
+    "chineseName": "文昌",
+    "code": 101310212,
+    "x": 531,
+    "y": 83,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "anshan",
+    "chineseName": "鞍山",
+    "code": 101070301,
+    "x": 354,
+    "y": 288,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87cf",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "liaoyang",
+    "chineseName": "辽阳",
+    "code": 101071001,
+    "x": 341,
+    "y": 217,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87e9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f98", "code": 42},
+    "pinyinName": "guyuan",
+    "chineseName": "固原",
+    "code": 101170401,
+    "x": 316,
+    "y": 382,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f98", "code": 42},
+    "pinyinName": "wuzhong",
+    "chineseName": "吴忠",
+    "code": 101170301,
+    "x": 332,
+    "y": 246,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87d9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "xingtai",
+    "chineseName": "邢台",
+    "code": 101090901,
+    "x": 265.45,
+    "y": 363,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87de",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "tunchang",
+    "chineseName": "屯昌",
+    "code": 101310210,
+    "x": 372.75,
+    "y": 195,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ec",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "zhangjiakou",
+    "chineseName": "张家口",
+    "code": 101090301,
+    "x": 252.75,
+    "y": 138.15,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87eb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "dingxi",
+    "chineseName": "定西",
+    "code": 101160201,
+    "x": 420,
+    "y": 348,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ee",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "handan",
+    "chineseName": "邯郸",
+    "code": 101091001,
+    "x": 254.55,
+    "y": 404.55,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "jingmen",
+    "chineseName": "荆门",
+    "code": 101201401,
+    "x": 331.8,
+    "y": 247.25,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "chenzhou",
+    "chineseName": "郴州",
+    "code": 101250501,
+    "x": 440,
+    "y": 350,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87fb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "chuzhou",
+    "chineseName": "滁州",
+    "code": 101221101,
+    "x": 403.3,
+    "y": 217.9,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8800",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "xianyang",
+    "chineseName": "咸阳",
+    "code": 101110200,
+    "x": 307,
+    "y": 313,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8805",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "guangan",
+    "chineseName": "广安",
+    "code": 101270801,
+    "x": 450,
+    "y": 230,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef880a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "qiannan",
+    "chineseName": "黔南",
+    "code": 101260401,
+    "x": 395.7,
+    "y": 295.95,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef880f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "shangrao",
+    "chineseName": "上饶",
+    "code": 101240301,
+    "x": 438,
+    "y": 128,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8814",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "yangjiang",
+    "chineseName": "阳江",
+    "code": 101281801,
+    "x": 226.55,
+    "y": 304.5,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "kaifeng",
+    "chineseName": "开封",
+    "code": 101180801,
+    "x": 383,
+    "y": 181,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8819",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "hezhou",
+    "chineseName": "贺州",
+    "code": 101300701,
+    "x": 544.55,
+    "y": 193.6,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "xiangtan",
+    "chineseName": "湘潭",
+    "code": 101250201,
+    "x": 397,
+    "y": 213,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87fa",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "bozhou",
+    "chineseName": "亳州",
+    "code": 101220901,
+    "x": 244,
+    "y": 145,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "huangshi",
+    "chineseName": "黄石",
+    "code": 101200601,
+    "x": 542.05,
+    "y": 336.05,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87ff",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "yuncheng",
+    "chineseName": "运城",
+    "code": 101100801,
+    "x": 266,
+    "y": 408,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef87f8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "laiwu",
+    "chineseName": "莱芜",
+    "code": 101121601,
+    "x": 265,
+    "y": 266,
+    "__v": 0
+}, {
+    "_id": "56a88f7d5983c58423ef8804",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "neijiang",
+    "chineseName": "内江",
+    "code": 101271201,
+    "x": 407,
+    "y": 279,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87fd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "datong",
+    "chineseName": "大同",
+    "code": 101100201,
+    "x": 392,
+    "y": 110,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8809",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "bijie",
+    "chineseName": "毕节",
+    "code": 101260701,
+    "x": 240,
+    "y": 210.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8802",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "panzhihua",
+    "chineseName": "攀枝花",
+    "code": 101270201,
+    "x": 238,
+    "y": 406,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef880e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "xiamen",
+    "chineseName": "厦门",
+    "code": 101230201,
+    "x": 316.55,
+    "y": 359.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8807",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "puer",
+    "chineseName": "普洱",
+    "code": 101290901,
+    "x": 267.75,
+    "y": 339.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8813",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "daxing",
+    "chineseName": "大兴",
+    "code": 101011100,
+    "x": 319,
+    "y": 400,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef880c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "taizhou1",
+    "chineseName": "台州",
+    "code": 101210601,
+    "x": 459.65,
+    "y": 272.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8818",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "liuzhou",
+    "chineseName": "柳州",
+    "code": 101300301,
+    "x": 398.95,
+    "y": 200.55,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8811",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "huairou",
+    "chineseName": "怀柔",
+    "code": 101010500,
+    "x": 332,
+    "y": 142,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8816",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "shenzhen",
+    "chineseName": "深圳",
+    "code": 101280601,
+    "x": 409,
+    "y": 257,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "ninghe",
+    "chineseName": "宁河",
+    "code": 101030700,
+    "x": 391,
+    "y": 239,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87e3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "panjin",
+    "chineseName": "盘锦",
+    "code": 101071301,
+    "x": 267.75,
+    "y": 251.5,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "liangpingxian",
+    "chineseName": "梁平",
+    "code": 101042300,
+    "x": 308,
+    "y": 186,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "hechuanshi",
+    "chineseName": "合川",
+    "code": 101040300,
+    "x": 182,
+    "y": 240,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8822",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "qijiang",
+    "chineseName": "綦江",
+    "code": 101043300,
+    "x": 221,
+    "y": 383,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8827",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "huludao",
+    "chineseName": "葫芦岛",
+    "code": 101071401,
+    "x": 188.65,
+    "y": 301.35,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "guoluo",
+    "chineseName": "果洛",
+    "code": 101150501,
+    "x": 452,
+    "y": 326,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8820",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "zhongxian",
+    "chineseName": "忠县",
+    "code": 101042400,
+    "x": 337,
+    "y": 222,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8825",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "wulumuqi",
+    "chineseName": "乌鲁木齐",
+    "code": 101130101,
+    "x": 408,
+    "y": 203,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "rikaze",
+    "chineseName": "日喀则",
+    "code": 101140201,
+    "x": 258,
+    "y": 286,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "lanzhou",
+    "chineseName": "兰州",
+    "code": 101160101,
+    "x": 386,
+    "y": 293,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87b3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 41},
+    "pinyinName": "wulanchabu",
+    "chineseName": "乌兰察布",
+    "code": 101080401,
+    "x": 362.1,
+    "y": 335,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87b8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "danzhou",
+    "chineseName": "儋州",
+    "code": 101310205,
+    "x": 240.9,
+    "y": 133.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87bd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "qionghai",
+    "chineseName": "琼海",
+    "code": 101310211,
+    "x": 450,
+    "y": 231.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87c2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "shenyang",
+    "chineseName": "沈阳",
+    "code": 101070101,
+    "x": 316,
+    "y": 164,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87c7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f98", "code": 42},
+    "pinyinName": "zhongwei",
+    "chineseName": "中卫",
+    "code": 101170501,
+    "x": 246,
+    "y": 245,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87cc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "hami",
+    "chineseName": "哈密",
+    "code": 101131201,
+    "x": 494,
+    "y": 196,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8823",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "anding",
+    "chineseName": "定安",
+    "code": 101310209,
+    "x": 430,
+    "y": 170.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8828",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "dalian",
+    "chineseName": "大连",
+    "code": 101070201,
+    "x": 272.1,
+    "y": 429.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8831",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "qinhuangdao",
+    "chineseName": "秦皇岛",
+    "code": 101091101,
+    "x": 451,
+    "y": 155,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f98", "code": 42},
+    "pinyinName": "yinchuan",
+    "chineseName": "银川",
+    "code": 101170101,
+    "x": 314,
+    "y": 123,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8836",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "zhumadian",
+    "chineseName": "驻马店",
+    "code": 101181601,
+    "x": 376,
+    "y": 325,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8832",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "cangzhou",
+    "chineseName": "沧州",
+    "code": 101090701,
+    "x": 361,
+    "y": 288,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "huanggang",
+    "chineseName": "黄冈",
+    "code": 101200501,
+    "x": 536.6,
+    "y": 268.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8840",
+    "province": {"_id": "56a879c04c7fd9141e6f8f81", "code": 5},
+    "pinyinName": "haikou",
+    "chineseName": "海口",
+    "code": 101310101,
+    "x": 451,
+    "y": 73,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8837",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "zhoukou",
+    "chineseName": "周口",
+    "code": 101181401,
+    "x": 417,
+    "y": 250,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8834",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "sanmenxia",
+    "chineseName": "三门峡",
+    "code": 101181701,
+    "x": 139,
+    "y": 216,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8845",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "yingkou",
+    "chineseName": "营口",
+    "code": 101070801,
+    "x": 312,
+    "y": 306,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8839",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "jingzhou",
+    "chineseName": "荆州",
+    "code": 101200801,
+    "x": 313.3,
+    "y": 333.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "binzhou",
+    "chineseName": "滨州",
+    "code": 101121101,
+    "x": 280.8,
+    "y": 148.5,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87e8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "geermu",
+    "chineseName": "格尔木",
+    "code": 101150901,
+    "x": 278.6,
+    "y": 194.05,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f98", "code": 42},
+    "pinyinName": "shizuishan",
+    "chineseName": "石嘴山",
+    "code": 101170201,
+    "x": 341,
+    "y": 79,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8843",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "akesu",
+    "chineseName": "阿克苏",
+    "code": 101130801,
+    "x": 248,
+    "y": 261,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87ed",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "langfang",
+    "chineseName": "廊坊",
+    "code": 101090601,
+    "x": 331.75,
+    "y": 239.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "shijiazhuang",
+    "chineseName": "石家庄",
+    "code": 101090101,
+    "x": 252,
+    "y": 310,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8848",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "changdu",
+    "chineseName": "昌都",
+    "code": 101140501,
+    "x": 560,
+    "y": 271,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "qingyang",
+    "chineseName": "庆阳",
+    "code": 101160401,
+    "x": 527,
+    "y": 309,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87d1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "shannan",
+    "chineseName": "山南",
+    "code": 101140301,
+    "x": 391,
+    "y": 337,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87d6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "gannan",
+    "chineseName": "甘南",
+    "code": 101161201,
+    "x": 368,
+    "y": 374,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87db",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "zhengzhou",
+    "chineseName": "郑州",
+    "code": 101180101,
+    "x": 314,
+    "y": 185,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87e0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "yili",
+    "chineseName": "伊犁",
+    "code": 101131001,
+    "x": 257,
+    "y": 207,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8854",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "xiangfan",
+    "chineseName": "襄阳",
+    "code": 101200201,
+    "x": 272.75,
+    "y": 179.05,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8852",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "shangqiu",
+    "chineseName": "商丘",
+    "code": 101181001,
+    "x": 452,
+    "y": 192,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87f2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "xiantao",
+    "chineseName": "仙桃",
+    "code": 101201601,
+    "x": 410,
+    "y": 329,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87f7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "jinan",
+    "chineseName": "济南",
+    "code": 101120101,
+    "x": 224,
+    "y": 218,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87fc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "wuhu",
+    "chineseName": "芜湖",
+    "code": 101220301,
+    "x": 427.15,
+    "y": 326.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8801",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "ankang",
+    "chineseName": "安康",
+    "code": 101110701,
+    "x": 333,
+    "y": 400,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8806",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "baoshan",
+    "chineseName": "宝山",
+    "code": 101020300,
+    "x": 277,
+    "y": 173,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef880b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "shaoxing",
+    "chineseName": "绍兴",
+    "code": 101210501,
+    "x": 371,
+    "y": 169,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8859",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "hengyang",
+    "chineseName": "衡阳",
+    "code": 101250401,
+    "x": 401,
+    "y": 273,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "huainan",
+    "chineseName": "淮南",
+    "code": 101220401,
+    "x": 285,
+    "y": 203,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8857",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "xiangxi",
+    "chineseName": "湘西",
+    "code": 101251501,
+    "x": 196.2,
+    "y": 164.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "heze",
+    "chineseName": "菏泽",
+    "code": 101121001,
+    "x": 115,
+    "y": 390,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8863",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "tongchuan",
+    "chineseName": "铜川",
+    "code": 101111001,
+    "x": 325,
+    "y": 268,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8868",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "youyang",
+    "chineseName": "酉阳",
+    "code": 101043400,
+    "x": 420,
+    "y": 369,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8861",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "taiyuan",
+    "chineseName": "太原",
+    "code": 101100101,
+    "x": 324.15,
+    "y": 234.15,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8866",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "chengdu",
+    "chineseName": "成都",
+    "code": 101270101,
+    "x": 324,
+    "y": 206,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 52},
+    "pinyinName": "tainan",
+    "chineseName": "台南",
+    "code": 101340203,
+    "x": 250.4,
+    "y": 317.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8872",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "zhangjiajie",
+    "chineseName": "张家界",
+    "code": 101251101,
+    "x": 249,
+    "y": 98,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8877",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "qingdao",
+    "chineseName": "青岛",
+    "code": 101120201,
+    "x": 487.85,
+    "y": 258,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "xinzhou",
+    "chineseName": "忻州",
+    "code": 101101001,
+    "x": 323,
+    "y": 172,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 52},
+    "pinyinName": "taoyuan",
+    "chineseName": "桃园",
+    "code": 101340102,
+    "x": 326.3,
+    "y": 122.5,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8881",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "deyang",
+    "chineseName": "德阳",
+    "code": 101272001,
+    "x": 360,
+    "y": 197,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8870",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "suizhou",
+    "chineseName": "随州",
+    "code": 101201301,
+    "x": 390.9,
+    "y": 175.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8886",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "yuxi",
+    "chineseName": "玉溪",
+    "code": 101290701,
+    "x": 323,
+    "y": 290,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8875",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "dongying",
+    "chineseName": "东营",
+    "code": 101121201,
+    "x": 323,
+    "y": 109,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "nanping",
+    "chineseName": "南平",
+    "code": 101230901,
+    "x": 305.7,
+    "y": 171.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "anqing",
+    "chineseName": "安庆",
+    "code": 101220601,
+    "x": 312.2,
+    "y": 377.25,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "xian",
+    "chineseName": "西安",
+    "code": 101110101,
+    "x": 340,
+    "y": 333,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8884",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "nujiang",
+    "chineseName": "怒江",
+    "code": 101291201,
+    "x": 187,
+    "y": 161,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8889",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "jiaxing",
+    "chineseName": "嘉兴",
+    "code": 101210301,
+    "x": 368,
+    "y": 73,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "xinyu",
+    "chineseName": "新余",
+    "code": 101241001,
+    "x": 257,
+    "y": 208,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8890",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "shunyi",
+    "chineseName": "顺义",
+    "code": 101010400,
+    "x": 360,
+    "y": 265,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8895",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "shanwei",
+    "chineseName": "汕尾",
+    "code": 101282101,
+    "x": 492,
+    "y": 217,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "fangchenggang",
+    "chineseName": "防城港",
+    "code": 101301401,
+    "x": 323.05,
+    "y": 439.05,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8893",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "qingyuan",
+    "chineseName": "清远",
+    "code": 101281301,
+    "x": 313.3,
+    "y": 160.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8898",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "zhenjiang",
+    "chineseName": "镇江",
+    "code": 101190301,
+    "x": 328,
+    "y": 339,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "qianjiangtujia",
+    "chineseName": "黔江",
+    "code": 101041100,
+    "x": 410.85,
+    "y": 315.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9b", "code": 50},
+    "pinyinName": "jiulong",
+    "chineseName": "九龙",
+    "code": 101320102,
+    "x": 348,
+    "y": 241,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "dagang",
+    "chineseName": "大港",
+    "code": 101031200,
+    "x": 356,
+    "y": 404,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "rongchang",
+    "chineseName": "荣昌",
+    "code": 101042700,
+    "x": 118,
+    "y": 333,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "pingdong",
+    "chineseName": "屏东",
+    "code": 101340205,
+    "x": 278.6,
+    "y": 379.4,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ae",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "kunming",
+    "chineseName": "昆明",
+    "code": 101290101,
+    "x": 356,
+    "y": 220,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "miaoli",
+    "chineseName": "苗栗",
+    "code": 101340402,
+    "x": 306.8,
+    "y": 196.2,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "wenzhou",
+    "chineseName": "温州",
+    "code": 101210701,
+    "x": 396,
+    "y": 364,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ac",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "diqing",
+    "chineseName": "迪庆",
+    "code": 101291301,
+    "x": 204,
+    "y": 91,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "pinggu",
+    "chineseName": "平谷",
+    "code": 101011500,
+    "x": 439,
+    "y": 232,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "huzhou",
+    "chineseName": "湖州",
+    "code": 101210201,
+    "x": 291,
+    "y": 71,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "pingxiang",
+    "chineseName": "萍乡",
+    "code": 101240901,
+    "x": 198,
+    "y": 238,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88bd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "heyuan",
+    "chineseName": "河源",
+    "code": 101281201,
+    "x": 442.55,
+    "y": 141.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "xiqing",
+    "chineseName": "西青",
+    "code": 101030500,
+    "x": 281,
+    "y": 330,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "changshou",
+    "chineseName": "长寿",
+    "code": 101041000,
+    "x": 265,
+    "y": 264,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88cc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "fengxian",
+    "chineseName": "奉贤",
+    "code": 101021000,
+    "x": 330,
+    "y": 330,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88bb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "jiangmen",
+    "chineseName": "江门",
+    "code": 101281101,
+    "x": 291,
+    "y": 285,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "wuzhou",
+    "chineseName": "梧州",
+    "code": 101300601,
+    "x": 538.8,
+    "y": 274.25,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "wushanxian",
+    "chineseName": "巫山",
+    "code": 101042000,
+    "x": 513.85,
+    "y": 134.4,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ca",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9b", "code": 50},
+    "pinyinName": "xinjie",
+    "chineseName": "新界",
+    "code": 101320103,
+    "x": 295,
+    "y": 181,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88cf",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "taizhou",
+    "chineseName": "泰州",
+    "code": 101191201,
+    "x": 366,
+    "y": 269,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 52},
+    "pinyinName": "taidong",
+    "chineseName": "台东",
+    "code": 101340204,
+    "x": 323.05,
+    "y": 351.25,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "tangshan",
+    "chineseName": "唐山",
+    "code": 101090501,
+    "x": 408,
+    "y": 180,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "yiyang",
+    "chineseName": "益阳",
+    "code": 101250700,
+    "x": 349,
+    "y": 165,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8841",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "aletai",
+    "chineseName": "阿勒泰",
+    "code": 101131401,
+    "x": 394,
+    "y": 92,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8846",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "tieling",
+    "chineseName": "铁岭",
+    "code": 101071101,
+    "x": 371,
+    "y": 106,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "jiuquan",
+    "chineseName": "酒泉",
+    "code": 101160801,
+    "x": 164,
+    "y": 118,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8850",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "anyang",
+    "chineseName": "安阳",
+    "code": 101180201,
+    "x": 336,
+    "y": 54,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8855",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "tianmen",
+    "chineseName": "天门",
+    "code": 101201501,
+    "x": 383,
+    "y": 286,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "dezhou",
+    "chineseName": "德州",
+    "code": 101120401,
+    "x": 152.85,
+    "y": 166.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "changzhou",
+    "chineseName": "常州",
+    "code": 101191101,
+    "x": 338,
+    "y": 380,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88db",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "xinyang",
+    "chineseName": "信阳",
+    "code": 101180601,
+    "x": 380.5,
+    "y": 393.5,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "luoyang",
+    "chineseName": "洛阳",
+    "code": 101180901,
+    "x": 236.35,
+    "y": 191.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "weifang",
+    "chineseName": "潍坊",
+    "code": 101120601,
+    "x": 367,
+    "y": 206,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88de",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "ezhou",
+    "chineseName": "鄂州",
+    "code": 101200301,
+    "x": 510,
+    "y": 316.35,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "shuozhou",
+    "chineseName": "朔州",
+    "code": 101100901,
+    "x": 324,
+    "y": 127,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "hefei",
+    "chineseName": "合肥",
+    "code": 101220101,
+    "x": 328.5,
+    "y": 275.35,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "weinan",
+    "chineseName": "渭南",
+    "code": 101110501,
+    "x": 371,
+    "y": 274,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8810",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "fuzhou1",
+    "chineseName": "抚州",
+    "code": 101240401,
+    "x": 356,
+    "y": 208,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8815",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "zhongshan",
+    "chineseName": "中山",
+    "code": 101281701,
+    "x": 342.7,
+    "y": 255,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "yulin",
+    "chineseName": "玉林",
+    "code": 101300901,
+    "x": 458.2,
+    "y": 360.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "wuxi",
+    "chineseName": "无锡",
+    "code": 101190201,
+    "x": 400,
+    "y": 386,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8824",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "tacheng",
+    "chineseName": "塔城",
+    "code": 101131101,
+    "x": 289,
+    "y": 107,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8829",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8a", "code": 14},
+    "pinyinName": "fushun",
+    "chineseName": "抚顺",
+    "code": 101070401,
+    "x": 411,
+    "y": 163,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "jiayuguan",
+    "chineseName": "嘉峪关",
+    "code": 101161401,
+    "x": 235,
+    "y": 166,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87e5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "ali",
+    "chineseName": "阿里",
+    "code": 101140701,
+    "x": 121,
+    "y": 119,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87ea",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "wuwei",
+    "chineseName": "武威",
+    "code": 101160501,
+    "x": 382,
+    "y": 236,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "chaohu",
+    "chineseName": "巢湖",
+    "code": 101221601,
+    "x": 373,
+    "y": 297,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87ef",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "jiaozuo",
+    "chineseName": "焦作",
+    "code": 101181101,
+    "x": 297,
+    "y": 143,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8864",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "shangluo",
+    "chineseName": "商洛",
+    "code": 101110601,
+    "x": 383,
+    "y": 346,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87f4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "yueyang",
+    "chineseName": "岳阳",
+    "code": 101251001,
+    "x": 429,
+    "y": 103,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ea",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "mianyang",
+    "chineseName": "绵阳",
+    "code": 101270401,
+    "x": 367.5,
+    "y": 153.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8833",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "hebi",
+    "chineseName": "鹤壁",
+    "code": 101181201,
+    "x": 375,
+    "y": 99,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8838",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "shennongjia",
+    "chineseName": "神农架",
+    "code": 101201201,
+    "x": 169,
+    "y": 221.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "zhuzhou",
+    "chineseName": "株洲",
+    "code": 101250301,
+    "x": 446.65,
+    "y": 219,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8842",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "changji",
+    "chineseName": "昌吉",
+    "code": 101130401,
+    "x": 369,
+    "y": 203,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8847",
+    "province": {"_id": "56a879c04c7fd9141e6f8f99", "code": 43},
+    "pinyinName": "naqu",
+    "chineseName": "那曲",
+    "code": 101140601,
+    "x": 316,
+    "y": 174,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8869",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "jiading",
+    "chineseName": "嘉定",
+    "code": 101020500,
+    "x": 225,
+    "y": 184,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9c", "code": 51},
+    "pinyinName": "dangzai",
+    "chineseName": "氹仔岛",
+    "code": 101330102,
+    "x": 320.9,
+    "y": 262.7,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8873",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "changsha",
+    "chineseName": "长沙",
+    "code": 101250101,
+    "x": 418,
+    "y": 170,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8878",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "rizhao",
+    "chineseName": "日照",
+    "code": 101121501,
+    "x": 399,
+    "y": 309,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "linfen",
+    "chineseName": "临汾",
+    "code": 101100701,
+    "x": 276,
+    "y": 339,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8882",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "nanchong",
+    "chineseName": "南充",
+    "code": 101270501,
+    "x": 427,
+    "y": 187,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8887",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "zunyi",
+    "chineseName": "遵义",
+    "code": 101260201,
+    "x": 366.4,
+    "y": 164.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "longyan",
+    "chineseName": "龙岩",
+    "code": 101230701,
+    "x": 223.3,
+    "y": 321.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8891",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "fengtai",
+    "chineseName": "丰台",
+    "code": 101010900,
+    "x": 282.95,
+    "y": 361,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8896",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "baise",
+    "chineseName": "百色",
+    "code": 101301001,
+    "x": 184.55,
+    "y": 245.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "baodi",
+    "chineseName": "宝坻",
+    "code": 101030300,
+    "x": 335,
+    "y": 180,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "wanzhou",
+    "chineseName": "万州",
+    "code": 101041300,
+    "x": 380,
+    "y": 187,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "songjiang",
+    "chineseName": "松江",
+    "code": 101020900,
+    "x": 228,
+    "y": 296,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88aa",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "lianyungang",
+    "chineseName": "连云港",
+    "code": 101191001,
+    "x": 267,
+    "y": 90,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88af",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "wenshan",
+    "chineseName": "文山",
+    "code": 101290601,
+    "x": 434,
+    "y": 309,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "putian",
+    "chineseName": "莆田",
+    "code": 101230401,
+    "x": 365,
+    "y": 275,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "shizhongxin",
+    "chineseName": "市中心",
+    "code": 101020100,
+    "x": 289,
+    "y": 224,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88be",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "shantou",
+    "chineseName": "汕头",
+    "code": 101280501,
+    "x": 566.45,
+    "y": 179.25,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "jinnan",
+    "chineseName": "津南",
+    "code": 101031000,
+    "x": 351,
+    "y": 349,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "dazu",
+    "chineseName": "大足",
+    "code": 101042600,
+    "x": 140,
+    "y": 295,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ef",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "xishuangbanna",
+    "chineseName": "西双版纳",
+    "code": 101291601,
+    "x": 260,
+    "y": 400,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "jining",
+    "chineseName": "济宁",
+    "code": 101120701,
+    "x": 191,
+    "y": 355,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "yangquan",
+    "chineseName": "阳泉",
+    "code": 101100301,
+    "x": 380,
+    "y": 222,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88fe",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "meishan",
+    "chineseName": "眉山",
+    "code": 101271501,
+    "x": 324,
+    "y": 257,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8903",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "honghe",
+    "chineseName": "红河",
+    "code": 101290301,
+    "x": 357,
+    "y": 328,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ed",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "luzhou",
+    "chineseName": "泸州",
+    "code": 101271001,
+    "x": 410,
+    "y": 323,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8908",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "ningde",
+    "chineseName": "宁德",
+    "code": 101230301,
+    "x": 390,
+    "y": 137,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "liaocheng",
+    "chineseName": "聊城",
+    "code": 101121701,
+    "x": 119,
+    "y": 248,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "mentougou",
+    "chineseName": "门头沟",
+    "code": 101011400,
+    "x": 167,
+    "y": 317.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "maanshan",
+    "chineseName": "马鞍山",
+    "code": 101220501,
+    "x": 428.2,
+    "y": 285.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88fc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "hanzhong",
+    "chineseName": "汉中",
+    "code": 101110801,
+    "x": 268,
+    "y": 375,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "baiyin",
+    "chineseName": "白银",
+    "code": 101161301,
+    "x": 424.95,
+    "y": 281.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8901",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "dehong",
+    "chineseName": "德宏",
+    "code": 101291501,
+    "x": 132,
+    "y": 264,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8851",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "xinxiang",
+    "chineseName": "新乡",
+    "code": 101180301,
+    "x": 344,
+    "y": 126,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8906",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "hangzhou",
+    "chineseName": "杭州",
+    "code": 101210101,
+    "x": 320.9,
+    "y": 130.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88cd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 52},
+    "pinyinName": "yilan",
+    "chineseName": "宜兰",
+    "code": 101340104,
+    "x": 388.1,
+    "y": 156.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "xuzhou",
+    "chineseName": "徐州",
+    "code": 101190801,
+    "x": 119.25,
+    "y": 139.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "hengshui",
+    "chineseName": "衡水",
+    "code": 101090801,
+    "x": 313,
+    "y": 325,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88dc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "yichang",
+    "chineseName": "宜昌",
+    "code": 101200901,
+    "x": 227.25,
+    "y": 281.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8912",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "meizhou",
+    "chineseName": "梅州",
+    "code": 101280401,
+    "x": 522.55,
+    "y": 110.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8917",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "qujing",
+    "chineseName": "曲靖",
+    "code": 101290401,
+    "x": 405.45,
+    "y": 220.05,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "chongqingshi",
+    "chineseName": "重庆",
+    "code": 101040100,
+    "x": 233,
+    "y": 324,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8921",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "bishan",
+    "chineseName": "璧山",
+    "code": 101042900,
+    "x": 180,
+    "y": 327,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8926",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "taizhong",
+    "chineseName": "台中",
+    "code": 101340401,
+    "x": 280.8,
+    "y": 217.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "lishui",
+    "chineseName": "丽水",
+    "code": 101210801,
+    "x": 339.3,
+    "y": 311.15,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8930",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "changping",
+    "chineseName": "昌平",
+    "code": 101010700,
+    "x": 261,
+    "y": 248,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8935",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "huizhou",
+    "chineseName": "惠州",
+    "code": 101280301,
+    "x": 423.85,
+    "y": 214.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "beichen",
+    "chineseName": "北辰",
+    "code": 101030600,
+    "x": 313,
+    "y": 255,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "shizhu",
+    "chineseName": "石柱",
+    "code": 101042500,
+    "x": 372,
+    "y": 258,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8944",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "jinshan",
+    "chineseName": "金山",
+    "code": 101020700,
+    "x": 240,
+    "y": 360,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8949",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "yancheng",
+    "chineseName": "盐城",
+    "code": 101190701,
+    "x": 360,
+    "y": 169,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87f9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "zaozhuang",
+    "chineseName": "枣庄",
+    "code": 101121401,
+    "x": 264,
+    "y": 397,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef87fe",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "lvliang",
+    "chineseName": "吕梁",
+    "code": 101101100,
+    "x": 265,
+    "y": 268,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8803",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "leshan",
+    "chineseName": "乐山",
+    "code": 101271401,
+    "x": 319,
+    "y": 297,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8808",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "zhaotong",
+    "chineseName": "昭通",
+    "code": 101291001,
+    "x": 394.6,
+    "y": 124.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef880d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "sanming",
+    "chineseName": "三明",
+    "code": 101230801,
+    "x": 259.1,
+    "y": 236.35,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8812",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "haidian",
+    "chineseName": "海淀",
+    "code": 101010200,
+    "x": 264.5,
+    "y": 300.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8817",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "jieyang",
+    "chineseName": "揭阳",
+    "code": 101281901,
+    "x": 526.8,
+    "y": 182,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef881c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "hangu",
+    "chineseName": "汉沽",
+    "code": 101030800,
+    "x": 430,
+    "y": 271,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8821",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "tongnan",
+    "chineseName": "潼南",
+    "code": 101042100,
+    "x": 144,
+    "y": 244,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8826",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9a", "code": 44},
+    "pinyinName": "kashi",
+    "chineseName": "喀什",
+    "code": 101130901,
+    "x": 158,
+    "y": 316,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef882b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "haixi",
+    "chineseName": "海西",
+    "code": 101150701,
+    "x": 374,
+    "y": 139.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8830",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "pingliang",
+    "chineseName": "平凉",
+    "code": 101160301,
+    "x": 498,
+    "y": 347,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "yingtan",
+    "chineseName": "鹰潭",
+    "code": 101241101,
+    "x": 389,
+    "y": 167,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8910",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "foshan",
+    "chineseName": "佛山",
+    "code": 101280800,
+    "x": 308.7,
+    "y": 225,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8915",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "qinzhou",
+    "chineseName": "钦州",
+    "code": 101301101,
+    "x": 376,
+    "y": 377,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "ningbo",
+    "chineseName": "宁波",
+    "code": 101210401,
+    "x": 440,
+    "y": 148,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "dianjiang",
+    "chineseName": "���江",
+    "code": 101042200,
+    "x": 289,
+    "y": 225,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8924",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "minhang",
+    "chineseName": "闵行",
+    "code": 101020200,
+    "x": 291,
+    "y": 275,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8929",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "suqian",
+    "chineseName": "宿迁",
+    "code": 101191301,
+    "x": 227,
+    "y": 175,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "yichun1",
+    "chineseName": "宜春",
+    "code": 101240501,
+    "x": 259,
+    "y": 159,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8933",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "zhaoqing",
+    "chineseName": "肇庆",
+    "code": 101280901,
+    "x": 275.35,
+    "y": 214.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8938",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "guigang",
+    "chineseName": "贵港",
+    "code": 101300801,
+    "x": 417.35,
+    "y": 307.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "yunyangxian",
+    "chineseName": "云阳",
+    "code": 101041700,
+    "x": 408,
+    "y": 139,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8942",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "xiushan",
+    "chineseName": "秀山",
+    "code": 101043600,
+    "x": 436,
+    "y": 418,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8947",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "gaoxiong",
+    "chineseName": "高雄",
+    "code": 101340201,
+    "x": 239.6,
+    "y": 385.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8835",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "xuchang",
+    "chineseName": "许昌",
+    "code": 101180401,
+    "x": 330,
+    "y": 231,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "xiaogan",
+    "chineseName": "孝感",
+    "code": 101200401,
+    "x": 424.55,
+    "y": 250,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef883f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "zibo",
+    "chineseName": "淄博",
+    "code": 101120301,
+    "x": 290,
+    "y": 219,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8844",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "chaoyang",
+    "chineseName": "朝阳",
+    "code": 101010300,
+    "x": 344.3,
+    "y": 317.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8849",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8b", "code": 15},
+    "pinyinName": "hainanzangzuzizhizhou",
+    "chineseName": "海南",
+    "code": 101150401,
+    "x": 483,
+    "y": 229,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef884e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f82", "code": 6},
+    "pinyinName": "chengde",
+    "chineseName": "承德",
+    "code": 101090402,
+    "x": 396.75,
+    "y": 111.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8853",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "nanyang",
+    "chineseName": "南阳",
+    "code": 101180701,
+    "x": 259.1,
+    "y": 314.4,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8858",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "huaihua",
+    "chineseName": "怀化",
+    "code": 101251201,
+    "x": 217,
+    "y": 233,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8856",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "xianning",
+    "chineseName": "咸宁",
+    "code": 101200701,
+    "x": 468.2,
+    "y": 368.15,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "weihai",
+    "chineseName": "威海",
+    "code": 101121301,
+    "x": 602,
+    "y": 110,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8860",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "xuancheng",
+    "chineseName": "宣城",
+    "code": 101221401,
+    "x": 465,
+    "y": 343,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8865",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "yaan",
+    "chineseName": "雅安",
+    "code": 101271701,
+    "x": 282,
+    "y": 243,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "nanhui",
+    "chineseName": "浦东南汇",
+    "code": 101020600,
+    "x": 396,
+    "y": 293,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "enshi",
+    "chineseName": "恩施",
+    "code": 101201001,
+    "x": 99.1,
+    "y": 352.7,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8874",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "shaoyang",
+    "chineseName": "邵阳",
+    "code": 101250901,
+    "x": 312.2,
+    "y": 253.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8879",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "bengbu",
+    "chineseName": "蚌埠",
+    "code": 101220201,
+    "x": 318,
+    "y": 162,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "yan an",
+    "chineseName": "延安",
+    "code": 101110300,
+    "x": 345,
+    "y": 208,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "linyi",
+    "chineseName": "临沂",
+    "code": 101120901,
+    "x": 338.25,
+    "y": 370.75,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "jinzhong",
+    "chineseName": "晋中",
+    "code": 101100401,
+    "x": 355,
+    "y": 258,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88eb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "guangyuan",
+    "chineseName": "广元",
+    "code": 101272101,
+    "x": 415,
+    "y": 131,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "loudi",
+    "chineseName": "娄底",
+    "code": 101250801,
+    "x": 319,
+    "y": 210,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "suzhou1",
+    "chineseName": "宿州",
+    "code": 101220701,
+    "x": 321,
+    "y": 105,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88fa",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "jincheng",
+    "chineseName": "晋城",
+    "code": 101100601,
+    "x": 366.4,
+    "y": 384.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ff",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "ziyang",
+    "chineseName": "资阳",
+    "code": 101271301,
+    "x": 372,
+    "y": 245,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8904",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "tongren",
+    "chineseName": "铜仁",
+    "code": 101260601,
+    "x": 525.8,
+    "y": 143.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8883",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "bazhong",
+    "chineseName": "巴中",
+    "code": 101270901,
+    "x": 463,
+    "y": 145,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8888",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "anshun",
+    "chineseName": "安顺",
+    "code": 101260301,
+    "x": 280,
+    "y": 301,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "jingdezhen",
+    "chineseName": "景德镇",
+    "code": 101240801,
+    "x": 395,
+    "y": 74,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8892",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "maoming",
+    "chineseName": "茂名",
+    "code": 101282001,
+    "x": 170.65,
+    "y": 317.55,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8897",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "huaian",
+    "chineseName": "淮安",
+    "code": 101190901,
+    "x": 279,
+    "y": 190,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "dongli",
+    "chineseName": "东丽",
+    "code": 101030400,
+    "x": 349,
+    "y": 303,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "yubei",
+    "chineseName": "渝北",
+    "code": 101040700,
+    "x": 233,
+    "y": 282,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "chongming",
+    "chineseName": "崇明",
+    "code": 101021100,
+    "x": 302,
+    "y": 80,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ab",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "yibin",
+    "chineseName": "宜宾",
+    "code": 101271101,
+    "x": 369,
+    "y": 333,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "liupanshui",
+    "chineseName": "六盘水",
+    "code": 101260801,
+    "x": 189.7,
+    "y": 265.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef885d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "huaibei",
+    "chineseName": "淮北",
+    "code": 101221201,
+    "x": 276.45,
+    "y": 101.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8862",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8e", "code": 18},
+    "pinyinName": "changzhi",
+    "chineseName": "长治",
+    "code": 101100501,
+    "x": 374,
+    "y": 330.65,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8867",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "suining",
+    "chineseName": "遂宁",
+    "code": 101270701,
+    "x": 408,
+    "y": 224,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8909",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "quanzhou",
+    "chineseName": "泉州",
+    "code": 101230501,
+    "x": 353.4,
+    "y": 326.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef886c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 52},
+    "pinyinName": "zhanghua",
+    "chineseName": "彰化",
+    "code": 101340403,
+    "x": 251.5,
+    "y": 237.4,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "fangshan",
+    "chineseName": "房山",
+    "code": 101011200,
+    "x": 198,
+    "y": 386,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8871",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "wuhan",
+    "chineseName": "武汉",
+    "code": 101200101,
+    "x": 472.75,
+    "y": 280,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8913",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "hechi",
+    "chineseName": "河池",
+    "code": 101301201,
+    "x": 277.25,
+    "y": 193.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8876",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "yantai",
+    "chineseName": "烟台",
+    "code": 101120501,
+    "x": 543.1,
+    "y": 94.3,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8918",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "guiyang",
+    "chineseName": "贵阳",
+    "code": 101260101,
+    "x": 332.8,
+    "y": 256.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "fengduxian",
+    "chineseName": "丰都",
+    "code": 101043000,
+    "x": 331,
+    "y": 272,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8922",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "pengshui",
+    "chineseName": "彭水",
+    "code": 101043200,
+    "x": 371,
+    "y": 325,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8927",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "jiayi",
+    "chineseName": "嘉义",
+    "code": 101340202,
+    "x": 286.2,
+    "y": 295.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "fuzhou",
+    "chineseName": "福州",
+    "code": 101230101,
+    "x": 403.3,
+    "y": 215.75,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8931",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "shijingshan",
+    "chineseName": "石景山",
+    "code": 101011000,
+    "x": 255,
+    "y": 341.5,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8936",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "chaozhou",
+    "chineseName": "潮州",
+    "code": 101281501,
+    "x": 579,
+    "y": 137.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "tanggu",
+    "chineseName": "塘沽",
+    "code": 101031100,
+    "x": 400,
+    "y": 319,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8940",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "tongliang",
+    "chineseName": "铜梁",
+    "code": 101042800,
+    "x": 175,
+    "y": 282,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8945",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "xinzhu",
+    "chineseName": "新竹",
+    "code": 101340103,
+    "x": 300.3,
+    "y": 151.75,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef894a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "nantong",
+    "chineseName": "南通",
+    "code": 101190501,
+    "x": 450,
+    "y": 297,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "jiujiang",
+    "chineseName": "九江",
+    "code": 101240201,
+    "x": 294,
+    "y": 86,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ba",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "zhanjiang",
+    "chineseName": "湛江",
+    "code": 101281001,
+    "x": 137.7,
+    "y": 385.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88bf",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "chongzuo",
+    "chineseName": "崇左",
+    "code": 101300201,
+    "x": 235.45,
+    "y": 363.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "jiangjinshi",
+    "chineseName": "江津",
+    "code": 101040500,
+    "x": 183,
+    "y": 368,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "nanchuan",
+    "chineseName": "南川",
+    "code": 101040400,
+    "x": 273,
+    "y": 345,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ce",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "hualian",
+    "chineseName": "花莲",
+    "code": 101340405,
+    "x": 368.6,
+    "y": 229.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef887b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "chizhou",
+    "chineseName": "池州",
+    "code": 101221701,
+    "x": 363.15,
+    "y": 385.95,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8880",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "aba",
+    "chineseName": "阿坝",
+    "code": 101271901,
+    "x": 276,
+    "y": 138,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8885",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "lincang",
+    "chineseName": "临沧",
+    "code": 101291101,
+    "x": 203,
+    "y": 299,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "yangzhou",
+    "chineseName": "扬州",
+    "code": 101190601,
+    "x": 318.7,
+    "y": 294.85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "puyang",
+    "chineseName": "濮阳",
+    "code": 101181301,
+    "x": 424,
+    "y": 80,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "jinhua",
+    "chineseName": "金华",
+    "code": 101210901,
+    "x": 316,
+    "y": 237,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef888f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "yanqing",
+    "chineseName": "延庆",
+    "code": 101010800,
+    "x": 232,
+    "y": 190.8,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8894",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "guangzhou",
+    "chineseName": "广州",
+    "code": 101280101,
+    "x": 353,
+    "y": 196,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8899",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "nanning",
+    "chineseName": "南宁",
+    "code": 101300101,
+    "x": 332,
+    "y": 309,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef889e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "fulingqu",
+    "chineseName": "涪陵",
+    "code": 101041400,
+    "x": 277,
+    "y": 300,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "wulong",
+    "chineseName": "武隆",
+    "code": 101043100,
+    "x": 322,
+    "y": 328,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88a8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "yunlin",
+    "chineseName": "云林",
+    "code": 101340406,
+    "x": 243.9,
+    "y": 276.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ad",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "dali",
+    "chineseName": "大理",
+    "code": 101290201,
+    "x": 223,
+    "y": 198,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "zhoushan",
+    "chineseName": "舟山",
+    "code": 101211101,
+    "x": 480,
+    "y": 96,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88b7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "ganzhou",
+    "chineseName": "赣州",
+    "code": 101240701,
+    "x": 298,
+    "y": 345,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88bc",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "shaoguan",
+    "chineseName": "韶关",
+    "code": 101280201,
+    "x": 352.6,
+    "y": 80,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "jixian",
+    "chineseName": "蓟县",
+    "code": 101031400,
+    "x": 320,
+    "y": 85,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88c6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "fengjie",
+    "chineseName": "奉节",
+    "code": 101041900,
+    "x": 461,
+    "y": 167,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88cb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "pudong",
+    "chineseName": "浦东",
+    "code": 101021300,
+    "x": 350,
+    "y": 220,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d0",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "suzhou",
+    "chineseName": "苏州",
+    "code": 101190401,
+    "x": 450,
+    "y": 388,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88d5",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7e", "code": 2},
+    "pinyinName": "tianshui",
+    "chineseName": "天水",
+    "code": 101160901,
+    "x": 465,
+    "y": 368,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88da",
+    "province": {"_id": "56a879c04c7fd9141e6f8f84", "code": 8},
+    "pinyinName": "pingdingshan",
+    "chineseName": "平顶山",
+    "code": 101180501,
+    "x": 287,
+    "y": 249,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88df",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "changde",
+    "chineseName": "常德",
+    "code": 101250601,
+    "x": 331.75,
+    "y": 121.4,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e4",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "tongling",
+    "chineseName": "铜陵",
+    "code": 101221301,
+    "x": 392.45,
+    "y": 346.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e9",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "ganzi",
+    "chineseName": "甘孜",
+    "code": 101271801,
+    "x": 152.85,
+    "y": 147.45,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ee",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "lijiang",
+    "chineseName": "丽江",
+    "code": 101291401,
+    "x": 259,
+    "y": 139,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f3",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8d", "code": 17},
+    "pinyinName": "taian",
+    "chineseName": "泰安",
+    "code": 101120801,
+    "x": 214,
+    "y": 291,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f8",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "huangshan",
+    "chineseName": "黄山",
+    "code": 101221001,
+    "x": 431.45,
+    "y": 426.05,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88fd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "liangshan",
+    "chineseName": "凉山",
+    "code": 101271601,
+    "x": 255,
+    "y": 353,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88dd",
+    "province": {"_id": "56a879c04c7fd9141e6f8f85", "code": 9},
+    "pinyinName": "qianjiang",
+    "chineseName": "潜江",
+    "code": 101201701,
+    "x": 355,
+    "y": 320,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e2",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "fuyang",
+    "chineseName": "阜阳",
+    "code": 101220801,
+    "x": 214,
+    "y": 191,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88e7",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "yulin1",
+    "chineseName": "榆林",
+    "code": 101110401,
+    "x": 356,
+    "y": 119,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88ec",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "zigong",
+    "chineseName": "自贡",
+    "code": 101270301,
+    "x": 364,
+    "y": 294,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f1",
+    "province": {"_id": "56a879c04c7fd9141e6f8f86", "code": 10},
+    "pinyinName": "yongzhou",
+    "chineseName": "永州",
+    "code": 101251401,
+    "x": 355,
+    "y": 343,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88f6",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7c", "code": 0},
+    "pinyinName": "liuan",
+    "chineseName": "六安",
+    "code": 101221501,
+    "x": 270,
+    "y": 268,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef88fb",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8c", "code": 16},
+    "pinyinName": "baoji",
+    "chineseName": "宝鸡",
+    "code": 101110901,
+    "x": 258,
+    "y": 311,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8900",
+    "province": {"_id": "56a879c04c7fd9141e6f8f8f", "code": 19},
+    "pinyinName": "dazhou",
+    "chineseName": "达州",
+    "code": 101270601,
+    "x": 488,
+    "y": 190,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8905",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "qiandongnan",
+    "chineseName": "黔东南",
+    "code": 101260501,
+    "x": 442.3,
+    "y": 256.9,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "nanchang",
+    "chineseName": "南昌",
+    "code": 101240101,
+    "x": 321,
+    "y": 138,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "yunfu",
+    "chineseName": "云浮",
+    "code": 101281401,
+    "x": 225,
+    "y": 245,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8914",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "laibin",
+    "chineseName": "来宾",
+    "code": 101300401,
+    "x": 400,
+    "y": 260,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8919",
+    "province": {"_id": "56a879c04c7fd9141e6f8f80", "code": 4},
+    "pinyinName": "qianxinan",
+    "chineseName": "黔西南",
+    "code": 101260901,
+    "x": 198.4,
+    "y": 396.75,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "chengkou",
+    "chineseName": "城口",
+    "code": 101041600,
+    "x": 400,
+    "y": 58,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8923",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9b", "code": 50},
+    "pinyinName": "xianggang",
+    "chineseName": "香港岛",
+    "code": 101320101,
+    "x": 362,
+    "y": 307,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8928",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9c", "code": 51},
+    "pinyinName": "aomen",
+    "chineseName": "澳门",
+    "code": 101330101,
+    "x": 282.75,
+    "y": 98.15,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892d",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7d", "code": 1},
+    "pinyinName": "zhangzhou",
+    "chineseName": "漳州",
+    "code": 101230601,
+    "x": 276.45,
+    "y": 381.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8932",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "tongzhou",
+    "chineseName": "通州",
+    "code": 101010600,
+    "x": 374,
+    "y": 355,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8937",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "guilin",
+    "chineseName": "桂林",
+    "code": 101300501,
+    "x": 469.4,
+    "y": 142,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "yongchuanshi",
+    "chineseName": "永川",
+    "code": 101040200,
+    "x": 151,
+    "y": 350,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8941",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "wansheng",
+    "chineseName": "万盛",
+    "code": 101040600,
+    "x": 260,
+    "y": 380,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8946",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "nantou",
+    "chineseName": "南投",
+    "code": 101340404,
+    "x": 319.8,
+    "y": 258,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8902",
+    "province": {"_id": "56a879c04c7fd9141e6f8f90", "code": 20},
+    "pinyinName": "chuxiong",
+    "chineseName": "楚雄",
+    "code": 101290801,
+    "x": 294,
+    "y": 223,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8907",
+    "province": {"_id": "56a879c04c7fd9141e6f8f91", "code": 21},
+    "pinyinName": "quzhou",
+    "chineseName": "衢州",
+    "code": 101211001,
+    "x": 211,
+    "y": 280,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef890c",
+    "province": {"_id": "56a879c04c7fd9141e6f8f92", "code": 30},
+    "pinyinName": "miyun",
+    "chineseName": "密云",
+    "code": 101011300,
+    "x": 394,
+    "y": 157,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8911",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "dongguan",
+    "chineseName": "东莞",
+    "code": 101281601,
+    "x": 377,
+    "y": 234,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8916",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "wuqing",
+    "chineseName": "武清",
+    "code": 101030200,
+    "x": 270,
+    "y": 228,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef891b",
+    "province": {"_id": "56a879c04c7fd9141e6f8f93", "code": 31},
+    "pinyinName": "jinghai",
+    "chineseName": "静海",
+    "code": 101030900,
+    "x": 271,
+    "y": 375,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8920",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "beibei",
+    "chineseName": "北碚",
+    "code": 101040800,
+    "x": 203,
+    "y": 281,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8925",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 52},
+    "pinyinName": "taibei",
+    "chineseName": "台北",
+    "code": 101340101,
+    "x": 361,
+    "y": 110.6,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892a",
+    "province": {"_id": "56a879c04c7fd9141e6f8f87", "code": 11},
+    "pinyinName": "nanjing",
+    "chineseName": "南京",
+    "code": 101190101,
+    "x": 278,
+    "y": 343,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef892f",
+    "province": {"_id": "56a879c04c7fd9141e6f8f88", "code": 12},
+    "pinyinName": "jian",
+    "chineseName": "吉安",
+    "code": 101240601,
+    "x": 278.6,
+    "y": 246.1,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8934",
+    "province": {"_id": "56a879c04c7fd9141e6f8f7f", "code": 3},
+    "pinyinName": "zhuhai",
+    "chineseName": "珠海",
+    "code": 101280701,
+    "x": 340.55,
+    "y": 300,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8939",
+    "province": {"_id": "56a879c04c7fd9141e6f8f96", "code": 40},
+    "pinyinName": "beihai",
+    "chineseName": "北海",
+    "code": 101301301,
+    "x": 402,
+    "y": 427,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef893e",
+    "province": {"_id": "56a879c04c7fd9141e6f8f95", "code": 33},
+    "pinyinName": "kaixian",
+    "chineseName": "开县",
+    "code": 101041500,
+    "x": 366,
+    "y": 127,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8943",
+    "province": {"_id": "56a879c04c7fd9141e6f8f94", "code": 32},
+    "pinyinName": "qingpu",
+    "chineseName": "青浦",
+    "code": 101020800,
+    "x": 190,
+    "y": 250,
+    "__v": 0
+},{
+    "_id": "56a88f7d5983c58423ef8948",
+    "province": {"_id": "56a879c04c7fd9141e6f8f9c", "code": 51},
+    "pinyinName": "luhuandao",
+    "chineseName": "路环岛",
+    "code": 101330103,
+    "x": 339.1,
+    "y": 382.7,
+    "__v": 0
+}]
+}

@@ -1,7 +1,7 @@
 /*THIS DOCUMENT WAS CREATED TO FILL THE DATABASE MODEL AT STARTUP*/
 
 module.exports = {
-    provinces : [
+        provinces : [
         /*PROVINCES*/
         {name: 'Anhui', chineseName:"安徽", typeOfRegion: 1, code: 0},
         {name: 'Fujian', chineseName:"福建", typeOfRegion: 1, code: 1},
@@ -38,6 +38,7 @@ module.exports = {
         {name: 'Xinjiang', chineseName:"新疆", typeOfRegion: 3, code: 44},
         /*SPECIAL ADMINISTRATIVE REGIONS*/
         {name: 'Hong Kong', chineseName:"香港", typeOfRegion: 4, code: 50},
-        {name: 'Macao (Macau)', chineseName:"澳门", typeOfRegion: 5, code: 51}
+        {name: 'Macao (Macau)', chineseName:"澳门", typeOfRegion: 4, code: 51},
+        {name: 'Taiwan', chineseName:"台湾", typeOfRegion: 4, code: 52}
     ]
 }

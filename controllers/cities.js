@@ -5,26 +5,35 @@ module.exports = {
 
     citiesToPush : new Array(),
 
-    initCities : function(citieslist){
-        var ncity;
-        for(var city in citieslist){
-            ncity = citieslist[city];
-            if(ncity.province == "")
-                ncity.province = ncity.cnName;
-            provincesController.getProvinceByChineseName(ncity, ncity.province, function(cityinfo, province){
-                module.exports.citiesToPush.push({province:province, pinyinName: cityinfo.pyName, chineseName: cityinfo.cnName, code: cityinfo.code, x:cityinfo.x, y:cityinfo.y});
-                var a = 2;
-            });
-        }
+    initCities : function(citieslist, callback){
+        console.log("BEGINNING INITCITIES")
+        City.count({},function(err,count){
+            if(count == 0){
+
+                var city;
+                for(var i in citieslist){
+                    city = citieslist[i];
+                    if(city.province == "" || city.province == null)
+                        city.province = {"_id": "56a879c04c7fd9141e6f8f89", "code": 13};
+                    provincesController.helpInitCities(city, city.province.code, function(cityinfo, province){
+                        module.exports.citiesToPush.push({province:province, pinyinName: cityinfo.pinyinName, chineseName: cityinfo.chineseName, code: cityinfo.code, x:cityinfo.x, y:cityinfo.y});
+                        var a = 2;
+                    });
+                }
+            }
+        });
+        callback();
+
     },
 
-    pushCities: function(citiesList){
+    pushCities: function(citiesList,callback){
         City.create(citiesList, function(err,result){
             if(err){
                 console.log(err);
             }
             else{
                 console.log("Pushing cities : " + result);
+                callback(result);
             }
         });
     },

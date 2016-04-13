@@ -13,13 +13,13 @@ var provincesController = require('./controllers/provinces');
 var citiesController = require('./controllers/cities');
 
 // Connect to DB
-//mongoose.connect(dbConfig.url,function(){
+//mongoose.connect(dbConfig.urldev,function(){
 //  /* Drop the DB */
 //    mongoose.connection.db.dropDatabase();
 //    //mongoose.connection.db.dropCollection('Province', function(err, result) {});
 //});
 // Reset DB
-mongoose.connect(dbConfig.url);
+mongoose.connect(dbConfig.urldev);
 
 
 //AWS TO BE SET IN HEROKU NEVER IN APP ITSELF
@@ -70,27 +70,40 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Using the flash middleware provided by connect-flash to store messages in session
-// and displaying in templates
+
+/***************************************************************
+ * Using the flash middleware provided by connect-flash to store messages in session
+ * and displaying in templates
+ ***************************************************************/
 var flash = require('connect-flash');
 app.use(flash());
+
 
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
 
+
+/***************************************************************
+ * ROUTES, currently only has main routes and school's
+ * @type {router|exports}
+ ***************************************************************/
 var routes = require('./routes/index')(passport);
 var schoolRoutes = require('./routes/schools')(passport);
+var functionRoutes = require('./routes/function')(passport);
 app.use('/', routes);
 app.use('/school', schoolRoutes);
+app.use('/function', functionRoutes);
 
-/// catch 404 and forward to error handler
+
+/***************************************************************
+ catch 404 and forward to error handler
+ ***************************************************************/
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 
 
 // development error handler
@@ -105,5 +118,9 @@ if (app.get('env') === 'development') {
   });
 }
 
+/************************************************
+*INIT Provinces
+ ************************************************/
+//provincesController.initProvinces(provinces.provinces);
 
 module.exports = app;
