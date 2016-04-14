@@ -7,7 +7,8 @@ module.exports = function(passport) {
     passport.use('facebook', new FacebookStrategy({
             clientID        : fbConfig.appID,
             clientSecret    : fbConfig.appSecret,
-            callbackURL     : fbConfig.callbackUrl
+            callbackURL     : fbConfig.callbackUrl,
+            profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender']
         },
 
         // facebook will send back the tokens and profile
@@ -37,9 +38,18 @@ module.exports = function(passport) {
                         // set all of the facebook information in our user model
                         newUser.fb.id    = profile.id; // set the users facebook id
                         newUser.fb.access_token = access_token; // we will save the token that facebook provides to the user
+
                         newUser.fb.firstName  = profile.name.givenName;
+                        newUser.firstName  = profile.name.givenName;
+
                         newUser.fb.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
+                        newUser.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
+
                         newUser.fb.email = ( typeof profile.emails != 'undefined' && profile.emails instanceof Array ) ? profile.emails[0].value : "";// facebook can return multiple emails so we'll take the first
+                        newUser.email = ( typeof profile.emails != 'undefined' && profile.emails instanceof Array ) ? profile.emails[0].value : "";// facebook can return multiple emails so we'll take the first
+
+                        newUser.avatarUrl = profile.photos[0].value;
+                        newUser.gender = profile.gender;
 
                         // save our user to the database
                         newUser.save(function(err) {

@@ -46,7 +46,7 @@ module.exports = {
     },
 
     findReviews : function(schoolId, callback){
-        Review.find({objectType:0, foreignId:schoolId}).limit(6).populate("user").exec(function(err,comments){
+        Review.find({objectType:0, foreignId:schoolId}).limit(9).populate("user").exec(function(err,comments){
             if(err){
                 console.log(err);
             }

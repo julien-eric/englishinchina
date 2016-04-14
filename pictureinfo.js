@@ -1,5 +1,9 @@
 module.exports = {
 
+    returnFacebookPicture : function(link){
+        return link;
+    },
+
     returnThumbnail : function(link){
         var hostname = link.substring(0, link.lastIndexOf('/'));
         var pathname = link.substring(link.lastIndexOf('/'));
@@ -14,6 +18,7 @@ module.exports = {
 
     THUMBNAIL : "th_",
     THUMBNAIL_SIZE: 350,
+    FACEBOOK :"",
     LARGE : "lg_",
     LARGE_SIZE : 1663
 }

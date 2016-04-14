@@ -9,7 +9,10 @@ block content
                   h2 Contact Information
                   .clearfix
                   .user-box.col-sm-12.col-md-6
-                     .image-holder.img-circle.img-responsive(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+                     if locals.user.fb
+                        .image-holder.img-circle.img-responsive(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                     else
+                        .image-holder.img-circle.img-responsive(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                      h2 #{user.firstName} #{user.lastName}
                      .clearfix
                   label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 1. Position in School

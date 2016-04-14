@@ -30,8 +30,11 @@ block content
          include schoolreviews
          .clearfix
          .btn-group
-            h4
-               a.btn.btn-eic.btn-primary.btn-lg(href="#loadMoreReviews") Load More
+            //h4
+            //   a.btn.btn-eic.btn-primary.btn-lg(href="#loadMoreReviews") Load More
             if locals.user
                h4
                   a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review
+            else
+               h4
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Login & Review

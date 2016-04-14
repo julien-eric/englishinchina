@@ -112,7 +112,7 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.get('/login/facebook',
         passport.authenticate('facebook', { scope : 'email' }
-        ));
+    ));
 
 
     /************************************************************************************************************
@@ -120,7 +120,7 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.get('/login/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/home',
+            successRedirect : '/',
             failureRedirect : '/'
         })
     );

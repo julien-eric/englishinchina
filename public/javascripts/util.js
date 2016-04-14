@@ -15,14 +15,19 @@ $(document).ready(function() {
     (function setLightboxOnReadmore() {
 
         var turnon = function(){
-            var element = $(this).closest(".list-group-review");
+            var original = $(this).closest(".list-group-review");
+            var element = original.clone()
+            element.find('.review-content').addClass('read-review');
+            element.find('h5').remove();
             element.clone().appendTo("#lightboxcontent")
             $("#lightbox").toggle();
+            $('body').addClass('noscroll');
         };
 
         var turnoff = function(){
             var element = $("#lightboxcontent").empty();
             $("#lightbox").toggle();
+            $('body').removeClass('noscroll');
         };
 
         $(".readmore").click(turnon);

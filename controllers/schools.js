@@ -69,13 +69,27 @@ module.exports = {
 
         if(prov != -1){ //Province is specified
             provincesController.getProvinceByCode(prov, function(provModel){
-                School.
-                    find({name: new RegExp(schoolInfo, "i")}).
-                    populate("province").
-                    populate("city").
-                    where('province').equals(provModel).
-                    limit(10).
-                    exec(function(err,schoolList){callback(schoolList)});
+                if(city != -1){ //City is also specified
+                    citiesController.getCityByCode(city,function(cityModel){
+                        School.
+                            find({name: new RegExp(schoolInfo, "i")}).
+                            populate("province").
+                            populate("city").
+                            where('province').equals(provModel).
+                            where('city').equals(cityModel).
+                            limit(10).
+                            exec(function(err,schoolList){callback(schoolList)});
+                    });
+                }
+                else{
+                    School.
+                        find({name: new RegExp(schoolInfo, "i")}).
+                        populate("province").
+                        populate("city").
+                        where('province').equals(provModel).
+                        limit(10).
+                        exec(function(err,schoolList){callback(schoolList)});
+                }
             });
         }
         else{

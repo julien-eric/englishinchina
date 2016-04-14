@@ -15,11 +15,11 @@ nav.navbar.navbar-default.navbar-custom
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
             ul.nav.navbar-nav
                 li.active
-                    a(href='/home')
+                    a(href='/')
                         | Home
                         span.sr-only (current)
                 li
-                    a(href='/home')
+                    a(href='/')
                         | About
                         span.sr-only (current)
             ul.nav.navbar-nav.navbar-right
@@ -41,7 +41,10 @@ nav.navbar.navbar-default.navbar-custom
                             li
                                 a(href='/signout') Sign Out
                     li.profile-picture
-                        div.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+                        if locals.user.fb
+                            div.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                        else
+                            div.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                 else
                     li
                         a(href='/login') Sign In

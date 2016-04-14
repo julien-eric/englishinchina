@@ -336,10 +336,20 @@ footer .container ul li {
   height: 500px;
   margin: auto;
 }
+.noscroll {
+  overflow: hidden;
+}
 .review-content {
   height: 100px;
   overflow: hidden;
   -webkit-box-shadow: inset 0px -10px 15px -2px #f0f0f0;
+}
+.read-review {
+  padding-top: 20px;
+  height: auto;
+/*overflow hidden*/
+  text-align: left;
+  -webkit-box-shadow: none;
 }
 .carousel-caption {
   padding-bottom: 50px;
