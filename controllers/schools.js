@@ -50,7 +50,7 @@ module.exports = {
     },
 
     findSchoolById : function(id, callback){
-        School.findOne({_id:id}).populate("province").exec(function(err,school){
+        School.findOne({_id:id}).populate("province").populate("city").exec(function(err,school){
             callback(school);
         });
     },
@@ -95,6 +95,22 @@ module.exports = {
                         exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
                 }
             });
+        }
+        else if(city != -1){
+            citiesController.getCityByCode(city,function(cityModel){
+                if(schoolInfo != ""){
+                    searchQueryMessage += '"' + schoolInfo + '" in ' ;
+                }
+                searchQueryMessage += cityModel.pinyinName + "(" + cityModel.chineseName + ")";
+                School. //Province is not specified
+                    find({name: new RegExp(schoolInfo,"i")}).
+                    populate("province").
+                    populate("city").
+                    where('city').equals(cityModel).
+                    limit(10).
+                    exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
+            });
+
         }
         else{
             School. //Province is not specified

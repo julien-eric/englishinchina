@@ -12,7 +12,6 @@ block content
                                 #preview.img-circle.profile-image-holder(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
                             else
                                 #preview.img-circle.profile-image-holder(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-
                            .clearfix
                            .progress
                               #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
@@ -35,7 +34,7 @@ block content
                         .form-group
                             label.control-label(for='Last Name') Last Name
                             input(type='text', name='lastName', class='form-control', value=user.lastName, placeholder='Last Name',required)
-                        button(class='btn btn-lg btn-primary', type='submit') Apply
+                        button(class='btn btn-lg btn-eic btn-primary', type='submit') Apply
                 #message
                     if message
                         h1.text-center.error-message #{message}

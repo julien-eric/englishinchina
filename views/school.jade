@@ -7,14 +7,18 @@ block content
                div.stick-to-bottom
                   div.gradient-shadow
                   h1.school-page-name #{school.name}
+                  h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+                  h3.school-page-location China \
+                     | #{school.province.name} \
+                     span
+                        a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
                   #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
 
-               h3 #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
-               hr
-               h4 China \ #{school.province.name} \ Dongying
+
+
                hr
                if edit
                   h4
@@ -23,9 +27,12 @@ block content
                h4.login-title #{school.description}
                span.clearfix
 
-               h2 Photos
-               h4
-                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Add Photos
+
+
+
+            //h2 Photos
+               //h4
+               //   a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Add Photos
                hr
          include schoolreviews
          .clearfix
@@ -34,7 +41,7 @@ block content
             //   a.btn.btn-eic.btn-primary.btn-lg(href="#loadMoreReviews") Load More
             if locals.user
                h4
-                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write a Review
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
             else
                h4
-                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Login & Review
+                  a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
