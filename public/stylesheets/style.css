@@ -357,3 +357,6 @@ footer .container ul li {
 .float-left {
   float: left;
 }
+#city-select {
+  min-width: 180px;
+}

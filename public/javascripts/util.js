@@ -105,13 +105,13 @@ $(document).ready(function() {
     }
 
 
-    $('#citySelect').prop('disabled', 'disabled');
+    $('#city-select').prop('disabled', 'disabled');
     $('#provinceSelect').on('change', function() {
-        $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
-        $('#citySelect').prop('disabled', 'disabled');
+        $('#city-select option:gt(0)').remove(); // remove all options, but not the first
+        $('#city-select').prop('disabled', 'disabled');
         $.ajax({url: "/cities/" + this.value, success: function(results){
-            $('#citySelect').prop('disabled', false);
-            var $element = $("#citySelect");
+            $('#city-select').prop('disabled', false);
+            var $element = $("#city-select");
             for(var i = 0; i <= results.length; i++){
                 $element.append($("<option></option>")
                     .attr("value", results[i].code).text(capitalize(results[i].pinyinName) + " - " + results[i].chineseName));
