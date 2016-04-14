@@ -336,8 +336,8 @@ footer .container ul li {
   height: 500px;
   margin: auto;
 }
-.noscroll {
-  overflow: hidden;
+#lightboxcontent {
+  z-index: 99;
 }
 .review-content {
   height: 100px;
