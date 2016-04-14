@@ -63,14 +63,18 @@ module.exports = {
 
     searchSchools : function(schoolInfo, prov, city, callback){
 
-        if(prov != -1 && city != -1){
-
-        }
+        var searchQueryMessage = "You have searched for ";
 
         if(prov != -1){ //Province is specified
             provincesController.getProvinceByCode(prov, function(provModel){
+                if(schoolInfo != ""){
+                    searchQueryMessage += '"' + schoolInfo + '" in ' ;
+                }
+                searchQueryMessage += provModel.name + "(" + provModel.chineseName + ")";
+
                 if(city != -1){ //City is also specified
                     citiesController.getCityByCode(city,function(cityModel){
+                        searchQueryMessage += ", " + cityModel.pinyinName + "(" + cityModel.chineseName + ")";
                         School.
                             find({name: new RegExp(schoolInfo, "i")}).
                             populate("province").
@@ -78,7 +82,7 @@ module.exports = {
                             where('province').equals(provModel).
                             where('city').equals(cityModel).
                             limit(10).
-                            exec(function(err,schoolList){callback(schoolList)});
+                            exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
                     });
                 }
                 else{
@@ -88,7 +92,7 @@ module.exports = {
                         populate("city").
                         where('province').equals(provModel).
                         limit(10).
-                        exec(function(err,schoolList){callback(schoolList)});
+                        exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
                 }
             });
         }
@@ -98,7 +102,7 @@ module.exports = {
                 populate("province").
                 populate("city").
                 limit(10).
-                exec(function(err,schoolList){callback(schoolList)});
+                exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
         }
     },
 

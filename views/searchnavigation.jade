@@ -12,10 +12,10 @@ block content
       .collapse.navbar-collapse#search-navigation
          form.navbar-form.navbar-left(role='search', action='/school/search', method='GET')
             .form-group
-               input.form-control(type='text', placeholder='School Name', name='schoolInfo',)
+               input.search-navigation-inputs.form-control(type='text', placeholder='School Name', name='schoolInfo',)
             .form-group
                .navbar-form.navbar-left(role='province')
-                  select#provinceSelect.form-control(name="province")
+                  select#provinceSelect.search-navigation-inputs.form-control(name="province")
                      option(value="-1") Province
                      option(value="-2") =============
                      optgroup(label="Provinces")
@@ -23,7 +23,7 @@ block content
                            option(value=province.code) #{province.name} - #{province.chineseName}
             .form-group
                .navbar-form.navbar-left(role='city')
-                  select#city-select.form-control(name="city")
+                  select.search-navigation-inputs.form-control(name="city")
                      option(value="-1") City
                      //each city,i in cities
                      //   option(value=i) #{city.pyName} - #{city.cnName}

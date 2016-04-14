@@ -137,11 +137,11 @@ module.exports = function(passport) {
     router.get('/search', function (req, res) {
         var schoolInfo = req.query.schoolInfo;
         var province = req.query.province;
-        var city = req.query.city;
+        var city = validateCity(req.query.city);
 
+        //var searchMessage = createSearchMessage(schoolInfo, province, city);
 
-
-        schools.searchSchools(schoolInfo, province, city, function (schoolList) {
+        schools.searchSchools(schoolInfo, province, city, function (schoolList, searchMessage) {
             if (schoolList != undefined && schoolList.length > 0){
                 schoolList = jadefunctions.trunkSchoolDescription(schoolList);
             }
@@ -151,13 +151,35 @@ module.exports = function(passport) {
                     user: req.user,
                     provinces: provinces,
                     pictureInfo: pictureinfo,
-                    searchQuery: schoolInfo,
+                    searchMessage: searchMessage,
                     jadefunctions: jadefunctions
                 });
             });
         });
     });
 
+    var createSearchMessage = function(schoolInfo, province, city){
+        var searchQueryMessage = "You have searched for ";
+        if(schoolInfo != "" && province){
+            searchQueryMessage += schoolInfo + " in " + province;
+            if(city != undefined){
+                searchQueryMessage +=  + ", " + city;
+            }
+        }
+        if(schoolInfo != "" && (province == undefined)){
+            searchQueryMessage += schoolInfo;
+        }
+        if( province && (schoolInfo == "")){
+            searchQueryMessage += province;
+        }
+        return searchQueryMessage;
+    };
+
+    var validateCity = function (queryElement){
+        if (queryElement == undefined)
+            return -1;
+        return queryElement;
+    }
 
     /************************************************************************************************************
      *editSchool: GET loads page to edit existing school

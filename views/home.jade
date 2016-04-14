@@ -17,13 +17,14 @@ block content
                                     h1 #{featuredSchool.name}
                                     p
                                         a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{featuredSchool._id}" role="button") Learn more
-
+    else
+        .padding
 
 
     .container
         include searchnavigation
-        if searchQuery
-            h2 You have searched for #{searchQuery}
+        if searchMessage
+            h2 #{searchMessage}
         div.row
             div.school-list-wrapper.col-sm-12.col-md-8
                 ul.list-group
