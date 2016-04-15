@@ -21,15 +21,18 @@ module.exports = {
         });
     },
 
-    getAllProvinces : function(callback){
-        Province.find(function(err, provinces){
-            if(err){
-                console.log(err);
-            }
-            else{
-                callback(provinces);
-            }
-        });
+    getAllProvinces : function(callback) {
+        Province.
+            find().
+            sort({"name": 1}).
+            exec(function (err, provinces) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    callback(provinces);
+                }
+            })
     },
 
     getProvinceByCode : function(code, callback){

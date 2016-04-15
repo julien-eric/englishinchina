@@ -40,14 +40,18 @@ module.exports = {
 
     getCitiesByProvince: function(provinceCode,callback){
         provincesController.getProvinceByCode(provinceCode, function(province){
-            City.find({province:province},function(err, result){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    callback(result);
-                }
-            });
+            City
+                .find({province:province})
+                .sort({"pinyinName" : 1})
+                .exec(
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        callback(result);
+                    }
+                });
         });
     },
 

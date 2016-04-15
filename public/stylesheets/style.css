@@ -134,6 +134,10 @@ a h2.list-group-item-heading:hover {
   text-transform: uppercase;
   font-size: 18px;
 }
+h2.school-location {
+  font-size: 22px;
+  margin: 0;
+}
 .school-list-information {
   padding-top: 15px;
 }
@@ -213,6 +217,18 @@ float-left
 .user-information .date {
   font-size: 20px;
 }
+.default-user-picture,
+.profile-img {
+  position: absolute;
+  top: 0;
+}
+.user-picture {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  float: left;
+  margin-right: 10px;
+}
 footer .container {
   color: #ccc;
 }
@@ -282,6 +298,7 @@ footer .container ul li {
   -webkit-box-shadow: inset 0px -150px 150px -100px #222;
 }
 .btn-eic,
+.btn-eic.disabled,
 .btn-eic:visited {
   background-color: #388577;
   border: #388577;
@@ -289,7 +306,8 @@ footer .container ul li {
 .btn-eic:hover {
   background-color: #34635a;
 }
-.btn-eic:active.btn-eic:hover {
+.btn-eic:active,
+.btn-eic:hover {
   background-color: #223f3a;
 }
 .dark-hr {

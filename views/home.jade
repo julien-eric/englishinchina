@@ -38,12 +38,13 @@ block content
                                     a(href="/school/id/#{school.id}")
                                         h2.list-group-item-heading #{school.name}
                                     //a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1")
-                                    a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") China /
-                                    a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") #{school.province.name} /
-                                    if school.city
-                                        a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
-                                    else
-                                        a(href="/school/search?schoolInfo=&province=-1&city=1") Dongying
+                                    h2.school-location
+                                        a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") China/
+                                        a(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") #{school.province.name}/
+                                        if school.city
+                                            a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
+                                        else
+                                            a(href="/school/search?schoolInfo=&province=-1&city=1") Dongying
 
                                     h5 #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
                                     .rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")

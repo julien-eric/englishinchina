@@ -16,13 +16,14 @@ block content
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
-
+               span.clearfix
+               h2 Description
 
 
                hr
                if edit
                   h4
-                     a(href="/school/edit/#{school.id}") edit
+                     a.btn.btn-eic.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
                span.clearfix
                h4.login-title #{school.description}
                span.clearfix

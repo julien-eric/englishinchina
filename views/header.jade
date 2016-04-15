@@ -9,7 +9,7 @@ nav.navbar.navbar-default.navbar-custom
                 span.icon-bar
             a.pull-left(href='/')
                 img.nav-logo(src="/images/logo2.gif")
-            a(href='/')
+            a.pull-left(href='/')
                 img.nav-brand(src="/images/logo-name2.gif")
         // Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
@@ -42,9 +42,11 @@ nav.navbar.navbar-default.navbar-custom
                                 a(href='/signout') Sign Out
                     li.profile-picture
                         if locals.user.fb
-                            div.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                            div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+                            div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
                         else
-                            div.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+                            div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+                            div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                 else
                     li
                         a(href='/login') Log In
