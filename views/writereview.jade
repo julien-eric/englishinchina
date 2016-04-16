@@ -9,13 +9,21 @@ block content
                   h2 Contact Information
                   .clearfix
                   .user-box.col-sm-12.col-md-6
-                     if locals.user.fb
-                        .image-holder.img-circle.img-responsive(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
-                     else
-                        .image-holder.img-circle.img-responsive(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-                     h2 #{user.firstName} #{user.lastName}
+                     .user-picture
+                        if user.fb
+                           .default-user-picture.image-holder.img-circle(style="background-image: url('/images/default-user.png');")
+                           .profile-img.image-holder.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                        else
+                           .default-user-picture.image-holder.img-circle(style="background-image: url('/images/default-user.png');")
+                           .profile-img.image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+                     h2 #{user.username}
                      .clearfix
-                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 1. Position in School
+                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 1. Review anonymously
+                  label.col-sm-6.col-md-6
+                     input(type="checkbox", name="anonymous")
+                     | Review anonymously, your account name and picture will not be associated with this review
+                  .clearfix
+                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Position in School
                   select.employeeInfo.col-sm-12.col-md-4#typeofemployee.form-control(name="typeofemployee")
                      option(value="-1") Position in School
                      option(value="-1") Current Teacher
@@ -23,7 +31,7 @@ block content
                      option(value="-1") Teacher's Assistant(TA)
                      option(value="-1") Former Teacher's Assistant(TA)
                      option(value="-1") Head Teacher
-                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Period of employment
+                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 3. Period of employment
                   div.col-sm-12.col-md-6.float-left
                      div.calendar(style="display:inline-block; z-index: 2;")
                         .form-group
@@ -34,11 +42,6 @@ block content
                         input.col-sm-8.col-md-8#mytarget2(type="text" value="End Date" readonly="readonly")
                         span.glyphicon.glyphicon-calendar.form-control-feedback
                         .monthly#mycalendar2
-                  .clearfix
-                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 3. Review anonymously
-                  label.col-sm-6.col-md-6
-                     input(type="checkbox", name="anonymous")
-                     | Review anonymously, your account name and picture will not be associated with this review
                   .clearfix
                h2 Evaluation Of School
                .form-group

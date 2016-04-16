@@ -81,7 +81,9 @@ $(document).ready(function() {
         }
         xhr.onload = function () {
             if (xhr.status === 200) {
-                document.getElementById("preview").src = url;
+                var preview = $("#preview");
+                preview.toggle();
+                preview.attr("src", url);
                 document.getElementById("avatarUrl").value = url;
                 //alert("success");
                 xhr2 = new XMLHttpRequest();

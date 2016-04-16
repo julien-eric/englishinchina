@@ -18,11 +18,14 @@ block content
                             //label.control-label(for='Password') Password
                             input(type='password', name='password' class='form-control input-lg', placeholder='Password', required)
                             span.glyphicon.glyphicon-lock.form-control-feedback
-                        a Forgot your password?
+                        p
+                            a Forgot your password?
                         span.clearfix
-                        button.login-button.col-xs-4(class='btn btn-eic btn-lg btn-primary', type='submit') Login
+                        button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Login
                         span.clearfix
-                        a(href='/signup', class='new-account') Create an account
+                        #message
+                            if message
+                                h3.text-center.error-message #{message}
                     span.clearfix
                     hr.dark-hr
                     h4.login-title Social Login
@@ -31,8 +34,6 @@ block content
                             img.img-responsive.social-login(src="/images/fcb.gif")
                         a.social-login-link.col-xs-12.col-sm-6(href='/login/twitter')
                             img.img-responsive.social-login(src="/images/tw.gif")
-                #message
-                if message
-                    h1.text-center.error-message #{message}
+
 
 

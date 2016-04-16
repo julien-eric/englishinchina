@@ -212,7 +212,6 @@ h2.school-location {
 }
 .user-information {
   font-size: 23px;
-float-left
 }
 .user-information .date {
   font-size: 20px;
@@ -398,4 +397,21 @@ footer .container ul li {
 }
 .noscroll {
   overflow: hidden;
+}
+#preview {
+  display: none;
+}
+.edit-preview {
+  display: inline !important;
+}
+.preview {
+  height: 100px;
+  width: 100px;
+}
+.register-picture {
+  height: 100px;
+  width: 100px;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
 }

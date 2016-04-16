@@ -181,7 +181,7 @@ module.exports = function(passport){
             });
         })
         .post(function(req,res){
-            usersController.updateUser(req, function(user){
+            usersController.updateUser(req.body, function(user){
                 res.render('edituser', {
                     user: user,
                     pictureInfo: pictureinfo,

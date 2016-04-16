@@ -13,12 +13,15 @@ block content
                .profile-img.image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
          .user-information
             if review.user
-               a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
+               if review.user.firstName && review.user.lastName
+                  a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
+               else
+                  a.name(href="/user/#{review.user._id}") #{review.user.username}
                .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
          span.clearfix
          if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
-         .review-content #{review.comment}
+         .review-content !{review.comment}
          h5
             span.glyphicon.glyphicon-resize-full
             a.readmore(href="##{review._id}") Read More
