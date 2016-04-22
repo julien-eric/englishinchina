@@ -6,7 +6,7 @@ block content
    .school-img-list.col-md
       each photo in school.photos
          //.item.col-sm-4.col-md-3.col-lg-3(id="#{photo._id}")
-         .item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-2(width="100%", src="#{pictureInfo.returnThumbnail(photo.url)}")
+         .school-image-item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-2(width="100%", src="#{pictureInfo.returnThumbnail(photo.url)}")
             .school-img-list-item(style="background-image: url('#{pictureInfo.returnThumbnail(photo.url)}');")
 .clearfix
 
