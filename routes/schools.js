@@ -191,7 +191,7 @@ module.exports = function(passport) {
                 console.log("Back");
                 schools.findSchoolById(schoolId, function (school) {
                     reviews.findReviews(school, function (reviews) {
-                        res.redirect('school/id/'+ school._id)
+                        res.redirect('id/'+ school._id)
 
                         //res.render('school', {
                         //    school: school,

@@ -24,6 +24,14 @@ $(document).ready(function() {
             $('body').addClass('noscroll');
         };
 
+        var turnonPicture = function(){
+            var original = $(this).closest(".school-img-list-item");
+            var element = original.clone()
+            element.clone().appendTo("#lightboxcontent")
+            $("#lightbox").toggle();
+            $('body').addClass('noscroll');
+        };
+
         var turnoff = function(){
             var element = $("#lightboxcontent").empty();
             $("#lightbox").toggle();
@@ -31,6 +39,7 @@ $(document).ready(function() {
         };
 
         $(".readmore").click(turnon);
+        $(".school-img-list-item").click(turnonPicture);
         $("#lightbox").click(turnoff);
     })();
 
