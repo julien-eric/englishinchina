@@ -6,11 +6,13 @@ var bodyParser = require('body-parser');
 var dbConfig = require('./database');
 var mongoose = require('mongoose');
 var stylus = require('stylus');
-var schools = require('./controllers/schools');
 var provinces = require('./provinces');
+var schools = require('./controllers/schools');
 var provincesController = require('./controllers/provinces');
 var citiesController = require('./controllers/cities');
 var favicon = require('serve-favicon');
+var flash = require('express-flash');
+
 
 // Connect to DB
 //mongoose.connect(dbConfig.urldev,function(){
@@ -30,11 +32,11 @@ var S3_BUCKET = process.env.S3_BUCKET;
 var app = express();
 
 //REMOVE THIS AND RUN FROM BIN
-//var debug = require('debug')('passport-mongo');
-//app.set('port', process.env.PORT || 3000);
-//var server = app.listen(app.get('port'), function() {
-//  debug('Express server listening on port ' + server.address().port);
-//});
+var debug = require('debug')('passport-mongo');
+app.set('port', process.env.PORT || 3000);
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
 //////////////////////////////
 
 function compile(str, path) {
@@ -71,13 +73,18 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+//app.use(function(req, res, next){
+//    res.locals.success_messages = req.flash('success_messages');
+//    res.locals.error_messages = req.flash('error_messages');
+//    next();
+//});
 
 /***************************************************************
  * Using the flash middleware provided by connect-flash to store messages in session
  * and displaying in templates
  ***************************************************************/
-var flash = require('connect-flash');
-app.use(flash());
+
 
 // Initialize Passport
 var initPassport = require('./passport/init');

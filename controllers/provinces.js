@@ -26,12 +26,7 @@ module.exports = {
             find().
             sort({"name": 1}).
             exec(function (err, provinces) {
-                if (err) {
-                    console.log(err);
-                }
-                else {
                     callback(provinces);
-                }
             })
     },
 

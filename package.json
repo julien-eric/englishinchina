@@ -6,23 +6,25 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^1.5.2",
+    "aws-sdk": "*",
+    "bcrypt-nodejs": "*",
     "body-parser": "~1.13.2",
+    "bootstrap-slider": "*",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.0.2",
-    "cookie-parser": "~1.3.5",
-    "jade": "~1.11.0",
-    "passport": "~0.2.0",
-    "passport-local": "~1.0.0",
-    "passport-facebook": "~1.0.0",
-    "mongoose": "~3.8.12",
-    "bcrypt-nodejs" : "*",
-    "connect-flash": "^0.1.1",
-    "stylus": "*",
-    "jquery-bar-rating": "*",
-    "bootstrap-slider": "*",
-    "aws-sdk": "*",
     "gm": "*",
-    "mime": "*"
+    "jade": "~1.11.0",
+    "jquery-bar-rating": "*",
+    "mime": "*",
+    "mongoose": "~3.8.12",
+    "nodemailer": "^2.3.2",
+    "passport": "~0.2.0",
+    "passport-facebook": "~1.0.0",
+    "passport-local": "~1.0.0",
+    "stylus": "*"
   }
 }

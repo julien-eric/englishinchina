@@ -48,6 +48,12 @@ block content
 
                                     h5 #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
                                     .rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+                                    if locals.user && locals.user.admin && !school.validated
+                                        a.btn.btn-eic.btn-primary.btn-lg(href="/school/validate/#{school.id}" role="button") Validate
+                                    if locals.user && locals.user.admin && school.validated
+                                        a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/validate/#{school.id}" role="button") Validated!
+                                    if locals.user && locals.user.admin
+                                        a.btn.btn-eic.btn-primary.btn-lg(href="/school/remove/#{school.id}" role="button") Remove
                                     hr
                                     div.school-list-text
                                         p.list-group-item-text #{school.description}

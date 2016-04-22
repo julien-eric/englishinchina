@@ -21,7 +21,16 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
   body
     include ./header.jade
-    //div.container
+    .container.col-md-4.col-md-offset-4.col-sm-12
+        if messages.error
+          .alert.alert-danger.flash-messages
+            div= messages.error
+        if messages.info
+          .alert.alert-info.flash-messages
+            div= messages.info
+        if messages.success
+          .alert.alert-success.flash-messages
+            div= messages.success
     block content
 
     include ./footer.jade

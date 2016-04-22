@@ -8,6 +8,9 @@ module.exports = mongoose.model('User',{
     email: String,
     gender: String,
     avatarUrl: String,
+    admin: Boolean,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     fb: {
         id: String,
         access_token: String,

@@ -5,11 +5,21 @@ var User = require('./../models/user');
 
 module.exports = {
 
-
-
     findUserById : function(id, callback){
         User.findOne({_id:id}).exec(function(err,user){
             callback(user);
+        });
+    },
+
+    findUserByEmail : function(email, callback){
+        User.findOne({email:email}).exec(function(err,user){
+            callback(err,user);
+        });
+    },
+
+    findUserByToken : function(token, expiryDate, callback){
+        User.findOne({resetPasswordToken:token, resetPasswordExpires:expiryDate}).exec(function(err,user){
+            callback(err,user);
         });
     },
 
@@ -20,6 +30,10 @@ module.exports = {
             user.address = "";
         if(user.gender == undefined)
             user.gender = "";
+        if(user.username == "admin"){
+            user.admin = true;
+        }
+        else{user.admin=false;}
 
         User.findOneAndUpdate({_id:user.id}, {
                 username:user.username,
@@ -28,6 +42,7 @@ module.exports = {
                 email:user.email,
                 gender:user.gender,
                 address:user.address,
+                admin:user.admin,
                 avatarUrl: user.avatarUrl
         }, function(err, editedUser){
             if(err){

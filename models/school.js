@@ -8,5 +8,7 @@ module.exports = mongoose.model('School',{
     city: {type: mongoose.Schema.Types.ObjectId, ref: 'City'},
     schoolType: Number,
     pictureUrl: String,
-    averageRating: Number
+    averageRating: Number,
+    validated: Boolean,
+    photos : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }]
 });

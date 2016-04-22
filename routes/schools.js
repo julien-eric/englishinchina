@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var schools = require('../controllers/schools');
 var reviews = require('../controllers/reviews');
+var images = require('../controllers/images');
 var provincesController = require('../controllers/provinces');
 var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
+var async = require('async');
 
 
 
@@ -21,46 +23,47 @@ module.exports = function(passport) {
 
         schools.findSchoolById(req.params.id, function (school) {
             reviews.findReviews(school, function (reviews) {
+                //images.getImagesBySchool(school, function(images) {
 
-                //Verify if user has access to school editing.
-                var schoolOwner = false;
-                if(req.user && school.user && school.user.equals(req.user._id)){
-                    schoolOwner = true;
-                }
+                    //Verify if user has access to school editing.
+                    var schoolOwner = false;
+                    if (req.user && school.user && school.user.equals(req.user._id)) {
+                        schoolOwner = true;
+                    }
 
-                function nl2br (str, is_xhtml) {
-                    // http://kevin.vanzonneveld.net
-                    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-                    // +   improved by: Philip Peterson
-                    // +   improved by: Onno Marsman
-                    // +   improved by: Atli Þór
-                    // +   bugfixed by: Onno Marsman
-                    // +      input by: Brett Zamir (http://brett-zamir.me)
-                    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-                    // +   improved by: Brett Zamir (http://brett-zamir.me)
-                    // +   improved by: Maximusya
-                    // *     example 1: nl2br('Kevin\nvan\nZonneveld');
-                    // *     returns 1: 'Kevin<br />\nvan<br />\nZonneveld'
-                    // *     example 2: nl2br("\nOne\nTwo\n\nThree\n", false);
-                    // *     returns 2: '<br>\nOne<br>\nTwo<br>\n<br>\nThree<br>\n'
-                    // *     example 3: nl2br("\nOne\nTwo\n\nThree\n", true);
-                    // *     returns 3: '<br />\nOne<br />\nTwo<br />\n<br />\nThree<br />\n'
-                    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : "<br>"; // Adjust comment to avoid issue on phpjs.org display
+                    function nl2br(str, is_xhtml) {
+                        // http://kevin.vanzonneveld.net
+                        // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+                        // +   improved by: Philip Peterson
+                        // +   improved by: Onno Marsman
+                        // +   improved by: Atli Þór
+                        // +   bugfixed by: Onno Marsman
+                        // +      input by: Brett Zamir (http://brett-zamir.me)
+                        // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+                        // +   improved by: Brett Zamir (http://brett-zamir.me)
+                        // +   improved by: Maximusya
+                        // *     example 1: nl2br('Kevin\nvan\nZonneveld');
+                        // *     returns 1: 'Kevin<br />\nvan<br />\nZonneveld'
+                        // *     example 2: nl2br("\nOne\nTwo\n\nThree\n", false);
+                        // *     returns 2: '<br>\nOne<br>\nTwo<br>\n<br>\nThree<br>\n'
+                        // *     example 3: nl2br("\nOne\nTwo\n\nThree\n", true);
+                        // *     returns 3: '<br />\nOne<br />\nTwo<br />\n<br />\nThree<br />\n'
+                        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : "<br>"; // Adjust comment to avoid issue on phpjs.org display
+                        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+                    };
 
-                    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-                };
+                    school.description = nl2br(school.description, false);
 
-                school.description = nl2br(school.description, false);
-
-                res.render('school', {
-                    edit: schoolOwner,
-                    school: school,
-                    user: req.user,
-                    reviews: reviews,
-                    jadefunctions: jadefunctions,
-                    pictureInfo: pictureinfo
-                });
-            })
+                    res.render('school', {
+                        edit: schoolOwner,
+                        school: school,
+                        user: req.user,
+                        reviews: reviews,
+                        jadefunctions: jadefunctions,
+                        pictureInfo: pictureinfo
+                    });
+                //});
+            });
         });
     });
 
@@ -79,7 +82,7 @@ module.exports = function(passport) {
             });
         })
         .post(function (req, res) {
-            schools.addSchool(req, function(err, newSchool){
+            schools.addSchool(req.body, function(err, newSchool){
                 if (err) {
                     console.log("error");
                     return handleError(err);
@@ -103,6 +106,57 @@ module.exports = function(passport) {
                 }
             })
         });
+
+
+    /************************************************************************************************************
+     *Addphoto : Add photo to a school
+     * Param : School id
+     *************************************************************************************************************/
+    router.get('/addphoto/:id', function (req, res) {
+            schools.findSchoolById(req.params.id, function (school) {
+                res.render('addphoto', {school:school});
+            });
+    })
+
+    router.post('/addphoto', function (req, res) {
+            var pictureUrl = req.body.pictureUrl;
+            async.waterfall([
+                    //1 First find the school
+                    async.apply(function getSchool(pictureUrl,next){
+                        schools.findSchoolById(req.body.id, function (school) {
+                            next(null, pictureUrl, school)
+                        });
+                    },pictureUrl),
+
+                    //2 Add Images
+                    function addImage(pictureUrl, school, next){
+                        images.addImage({
+                                type: 1,
+                                user: null,
+                                school: school,
+                                url: pictureUrl,
+                                date: Date.now()
+                            },
+                            function(error, image){
+                                if(!error){
+                                    var xschool = school.toObject()
+                                    xschool.photos.push(image);
+                                    schools.updatePictures(xschool, function(err, school){
+                                        res.redirect('/school/id/' + school._id);
+                                    });
+                                }
+                                else{
+                                    callback(error, createdSchool);
+                                }
+                                //next(err, province, city, image);
+                            });
+                    }
+
+
+                ],
+                function(err,callback){})
+
+    })
 
     /**********************************************************************************************************************************
      //REVIEWS
@@ -137,13 +191,15 @@ module.exports = function(passport) {
                 console.log("Back");
                 schools.findSchoolById(schoolId, function (school) {
                     reviews.findReviews(school, function (reviews) {
-                        res.render('school', {
-                            school: school,
-                            user: req.user,
-                            reviews: reviews,
-                            pictureInfo: pictureinfo,
-                            jadefunctions: jadefunctions
-                        });
+                        res.redirect('school/id/'+ school._id)
+
+                        //res.render('school', {
+                        //    school: school,
+                        //    user: req.user,
+                        //    reviews: reviews,
+                        //    pictureInfo: pictureinfo,
+                        //    jadefunctions: jadefunctions
+                        //});
                     })
                 });
             });
@@ -163,41 +219,36 @@ module.exports = function(passport) {
         var province = req.query.province;
         var city = validateCity(req.query.city);
 
-        //var searchMessage = createSearchMessage(schoolInfo, province, city);
 
-        schools.searchSchools(schoolInfo, province, city, function (schoolList, searchMessage) {
-            if (schoolList != undefined && schoolList.length > 0){
-                schoolList = jadefunctions.trunkSchoolDescription(schoolList);
-            }
-            provincesController.getAllProvinces(function(provinces){
-                res.render('home', {
-                    schools: schoolList,
-                    user: req.user,
-                    provinces: provinces,
-                    pictureInfo: pictureinfo,
-                    searchMessage: searchMessage,
-                    jadefunctions: jadefunctions
+        async.waterfall([
+
+            //1) Search for list of schools containing some or all of the info
+            async.apply(function searchSchools(schoolInfo, province, city, callback){
+                schools.searchSchools(schoolInfo, province, city, function (schoolList, searchMessage) {
+                    if (schoolList != undefined && schoolList.length > 0) {
+                        schoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
+                    }
+                    callback(null, schoolList, searchMessage);
+                })
+            },schoolInfo, province, city),
+            //2) Get the provinces and pass along all the returned values
+            function getProvinces(schoolList, searchMessage){
+                provincesController.getAllProvinces(function(provinces){
+                    res.render('home', {
+                        schools: schoolList,
+                        user: req.user,
+                        provinces: provinces,
+                        pictureInfo: pictureinfo,
+                        searchMessage: searchMessage,
+                        jadefunctions: jadefunctions
+                    });
                 });
-            });
+            }
+        ], function(err){
+            if (err) return next(err);
+            res.redirect('/');
         });
     });
-
-    var createSearchMessage = function(schoolInfo, province, city){
-        var searchQueryMessage = "You have searched for ";
-        if(schoolInfo != "" && province){
-            searchQueryMessage += schoolInfo + " in " + province;
-            if(city != undefined){
-                searchQueryMessage +=  + ", " + city;
-            }
-        }
-        if(schoolInfo != "" && (province == undefined)){
-            searchQueryMessage += schoolInfo;
-        }
-        if( province && (schoolInfo == "")){
-            searchQueryMessage += province;
-        }
-        return searchQueryMessage;
-    };
 
     var validateCity = function (queryElement){
         if (queryElement == undefined)
@@ -222,7 +273,7 @@ module.exports = function(passport) {
     });
 
     router.post('/edit', function(req, res){
-        schools.editSchool(req, function(err, editedSchool){
+        schools.editSchool(req.body, function(err, editedSchool){
             if (err) {
                 console.log("error");
                 return handleError(err);
@@ -241,6 +292,40 @@ module.exports = function(passport) {
             }
         })
     });
+
+
+    /************************************************************************************************************
+     *  validateSchool: School should be validated before appearing in list
+     * Param : SchoolID, id of school to validate
+     *************************************************************************************************************/
+    router.get('/validate/:id', function(req, res){
+        if(req.user.admin){
+            schools.validateSchool(req.params.id, function(err, editedSchool){
+                res.redirect('/');
+            })
+        }
+        else{
+            return "nice try";
+        }
+    });
+
+
+    /************************************************************************************************************
+     *  removeSchool: Remove school if user is admin
+     * Param : SchoolID, id of school to remove
+     *************************************************************************************************************/
+    router.get('/remove/:id', function(req, res){
+        if(req.user.admin){
+            schools.deleteSchool(req.params.id, function(err, editedSchool){
+                res.redirect('/');
+            })
+        }
+        else{
+            req.flash('error', "You don't have administrator rights.");
+            return res.redirect('/');
+        }
+    });
+
 
     return router;
 }

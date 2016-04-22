@@ -1,0 +1,34 @@
+extends layout
+block content
+   div.container
+      div.login-form.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+         .login-branding
+            img.signin-logo(src="/images/logo2.gif")
+            .clearfix
+            //img.signin-brand(src="/images/logo-name3.gif")
+         .panel.panel-default
+            .panel-body.flat-body
+               h3.text-center.login-title Add Picture
+               form(action='/school/addphoto', method='POST')
+                  .form-group
+                     input#id(type="hidden", name="id", value=school.id)
+
+                  .form-group
+                     label.control-label(for='Picture') Picture
+                     .progress
+                        #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
+                           span.sr-only 0% Complete
+                     img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src="/images/default.png")
+                     input#avatarUrl(type="hidden" name="pictureUrl" accept="image/*" value="/public/default.png")
+                     span(class="btn btn-default btn-file") Browse
+                        input#file_input(type="file")
+
+                  .form-group
+                     label.control-label(for='Description') Description
+                     textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
+
+                  button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Submit
+                  span.clearfix
+               #message
+                  if message
+                     h1.text-center.error-message #{message}

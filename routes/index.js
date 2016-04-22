@@ -11,6 +11,10 @@ var pictureinfo = require('../pictureinfo');
 var provincesController = require('../controllers/provinces');
 var citiesController = require('../controllers/cities');
 var usersController = require('../controllers/users');
+var async = require('async');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+var smtpTransport = require("nodemailer-smtp-transport")
 
 /************************************************************************************************************
  *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -25,8 +29,6 @@ var isAuthenticated = function (req, res, next) {
 }
 
 
-
-
 module.exports = function(passport){
 
     /**********************************************************************************************************************************
@@ -38,15 +40,28 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.get('/', function(req, res){
 
-        //var cities = citiesController.citiesToPush;
-        //var JSONized = JSON.stringify(cities);
-        //citiesController.getAllCities(function(cities){
-        //    var a = 2;
-        //});
-        provincesController.getAllProvinces(function(provinces){
-            schools.featuredSchools(function(featuredSchoolList){
+        async.waterfall([
+            //1) First get provinces list
+            function getProvinces(done) {
+                provincesController.getAllProvinces(function(provinces){
+                    done(null, provinces);
+                });
+            },
+            //2) Then get featured schools for jumbotron
+            function getFeaturedSchools(provinces, done) {
+                schools.featuredSchools(function(err, featuredSchoolList){
+                    done(null, provinces,featuredSchoolList);
+                });
+            },
+            //3) Lastly Get paginated list of schools
+            function getSchools(provinces, featuredSchoolList) {
                 var pageSize = 5;
-                schools.loadSchools(function(count, schoolList){
+                var admin = false;
+                if(req.user == undefined || req.user.admin == undefined){admin = false;}
+                else{admin = req.user.admin};
+
+
+                schools.getSchools(function(count, schoolList){
                     var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
                     res.render('home', {
                         featured: featuredSchoolList,
@@ -60,8 +75,11 @@ module.exports = function(passport){
                         total: count,
                         totalPages: ((count - (count%pageSize))/pageSize)+1
                     })
-                },pageSize, 0);
-            });
+                },pageSize, 0, admin);
+            }
+        ], function(err) {
+            if (err) console.log(err);
+            //res.redirect('/');
         });
     });
 
@@ -70,7 +88,7 @@ module.exports = function(passport){
         var page = req.params.page;
         var pageSize = 5;
         provincesController.getAllProvinces(function(provinces) {
-            schools.loadSchools(function (count, schoolList) {
+            schools.getSchools(function (count, schoolList) {
                 var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
                 res.render('home', {
                     schools: truckSchoolList,
@@ -151,6 +169,105 @@ module.exports = function(passport){
     });
 
 
+    /************************************************************************************************************
+     *FORGOT :   GET : Forgot your password page
+     *************************************************************************************************************/
+    router.get('/forgot', function(req, res) {
+        res.render('forgot', {
+            user: req.user,
+            pictureInfo: pictureinfo
+        });
+    });
+
+    router.post('/forgot', function(req, res, next) {
+
+        async.waterfall([
+            function(done) {
+                crypto.randomBytes(20, function(err, buf) {
+                    var token = buf.toString('hex');
+                    done(err, token);
+                });
+            },
+            function(token, done) {
+                usersController.findUserByEmail(req.body.email, function(err, user) {
+                    if (!user) {
+                        req.flash('error', 'No account with that email address exists.');
+                        return res.redirect('/forgot');
+                    }
+
+                    user.resetPasswordToken = token;
+                    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                    user.save(function(err) {
+                        done(err, token, user);
+                    });
+                });
+            },
+            function(token, user, done) {
+
+                var smtpTransport = nodemailer.createTransport({
+                    service: "sendGrid",
+                    host : "smtp.sendgrid.net",
+                    secureConnection : false,
+                    port: 587,
+                    auth : {
+                        user : "jueri",
+                        pass : "Montreal123!"
+                    }
+                });
+
+                var mailOptions = {
+                    to: user.email,
+                    from: 'passwordreset@englishinchina.co',
+                    subject: 'English in China Password Reset',
+                    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                    'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                    'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                };
+                smtpTransport.sendMail(mailOptions, function(err) {
+                    req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                    done(err, 'done');
+                });
+            }
+        ], function(err) {
+            if (err) return next(err);
+            res.redirect('/forgot');
+        });
+    });
+
+    router.get('/reset/:token', function(req, res) {
+        usersController.findUserByToken(req.params.token, {$gt: Date.now()}, function(err, user) {
+            if (!user) {
+                req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.redirect('/forgot');
+            }
+            res.render('reset', {
+                user: req.user,
+                pictureInfo: pictureinfo
+            });
+        });
+    });
+
+    router.post('/reset/:token', function(req, res) {
+
+        usersController.findUserByToken(req.params.token, {$gt: Date.now()}, function(err, user) {
+            if (!user) {
+                req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.redirect('back');
+            }
+
+            user.password = req.body.password;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+                req.logIn(user, function(err) {
+                    return res.redirect('/');
+                });
+            });
+        });
+    });
 
     /************************************************************************************************************
      *USER :   GET : If user is authenticated, send him to view myprofile page, else redirect to login

@@ -1,45 +1,112 @@
 var School = require('./../models/school');
 var provincesController = require('./provinces');
 var citiesController = require('./cities');
+var imagesController = require('./images');
+var async = require('async');
 
 module.exports = {
 
     featuredSchools: function(callback){
         //At the moment featured schools are schools with the highest ratings
-        School.
-            find().
-            sort({"averageRating": -1}).
-            limit(3).
-            exec(function(err,schoolList){callback(schoolList)});
+        School.find()
+            .sort({"averageRating": -1})
+            .where({"validated":true})
+            .limit(3)
+            .exec(function(err,schoolList){callback(err, schoolList)});
     },
 
-    loadSchools : function(callback, pageSize, page){
-        School.count({},function(err,count){
-            School.find()
-                .populate("province")
-                .populate("city")
-                .limit(pageSize)
-                .skip(pageSize * page)
-                .exec(function(err,schools){
-                    callback(count,schools);
-                });
-        })
+    getSchools : function(callback, pageSize, page){
+        getSchools(callback,pageSize,page,null);
     },
 
-    addSchool : function (request, callback) {
-        provincesController.getProvinceByCode(request.body.province, function(province){
-            citiesController.getCityByCode(request.body.city, function(city){
-                School.create({ user: request.user._id, name:request.body.name, description:request.body.description, schoolType: request.body.schoolType, province:province, city:city, pictureUrl: request.body.avatarUrl, averageRating:-1 }, function (err, newSchool){
-                        callback(err, newSchool);
-                });
-            });
-        });
-
+    getSchools : function(callback, pageSize, page, admin){
+        var adminInfo = {"validated":true};
+        if(admin == true){
+            adminInfo = {}
+        }
+        School.count()
+            .where({"validated":true})
+            .exec(function(err,count) {
+                School.find()
+                    .populate("province")
+                    .populate("city")
+                    .where(adminInfo)
+                    .limit(pageSize)
+                    .skip(pageSize * page)
+                    .exec(function (err, schools) {
+                        callback(count, schools);
+                    })
+            })
     },
 
-    editSchool : function (req, callback) {
-        School.findOneAndUpdate({ _id : req.body.id }, { name:req.body.name, description:req.body.description, province:req.body.province, pictureUrl: req.body.avatarUrl }, function(err, editedSchool){
+    addSchool : function (school, callback) {
+
+        async.waterfall([
+
+                function getProvince(next){
+                    provincesController.getProvinceByCode(school.province, function(province){
+                        next(null, province);
+                    });
+                },
+                function getCity(province,next){
+                    citiesController.getCityByCode(school.city, function(city){
+                        next(null, province,city);
+                    });
+                },
+                function createSchool(province, city, next){
+                    School.create({ user: school._id, name:school.name, description:school.description, schoolType: school.schoolType, province:province, city:city, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
+                        next(err, province, city, newSchool);
+                    });
+                },
+                function createPicture(province, city, createdSchool, next){
+                    imagesController.addImage({
+                            type: 1,
+                            user: null,
+                            school: createdSchool,
+                            url: createdSchool.pictureUrl,
+                            date: Date.now()
+                        },
+                        function(err, image){
+                            if(!err){
+                                var xschool = createdSchool.toObject()
+                                xschool.photos.push(image);
+                                School.findOneAndUpdate({_id : xschool._id}, xschool, callback);
+                            }
+                            else{
+                                callback(err, createdSchool);
+                            }
+                            //next(err, province, city, image);
+                    });
+                }
+            ],
+            function(err,callback){
+                if(err){
+                    console.log(err);
+                    //res.redirect('/');
+                }
+            }
+        )
+    },
+
+    deleteSchool: function (id, callback) {
+        School.find({_id : id}).remove(callback);
+    },
+
+    editSchool : function (school, callback) {
+        School.findOneAndUpdate({ _id : school.id }, { name:school.name, description:school.description, province:school.province, photos:school.photos, pictureUrl: school.pictureUrl }, function(err, editedSchool){
             callback(err, editedSchool);
+        });
+    },
+
+    updatePictures: function (school, callback) {
+        School.findOneAndUpdate({ _id : school._id }, { photos:school.photos}, function(err, editedSchool){
+            callback(err, editedSchool);
+        });
+    },
+
+    validateSchool : function (id, callback) {
+        School.findOneAndUpdate({ _id : id }, { validated: true }, function(err, validatedSchool){
+            callback(err, validatedSchool);
         });
     },
 
@@ -50,7 +117,7 @@ module.exports = {
     },
 
     findSchoolById : function(id, callback){
-        School.findOne({_id:id}).populate("province").populate("city").exec(function(err,school){
+        School.findOne({_id:id}).populate("province").populate("city").populate("photos").exec(function(err,school){
             callback(school);
         });
     },
