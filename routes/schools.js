@@ -27,7 +27,7 @@ module.exports = function(passport) {
 
                     //Verify if user has access to school editing.
                     var schoolOwner = false;
-                    if (req.user && school.user && school.user.equals(req.user._id)) {
+                    if (req.user && school && school.user && school.user.equals(req.user._id)) {
                         schoolOwner = true;
                     }
 
@@ -113,9 +113,9 @@ module.exports = function(passport) {
      * Param : School id
      *************************************************************************************************************/
     router.get('/addphoto/:id', function (req, res) {
-            schools.findSchoolById(req.params.id, function (school) {
-                res.render('addphoto', {school:school});
-            });
+        schools.findSchoolById(req.params.id, function (school) {
+            res.render('addphoto', {school:school});
+        });
     })
 
     router.post('/addphoto', function (req, res) {
@@ -158,6 +158,24 @@ module.exports = function(passport) {
 
     })
 
+
+    router.get('/deletephoto/:photoid/:schoolid', function (req, res) {
+
+        if(req.user.admin){
+            var photoId = req.params.photoid;
+            var schoolId = req.params.schoolid;
+
+            images.deleteImage(photoId, function (err, numberOfPhotosDeleted) {
+                res.redirect('/school/id/' + schoolId);
+            });
+        }
+        else{
+            req.flash('error', "You don't have administrator rights.");
+            return res.redirect('/');
+        }
+    })
+
+
     /**********************************************************************************************************************************
      //REVIEWS
      ***********************************************************************************************************************************/
@@ -188,24 +206,37 @@ module.exports = function(passport) {
         reviews.insertReviewforSchool(req, function(schoolId, averageRating){
             reviews.findNumberofReviews(schoolId, function(numberOfReviews){
                 schools.updateSchoolRating(schoolId,averageRating,numberOfReviews);
-                console.log("Back");
                 schools.findSchoolById(schoolId, function (school) {
                     reviews.findReviews(school, function (reviews) {
                         res.redirect('id/'+ school._id)
-
-                        //res.render('school', {
-                        //    school: school,
-                        //    user: req.user,
-                        //    reviews: reviews,
-                        //    pictureInfo: pictureinfo,
-                        //    jadefunctions: jadefunctions
-                        //});
                     })
                 });
             });
         })
     });
 
+    /************************************************************************************************************
+     *deleteReview : Delete Review
+     * userID : integer
+     * schoolID : integer
+     * review : string
+     *************************************************************************************************************/
+    router.get('/deletereview/:reviewid/:schoolid', function(req, res) {
+
+        if(req.user.admin){
+            var reviewId = req.params.reviewid;
+            var schoolId = req.params.schoolid;
+            reviews.deleteReview(reviewId, function(err, NumberofDocumentsDeleted){
+                res.redirect('/school/id/' + schoolId);
+            })
+        }
+        else{
+            req.flash('error', "You don't have administrator rights.");
+            return res.redirect('/');
+        }
+
+
+    });
 
 
     /************************************************************************************************************
@@ -309,6 +340,21 @@ module.exports = function(passport) {
         }
     });
 
+    /************************************************************************************************************
+     *  devalidateSchool: Devalidate School
+     * Param : SchoolID, id of school to validate
+     *************************************************************************************************************/
+    router.get('/invalidate/:id', function(req, res){
+        if(req.user.admin){
+            schools.validateSchool(req.params.id, function(err, editedSchool){
+                res.redirect('/');
+            },false)
+        }
+        else{
+            return "nice try";
+        }
+    });
+
 
     /************************************************************************************************************
      *  removeSchool: Remove school if user is admin
@@ -316,7 +362,7 @@ module.exports = function(passport) {
      *************************************************************************************************************/
     router.get('/remove/:id', function(req, res){
         if(req.user.admin){
-            schools.deleteSchool(req.params.id, function(err, editedSchool){
+            schools.deleteSchool(req.params.id, function(err, deletedSchool){
                 res.redirect('/');
             })
         }
@@ -325,7 +371,6 @@ module.exports = function(passport) {
             return res.redirect('/');
         }
     });
-
 
     return router;
 }

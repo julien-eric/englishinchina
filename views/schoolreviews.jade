@@ -25,6 +25,10 @@ block content
          h5
             span.glyphicon.glyphicon-resize-full
             a.readmore(href="##{review._id}") Read More
+            if locals.user && locals.user.admin
+               a.btn.btn-eic.btn-primary.btn-lg(href="/school/deletereview/#{review._id}/#{school._id}") Delete
+
+
    #lightbox
       p Click to close
       #lightboxcontent

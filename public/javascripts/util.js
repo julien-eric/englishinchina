@@ -25,9 +25,19 @@ $(document).ready(function() {
         };
 
         var turnonPicture = function(){
-            var original = $(this).closest(".school-img-list-item");
-            var element = original.clone()
-            element.clone().appendTo("#lightboxcontent")
+            var url = $(this).css('background-image');
+            url = url.substring(5);
+            url = url.substring(0, (url.length-2));
+            url = url.replace("th_", "");
+            var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
+            img.addClass('image-lightbox');
+            img.attr('src', url);
+            img.appendTo('#lightboxcontent');
+
+
+            //var original = $(this).closest(".school-img-list-item");
+            //var element = original.clone()
+            //element.clone().appendTo("#lightboxcontent")
             $("#lightbox").toggle();
             $('body').addClass('noscroll');
         };

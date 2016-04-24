@@ -56,6 +56,10 @@ module.exports = {
         });
     },
 
+    deleteReview : function(reviewId, callback){
+        Review.find({_id : reviewId}).remove(callback);
+    },
+
     findNumberofReviews : function(schoolId,callback){
         Review.find({objectType:0, foreignId:schoolId}).exec(function(err,comments){
             if(err){

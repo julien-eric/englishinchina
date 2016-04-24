@@ -104,8 +104,12 @@ module.exports = {
         });
     },
 
-    validateSchool : function (id, callback) {
-        School.findOneAndUpdate({ _id : id }, { validated: true }, function(err, validatedSchool){
+    validateSchool : function (id, callback, validate) {
+        var valida = true;
+        if(typeof(validate) === "boolean"){
+            valida = validate;
+        }
+        School.findOneAndUpdate({ _id : id }, { validated: valida }, function(err, validatedSchool){
             callback(err, validatedSchool);
         });
     },

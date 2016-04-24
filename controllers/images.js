@@ -18,6 +18,10 @@ module.exports = {
                 callback(err,createdImage);
             }
         );
+    },
+
+    deleteImage: function(photoId, callback){
+        Image.find({_id : photoId}).remove(callback);
     }
 
 
