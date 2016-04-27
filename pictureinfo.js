@@ -5,6 +5,9 @@ module.exports = {
     },
 
     returnThumbnail : function(link){
+        if(link == undefined){
+            return "/images/default-user.png";
+        }
         var hostname = link.substring(0, link.lastIndexOf('/'));
         var pathname = link.substring(link.lastIndexOf('/'));
         return hostname + "/" + module.exports.THUMBNAIL + pathname.substring(1);

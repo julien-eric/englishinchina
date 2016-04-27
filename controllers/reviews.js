@@ -45,19 +45,33 @@ module.exports = {
             },onReturn);
     },
 
-    findReviews : function(schoolId, callback){
-        Review.find({objectType:0, foreignId:schoolId}).limit(9).populate("user").exec(function(err,comments){
+    findReviews : function(schoolId, callback, limit, populate){
+
+        var onReturn = function(err,comments){
             if(err){
                 console.log(err);
             }
             else{
                 callback(comments);
             }
-        });
+        }
+        if(limit && populate){
+            Review.find({objectType:0, foreignId:schoolId}).limit(limit).populate("user").exec(onReturn);
+        }
+        else if(!limit && populate){
+            Review.find({objectType:0, foreignId:schoolId}).populate("user").exec(onReturn);
+        }
+        else{
+            Review.find({objectType:0, foreignId:schoolId}).exec(onReturn);
+        }
+
+
     },
 
     deleteReview : function(reviewId, callback){
-        Review.find({_id : reviewId}).remove(callback);
+        Review.find({_id : reviewId},function(err, review){
+            review[0].remove(callback);
+        });
     },
 
     findNumberofReviews : function(schoolId,callback){

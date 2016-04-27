@@ -32,22 +32,6 @@ module.exports = function(passport) {
                     }
 
                     function nl2br(str, is_xhtml) {
-                        // http://kevin.vanzonneveld.net
-                        // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-                        // +   improved by: Philip Peterson
-                        // +   improved by: Onno Marsman
-                        // +   improved by: Atli Þór
-                        // +   bugfixed by: Onno Marsman
-                        // +      input by: Brett Zamir (http://brett-zamir.me)
-                        // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-                        // +   improved by: Brett Zamir (http://brett-zamir.me)
-                        // +   improved by: Maximusya
-                        // *     example 1: nl2br('Kevin\nvan\nZonneveld');
-                        // *     returns 1: 'Kevin<br />\nvan<br />\nZonneveld'
-                        // *     example 2: nl2br("\nOne\nTwo\n\nThree\n", false);
-                        // *     returns 2: '<br>\nOne<br>\nTwo<br>\n<br>\nThree<br>\n'
-                        // *     example 3: nl2br("\nOne\nTwo\n\nThree\n", true);
-                        // *     returns 3: '<br />\nOne<br />\nTwo<br />\n<br />\nThree<br />\n'
                         var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : "<br>"; // Adjust comment to avoid issue on phpjs.org display
                         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
                     };
@@ -63,7 +47,7 @@ module.exports = function(passport) {
                         pictureInfo: pictureinfo
                     });
                 //});
-            });
+            },9,true);
         });
     });
 
@@ -204,13 +188,10 @@ module.exports = function(passport) {
     router.post('/insertreview', function(req, res) {
 
         reviews.insertReviewforSchool(req, function(schoolId, averageRating){
-            reviews.findNumberofReviews(schoolId, function(numberOfReviews){
-                schools.updateSchoolRating(schoolId,averageRating,numberOfReviews);
-                schools.findSchoolById(schoolId, function (school) {
-                    reviews.findReviews(school, function (reviews) {
-                        res.redirect('id/'+ school._id)
-                    })
-                });
+            schools.findSchoolById(schoolId, function (school) {
+                reviews.findReviews(school, function (reviews) {
+                    res.redirect('/school/id/'+ school._id)
+                })
             });
         })
     });
@@ -226,7 +207,7 @@ module.exports = function(passport) {
         if(req.user.admin){
             var reviewId = req.params.reviewid;
             var schoolId = req.params.schoolid;
-            reviews.deleteReview(reviewId, function(err, NumberofDocumentsDeleted){
+            reviews.deleteReview(reviewId, function(err, document, result){
                 res.redirect('/school/id/' + schoolId);
             })
         }
@@ -310,16 +291,7 @@ module.exports = function(passport) {
                 return handleError(err);
             }
             else {
-                schools.findSchoolById(editedSchool.id, function (school) {
-                    reviews.findReviews(school, function (reviews) {
-                        res.render('school', {
-                            school: school,
-                            user: req.user,
-                            reviews: reviews,
-                            provinces: provinces.provinces
-                        });
-                    })
-                });
+                res.redirect('/school/' + editedSchool._id);
             }
         })
     });

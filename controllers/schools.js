@@ -1,5 +1,6 @@
 var School = require('./../models/school');
 var provincesController = require('./provinces');
+var reviews = require('./reviews');
 var citiesController = require('./cities');
 var imagesController = require('./images');
 var async = require('async');
@@ -199,29 +200,47 @@ module.exports = {
         });
     },
 
-    updateSchoolRating : function(schoolId, rating, numberOfReviews){
 
-        var updateRating = function(rating){
-            School.findOneAndUpdate({ _id : schoolId }, {averageRating:rating}, function(err, editedSchool){
+    updateAverageRating : function(schoolId){
+        reviews.findReviews(schoolId, function(reviews){
+            var averageScore = 0;
+            for(var review in reviews){
+                averageScore += reviews[review].average_rating;
+            }
+            averageScore = averageScore/reviews.length;
+
+            School.findOneAndUpdate({ _id : schoolId }, {averageRating:averageScore}, function(err, editedSchool){
                 if(err){
                     console.log(err);
                 }
             });
-        };
-
-        if(numberOfReviews != 0){
-            School.findOne({_id:schoolId}).exec(function(err,school){
-                if(school.averageRating == undefined || school.averageRating == -1 ){
-                    updateRating(rating);
-                }
-                else{
-                    var newRating = school.averageRating*(numberOfReviews/(numberOfReviews+1)) + rating*(1/(numberOfReviews+1));
-                    updateRating(newRating);
-                }
-            });
-        }
-        else{
-            updateRating(rating);
-        }
+        });
     }
+
+    //
+    //updateSchoolRating : function(schoolId, rating, numberOfReviews){
+    //
+    //    var updateRating = function(rating){
+    //        School.findOneAndUpdate({ _id : schoolId }, {averageRating:rating}, function(err, editedSchool){
+    //            if(err){
+    //                console.log(err);
+    //            }
+    //        });
+    //    };
+    //
+    //    if(numberOfReviews != 0){
+    //        School.findOne({_id:schoolId}).exec(function(err,school){
+    //            if(school.averageRating == undefined || school.averageRating == -1 ){
+    //                updateRating(rating);
+    //            }
+    //            else{
+    //                var newRating = school.averageRating*(numberOfReviews/(numberOfReviews+1)) + rating*(1/(numberOfReviews+1));
+    //                updateRating(newRating);
+    //            }
+    //        });
+    //    }
+    //    else{
+    //        updateRating(rating);
+    //    }
+    //}
 }
