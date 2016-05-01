@@ -1,7 +1,4 @@
 block content
-   span.clearfix
-   h2 Reviews
-   hr
    each review in reviews
       li.list-group-review.col-sm-10.col-md-3.col-lg-3(id="#{review._id}")
          .user-picture
@@ -18,19 +15,17 @@ block content
                else
                   a.name(href="/user/#{review.user._id}") #{review.user.username}
                .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
-         span.clearfix
-         if review.average_rating
+            if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
+         span.clearfix
          .review-content !{review.comment}
          h5
             span.glyphicon.glyphicon-resize-full
             a.readmore(href="##{review._id}") Read More
             if locals.user && locals.user.admin
                a.btn.btn-eic.btn-primary.btn-lg(href="/school/deletereview/#{review._id}/#{school._id}") Delete
-
-
-   #lightbox
-      p Click to close
-      #lightboxcontent
+   .clearfix
+   if reviews.length != 0
+      hr.review-separator
 
 

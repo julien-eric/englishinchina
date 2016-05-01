@@ -4,10 +4,10 @@
 var Review = require('./../models/review');
 
 var calculateAverage= function(review){
-    return (Number(review.cri_academicDisciplinarySupport) +
+    return (Number(review.cri_dynamicTeachers) +
         Number(review.cri_accomodationProvided) +
         Number(review.cri_managementAdministration) +
-        Number(review.cri_pollution) +
+        Number(review.cri_locationAccesibility) +
         Number(review.cri_resourcesAvailability) +
         Number(review.cri_respectForContract) +
         Number(review.cri_salaryVsCOLiving) +
@@ -33,19 +33,20 @@ module.exports = {
             objectType:0,
             foreignId:req.body.school,
             comment:req.body.comment,
-            cri_academicDisciplinarySupport:req.body.cri_academicDisciplinarySupport,
-            cri_managementAdministration:req.body.cri_managementAdministration,
-            cri_resourcesAvailability:req.body.cri_resourcesAvailability,
-            cri_accomodationProvided:req.body.cri_accomodationProvided,
-            cri_supportOnArrivalandVisa:req.body.cri_supportOnArrivalandVisa,
-            cri_salaryVsCOLiving:req.body.cri_salaryVsCOLiving,
-            cri_respectForContract:req.body.cri_respectForContract,
-            cri_pollution:req.body.cri_pollution,
+            criteria : {
+                c1:req.body.cri_supportOnArrivalandVisa,
+                c2:req.body.cri_managementAdministration,
+                c3:req.body.cri_resourcesAvailability,
+                c4:req.body.cri_accomodationProvided,
+                c5:req.body.cri_locationAccesibility,
+                c6:req.body.cri_salaryVsCOLiving,
+                c7:req.body.cri_respectForContract,
+                c8:req.body.cri_dynamicTeachers},
             average_rating: calculateAverage(req.body)
             },onReturn);
     },
 
-    findReviews : function(schoolId, callback, limit, populate){
+    findReviews : function(schoolId, callback, pageSize, page, populate){
 
         var onReturn = function(err,comments){
             if(err){
@@ -55,10 +56,10 @@ module.exports = {
                 callback(comments);
             }
         }
-        if(limit && populate){
-            Review.find({objectType:0, foreignId:schoolId}).limit(limit).populate("user").exec(onReturn);
+        if(pageSize && page && populate){
+            Review.find({objectType:0, foreignId:schoolId}).limit(pageSize).skip(pageSize * (page-1)).populate("user").exec(onReturn);
         }
-        else if(!limit && populate){
+        else if(!pageSize && populate){
             Review.find({objectType:0, foreignId:schoolId}).populate("user").exec(onReturn);
         }
         else{
@@ -75,12 +76,12 @@ module.exports = {
     },
 
     findNumberofReviews : function(schoolId,callback){
-        Review.find({objectType:0, foreignId:schoolId}).exec(function(err,comments){
+        Review.count({objectType:0, foreignId:schoolId}).exec(function(err,numberOfComments){
             if(err){
                 console.log(err);
             }
             else{
-                callback(comments.length);
+                callback(numberOfComments);
             }
         });
     },

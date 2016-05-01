@@ -8,14 +8,15 @@ var Review = new Schema({
     foreignId: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
     comment: String,
     dateCreated: {type: Date, default: Date.now},
-    cri_academicDisciplinarySupport: Number,
-    cri_managementAdministration: Number,
-    cri_resourcesAvailability: Number,
-    cri_accomodationProvided: Number,
-    cri_supportOnArrivalandVisa : Number,
-    cri_salaryVsCOLiving: Number,
-    cri_respectForContract: Number,
-    cri_pollution: Number,
+    criteria : {
+        c1:Number,
+        c2:Number,
+        c3:Number,
+        c4:Number,
+        c5:Number,
+        c6:Number,
+        c7:Number,
+        c8:Number },
     average_rating: Number
 })
 

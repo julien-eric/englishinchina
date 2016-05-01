@@ -204,12 +204,29 @@ module.exports = {
     updateAverageRating : function(schoolId){
         reviews.findReviews(schoolId, function(reviews){
             var averageScore = 0;
+            var criteria = {c1:0,c2:0,c3:0,c4:0,c5:0,c6:0,c7:0,c8:0};
             for(var review in reviews){
                 averageScore += reviews[review].average_rating;
+                criteria.c1 += reviews[review].criteria.c1;
+                criteria.c2 += reviews[review].criteria.c2;
+                criteria.c3 += reviews[review].criteria.c3;
+                criteria.c4 += reviews[review].criteria.c4;
+                criteria.c5 += reviews[review].criteria.c5;
+                criteria.c6 += reviews[review].criteria.c6;
+                criteria.c7 += reviews[review].criteria.c7;
+                criteria.c8 += reviews[review].criteria.c8;
             }
             averageScore = averageScore/reviews.length;
+            criteria.c1 = criteria.c1/reviews.length;
+            criteria.c2 = criteria.c2/reviews.length;
+            criteria.c3 = criteria.c3/reviews.length;
+            criteria.c4 = criteria.c4/reviews.length;
+            criteria.c5 = criteria.c5/reviews.length;
+            criteria.c6 = criteria.c6/reviews.length;
+            criteria.c7 = criteria.c7/reviews.length;
+            criteria.c8 = criteria.c8/reviews.length;
 
-            School.findOneAndUpdate({ _id : schoolId }, {averageRating:averageScore}, function(err, editedSchool){
+            School.findOneAndUpdate({ _id : schoolId }, {averageRating:averageScore, criteria:criteria}, function(err, editedSchool){
                 if(err){
                     console.log(err);
                 }

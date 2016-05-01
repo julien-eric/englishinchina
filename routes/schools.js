@@ -6,6 +6,7 @@ var images = require('../controllers/images');
 var provincesController = require('../controllers/provinces');
 var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
+var criteria = require('../criteria').criteria;
 var async = require('async');
 
 
@@ -21,9 +22,20 @@ module.exports = function(passport) {
      *************************************************************************************************************/
     router.get('/id/:id', function (req, res) {
 
-        schools.findSchoolById(req.params.id, function (school) {
-            reviews.findReviews(school, function (reviews) {
-                //images.getImagesBySchool(school, function(images) {
+        async.waterfall([
+            function findSchool(done){
+                schools.findSchoolById(req.params.id, function (school) {
+                    done(null, school);
+                });
+            },
+
+            function findNumberOfReviews(school, done){
+                reviews.findNumberofReviews(school._id, function(numberOfReviews){
+                    done(null, school, numberOfReviews);
+                });
+            },
+            function findReviews(school, numberOfReviews){
+                reviews.findReviews(school, function (reviews) {
 
                     //Verify if user has access to school editing.
                     var schoolOwner = false;
@@ -42,13 +54,20 @@ module.exports = function(passport) {
                         edit: schoolOwner,
                         school: school,
                         user: req.user,
+                        reviewsCount: numberOfReviews,
                         reviews: reviews,
+                        criteria:criteria,
                         jadefunctions: jadefunctions,
                         pictureInfo: pictureinfo
                     });
-                //});
-            },9,true);
-        });
+                },6,1,true);
+            }
+
+        ], function(err,callback){
+            if(err){
+                console.log(err);
+            }
+        })
     });
 
     /************************************************************************************************************
@@ -84,7 +103,7 @@ module.exports = function(passport) {
                                     jadefunctions: jadefunctions,
                                     pictureInfo: pictureinfo
                                 });
-                            })
+                            },6,1,true)
                         });
                     });
                 }
@@ -99,6 +118,19 @@ module.exports = function(passport) {
     router.get('/addphoto/:id', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
             res.render('addphoto', {school:school});
+        });
+    })
+
+    router.get('/addphotoajax/:id', function (req, res) {
+        schools.findSchoolById(req.params.id, function (school) {
+            res.render('addphoto', {school:school},
+                function(err, html) {
+                    if(err)
+                        console.log(err);
+                    else{
+                        res.send({html:html});
+                    }
+            });
         });
     })
 
@@ -174,6 +206,7 @@ module.exports = function(passport) {
             res.render('writereview', {
                 user: req.user,
                 school: school,
+                criteria: criteria,
                 pictureInfo: pictureinfo
             });
         });
@@ -189,9 +222,7 @@ module.exports = function(passport) {
 
         reviews.insertReviewforSchool(req, function(schoolId, averageRating){
             schools.findSchoolById(schoolId, function (school) {
-                reviews.findReviews(school, function (reviews) {
                     res.redirect('/school/id/'+ school._id)
-                })
             });
         })
     });
@@ -216,6 +247,32 @@ module.exports = function(passport) {
             return res.redirect('/');
         }
 
+
+    });
+
+    /****************************************************************************************************************
+     * getmorereviews
+     ***************************************************************************************************************/
+    router.get('/reviews/:schoolid/:page', function(req, res) {
+
+        var page = req.params.page;
+        var schoolId = req.params.schoolid;
+
+        reviews.findReviews(schoolId,function(reviews){
+
+            res.render('schoolreviews',{
+                reviews: reviews,
+                pictureInfo: pictureinfo,
+                jadefunctions: jadefunctions
+            },function(err, html) {
+                if(err)
+                    console.log(err);
+                else{
+                    res.send({html:html});
+                }
+            });
+
+        },6,page,true);
 
     });
 

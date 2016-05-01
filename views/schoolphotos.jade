@@ -17,7 +17,13 @@ block content
 
 if locals.user
    h4
-      a.btn.btn-eic.btn-primary.btn-lg(href="/school/addphoto/#{school.id}") Add Photo
+      #ajax-add-photo.btn.btn-eic.btn-primary.btn-lg(href="/school/addphotoajax/#{school.id}") Add Photo
+      button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
+      <!-- Modal -->
+      .modal.fade#myModal(role="dialog")
+         .modal-dialog.modal-lg
+            #modal-body.modal-body
+               button.close(type="button" data-dismiss="modal")&times;
 else
    h4
       a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/addphoto/#{school.id}") Login to Add Photos

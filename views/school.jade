@@ -1,43 +1,58 @@
 extends layout
 block content
    div.school-page
+            div(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');").school-image-container
+               div.gradient-shadow
+               div.container
+                  div.stick-to-bottom
+                     #schoolid.hidden(value="#{school.id}")
+                     h1.school-page-name #{school.name}
+                     h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+                     h3.school-page-location China \
+                        | #{school.province.name} \
+                        span
+                           a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
+                     #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+
       div.container.school-background
          .row
-            div(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');").school-image-container
-               div.stick-to-bottom
-                  div.gradient-shadow
-                  h1.school-page-name #{school.name}
-                  h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
-                  h3.school-page-location China \
-                     | #{school.province.name} \
-                     span
-                        a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
-                  #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
                span.clearfix
                h2 Description
-
-
                hr
                if edit
                   h4
                      a.btn.btn-eic.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
                span.clearfix
-               h4.login-title !{school.description}
+               div.description-container
+                  h4.login-title !{school.description}
+               h5
+                  span.glyphicon.glyphicon-chevron-down
+                  #description-readmore.description-readmore Read Full Description
                span.clearfix
 
                include schoolphotos
+               include schoolbreakdown
 
-         include schoolreviews
+
+         //REVIEWS
+         span.clearfix
+         h2 Reviews (#{reviewsCount})
+         hr
+         #reviews
+            include schoolreviews
+         #lightbox
+            p Click to close
+            #lightboxcontent
          .clearfix
-         .btn-group
-            //h4
-            //   a.btn.btn-eic.btn-primary.btn-lg(href="#loadMoreReviews") Load More
-            if locals.user
-               h4
-                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
-            else
-               h4
-                  a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+         if reviewsCount > 6
+            #load-more-reviews.btn.btn-eic.btn-primary.btn-lg Load More
+         if locals.user
+            a#review.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+         else
+            a#review.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+
+
+

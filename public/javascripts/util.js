@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-
+    var page = 2;
 
     function capitalize(str) {
         strVal = '';
@@ -12,7 +12,7 @@ $(document).ready(function() {
         return strVal
     }
 
-    (function setLightboxOnReadmore() {
+    function setLightboxOnReadmore() {
 
         var turnon = function(){
             var original = $(this).closest(".list-group-review");
@@ -51,9 +51,10 @@ $(document).ready(function() {
         $(".readmore").click(turnon);
         $(".school-img-list-item").click(turnonPicture);
         $("#lightbox").click(turnoff);
-    })();
+    };
+    setLightboxOnReadmore();
 
-    (function () {
+    function setUploadFile() {
         if(document.getElementById("file_input")){
             document.getElementById("file_input").onchange = function () {
                 var files = document.getElementById("file_input").files;
@@ -66,7 +67,74 @@ $(document).ready(function() {
                 }
             };
         }
-    })();
+    };
+    setUploadFile();
+
+
+    $("#ajax-add-photo" ).click(function() {
+        var schoolid = $('#schoolid').attr('value')
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/school/addphotoajax/" + schoolid);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    $( "#modal-body").empty();
+                    var response = JSON.parse(xhr.responseText);
+                    var elements = $($.parseHTML(response.html));
+                    $.each(elements,function(index, element){
+                        $(element).appendTo("#modal-body");
+                    });
+                    $( "#modal" ).trigger( "click" );
+                    setUploadFile();
+                }
+                else {
+                    alert("Problem.");
+                }
+            }
+        };
+        xhr.send();
+    });
+
+    $('.chart').horizBarChart({
+        selector: '.bar',
+        speed: 1800
+    });
+
+    $( "#description-readmore" ).click(function() {
+        $(".description-container").animate({"max-height":'2000px'}, 500);
+    });
+
+    $( "#load-more-reviews" ).click(function() {
+        var schoolid = $('#schoolid').attr('value')
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/school/reviews/" + schoolid + "/" + page);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    //alert("success." + response.html);
+                    var elements = $($.parseHTML(response.html));
+                    $.each(elements,function(index, element){
+                        $(element).appendTo("#reviews");
+                    });
+                    $(".rating").rate({
+                        readonly: false
+                    });
+                    $(".rating").rate("destroy");
+                    $(".readmore").unbind();
+                    $(".school-img-list-item").unbind();
+                    $("#lightbox").unbind();
+                    page++;
+                    setLightboxOnReadmore();
+
+                }
+                else {
+                    alert("Problem.");
+                }
+            }
+        };
+        xhr.send();
+    });
 
     function get_signed_request(file) {
         var xhr = new XMLHttpRequest();
@@ -84,6 +152,8 @@ $(document).ready(function() {
         };
         xhr.send();
     }
+
+
 
     function upload_file(file, signed_request, url) {
         var xhr = new XMLHttpRequest();

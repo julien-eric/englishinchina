@@ -3,6 +3,7 @@ china-red = #AA381E;
 deep-blue = #2A303C;
 china-green = #87D37C;
 eicgreen = #388577;
+eicorange = #D0A458;
 
 /** {*/
   /*-webkit-border-radius: 0 !important;*/
@@ -71,8 +72,8 @@ footer
   width 100%
   position:relative;
   vertical-align: middle;
-  border-top: solid 10px #000;
-  border-bottom: solid 10px #000;
+  /*border-top: solid 10px #000;*/
+  /*border-bottom: solid 10px #000;*/
   background-position center center;
 
 .featured-school
@@ -169,6 +170,7 @@ h2.school-location
 .rating
   font-size: 30px;
   color #e38d13
+  margin-top: -10px;
   /*color #4cae4c*/
 
 #rating
@@ -181,7 +183,8 @@ h2.school-location
 .list-group-review
   display inline-table;
   /*width 22em;*/
-  padding 20px;
+  padding 20px 20px 10px 20px;
+  min-width: 280px;
   margin-right 10px;
   margin-bottom 10px;
   background #FFFFFF;
@@ -219,6 +222,7 @@ h2.school-location
 
 .user-information
   font-size 23px;
+  float: left;
 
 .user-information .date
   font-size 20px
@@ -315,6 +319,24 @@ footer .container ul li
 .btn-eic:active, .btn-eic:hover
   background-color #223F3A
 
+
+.btn-gray, .btn-gray.disabled,.btn-gray:visited
+  color #000
+  background-color #d8d8d8
+  border #aaaaaa
+  margin-right 5px
+
+.btn-gray:hover
+  color #FFF
+  background-color #acacac
+
+.btn-gray:active, .btn-gray:hover
+  color #FFF
+  background-color #777777
+
+
+
+
 .dark-hr
   border: solid 1px #ddd;
 
@@ -378,9 +400,15 @@ footer .container ul li
   /*z-index: 99*/
 
 .review-content
-  height 100px
+  height: 75px;
   overflow hidden
   -webkit-box-shadow: inset 0px -10px 15px -2px #F0F0F0;
+
+#load-more-reviews,
+#btn-review{
+  display: inline-block;
+  vertical-align: top;
+}
 
 .read-review
   padding-top 20px
@@ -449,3 +477,23 @@ input:-webkit-autofill
   position relative
   top 0;
   right 0;
+
+.modal-dialog
+  margin: 0
+  width auto
+
+.modal-body
+  padding 0
+
+.review-separator
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 0;
+  border-top: 1px solid #ddd;
+
+.description-container
+  max-height 350px;
+  overflow: hidden
+
+.description-readmore
+  float:left
