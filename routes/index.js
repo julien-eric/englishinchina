@@ -14,7 +14,8 @@ var usersController = require('../controllers/users');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
-var smtpTransport = require("nodemailer-smtp-transport")
+var smtpTransport = require("nodemailer-smtp-transport");
+var scripts = require('../scripts').scripts;
 
 /************************************************************************************************************
  *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -73,7 +74,8 @@ module.exports = function(passport){
                         cities: {},
                         currentPage: 1,
                         total: count,
-                        totalPages: ((count - (count%pageSize))/pageSize)+1
+                        totalPages: ((count - (count%pageSize))/pageSize)+1,
+                        scripts:[scripts.librater, scripts.util, scripts.rating]
                     })
                 },pageSize, 0, admin);
             }
@@ -98,7 +100,8 @@ module.exports = function(passport){
                     jadefunctions: jadefunctions,
                     currentPage: page,
                     total: count,
-                    totalPages: ((count - (count % pageSize)) / pageSize) + 1
+                    totalPages: ((count - (count % pageSize)) / pageSize) + 1,
+                    scripts:[scripts.librater, scripts.util]
                 })
             }, pageSize, page - 1);
         });
@@ -115,7 +118,10 @@ module.exports = function(passport){
 
             //citiesController.pushCities(citiesController.citiesToPush);
             // Display the Login page with any flash message, if any
-            res.render('index', { message: req.flash('message') });
+            res.render('index', {
+                message: req.flash('message'),
+                scripts:[scripts.util]
+            });
         })
         .post(passport.authenticate('login', {
             successRedirect: '/',
@@ -150,7 +156,10 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.route('/signup')
         .get( function(req, res){
-            res.render('register',{message: req.flash('message')});
+            res.render('register',{
+                message: req.flash('message'),
+                scripts:[scripts.util]
+            });
         })
         .post(passport.authenticate('signup', {
             successRedirect: '/',
@@ -175,7 +184,8 @@ module.exports = function(passport){
     router.get('/forgot', function(req, res) {
         res.render('forgot', {
             user: req.user,
-            pictureInfo: pictureinfo
+            pictureInfo: pictureinfo,
+            scripts:[scripts.util]
         });
     });
 
@@ -244,7 +254,8 @@ module.exports = function(passport){
             }
             res.render('reset', {
                 user: req.user,
-                pictureInfo: pictureinfo
+                pictureInfo: pictureinfo,
+                scripts:[scripts.util]
             });
         });
     });
@@ -279,7 +290,8 @@ module.exports = function(passport){
                 user: req.user,
                 reviews: reviews,
                 pictureInfo: pictureinfo,
-                jadefunctions: jadefunctions
+                jadefunctions: jadefunctions,
+                scripts:[scripts.util]
             });
         });
     });
@@ -293,29 +305,16 @@ module.exports = function(passport){
                 res.render('edituser', {
                     user: user,
                     pictureInfo: pictureinfo,
-                    jadefunctions: jadefunctions
+                    jadefunctions: jadefunctions,
+                    scripts:[scripts.util]
                 });
             });
         })
         .post(function(req,res){
             usersController.updateUser(req.body, function(user){
-                res.render('edituser', {
-                    user: user,
-                    pictureInfo: pictureinfo,
-                    jadefunctions: jadefunctions
-                });
+                res.redirect('/user/edit');
             });
         });
-
-    router.route('/signup')
-        .get( function(req, res){
-            res.render('register',{message: req.flash('message')});
-        })
-        .post(passport.authenticate('signup', {
-            successRedirect: '/',
-            failureRedirect: '/signup',
-            failureFlash : true
-        }));
 
     /************************************************************************************************************
      *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
@@ -327,7 +326,8 @@ module.exports = function(passport){
                     user: user,
                     reviews: reviews,
                     pictureInfo: pictureinfo,
-                    jadefunctions: jadefunctions
+                    jadefunctions: jadefunctions,
+                    scripts:[scripts.util]
                 });
             });
         });

@@ -34,19 +34,22 @@ block content
                span.clearfix
 
                include schoolphotos
-               include schoolbreakdown
-
 
          //REVIEWS
          span.clearfix
          h2 Reviews (#{reviewsCount})
          hr
+
+         //h3 Average Rating
+         //.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+         //hr
+
          #reviews
+            include schoolbreakdown
+            h3 Reviews
             include schoolreviews
-         #lightbox
-            p Click to close
-            #lightboxcontent
          .clearfix
+
          if reviewsCount > 6
             #load-more-reviews.btn.btn-eic.btn-primary.btn-lg Load More
          if locals.user
@@ -55,4 +58,15 @@ block content
             a#review.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
 
 
+         #lightbox
+            p Click to close
+            #lightboxcontent
 
+
+
+   <!-- Modal -->
+   button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
+   .modal.fade#myModal(role="dialog")
+      .modal-dialog.modal-lg
+         #modal-body.modal-body
+            button.close(type="button" data-dismiss="modal")&times;

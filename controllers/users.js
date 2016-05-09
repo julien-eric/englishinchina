@@ -24,6 +24,7 @@ module.exports = {
     },
 
     updateUser : function(user, callback){
+        var useFacebookPic = false;
 
         //Replace undefined values by empty strings
         if(user.address == undefined)
@@ -33,6 +34,10 @@ module.exports = {
         if(user.username == "admin"){
             user.admin = true;
         }
+        if(user.avatarUrl.indexOf("englishinchina") == -1){
+            useFacebookPic = true;
+        }
+
         else{user.admin=false;}
 
         User.findOneAndUpdate({_id:user.id}, {
@@ -43,6 +48,7 @@ module.exports = {
                 gender:user.gender,
                 address:user.address,
                 admin:user.admin,
+                useFacebookPic:useFacebookPic,
                 avatarUrl: user.avatarUrl
         }, function(err, editedUser){
             if(err){

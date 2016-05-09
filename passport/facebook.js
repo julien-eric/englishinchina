@@ -49,6 +49,7 @@ module.exports = function(passport) {
                         newUser.email = ( typeof profile.emails != 'undefined' && profile.emails instanceof Array ) ? profile.emails[0].value : "";// facebook can return multiple emails so we'll take the first
 
                         newUser.avatarUrl = profile.photos[0].value;
+                        newUser.useFacebookPic = true;
                         newUser.gender = profile.gender;
 
                         // save our user to the database

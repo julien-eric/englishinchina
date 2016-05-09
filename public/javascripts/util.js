@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     var page = 2;
 
@@ -48,9 +46,9 @@ $(document).ready(function() {
             $('body').removeClass('noscroll');
         };
 
-        $(".readmore").click(turnon);
+        //$(".readmore").click(turnon);
         $(".school-img-list-item").click(turnonPicture);
-        $("#lightbox").click(turnoff);
+        //$("#lightbox").click(turnoff);
     };
     setLightboxOnReadmore();
 
@@ -71,71 +69,6 @@ $(document).ready(function() {
     setUploadFile();
 
 
-    $("#ajax-add-photo" ).click(function() {
-        var schoolid = $('#schoolid').attr('value')
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/school/addphotoajax/" + schoolid);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    $( "#modal-body").empty();
-                    var response = JSON.parse(xhr.responseText);
-                    var elements = $($.parseHTML(response.html));
-                    $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-body");
-                    });
-                    $( "#modal" ).trigger( "click" );
-                    setUploadFile();
-                }
-                else {
-                    alert("Problem.");
-                }
-            }
-        };
-        xhr.send();
-    });
-
-    $('.chart').horizBarChart({
-        selector: '.bar',
-        speed: 1800
-    });
-
-    $( "#description-readmore" ).click(function() {
-        $(".description-container").animate({"max-height":'2000px'}, 500);
-    });
-
-    $( "#load-more-reviews" ).click(function() {
-        var schoolid = $('#schoolid').attr('value')
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/school/reviews/" + schoolid + "/" + page);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    //alert("success." + response.html);
-                    var elements = $($.parseHTML(response.html));
-                    $.each(elements,function(index, element){
-                        $(element).appendTo("#reviews");
-                    });
-                    $(".rating").rate({
-                        readonly: false
-                    });
-                    $(".rating").rate("destroy");
-                    $(".readmore").unbind();
-                    $(".school-img-list-item").unbind();
-                    $("#lightbox").unbind();
-                    page++;
-                    setLightboxOnReadmore();
-
-                }
-                else {
-                    alert("Problem.");
-                }
-            }
-        };
-        xhr.send();
-    });
-
     function get_signed_request(file) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/sign_s3?file_name=" + file.name + "&file_type=" + file.type);
@@ -152,8 +85,6 @@ $(document).ready(function() {
         };
         xhr.send();
     }
-
-
 
     function upload_file(file, signed_request, url) {
         var xhr = new XMLHttpRequest();
@@ -211,103 +142,6 @@ $(document).ready(function() {
 
     });
 
-    $('#mycalendar1').monthly({
-        mode: 'picker',
-        target: '#mytarget1',
-        setWidth: '250px',
-        startHidden: true,
-        showTrigger: '#mytarget1',
-        stylePast: false,
-        disablePast: false
-    });
-
-    $('#mycalendar2').monthly({
-        mode: 'picker',
-        target: '#mytarget2',
-        setWidth: '250px',
-        startHidden: true,
-        showTrigger: '#mytarget2',
-        stylePast: false,
-        disablePast: false
-    });
-
-    $(".rating").rate({
-        readonly: false
-    });
-    $(".rating").rate("destroy");
-    //Destroy makes it uninteractive, but doesn't remove the DOM elements.
-    var slider = new Slider('#ex1', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider2 = new Slider('#ex2', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider3 = new Slider('#ex3', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider4 = new Slider('#ex4', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider5 = new Slider('#ex5', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider6 = new Slider('#ex6', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider7 = new Slider('#ex7', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-    var slider8 = new Slider('#ex8', {
-        formatter: function(value) {
-            return 'Current value: ' + value;
-        }
-    });
-
-    $("#ex1").on("slide", function(slideEvt) {
-        $("#ex1SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex2").on("slide", function(slideEvt) {
-        $("#ex2SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex3").on("slide", function(slideEvt) {
-        $("#ex3SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex4").on("slide", function(slideEvt) {
-        $("#ex4SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex5").on("slide", function(slideEvt) {
-        $("#ex5SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex6").on("slide", function(slideEvt) {
-        $("#ex6SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex7").on("slide", function(slideEvt) {
-        $("#ex7SliderVal").text(slideEvt.value);
-    });
-
-    $("#ex8").on("slide", function(slideEvt) {
-        $("#ex8SliderVal").text(slideEvt.value);
-    });
 
 });
 

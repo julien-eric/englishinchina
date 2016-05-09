@@ -5,6 +5,18 @@ china-green = #87D37C;
 eicgreen = #388577;
 eicorange = #D0A458;
 
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('../fonts/OpenSans-Regular-webfont.eot');
+  src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+  url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+  url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 /** {*/
   /*-webkit-border-radius: 0 !important;*/
   /*-moz-border-radius: 0 !important;*/
@@ -13,8 +25,9 @@ eicorange = #D0A458;
 
 body
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'open_sansregular', "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color #f4f3f0
+
 
 a
   color: inherit
@@ -92,7 +105,7 @@ footer
 
 a h2.list-group-item-heading,a h2.list-group-item-heading:hover
   color: black;
-  font-size: 3em;
+  font-size: 2.5em;
 
 .school-list-wrapper
   padding-left 0px;
@@ -173,8 +186,8 @@ h2.school-location
   margin-top: -10px;
   /*color #4cae4c*/
 
-#rating
-  padding-left: 20px;
+/*#rating*/
+  /*padding-left: 20px;*/
 
 .overall-rating
   font-size: 36px
@@ -221,11 +234,11 @@ h2.school-location
   height: 150px;
 
 .user-information
-  font-size 23px;
+  font-size 21px;
   float: left;
 
 .user-information .date
-  font-size 20px
+  font-size 18px
 
 .default-user-picture, .profile-img
   position: absolute;
@@ -497,3 +510,6 @@ input:-webkit-autofill
 
 .description-readmore
   float:left
+
+.stick-to-bottom h1, .stick-to-bottom h3, .stick-to-bottom div.rating
+  padding-left 0

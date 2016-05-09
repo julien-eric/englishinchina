@@ -11,6 +11,7 @@ module.exports = mongoose.model('User',{
     admin: Boolean,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+    useFacebookPic: Boolean,
     fb: {
         id: String,
         access_token: String,

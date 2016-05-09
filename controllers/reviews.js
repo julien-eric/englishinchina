@@ -95,5 +95,16 @@ module.exports = {
                 callback(comments);
             }
         });
+    },
+
+    findReviewById : function(reviewId, callback){
+        Review.find({_id:reviewId}).populate("user").exec(function(err,comments){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(comments);
+            }
+        });
     }
 }

@@ -8,6 +8,7 @@ var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
 var criteria = require('../criteria').criteria;
 var async = require('async');
+var scripts = require('../scripts').scripts;
 
 
 
@@ -57,8 +58,10 @@ module.exports = function(passport) {
                         reviewsCount: numberOfReviews,
                         reviews: reviews,
                         criteria:criteria,
+                        criteriaScore: school.criteria,
                         jadefunctions: jadefunctions,
-                        pictureInfo: pictureinfo
+                        pictureInfo: pictureinfo,
+                        scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.schoolpage]
                     });
                 },6,1,true);
             }
@@ -80,7 +83,8 @@ module.exports = function(passport) {
                 res.render('addschool', {
                     user: req.user,
                     pictureInfo: pictureinfo,
-                    provinces: provinces
+                    provinces: provinces,
+                    scripts:[scripts.util]
                 });
             });
         })
@@ -91,21 +95,7 @@ module.exports = function(passport) {
                     return handleError(err);
                 }
                 else {
-
-                    provincesController.getAllProvinces(function(provinces){
-                        schools.findSchoolById(newSchool.id, function (school) {
-                            reviews.findReviews(school, function (reviews) {
-                                res.render('school', {
-                                    school: school,
-                                    user: req.user,
-                                    reviews: reviews,
-                                    provinces: provinces,
-                                    jadefunctions: jadefunctions,
-                                    pictureInfo: pictureinfo
-                                });
-                            },6,1,true)
-                        });
-                    });
+                    res.redirect('/school/id/' + newSchool.id);
                 }
             })
         });
@@ -117,7 +107,10 @@ module.exports = function(passport) {
      *************************************************************************************************************/
     router.get('/addphoto/:id', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
-            res.render('addphoto', {school:school});
+            res.render('addphoto', {
+                school:school,
+                scripts:[scripts.util]
+            });
         });
     })
 
@@ -207,7 +200,8 @@ module.exports = function(passport) {
                 user: req.user,
                 school: school,
                 criteria: criteria,
-                pictureInfo: pictureinfo
+                pictureInfo: pictureinfo,
+                scripts:[scripts.util, scripts.libcalendar, scripts.libslider, scripts.writereview]
             });
         });
     });
@@ -263,7 +257,8 @@ module.exports = function(passport) {
             res.render('schoolreviews',{
                 reviews: reviews,
                 pictureInfo: pictureinfo,
-                jadefunctions: jadefunctions
+                jadefunctions: jadefunctions,
+                scripts:[scripts.util]
             },function(err, html) {
                 if(err)
                     console.log(err);
@@ -274,6 +269,33 @@ module.exports = function(passport) {
 
         },6,page,true);
 
+    });
+
+
+    /****************************************************************************************************************
+     * getIndividualreview
+     ***************************************************************************************************************/
+    router.get('/reviews/:id', function(req, res) {
+
+        var reviewId = req.params.id;
+
+        reviews.findReviewById(reviewId,function(reviews){
+
+            res.render('schoolreview',{
+                review: reviews[0],
+                pictureInfo: pictureinfo,
+                jadefunctions: jadefunctions,
+                scripts:[scripts.util],
+                criteria: criteria,
+                criteriaScore: new Array(reviews[0].criteria.c1,reviews[0].criteria.c2,reviews[0].criteria.c3,reviews[0].criteria.c4,reviews[0].criteria.c5,reviews[0].criteria.c6,reviews[0].criteria.c7,reviews[0].criteria.c8)
+            },function(err, html) {
+                if(err)
+                    console.log(err);
+                else{
+                    res.send({html:html});
+                }
+            });
+        });
     });
 
 
@@ -309,7 +331,8 @@ module.exports = function(passport) {
                         provinces: provinces,
                         pictureInfo: pictureinfo,
                         searchMessage: searchMessage,
-                        jadefunctions: jadefunctions
+                        jadefunctions: jadefunctions,
+                        scripts:[scripts.util]
                     });
                 });
             }
@@ -336,7 +359,8 @@ module.exports = function(passport) {
                     school: school,
                     user: req.user,
                     reviews: reviews,
-                    provinces: provinces.provinces
+                    provinces: provinces.provinces,
+                    scripts:[scripts.util]
                 });
         });
     });

@@ -41,7 +41,7 @@ nav.navbar.navbar-default.navbar-custom
                             li
                                 a(href='/signout') Sign Out
                     li.profile-picture
-                        if locals.user.fb
+                        if locals.user.fb && locals.user.useFacebookPic
                             div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
                             div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
                         else
