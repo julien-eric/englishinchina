@@ -24,22 +24,20 @@ block content
                      | Review anonymously, your account name and picture will not be associated with this review
                   .clearfix
                   label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Position in School
-                  select.employeeInfo.col-sm-12.col-md-4#typeofemployee.form-control(name="typeofemployee")
+                  select.employeeInfo.col-sm-12.col-md-4#typeofemployee.form-control(name="position")
                      option(value="-1") Position in School
-                     option(value="-1") Current Teacher
-                     option(value="-1") Former Teacher
-                     option(value="-1") Teacher's Assistant(TA)
-                     option(value="-1") Former Teacher's Assistant(TA)
-                     option(value="-1") Head Teacher
+                     option(value="1") Current Teacher
+                     option(value="2") Teacher's Assistant(TA)
+                     option(value="3") Head Teacher
                   label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 3. Period of employment
                   div.col-sm-12.col-md-6.float-left
                      div.calendar(style="display:inline-block; z-index: 2;")
                         .form-group
-                           input#mytarget1(type="text" value="Start Date" readonly="readonly")
+                           input#mytarget1(type="text" name="dateEmployed" value="Start Date" readonly="readonly")
                            span.glyphicon.glyphicon-calendar.form-control-feedback
                         .monthly#mycalendar1
                      div.calendar(style="display:inline-block; z-index: 2;")
-                        input.col-sm-8.col-md-8#mytarget2(type="text" value="End Date" readonly="readonly")
+                        input.col-sm-8.col-md-8#mytarget2(type="text" name="dateReleased" value="End Date" readonly="readonly")
                         span.glyphicon.glyphicon-calendar.form-control-feedback
                         .monthly#mycalendar2
                   .clearfix

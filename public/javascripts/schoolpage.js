@@ -51,6 +51,10 @@ $(document).ready(function() {
                         readonly: false
                     });
                     $(".rating").rate("destroy");
+                    $('.chart').horizBarChart({
+                        selector: '.bar',
+                        speed: 1800
+                    });
                 }
                 else {
                     alert("Problem.");

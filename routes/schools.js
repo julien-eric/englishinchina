@@ -287,7 +287,7 @@ module.exports = function(passport) {
                 jadefunctions: jadefunctions,
                 scripts:[scripts.util],
                 criteria: criteria,
-                criteriaScore: new Array(reviews[0].criteria.c1,reviews[0].criteria.c2,reviews[0].criteria.c3,reviews[0].criteria.c4,reviews[0].criteria.c5,reviews[0].criteria.c6,reviews[0].criteria.c7,reviews[0].criteria.c8)
+                criteriaScore: reviews[0].criteria
             },function(err, html) {
                 if(err)
                     console.log(err);

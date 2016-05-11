@@ -7,6 +7,10 @@ var Review = new Schema({
     objectType: Number, /*School:0*/
     foreignId: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
     comment: String,
+    anonymous: Boolean,
+    position: Number, /*FT 1, TA 2, HT3*/
+    dateEmployed: Date,
+    dateReleased: Date,
     dateCreated: {type: Date, default: Date.now},
     criteria : {
         c1:Number,

@@ -28,11 +28,18 @@ module.exports = {
             }
         };
 
+
+
+
         Review.create({
             user: req.user._id,
             objectType:0,
             foreignId:req.body.school,
             comment:req.body.comment,
+            anonymous: req.body.anonymous,
+            position: req.body.position,
+            dateEmployed: new Date(Date.parse(req.body.dateEmployed)),
+            dateReleased: new Date(Date.parse(req.body.dateReleased)),
             criteria : {
                 c1:req.body.cri_supportOnArrivalandVisa,
                 c2:req.body.cri_managementAdministration,

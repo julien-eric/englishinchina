@@ -64,6 +64,7 @@ module.exports = function(passport){
 
                 schools.getSchools(function(count, schoolList){
                     var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
+
                     res.render('home', {
                         featured: featuredSchoolList,
                         schools:truckSchoolList,
