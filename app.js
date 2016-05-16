@@ -21,7 +21,7 @@ var flash = require('express-flash');
 //    //mongoose.connection.db.dropCollection('Province', function(err, result) {});
 //});
 // Reset DB
-mongoose.connect(dbConfig.urldev);
+mongoose.connect(dbConfig.url);
 
 
 //AWS TO BE SET IN HEROKU NEVER IN APP ITSELF

@@ -34,11 +34,11 @@ module.exports = {
         if(user.username == "admin"){
             user.admin = true;
         }
+        else{user.admin=false;}
         if(user.avatarUrl.indexOf("englishinchina") == -1){
             useFacebookPic = true;
         }
 
-        else{user.admin=false;}
 
         User.findOneAndUpdate({_id:user.id}, {
                 username:user.username,

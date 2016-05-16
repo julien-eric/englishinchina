@@ -128,22 +128,23 @@ module.exports = function(passport) {
     })
 
     router.post('/addphoto', function (req, res) {
-            var pictureUrl = req.body.pictureUrl;
+            var picture = {url:req.body.pictureUrl, description: req.body.description};
             async.waterfall([
                     //1 First find the school
-                    async.apply(function getSchool(pictureUrl,next){
+                    async.apply(function getSchool(picture,next){
                         schools.findSchoolById(req.body.id, function (school) {
-                            next(null, pictureUrl, school)
+                            next(null, picture, school)
                         });
-                    },pictureUrl),
+                    },picture),
 
                     //2 Add Images
-                    function addImage(pictureUrl, school, next){
+                    function addImage(picture, school, next){
                         images.addImage({
                                 type: 1,
-                                user: null,
+                                user: req.user,
                                 school: school,
-                                url: pictureUrl,
+                                url: picture.url,
+                                description: picture.description,
                                 date: Date.now()
                             },
                             function(error, image){
@@ -165,6 +166,19 @@ module.exports = function(passport) {
                 ],
                 function(err,callback){})
 
+    })
+
+    router.get('/getphoto/:id', function (req, res) {
+        images.getImageById(req.params.id, function (image) {
+            res.render('photomodal', {photo:image[0], pictureInfo:pictureinfo},
+                function(err, html){
+                    if (err)
+                        res.send({html: err.toString()})
+                    else {
+                        res.send({html: html});
+                    }
+                });
+            });
     })
 
 

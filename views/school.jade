@@ -12,13 +12,24 @@ block content
                         | #{school.province.name} \
                         span
                            a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
-                     #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+                     if reviewsCount > 0
+                        #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
 
       div.container.school-background
          .row
             div.col-sm-12.col-md-8
                //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
                //   h3 #{provinces[school.province]}
+
+               if locals.user && locals.user.admin && !school.validated
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/validate/#{school.id}" role="button") Validate
+               if locals.user && locals.user.admin && school.validated
+                  a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/validate/#{school.id}" role="button") Validated!
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/invalidate/#{school.id}" role="button") Devalidate
+               if locals.user && locals.user.admin
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/remove/#{school.id}" role="button") Remove
+
+
                span.clearfix
                h2 Description
                hr
@@ -45,9 +56,10 @@ block content
          //hr
 
          #reviews
-            include schoolbreakdown
-            h3 Reviews
-            include schoolreviews
+            if reviewsCount > 0
+               include schoolbreakdown
+               h3 Reviews
+               include schoolreviews
          .clearfix
 
          if reviewsCount > 6
@@ -67,6 +79,5 @@ block content
    <!-- Modal -->
    button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
    .modal.fade#myModal(role="dialog")
-      .modal-dialog.modal-lg
-         #modal-body.modal-body
-            button.close(type="button" data-dismiss="modal")&times;
+      #modal-dialog.modal-dialog
+         button.close(type="button" data-dismiss="modal")&times;

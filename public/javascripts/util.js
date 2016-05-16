@@ -50,7 +50,7 @@ function setLightboxOnReadmore() {
     };
 
     //$(".readmore").click(turnon);
-    $(".school-img-list-item").click(turnonPicture);
+    //$(".school-img-list-item").click(turnonPicture);
     //$("#lightbox").click(turnoff);
 };
 
@@ -126,8 +126,6 @@ $(document).ready(function() {
 
     setLightboxOnReadmore();
     setUploadFile();
-
-
 
 
 

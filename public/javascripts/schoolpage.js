@@ -9,6 +9,52 @@ $(document).ready(function() {
         $(".description-container").animate({"max-height":'2000px'}, 500);
     });
 
+    $( ".school-img-list-item" ).click(function() {
+
+
+        var photoid = this.closest('.school-image-item').id;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/school/getphoto/" + photoid);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    $( "#modal-dialog").empty();
+                    var response = JSON.parse(xhr.responseText);
+                    var elements = $($.parseHTML(response.html));
+                    $.each(elements,function(index, element){
+                        $(element).appendTo("#modal-dialog");
+                    });
+                    $( "#modal" ).trigger( "click" );
+                    setUploadFile();
+                }
+                else {
+                    alert("Problem.");
+                }
+            }
+        };
+        xhr.send();
+
+
+
+
+
+        //var url = $(this).css('background-image');
+        //url = url.substring(5);
+        //url = url.substring(0, (url.length-2));
+        //url = url.replace("th_", "");
+        //var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
+        //img.addClass('image-lightbox');
+        //img.attr('src', url);
+        ////img.appendTo('#lightboxcontent');
+        //
+        //var div = $('<div class="col-sm-10 col-sm-offset-1">');
+        //img.appendTo(div);
+        //
+        //$( "#modal-body").empty();
+        //div.appendTo("#modal-body");
+        //$( "#modal" ).trigger( "click" );
+    });
+
     $("#ajax-add-photo" ).click(function() {
         var schoolid = $('#schoolid').attr('value')
         var xhr = new XMLHttpRequest();
@@ -16,11 +62,11 @@ $(document).ready(function() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    $( "#modal-body").empty();
+                    $( "#modal-dialog").empty();
                     var response = JSON.parse(xhr.responseText);
                     var elements = $($.parseHTML(response.html));
                     $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-body");
+                        $(element).appendTo("#modal-dialog");
                     });
                     $( "#modal" ).trigger( "click" );
                     setUploadFile();
@@ -40,11 +86,11 @@ $(document).ready(function() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    $( "#modal-body").empty();
+                    $( "#modal-dialog").empty();
                     var response = JSON.parse(xhr.responseText);
                     var elements = $($.parseHTML(response.html));
                     $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-body");
+                        $(element).appendTo("#modal-dialog");
                     });
                     $( "#modal" ).trigger( "click" );
                     $(".rating").rate({

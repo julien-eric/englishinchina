@@ -91,10 +91,13 @@ module.exports = function(passport){
         var page = req.params.page;
         var pageSize = 5;
         provincesController.getAllProvinces(function(provinces) {
+            var admin = false;
+            if(req.user == undefined || req.user.admin == undefined){admin = false;}
+            else{admin = req.user.admin};
             schools.getSchools(function (count, schoolList) {
-                var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
+                var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
                 res.render('home', {
-                    schools: truckSchoolList,
+                    schools: trunckSchoolList,
                     user: req.user,
                     provinces: provinces,
                     pictureInfo: pictureinfo,
@@ -102,9 +105,9 @@ module.exports = function(passport){
                     currentPage: page,
                     total: count,
                     totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-                    scripts:[scripts.librater, scripts.util]
+                    scripts:[scripts.librater, scripts.util, scripts.rating]
                 })
-            }, pageSize, page - 1);
+            }, pageSize, page - 1, admin);
         });
     });
 

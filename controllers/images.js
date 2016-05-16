@@ -13,6 +13,17 @@ module.exports = {
         });
     },
 
+    getImageById: function(id, callback){
+        Image.find({_id:id}).populate("user").exec(function(err,image){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(image);
+            }
+        });
+    },
+
     addImage: function(image, callback){
         Image.create(image, function(err,createdImage){
                 callback(err,createdImage);

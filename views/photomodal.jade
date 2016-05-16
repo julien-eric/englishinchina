@@ -1,0 +1,28 @@
+block content
+   .col-sm-12.col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
+      li.photo-modal(id="#{photo._id}")
+         img#dynamic.image-lightbox(src=pictureInfo.returnLarge(photo.url))
+         .padding
+         span.clearfix
+         .col-sm-12
+            if photo.user
+               .user-picture
+                  if photo.user.fb && photo.user.useFacebookPic
+                     .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(photo.user.avatarUrl)}');")
+                  else
+                     .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(photo.user.avatarUrl)}');")
+               .user-information
+                  if photo.user
+                     if photo.user.firstName && photo.user.lastName
+                        a.name(href="/user/#{photo.user._id}") #{photo.user.firstName} #{photo.user.lastName}
+                     else
+                        a.name(href="/user/#{photo.user._id}") #{photo.user.username}
+                     .date #{photo.date.getDate()}/#{photo.date.getUTCMonth()+1}/#{photo.date.getUTCFullYear()}
+            .padding
+            span.clearfix
+            .review-description !{photo.description}
+      .clearfix
+
+
