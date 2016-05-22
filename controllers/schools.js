@@ -40,7 +40,7 @@ module.exports = {
             })
     },
 
-    addSchool : function (school, callback) {
+    addSchool : function (user, school, callback) {
 
         async.waterfall([
 
@@ -55,7 +55,7 @@ module.exports = {
                     });
                 },
                 function createSchool(province, city, next){
-                    School.create({ user: school._id, name:school.name, description:school.description, schoolType: school.schoolType, province:province, city:city, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
+                    School.create({ user: user._id, name:school.name, description:school.description, schoolType: school.schoolType, province:province, city:city, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
                         next(err, province, city, newSchool);
                     });
                 },

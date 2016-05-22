@@ -2,19 +2,20 @@ block content
    .col-sm-10.col-sm-offset-1.col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
       li.single-review(id="#{review._id}")
          .user-picture
-            if review.user.fb && review.user.useFacebookPic
-               .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
-               .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}');")
-            else
-               .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
-               .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
+               if review.user.fb && review.user.useFacebookPic
+                  .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}');")
+               else
+                  .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
          .user-information
             if review.user
                if review.user.firstName && review.user.lastName
                   a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
                else
                   a.name(href="/user/#{review.user._id}") #{review.user.username}
-               .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
+            .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
+
             if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
          span.clearfix

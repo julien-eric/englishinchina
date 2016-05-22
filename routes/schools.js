@@ -44,12 +44,7 @@ module.exports = function(passport) {
                         schoolOwner = true;
                     }
 
-                    function nl2br(str, is_xhtml) {
-                        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : "<br>"; // Adjust comment to avoid issue on phpjs.org display
-                        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-                    };
-
-                    school.description = nl2br(school.description, false);
+                    school.description = jadefunctions.nl2br(school.description, false);
 
                     res.render('school', {
                         edit: schoolOwner,
@@ -89,7 +84,7 @@ module.exports = function(passport) {
             });
         })
         .post(function (req, res) {
-            schools.addSchool(req.body, function(err, newSchool){
+            schools.addSchool(req.user, req.body, function(err, newSchool){
                 if (err) {
                     console.log("error");
                     return handleError(err);
@@ -295,8 +290,11 @@ module.exports = function(passport) {
 
         reviews.findReviewById(reviewId,function(reviews){
 
+            var review = reviews[0];
+            review.comment = jadefunctions.nl2br(review.comment,false);
+
             res.render('schoolreview',{
-                review: reviews[0],
+                review: review,
                 pictureInfo: pictureinfo,
                 jadefunctions: jadefunctions,
                 scripts:[scripts.util],
