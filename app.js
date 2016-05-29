@@ -8,10 +8,15 @@ var mongoose = require('mongoose');
 var stylus = require('stylus');
 var provinces = require('./provinces');
 var schools = require('./controllers/schools');
+var email = require('./controllers/email');
 var provincesController = require('./controllers/provinces');
 var citiesController = require('./controllers/cities');
 var favicon = require('serve-favicon');
 var flash = require('express-flash');
+
+
+
+
 
 
 // Connect to DB
@@ -66,7 +71,7 @@ var passport = require('passport');
 var expressSession = require('express-session');
 
 app.use(expressSession({
-    cookie: { maxAge: 30* 60000 },
+    cookie: { maxAge: 60* 60000 },
     secret: 'mySecretKey',
     saveUninitialized: true,
     resave: true}));
@@ -84,8 +89,6 @@ app.use(flash());
  * Using the flash middleware provided by connect-flash to store messages in session
  * and displaying in templates
  ***************************************************************/
-
-
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);

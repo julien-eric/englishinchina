@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var schools = require('../controllers/schools');
 var reviews = require('../controllers/reviews');
+var email = require('../controllers/email');
 //var provinces = require('../provinces');
 var pictures = require('../pictures');
 var aws = require('aws-sdk');
@@ -13,8 +14,6 @@ var citiesController = require('../controllers/cities');
 var usersController = require('../controllers/users');
 var async = require('async');
 var crypto = require('crypto');
-var nodemailer = require('nodemailer');
-var smtpTransport = require("nodemailer-smtp-transport");
 var scripts = require('../scripts').scripts;
 
 /************************************************************************************************************
@@ -219,30 +218,32 @@ module.exports = function(passport){
             },
             function(token, user, done) {
 
-                var smtpTransport = nodemailer.createTransport({
-                    service: "sendGrid",
-                    host : "smtp.sendgrid.net",
-                    secureConnection : false,
-                    port: 587,
-                    auth : {
-                        user : "jueri",
-                        pass : "Montreal123!"
-                    }
-                });
+                email.resetPassword(req, user, token, done);
 
-                var mailOptions = {
-                    to: user.email,
-                    from: 'passwordreset@englishinchina.co',
-                    subject: 'English in China Password Reset',
-                    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-                    'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                    'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-                    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-                };
-                smtpTransport.sendMail(mailOptions, function(err) {
-                    req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-                    done(err, 'done');
-                });
+                //var smtpTransport = nodemailer.createTransport({
+                //    service: "sendGrid",
+                //    host : "smtp.sendgrid.net",
+                //    secureConnection : false,
+                //    port: 587,
+                //    auth : {
+                //        user : "jueri",
+                //        pass : "Montreal123!"
+                //    }
+                //});
+                //
+                //var mailOptions = {
+                //    to: user.email,
+                //    from: 'passwordreset@englishinchina.co',
+                //    subject: 'English in China Password Reset',
+                //    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                //    'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                //    'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                //    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+                //};
+                //smtpTransport.sendMail(mailOptions, function(err) {
+                //    req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                //    done(err, 'done');
+                //});
             }
         ], function(err) {
             if (err) return next(err);
