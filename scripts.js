@@ -7,7 +7,8 @@ module.exports = {
         util:'/javascripts/util.js',
         rating:'/javascripts/rating.js',
         writereview:'/javascripts/writereview.js',
-        schoolpage:'/javascripts/schoolpage.js'
+        schoolpage:'/javascripts/schoolpage.js',
+        addschool:'/javascripts/addschool.js'
     }
 }
 

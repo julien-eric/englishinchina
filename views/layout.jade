@@ -9,12 +9,12 @@ html
     link(rel='stylesheet', href='/stylesheets/monthly.css')
     link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-slider.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap3-wysihtml5.min.css')
     script(src="/javascripts/libs/jquery-2.1.4.min.js")
     script(src="/javascripts/libs/bootstrap.min.js")
-    each js in scripts
-      script(src=js)
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-
+    script(src="/javascripts/libs/bootstrap3-wysihtml5.all.min.js")
+  each js in scripts
+    script(src=js)
   body
     include ./header.jade
     .container.col-md-4.col-md-offset-4.col-sm-12
@@ -30,3 +30,5 @@ html
     block content
 
     include ./footer.jade
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+

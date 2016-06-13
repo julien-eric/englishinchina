@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
                     //Verify if user has access to school editing.
                     var schoolOwner = false;
-                    if (req.user && school && school.user && school.user.equals(req.user._id)) {
+                    if ((req.user && school && school.user && school.user.equals(req.user._id)) || req.user.admin) {
                         schoolOwner = true;
                     }
 
@@ -79,7 +79,7 @@ module.exports = function(passport) {
                     user: req.user,
                     pictureInfo: pictureinfo,
                     provinces: provinces,
-                    scripts:[scripts.util]
+                    scripts:[scripts.util, scripts.addschool]
                 });
             });
         })
@@ -367,6 +367,7 @@ module.exports = function(passport) {
      *************************************************************************************************************/
     router.get('/edit/:id', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
+            provincesController.getAllProvinces(function(provinces){
                 res.render('editschool', {
                     school: school,
                     user: req.user,
@@ -374,6 +375,7 @@ module.exports = function(passport) {
                     provinces: provinces.provinces,
                     scripts:[scripts.util]
                 });
+            });
         });
     });
 

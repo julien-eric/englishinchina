@@ -1,7 +1,7 @@
 extends layout
 block content
    div.container
-      div.login-form.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+      div.login-form.col-sm-10.col-sm-offset-1.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
          .login-branding
             img.signin-logo(src="/images/logo2.gif")
             .clearfix
@@ -53,7 +53,7 @@ block content
                         option(value="2") Contractual Training School
                   .form-group
                      label.control-label(for='Description') Description
-                     textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
+                     textarea#description-textarea(rows='20', name='description', class='form-control', placeholder='Description', style="width: 100%",    required)
                   button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Submit
                   span.clearfix
                #message

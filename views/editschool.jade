@@ -3,32 +3,32 @@ block content
    div.container
       div.row
          div.col-sm-6.col-md-6.col-md-offset-3.col-sm-offset-3
-            h1.text-center.login-title Edit #{school.name}
-            form(action='/school/edit', method='POST')
-               .form-group
-                  input#id(type="hidden", name="id", value=school.id)
-               .form-group
-                  label.control-label(for='Name') Name
-                  input(type='text', name='name', class='form-control', value=school.name placeholder='School Name',required, autofocus)
-               .form-group
-                  label.control-label(for='Picture') Picture
-                  img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src=school.pictureUrl )
-                  input#avatarUrl(type="hidden", name="avatarUrl", value=school.pictureUrl)
-                  span(class="btn btn-default btn-file") Change Picture
-                     input#file_input(type="file")
-               .form-group
-                  label.control-label(for='Description') Description
-                  textarea(rows='5', name='description', class='form-control', placeholder='Description' required) #{school.description}
-               .form-group
-                  label.control-label(for='Province') Province
-                  select.form-control(name="province", value=school.province)
-                     each province, index in provinces
-                        if(index == school.province)
-                           option(value=index selected="selected") #{province}
-                        else
-                           option(value=index) #{province}
-               button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
-               span.clearfix
-            #message
-               if message
-                  h1.text-center.error-message #{message}
+            //h1.text-center.login-title Edit #{school.name}
+            //form(action='/school/edit', method='POST')
+            //   .form-group
+            //      input#id(type="hidden", name="id", value=school.id)
+            //   .form-group
+            //      label.control-label(for='Name') Name
+            //      input(type='text', name='name', class='form-control', value=school.name placeholder='School Name',required, autofocus)
+            //   .form-group
+            //      label.control-label(for='Picture') Picture
+            //      img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src=school.pictureUrl )
+            //      input#avatarUrl(type="hidden", name="avatarUrl", value=school.pictureUrl)
+            //      span(class="btn btn-default btn-file") Change Picture
+            //         input#file_input(type="file")
+            //   .form-group
+            //      label.control-label(for='Description') Description
+            //      textarea(rows='5', name='description', class='form-control', placeholder='Description' required) #{school.description}
+            //   .form-group
+            //      label.control-label(for='Province') Province
+            //      select.form-control(name="province", value=school.province)
+            //         each province, index in provinces
+            //            if(index == school.province)
+            //               option(value=index selected="selected") #{province}
+            //            else
+            //               option(value=index) #{province}
+            //   button(class='btn btn-lg btn-primary btn-block', type='submit') Submit
+            //   span.clearfix
+            //#message
+            //   if message
+            //      h1.text-center.error-message #{message}
