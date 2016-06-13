@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
                     //Verify if user has access to school editing.
                     var schoolOwner = false;
-                    if ((req.user && school && school.user && school.user.equals(req.user._id)) || req.user.admin) {
+                    if ((req.user && school && school.user && school.user.equals(req.user._id)) || (req.user && req.user.admin)) {
                         schoolOwner = true;
                     }
 
