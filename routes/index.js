@@ -375,7 +375,7 @@ module.exports = function(passport){
         });
         var s3 = new aws.S3();
         var s3_params = {
-            Bucket: "englishinchina",
+            Bucket: "englishinchinaasia",
             Key: req.query.file_name,
             Expires: 60,
             ContentType: req.query.file_type,
@@ -388,7 +388,7 @@ module.exports = function(passport){
             else {
                 var return_data = {
                     signed_request: data,
-                    url: 'https://' + "englishinchina" + '.s3.amazonaws.com/' + req.query.file_name
+                    url: req.query.file_name
                 };
                 res.write(JSON.stringify(return_data));
                 res.end();

@@ -15,6 +15,10 @@ module.exports = {
         return "https://englishinchinaasia.s3.amazonaws.com/" + module.exports.LARGE + file;
     },
 
+    trunkFileName : function(file){
+        return "https://englishinchinaasia.s3.amazonaws.com/" + module.exports.LARGE + file;
+    },
+
     THUMBNAIL : "th_",
     THUMBNAIL_SIZE: 350,
     FACEBOOK :"",

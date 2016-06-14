@@ -88,7 +88,7 @@ function upload_file(file, signed_request, url) {
         if (xhr.status === 200) {
             var preview = $("#preview");
             preview.toggle();
-            preview.attr("src", url);
+            preview.attr("src", 'https://' + "englishinchinaasia" + '.s3.amazonaws.com/' + url);
             document.getElementById("avatarUrl").value = url;
             //alert("success");
             xhr2 = new XMLHttpRequest();

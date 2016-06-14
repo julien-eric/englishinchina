@@ -15,7 +15,7 @@ var resizeImageAsync = function(bucket,gmImage,filename, size, prefix){
         });
         stdout.on('end', function(data) {
             var data = {
-                Bucket: "englishinchina",
+                Bucket: "englishinchinaasia",
                 Key: prefix + filename,
                 Body: buf,
                 ContentType: mime.lookup(filename),
@@ -40,7 +40,7 @@ module.exports = {
         aws.config.update({accessKeyId: "AKIAJFGLJ3FU42D22YKQ", secretAccessKey: "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"});
         var s3 = new aws.S3();
         var s3_params = {
-            Bucket: "englishinchina",
+            Bucket: "englishinchinaasia",
             Key: filename
         };
         s3.getObject(s3_params,function(err, data){
