@@ -2,13 +2,24 @@ var Image = require('./../models/image');
 
 module.exports = {
 
-    getImagesBySchool: function(school, callback){
-        Image.find({school:school._id}).exec(function(err,comments){
+    getAllImages: function(callback){
+        Image.find().exec(function(err,images){
             if(err){
                 console.log(err);
             }
             else{
-                callback(comments);
+                callback(images);
+            }
+        });
+    },
+
+    getImagesBySchool: function(school, callback){
+        Image.find({school:school._id}).exec(function(err,images){
+            if(err){
+                console.log(err);
+            }
+            else{
+                callback(images);
             }
         });
     },
@@ -33,6 +44,12 @@ module.exports = {
 
     deleteImage: function(photoId, callback){
         Image.find({_id : photoId}).remove(callback);
+    },
+
+    updateImage: function(image,  callback){
+        Image.findOneAndUpdate({ _id : image._id }, { url:image.url}, function(err, editedImage){
+            callback(err, editedImage);
+        });
     }
 
 

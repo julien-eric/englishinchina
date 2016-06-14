@@ -1,24 +1,18 @@
 module.exports = {
 
-    returnFacebookPicture : function(link){
-        return link;
+    returnFacebookPicture : function(file){
+        return "https://englishinchinaasia.s3.amazonaws.com/" + module.exports.THUMBNAIL + file;
     },
 
-    returnThumbnail : function(link){
-        if(link == undefined){
+    returnThumbnail : function(file){
+        if(file == undefined){
             return "/images/default-user.png";
         }
-        //link = link.replace(/englishinchina/g, "englishinchinaasia")
-        var hostname = link.substring(0, link.lastIndexOf('/'));
-        var pathname = link.substring(link.lastIndexOf('/'));
-        return hostname + "/" + module.exports.THUMBNAIL + pathname.substring(1);
+        return "https://englishinchinaasia.s3.amazonaws.com/" + module.exports.THUMBNAIL + file;
     },
 
-    returnLarge : function(link){
-        //link = link.replace(/englishinchina/g, "englishinchinaasia")
-        var hostname = link.substring(0, link.lastIndexOf('/'));
-        var pathname = link.substring(link.lastIndexOf('/'));
-        return hostname + "/" + module.exports.LARGE + pathname.substring(1);
+    returnLarge : function(file){
+        return "https://englishinchinaasia.s3.amazonaws.com/" + module.exports.LARGE + file;
     },
 
     THUMBNAIL : "th_",

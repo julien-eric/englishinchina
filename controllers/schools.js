@@ -7,6 +7,13 @@ var async = require('async');
 
 module.exports = {
 
+    getAllSchools: function(callback){
+        School.find().exec(function(err,schoolList){
+            if(err){console.log(err);}
+            else{callback(schoolList);}
+        });
+    },
+
     featuredSchools: function(callback){
         //At the moment featured schools are schools with the highest ratings
         School.find()

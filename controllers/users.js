@@ -5,6 +5,13 @@ var User = require('./../models/user');
 
 module.exports = {
 
+    getAllUsers : function(callback){
+        User.find().exec(function(err,userList){
+            if(err){console.log(err);}
+            else{callback(userList);}
+        });
+    },
+
     findUserById : function(id, callback){
         User.findOne({_id:id}).exec(function(err,user){
             callback(user);
