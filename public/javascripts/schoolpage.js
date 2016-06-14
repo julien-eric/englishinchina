@@ -12,7 +12,7 @@ $(document).ready(function() {
     $( ".school-img-list-item" ).click(function() {
 
 
-        var photoid = this.closest('.school-image-item').id;
+        var photoid = $(this).closest('.school-image-item')[0].id;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/school/getphoto/" + photoid);
         xhr.onreadystatechange = function () {
@@ -80,7 +80,7 @@ $(document).ready(function() {
     });
 
     $( ".readmore" ).click(function() {
-        var reviewid = this.closest('.list-group-review').id;
+        var reviewid = $(this).closest('.list-group-review')[0].id;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/school/reviews/" + reviewid);
         xhr.onreadystatechange = function () {
