@@ -486,7 +486,7 @@ input:-webkit-autofill {
   right: 0;
 }
 .modal-dialog {
-  margin: 20px 10px 10px 10px;
+  margin: 35px 10px 10px 10px;
   width: auto;
 }
 .modal-body {
@@ -534,4 +534,10 @@ input:-webkit-autofill {
 }
 .form-control {
   width: 100%;
+}
+#closemodal {
+  position: relative;
+  right: 0px;
+  top: 20px;
+  z-index: 2;
 }

@@ -11,7 +11,6 @@ $(document).ready(function() {
 
     $( ".school-img-list-item" ).click(function() {
 
-
         var photoid = $(this).closest('.school-image-item')[0].id;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/school/getphoto/" + photoid);
@@ -33,26 +32,6 @@ $(document).ready(function() {
             }
         };
         xhr.send();
-
-
-
-
-
-        //var url = $(this).css('background-image');
-        //url = url.substring(5);
-        //url = url.substring(0, (url.length-2));
-        //url = url.replace("th_", "");
-        //var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
-        //img.addClass('image-lightbox');
-        //img.attr('src', url);
-        ////img.appendTo('#lightboxcontent');
-        //
-        //var div = $('<div class="col-sm-10 col-sm-offset-1">');
-        //img.appendTo(div);
-        //
-        //$( "#modal-body").empty();
-        //div.appendTo("#modal-body");
-        //$( "#modal" ).trigger( "click" );
     });
 
     $("#ajax-add-photo" ).click(function() {
