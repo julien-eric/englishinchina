@@ -62,7 +62,7 @@ module.exports = function(passport){
 
 
                 schools.getSchools(function(count, schoolList){
-                    var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
+                    var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,300);
 
                     res.render('home', {
                         featured: featuredSchoolList,
@@ -94,7 +94,7 @@ module.exports = function(passport){
             if(req.user == undefined || req.user.admin == undefined){admin = false;}
             else{admin = req.user.admin};
             schools.getSchools(function (count, schoolList) {
-                var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 500);
+                var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 300);
                 res.render('home', {
                     schools: trunckSchoolList,
                     user: req.user,

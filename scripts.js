@@ -11,12 +11,3 @@ module.exports = {
         addschool:'/javascripts/addschool.js'
     }
 }
-
-/*
- //script(src="/javascripts/libs/rater.min.js")
- //script(src="/javascripts/libs/bootstrap-slider.js")
- //script(src="/javascripts/libs/monthly.js")
- //script(src="/javascripts/libs/jquery.horizBarChart.min.js")
- script(src="/javascripts/util.js")
-
- */
