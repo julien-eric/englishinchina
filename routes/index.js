@@ -218,7 +218,7 @@ module.exports = function(passport){
             },
             function(token, user, done) {
 
-                email.resetPassword(req, user, token, done);
+                email.resetPassword(req, user, token, req, done);
 
                 //var smtpTransport = nodemailer.createTransport({
                 //    service: "sendGrid",
@@ -283,6 +283,16 @@ module.exports = function(passport){
                 });
             });
         });
+    });
+
+    router.post('/contactus', function(req, res) {
+        var message = "Email: " + req.body.email + "\n" + req.body.content;
+        var callbackMessage = "Thank you, we will get back to you shortly";
+        email.sendEmail("julieneric11@gmail.com","contactusfeedback@englishinchina.com","Feedback comment from user",message,callbackMessage, req, function(){
+                res.redirect('/');
+            }
+        )
+
     });
 
     /************************************************************************************************************

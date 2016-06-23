@@ -5,11 +5,6 @@
   font-weight: normal;
   font-style: normal;
 }
-/** {*/
-/*-webkit-border-radius: 0 !important;*/
-/*-moz-border-radius: 0 !important;*/
-/*border-radius: 0 !important;*/
-/*}*/
 body {
   padding: 0px;
   font: 14px 'open_sansregular', "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -34,13 +29,6 @@ header {
   width: 100%;
   height: 60px;
   background-color: #87d37c;
-}
-footer {
-  border-top: solid 1px #555;
-  margin-top: 50px;
-  width: 100%;
-  height: 200px;
-  background-color: #2a303c;
 }
 .lift-content {
   margin-top: 100px;
@@ -170,17 +158,13 @@ h2.school-location {
   font-size: 30px;
   color: #e38d13;
   margin-top: -10px;
-/*color #4cae4c*/
 }
-/*#rating*/
-/*padding-left: 20px;*/
 .overall-rating {
   font-size: 36px;
   padding-bottom: 10px;
 }
 .list-group-review {
   display: inline-table;
-/*width 22em;*/
   padding: 20px 20px 10px 20px;
   min-width: 280px;
   margin-right: 10px;
@@ -245,16 +229,6 @@ h2.school-location {
   height: 70px;
   float: left;
   margin-right: 10px;
-}
-footer .container {
-  color: #ccc;
-}
-footer .container ul {
-  list-style: none;
-  padding-left: 0;
-}
-footer .container ul li {
-  padding-bottom: 15px;
 }
 .search-title {
   padding: 0 0 0 15px;
@@ -540,4 +514,8 @@ input:-webkit-autofill {
   right: 0px;
   top: 20px;
   z-index: 2;
+}
+.social-media-inquire {
+  height: 25px;
+  background-color: #000;
 }

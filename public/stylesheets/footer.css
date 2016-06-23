@@ -1,0 +1,32 @@
+footer {
+  border-top: solid 1px #555;
+  margin-top: 50px;
+  width: 100%;
+  min-height: 200px;
+  background-color: #2a303c;
+}
+.footer-box {
+  padding-bottom: 20px;
+}
+footer .container {
+  color: #ccc;
+}
+.footer-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+.footer-box ul li {
+  padding-bottom: 15px;
+  font-size: 17px;
+}
+#mission {
+  padding: 10px 0 0 0;
+  font-size: 13px;
+}
+.social-media {
+/*width 30px;*/
+  padding-top: 10px;
+}
+.social-icon {
+  padding-right: 10px;
+}
