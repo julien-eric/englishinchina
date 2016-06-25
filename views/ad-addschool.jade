@@ -1,0 +1,19 @@
+.ad-addschool
+   h1 Can't find your school?
+   hr
+   p Create a profile for your school to let other teachers write their reviews.  It will only take 3 minutes and other users will be able to help you edit it so you don't need to.
+   form(action='/school/addschoolgetstarted', method='POST')
+      .form-group
+         label.control-label(for='name') Name
+         input(type='name', name='name', class='form-control', placeholder='Name of your school',required)
+      .form-group
+         label.control-label(for='TypeOfSchool') Type Of School
+         select.form-control(name="schoolType")
+            option(value="0") Training School
+            option(value="1") Public School
+            option(value="2") Contractual Training School
+      if locals.user
+         button(class='btn btn-md btn-primary btn-eic', type='submit') Continue
+      else
+         p You must be logged in to create a school
+         button(class='btn btn-md btn-primary btn-eic disabled', type='submit') Continue

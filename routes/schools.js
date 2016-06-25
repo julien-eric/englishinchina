@@ -10,6 +10,17 @@ var criteria = require('../criteria').criteria;
 var async = require('async');
 var scripts = require('../scripts').scripts;
 
+/************************************************************************************************************
+ *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
+ Passport adds this method to request object. A middleware is allowed to add properties to
+ request and response objects
+ *************************************************************************************************************/
+var isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    // if the user is not authenticated then redirect him to the login page
+    res.redirect('/login');
+}
 
 
 module.exports = function(passport) {
@@ -73,13 +84,18 @@ module.exports = function(passport) {
      * Param : user, verify user validity and store in DB, to enable editing school
      *************************************************************************************************************/
     router.route('/addschool')
-        .get(function (req, res) {
+        .get( isAuthenticated, function (req, res) {
+            var incompleteSchool = undefined;
+            if (req.query.name !== undefined || req.query.schoolType !== undefined ) {
+                incompleteSchool = {name:decodeURIComponent(req.query.name), schoolType:parseInt(req.query.type)};
+            }
             provincesController.getAllProvinces(function(provinces){
                 res.render('addschool', {
                     user: req.user,
                     pictureInfo: pictureinfo,
                     provinces: provinces,
-                    scripts:[scripts.util, scripts.addschool]
+                    scripts:[scripts.util, scripts.addschool],
+                    incompleteSchool:incompleteSchool
                 });
             });
         })
@@ -94,6 +110,11 @@ module.exports = function(passport) {
                 }
             })
         });
+
+    router.post('/addschoolgetstarted', isAuthenticated, function (req, res) {
+        var school = {name:encodeURIComponent(req.body.name), schoolType:encodeURIComponent(req.body.schoolType)}
+        res.redirect('/school/addschool?name=' + school.name +"&type=" + school.schoolType);
+    });
 
 
     /************************************************************************************************************
@@ -201,7 +222,7 @@ module.exports = function(passport) {
      *WriteReview : Page for users to write review for school specified by id
      * Param : School id
      *************************************************************************************************************/
-    router.get('/id/:id/writereview', function (req, res) {
+    router.get('/id/:id/writereview',isAuthenticated, function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
             //var province = req.query.province;
             //var city = req.query.city;

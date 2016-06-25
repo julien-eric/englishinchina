@@ -38,8 +38,12 @@ header {
   background-color: #fff;
   border: solid 1px #ccc;
 }
-.search-navigation-search-input {
-  width: 50%;
+#search-navigation form .form-group {
+  padding-right: 30px;
+}
+.search-label {
+  color: #000;
+  text-align: left;
 }
 .contains-image {
   max-height: 300px;
@@ -125,6 +129,9 @@ a h2.list-group-item-heading:hover {
   box-shadow: 0 8px 6px -6px #999;
   min-height: 50px;
   z-index: 999;
+}
+.navbar-search {
+  padding: 5px;
 }
 .navbar-header h3 {
   text-transform: uppercase;
@@ -404,9 +411,6 @@ h2.school-location {
 .float-left {
   float: left;
 }
-.search-navigation-inputs {
-  min-width: 200px;
-}
 .padding {
   height: 20px;
 }
@@ -518,4 +522,26 @@ input:-webkit-autofill {
 .social-media-inquire {
   height: 25px;
   background-color: #000;
+}
+.ad-addschool {
+  border-radius: 2px;
+/*margin 10px;*/
+  padding: 10px 10px 20px 10px;
+  margin-top: 10px;
+  background-color: #2a303c;
+}
+.ad-addschool h1 {
+  text-align: center;
+  font-size: 2.2em;
+  color: #fff;
+}
+.ad-addschool p {
+  color: #fff;
+  font-size: 0.9em;
+}
+.ad-addschool form .form-group label {
+  color: #fff;
+}
+.sidebar {
+  margin: 10px 0;
 }
