@@ -15,8 +15,9 @@ html
     script(src="/javascripts/libs/jquery-2.1.4.min.js")
     script(src="/javascripts/libs/bootstrap.min.js")
     script(src="/javascripts/libs/bootstrap3-wysihtml5.all.min.js")
-  each js in scripts
-    script(src=js)
+    if scripts
+      each js in scripts
+        script(src=js)
   body
     //include ./preheader.jade
     include ./header.jade
