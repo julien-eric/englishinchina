@@ -34,7 +34,7 @@ block content
                         optgroup(label="Provinces")
                         each province,i in provinces
                            option(value=province.code) #{province.name} - #{province.chineseName}
-                     select#city-select.form-control(name="city")
+                     select#city-select.empty.form-control(name="city")
                         option(value="-1") City
                   .clearfix
                   .form-group

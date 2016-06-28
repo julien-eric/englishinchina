@@ -129,7 +129,8 @@ $(document).ready(function() {
 
 
 
-    $('#city-select').prop('disabled', 'disabled');
+    $('#city-select.empty').prop('disabled', 'disabled');
+
     $('#provinceSelect').on('change', function() {
         $('#city-select option:gt(0)').remove(); // remove all options, but not the first
         $('#city-select').prop('disabled', 'disabled');

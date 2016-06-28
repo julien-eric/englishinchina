@@ -114,13 +114,33 @@ module.exports = {
                         next(null, province,city);
                     });
                 },
-                function updateSchool(province, city, next){
-                    School.findOneAndUpdate({ _id : school.id }, { name:school.name, description:school.description, schoolType: school.schoolType, province:province._id, city:city._id, pictureUrl: school.avatarUrl }, function(err, editedSchool){
+                function getOldSchool(province, city, next){
+                    module.exports.findSchoolById(school.id, function(oldSchool){
+                        next(null, oldSchool, province, city);
+                    })
+                },
+                function updateSchool(oldSchool, province, city, next){
+                    var newPicture = false;
+                    var newSchool = {province:province._id, city:city._id};
+                    if(oldSchool.name !== school.name){newSchool.name = school.name}
+                    if(oldSchool.description !== school.description){newSchool.description = school.description}
+                    if(oldSchool.schoolType !== school.schoolType){newSchool.schoolType = school.schoolType}
+                    if(oldSchool.pictureUrl !== school.avatarUrl){
+                        newSchool.pictureUrl = school.avatarUrl
+                        newPicture = true;
+                    }
+
+                    School.findOneAndUpdate({ _id : school.id }, newSchool, function(err, editedSchool){
                         if(err){
                             console.log(err)
                         }
                         else{
-                            next(null,editedSchool);
+                            if(newPicture){
+                                next(null,editedSchool);
+                            }
+                            else{
+                                callback(err, editedSchool);
+                            }
                         }
                     });
                 },
@@ -288,31 +308,4 @@ module.exports = {
             });
         });
     }
-
-    //
-    //updateSchoolRating : function(schoolId, rating, numberOfReviews){
-    //
-    //    var updateRating = function(rating){
-    //        School.findOneAndUpdate({ _id : schoolId }, {averageRating:rating}, function(err, editedSchool){
-    //            if(err){
-    //                console.log(err);
-    //            }
-    //        });
-    //    };
-    //
-    //    if(numberOfReviews != 0){
-    //        School.findOne({_id:schoolId}).exec(function(err,school){
-    //            if(school.averageRating == undefined || school.averageRating == -1 ){
-    //                updateRating(rating);
-    //            }
-    //            else{
-    //                var newRating = school.averageRating*(numberOfReviews/(numberOfReviews+1)) + rating*(1/(numberOfReviews+1));
-    //                updateRating(newRating);
-    //            }
-    //        });
-    //    }
-    //    else{
-    //        updateRating(rating);
-    //    }
-    //}
 }

@@ -399,7 +399,7 @@ module.exports = function(passport) {
                         cities: cities,
                         jadefunctions: jadefunctions,
                         pictureInfo: pictureinfo,
-                        scripts:[scripts.util]
+                        scripts:[scripts.util,scripts.addschool]
                     });
                 });
             });
