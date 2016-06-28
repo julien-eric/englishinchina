@@ -101,9 +101,57 @@ module.exports = {
     },
 
     editSchool : function (school, callback) {
-        School.findOneAndUpdate({ _id : school.id }, { name:school.name, description:school.description, province:school.province, photos:school.photos, pictureUrl: school.pictureUrl }, function(err, editedSchool){
-            callback(err, editedSchool);
-        });
+
+        async.waterfall([
+
+                function getProvince(next){
+                    provincesController.getProvinceByCode(school.province, function(province){
+                        next(null, province);
+                    });
+                },
+                function getCity(province,next){
+                    citiesController.getCityByCode(school.city, function(city){
+                        next(null, province,city);
+                    });
+                },
+                function updateSchool(province, city, next){
+                    School.findOneAndUpdate({ _id : school.id }, { name:school.name, description:school.description, schoolType: school.schoolType, province:province._id, city:city._id, pictureUrl: school.avatarUrl }, function(err, editedSchool){
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            next(null,editedSchool);
+                        }
+                    });
+                },
+                function createPicture(editedSchool, next){
+                    imagesController.addImage({
+                            type: 1,
+                            user: null,
+                            school: editedSchool,
+                            url: editedSchool.pictureUrl,
+                            date: Date.now()
+                        },
+                        function(err, image){
+                            if(!err){
+                                var xschool = editedSchool.toObject()
+                                xschool.photos.push(image);
+                                School.findOneAndUpdate({_id : xschool._id}, xschool, callback);
+                            }
+                            else{
+                                callback(err, editedSchool);
+                            }
+                        });
+                }
+
+            ],
+            function(err,callback){
+                if(err){
+                    console.log(err);
+                    //res.redirect('/');
+                }
+            }
+        )
     },
 
     updatePictures: function (school, callback) {

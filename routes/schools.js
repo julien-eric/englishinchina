@@ -413,7 +413,7 @@ module.exports = function(passport) {
                 return handleError(err);
             }
             else {
-                res.redirect('/school/' + editedSchool._id);
+                res.redirect('/school/id/' + editedSchool._id);
             }
         })
     });
