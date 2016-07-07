@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 var schools = require('../controllers/schools');
 var reviews = require('../controllers/reviews');
@@ -65,6 +66,7 @@ module.exports = function(passport) {
                         reviewsCount: numberOfReviews,
                         reviews: reviews,
                         criteria:criteria,
+                        moment:moment,
                         criteriaScore: school.criteria,
                         jadefunctions: jadefunctions,
                         pictureInfo: pictureinfo,
@@ -232,7 +234,7 @@ module.exports = function(passport) {
                 school: school,
                 criteria: criteria,
                 pictureInfo: pictureinfo,
-                scripts:[scripts.util, scripts.libcalendar, scripts.libslider, scripts.writereview]
+                scripts:[scripts.util, scripts.libcalendar,scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview]
             });
         });
     });
@@ -321,6 +323,7 @@ module.exports = function(passport) {
                 jadefunctions: jadefunctions,
                 scripts:[scripts.util],
                 criteria: criteria,
+                moment: moment,
                 criteriaScore: reviews[0].criteria
             },function(err, html) {
                 if(err)

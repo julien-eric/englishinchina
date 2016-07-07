@@ -73,24 +73,16 @@ $(document).ready(function() {
         $("#ex8SliderVal").text(slideEvt.value);
     });
 
-    $('#mycalendar1').monthly({
-        mode: 'picker',
-        target: '#mytarget1',
-        setWidth: '250px',
-        startHidden: true,
-        showTrigger: '#mytarget1',
-        stylePast: false,
-        disablePast: false
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: "dddd, MMMM Do YYYY"
+        });
     });
 
-    $('#mycalendar2').monthly({
-        mode: 'picker',
-        target: '#mytarget2',
-        setWidth: '250px',
-        startHidden: true,
-        showTrigger: '#mytarget2',
-        stylePast: false,
-        disablePast: false
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+            format: "dddd, MMMM Do YYYY"
+        });
     });
 
 });

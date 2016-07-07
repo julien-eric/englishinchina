@@ -2,6 +2,7 @@
  * Created by Julz on 11/28/2015.
  */
 var Review = require('./../models/review');
+var moment = require('moment');
 
 var calculateAverage= function(review){
     return (Number(review.cri_dynamicTeachers) +
@@ -38,8 +39,8 @@ module.exports = {
             comment:req.body.comment,
             anonymous: req.body.anonymous,
             position: req.body.position,
-            dateEmployed: new Date(Date.parse(req.body.dateEmployed)),
-            dateReleased: new Date(Date.parse(req.body.dateReleased)),
+            dateEmployed: new Date(moment(req.body.dateEmployed, 'dddd, MMMM Do YYYY').format()),
+            dateReleased: new Date(moment(req.body.dateReleased, 'dddd, MMMM Do YYYY').format()),
             criteria : {
                 c1:req.body.cri_supportOnArrivalandVisa,
                 c2:req.body.cri_managementAdministration,
@@ -105,7 +106,7 @@ module.exports = {
     },
 
     findReviewById : function(reviewId, callback){
-        Review.find({_id:reviewId}).populate("user").exec(function(err,comments){
+        Review.find({_id:reviewId}).populate("user").populate("foreignId").exec(function(err,comments){
             if(err){
                 console.log(err);
             }

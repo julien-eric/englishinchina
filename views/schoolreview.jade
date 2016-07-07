@@ -14,7 +14,7 @@ block content
                   a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
                else
                   a.name(href="/user/#{review.user._id}") #{review.user.username}
-            .date #{review.dateCreated.getDate()}/#{review.dateCreated.getUTCMonth()+1}/#{review.dateCreated.getUTCFullYear()}
+            .date Worked at #{review.foreignId.name + " from " + moment(review.dateEmployed).format("MMMM Do YYYY") + " to " + moment(review.dateReleased).format("MMMM Do YYYY")}
 
             if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")

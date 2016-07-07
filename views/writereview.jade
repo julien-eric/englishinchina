@@ -31,15 +31,14 @@ block content
                      option(value="3") Head Teacher
                   label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Period of employment
                   div.col-sm-12.col-md-6.float-left
-                     div.calendar(style="display:inline-block; z-index: 2;")
-                        .form-group
-                           input#mytarget1(type="text" name="dateEmployed" value="Start Date" readonly="readonly")
-                           span.glyphicon.glyphicon-calendar.form-control-feedback
-                        .monthly#mycalendar1
-                     div.calendar(style="display:inline-block; z-index: 2;")
-                        input.col-sm-8.col-md-8#mytarget2(type="text" name="dateReleased" value="End Date" readonly="readonly")
-                        span.glyphicon.glyphicon-calendar.form-control-feedback
-                        .monthly#mycalendar2
+                     #datetimepicker1.calendar.input-group.date
+                           input.form-control(type="text" name="dateEmployed" value="Start Date")
+                           span.input-group-addon
+                              span.glyphicon.glyphicon-calendar
+                     #datetimepicker2.calendar.input-group.date
+                           input.form-control(type="text" name="dateReleased" value="End Date")
+                           span.input-group-addon
+                              span.glyphicon.glyphicon-calendar
                   .clearfix
                h2 Evaluation Of School
 
