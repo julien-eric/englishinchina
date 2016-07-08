@@ -75,13 +75,15 @@ $(document).ready(function() {
 
     $(function () {
         $('#datetimepicker1').datetimepicker({
-            format: "dddd, MMMM Do YYYY"
+            format: "dddd, MMMM Do YYYY",
+            allowInputToggle: true
         });
     });
 
     $(function () {
         $('#datetimepicker2').datetimepicker({
-            format: "dddd, MMMM Do YYYY"
+            format: "dddd, MMMM Do YYYY",
+            allowInputToggle: true
         });
     });
 

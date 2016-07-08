@@ -5,7 +5,7 @@ block content
          div.col-sm-8.col-md-8.col-md-offset-2.col-sm-offset-2
             h1  Review #{school.name}
             form(action='/school/insertreview', method='POST')
-               .form-group.writereviewformgroup
+               .writereviewformgroup
                   h2 Contact Information
                   .clearfix
                   .user-box.col-sm-12.col-md-6
@@ -23,23 +23,25 @@ block content
                      input.hidden(type="checkbox", name="anonymous")
                      | Review anonymously, your account name and picture will not be associated with this review
                   .clearfix
-                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 1. Position in School
-                  select.employeeInfo.col-sm-12.col-md-4#typeofemployee.form-control(name="position")
-                     option(value="-1") Position in School
-                     option(value="1") Teacher
-                     option(value="2") Teacher's Assistant(TA)
-                     option(value="3") Head Teacher
-                  label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Period of employment
-                  div.col-sm-12.col-md-6.float-left
-                     #datetimepicker1.calendar.input-group.date
-                           input.form-control(type="text" name="dateEmployed" value="Start Date")
-                           span.input-group-addon
-                              span.glyphicon.glyphicon-calendar
-                     #datetimepicker2.calendar.input-group.date
-                           input.form-control(type="text" name="dateReleased" value="End Date")
-                           span.input-group-addon
-                              span.glyphicon.glyphicon-calendar
-                  .clearfix
+                  .form-group
+                     label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 1. Position in School
+                     select.employeeInfo.col-sm-12.col-md-4#typeofemployee.form-control(name="position" required="required")
+                        option(value="-1") Position in School
+                        option(value="1") Teacher
+                        option(value="2") Teacher's Assistant(TA)
+                        option(value="3") Head Teacher
+                  .form-group
+                     label.criteria.control-label.col-sm-12.col-md-12(for='nothing') 2. Period of employment
+                     div.col-sm-12.col-md-6.float-left
+                        #datetimepicker1.calendar.input-group.date
+                              input.form-control(type="text" name="dateEmployed" value="Start Date",required)
+                              span.input-group-addon
+                                 span.glyphicon.glyphicon-calendar
+                        #datetimepicker2.calendar.input-group.date
+                              input.form-control(type="text" name="dateReleased" value="End Date",required)
+                              span.input-group-addon
+                                 span.glyphicon.glyphicon-calendar
+                     .clearfix
                h2 Evaluation Of School
 
                each criterium,i in criteria

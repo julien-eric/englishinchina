@@ -14,8 +14,12 @@ block content
                   a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
                else
                   a.name(href="/user/#{review.user._id}") #{review.user.username}
-            .date Worked at #{review.foreignId.name + " from " + moment(review.dateEmployed).format("MMMM Do YYYY") + " to " + moment(review.dateReleased).format("MMMM Do YYYY")}
-
+            if Date.parse(review.dateEmployed) != 0 && Date.parse(review.dateReleased) != 0
+               .school-name Worked at #{review.foreignId.name}
+               .date #{moment(review.dateEmployed).format("MMM YYYY") + " to " + moment(review.dateReleased).format("MMM YYYY")}
+            //Somewhat confusing because other case doesnt have a label like worked: (no space for that at this point)
+            //else
+            //   .date Posted on #{moment(review.dateCreated).format("MMMM Do YYYY")}
             if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
          span.clearfix

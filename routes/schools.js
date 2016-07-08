@@ -1,5 +1,6 @@
 var express = require('express');
 var moment = require('moment');
+var email = require('../controllers/email');
 var router = express.Router();
 var schools = require('../controllers/schools');
 var reviews = require('../controllers/reviews');
@@ -109,7 +110,14 @@ module.exports = function(passport) {
                     return handleError(err);
                 }
                 else {
-                    res.redirect('/school/id/' + newSchool.id);
+                    //Send Email to admin to advise the creation of a new school
+                    var message = "Email: " + newSchool.name + "\n" + newSchool.description;
+                    var callbackMessage = "Thank you, we will get back to you shortly";
+                    email.sendEmail("julieneric11@gmail.com","newschoolcreated@englishinchina.com","School Created "+newSchool.name,message,callbackMessage, req, function(){
+                            //redirect the user to its new school
+                            res.redirect('/school/id/' + newSchool.id);
+                        }
+                    )
                 }
             })
         });

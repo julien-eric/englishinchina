@@ -1,3 +1,6 @@
+var striptags = require("striptags");
+
+
 module.exports = {
 
     /************************************************************************************************************
@@ -11,7 +14,7 @@ module.exports = {
             }
             var description = school.description.substring(0,length);
             description = description.substring(0, description.lastIndexOf(" ")) + "...";
-            school.description = description;
+            school.description = striptags(description);
         });
         return schoolList;
     },

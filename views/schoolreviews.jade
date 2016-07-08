@@ -16,7 +16,10 @@ block content
                   a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
                else
                   a.name(href="/user/#{review.user._id}") #{review.user.username}
-               .date #{moment(review.dateEmployed).format("MMM YYYY")+" to " + moment(review.dateReleased).format("MMM YYYY")}
+               if Date.parse(review.dateEmployed) != 0 && Date.parse(review.dateReleased) != 0
+                  .date #{moment(review.dateEmployed).format("MMM YYYY")+" to " + moment(review.dateReleased).format("MMM YYYY")}
+               else
+                  .date Posted in #{moment(review.dateCreated).format("MMM YYYY")}
             if review.average_rating
             .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
          span.clearfix

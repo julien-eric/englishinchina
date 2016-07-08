@@ -225,6 +225,9 @@ h2.school-location {
 .user-information .date {
   font-size: 15px;
 }
+.user-information .school-name {
+  font-size: 11px;
+}
 .default-user-picture,
 .profile-img {
   position: absolute;
