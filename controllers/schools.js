@@ -210,7 +210,7 @@ module.exports = {
 
     searchSchools : function(schoolInfo, prov, city, callback){
 
-        var searchQueryMessage = "You have searched for ";
+        var searchQueryMessage = "";
 
         if(prov != -1){ //Province is specified
             provincesController.getProvinceByCode(prov, function(provModel){

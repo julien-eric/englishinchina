@@ -61,7 +61,7 @@ $(document).ready(function() {
     $( ".readmore" ).click(function() {
         var reviewid = $(this).closest('.list-group-review')[0].id;
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/school/reviews/" + reviewid);
+        xhr.open("GET", "/school/reviews/" + reviewid + "?ajax=true");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {

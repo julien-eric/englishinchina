@@ -1,7 +1,10 @@
 doctype html
 html
   head
-    title= "English in China"
+    if title
+      title #{title}
+    else
+      title= "English in China"
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-fileinput.css')
     link(rel='stylesheet', href='/stylesheets/style.css')

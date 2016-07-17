@@ -7,6 +7,7 @@ var email = require('../controllers/email');
 var pictures = require('../pictures');
 var aws = require('aws-sdk');
 var url = require('url');
+var moment = require('moment');
 var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
 var provincesController = require('../controllers/provinces');
@@ -65,6 +66,7 @@ module.exports = function(passport){
                     var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,300);
 
                     res.render('home', {
+                        title: "English in China",
                         featured: featuredSchoolList,
                         schools:truckSchoolList,
                         user: req.user,
@@ -96,6 +98,7 @@ module.exports = function(passport){
             schools.getSchools(function (count, schoolList) {
                 var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 300);
                 res.render('home', {
+                    title: "English in China - Page " + page,
                     schools: trunckSchoolList,
                     user: req.user,
                     provinces: provinces,
@@ -122,6 +125,7 @@ module.exports = function(passport){
             //citiesController.pushCities(citiesController.citiesToPush);
             // Display the Login page with any flash message, if any
             res.render('index', {
+                title: "Login - English in China",
                 message: req.flash('message'),
                 scripts:[scripts.util]
             });
@@ -160,6 +164,7 @@ module.exports = function(passport){
     router.route('/signup')
         .get( function(req, res){
             res.render('register',{
+                title: "Sign up - English in China",
                 message: req.flash('message'),
                 scripts:[scripts.util]
             });
@@ -186,6 +191,7 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.get('/forgot', function(req, res) {
         res.render('forgot', {
+            title: "Forgot your Password - English in China",
             user: req.user,
             pictureInfo: pictureinfo,
             scripts:[scripts.util]
@@ -258,7 +264,7 @@ module.exports = function(passport){
                 return res.redirect('/forgot');
             }
             res.render('reset', {
-                user: req.user,
+                title: "Reset Password - English in China",
                 pictureInfo: pictureinfo,
                 scripts:[scripts.util]
             });
@@ -302,6 +308,7 @@ module.exports = function(passport){
     router.get('/user', isAuthenticated, function(req, res){
         reviews.findReviewsByUser(req.user._id, function(reviews){
             res.render('user', {
+                title: "User " + req.user.username + " - English in China",
                 user: req.user,
                 reviews: reviews,
                 pictureInfo: pictureinfo,
@@ -318,6 +325,7 @@ module.exports = function(passport){
         .get(function(req, res){
             usersController.findUserById(req.user._id, function(user){
                 res.render('edituser', {
+                    title: "Edit Profile - " + user.username + " - English in China",
                     user: user,
                     pictureInfo: pictureinfo,
                     jadefunctions: jadefunctions,
@@ -338,10 +346,12 @@ module.exports = function(passport){
         usersController.findUserById(req.params.id, function(user){
             reviews.findReviewsByUser(req.params.id, function(reviews){
                 res.render('user', {
+                    title: "User " + user.username + " - English in China",
                     user: user,
                     reviews: reviews,
                     pictureInfo: pictureinfo,
                     jadefunctions: jadefunctions,
+                    moment: moment,
                     scripts:[scripts.util]
                 });
             });

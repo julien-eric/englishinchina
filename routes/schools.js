@@ -61,6 +61,7 @@ module.exports = function(passport) {
                     school.description = jadefunctions.nl2br(school.description, false);
 
                     res.render('school', {
+                        title: school.name + " - English in China",
                         edit: schoolOwner,
                         school: school,
                         user: req.user,
@@ -95,6 +96,7 @@ module.exports = function(passport) {
             }
             provincesController.getAllProvinces(function(provinces){
                 res.render('addschool', {
+                    title: "Add School - English in China",
                     user: req.user,
                     pictureInfo: pictureinfo,
                     provinces: provinces,
@@ -135,6 +137,7 @@ module.exports = function(passport) {
     router.get('/addphoto/:id', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
             res.render('addphoto', {
+                title: "Upload Picture - English in China",
                 school:school,
                 scripts:[scripts.util]
             });
@@ -143,7 +146,10 @@ module.exports = function(passport) {
 
     router.get('/addphotoajax/:id', function (req, res) {
         schools.findSchoolById(req.params.id, function (school) {
-            res.render('addphoto', {school:school},
+            res.render('addphoto', {
+                    title: "Upload Picture - English in China",
+                    school:school
+                },
                 function(err, html) {
                     if(err)
                         console.log(err);
@@ -197,7 +203,11 @@ module.exports = function(passport) {
 
     router.get('/getphoto/:id', function (req, res) {
         images.getImageById(req.params.id, function (image) {
-            res.render('photomodal', {photo:image[0], pictureInfo:pictureinfo},
+            res.render('photomodal', {
+                    title: "View Picture - English in China",
+                    photo:image[0],
+                    pictureInfo:pictureinfo
+                },
                 function(err, html){
                     if (err)
                         res.send({html: err.toString()})
@@ -207,7 +217,6 @@ module.exports = function(passport) {
                 });
             });
     })
-
 
     router.get('/deletephoto/:photoid/:schoolid', function (req, res) {
 
@@ -225,7 +234,6 @@ module.exports = function(passport) {
         }
     })
 
-
     /**********************************************************************************************************************************
      //REVIEWS
      ***********************************************************************************************************************************/
@@ -238,6 +246,7 @@ module.exports = function(passport) {
             //var province = req.query.province;
             //var city = req.query.city;
             res.render('writereview', {
+                title: "Write Review for " + school.name + " - English in China",
                 user: req.user,
                 school: school,
                 criteria: criteria,
@@ -296,6 +305,7 @@ module.exports = function(passport) {
         reviews.findReviews(schoolId,function(reviews){
 
             res.render('schoolreviews',{
+                title: "Reviews - English in China",
                 reviews: reviews,
                 pictureInfo: pictureinfo,
                 jadefunctions: jadefunctions,
@@ -312,37 +322,55 @@ module.exports = function(passport) {
 
     });
 
-
     /****************************************************************************************************************
-     * getIndividualreview
+     * get Ajax review
      ***************************************************************************************************************/
     router.get('/reviews/:id', function(req, res) {
-
+        var ajax = false;
         var reviewId = req.params.id;
+        if (req.query.ajax !== undefined ) {
+            ajax = decodeURIComponent(req.query.ajax);
+        }
 
-        reviews.findReviewById(reviewId,function(reviews){
+        reviews.findReviewById(reviewId,function(reviewlist){
 
-            var review = reviews[0];
+            var review = reviewlist[0];
             review.comment = jadefunctions.nl2br(review.comment,false);
 
-            res.render('schoolreview',{
-                review: review,
-                pictureInfo: pictureinfo,
-                jadefunctions: jadefunctions,
-                scripts:[scripts.util],
-                criteria: criteria,
-                moment: moment,
-                criteriaScore: reviews[0].criteria
-            },function(err, html) {
-                if(err)
-                    console.log(err);
-                else{
-                    res.send({html:html});
-                }
-            });
+            if(ajax){
+                res.render('schoolreview',{
+                    review: review,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions,
+                    scripts:[scripts.util],
+                    criteria: criteria,
+                    moment: moment,
+                    criteriaScore: review.criteria
+                },function(err, html) {
+                    if(err)
+                        console.log(err);
+                    else{
+                        res.send({html:html});
+                    }
+                });
+            }
+            else{
+                reviews.findReviews(review.foreignId.id,function(otherReviews){
+                    res.render('review', {
+                        title: review.foreignId.name + " - review by " + review.user.username + " - " + review.comment + " - English in China",
+                        review: review,
+                        reviews:otherReviews,
+                        pictureInfo: pictureinfo,
+                        jadefunctions: jadefunctions,
+                        scripts: [scripts.util, scripts.libbarchart, scripts.schoolpage],
+                        criteria: criteria,
+                        moment: moment,
+                        criteriaScore: review.criteria
+                    });
+                },9,1,true);
+            }
         });
     });
-
 
     /************************************************************************************************************
      *searchSchool : Method for search all schools, it will return any school that has some of the information
@@ -371,11 +399,12 @@ module.exports = function(passport) {
             function getProvinces(schoolList, searchMessage){
                 provincesController.getAllProvinces(function(provinces){
                     res.render('home', {
+                        title: searchMessage + " Schools - English in China",
                         schools: schoolList,
                         user: req.user,
                         provinces: provinces,
                         pictureInfo: pictureinfo,
-                        searchMessage: searchMessage,
+                        searchMessage: "You have searched for " +  searchMessage,
                         jadefunctions: jadefunctions,
                         scripts:[scripts.util]
                     });
@@ -429,7 +458,6 @@ module.exports = function(passport) {
         })
     });
 
-
     /************************************************************************************************************
      *  validateSchool: School should be validated before appearing in list
      * Param : SchoolID, id of school to validate
@@ -459,7 +487,6 @@ module.exports = function(passport) {
             return "nice try";
         }
     });
-
 
     /************************************************************************************************************
      *  removeSchool: Remove school if user is admin
