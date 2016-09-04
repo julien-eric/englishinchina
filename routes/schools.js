@@ -406,7 +406,7 @@ module.exports = function(passport) {
                         pictureInfo: pictureinfo,
                         searchMessage: "You have searched for " +  searchMessage,
                         jadefunctions: jadefunctions,
-                        scripts:[scripts.util]
+                        scripts:[scripts.librater, scripts.util, scripts.rating]
                     });
                 });
             }
