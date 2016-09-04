@@ -3,6 +3,7 @@ var provincesController = require('./provinces');
 var reviews = require('./reviews');
 var citiesController = require('./cities');
 var imagesController = require('./images');
+var jadeutilityfunctions = require('./../routes/jadeutilityfunctions');
 var async = require('async');
 
 module.exports = {
@@ -221,7 +222,7 @@ module.exports = {
 
                 if(city != -1){ //City is also specified
                     citiesController.getCityByCode(city,function(cityModel){
-                        searchQueryMessage += ", " + cityModel.pinyinName + "(" + cityModel.chineseName + ")";
+                        searchQueryMessage += ", " + jadeutilityfunctions.capitalize(cityModel.pinyinName) + "(" + cityModel.chineseName + ")";
                         School.
                             find({name: new RegExp(schoolInfo, "i")}).
                             populate("province").
@@ -248,7 +249,7 @@ module.exports = {
                 if(schoolInfo != ""){
                     searchQueryMessage += '"' + schoolInfo + '" in ' ;
                 }
-                searchQueryMessage += cityModel.pinyinName + "(" + cityModel.chineseName + ")";
+                searchQueryMessage += jadeutilityfunctions.capitalize(cityModel.pinyinName) + "(" + cityModel.chineseName + ")";
                 School. //Province is not specified
                     find({name: new RegExp(schoolInfo,"i")}).
                     populate("province").
