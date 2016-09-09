@@ -67,12 +67,12 @@ header {
 }
 .featured-school {
   overflow: hidden;
-  height: 400px;
+  height: 350px;
 /*border-bottom solid 10px black*/
   background-position: center center;
 }
 .featured-school-item {
-  height: 400px;
+  height: 350px;
   background-position: center center;
   background-size: cover;
 }

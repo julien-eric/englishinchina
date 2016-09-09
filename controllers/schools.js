@@ -276,6 +276,14 @@ module.exports = {
         });
     },
 
+    updateCoverPicture : function(schoolId, newPictureUrl, callback){
+        School.findOneAndUpdate({ _id : schoolId }, {pictureUrl:newPictureUrl}, function(err, editedSchool){
+            if(err){
+                console.log(err);
+            }
+            callback(editedSchool);
+        });
+    },
 
     updateAverageRating : function(schoolId){
         reviews.findReviews(schoolId, function(reviews){

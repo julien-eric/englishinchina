@@ -202,10 +202,15 @@ module.exports = function(passport) {
     })
 
     router.get('/getphoto/:id', function (req, res) {
+        var admin = false;
+        if(req.user && req.user.admin){
+            admin = true;
+        }
         images.getImageById(req.params.id, function (image) {
             res.render('photomodal', {
                     title: "View Picture - English in China",
                     photo:image[0],
+                    admin: admin,
                     pictureInfo:pictureinfo
                 },
                 function(err, html){
@@ -232,6 +237,18 @@ module.exports = function(passport) {
             req.flash('error', "You don't have administrator rights.");
             return res.redirect('/');
         }
+    })
+
+    router.get('/updatecoverphoto/:photoid/:schoolid', function (req, res) {
+            var photoId = req.params.photoid;
+            var schoolId = req.params.schoolid;
+
+            images.getImageById(photoId, function(photolist){
+                schools.updateCoverPicture(schoolId, photolist[0].url, function(editedschool){
+                    res.redirect("/");
+                });
+            });
+
     })
 
     /**********************************************************************************************************************************
