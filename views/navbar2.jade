@@ -1,0 +1,44 @@
+if popularCities && popularProvinces
+   .explorebar.hidden-xs
+      .navbar-xs
+         nav.navbar.navbar-default.navbar-custom.navbar-nosideborder
+               .container.container-fluid
+                  // Brand and toggle get grouped for better mobile display
+                  .navbar-header
+                     button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                  .collapse.navbar-collapse#bs-example-navbar-collapse-1
+                     ul.nav.navbar-nav
+                        li
+                           p Quick Search
+                        li.dropdown
+                           a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                              | Cities
+                              span.caret
+                           ul.dropdown-menu
+                              each city in popularCities
+                                 if city && city._id
+                                    li
+                                       a(href="/school/search?schoolInfo=&province=-1&city=#{city._id.code}") #{jadefunctions.capitalize(city._id.pinyinName)} - #{city._id.chineseName}
+                        li.dropdown
+                           a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                              | Provinces
+                              span.caret
+                           ul.dropdown-menu
+                              each province in popularProvinces
+                                 if province && province._id
+                                    li
+                                       a(href="/school/search?schoolInfo=&province=#{province._id.code}&city=-1") #{jadefunctions.capitalize(province._id.name)} - #{province._id.chineseName}
+                        if featuredSchoolList
+                           li.dropdown
+                              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                 | Schools
+                                 span.caret
+                              ul.dropdown-menu
+                                 each featuredSchool in featuredSchoolList
+                                    if featuredSchool && featuredSchool._id
+                                       li
+                                          a(href="/school/id/#{featuredSchool._id.code}&city=-1") #{featuredSchool.name}

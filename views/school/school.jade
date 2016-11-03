@@ -1,0 +1,171 @@
+extends ../layout
+block content
+   div.school-page
+      .img-responsive.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');")
+         .container.school-content
+            .col-xs-12.col-sm-12.col-md-6.col-lg-8
+               #schoolid.hidden(value="#{school.id}")
+               h1.school-page-name #{school.name}
+               //.share
+               //   include sharingbuttons
+               h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+               if school.website
+                  a(href="#{school.website}")
+                     h4 #{school.website}
+               .school-location
+                  if school.province && school.city
+                     a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") China
+                     span
+                     a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=#{school.province.code}&city=-1") #{school.province.name}
+                     span
+                     if school.city
+                        a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
+                     else
+                        a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=-1&city=1") Dongying
+            .col-xs-12.col-sm-12.col-md-6.col-lg-4
+               include ratingcard
+
+
+            span.clearfix
+            .col-xs-12.col-sm-12.col-md-12.col-lg-8
+               h2 Description
+               hr
+               if edit
+                  h4
+                     a.btn.btn-eic.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
+               span.clearfix
+               div.description-container
+                  p.login-title !{school.description}
+               h5#read-more
+                  span.glyphicon.glyphicon-chevron-down
+                  #description-readmore.description-readmore Read Full Description
+               span.clearfix
+
+            .col-xs-12.col-sm-12.col-md-12.col-lg-4
+               include schoolphotos
+
+            include schooladminsection
+
+            //REVIEWS
+            span.clearfix
+            #reviews
+               if reviewsCount > 0
+                  .col-sm-12.col-md-8.col-lg-8.no-padding-left
+                     include schoolbreakdown
+                  .clearfix
+                  h3 Reviews (#{reviewsCount})
+                  include schoolreviews
+
+            .clearfix
+            if reviewsCount > 6
+               #load-more-reviews.btn.btn-eic.btn-default.btn-lg Load More
+            if locals.user
+               a#review.btn.btn-eic.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+            else
+               a#review.btn.btn-eic.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+
+            //.container
+            include ../populargrid/popularcategories
+               //.clearfix
+
+            #lightbox
+               //p Click to close
+               #lightboxcontent
+
+
+   <!-- Modal -->
+   button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
+   .modal.fade#myModal(role="dialog")
+      #modal-dialog.modal-dialog
+      .modal-wrapper.col-sm-10.col-sm-offset-1.col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
+         button#closemodal(type="button" class="btn-gray btn btn-info btn-lg" data-dismiss="modal") CLOSE
+
+
+
+
+
+
+   //            div.gradient-shadow
+   //            div.container
+   //               div.stick-to-bottom
+   //                  #schoolid.hidden(value="#{school.id}")
+   //                  h1.school-page-name #{school.name}
+   //                  h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+   //                  h3.school-page-location China /
+   //                     | #{school.province.name} /
+   //                     span
+   //                        a(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
+   //                  if reviewsCount > 0
+   //                     #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+   //
+   //   div.container.school-background
+   //      .row
+   //         div.col-sm-12.col-md-8
+   //            //a(href="/school/search?schoolInfo=&province=#{school.province}&city=-1")
+   //            //   h3 #{provinces[school.province]}
+   //
+   //            if locals.user && locals.user.admin && !school.validated
+   //               a.btn.btn-eic.btn-primary.btn-lg(href="/school/validate/#{school.id}" role="button") Validate
+   //            if locals.user && locals.user.admin && school.validated
+   //               a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/validate/#{school.id}" role="button") Validated!
+   //               a.btn.btn-eic.btn-primary.btn-lg(href="/school/invalidate/#{school.id}" role="button") Devalidate
+   //            if locals.user && locals.user.admin
+   //               a.btn.btn-eic.btn-primary.btn-lg(href="/school/remove/#{school.id}" role="button") Remove
+   //
+   //
+   //            span.clearfix
+   //            h2 Description
+   //            hr
+   //            if edit
+   //               h4
+   //                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
+   //            span.clearfix
+   //            div.description-container
+   //               p.login-title !{school.description}
+   //            h5
+   //               span.glyphicon.glyphicon-chevron-down
+   //               #description-readmore.description-readmore Read Full Description
+   //            span.clearfix
+   //
+   //            include schoolphotos
+   //
+   //      //REVIEWS
+   //      span.clearfix
+   //      h2 Reviews (#{reviewsCount})
+   //      hr
+   //
+   //      //h3 Average Rating
+   //      //.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+   //      //hr
+   //
+   //      #reviews
+   //         if reviewsCount > 0
+   //            .col-sm-12.col-md-8.col-lg-8.no-padding-left
+   //               include schoolbreakdown
+   //            .clearfix
+   //            h3 Reviews
+   //            include schoolreviews
+   //
+   //      .clearfix
+   //
+   //      if reviewsCount > 6
+   //         #load-more-reviews.btn.btn-eic.btn-primary.btn-lg Load More
+   //      if locals.user
+   //         a#review.btn.btn-eic.btn-primary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+   //      else
+   //         a#review.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+   //
+   //
+   //      #lightbox
+   //         p Click to close
+   //         #lightboxcontent
+   //
+   //
+   <!-- Modal -->
+   //button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
+   //.modal.fade#myModal(role="dialog")
+   //   #modal-dialog.modal-dialog
+   //   .modal-wrapper.col-sm-10.col-sm-offset-1.col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
+   //      button#closemodal(type="button" class="btn-gray btn btn-info btn-lg" data-dismiss="modal") CLOSE
+   //
+   //

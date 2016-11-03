@@ -1,6 +1,7 @@
 var School = require('./../models/school');
 var provincesController = require('./provinces');
 var reviews = require('./reviews');
+var Review = require('./../models/review');
 var citiesController = require('./cities');
 var imagesController = require('./images');
 var jadeutilityfunctions = require('./../routes/jadeutilityfunctions');
@@ -63,7 +64,7 @@ module.exports = {
                     });
                 },
                 function createSchool(province, city, next){
-                    School.create({ user: user._id, name:school.name, description:school.description, schoolType: school.schoolType, province:province, city:city, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
+                    School.create({ user: user._id, name:school.name, description:school.description, website: school.website, schoolType: school.schoolType, province:province, city:city, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
                         next(err, province, city, newSchool);
                     });
                 },
@@ -125,6 +126,7 @@ module.exports = {
                     var newSchool = {province:province._id, city:city._id};
                     if(oldSchool.name !== school.name){newSchool.name = school.name}
                     if(oldSchool.description !== school.description){newSchool.description = school.description}
+                    if(oldSchool.website !== school.website){newSchool.website = school.website}
                     if(oldSchool.schoolType !== school.schoolType){newSchool.schoolType = school.schoolType}
                     if(oldSchool.pictureUrl !== school.avatarUrl){
                         newSchool.pictureUrl = school.avatarUrl

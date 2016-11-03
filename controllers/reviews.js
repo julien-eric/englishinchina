@@ -51,14 +51,29 @@ module.exports = {
             },onReturn);
     },
 
-    findReviews : function(schoolId, callback, pageSize, page, populate){
+    findReviews : function(schoolId, callback, pageSize, page, populate, req){
 
-        var onReturn = function(err,comments){
+        var onReturn = function(err,reviews){
             if(err){
                 console.log(err);
             }
             else{
-                callback(comments);
+                if(req && req.user){
+                    //If this could be done in the fetch from db it would be much better
+                    reviews.forEach(function(review){
+                        review.helpfuls.forEach(function(helpful){
+                            if(helpful.user.id == req.user._id.id){
+                                review.hasHF = true;
+                            }
+                        });
+                    });
+                    callback(reviews);
+                }
+                else{
+                    callback(reviews);
+                }
+
+
             }
         }
         if(pageSize && page && populate){
@@ -102,14 +117,56 @@ module.exports = {
         });
     },
 
-    findReviewById : function(reviewId, callback){
-        Review.find({_id:reviewId}).populate("user").populate("foreignId").exec(function(err,comments){
+    findReviewById : function(reviewId,userId,callback){
+        Review.find({_id:reviewId}).populate("user").populate("foreignId").exec(function(err,reviews){
             if(err){
                 console.log(err);
             }
             else{
-                callback(comments);
+                if(userId){
+                    //If this could be done in the fetch from db it would be much better
+                    reviews.forEach(function(review){
+                        review.helpfuls.forEach(function(helpful){
+                            if(helpful.user.id == userId._id.id){
+                                review.hasHF = true;
+                            }
+                        });
+                    });
+                    callback(reviews);
+                }
+                else{
+                    callback(reviews);
+                }
+
+
             }
         });
+    },
+
+    createReviewDistribution : function(reviews){
+        var distribution = new Array(0,0,0,0,0);
+        for(var i in reviews){
+            var value = reviews[i].average_rating
+            switch(true) {
+                case (value < 1.5):
+                    distribution[0]++;
+                    break;
+                case (value < 2.5):
+                    distribution[1]++;
+                    break;
+                case (value < 3.5):
+                    distribution[2]++;
+                    break;
+                case (value < 4.5):
+                    distribution[3]++;
+                    break;
+                case (value < 5):
+                    distribution[4]++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return distribution;
     }
 }

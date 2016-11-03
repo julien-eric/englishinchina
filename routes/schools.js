@@ -43,14 +43,25 @@ module.exports = function(passport) {
                     done(null, school);
                 });
             },
-
-            function findNumberOfReviews(school, done){
-                reviews.findNumberofReviews(school._id, function(numberOfReviews){
-                    done(null, school, numberOfReviews);
+            function getPopularCities (school, done){
+                citiesController.getMostPopularCities(function(popularCities){
+                    done(null,school, popularCities);
                 });
             },
-            function findReviews(school, numberOfReviews){
-                reviews.findReviews(school, function (reviews) {
+            function getPopularProvinces (school, popularCities, done){
+                provincesController.getMostPopularProvinces(function(popularProvinces){
+                    done(null,school, popularCities, popularProvinces);
+                });
+            },
+
+            function findNumberOfReviews(school, popularCities, popularProvinces, done){
+                reviews.findNumberofReviews(school._id, function(numberOfReviews){
+                    done(null, school, popularCities, popularProvinces, numberOfReviews);
+                });
+            },
+
+            function findReviews(school, popularCities, popularProvinces, numberOfReviews){
+                reviews.findReviews(school, function (reviewList) {
 
                     //Verify if user has access to school editing.
                     var schoolOwner = false;
@@ -59,22 +70,26 @@ module.exports = function(passport) {
                     }
 
                     school.description = jadefunctions.nl2br(school.description, false);
+                    var reviewDistribution = reviews.createReviewDistribution(reviewList);
 
-                    res.render('school', {
+                    res.render('school/school', {
                         title: school.name + " - English in China",
                         edit: schoolOwner,
                         school: school,
                         user: req.user,
                         reviewsCount: numberOfReviews,
-                        reviews: reviews,
+                        reviews: reviewList,
+                        reviewDistribution: reviewDistribution,
                         criteria:criteria,
                         moment:moment,
                         criteriaScore: school.criteria,
                         jadefunctions: jadefunctions,
+                        popularCities: popularCities,
+                        popularProvinces: popularProvinces,
                         pictureInfo: pictureinfo,
-                        scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.schoolpage]
+                        scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.schoolpage, scripts.libsharer]
                     });
-                },6,1,true);
+                },6,1,true,req);
             }
 
         ], function(err,callback){
@@ -95,7 +110,7 @@ module.exports = function(passport) {
                 incompleteSchool = {name:decodeURIComponent(req.query.name), schoolType:parseInt(req.query.type)};
             }
             provincesController.getAllProvinces(function(provinces){
-                res.render('addschool', {
+                res.render('school/addschool', {
                     title: "Add School - English in China",
                     user: req.user,
                     pictureInfo: pictureinfo,
@@ -259,18 +274,43 @@ module.exports = function(passport) {
      * Param : School id
      *************************************************************************************************************/
     router.get('/id/:id/writereview',isAuthenticated, function (req, res) {
-        schools.findSchoolById(req.params.id, function (school) {
-            //var province = req.query.province;
-            //var city = req.query.city;
-            res.render('writereview', {
-                title: "Write Review for " + school.name + " - English in China",
-                user: req.user,
-                school: school,
-                criteria: criteria,
-                pictureInfo: pictureinfo,
-                scripts:[scripts.util, scripts.libcalendar,scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview]
-            });
-        });
+        var schoolId = req.params.id;
+
+        async.waterfall([
+
+            async.apply(function findNumberofReviews(schoolId, done){
+                reviews.findNumberofReviews(schoolId, function(numberOfReviews){
+                    done(null, schoolId, numberOfReviews);
+                });
+            },schoolId),
+
+            function findReviews(schoolId, numberOfReviews, done){
+                reviews.findReviews(schoolId, function (reviewList) {
+                    done(null,schoolId,numberOfReviews,reviewList);
+                });
+            },
+            function findSchool(schoolId, numberOfReviews,reviewList){
+                schools.findSchoolById(schoolId, function (school) {
+                    res.render('writereview', {
+                        title: "Write Review for " + school.name + " - English in China",
+                        user: req.user,
+                        school: school,
+                        criteria: criteria,
+                        moment:moment,
+                        reviewsCount: numberOfReviews,
+                        reviews: reviewList,
+                        pictureInfo: pictureinfo,
+                        jadefunctions: jadefunctions,
+                        scripts:[scripts.util, scripts.libcalendar,scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview]
+                    });
+                });
+            }
+
+        ], function(err,callback){
+            if(err){
+                console.log(err);
+            }
+        })
     });
 
     /************************************************************************************************************
@@ -321,7 +361,7 @@ module.exports = function(passport) {
 
         reviews.findReviews(schoolId,function(reviews){
 
-            res.render('schoolreviews',{
+            res.render('school/schoolreviews',{
                 title: "Reviews - English in China",
                 reviews: reviews,
                 pictureInfo: pictureinfo,
@@ -335,7 +375,7 @@ module.exports = function(passport) {
                 }
             });
 
-        },6,page,true);
+        },6,page,true,req);
 
     });
 
@@ -345,18 +385,20 @@ module.exports = function(passport) {
     router.get('/reviews/:id', function(req, res) {
         var ajax = false;
         var reviewId = req.params.id;
+        var userId = req.user;
         if (req.query.ajax !== undefined ) {
             ajax = decodeURIComponent(req.query.ajax);
         }
 
-        reviews.findReviewById(reviewId,function(reviewlist){
+        reviews.findReviewById(reviewId, userId, function(reviewlist){
 
             var review = reviewlist[0];
             review.comment = jadefunctions.nl2br(review.comment,false);
 
             if(ajax){
-                res.render('schoolreview',{
+                res.render('school/schoolreview',{
                     review: review,
+                    loggedin : "true",
                     pictureInfo: pictureinfo,
                     jadefunctions: jadefunctions,
                     scripts:[scripts.util],
@@ -373,7 +415,7 @@ module.exports = function(passport) {
             }
             else{
                 reviews.findReviews(review.foreignId.id,function(otherReviews){
-                    res.render('review', {
+                    res.render('school/review', {
                         title: review.foreignId.name + " - review by " + review.user.username + " - " + review.comment + " - English in China",
                         review: review,
                         reviews:otherReviews,
@@ -388,6 +430,76 @@ module.exports = function(passport) {
             }
         });
     });
+
+    /****************************************************************************************************************
+     * This review was helpful
+     ***************************************************************************************************************/
+    router.post('/helpfuls/:type/:id',isAuthenticated, function(req, res) {
+        var reviewId = req.params.id;
+        var type = req.params.type;
+        var userId = req.user;
+
+        async.waterfall([
+            async.apply(function getReview(reviewId, userId, type, done){
+                reviews.findReviewById(reviewId,userId, function(reviewList){
+                    done(null, reviewList[0], userId, type);
+                });
+            }, reviewId, userId, type),
+
+            function addHelpful(review, userId, type, done){
+                review.helpfuls.push({user: userId});
+                var hf = review.helpfuls[0];
+                console.log(hf) // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
+                console.log(hf.isNew) // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
+                hf.isNew; // true
+
+                review.save(function (err, document) {
+                    //TODO: Change my error handling to this form
+                    //if (err) return handleError(err)
+                    //console.log('Success!');
+                    if (err){
+                        res.send({result:"0"});
+                    }
+                    else{
+                        //res.send({result:"1", reviewId:documents._id , numberOfHelpfuls:documents.helpfuls.length});
+                        document.hasHF = true;
+                        res.render('helpfulshort',{
+                            review: document,
+                            loggedin : "true"
+                        },function(err, html) {
+                            if(err)
+                                console.log(err);
+                            else{
+                                res.send({html:html, result:"1", reviewId:document.id});
+                            }
+                        });
+                    }
+                    done(null, document)
+                });
+            },
+
+            function sendEmailToReviewUser(review){
+                var user = review.user;
+                if(user.email != undefined){
+                    var message = "Hi " + review.user.username + "!\n " + review.helpfuls.length + " people think your review is helpful.\n Take a look : http://englishinchina.co/school/id/" + review.foreignId.id;
+                    var callbackMessage = "Thank you, we will get back to you shortly";
+                    email.sendEmail(user.email,"reviews@englishinchina.com","Review Feedback on " + review.foreignId.name, message, callbackMessage, req, function(){})
+                }
+            }
+
+            ],
+            //ERROR MANAGEMENT
+            function(err,callback){
+                if(err){
+                    console.log("ERROR" + err);
+                }
+                else{
+                    done();
+                }
+            }
+        );
+    });
+
 
     /************************************************************************************************************
      *searchSchool : Method for search all schools, it will return any school that has some of the information
@@ -407,21 +519,33 @@ module.exports = function(passport) {
             async.apply(function searchSchools(schoolInfo, province, city, callback){
                 schools.searchSchools(schoolInfo, province, city, function (schoolList, searchMessage) {
                     if (schoolList != undefined && schoolList.length > 0) {
-                        schoolList = jadefunctions.trunkSchoolDescription(schoolList,500);
+                        schoolList = jadefunctions.trunkSchoolDescription(schoolList,180);
                     }
                     callback(null, schoolList, searchMessage);
                 })
             },schoolInfo, province, city),
+            function getPopularCities (schoolList, searchMessage, done){
+                citiesController.getMostPopularCities(function(popularCities){
+                    done(null, schoolList, searchMessage, popularCities);
+                });
+            },
+            function getPopularProvinces (schoolList, searchMessage, popularCities, done){
+                provincesController.getMostPopularProvinces(function(popularProvinces){
+                    done(null, schoolList, searchMessage, popularCities, popularProvinces);
+                });
+            },
             //2) Get the provinces and pass along all the returned values
-            function getProvinces(schoolList, searchMessage){
+            function getProvinces(schoolList, searchMessage, popularCities, popularProvinces){
                 provincesController.getAllProvinces(function(provinces){
-                    res.render('home', {
+                    res.render('search', {
                         title: searchMessage + " Schools - English in China",
                         schools: schoolList,
                         user: req.user,
                         provinces: provinces,
                         pictureInfo: pictureinfo,
-                        searchMessage: "You have searched for " +  searchMessage,
+                        popularCities: popularCities,
+                        popularProvinces: popularProvinces,
+                        searchMessage: "You searched for " +  searchMessage,
                         jadefunctions: jadefunctions,
                         scripts:[scripts.librater, scripts.util, scripts.rating]
                     });
@@ -448,7 +572,7 @@ module.exports = function(passport) {
         schools.findSchoolById(req.params.id, function (school) {
             provincesController.getAllProvinces(function(provinces){
                 citiesController.getCitiesByProvince(school.province.code, function(cities){
-                    res.render('editschool', {
+                    res.render('school/editschool', {
                         school: school,
                         user: req.user,
                         reviews: reviews,

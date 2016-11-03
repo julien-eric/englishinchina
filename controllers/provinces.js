@@ -2,6 +2,7 @@
  * Created by Julz on 1/24/2016.
  */
 var Province = require('../models/province');
+var School = require('../models/school');
 
 
 module.exports = {
@@ -72,5 +73,30 @@ module.exports = {
                 callback(cityinfo, province);
             }
         });
+    },
+
+    getMostPopularProvinces: function(callback){
+        //At the moment featured schools are schools with the highest ratings
+        School.aggregate(
+            [
+                { $group : { _id : "$province" , number : { $sum : 1 }, pictureUrl: { $first: "$pictureUrl" } } },
+                { $sort : {number : -1}},
+                { $limit : 9 }
+            ]).exec(function(err, transactions) {
+                if(err)
+                {
+                    console.log(err);
+                    return;
+                }
+                Province.populate(transactions, {path: '_id'}, function(err, popularProvinces) {
+                    // Your populated translactions are inside populatedTransactions
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        callback(popularProvinces);
+                    }
+                });
+            });
     }
 }

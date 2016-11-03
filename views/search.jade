@@ -1,0 +1,18 @@
+extends layout
+block content
+
+   .splash2
+      .splash-image-container
+         .splash-image(style="background-image: url('/images/chinag.jpg');")
+      .splash-text.col-sm-12.col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+         h1 Find Any School in China
+         include searchnavigation
+
+   .container
+      div.row
+         include schoollist
+         include sidebar
+      hr
+      div.row
+         include populargrid/popularcategories
+         //include popularcategories

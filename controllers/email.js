@@ -3,8 +3,9 @@ var smtpTransport = require("nodemailer-smtp-transport");
 
 module.exports = {
 
-    sendEmail : function(to, from, subject, text, callbackMessage ,req, done){
+    sendEmail : function(to, from, fromname, subject, text, callbackMessage ,req, done){
 
+            //var senderName = "English in China";
             var smtpTransport = nodemailer.createTransport({
                 service: "sendGrid",
                 host : "smtp.sendgrid.net",

@@ -1,4 +1,5 @@
-nav.navbar.navbar-default.navbar-custom
+include fcb-js-sdk
+nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
     .container.container-fluid
         // Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -7,10 +8,10 @@ nav.navbar.navbar-default.navbar-custom
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.pull-left(href='/')
-                img.nav-logo(src="/images/logo2.gif")
-            a.pull-left(href='/')
-                img.nav-brand(src="/images/logo-name2.gif")
+            //a.pull-left(href='/')
+            //    img.nav-logo(src="/images/logo2.gif")
+            //a.pull-left(href='/')
+            //    img.nav-brand(src="/images/logo-name2.gif")
         // Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
             ul.nav.navbar-nav
@@ -20,16 +21,25 @@ nav.navbar.navbar-default.navbar-custom
                         span.sr-only (current)
                 li
                     a(href='/')
-                        | About
+                        | About Us
                         span.sr-only (current)
             ul.nav.navbar-nav.navbar-right
                 if locals.user
                     li
-                        a(href='/school/addschool') Add school
+                        a(href='/school/addschool')
+                            span.navbar-icon.glyphicon.glyphicon-plus-sign
+                            | Add School
                     li.dropdown
                         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                             | #{user.username}
                             span.caret
+                            //.profile-picture
+                            //    if locals.user.fb && locals.user.useFacebookPic
+                            //        div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+                            //        div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                            //    else
+                            //        div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+                            //        div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
                         ul.dropdown-menu
                             //li
                             //    a(href='/user') My Profile
@@ -52,4 +62,5 @@ nav.navbar.navbar-default.navbar-custom
                         a(href='/login/') Log In
                     li
                         a(href='/signup') Sign Up
+.paddingundernav
 

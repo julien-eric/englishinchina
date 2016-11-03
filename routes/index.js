@@ -54,25 +54,37 @@ module.exports = function(passport){
                     done(null, provinces,featuredSchoolList);
                 });
             },
+            function getPopularCities (provinces,featuredSchoolList, done){
+                citiesController.getMostPopularCities(function(popularCities){
+                    done(null,provinces,featuredSchoolList,popularCities);
+                });
+            },
+            function getPopularProvinces (provinces, featuredSchoolList, popularCities, done){
+                provincesController.getMostPopularProvinces(function(popularProvinces){
+                    done(null,provinces, featuredSchoolList, popularCities, popularProvinces);
+                });
+            },
             //3) Lastly Get paginated list of schools
-            function getSchools(provinces, featuredSchoolList) {
+            function getSchools(provinces, featuredSchoolList, popularCities,popularProvinces) {
                 var pageSize = 5;
                 var admin = false;
                 if(req.user == undefined || req.user.admin == undefined){admin = false;}
                 else{admin = req.user.admin};
 
-
                 schools.getSchools(function(count, schoolList){
-                    var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,300);
+                    var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,150);
 
                     res.render('home', {
                         title: "English in China",
-                        featured: featuredSchoolList,
+                        main: true,
+                        featuredSchoolList: featuredSchoolList,
                         schools:truckSchoolList,
                         user: req.user,
                         provinces: provinces,
                         pictureInfo: pictureinfo,
                         jadefunctions: jadefunctions,
+                        popularCities: popularCities,
+                        popularProvinces: popularProvinces,
                         cities: {},
                         currentPage: 1,
                         total: count,
@@ -89,28 +101,57 @@ module.exports = function(passport){
 
 
     router.get('/page/:page', function(req, res){
-        var page = req.params.page;
-        var pageSize = 5;
-        provincesController.getAllProvinces(function(provinces) {
-            var admin = false;
-            if(req.user == undefined || req.user.admin == undefined){admin = false;}
-            else{admin = req.user.admin};
-            schools.getSchools(function (count, schoolList) {
-                var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 300);
-                res.render('home', {
-                    title: "English in China - Page " + page,
-                    schools: trunckSchoolList,
-                    user: req.user,
-                    provinces: provinces,
-                    pictureInfo: pictureinfo,
-                    jadefunctions: jadefunctions,
-                    currentPage: page,
-                    total: count,
-                    totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-                    scripts:[scripts.librater, scripts.util, scripts.rating]
-                })
-            }, pageSize, page - 1, admin);
+
+
+        async.waterfall([
+            //1) First get provinces list
+            function getProvinces(done) {
+                provincesController.getAllProvinces(function(provinces){
+                    done(null, provinces);
+                });
+            },
+            function getPopularCities (provinces, done){
+                citiesController.getMostPopularCities(function(popularCities){
+                    done(null,provinces,popularCities);
+                });
+            },
+            function getPopularProvinces (provinces, popularCities, done){
+                provincesController.getMostPopularProvinces(function(popularProvinces){
+                    done(null,provinces, popularCities, popularProvinces);
+                });
+            },
+            //3) Lastly Get paginated list of schools
+            function getSchools(provinces, popularCities, popularProvinces) {
+                var page = req.params.page;
+                var pageSize = 5;
+                var admin = false;
+
+                if(req.user == undefined || req.user.admin == undefined){admin = false;}
+                else{admin = req.user.admin};
+                schools.getSchools(function (count, schoolList) {
+                    var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 300);
+                    res.render('home', {
+                        title: "English in China - Page " + page,
+                        schools: trunckSchoolList,
+                        user: req.user,
+                        provinces: provinces,
+                        pictureInfo: pictureinfo,
+                        jadefunctions: jadefunctions,
+                        popularCities: popularCities,
+                        popularProvinces: popularProvinces,
+                        currentPage: page,
+                        total: count,
+                        totalPages: ((count - (count % pageSize)) / pageSize) + 1,
+                        scripts:[scripts.librater, scripts.util, scripts.rating]
+                    })
+                }, pageSize, page - 1, admin);
+            }
+        ], function(err) {
+            if (err) console.log(err);
+            //res.redirect('/');
         });
+
+
     });
 
 
@@ -124,7 +165,7 @@ module.exports = function(passport){
 
             //citiesController.pushCities(citiesController.citiesToPush);
             // Display the Login page with any flash message, if any
-            res.render('index', {
+            res.render('login', {
                 title: "Login - English in China",
                 message: req.flash('message'),
                 scripts:[scripts.util]

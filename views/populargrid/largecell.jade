@@ -1,0 +1,15 @@
+li.list-group-item.col-sm-8.col-md-8.col-lg-8.col-xs-8.nopadding.popular-city
+   div.col-sm-12.col-lg-12.col-md-12.nopadding
+      div.col-sm-12.col-lg-12.col-md-12.nopadding
+         a(href="/school/search?schoolInfo=&province=#{item.code}&city=-1")
+            .img-container
+               .img-frame(style="background-image: url('#{pictureInfo.returnLarge(item.picture)}');")
+         .clearfix
+         a(href="/school/search?schoolInfo=&province=#{item.code}&city=-1")
+            .city-name-panel
+               h4 #{jadefunctions.capitalize(item.pName)} - #{item.cName}
+               if item.number == 1
+                  p #{item.number} school
+               else
+                  p #{item.number} schools
+      .clearfix

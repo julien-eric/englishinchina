@@ -1,0 +1,38 @@
+block content
+   hr
+   //p All of the most recent reviews for #{school.name}. See at the bottom for more reviews or writing your own review.
+   each review in reviews
+      li.list-group-review-outer.col-sm-10.col-md-3.col-lg-3
+         .list-group-review(id="#{review._id}")
+            .user-picture
+               if review.user.fb && review.user.useFacebookPic
+                  .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}');")
+               else
+                  .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
+            .user-information
+               if review.user
+                  if review.user.firstName && review.user.lastName
+                     a.name(href="/user/#{review.user._id}") #{review.user.firstName} #{review.user.lastName}
+                  else
+                     a.name(href="/user/#{review.user._id}") #{review.user.username}
+                  if Date.parse(review.dateEmployed) != 0 && Date.parse(review.dateReleased) != 0
+                     .date #{moment(review.dateEmployed).format("MMM YYYY")+" to " + moment(review.dateReleased).format("MMM YYYY")}
+                  else
+                     .date Posted in #{moment(review.dateCreated).format("MMM YYYY")}
+               if review.average_rating
+               .rating(data-rate-value="#{jadefunctions.roundToPoint5(review.average_rating)}")
+            span.clearfix
+            .review-content !{review.comment}
+            h5
+               a.btn.btn-link.readmore.no-padding-left(href="##{review._id}") Read More
+               if locals.user && locals.user.admin
+                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/deletereview/#{review._id}/#{school._id}") Delete
+               .pull-right
+                  include ../helpfulshort
+   .clearfix
+   //if reviews.length != 0
+   //   hr.review-separator
+
+

@@ -1,5 +1,6 @@
 var provincesController = require('./provinces');
 var City = require('../models/city');
+var School = require('../models/school');
 
 module.exports = {
 
@@ -75,5 +76,30 @@ module.exports = {
                 callback(result);
             }
         });
+    },
+
+    getMostPopularCities: function(callback){
+        //At the moment featured schools are schools with the highest ratings
+        School.aggregate(
+            [
+                { $group : { _id : "$city" , number : { $sum : 1 }, pictureUrl: { $first: "$pictureUrl" } } },
+                { $sort : {number : -1}},
+                { $limit : 9 }
+            ]).exec(function(err, transactions) {
+                if(err)
+                {
+                    console.log(err);
+                    return;
+                }
+                City.populate(transactions, {path: '_id'}, function(err, popularCities) {
+                    // Your populated translactions are inside populatedTransactions
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        callback(popularCities);
+                    }
+                });
+            });
     }
 }

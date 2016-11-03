@@ -1,0 +1,33 @@
+.school-rating-card.col-lg-12
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .school-rating #{jadefunctions.roundToPoint5(school.averageRating)}
+      if reviewsCount > 0
+         #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+      p #{reviewsCount}  Reviews
+   .star-rating-row.col-xs-1.col-sm-1.col-md-1.col-lg-1
+      p
+         span.spacious 1
+         span.inline.glyphicon.glyphicon-star
+      p
+         span.spacious 2
+         span.inline.glyphicon.glyphicon-star
+      p
+         span.spacious 3
+         span.inline.glyphicon.glyphicon-star
+      p
+         span.spacious 4
+         span.inline.glyphicon.glyphicon-star
+      p
+         span.spacious 5
+         span.inline.glyphicon.glyphicon-star
+   .col-xs-6.col-sm-6.col-md-6.col-lg-6
+      ul.chart
+         for dis in reviewDistribution
+            //li(title=dis)
+            if dis == 0
+               li
+                  span.bar(data-number=0.05)
+            else
+               li
+                  span.bar(data-number=dis)
+   .clearfix

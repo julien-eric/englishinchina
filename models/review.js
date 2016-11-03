@@ -2,6 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var schools = require('../controllers/schools');
 
+var helpful = new Schema({
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    dateCreated: {type: Date, default: Date.now}
+});
+
 var Review = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     objectType: Number, /*School:0*/
@@ -12,6 +17,7 @@ var Review = new Schema({
     dateEmployed: Date,
     dateReleased: Date,
     dateCreated: {type: Date, default: Date.now},
+    helpfuls: [helpful],
     criteria : {
         c1:Number,
         c2:Number,

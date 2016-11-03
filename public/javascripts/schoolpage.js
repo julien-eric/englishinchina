@@ -5,8 +5,10 @@ $(document).ready(function() {
         speed: 1800
     });
 
-    $( "#description-readmore" ).click(function() {
-        $(".description-container").animate({"max-height":'2000px'}, 500);
+    $( "#read-more" ).click(function() {
+        $(".description-container").animate({"max-height":'2000px'}, 500,function(){
+            $("#read-more").remove()
+        });
     });
 
     $( ".school-img-list-item" ).click(function() {
@@ -58,7 +60,39 @@ $(document).ready(function() {
         xhr.send();
     });
 
-    $( ".readmore" ).click(function() {
+    $(document).on('click', '.helpful', function(e) {
+        e.preventDefault();
+        var element;
+        var reviewId;
+        if($(this).closest('.list-group-review')[0]){
+            element = $(this).closest('.list-group-review')[0];
+            reviewId = element.id;
+        }
+        else if($(this).closest('.single-review')[0]){
+            element = $(this).closest('.single-review')[0];
+            reviewId = element.id;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/school/helpfuls/0/" + reviewId);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    if(result.result == "1"){
+                        var elements = $($.parseHTML(result.html));
+                        $(".hf_" + result.reviewId ).replaceWith(elements);
+                    }
+                }
+                else {
+                    alert("Problem.");
+                }
+            }
+        };
+        xhr.send();
+    });
+
+    $(".readmore" ).click(function(e) {
+        e.preventDefault();
         var reviewid = $(this).closest('.list-group-review')[0].id;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/school/reviews/" + reviewid + "?ajax=true");

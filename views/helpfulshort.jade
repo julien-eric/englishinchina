@@ -1,0 +1,25 @@
+- var logn = false
+- var classes = "hf_" + review.id + " "
+
+if loggedin == "true" || locals.user
+   - logn = true
+
+//LOGGED IN HASNT VOTED
+if logn && !review.hasHF
+   a.helpful.btn.btn-eic.btn-default.btn-sm(class="#{classes}", href="#")
+      span.glyphicon.glyphicon-thumbs-up
+      |&nbsp;Helpful #{review.helpfuls.length}
+
+//LOGGED IN HAS ALREADY VOTED
+if logn && review.hasHF
+   a.helpful.btn.btn-eic.btn-default.btn-sm.disabled.hasHF(class="#{classes}", href="#")
+      span.glyphicon.glyphicon-thumbs-up
+      |&nbsp;Helpful #{review.helpfuls.length}
+
+//ISNT LOGGED IN
+if !logn
+   a.helpful.btn.btn-default.btn-sm.disabled(class="#{classes}", href="#")
+      span.glyphicon.glyphicon-thumbs-up
+      |&nbsp;Helpful #{review.helpfuls.length}
+
+

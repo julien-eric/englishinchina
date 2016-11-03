@@ -1,0 +1,30 @@
+.popular-cities
+      if isSidebar
+         each province in popularProvinces
+            if province && province._id
+               li.list-group-item.col-sm-6.col-md-6.col-lg-6.col-xs-6.nopadding.popular-city
+                  div.col-sm-12.col-lg-12.col-md-12.nopadding
+                     div.col-sm-12.col-lg-12.col-md-12.nopadding
+                        a(href="/school/search?schoolInfo=&province=#{province._id.code}&city=-1")
+                           .img-container
+                              .img-frame.img-responsive(width="100%", style="background-image: url('#{pictureInfo.returnThumbnail(province.pictureUrl)}');")
+                        .clearfix
+                        a(href="/school/search?schoolInfo=&province=#{province._id.code}&city=-1")
+                           .city-name-panel
+                              h4 #{jadefunctions.capitalize(province._id.name)} - #{province._id.chineseName}
+                              if province.number == 1
+                                 p #{province.number} school
+                              else
+                                 p #{province.number} schools
+                     .clearfix
+      else
+         -var max = 7;
+         if popularProvinces.length < 7
+            - max = popularProvinces.length
+         - for (var i = 0; i < max; ++i)
+            - var item = {code:popularProvinces[i]._id.code, picture:popularProvinces[i].pictureUrl, pName:popularProvinces[i]._id.name, cName:popularProvinces[i]._id.chineseName, number:popularProvinces[i].number}
+            if(i == 0 || i == 6)
+               include largecell
+            else
+               include smallcell
+   .clearfix

@@ -4,6 +4,7 @@ module.exports = mongoose.model('School',{
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     name: String,
     description: String,
+    website: String,
     province: {type: mongoose.Schema.Types.ObjectId, ref: 'Province'},
     city: {type: mongoose.Schema.Types.ObjectId, ref: 'City'},
     schoolType: Number,
