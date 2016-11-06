@@ -481,9 +481,12 @@ module.exports = function(passport) {
             function sendEmailToReviewUser(review){
                 var user = review.user;
                 if(user.email != undefined){
-                    var message = "Hi " + review.user.username + "!\n " + review.helpfuls.length + " people think your review is helpful.\n Take a look : http://englishinchina.co/school/id/" + review.foreignId.id;
-                    var callbackMessage = "Thank you, we will get back to you shortly";
-                    email.sendEmail(user.email,"reviews@englishinchina.com","Review Feedback on " + review.foreignId.name, message, callbackMessage, req, function(){})
+                    //var message = "Hi " + review.user.username + "! " + review.helpfuls.length + " people think your review is helpful.\n Take a look : http://englishinchina.co/school/id/" + review.foreignId.id;
+                    var message = email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, function(message){
+                        var callbackMessage = "Thank you";
+                        email.sendEmail(user.email,"reviews@englishinchina.com","Review Feedback on " + review.foreignId.name, message, callbackMessage, req, function(){});
+                    });
+
                 }
             }
 

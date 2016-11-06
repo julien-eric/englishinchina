@@ -8,10 +8,22 @@ nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            //a.pull-left(href='/')
-            //    img.nav-logo(src="/images/logo2.gif")
-            //a.pull-left(href='/')
-            //    img.nav-brand(src="/images/logo-name2.gif")
+            a.pull-left(href='/')
+                img.nav-logo(src="/images/logo.png")
+            a.pull-left.hidden-xs(href='/')
+                img.nav-brand(src="/images/title.png")
+            a.pull-left.hidden-sm.hidden-md.hidden-lg(href='/')
+                img.nav-brand(src="/images/title-xs.png")
+            //if locals.user
+            //    a.pull-right
+            //        ul.nav.navbar-nav.navbar-right
+            //            li.profile-picture
+            //                if locals.user.fb && locals.user.useFacebookPic
+            //                    div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+            //                    div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+            //                else
+            //                    div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
+            //                    div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
         // Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
             ul.nav.navbar-nav
@@ -23,6 +35,7 @@ nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
                     a(href='/')
                         | About Us
                         span.sr-only (current)
+
             ul.nav.navbar-nav.navbar-right
                 if locals.user
                     li
@@ -50,7 +63,7 @@ nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
                             li.divider(role='separator')
                             li
                                 a(href='/signout') Sign Out
-                    li.profile-picture
+                    li.profile-picture.profile-picture.hidden-xs
                         if locals.user.fb && locals.user.useFacebookPic
                             div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
                             div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")

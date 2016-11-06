@@ -5,7 +5,7 @@ module.exports = {
 
     sendEmail : function(to, from, subject, text, callbackMessage,req, done){
 
-            //var senderName = "English in China";
+
             var smtpTransport = nodemailer.createTransport({
                 service: "sendGrid",
                 host : "smtp.sendgrid.net",
@@ -21,7 +21,8 @@ module.exports = {
                 to: to,
                 from: from,
                 subject: subject,
-                text: text
+                text: text,
+                html: text
             };
 
             smtpTransport.sendMail(mailOptions, function(err) {
@@ -29,6 +30,21 @@ module.exports = {
                 done(err, 'done');
             });
 
+    },
+
+    createReviewHelpfulMessage: function(res, name, numberHF, schoolId, callback){
+        res.render('email', {
+                name: name,
+                numberHF:numberHF,
+                schoolId: schoolId
+            },
+            function(err, html) {
+                if(err)
+                    console.log(err);
+                else{
+                    callback(html);
+                }
+            })
     },
 
     resetPassword : function(req, user, token, req, done){
