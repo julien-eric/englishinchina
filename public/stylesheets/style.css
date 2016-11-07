@@ -668,11 +668,14 @@ h2.searchmessage {
   background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-position: top;
+  background-size: 100% auto;
 /*height 500px;*/
 }
-/*@media (max-width: 1140px)*/
-/*.school-image-container*/
-/*padding-top 120px;*/
+@media (max-width: 568px) {
+  .school-image-container {
+    background-size: 150% auto;
+  }
+}
 .school-content {
   background-color: #fff;
 }

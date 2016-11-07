@@ -6,13 +6,13 @@ if isSidebar
 
 .popular-categories.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-10.col-md-offset-1
    ul.nav.nav-pills
-      li
-         a(data-toggle="pill" href="##{ncities}") Popular Cities
       li.active
          a(data-toggle="pill" href="##{nprovinces}") Popular Provinces
+      li
+         a(data-toggle="pill" href="##{ncities}") Popular Cities
    .tab-content
-      .tab-pane.fade(id="#{ncities}")
-         include popularcities
       .tab-pane.fade.in.active(id="#{nprovinces}")
          include popularprovinces
+      .tab-pane.fade(id="#{ncities}")
+         include popularcities
    .clearfix
