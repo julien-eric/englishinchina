@@ -529,6 +529,10 @@ h2.searchmessage {
   }
 }
 @media (max-width: 540px) {
+  .popular-categories {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .popular-city,
   .popular-city .img-container,
   .popular-city .img-frame,

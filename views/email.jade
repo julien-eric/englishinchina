@@ -13,7 +13,7 @@ head
       table td {border-collapse: collapse;} /* Outlook 07, 10 padding issue fix */
       table {border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; } /* remove spacing around Outlook 07, 10 tables */
       /* bring inline */
-      img {display: block; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+      img {display: inline-block; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; padding-right: 15px;}
       a img {border: none;}
       a {text-decoration: none; color: #000001;} /* text link */
       a.phone {text-decoration: none; color: #000001 !important; pointer-events: auto; cursor: default;} /* phone link, use as wrapper on phone numbers */
@@ -31,14 +31,18 @@ head
                   tr
                      td(valign='top')
                         // content wrapper
-                        h1 English in China
-                        img(src="full path to image" alt="alt text" title="title text" width="50" height="50" style="width: 50px; height: 50px;")
+                        //h1 English in China
+                        img(src="http://englishinchina.co/images/logo.png" alt="EIC Logo" title="English in China" width="50" height="50" style="width: 50px; height: 50px;")
+                        img(src="http://englishinchina.co/images/title-xs.png" alt="EIC Brand" title="English in China" width="50" height="50" style="width: 200px; height: 50px;")
                         hr
                         br
                         span Hi #{name}!
                         br
                         br
-                        span Others users have interacted with your post. #{numberHF} people think your review on Shane East City English School is useful. Thank you for using English in China.
+                        if numberHF = 1
+                           span Others users have interacted with your post. #{numberHF} person thinks your review on Shane East City English School is useful. Thank you for using English in China.
+                        else
+                           span Others users have interacted with your post. #{numberHF} people think your review on Shane East City English School is useful. Thank you for using English in China.
                         br
                         br
                         span EIC Team
