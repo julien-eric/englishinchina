@@ -664,7 +664,7 @@ h2.searchmessage {
   top: 0;
 }
 .school-image-container {
-  padding-top: 200px;
+  padding-top: 260px;
   background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-position: top;
@@ -677,11 +677,36 @@ h2.searchmessage {
   }
 }
 .school-content {
+  padding-top: 15px;
   background-color: #fff;
 }
-.school-content h1 {
-  font-size: 45px;
+.darkbg {
+  background: -webkit-linear-gradient(-90deg, rgba(69,150,44,0.51), rgba(41,146,152,0.51)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(-90deg, rgba(69,150,44,0.51), rgba(41,146,152,0.51)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(-90deg, rgba(69,150,44,0.51), rgba(41,146,152,0.51)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(-90deg, rgba(69,150,44,0.51), rgba(41,146,152,0.51)); /* Standard syntax */
+  background-color: rgba(0,0,0,0.5);
   padding-top: 20px;
+  padding-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .darkbg {
+    background-color: #000;
+  }
+}
+@media (max-width: 540px) {
+  .darkbg {
+    background-color: #000;
+  }
+}
+.darkbg h1 {
+  font-size: 4em;
+  font-weight: 100;
+  color: #fff;
+}
+.darkbg h3 {
+  font-weight: 300;
+  color: #fff;
 }
 .school-location {
   padding-bottom: 15px;
