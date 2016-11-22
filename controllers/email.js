@@ -55,7 +55,7 @@ module.exports = {
 
         var callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.'
 
-        this.exports.sendEmail(user.email,'passwordreset@englishinchina.co','English in China Password Reset', text, callbackMessage, req, done);
+        module.exports.sendEmail(user.email,'passwordreset@englishinchina.co','English in China Password Reset', text, callbackMessage, req, done);
     }
 
 }
