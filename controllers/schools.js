@@ -216,31 +216,39 @@ module.exports = {
         var searchQueryMessage = "";
 
         if(prov != -1){ //Province is specified
-            provincesController.getProvinceByCode(prov, function(provModel){
-                if(schoolInfo != ""){
-                    searchQueryMessage += '"' + schoolInfo + '" in ' ;
-                }
-                searchQueryMessage += provModel.name + "(" + provModel.chineseName + ")";
+            provincesController.getProvinceByCode(prov, function(err, provModel){
+                if(!err){
+                    if(schoolInfo != ""){
+                        searchQueryMessage += '"' + schoolInfo + '" in ' ;
+                    }
+                    searchQueryMessage += provModel.name + "(" + provModel.chineseName + ")";
 
-                if(city != -1){ //City is also specified
-                    citiesController.getCityByCode(city,function(cityModel){
-                        searchQueryMessage += ", " + jadeutilityfunctions.capitalize(cityModel.pinyinName) + "(" + cityModel.chineseName + ")";
+                    if(city != -1){ //City is also specified
+                        citiesController.getCityByCode(city,function(cityModel){
+                            searchQueryMessage += ", " + jadeutilityfunctions.capitalize(cityModel.pinyinName) + "(" + cityModel.chineseName + ")";
+                            School.
+                                find({name: new RegExp(schoolInfo, "i")}).
+                                populate("province").
+                                populate("city").
+                                where('province').equals(provModel).
+                                where('city').equals(cityModel).
+                                limit(10).
+                                exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
+                        });
+                    }
+                    else{
                         School.
                             find({name: new RegExp(schoolInfo, "i")}).
                             populate("province").
                             populate("city").
-                            where('province').equals(provModel).
-                            where('city').equals(cityModel).
-                            limit(10).
                             exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
-                    });
+                    }
                 }
                 else{
-                    School.
-                        find({name: new RegExp(schoolInfo, "i")}).
+                    School. //Province and City is not specified
+                        find({name: new RegExp(schoolInfo,"i")}).
                         populate("province").
                         populate("city").
-                        where('province').equals(provModel).
                         limit(10).
                         exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
                 }
@@ -263,7 +271,7 @@ module.exports = {
 
         }
         else{
-            School. //Province is not specified
+            School. //Province and City is not specified
                 find({name: new RegExp(schoolInfo,"i")}).
                 populate("province").
                 populate("city").

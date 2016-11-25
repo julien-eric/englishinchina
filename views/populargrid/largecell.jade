@@ -5,12 +5,22 @@ li.list-group-item.col-sm-8.col-md-8.col-lg-8.col-xs-8.nopadding.popular-city
             .img-container
                .img-frame(style="background-image: url('#{pictureInfo.returnLarge(item.picture)}');")
          .clearfix
-         a(href="/school/search?schoolInfo=&province=#{item.code}&city=-1")
-            .city-name-panel
-               h4 #{jadefunctions.capitalize(item.pName)}
-                span.hidden-xs - #{item.cName}
-               if item.number == 1
-                  p #{item.number} school
-               else
-                  p #{item.number} schools
+         if isCity
+            a(href="/school/search?schoolInfo=&province=-1&city=#{item.code}")
+               .city-name-panel
+                  h4 #{jadefunctions.capitalize(item.pName)}
+                   span.hidden-xs - #{item.cName}
+                  if item.number == 1
+                     p #{item.number} school
+                  else
+                     p #{item.number} schools
+         else
+            a(href="/school/search?schoolInfo=&province=#{item.code}&city=-1")
+               .city-name-panel
+                  h4 #{jadefunctions.capitalize(item.pName)}
+                     span.hidden-xs - #{item.cName}
+                  if item.number == 1
+                     p #{item.number} school
+                  else
+                     p #{item.number} schools
       .clearfix
