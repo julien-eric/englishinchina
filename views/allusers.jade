@@ -1,0 +1,8 @@
+extends layout
+block content
+   div.container
+      div.lift-content
+         div.col-sm-12.col-md-8
+            ul
+            each user in users
+               li #{user.username}

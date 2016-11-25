@@ -427,6 +427,26 @@ module.exports = function(passport){
     });
 
     /************************************************************************************************************
+     *GETUSERS :
+     *************************************************************************************************************/
+    router.get('/allusers', isAuthenticated, function(req, res){
+        if(req.user.admin){
+            usersController.getAllUsers(function(users){
+                res.render('allusers', {
+                    title: "Users - English in China",
+                    users: users,
+                    pictureInfo: pictureinfo,
+                    jadefunctions: jadefunctions,
+                    moment: moment,
+                    scripts:[scripts.util]
+                });
+            });
+        }
+        else{
+            return "nice try";
+        }
+    });
+    /************************************************************************************************************
      * sign_s3 : GET get signed request to upload to server directly.
      *************************************************************************************************************/
     router.get('/sign_s3', function (req, res) {
