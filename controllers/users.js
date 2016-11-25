@@ -46,7 +46,6 @@ module.exports = {
             useFacebookPic = true;
         }
 
-
         User.findOneAndUpdate({_id:user.id}, {
                 username:user.username,
                 firstName:user.firstName,
