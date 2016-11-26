@@ -241,6 +241,7 @@ module.exports = {
                             find({name: new RegExp(schoolInfo, "i")}).
                             populate("province").
                             populate("city").
+                            where('province').equals(provModel).
                             exec(function(err,schoolList){callback(schoolList, searchQueryMessage)});
                     }
                 }
