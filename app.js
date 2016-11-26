@@ -15,10 +15,6 @@ var favicon = require('serve-favicon');
 var flash = require('express-flash');
 
 
-
-
-
-
 // Connect to DB
 //mongoose.connect(dbConfig.urldev,function(){
 //  /* Drop the DB */
@@ -37,11 +33,11 @@ var S3_BUCKET = process.env.S3_BUCKET;
 var app = express();
 
 //REMOVE THIS AND RUN FROM BIN
-//var debug = require('debug')('passport-mongo');
-//app.set('port', process.env.PORT || 3000);
-//var server = app.listen(app.get('port'), function() {
-//  debug('Express server listening on port ' + server.address().port);
-//});
+var debug = require('debug')('passport-mongo');
+app.set('port', process.env.PORT || 3000);
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
 //////////////////////////////
 
 function compile(str, path) {
@@ -69,12 +65,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
+var MongoStore = require('connect-mongo')(expressSession);
 
 app.use(expressSession({
-    cookie: { maxAge: 60* 60000 },
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000))},
     secret: 'mySecretKey',
-    saveUninitialized: true,
-    resave: true}));
+    saveUninitialized: true
+}));
+//app.use(expressSession({
+//    cookie: { maxAge: 100* 60000 },
+//    secret: 'mySecretKey',
+//    saveUninitialized: true,
+//    resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
