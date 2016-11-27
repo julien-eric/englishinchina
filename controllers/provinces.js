@@ -33,7 +33,12 @@ module.exports = {
 
     getProvinceByCode : function(code, callback){
         Province.findOne({code:code}).exec(function(err, province){
-            callback(err, province);
+            if(err){
+                console.log(err)
+            }
+            else{
+                callback(province);
+            }
         });
     },
 
