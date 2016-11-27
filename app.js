@@ -71,6 +71,7 @@ app.use(expressSession({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000))},
     secret: 'mySecretKey',
+    resave: true,
     saveUninitialized: true
 }));
 //app.use(expressSession({
