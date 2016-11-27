@@ -72,6 +72,7 @@ module.exports = {
 
     nl2br : function(str, is_xhtml) {
         var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : "<br>"; // Adjust comment to avoid issue on phpjs.org display
+        //str = str.replace("\r\n", "\n").replace("\r", "\n")
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 

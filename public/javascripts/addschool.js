@@ -1,9 +1,20 @@
 $(document).ready(function() {
 
-    $('#description-textarea').wysihtml5({
-        "link": false, //Button to insert a link. Default true
-        "image": false, //Button to insert an image. Default true,
-        "color": false //Button to change color of font
+    tinymce.init({
+        selector: '#description-textarea',
+        menubar: false,
+        style_formats:[
+            {title: "Header",format: "h3"}
+        ],
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        },
+        toolbar: 'undo redo styleselect bold italic outdent indent bullist numlist',
+        content_css: [
+            'http://englishinchina.co/stylesheets/style.css'
+        ]
     });
 
 });

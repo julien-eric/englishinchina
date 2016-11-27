@@ -69,7 +69,7 @@ module.exports = function(passport) {
                         schoolOwner = true;
                     }
 
-                    school.description = jadefunctions.nl2br(school.description, false);
+                    //school.description = jadefunctions.nl2br(school.description, false);
                     var reviewDistribution = reviews.createReviewDistribution(reviewList);
 
                     res.render('school/school', {
