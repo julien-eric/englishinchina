@@ -16,6 +16,7 @@ var usersController = require('../controllers/users');
 var async = require('async');
 var crypto = require('crypto');
 var scripts = require('../scripts').scripts;
+var bCrypt = require('bcrypt-nodejs');
 
 /************************************************************************************************************
  *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -320,7 +321,11 @@ module.exports = function(passport){
                 return res.redirect('back');
             }
 
-            user.password = req.body.password;
+            // Generates hash using bCrypt
+            var createHash = function(password){
+                return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+            }
+            user.password = createHash(req.body.password);
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
 
