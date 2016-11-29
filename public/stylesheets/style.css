@@ -26,6 +26,12 @@
   font-weight: 900;
   src: local('Roboto Black'), local('Roboto-Black'), url("../fonts/roboto-v15-latin-900.woff2") format('woff2'), url("../fonts/roboto-v15-latin-900.woff") format('woff');
 }
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url("../fonts/RobotoCondensed-Light.ttf") format('truetype');
+}
 .navbar-custom {
   margin-bottom: 0;
   border-radius: 0;
@@ -700,8 +706,9 @@ h2.searchmessage {
   }
 }
 .darkbg h1 {
+  font-family: 'Roboto Condensed';
   font-size: 4em;
-  font-weight: 100;
+  font-weight: 300;
   color: #fff;
 }
 .darkbg h3 {
