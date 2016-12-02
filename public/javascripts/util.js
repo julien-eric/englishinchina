@@ -128,7 +128,6 @@ $(document).ready(function() {
     setUploadFile();
 
 
-
     $('#city-select.empty').prop('disabled', 'disabled');
 
     $('#provinceSelect').on('change', function() {
