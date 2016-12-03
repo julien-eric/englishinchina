@@ -11,30 +11,35 @@ $(document).ready(function() {
         });
     });
 
-    $( ".school-img-list-item" ).click(function() {
-
-        var photoid = $(this).closest('.school-image-item')[0].id;
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/school/getphoto/" + photoid);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    $( "#modal-dialog").empty();
-                    var response = JSON.parse(xhr.responseText);
-                    var elements = $($.parseHTML(response.html));
-                    $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-dialog");
-                    });
-                    $( "#modal" ).trigger( "click" );
-                    setUploadFile();
-                }
-                else {
-                    alert("Problem.");
-                }
-            }
-        };
-        xhr.send();
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
     });
+
+    //$( ".school-img-list-item" ).click(function() {
+    //
+    //    var photoid = $(this).closest('.school-image-item')[0].id;
+    //    var xhr = new XMLHttpRequest();
+    //    xhr.open("GET", "/school/getphoto/" + photoid);
+    //    xhr.onreadystatechange = function () {
+    //        if (xhr.readyState === 4) {
+    //            if (xhr.status === 200) {
+    //                $( "#modal-dialog").empty();
+    //                var response = JSON.parse(xhr.responseText);
+    //                var elements = $($.parseHTML(response.html));
+    //                $.each(elements,function(index, element){
+    //                    $(element).appendTo("#modal-dialog");
+    //                });
+    //                $( "#modal" ).trigger( "click" );
+    //                setUploadFile();
+    //            }
+    //            else {
+    //                alert("Problem.");
+    //            }
+    //        }
+    //    };
+    //    xhr.send();
+    //});
 
     $("#ajax-add-photo" ).click(function() {
         var schoolid = $('#schoolid').attr('value')

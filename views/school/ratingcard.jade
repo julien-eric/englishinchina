@@ -1,9 +1,10 @@
 if reviewsCount > 0
-   .school-rating-card.col-lg-12
-      .col-xs-4.col-sm-4.col-md-4.col-lg-4
-         .school-rating #{jadefunctions.roundToPoint5(school.averageRating)}
-         #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
-         p #{reviewsCount}  Reviews
+   .school-rating-card.col-lg-8
+      .col-xs-4.col-sm-4.col-md-4.col-lg-4.align-center
+            .school-rating #{jadefunctions.roundToPoint5(school.averageRating)}
+            .center
+               #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+            p #{reviewsCount}  Reviews
       .star-rating-row.col-xs-1.col-sm-1.col-md-1.col-lg-1
          p
             span.spacious 1

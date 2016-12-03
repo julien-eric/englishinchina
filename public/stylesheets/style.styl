@@ -129,10 +129,13 @@ h3.has-hr
   background-color #223F3A
 
 .no-padding-left
-  padding-left 0;
+  padding-left 0 !important;
 
 .add-photo
   background-color #f9f9f9
+
+.modal-dialog
+  margin auto;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //NAVBAR #1
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -549,7 +552,29 @@ h2.searchmessage
   .popular-cities .city-name-panel h4
     font-size 1.2em;
 
+/////////////////////////////////////////////////////////////////////////////////////
+//CARDS
+/////////////////////////////////////////////////////////////////////////////////////
+.cards .nav-pills
+  margin-top 50px;
+  font-size 2 em;
+  font-weight 100;
 
+.cards
+  margin-top 10px;
+
+.cards .nav-pills>li.active>a, .cards .nav-pills>li.active>a:hover, .cards .nav-pills>li.active>a:focus
+  color: #000000;
+  background-color: #FFFFFF;
+  font-weight bold;
+
+.cards .nav-pills>li>a, .cards .nav-pills>li>a:hover, .cards .nav-pills>li>a:focus
+  color: #000000;
+  background-color: #FFFFFF;
+
+.cards .nav-pills>li>a
+  border-radius: 0px;
+  margin-bottom 1px;
 
 /////////////////////////////////////////////////////////////////////////////////////
 //EXPLORE BAR
@@ -769,9 +794,9 @@ h2.searchmessage
   top 0;
   right 0;
 
-.modal-dialog
-  margin: 35px 10px 10px 10px;
-  width auto
+/*.modal-dialog*/
+  /*margin: 35px 10px 10px 10px;*/
+  /*width auto*/
 
 .modal-body
   padding 0
@@ -792,6 +817,7 @@ h2.searchmessage
 .list-group-review-outer
   display inline-table;
   padding 10px;
+  padding-left: 0;
   min-width: 280px;
 
 .list-group-review
@@ -870,6 +896,7 @@ h2.searchmessage
 #load-more-reviews,
 #btn-review{
   display: inline-block;
+  margin-right: 10px;
   vertical-align: top;
 }
 
@@ -894,15 +921,28 @@ h2.searchmessage
   /*text-align center;*/
   border solid 1px #cccccc;
   background-color #f9f9f9;
-  margin-top 40px;
+  margin-top 10px;
   padding 15px 10px 15px 10px;
   /*width 300px*/
   /*height: 140px;*/
 
+.center
+  width 100px
+  margin auto
+  padding-left 10px
+
 .school-breakdown-card
   border solid 1px #cccccc;
   background-color #f9f9f9;
+  margin-top 10px;
   padding 15px 10px 15px 10px;
+
+.school-breakdown-card .criteria-name ul li
+  /*text-align right*/
+  line-height 16px
+  font-weight 300;
+  font-size 17px;
+  /*font-weight bold*/
 
 .school-rating
   font-size 60px;
@@ -915,6 +955,7 @@ h2.searchmessage
 
 .star-rating-row p
   margin 0 0 8px;
+  line-height 23px;
 
 /////////////////////////////////////////////////////////////////////////////////////
 //Schoolpage helpfuls

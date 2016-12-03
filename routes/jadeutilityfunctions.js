@@ -48,14 +48,16 @@ module.exports = {
      *roundToPoint5 : Round to closest .5 for school ratings..
      *************************************************************************************************************/
     roundToPoint5 : function(rating){
-        return (Math.round(rating*2))/2
+        var number = (Math.round(rating*2))/2;
+        return number.toFixed(1);
     },
 
     /************************************************************************************************************
      *scale in 4 : Round to closest .5 for school ratings..
      *************************************************************************************************************/
     scale1to4 : function(number){
-        return ((number/5)*4)+1
+        var number =  ((number/5)*4)+1
+        return number.toFixed(1);
     },
 
     /************************************************************************************************************

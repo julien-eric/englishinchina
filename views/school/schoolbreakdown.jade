@@ -1,8 +1,5 @@
-h3 Breakdown
-hr
-//p This data is compiled from the reviews only. For more information about these categories, look hover your mouse or touch.
 .school-breakdown-card
-   .col-xs-4.col-sm-3.col-md-3.col-lg-2
+   .criteria-name.col-xs-4.col-sm-3.col-md-3.col-lg-3
       ul.breakdown-criteria.nopadding
          li #{criteria[0].shortName}
          li #{criteria[1].shortName}
@@ -12,7 +9,7 @@ hr
          li #{criteria[5].shortName}
          li #{criteria[6].shortName}
          li #{criteria[7].shortName}
-   .col-xs-8.col-sm-9.col-md-9.col-lg-10
+   .col-xs-8.col-sm-9.col-md-9.col-lg-9.no-padding-left
       ul.chart
          li(title=Math.round(criteriaScore.c1*10)/10)
             span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c1))
@@ -33,45 +30,3 @@ hr
          li.reference-bar
             span.bar(data-number=5)
    .clearfix
-
-//h3 Breakdown
-//hr
-////p This data is compiled from the reviews only. For more information about these categories, look hover your mouse or touch.
-//.school-rating-card
-//   .criteria
-//   ul.col-lg-4
-//      li #{criteria[0].shortName}
-//      li #{criteria[1].shortName}
-//      li #{criteria[2].shortName}
-//      li #{criteria[3].shortName}
-//      li #{criteria[4].shortName}
-//      li #{criteria[5].shortName}
-//      li #{criteria[6].shortName}
-//      li #{criteria[7].shortName}
-//   ul.chart.col-lg-8
-//      li(title=criteria[0].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c1))
-//         span.number #{Math.round(criteriaScore.c1 * 10) / 10}
-//      li(title=criteria[1].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c2))
-//         span.number #{Math.round(criteriaScore.c2 * 10) / 10}
-//      li(title=criteria[2].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c3))
-//         span.number #{Math.round(criteriaScore.c3 * 10) / 10}
-//      li(title=criteria[3].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c4))
-//         span.number #{Math.round(criteriaScore.c4 * 10) / 10}
-//      li(title=criteria[4].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c5))
-//         span.number #{Math.round(criteriaScore.c5 * 10) / 10}
-//      li(title=criteria[5].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c6))
-//         span.number #{Math.round(criteriaScore.c6 * 10) / 10}
-//      li(title=criteria[6].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c7))
-//         span.number #{Math.round(criteriaScore.c7 * 10) / 10}
-//      li(title=criteria[7].shortName)
-//         span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c8))
-//         span.number #{Math.round(criteriaScore.c8 * 10) / 10}
-//      li.reference-bar
-//         span.bar(data-number=5)

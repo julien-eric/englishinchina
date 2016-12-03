@@ -216,7 +216,7 @@ module.exports = {
         var searchQueryMessage = "";
 
         if(prov != -1){ //Province is specified
-            provincesController.getProvinceByCode(prov, function(err, provModel){
+            provincesController.getProvinceByCode(prov, function(err,provModel){
                 if(!err){
                     if(schoolInfo != ""){
                         searchQueryMessage += '"' + schoolInfo + '" in ' ;

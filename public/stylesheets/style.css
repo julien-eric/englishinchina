@@ -122,10 +122,13 @@ h3.has-hr {
   background-color: #223f3a;
 }
 .no-padding-left {
-  padding-left: 0;
+  padding-left: 0 !important;
 }
 .add-photo {
   background-color: #f9f9f9;
+}
+.modal-dialog {
+  margin: auto;
 }
 .paddingundernav {
   height: 50px;
@@ -553,6 +556,31 @@ h2.searchmessage {
     font-size: 1.2em;
   }
 }
+.cards .nav-pills {
+  margin-top: 50px;
+  font-size: 2em;
+  font-weight: 100;
+}
+.cards {
+  margin-top: 10px;
+}
+.cards .nav-pills>li.active>a,
+.cards .nav-pills>li.active>a:hover,
+.cards .nav-pills>li.active>a:focus {
+  color: #000;
+  background-color: #fff;
+  font-weight: bold;
+}
+.cards .nav-pills>li>a,
+.cards .nav-pills>li>a:hover,
+.cards .nav-pills>li>a:focus {
+  color: #000;
+  background-color: #fff;
+}
+.cards .nav-pills>li>a {
+  border-radius: 0px;
+  margin-bottom: 1px;
+}
 .explorebar nav {
   min-height: 20px;
 }
@@ -814,10 +842,9 @@ h2.searchmessage {
   top: 0;
   right: 0;
 }
-.modal-dialog {
-  margin: 35px 10px 10px 10px;
-  width: auto;
-}
+/*.modal-dialog*/
+/*margin: 35px 10px 10px 10px;*/
+/*width auto*/
 .modal-body {
   padding: 0;
 }
@@ -837,6 +864,7 @@ h2.searchmessage {
 .list-group-review-outer {
   display: inline-table;
   padding: 10px;
+  padding-left: 0;
   min-width: 280px;
 }
 .list-group-review {
@@ -917,6 +945,7 @@ h2.searchmessage {
 #load-more-reviews,
 #btn-review {
   display: inline-block;
+  margin-right: 10px;
   vertical-align: top;
 }
 .read-review {
@@ -935,15 +964,28 @@ h2.searchmessage {
 /*text-align center;*/
   border: solid 1px #ccc;
   background-color: #f9f9f9;
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 15px 10px 15px 10px;
 /*width 300px*/
 /*height: 140px;*/
 }
+.center {
+  width: 100px;
+  margin: auto;
+  padding-left: 10px;
+}
 .school-breakdown-card {
   border: solid 1px #ccc;
   background-color: #f9f9f9;
+  margin-top: 10px;
   padding: 15px 10px 15px 10px;
+}
+.school-breakdown-card .criteria-name ul li {
+/*text-align right*/
+  line-height: 16px;
+  font-weight: 300;
+  font-size: 17px;
+/*font-weight bold*/
 }
 .school-rating {
   font-size: 60px;
@@ -956,6 +998,7 @@ h2.searchmessage {
 }
 .star-rating-row p {
   margin: 0 0 8px;
+  line-height: 23px;
 }
 .hasHF {
   color: #337ab7;

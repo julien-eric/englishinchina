@@ -87,7 +87,7 @@ module.exports = function(passport) {
                         popularCities: popularCities,
                         popularProvinces: popularProvinces,
                         pictureInfo: pictureinfo,
-                        scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.schoolpage, scripts.libsharer]
+                        scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
                     });
                 },6,1,true,req);
             }
