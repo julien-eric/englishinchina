@@ -570,6 +570,11 @@ h2.searchmessage {
   font-size: 2em;
   font-weight: 100;
 }
+@media (max-width: 540px) {
+  .cards .nav-pills {
+    font-size: 1.3em;
+  }
+}
 .cards {
   margin-top: 10px;
 }
@@ -601,7 +606,7 @@ h2.searchmessage {
   text-align: center;
 }
 .explorebar .dropdown-menu {
-  background-color: #2a303c;
+  background-color: #000;
 }
 .explorebar .dropdown-menu>li>a {
   color: #fff;
@@ -610,7 +615,7 @@ h2.searchmessage {
   background-color: #424c5f;
 }
 .explorebar .navbar {
-  background: #2a303c;
+  background: #000;
   border-bottom: none;
 }
 .explorebar .navbar .nav > li > a {
@@ -1055,16 +1060,20 @@ h2.searchmessage {
   background-size: cover;
 }
 footer {
-  border-top: solid 1px #555;
+  border-top: 0;
   width: 100%;
   min-height: 200px;
-  background-color: #2a303c;
+  background-color: #000;
+}
+footer h2 {
+  font-family: 'Roboto Condensed';
+  font-size: 2.3em;
 }
 .footer-box {
   padding-bottom: 20px;
 }
 footer .container {
-  color: #ccc;
+  color: #fff;
 }
 .footer-box ul {
   list-style: none;

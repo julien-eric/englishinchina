@@ -567,8 +567,13 @@ h2.searchmessage
 /////////////////////////////////////////////////////////////////////////////////////
 .cards .nav-pills
   margin-top 50px;
-  font-size 2 em;
+  font-size 2em;
   font-weight 100;
+
+@media (max-width: 540px)
+  .cards .nav-pills
+    font-size 1.3em;
+
 
 .cards
   margin-top 10px;
@@ -599,7 +604,7 @@ h2.searchmessage
 .explorebar .navbar
     text-align: center;
 .explorebar .dropdown-menu
-  background-color #2a303c
+  background-color #000000
 
 .explorebar .dropdown-menu>li>a
   color: #ffffff;
@@ -608,7 +613,7 @@ h2.searchmessage
 .explorebar .dropdown-menu>li>a:hover
   background-color: #424c5f
 
-.explorebar .navbar { background:#2a303c; border-bottom:none; }
+.explorebar .navbar { background:#000000; border-bottom:none; }
 .explorebar .navbar .nav > li > a {color: #FFFFFF;}
 .explorebar .navbar .nav > li > a:hover {color: #fff; background-color: #444444;}
 .explorebar .navbar .nav .active > a,.explorebar .navbar .nav .active > a:hover {color: #fff; background-color: #501762;}
@@ -1023,16 +1028,20 @@ h2.searchmessage
 /////////////////////////////////////////////////////////////////////////////////////
 
 footer
-  border-top solid 1px #555555
+  border-top 0
   width: 100%;
   min-height: 200px;
-  background-color: #2a303c
+  background-color: #000000
+
+footer h2
+  font-family 'Roboto Condensed'
+  font-size 2.3em
 
 .footer-box
   padding-bottom 20px;
 
 footer .container
-  color:#CCCCCC
+  color:#FFFFFF
 
 .footer-box ul
   list-style:none;
