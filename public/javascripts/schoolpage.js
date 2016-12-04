@@ -5,11 +5,20 @@ $(document).ready(function() {
         speed: 1800
     });
 
-    $( "#read-more" ).click(function() {
-        $(".description-container").animate({"max-height":'2000px'}, 500,function(){
-            $("#read-more").remove()
+
+    var height = $(".description-container").height();
+    if(height> 550){
+        $(".description-container").animate({"max-height":'550px'}, 500,function(){});
+        $( "#read-more" ).click(function() {
+            $(".description-container").animate({"max-height":'2000px'}, 500,function(){
+                $("#read-more").remove()
+            });
         });
-    });
+    }
+    else{
+        $("#read-more").remove()
+    }
+
 
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();

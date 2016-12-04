@@ -31,8 +31,9 @@ block content
                div.description-container
                   p.login-title !{school.description}
                h5#read-more
-                  span.glyphicon.glyphicon-chevron-down
-                  #description-readmore.description-readmore Read Full Description
+
+                  //#description-readmore.description-readmore
+                  #description-readmore.description-readmore.btn.btn-eic.btn-default.btn-sm Read Full Description
                span.clearfix
 
             .col-xs-12.col-sm-12.col-md-12.col-lg-4
@@ -69,7 +70,6 @@ block content
                   a#review.btn.btn-eic.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
                else
                   a#review.btn.btn-eic.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
-               #load-more-reviews.btn.btn-eic.btn-primary.btn-lg Load More
             //.container
             include ../populargrid/popularcategories
                //.clearfix
