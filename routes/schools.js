@@ -115,7 +115,7 @@ module.exports = function(passport) {
                     user: req.user,
                     pictureInfo: pictureinfo,
                     provinces: provinces,
-                    scripts:[scripts.util, scripts.addschool],
+                    scripts:[scripts.util, scripts.libtinyMCE, scripts.addschool],
                     incompleteSchool:incompleteSchool
                 });
             });

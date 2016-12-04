@@ -54,8 +54,10 @@ module.exports = {
         async.waterfall([
 
                 function getProvince(next){
-                    provincesController.getProvinceByCode(school.province, function(province){
-                        next(null, province);
+                    provincesController.getProvinceByCode(school.province, function(err, province){
+                        if(!err){
+                            next(null, province);
+                        }
                     });
                 },
                 function getCity(province,next){
@@ -73,6 +75,7 @@ module.exports = {
                             type: 1,
                             user: null,
                             school: createdSchool,
+                            description: createdSchool.name,
                             url: createdSchool.pictureUrl,
                             date: Date.now()
                         },
@@ -152,6 +155,7 @@ module.exports = {
                             type: 1,
                             user: null,
                             school: editedSchool,
+                            description: editedSchool.name,
                             url: editedSchool.pictureUrl,
                             date: Date.now()
                         },

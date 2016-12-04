@@ -1,0 +1,19 @@
+if review.hasHF
+   .pull-left.col-sm-4
+      include helpfulshort
+   .col-xs-8.col-sm-10.col-md-10.col-lg-10.hidden-xs.helpful-info
+      if(review.helpfuls.length==1)
+            |#{review.helpfuls.length} you think this review is helpful
+      else
+         |#{review.helpfuls.length} users including yourself think this review is helpful
+   .col-sm-8.visible-xs.helpful-info Thank you
+
+else
+   .pull-left.col-xs-4.col-sm-2.col-md-2.col-lg-2
+      include helpfulshort
+   .col-sm-8.hidden-xs.helpful-info
+      if(review.helpfuls.length==1)
+            |#{review.helpfuls.length} user thinks this review is helpful, what do you think? Log in to vote
+      else
+         |#{review.helpfuls.length} users think this review is helpful, what do you think? Log in to vote
+   .col-sm-8.visible-xs.helpful-info Log in to vote

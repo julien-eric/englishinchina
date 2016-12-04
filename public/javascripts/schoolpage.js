@@ -48,11 +48,11 @@ $(document).ready(function() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    $( "#modal-dialog").empty();
+                    $( "#modal-body").empty();
                     var response = JSON.parse(xhr.responseText);
                     var elements = $($.parseHTML(response.html));
                     $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-dialog");
+                        $(element).appendTo("#modal-body");
                     });
                     $( "#modal" ).trigger( "click" );
                     setUploadFile();
@@ -104,11 +104,11 @@ $(document).ready(function() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    $( "#modal-dialog").empty();
+                    $( "#modal-body").empty();
                     var response = JSON.parse(xhr.responseText);
                     var elements = $($.parseHTML(response.html));
                     $.each(elements,function(index, element){
-                        $(element).appendTo("#modal-dialog");
+                        $(element).appendTo("#modal-body");
                     });
                     $( "#modal" ).trigger( "click" );
                     $(".rating").rate({

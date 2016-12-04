@@ -130,6 +130,15 @@ h3.has-hr {
 .modal-dialog {
   margin: auto;
 }
+.modal-header {
+  border-bottom: 0;
+}
+.padding-block {
+  height: 15px;
+}
+.no-border {
+  border: 0;
+}
 .paddingundernav {
   height: 50px;
 }
@@ -709,6 +718,9 @@ h2.searchmessage {
   .school-image-container {
     background-size: 150% auto;
   }
+  .school-content {
+    padding: 15px 0 15px 0;
+  }
 }
 .school-content {
   padding-top: 15px;
@@ -842,6 +854,11 @@ h2.searchmessage {
   top: 0;
   right: 0;
 }
+.picture-corner-right {
+  position: relative;
+  top: 0;
+  left: 0;
+}
 /*.modal-dialog*/
 /*margin: 35px 10px 10px 10px;*/
 /*width auto*/
@@ -879,10 +896,11 @@ h2.searchmessage {
 .single-review {
   display: inline-table;
 /*width 22em;*/
-  padding: 20px 20px 10px 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   min-width: 280px;
   background: #fff;
-  border: solid 1px #eee;
+/*border solid 1px #EEEEEE;*/
 }
 .profile-picture {
   width: 40px;
@@ -981,11 +999,16 @@ h2.searchmessage {
   padding: 15px 10px 15px 10px;
 }
 .school-breakdown-card .criteria-name ul li {
-/*text-align right*/
   line-height: 16px;
   font-weight: 300;
   font-size: 17px;
-/*font-weight bold*/
+}
+@media (max-width: 568px) {
+  .school-breakdown-card .criteria-name ul li {
+    line-height: 16px;
+    font-weight: 300;
+    font-size: 14px;
+  }
 }
 .school-rating {
   font-size: 60px;
@@ -1002,6 +1025,9 @@ h2.searchmessage {
 }
 .hasHF {
   color: #337ab7;
+}
+.helpful-info {
+  line-height: 30px;
 }
 .criteria {
   font-size: 20px;
@@ -1027,4 +1053,35 @@ h2.searchmessage {
 .school-image-preview {
   height: 300px;
   background-size: cover;
+}
+footer {
+  border-top: solid 1px #555;
+  width: 100%;
+  min-height: 200px;
+  background-color: #2a303c;
+}
+.footer-box {
+  padding-bottom: 20px;
+}
+footer .container {
+  color: #ccc;
+}
+.footer-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+.footer-box ul li {
+  padding-bottom: 15px;
+  font-size: 17px;
+}
+#mission {
+  padding: 10px 0 0 0;
+  font-size: 13px;
+}
+.social-media {
+/*width 30px;*/
+  padding-top: 10px;
+}
+.social-icon {
+  padding-right: 10px;
 }

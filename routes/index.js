@@ -459,6 +459,7 @@ module.exports = function(passport){
             accessKeyId: "AKIAJFGLJ3FU42D22YKQ",
             secretAccessKey: "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"
         });
+
         var s3 = new aws.S3();
         var s3_params = {
             Bucket: "englishinchinaasia",

@@ -10,7 +10,6 @@ module.exports = {
         console.log("BEGINNING INITCITIES")
         City.count({},function(err,count){
             if(count == 0){
-
                 var city;
                 for(var i in citieslist){
                     city = citieslist[i];
@@ -40,19 +39,21 @@ module.exports = {
     },
 
     getCitiesByProvince: function(provinceCode,callback){
-        provincesController.getProvinceByCode(provinceCode, function(province){
-            City
-                .find({province:province})
-                .sort({"pinyinName" : 1})
-                .exec(
-                function(err, result){
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        callback(result);
-                    }
-                });
+        provincesController.getProvinceByCode(provinceCode, function(err, province){
+            if(!err){
+                City
+                    .find({province:province})
+                    .sort({"pinyinName" : 1})
+                    .exec(
+                    function(err, result){
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            callback(result);
+                        }
+                    });
+            }
         });
     },
 
