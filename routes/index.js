@@ -163,7 +163,6 @@ module.exports = function(passport){
      *************************************************************************************************************/
     router.route('/login')
         .get(function(req, res) {
-
             //citiesController.pushCities(citiesController.citiesToPush);
             // Display the Login page with any flash message, if any
             res.render('login', {
@@ -178,7 +177,20 @@ module.exports = function(passport){
             failureFlash : true
         }));
 
-
+    router.get('/loginajax', function (req, res) {
+        res.render('loginpanel', {
+                title: "Login - English in China",
+                message: req.flash('message'),
+                scripts:[scripts.util]
+            },
+            function(err, html) {
+                if(err)
+                    console.log(err);
+                else{
+                    res.send({html:html});
+                }
+            });
+    })
 
     /************************************************************************************************************
      *FACEBOOK LOGIN :   Facebook login will hit callback function below (login/facebook/callback)

@@ -13,18 +13,10 @@ block content
                      a.btn.btn-eic.btn-primary.btn-lg(href="/school/deletephoto/#{photo._id}/#{school._id}") X
                   .picture-corner
                      a.btn.btn-eic.btn-primary.btn-lg(href="/school/updatecoverphoto/#{photo.id}/"+"#{photo.school.id}" role="button") O
-      //.school-image-item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
-      //   .school-img-list-item.add-photo
-      //      h4 Add photo
+      if locals.user
+         .school-image-item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
+            #ajax-add-photo.school-img-list-item.add-photo(href="/school/addphotoajax/#{school.id}")
+      else
+         .school-image-item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
+            #ajax-login.school-img-list-item.add-photo(href="/loginajax")
 .clearfix
-
-.clearfix
-
-if locals.user
-   h4
-      #ajax-add-photo.btn.btn-default.btn-eic.btn-lg(href="/school/addphotoajax/#{school.id}") Add Photo
-else
-   h4
-      a.btn.btn-eic.btn-default.btn-lg.disabled(href="/school/addphoto/#{school.id}") Login to Add Photos
-
-

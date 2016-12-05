@@ -125,7 +125,14 @@ h3.has-hr {
   padding-left: 0 !important;
 }
 .add-photo {
-  background-color: #f9f9f9;
+  background-image: url("/images/addphoto2.png");
+  background-size: 55px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #eee;
+}
+.add-photo:hover {
+  background-color: #dedede;
 }
 .modal-dialog {
   margin: auto;
@@ -572,7 +579,7 @@ h2.searchmessage {
 }
 @media (max-width: 540px) {
   .cards .nav-pills {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 }
 .cards {
@@ -773,21 +780,25 @@ h2.searchmessage {
     margin-bottom: 75px;
   }
 }
-.login-page h1 {
+.login-panel h1 {
+  font-family: Roboto;
+  font-size: 3em;
+  font-weight: 300;
+  padding-bottom: 20px;
   color: #333;
 }
-.login-page p {
+.login-panel p {
   font-size: 16px;
   color: #000;
   font-weight: 300;
 }
-.login-page .btn,
-.login-page input {
+.login-panel .btn,
+.login-panel input {
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
 }
-.login-page .panel {
+.login-panel.panel {
   background-color: rgba(255,255,255,0.5);
   border-radius: 0px;
   -webkit-border-radius: 0px;
@@ -797,7 +808,7 @@ h2.searchmessage {
 /*-moz-box-shadow: 0px 0px 10px 0px rgba(255,255,255,1);*/
 /*box-shadow: 0px 0px 10px 0px rgba(255,255,255,1);*/
 }
-.login-page .forgot-password {
+.login-panel .forgot-password {
   margin-top: 20px;
   padding-bottom: 0px;
 }

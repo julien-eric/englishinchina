@@ -1,0 +1,32 @@
+.panel.login-panel
+   .panel-body.flat-body
+      h1 Login to your account
+      .padding
+      form(class='form-signin', action='/login', method='POST')
+         .form-group.has-feedback
+            //label.control-label(for='Username') Username
+            input(type='text', name='username' class='form-control input-lg', placeholder='Username',required, autofocus)
+            span.glyphicon.glyphicon-user.form-control-feedback
+         span.clearfix
+         .form-group.has-feedback
+            //label.control-label(for='Password') Password
+            input(type='password', name='password' class='form-control input-lg', placeholder='Password', required)
+            span.glyphicon.glyphicon-lock.form-control-feedback
+         span.clearfix
+         button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Login
+         span.clearfix
+         .padding
+         p.forgot-password
+            a(href="/forgot") Forgot your password?
+         hr
+         p
+            |Don't have an account yet?&nbsp;
+            a(href="/signup") Create an account
+         p.no-padding-bottom
+            |Sign in using social networks&nbsp;
+            a.social-icon(href='/login/facebook')
+               img.img-circle(src="/images/FB-f-Logo__blue_29.png")
+         #message
+            if message
+               h3.text-center.error-message #{message}
+      span.clearfix

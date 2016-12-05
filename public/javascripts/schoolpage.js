@@ -50,6 +50,29 @@ $(document).ready(function() {
     //    xhr.send();
     //});
 
+    $("#ajax-login").click(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/loginajax");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    $( "#modal-body").empty();
+                    var response = JSON.parse(xhr.responseText);
+                    var elements = $($.parseHTML(response.html));
+                    $.each(elements,function(index, element){
+                        $(element).appendTo("#modal-body");
+                    });
+                    $( "#modal" ).trigger( "click" );
+                    setUploadFile();
+                }
+                else {
+                    alert("Problem.");
+                }
+            }
+        };
+        xhr.send();
+    });
+
     $("#ajax-add-photo" ).click(function() {
         var schoolid = $('#schoolid').attr('value')
         var xhr = new XMLHttpRequest();
