@@ -178,7 +178,7 @@ module.exports = function(passport){
         }));
 
     router.get('/loginajax', function (req, res) {
-        res.render('registerpanel', {
+        res.render('loginpanel', {
                 title: "Login - English in China",
                 message: req.flash('message'),
                 scripts:[scripts.util]
