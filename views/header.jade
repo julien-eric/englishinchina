@@ -1,6 +1,5 @@
 include fcb-js-sdk
 nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
-    .container.container-fluid
         // Brand and toggle get grouped for better mobile display
         .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
@@ -14,17 +13,6 @@ nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
                 img.nav-brand(src="/images/title-xs.png")
             a.pull-left.hidden-sm.hidden-md.hidden-lg(href='/')
                 img.nav-brand(src="/images/title-xs.png")
-            //if locals.user
-            //    a.pull-right
-            //        ul.nav.navbar-nav.navbar-right
-            //            li.profile-picture
-            //                if locals.user.fb && locals.user.useFacebookPic
-            //                    div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
-            //                    div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
-            //                else
-            //                    div.default-user-picture.img-circle(style="background-image: url('/images/default-user.png');")
-            //                    div.profile-img.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-        // Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
             ul.nav.navbar-nav
                 li.active
@@ -35,7 +23,6 @@ nav.navbar-fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
                     a(href='/')
                         | About Us
                         span.sr-only (current)
-
             ul.nav.navbar-nav.navbar-right
                 if locals.user
                     li

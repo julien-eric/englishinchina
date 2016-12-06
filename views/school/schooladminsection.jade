@@ -1,9 +1,9 @@
 <!-- ADMIN-->
 div.col-sm-12.col-md-8
     if locals.user && locals.user.admin && !school.validated
-        a.btn.btn-eic.btn-primary.btn-lg(href="/school/validate/#{school.id}" role="button") Validate
+        a.btn.btn-primary.btn-lg(href="/school/validate/#{school.id}" role="button") Validate
     if locals.user && locals.user.admin && school.validated
-        a.btn.btn-eic.btn-primary.btn-lg.disabled(href="/school/validate/#{school.id}" role="button") Validated!
-        a.btn.btn-eic.btn-primary.btn-lg(href="/school/invalidate/#{school.id}" role="button") Devalidate
+        a.btn.btn-primary.btn-lg.disabled(href="/school/validate/#{school.id}" role="button") Validated!
+        a.btn.btn-primary.btn-lg(href="/school/invalidate/#{school.id}" role="button") Devalidate
     if locals.user && locals.user.admin
-        a.btn.btn-eic.btn-primary.btn-lg(href="/school/remove/#{school.id}" role="button") Remove
+        a.btn.btn-primary.btn-lg(href="/school/remove/#{school.id}" role="button") Remove

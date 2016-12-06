@@ -28,7 +28,7 @@ block content
             h5
                a.btn.btn-link.readmore.no-padding-left(href="##{review._id}") Read More
                if locals.user && locals.user.admin
-                  a.btn.btn-eic.btn-primary.btn-lg(href="/school/deletereview/#{review._id}/#{school._id}") Delete
+                  a.btn.btn-primary.btn-lg(href="/school/deletereview/#{review._id}/#{school._id}") Delete
                .pull-right
                   include ../helpfulshort
    .clearfix

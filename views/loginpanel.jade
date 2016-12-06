@@ -1,6 +1,7 @@
 .panel.login-panel
    .panel-body.flat-body
       h1 Login to your account
+      hr
       .padding
       form(class='form-signin', action='/login', method='POST')
          .form-group.has-feedback
@@ -25,7 +26,7 @@
          p.no-padding-bottom
             |Sign in using social networks&nbsp;
             a.social-icon(href='/login/facebook')
-               img.img-circle(src="/images/FB-f-Logo__blue_29.png")
+               img(src="/images/FB-f-Logo__blue_29.png")
          #message
             if message
                h3.text-center.error-message #{message}

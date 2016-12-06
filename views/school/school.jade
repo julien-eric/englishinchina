@@ -26,14 +26,14 @@ block content
                hr
                if edit
                   h4
-                     a.btn.btn-eic.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
+                     a.btn.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
                span.clearfix
                div.description-container
                   p.login-title !{school.description}
                h5#read-more
 
                   //#description-readmore.description-readmore
-                  #description-readmore.description-readmore.btn.btn-eic.btn-default.btn-sm Read Full Description
+                  #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
                span.clearfix
 
             .col-xs-12.col-sm-12.col-md-12.col-lg-4
@@ -65,13 +65,13 @@ block content
 
                .clearfix
                if reviewsCount > 6
-                  #load-more-reviews.btn.btn-eic.btn-default.btn-lg Load More
+                  #load-more-reviews.btn.btn-default.btn-lg Load More
                if locals.user
-                  a#review.btn.btn-eic.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+                  a#review.btn.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
                else
-                  a#review.btn.btn-eic.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
-            //.container
-            include ../populargrid/popularcategories
+                  a#review.btn.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+            .container
+               include ../populargrid/popularcategories
                //.clearfix
 
             #lightbox
