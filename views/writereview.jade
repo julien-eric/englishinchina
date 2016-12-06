@@ -1,6 +1,6 @@
 extends layout
 block content
-      container.login-page
+      .container.login-page
          .row
             div.login-form.col-sm-8.col-md-8.col-lg-8.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
                .panel.login-panel
@@ -13,7 +13,7 @@ block content
                         //include school/schoolreviews
                         form(action='/school/insertreview', method='POST')
                            .clearfix
-                           .col-sm-12.col-md-12.col-lg-8.col-lg-offset-2
+                           .col-sm-12.col-md-12.col-lg-10.col-lg-offset-1
                               hr
                               h2 Teacher Information
                               .form-group
@@ -39,10 +39,10 @@ block content
                               .clearfix
                               hr
 
-                           h2.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2 Evaluation Of School
+                           h2.col-sm-8.col-md-8.col-lg-10.col-lg-offset-1 Evaluation Of School
 
                            each criterium,i in criteria
-                              .form-group.col-sm-12.col-md-12.col-lg-8.col-lg-offset-2
+                              .form-group.col-sm-12.col-md-12.col-lg-10.col-lg-offset-1
                                  label.criteria.control-label.col-sm-12.col-md-12(for='#{criterium.label}') #{criterium.code}. #{criterium.name}
                                  p #{criterium.description}
                                  .clearfix
@@ -53,7 +53,7 @@ block content
                                  .clearfix
 
                            .clearfix
-                           .col-sm-12.col-md-12.col-lg-8.col-lg-offset-2
+                           .col-sm-12.col-md-12.col-lg-10.col-lg-offset-1
                               hr
                               h2 Write about your experience at #{school.name}
                               .form-group
@@ -66,4 +66,6 @@ block content
                         #message
                            if message
                               h1.text-center.error-message #{message}
+                     .clearfix
+                  .clearfix
 
