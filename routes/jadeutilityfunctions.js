@@ -12,9 +12,10 @@ module.exports = {
             if(length > school.description.length){
                 length = school.description.length;
             }
-            var description = school.description.substring(0,length);
-            description = description.substring(0, description.lastIndexOf(" ")) + "...";
-            school.description = striptags(description);
+            var description = school.description;
+            description = striptags(description);
+            description = description.substring(0,length);
+            school.description = description.substring(0, description.lastIndexOf(" ")) + "...";
         });
         return schoolList;
     },

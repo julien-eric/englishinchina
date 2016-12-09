@@ -6,6 +6,9 @@ block content
             h1.school-page-name #{school.name}
             #schoolid.hidden(value="#{school.id}")
             h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+               if(school.company)
+                  |&nbsp;|&nbsp;
+                  a(href="/company/id/#{school.company.id}") #{school.company.name}
             if school.website
                a(href="#{school.website}")
                   h4 #{school.website}
@@ -19,6 +22,7 @@ block content
                      a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=-1&city=#{school.city.code}") #{jadefunctions.capitalize(school.city.pinyinName)}
                   else
                      a.btn.btn-lg.btn-primary.btn-gray(href="/school/search?schoolInfo=&province=-1&city=1") Dongying
+      .school-container
          .container.school-content
             span.clearfix
             .col-xs-12.col-sm-12.col-md-12.col-lg-8
@@ -31,13 +35,12 @@ block content
                div.description-container
                   p.login-title !{school.description}
                h5#read-more
-
-                  //#description-readmore.description-readmore
                   #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
                span.clearfix
 
             .col-xs-12.col-sm-12.col-md-12.col-lg-4
-               include schoolphotos
+               -var photos = school.photos
+               include ../photogrid
 
             include schooladminsection
 
@@ -70,7 +73,8 @@ block content
                   a#review.btn.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
                else
                   a#review.btn.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
-            .container
+
+            .col-sm-12.col-md-12.col-lg-12
                include ../populargrid/popularcategories
                //.clearfix
 

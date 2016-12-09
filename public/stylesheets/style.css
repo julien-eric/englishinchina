@@ -54,6 +54,9 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 300;
 }
+p {
+  font-size: 16px;
+}
 .sidebar {
   margin: 5px 0;
 }
@@ -67,6 +70,7 @@ body {
 .btn-eic,
 .btn-eic.disabled,
 .btn-eic:visited {
+  color: #fff;
   background-color: #2f916b;
   border: #2d8c67;
 }
@@ -344,6 +348,9 @@ h2.searchmessage {
   font-size: 1.5em;
   font-weight: 400;
   margin-top: 10px;
+}
+.list-group-item p {
+  font-size: 14px;
 }
 .rating {
   font-size: 20px;
@@ -739,6 +746,9 @@ h2.searchmessage {
   background-size: 100% auto;
 /*height 500px;*/
 }
+.school-container {
+  background-color: #f1f1f1;
+}
 @media (max-width: 568px) {
   .school-image-container {
     background-size: 150% auto;
@@ -759,6 +769,9 @@ h2.searchmessage {
   background-color: rgba(0,0,0,0.5);
   padding-top: 20px;
   padding-bottom: 20px;
+}
+.darkbg a {
+  color: #fff;
 }
 @media (max-width: 768px) {
   .darkbg {
@@ -782,6 +795,9 @@ h2.searchmessage {
 }
 .school-location {
   padding-bottom: 15px;
+}
+.school-location a {
+  color: #000;
 }
 .login-page {
   margin-top: 120px;

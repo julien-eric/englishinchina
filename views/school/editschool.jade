@@ -44,6 +44,17 @@ block content
                                  option(value=city.code, , selected="selected") #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
                               else
                                  option(value=city.code) #{city.pinyinName} - #{city.chineseName}
+                     .form-group
+                        label.control-label(for='company') Company
+                        .clearfix
+                        select#companySelect.form-control(name="company")
+                           option(value="-1") Company
+                           option(value="-2") =============
+                           each company,i in companies
+                              if(school.company && company.id == school.company.id)
+                                 option(value=company.id, , selected="selected") #{company.name}
+                              else
+                                 option(value=company.id) #{company.name}
                      .clearfix
                      .form-group
                         label.control-label(for='TypeOfSchool') Type Of School

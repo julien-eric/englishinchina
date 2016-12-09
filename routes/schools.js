@@ -7,6 +7,7 @@ var reviews = require('../controllers/reviews');
 var images = require('../controllers/images');
 var provincesController = require('../controllers/provinces');
 var citiesController = require('../controllers/cities');
+var companiesController = require('../controllers/companies');
 var jadefunctions = require('./jadeutilityfunctions');
 var pictureinfo = require('../pictureinfo');
 var criteria = require('../criteria').criteria;
@@ -575,15 +576,18 @@ module.exports = function(passport) {
         schools.findSchoolById(req.params.id, function (school) {
             provincesController.getAllProvinces(function(provinces){
                 citiesController.getCitiesByProvince(school.province.code, function(cities){
-                    res.render('school/editschool', {
-                        school: school,
-                        user: req.user,
-                        reviews: reviews,
-                        provinces: provinces,
-                        cities: cities,
-                        jadefunctions: jadefunctions,
-                        pictureInfo: pictureinfo,
-                        scripts:[scripts.util,scripts.addschool]
+                    companiesController.getAllCompanies(function(companies){
+                        res.render('school/editschool', {
+                            school: school,
+                            user: req.user,
+                            reviews: reviews,
+                            provinces: provinces,
+                            cities: cities,
+                            companies: companies,
+                            jadefunctions: jadefunctions,
+                            pictureInfo: pictureinfo,
+                            scripts:[scripts.util,scripts.addschool]
+                        });
                     });
                 });
             });

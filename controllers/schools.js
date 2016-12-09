@@ -3,6 +3,7 @@ var provincesController = require('./provinces');
 var reviews = require('./reviews');
 var Review = require('./../models/review');
 var citiesController = require('./cities');
+var companiesController = require('./companies');
 var imagesController = require('./images');
 var jadeutilityfunctions = require('./../routes/jadeutilityfunctions');
 var async = require('async');
@@ -110,8 +111,8 @@ module.exports = {
         async.waterfall([
 
                 function getProvince(next){
-                    provincesController.getProvinceByCode(school.province, function(province){
-                        next(null, province);
+                    provincesController.getProvinceByCode(school.province, function(err, province){
+                        next(err, province);
                     });
                 },
                 function getCity(province,next){
@@ -119,14 +120,19 @@ module.exports = {
                         next(null, province,city);
                     });
                 },
-                function getOldSchool(province, city, next){
+                function getCompany(province, city, next){
+                    companiesController.findCompanyById(school.company, function(company){
+                        next(null, province, city, company);
+                    });
+                },
+                function getOldSchool(province, city, company, next){
                     module.exports.findSchoolById(school.id, function(oldSchool){
-                        next(null, oldSchool, province, city);
+                        next(null, province, city, company, oldSchool);
                     })
                 },
-                function updateSchool(oldSchool, province, city, next){
+                function updateSchool(province, city, company, oldSchool, next){
                     var newPicture = false;
-                    var newSchool = {province:province._id, city:city._id};
+                    var newSchool = {province:province._id, city:city._id, company:company._id};
                     if(oldSchool.name !== school.name){newSchool.name = school.name}
                     if(oldSchool.description !== school.description){newSchool.description = school.description}
                     if(oldSchool.website !== school.website){newSchool.website = school.website}
@@ -135,7 +141,6 @@ module.exports = {
                         newSchool.pictureUrl = school.avatarUrl
                         newPicture = true;
                     }
-
                     School.findOneAndUpdate({ _id : school.id }, newSchool, function(err, editedSchool){
                         if(err){
                             console.log(err)
@@ -204,7 +209,7 @@ module.exports = {
     },
 
     findSchoolById : function(id, callback){
-        School.findOne({_id:id}).populate("province").populate("city").populate("photos").exec(function(err,school){
+        School.findOne({_id:id}).populate("province").populate("city").populate("photos").populate("company").exec(function(err,school){
             callback(school);
         });
     },
@@ -212,6 +217,12 @@ module.exports = {
     findSchoolsByProvince : function(province, callback){
         School.find({province:province}).exec(function(err,school){
             callback(school);
+        });
+    },
+
+    findSchoolsByCompany : function(company, callback){
+        School.find({company:company}).populate("province").populate("city").exec(function(err,schoolList){
+            callback(err,schoolList);
         });
     },
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var schools = require('../controllers/schools');
+var companies = require('../controllers/companies');
 var reviews = require('../controllers/reviews');
 var email = require('../controllers/email');
 //var provinces = require('../provinces');
@@ -155,7 +156,102 @@ module.exports = function(passport){
 
     });
 
+    /**********************************************************************************************************************************
+     //COMPANY RELATED ROUTES
+    ***********************************************************************************************************************************/
+    router.route('/company/addcompany')
+        .get(function(req, res) {
+            res.render('company/addcompany', {
+                title: "Add Company - English in China",
+                message: req.flash('message'),
+                scripts:[scripts.util]
+            });
+        })
+        .post(function (req, res) {
+            var company = {
+                name: req.body.name,
+                description: req.body.description,
+                website: req.body.website,
+                pictureUrl: req.body.pictureUrl,
+                logoUrl: req.body.logoUrl
+            }
+            companies.addCompany(company, function(newCompany){
+                res.redirect('/company/id/' + newCompany.id);
+            })
+        });
 
+    router.route('/company/edit/:id')
+        .get(function(req, res) {
+            companies.findCompanyById(req.params.id, function (company) {
+                res.render('company/editcompany', {
+                    title: "Edit " + company.name +  " - English in China",
+                    company: company,
+                    message: req.flash('message'),
+                    pictureInfo: pictureinfo,
+                    scripts:[scripts.util]
+                });
+            });
+        })
+        .post(function (req, res) {
+            var company = {
+                id: req.body.id,
+                name: req.body.name,
+                description: req.body.description,
+                website: req.body.website,
+                pictureUrl: req.body.pictureUrl,
+                logoUrl: req.body.logoUrl
+            }
+            companies.editCompany(company, function(err, newCompany){
+                res.redirect('/company/id/' + newCompany.id);
+            })
+        });
+
+
+    router.get('/company/id/:id', function (req, res) {
+
+        async.waterfall([
+            function findCompany(done){
+                companies.findCompanyById(req.params.id, function (company) {
+                    done(null, company);
+                });
+            },
+
+            function getPopularCities (company, done){
+                citiesController.getMostPopularCities(function(popularCities){
+                    done(null,company, popularCities);
+                });
+            },
+            function getPopularProvinces (company, popularCities, done){
+                provincesController.getMostPopularProvinces(function(popularProvinces){
+                    done(null,company, popularCities, popularProvinces);
+                });
+            },
+            function getSchoolList (company, popularCities, popularProvinces, done){
+                schools.findSchoolsByCompany(company.id, function(err, schoolList){
+                    done(err, company, popularCities, popularProvinces, schoolList);
+                });
+            },
+            function finish(company, popularCities, popularProvinces, schoolList){
+                var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,150);
+                res.render('company/company', {
+                    title: company.name + " - English in China",
+                    company: company,
+                    user: req.user,
+                    moment:moment,
+                    jadefunctions: jadefunctions,
+                    popularCities: popularCities,
+                    popularProvinces: popularProvinces,
+                    schools: truckSchoolList,
+                    pictureInfo: pictureinfo,
+                    scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+                });
+            }
+        ], function(err,callback){
+            if(err){
+                console.log(err);
+            }
+        })
+    });
 
     /************************************************************************************************************
      *LOGIN :   GET : Root Path, login page.

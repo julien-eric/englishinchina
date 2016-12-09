@@ -7,6 +7,7 @@ module.exports = mongoose.model('School',{
     website: String,
     province: {type: mongoose.Schema.Types.ObjectId, ref: 'Province'},
     city: {type: mongoose.Schema.Types.ObjectId, ref: 'City'},
+    company: {type: mongoose.Schema.Types.ObjectId, ref: 'Company'},
     schoolType: Number,
     pictureUrl: String,
     criteria : {

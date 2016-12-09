@@ -7,7 +7,20 @@ var setUploadFile = function(){
                 alert("No file selected.");
             }
             else {
-                get_signed_request(file);
+                get_signed_request(file, 1);
+            }
+        };
+    }
+
+    if(document.getElementById("file_input2")){
+        document.getElementById("file_input2").onchange = function () {
+            var files = document.getElementById("file_input2").files;
+            var file = files[0];
+            if (file == null) {
+                alert("No file selected.");
+            }
+            else {
+                get_signed_request(file, 2);
             }
         };
     }
@@ -54,14 +67,14 @@ function setLightboxOnReadmore() {
     //$("#lightbox").click(turnoff);
 };
 
-function get_signed_request(file) {
+function get_signed_request(file, number) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/sign_s3?file_name=" + file.name + "&file_type=" + file.type);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                upload_file(file, response.signed_request, response.url);
+                upload_file(file, number, response.signed_request, response.url);
             }
             else {
                 alert("Could not get signed URL.");
@@ -71,7 +84,7 @@ function get_signed_request(file) {
     xhr.send();
 }
 
-function upload_file(file, signed_request, url) {
+function upload_file(file, number, signed_request, url) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signed_request);
     xhr.setRequestHeader('x-amz-acl', 'public-read');
@@ -81,7 +94,13 @@ function upload_file(file, signed_request, url) {
             //evt.loaded the bytes browser receive
             //evt.total the total bytes seted by the header
             var percentComplete = (event.loaded / event.total)*100;
-            $("#progress-bar-picture").css('width', percentComplete+'%').attr('aria-valuenow', percentComplete);
+            if(number == 1){
+                $("#progress-bar-picture").css('width', percentComplete+'%').attr('aria-valuenow', percentComplete);
+            }
+            else{
+                $("#progress-bar-picture2").css('width', percentComplete+'%').attr('aria-valuenow', percentComplete);
+            }
+
         }
     }
     xhr.onload = function () {
@@ -89,8 +108,12 @@ function upload_file(file, signed_request, url) {
             var preview = $("#preview");
             preview.toggle();
             preview.attr("src", 'https://' + "englishinchinaasia" + '.s3.amazonaws.com/' + url);
-            document.getElementById("avatarUrl").value = url;
-            //alert("success");
+            if(number == 1){
+                document.getElementById("avatarUrl").value = url;
+            }
+            else{
+                document.getElementById("logoUrl").value = url;
+            }
             xhr2 = new XMLHttpRequest();
             xhr2.open("POST", "/pictureuploaded?url=" + url + "&filename=" + file.name + "&filesize=" + file.size)
             if (xhr2.readyState === 4) {
