@@ -3,6 +3,7 @@
  */
 var Province = require('../models/province');
 var School = require('../models/school');
+var companiesController = require('./companies');
 
 
 module.exports = {
@@ -93,5 +94,32 @@ module.exports = {
                     }
                 });
             });
+    },
+
+    getMostPopularProvincesbyCompany: function(companyId, callback){
+        companiesController.findCompanyById(companyId, function(company){
+            School.aggregate(
+                [
+                    { $match : {company : company._id }},
+                    { $group : { _id : "$province" , number : { $sum : 1 }, pictureUrl: { $first: "$pictureUrl" } } },
+                    { $sort : {number : -1}},
+                    { $limit : 9 }
+                ]).exec(function(err, transactions) {
+                    if(err)
+                    {
+                        console.log(err);
+                        return;
+                    }
+                    Province.populate(transactions, {path: '_id'}, function(err, popularProvinces) {
+                        // Your populated translactions are inside populatedTransactions
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            callback(popularProvinces);
+                        }
+                    });
+                });
+        })
     }
 }

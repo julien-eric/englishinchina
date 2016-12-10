@@ -157,6 +157,9 @@ h3.has-hr {
 .no-border {
   border: 0;
 }
+.carousel-control {
+  width: 6%;
+}
 .paddingundernav {
   height: 50px;
 }
@@ -183,6 +186,7 @@ h3.has-hr {
   right: 0;
   top: 0;
   bottom: 0;
+  margin-bottom: 50px;
 }
 .splash2 .splash-image-container {
   min-height: 220px;
@@ -593,7 +597,7 @@ h2.searchmessage {
   }
 }
 .cards .nav-pills {
-  margin-top: 50px;
+  margin-top: 20px;
   font-size: 2em;
   font-weight: 100;
 }

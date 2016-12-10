@@ -231,7 +231,12 @@ module.exports = function(passport){
                     done(err, company, popularCities, popularProvinces, schoolList);
                 });
             },
-            function finish(company, popularCities, popularProvinces, schoolList){
+            function getprovincesByCompany (company, popularCities, popularProvinces, schoolList, done){
+                provincesController.getMostPopularProvincesbyCompany(req.params.id, function(provincesByCompany){
+                    done(null, company, popularCities, popularProvinces, schoolList, provincesByCompany);
+                });
+            },
+            function finish(company, popularCities, popularProvinces, schoolList, provincesByCompany){
                 var truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList,150);
                 res.render('company/company', {
                     title: company.name + " - English in China",
@@ -241,6 +246,7 @@ module.exports = function(passport){
                     jadefunctions: jadefunctions,
                     popularCities: popularCities,
                     popularProvinces: popularProvinces,
+                    provincesByCompany: provincesByCompany,
                     schools: truckSchoolList,
                     pictureInfo: pictureinfo,
                     scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
