@@ -5,7 +5,7 @@ block content
          .container.darkbg
             h1.school-page-name #{school.name}
             #schoolid.hidden(value="#{school.id}")
-            h3.school-page-schooltype #{jadefunctions.returnNameforProvinceCode(school.schoolType)}
+            h3.school-page-schooltype #{jadefunctions.returnNameforSchoolType(school.schoolType)}
                if(school.company)
                   |&nbsp;|&nbsp;
                   a(href="/company/id/#{school.company.id}") #{school.company.name}
@@ -25,7 +25,7 @@ block content
       .school-container
          .container.school-content
             span.clearfix
-            .col-xs-12.col-sm-12.col-md-12.col-lg-8
+            .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
                h2 Description
                hr
                if edit
@@ -38,7 +38,7 @@ block content
                   #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
                span.clearfix
 
-            .col-xs-12.col-sm-12.col-md-12.col-lg-4
+            .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
                -var photos = school.photos
                include ../photogrid
 
@@ -48,12 +48,13 @@ block content
             span.clearfix
             #reviews
                if reviewsCount > 0
-                  .cards.col-sm-12.col-md-8.col-lg-8
+                  .page-block.cards.col-sm-12.col-md-8.col-lg-8
                      ul.nav.nav-pills
                         li.active
                            a.no-padding-left(data-toggle="pill" href="#tabrating") Rating
                         li
                            a(data-toggle="pill" href="#tabbreakdown") Breakdown
+                     hr
                      .tab-content
                         .tab-pane.fade.in.active(id="tabrating")
                            include ratingcard
@@ -62,7 +63,7 @@ block content
                      .clearfix
                   .clearfix
 
-            .col-sm-12.col-md-12.col-lg-12
+            .page-block.col-sm-12.col-md-12.col-lg-12
                h3 Reviews (#{reviewsCount})
                include schoolreviews
 
@@ -74,7 +75,7 @@ block content
                else
                   a#review.btn.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
 
-            .col-sm-12.col-md-12.col-lg-12
+            .page-block.col-sm-12.col-md-12.col-lg-12
                include ../populargrid/popularcategorieshoriz
                //.clearfix
 

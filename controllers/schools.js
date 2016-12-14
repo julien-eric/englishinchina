@@ -41,6 +41,7 @@ module.exports = {
                 School.find()
                     .populate("province")
                     .populate("city")
+                    .populate("company")
                     .where(adminInfo)
                     .limit(pageSize)
                     .skip(pageSize * page)

@@ -215,7 +215,7 @@ h3.has-hr {
 }
 .splash .splash-text,
 .splash2 .splash-text {
-  margin-top: 80px;
+  margin-top: 70px;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -367,7 +367,6 @@ h2.searchmessage {
 }
 .inline-block {
   display: inline-block;
-  margin-right: 10px;
 }
 .school-list-information {
   padding-bottom: 10px;
@@ -535,30 +534,29 @@ h2.searchmessage {
   font-size: 12px;
   font-weight: 100;
 }
-.popular-categories .nav-pills {
-  margin-top: 50px;
-  font-size: 1em;
+.locations .nav-pills {
+  font-size: 1.3em;
   font-weight: 100;
 }
-.popular-categories {
+.locations {
   margin-top: 10px;
 }
-.popular-categories .nav-tabs {
+.locations .nav-tabs {
   margin-bottom: 10px;
 }
-.popular-categories .nav-pills>li.active>a,
-.popular-categories .nav-pills>li.active>a:hover,
-.popular-categories .nav-pills>li.active>a:focus {
+.locations .nav-pills>li.active>a,
+.locations .nav-pills>li.active>a:hover,
+.locations .nav-pills>li.active>a:focus {
   color: #fff;
   background-color: #333;
 }
-.popular-categories .nav-pills>li>a,
-.popular-categories .nav-pills>li>a:hover,
-.popular-categories .nav-pills>li>a:focus {
+.locations .nav-pills>li>a,
+.locations .nav-pills>li>a:hover,
+.locations .nav-pills>li>a:focus {
   color: #333;
   background-color: #eee;
 }
-.popular-categories .nav-pills>li>a {
+.locations .nav-pills>li>a {
   border-radius: 0px;
   margin-bottom: 1px;
 }
@@ -578,10 +576,6 @@ h2.searchmessage {
   }
 }
 @media (max-width: 540px) {
-  .popular-categories {
-    padding-left: 0;
-    padding-right: 0;
-  }
   .popular-city,
   .popular-city .img-container,
   .popular-city .img-frame,
@@ -625,6 +619,9 @@ h2.searchmessage {
 .cards .nav-pills>li>a {
   border-radius: 0px;
   margin-bottom: 1px;
+}
+.cards.locations .nav-pills>li>a {
+  padding-left: 0;
 }
 .explorebar nav {
   min-height: 20px;
@@ -765,6 +762,9 @@ h2.searchmessage {
 .school-content {
   padding-top: 15px;
   background-color: #fff;
+}
+.page-block {
+  padding-bottom: 30px;
 }
 .darkbg {
   background: -webkit-linear-gradient(-90deg, rgba(69,150,44,0.51), rgba(41,146,152,0.51)); /* For Safari 5.1 to 6.0 */

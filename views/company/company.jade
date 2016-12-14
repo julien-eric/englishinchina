@@ -15,7 +15,7 @@ block content
         .school-container
             .container.school-content
                 span.clearfix
-                .col-xs-12.col-sm-12.col-md-12.col-lg-8
+                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
                     h2 Description
                     hr
                     span.clearfix
@@ -24,29 +24,29 @@ block content
                     h5#read-more
                         #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
                     span.clearfix
-                .col-xs-12.col-sm-12.col-md-12.col-lg-4
+                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
                     - var photos = company.photos
                     - var isCompany = true
                     include ../photogrid
                 span.clearfix
 
-                //.col-xs-12.col-sm-12.col-md-12.col-lg-8.footer-box
+                //.col-xs-12.col-sm-12.col-md-12.col-lg-88.footer-box
                 //    h2.has-hr#popular-cities #{company.name} | Schools
                 //    hr
                 //    span.clearfix
                 //    include ../schoollist
 
-                .col-xs-12.col-sm-12.col-md-12.col-lg-8
+                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
                     h2.has-hr#popular-cities #{company.name} | Schools
                     hr
                     span.clearfix
                     .row
-                        .cards.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12
+                        .locations.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12
                             ul.nav.nav-pills
                                 each cprovince,i in provincesByCompany
                                     if(i == 0)
                                         li.active
-                                            a.no-padding-left(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
+                                            a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
                                     else
                                         li
                                             a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})

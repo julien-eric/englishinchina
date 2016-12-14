@@ -32,14 +32,14 @@ module.exports = {
         return reviews;
     },
 
-    returnNameforProvinceCode: function(code){
+    returnNameforSchoolType: function(code){
         switch(code){
             case 0:
                 return "Training School"
             case 1:
                 return "Public School"
             case 2:
-                return "Contractual Training School"
+                return "Cont.Training School"
 
         }
 

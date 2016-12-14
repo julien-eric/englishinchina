@@ -131,10 +131,10 @@ module.exports = function(passport){
                 if(req.user == undefined || req.user.admin == undefined){admin = false;}
                 else{admin = req.user.admin};
                 schools.getSchools(function (count, schoolList) {
-                    var trunckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 300);
+                    var trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList,150);
                     res.render('home', {
                         title: "English in China - Page " + page,
-                        schools: trunckSchoolList,
+                        schools: trunkSchoolList,
                         user: req.user,
                         provinces: provinces,
                         pictureInfo: pictureinfo,
