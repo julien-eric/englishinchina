@@ -63,7 +63,6 @@ module.exports = function(passport) {
                 else{
                     done(null,school, popularCities, popularProvinces, null);
                 }
-
             },
 
             function findNumberOfReviews(school, popularCities, popularProvinces, relatedSchools, done){
