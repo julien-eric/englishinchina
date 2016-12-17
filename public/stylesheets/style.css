@@ -525,6 +525,7 @@ h2.searchmessage {
 }
 .related-schools .popular-city {
   height: 80px;
+  margin-bottom: 10px !important;
 }
 .related-schools.popular-cities .city-name-panel {
   height: 80px;

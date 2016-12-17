@@ -228,7 +228,7 @@ module.exports = {
     },
 
     findSchoolsByCompanySortbyRating : function(company, callback){
-        School.find({company:company}).sort({"averageRating": -1}).populate("province").populate("city").exec(function(err,schoolList){
+        School.find({company:company}).sort({"averageRating": -1}).populate("province").populate("city").limit("3").exec(function(err,schoolList){
             callback(err,schoolList);
         });
     },
