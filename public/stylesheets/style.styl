@@ -166,6 +166,8 @@ h3.has-hr
 .carousel-control
   width: 6%;
 
+.pointer
+  cursor pointer !important;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //NAVBAR #1
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -344,18 +346,6 @@ h2.searchmessage
   padding: 0 !important;
   margin: 0 !important;
 
-.img-container
-  width 100%;
-  height 190px;
-
-.img-frame
-  /*width 100%*/
-  height 190px
-  background-size cover;
-  background-position center
-  background-repeat: no-repeat;
-  background-color: #eeeeee;
-
 .list-group-item h1
   color: #000;
   font-size: 1.5em;
@@ -364,7 +354,6 @@ h2.searchmessage
 
 .list-group-item p
   font-size: 14px;
-
 
 .rating
   font-size: 20px;
@@ -496,20 +485,32 @@ h2.searchmessage
   /*text-align center*/
   padding-right 20px
 
+.img-container
+  width 100%;
+  height 190px;
+
+.img-frame
+  /*width 100%*/
+  height 190px
+  background-size cover;
+  background-position center
+  background-repeat: no-repeat;
+  background-color: #eeeeee;
+
 .popular-city, .popular-city .img-container, .popular-city .img-frame, .popular-city .see-more
   height 190px;
 
 .popular-city .img-container
   overflow hidden;
 
+.related-schools .img-container
+  height: 80px;
+
+.related-schools .img-frame
+  height: 80px;
+
 .popular-cities .list-group-item
   border 0;
-/*.popular-city .img-frame*/
-  /*-webkit-filter: blur(2px);*/
-  /*-moz-filter: blur(2px);*/
-  /*-o-filter: blur(2px);*/
-  /*-ms-filter: blur(2px);*/
-  /*filter: blur(2px);*/
 
 .popular-cities .city-name-panel
   position: absolute;
@@ -526,6 +527,13 @@ h2.searchmessage
   -o-transition: all .3s ease-out;
   transition: all .3s ease-out;
 
+.related-schools .popular-city
+  height 80px;
+
+.related-schools.popular-cities .city-name-panel
+  height 80px;
+  padding-top 10px;
+
 .popular-cities .city-name-panel:hover
   background: rgba(0, 0, 0, 0.7);
 
@@ -541,7 +549,7 @@ h2.searchmessage
   font-weight 100;
 
 .locations .nav-pills
-  font-size 1.3 em;
+  font-size 1 em;
   font-weight 100;
 
 .locations
@@ -562,13 +570,21 @@ h2.searchmessage
   border-radius: 0px;
   margin-bottom 1px;
 
+
 @media (max-width: 768px)
   .popular-city, .popular-city .img-container, .popular-city .img-frame, .popular-city .see-more
     height 140px;
 
+  .related-schools .popular-city, .related-schools .popular-city .img-container, .related-schools .popular-city .img-frame, .related-schools .popular-city
+    height 80px;
+
   .popular-cities .city-name-panel
     padding-top: 43px;
     height 140px;
+
+  .related-schools.popular-cities .city-name-panel
+    padding-top: 10px;
+    height 80px;
 
   .popular-cities .city-name-panel h4
     font-size 1.3em;
@@ -579,8 +595,8 @@ h2.searchmessage
     height 120px;
 
   .popular-cities .city-name-panel
-    padding-top: 33px;
-    height 120px;
+    padding-top: 10px;
+    height 80px;
 
   .popular-cities .city-name-panel h4
     font-size 1.2em;

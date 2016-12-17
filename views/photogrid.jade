@@ -18,7 +18,7 @@ block content
             if locals.user
                #ajax-add-photo.school-img-list-item.add-photo(href="/company/addphotoajax/#{company.id}")
             else
-               #ajax-login.school-img-list-item.add-photo(href="/loginajax")
+               .ajax-login.school-img-list-item.add-photo(href="/loginajax")
    else
       .school-img-list
          each photo in photos
@@ -35,5 +35,5 @@ block content
                #ajax-add-photo.school-img-list-item.add-photo(href="/school/addphotoajax/#{school.id}")
          else
             .school-image-item.img-responsive.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
-               #ajax-login.school-img-list-item.add-photo(href="/loginajax")
+               .ajax-login.school-img-list-item.add-photo(href="/loginajax")
 .clearfix

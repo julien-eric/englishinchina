@@ -54,14 +54,25 @@ module.exports = function(passport) {
                     done(null,school, popularCities, popularProvinces);
                 });
             },
+            function getRelatedSchools (school, popularCities, popularProvinces, done){
+                if(school.company && school.company.id){
+                    schools.findSchoolsByCompanySortbyRating(school.company.id, function(err, relatedSchools){
+                        done(err,school, popularCities, popularProvinces, relatedSchools);
+                    });
+                }
+                else{
+                    done(null,school, popularCities, popularProvinces, null);
+                }
 
-            function findNumberOfReviews(school, popularCities, popularProvinces, done){
+            },
+
+            function findNumberOfReviews(school, popularCities, popularProvinces, relatedSchools, done){
                 reviews.findNumberofReviews(school._id, function(numberOfReviews){
-                    done(null, school, popularCities, popularProvinces, numberOfReviews);
+                    done(null, school, popularCities, popularProvinces, relatedSchools, numberOfReviews);
                 });
             },
 
-            function findReviews(school, popularCities, popularProvinces, numberOfReviews){
+            function findReviews(school, popularCities, popularProvinces, relatedSchools, numberOfReviews){
                 reviews.findReviews(school, function (reviewList) {
 
                     //Verify if user has access to school editing.
@@ -87,6 +98,7 @@ module.exports = function(passport) {
                         jadefunctions: jadefunctions,
                         popularCities: popularCities,
                         popularProvinces: popularProvinces,
+                        relatedSchools: relatedSchools,
                         pictureInfo: pictureinfo,
                         scripts:[scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
                     });

@@ -227,6 +227,12 @@ module.exports = {
         });
     },
 
+    findSchoolsByCompanySortbyRating : function(company, callback){
+        School.find({company:company}).sort({"averageRating": -1}).populate("province").populate("city").exec(function(err,schoolList){
+            callback(err,schoolList);
+        });
+    },
+
     searchSchools : function(schoolInfo, prov, city, callback){
 
         var searchQueryMessage = "";

@@ -4,8 +4,7 @@ $(document).ready(function() {
         selector: '.bar',
         speed: 1800
     });
-
-
+    
     var height = $(".description-container").height();
     if(height> 550){
         $(".description-container").animate({"max-height":'550px'}, 500,function(){});
@@ -19,40 +18,15 @@ $(document).ready(function() {
         $("#read-more").remove()
     }
 
-
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
 
-    //$( ".school-img-list-item" ).click(function() {
-    //
-    //    var photoid = $(this).closest('.school-image-item')[0].id;
-    //    var xhr = new XMLHttpRequest();
-    //    xhr.open("GET", "/school/getphoto/" + photoid);
-    //    xhr.onreadystatechange = function () {
-    //        if (xhr.readyState === 4) {
-    //            if (xhr.status === 200) {
-    //                $( "#modal-dialog").empty();
-    //                var response = JSON.parse(xhr.responseText);
-    //                var elements = $($.parseHTML(response.html));
-    //                $.each(elements,function(index, element){
-    //                    $(element).appendTo("#modal-dialog");
-    //                });
-    //                $( "#modal" ).trigger( "click" );
-    //                setUploadFile();
-    //            }
-    //            else {
-    //                alert("Problem.");
-    //            }
-    //        }
-    //    };
-    //    xhr.send();
-    //});
-
-    $("#ajax-login").click(function() {
+    $(".ajax-login").click(function() {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/loginajax");
+        var pathname = window.location.pathname;
+        xhr.open("GET", "/loginajax?url="+pathname);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {

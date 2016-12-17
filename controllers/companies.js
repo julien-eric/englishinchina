@@ -1,4 +1,5 @@
 var Company = require('../models/company');
+var companiesController = require('./companies');
 var imagesController = require('./images');
 var async = require('async');
 
@@ -83,7 +84,5 @@ module.exports = {
             //res.redirect('/');
         });
     }
-
-
 }
 

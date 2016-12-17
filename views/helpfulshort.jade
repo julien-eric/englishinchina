@@ -18,8 +18,6 @@ if logn && review.hasHF
 
 //ISNT LOGGED IN
 if !logn
-   a.helpful.btn.btn-default.btn-sm.disabled(class="#{classes}", href="#")
+   .ajax-login.helpful.btn.btn-default.btn-sm.disabled.pointer(class="#{classes}", href="/loginajax")
       span.glyphicon.glyphicon-thumbs-up
       |&nbsp;Helpful #{review.helpfuls.length}
-
-

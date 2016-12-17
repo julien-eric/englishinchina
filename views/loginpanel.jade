@@ -4,6 +4,9 @@
       hr
       .padding
       form(class='form-signin', action='/login', method='POST')
+         if(redirecturl)
+            .form-group.hidden
+               input(type='text', name='redirecturl' class='form-control input-lg', placeholder='Username', value=redirecturl)
          .form-group.has-feedback
             //label.control-label(for='Username') Username
             input(type='text', name='username' class='form-control input-lg', placeholder='Username',required, autofocus)

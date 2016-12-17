@@ -273,16 +273,27 @@ module.exports = function(passport){
                 scripts:[scripts.util]
             });
         })
-        .post(passport.authenticate('login', {
-            successRedirect: '/',
-            failureRedirect: '/login',
-            failureFlash : true
-        }));
+        .post(function(req, res, next) {
+            //custom callback allows us to redirect user to the same page he was on... (maybe better way?)
+            var redirect = "/";
+            if(req.body.redirecturl){
+                redirect = req.body.redirecturl;
+            }
+            passport.authenticate('login', function(err, user, info) {
+                if (err) { return next(err); }
+                if (!user) { return res.redirect('/login'); }
+                req.logIn(user, function(err) {
+                    if (err) { return next(err); }
+                    return res.redirect(redirect);
+                });
+            })(req, res, next);
+        });
 
     router.get('/loginajax', function (req, res) {
         res.render('loginpanel', {
                 title: "Login - English in China",
                 message: req.flash('message'),
+                redirecturl: req.query.url,
                 scripts:[scripts.util]
             },
             function(err, html) {

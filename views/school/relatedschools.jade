@@ -1,0 +1,19 @@
+block content
+   span.clearfix
+   h2 Related Schools
+   hr
+
+.popular-cities.related-schools
+   each rschool in relatedSchools
+      li.list-group-item.col-xs-12.col-sm-4.col-md-4.col-lg-12.nopadding.popular-city
+         div.col-sm-12.col-lg-12.col-md-12.nopadding
+            div.col-sm-12.col-lg-12.col-md-12.nopadding
+               a(href="#")
+                  .img-container
+                     .img-frame(style="background-image: url('#{pictureInfo.returnThumbnail(rschool.pictureUrl)}');")
+               .clearfix
+               a(href="#")
+                  .city-name-panel
+                     h4 #{jadefunctions.capitalize(rschool.name)}
+                     p #{rschool.province.name} - #{jadefunctions.capitalize(rschool.city.pinyinName)}
+            .clearfix
