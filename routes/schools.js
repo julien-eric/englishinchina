@@ -127,7 +127,7 @@ module.exports = function(passport) {
                     user: req.user,
                     pictureInfo: pictureinfo,
                     provinces: provinces,
-                    scripts:[scripts.util, scripts.libtinyMCE, scripts.addschool],
+                    scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
                     incompleteSchool:incompleteSchool
                 });
             });
@@ -597,7 +597,7 @@ module.exports = function(passport) {
                             companies: companies,
                             jadefunctions: jadefunctions,
                             pictureInfo: pictureinfo,
-                            scripts:[scripts.util,scripts.addschool]
+                            scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
                         });
                     });
                 });

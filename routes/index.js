@@ -164,7 +164,7 @@ module.exports = function(passport){
             res.render('company/addcompany', {
                 title: "Add Company - English in China",
                 message: req.flash('message'),
-                scripts:[scripts.util]
+                scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
             });
         })
         .post(function (req, res) {
@@ -188,7 +188,7 @@ module.exports = function(passport){
                     company: company,
                     message: req.flash('message'),
                     pictureInfo: pictureinfo,
-                    scripts:[scripts.util]
+                    scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
                 });
             });
         })
