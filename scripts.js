@@ -11,6 +11,6 @@ module.exports = {
         rating:'/javascripts/rating.js',
         writereview:'/javascripts/writereview.js',
         schoolpage:'/javascripts/schoolpage.js',
-        tinyMCE:'/javascripts/tinymce.js'
+        tinyMCE:'/javascripts/tinymce2.js'
     }
 }
