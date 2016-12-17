@@ -88,6 +88,18 @@ block content
                //p Click to close
                #lightboxcontent
 
+            if reviewsCount > 0
+               div.hidden(itemscope='', itemtype='"http://schema.org/Product"')
+                  img(itemprop="image", src=pictureInfo.returnThumbnail(school.pictureUrl), alt=school.name)
+                  span(itemprop="name") #{(school.name)}
+                  div(itemprop="aggregateRating", itemscope="", itemtype="http://schema.org/AggregateRating")
+                     span(itemprop="ratingValue") #{jadefunctions.roundToPoint5(school.averageRating)}
+                     | out of
+                     span(itemprop="bestRating") 5
+                     | based on
+                     span(itemprop="ratingCount") #{reviewsCount}
+                     |  user ratings.
+
 
    <!-- Modal -->
    button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
