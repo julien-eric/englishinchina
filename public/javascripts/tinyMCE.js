@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     tinymce.init({
         selector: '#description-textarea',
         menubar: false,
@@ -16,5 +15,4 @@ $(document).ready(function() {
             'http://englishinchina.co/stylesheets/style.css'
         ]
     });
-
 });

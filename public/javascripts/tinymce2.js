@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var a =2;
+
     tinymce.init({
         selector: '#description-textarea',
         menubar: false,
@@ -11,6 +11,8 @@ $(document).ready(function() {
                 editor.save();
             });
         },
+        plugins: "paste",
+        paste_as_text: true,
         toolbar: 'undo redo styleselect bold italic outdent indent bullist numlist',
         content_css: [
             'http://englishinchina.co/stylesheets/style.css'
