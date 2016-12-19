@@ -18,7 +18,7 @@ block content
                   //label.col-md-3.col-lg-3.control-label.search-label(for='province') Province:
                   select#provinceSelect.search-navigation-inputs.form-control(name="province")
                      option(value="-1") Province
-                     option(value="-2") =============
+                     option(value="-1") =============
                      optgroup(label="Provinces")
                         each province,i in provinces
                            option(value=province.code) #{province.name} - #{province.chineseName}

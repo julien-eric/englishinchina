@@ -32,13 +32,13 @@ if popularCities && popularProvinces
                                  if province && province._id
                                     li
                                        a(href="/school/search?schoolInfo=&province=#{province._id.code}&city=-1") #{jadefunctions.capitalize(province._id.name)} - #{province._id.chineseName}
-                        if featuredSchoolList
-                           li.dropdown
-                              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                                 | Schools
-                                 span.caret
-                              ul.dropdown-menu
-                                 each featuredSchool in featuredSchoolList
-                                    if featuredSchool && featuredSchool._id
-                                       li
-                                          a(href="/school/id/#{featuredSchool._id.code}&city=-1") #{featuredSchool.name}
+                        //if featuredSchoolList
+                        //   li.dropdown
+                        //      a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                        //         | Schools
+                        //         span.caret
+                        //      ul.dropdown-menu
+                        //         each featuredSchool in featuredSchoolList
+                        //            if featuredSchool && featuredSchool._id
+                        //               li
+                        //                  a(href="/school/id/#{featuredSchool._id.code}&city=-1") #{featuredSchool.name}

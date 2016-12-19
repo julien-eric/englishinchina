@@ -30,7 +30,7 @@ block content
                            .clearfix
                            select#provinceSelect.form-control(name="province")
                               option(value="-1") Province
-                              option(value="-2") =============
+                              option(value="-1") =============
                               optgroup(label="Provinces")
                               each province,i in provinces
                                  if(province.code == school.province.code)

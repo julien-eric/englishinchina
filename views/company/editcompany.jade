@@ -4,8 +4,10 @@ block content
       div.login-form.col-sm-10.col-sm-offset-1.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
          .panel.panel-default
             .panel-body.flat-body
-               h3.text-center.login-title Create New Company
-               form(action='/company/addcompany', method='POST')
+               h3.text-center.login-title Edit Company
+               form(action='/company/edit/', method='POST')
+                  .form-group
+                     input#id(type="hidden", name="id", value=company.id)
                   .form-group
                      label.control-label(for='Name') Name
                      input(type='text', name='name', class='form-control', placeholder='Company Name', value=company.name, required, autofocus)
