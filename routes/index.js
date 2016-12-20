@@ -194,7 +194,7 @@ module.exports = function(passport){
         })
         .post(function (req, res) {
             var company = {
-                id: req.body.id,
+                id: req.params.id,
                 name: req.body.name,
                 description: req.body.description,
                 website: req.body.website,
@@ -514,11 +514,12 @@ module.exports = function(passport){
      *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      *************************************************************************************************************/
     router.get('/user/:id', function(req, res){
-        usersController.findUserById(req.params.id, function(user){
-            reviews.findReviewsByUser(req.params.id, function(reviews){
+        usersController.findUserById(req.params.id, function(usern){
+            reviews.findReviewsByUser(usern, function(reviews){
                 res.render('user', {
-                    title: "User " + user.username + " - English in China",
-                    user: user,
+                    title: "User " + usern.username + " - English in China",
+                    user: req.user,
+                    usern: usern,
                     reviews: reviews,
                     pictureInfo: pictureinfo,
                     jadefunctions: jadefunctions,

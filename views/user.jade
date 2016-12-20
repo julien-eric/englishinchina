@@ -3,9 +3,10 @@ block content
     div.container
         div.lift-content
             div.col-sm-12.col-md-8
-                if locals.user.fb
-                    .profile-image-holder.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+                if locals.usern.fb
+                    .profile-image-holder.img-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(usern.avatarUrl)}');")
                 else
-                    .profile-image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-                h1.login-title #{user.firstName}
+                    .profile-image-holder.img-circle(style="background-image: url('#{pictureInfo.returnThumbnail(usern.avatarUrl)}');")
+                h1.login-title #{usern.username}
+            .page-block.col-sm-12.col-md-12.col-lg-12
                 include school/schoolreviews

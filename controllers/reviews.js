@@ -107,7 +107,7 @@ module.exports = {
     },
 
     findReviewsByUser : function(userId, callback){
-        Review.find({objectType:0, user:userId}).populate("user").exec(function(err,comments){
+        Review.find({objectType:0, user:userId}).populate("user").populate("school").exec(function(err,comments){
             if(err){
                 console.log(err);
             }

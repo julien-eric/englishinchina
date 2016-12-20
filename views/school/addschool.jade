@@ -53,6 +53,14 @@ block content
                                  option(value="0") Training School
                                  option(value="1") Public School
                                  option(value="2") Contractual Training School
+                        .form-group
+                           label.control-label(for='company') Company
+                           .clearfix
+                           select#companySelect.form-control(name="company")
+                              option(value="-1") Company
+                              option(value="-2") =============
+                              each company,i in companies
+                                 option(value=company.id) #{company.name}
 
                         .form-group
                            label.control-label(for='Description') Description

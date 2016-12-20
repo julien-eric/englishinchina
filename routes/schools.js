@@ -122,13 +122,16 @@ module.exports = function(passport) {
                 incompleteSchool = {name:decodeURIComponent(req.query.name), schoolType:parseInt(req.query.type)};
             }
             provincesController.getAllProvinces(function(provinces){
-                res.render('school/addschool', {
-                    title: "Add School - English in China",
-                    user: req.user,
-                    pictureInfo: pictureinfo,
-                    provinces: provinces,
-                    scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-                    incompleteSchool:incompleteSchool
+                companiesController.getAllCompanies(function(companies){
+                    res.render('school/addschool', {
+                        title: "Add School - English in China",
+                        user: req.user,
+                        pictureInfo: pictureinfo,
+                        provinces: provinces,
+                        companies: companies,
+                        scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
+                        incompleteSchool:incompleteSchool
+                    });
                 });
             });
         })
