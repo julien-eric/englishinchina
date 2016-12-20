@@ -73,7 +73,7 @@ module.exports = {
                     });
                 },
                 function createSchool(province, city, company, next){
-                    School.create({ user: user._id, name:school.name, description:school.description, website: school.website, schoolType: school.schoolType, province:province, city:city, company:company, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
+                    School.create({ user: user._id, name:school.name, description:school.description, website: school.website, schoolType: school.schoolType, province:province, city:city, company:company, address: school.address, phone:school.phone, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){
                         next(err, province, city, newSchool);
                     });
                 },
@@ -141,6 +141,8 @@ module.exports = {
                     var newSchool = {province:province._id, city:city._id, company:company._id};
                     if(oldSchool.name !== school.name){newSchool.name = school.name}
                     if(oldSchool.description !== school.description){newSchool.description = school.description}
+                    if(oldSchool.address !== school.address){newSchool.address = school.address}
+                    if(oldSchool.phone !== school.phone){newSchool.phone = school.phone}
                     if(oldSchool.website !== school.website){newSchool.website = school.website}
                     if(oldSchool.schoolType !== school.schoolType){newSchool.schoolType = school.schoolType}
                     if(oldSchool.pictureUrl !== school.avatarUrl){
