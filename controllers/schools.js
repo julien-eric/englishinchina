@@ -68,9 +68,14 @@ module.exports = {
                     });
                 },
                 function getCompany(province, city, next){
-                    companiesController.findCompanyById(school.company, function(company){
-                        next(null, province, city, company);
-                    });
+                    if(school.company == "-1"){
+                        next(null, province, city, null);
+                    }
+                    else{
+                        companiesController.findCompanyById(school.company, function(company){
+                            next(null, province, city, company);
+                        });
+                    }
                 },
                 function createSchool(province, city, company, next){
                     School.create({ user: user._id, name:school.name, description:school.description, website: school.website, schoolType: school.schoolType, province:province, city:city, company:company, address: school.address, phone:school.phone, pictureUrl: school.avatarUrl, averageRating:-1 }, function (err, newSchool){

@@ -82,6 +82,22 @@ p
   /*text-align: center;*/
   margin: 15px 0;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BUTTONS
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.btn-fcb, .btn-fcb.disabled,.btn-fcb:visited
+  color: #ffffff;
+  background-color #3b5998
+  border #2d8c67
+
+.btn-fcb:hover
+  color #FFF
+  background-color #3b5998
+
+.btn-fcb:active, .btn-fcb:hover
+  color #FFF
+  background-color #3b5998
+
 .btn-eic, .btn-eic.disabled,.btn-eic:visited
   color: #ffffff;
   background-color #2f916b
@@ -109,6 +125,10 @@ p
 .btn-gray:active, .btn-gray:hover
   color #FFF
   background-color #777777
+
+
+
+
 
 .no-height
   min-height 0;
@@ -716,6 +736,9 @@ h2.searchmessage
 .school-container
   background-color #f1f1f1;
 
+.school-glyphicon
+  margin-right: 10px;
+
 @media (max-width: 568px)
   .school-image-container
     background-position top
@@ -740,7 +763,7 @@ h2.searchmessage
   padding-top 20px;
   padding-bottom 20px;
 
-.darkbg a
+.darkbg a, .darkbg h4
   color #ffffff
 
 @media (max-width: 768px)
@@ -781,9 +804,16 @@ h2.searchmessage
     margin-bottom 75px;
 
 .login-panel h1
+  font-family: roboto;
   font-size: 3em;
-  font-weight: 300;
-  color: #000000
+  padding-bottom 40px;
+  font-weight: 100;
+  color: #000;
+  text-align: center;
+
+.login-panel h4
+  font-size: 14px;
+  font-style: italic;
 
 .login-panel p
   font-size 16px

@@ -3,15 +3,13 @@ block content
     div.school-page
         .img-responsive.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(company.pictureUrl)}');")
             .container.darkbg
-                //.col-md-3
-                //    .img-container
-                //        .img-frame.img-responsive.img-thumbnail(width="100%", style="background-image: url('#{pictureInfo.returnLarge(company.logoUrl)}');")
-                //.col-md-9
                 h1.school-page-name #{company.name}
                 #schoolid.hidden(value="#{company.id}")
                 if company.website
-                    a(href="#{company.website}")
-                    h4 #{company.website}
+                    h4
+                        a(href="#{company.website}")
+                            span.school-glyphicon.glyphicon.glyphicon-home
+                            | #{company.website}
         .school-container
             .container.school-content
                 span.clearfix

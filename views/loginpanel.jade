@@ -1,12 +1,20 @@
 .panel.login-panel
    .panel-body.flat-body
       h1 Login to your account
-      hr
+      .padding
+      .padding
       .padding
       form(class='form-signin', action='/login', method='POST')
          if(redirecturl)
             .form-group.hidden
                input(type='text', name='redirecturl' class='form-control input-lg', placeholder='Username', value=redirecturl)
+         h4.align-center ------------------------------------ connect with ------------------------------------
+         .padding-block
+         .form-group
+            a(href='/login/facebook').btn.btn-block.btn-fcb.btn-lg Facebook
+         .padding-block
+         h4.align-center ----------------------------------------- or -----------------------------------------
+         .padding-block
          .form-group.has-feedback
             //label.control-label(for='Username') Username
             input(type='text', name='username' class='form-control input-lg', placeholder='Username',required, autofocus)
@@ -22,14 +30,9 @@
          .padding
          p.forgot-password
             a(href="/forgot") Forgot your password?
-         hr
          p
             |Don't have an account yet?&nbsp;
             a(href="/signup") Create an account
-         p.no-padding-bottom
-            |Sign in using social networks&nbsp;
-            a.social-icon(href='/login/facebook')
-               img(src="/images/FB-f-Logo__blue_29.png")
          #message
             if message
                h3.text-center.error-message #{message}
