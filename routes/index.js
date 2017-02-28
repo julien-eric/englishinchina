@@ -14,6 +14,7 @@ var pictureinfo = require('../pictureinfo');
 var provincesController = require('../controllers/provinces');
 var citiesController = require('../controllers/cities');
 var usersController = require('../controllers/users');
+var articlesController = require('../controllers/articles');
 var async = require('async');
 var crypto = require('crypto');
 var scripts = require('../scripts').scripts;
@@ -530,10 +531,41 @@ module.exports = function(passport){
         });
     });
 
+    /************************************************************************************************************
+     * ARTICLES
+     *************************************************************************************************************/
+    router.route('/articles/add')
+        .get(function(req, res){
+            res.render('article/addarticle', {
+                pictureInfo: pictureinfo,
+                user: req.user,
+                jadefunctions: jadefunctions,
+                moment: moment,
+                scripts:[scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
+            });
+        })
+        .post(function(req,res){
+            articlesController.addArticle(req.user, req.body, function(err, article){
+                res.redirect('/articles/' + article.url);
+            });
+        });
+
+    router.get('/articles/:url', function(req, res){
+        var url = req.params.url;
+        articlesController.getArticleByURL(url, function(article){
+            res.render('article/article', {
+                article: article,
+                user: req.user,
+                pictureInfo: pictureinfo,
+                jadefunctions: jadefunctions,
+                moment: moment,
+                scripts:[scripts.util]
+            });
+        });
+    });
 
 
     /************************************************************************************************************
-     *GETCITIESFORPROVINCE :   GET : used with ajax. On search navigation bar
      * This method is not the general one to view a different user.
      *************************************************************************************************************/
     router.get('/cities/:provincecode', function(req, res){

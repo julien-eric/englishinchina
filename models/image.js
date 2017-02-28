@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 //1)school
 //2 user
 //3 company
+//4 article
 
 module.exports = mongoose.model('Image',{
     type: Number,
