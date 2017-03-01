@@ -20,6 +20,19 @@ module.exports = {
         return schoolList;
     },
 
+    trunkArticlesContent : function(articles, length){
+        articles.forEach(function(article){
+            if(length > article.content.length){
+                length = article.content.length;
+            }
+            var content = article.content;
+            content = striptags(content);
+            content = content.substring(0,length);
+            article.content = content.substring(0, content.lastIndexOf(" ")) + "...";
+        });
+        return articles;
+    },
+
     trunkSchoolReviews: function(reviews, length){
         reviews.forEach(function(review){
             if(length > review.comment.length){

@@ -564,6 +564,20 @@ module.exports = function(passport){
         });
     });
 
+    router.get('/articles', function(req, res){
+        articlesController.getArticles(function(articles){
+            articles = jadefunctions.trunkArticlesContent(articles,150);
+            res.render('article/articles', {
+                articles: articles,
+                user: req.user,
+                pictureInfo: pictureinfo,
+                jadefunctions: jadefunctions,
+                moment: moment,
+                scripts:[scripts.util]
+            });
+        });
+    });
+
 
     /************************************************************************************************************
      * This method is not the general one to view a different user.

@@ -29,6 +29,12 @@ module.exports = {
         Article.findOne({url:url}).populate("user").exec(function(err,article){
             callback(article);
         });
+    },
+
+    getArticles: function(callback){
+        Article.find().populate("user").exec(function(err,articles) {
+            callback(articles);
+        });
     }
 
 }

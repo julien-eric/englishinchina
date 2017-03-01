@@ -1,0 +1,18 @@
+extends ../layout
+block content
+    .container
+        h3 Articles
+        hr.col-sm-12.col-md-8
+        div.row
+            div.col-sm-12.col-md-8
+                .school-list-wrapper
+                    ul.list-group
+                        each article in articles
+                            //declare variables then use generic *card*
+                            - var title = article.title;
+                            - var pictureUrl = article.pictureUrl;
+                            - var user = article.user;
+                            - var dateCreated = article.dateCreated;
+                            - var url = article.url;
+                            - var content = article.content;
+                            include card
