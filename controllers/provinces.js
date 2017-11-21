@@ -1,125 +1,115 @@
 /**
  * Created by Julz on 1/24/2016.
  */
-var Province = require('../models/province');
-var School = require('../models/school');
-var companiesController = require('./companies');
+const Province = require('../models/province');
+const School = require('../models/school');
+const companiesController = require('./companies');
 
 
 module.exports = {
 
-    initProvinces : function(provincesList, callback){
-        Province.count({},function(err,count){
-            if(count == 0){
-                Province.create(provincesList,function(err, result){
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        callback(result);
-                    }
-                });
-            }
+  initProvinces(provincesList, callback) {
+    Province.count({}, (err, count) => {
+      if (count == 0) {
+        Province.create(provincesList, (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            callback(result);
+          }
         });
-    },
+      }
+    });
+  },
 
-    getAllProvinces : function(callback) {
-        Province.
-            find().
-            sort({"name": 1}).
-            exec(function (err, provinces) {
-                    callback(provinces);
-            })
-    },
+  getAllProvinces(callback) {
+    Province
+      .find()
+      .sort({name: 1})
+      .exec((err, provinces) => {
+        callback(provinces);
+      });
+  },
 
-    getProvinceByCode : function(code, callback){
-        Province.findOne({code:code}).exec(function(err, province){
-                callback(err, province);
+  getProvinceByCode(code, callback) {
+    Province.findOne({code}).exec((err, province) => {
+      callback(err, province);
+    });
+  },
+
+  getProvinceByPinyinName(name, callback) {
+    Province.findOne({name}).exec((err, province) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(province);
+      }
+    });
+  },
+
+  getProvinceByChineseName(cityinfo, provinceCode, callback) {
+    Province.findOne({code: chineseName}).exec((err, province) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(cityinfo, province);
+      }
+    });
+  },
+
+  helpInitCities(cityinfo, provinceCode, callback) {
+    Province.findOne({code: provinceCode}).exec((err, province) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(cityinfo, province);
+      }
+    });
+  },
+
+  getMostPopularProvinces(callback) {
+    // At the moment featured schools are schools with the highest ratings
+    School.aggregate([
+      {$group: {_id: '$province', number: {$sum: 1}, pictureUrl: {$first: '$pictureUrl'}}},
+      {$sort: {number: -1}},
+      {$limit: 9},
+    ]).exec((err, transactions) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      Province.populate(transactions, {path: '_id'}, (err, popularProvinces) => {
+        // Your populated translactions are inside populatedTransactions
+        if (err) {
+          console.log(err);
+        } else {
+          callback(popularProvinces);
+        }
+      });
+    });
+  },
+
+  getMostPopularProvincesbyCompany(companyId, callback) {
+    companiesController.findCompanyById(companyId, (company) => {
+      School.aggregate([
+        {$match: {company: company._id}},
+        {$group: {_id: '$province', number: {$sum: 1}, pictureUrl: {$first: '$pictureUrl'}}},
+        {$sort: {number: -1}},
+        {$limit: 9},
+      ]).exec((err, transactions) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        Province.populate(transactions, {path: '_id'}, (err, popularProvinces) => {
+          // Your populated translactions are inside populatedTransactions
+          if (err) {
+            console.log(err);
+          } else {
+            callback(popularProvinces);
+          }
         });
-    },
-
-    getProvinceByPinyinName : function(name, callback){
-        Province.findOne({name:name}).exec(function(err, province){
-            if(err){
-                console.log(err)
-            }
-            else{
-                callback(province);
-            }
-        });
-    },
-
-    getProvinceByChineseName : function(cityinfo, provinceCode, callback){
-        Province.findOne({code:chineseName}).exec(function(err, province){
-            if(err){
-                console.log(err)
-            }
-            else{
-                callback(cityinfo, province);
-            }
-        });
-    },
-
-    helpInitCities : function(cityinfo, provinceCode, callback){
-        Province.findOne({code:provinceCode}).exec(function(err, province){
-            if(err){
-                console.log(err)
-            }
-            else{
-                callback(cityinfo, province);
-            }
-        });
-    },
-
-    getMostPopularProvinces: function(callback){
-        //At the moment featured schools are schools with the highest ratings
-        School.aggregate(
-            [
-                { $group : { _id : "$province" , number : { $sum : 1 }, pictureUrl: { $first: "$pictureUrl" } } },
-                { $sort : {number : -1}},
-                { $limit : 9 }
-            ]).exec(function(err, transactions) {
-                if(err)
-                {
-                    console.log(err);
-                    return;
-                }
-                Province.populate(transactions, {path: '_id'}, function(err, popularProvinces) {
-                    // Your populated translactions are inside populatedTransactions
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        callback(popularProvinces);
-                    }
-                });
-            });
-    },
-
-    getMostPopularProvincesbyCompany: function(companyId, callback){
-        companiesController.findCompanyById(companyId, function(company){
-            School.aggregate(
-                [
-                    { $match : {company : company._id }},
-                    { $group : { _id : "$province" , number : { $sum : 1 }, pictureUrl: { $first: "$pictureUrl" } } },
-                    { $sort : {number : -1}},
-                    { $limit : 9 }
-                ]).exec(function(err, transactions) {
-                    if(err)
-                    {
-                        console.log(err);
-                        return;
-                    }
-                    Province.populate(transactions, {path: '_id'}, function(err, popularProvinces) {
-                        // Your populated translactions are inside populatedTransactions
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                            callback(popularProvinces);
-                        }
-                    });
-                });
-        })
-    }
-}
+      });
+    });
+  },
+};

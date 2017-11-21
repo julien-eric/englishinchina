@@ -1,56 +1,52 @@
-var Image = require('./../models/image');
+const Image = require('./../models/image');
 
 module.exports = {
 
-    getAllImages: function(callback){
-        Image.find().exec(function(err,images){
-            if(err){
-                console.log(err);
-            }
-            else{
-                callback(images);
-            }
-        });
-    },
+  getAllImages(callback) {
+    Image.find().exec((err, images) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(images);
+      }
+    });
+  },
 
-    getImagesBySchool: function(school, callback){
-        Image.find({school:school._id}).exec(function(err,images){
-            if(err){
-                console.log(err);
-            }
-            else{
-                callback(images);
-            }
-        });
-    },
+  getImagesBySchool(school, callback) {
+    Image.find({school: school._id}).exec((err, images) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(images);
+      }
+    });
+  },
 
-    getImageById: function(id, callback){
-        Image.find({_id:id}).populate("user").populate("school").exec(function(err,image){
-            if(err){
-                console.log(err);
-            }
-            else{
-                callback(image);
-            }
-        });
-    },
+  getImageById(id, callback) {
+    Image.find({_id: id}).populate('user').populate('school').exec((err, image) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(image);
+      }
+    });
+  },
 
-    addImage: function(image, callback){
-        Image.create(image, function(err,createdImage){
-                callback(err,createdImage);
-            }
-        );
-    },
+  addImage(image, callback) {
+    Image.create(image, (err, createdImage) => {
+      callback(err, createdImage);
+    });
+  },
 
-    deleteImage: function(photoId, callback){
-        Image.find({_id : photoId}).remove(callback);
-    },
+  deleteImage(photoId, callback) {
+    Image.find({_id: photoId}).remove(callback);
+  },
 
-    updateImage: function(image,  callback){
-        Image.findOneAndUpdate({ _id : image._id }, { url:image.url}, function(err, editedImage){
-            callback(err, editedImage);
-        });
-    }
+  updateImage(image, callback) {
+    Image.findOneAndUpdate({_id: image._id}, {url: image.url}, (err, editedImage) => {
+      callback(err, editedImage);
+    });
+  },
 
 
-}
+};

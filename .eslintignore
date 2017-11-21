@@ -3,5 +3,5 @@
 # Ignore built files except build/index.js
 .idea/
 bin/
-public/javascripts/libs/
+public/javascripts/
 views/
