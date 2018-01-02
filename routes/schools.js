@@ -15,19 +15,25 @@ const criteria = require('../criteria').criteria;
 const async = require('async');
 const scripts = require('../scripts').scripts;
 
-/** **********************************************************************************************************
- *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
+/**
+ * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
  Passport adds this method to request object. A middleware is allowed to add properties to
  request and response objects
- ************************************************************************************************************ */
-const isAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+ * @param {*} req HTTP Request
+ * @param {*} res HTTP Request
+ * @param {*} next callback
+ * @return {Object} The return of the callback function
+ */
+const isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
   // if the user is not authenticated then redirect him to the login page
   res.redirect('/login');
 };
 
 
-module.exports = function (passport) {
+module.exports = function(passport) {
   /** ********************************
     //SCHOOL ROUTES
     ********************************** */
@@ -115,7 +121,7 @@ module.exports = function (passport) {
     .get(isAuthenticated, (req, res) => {
       let incompleteSchool;
       if (req.query.name !== undefined || req.query.schoolType !== undefined) {
-        incompleteSchool = { name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type) };
+        incompleteSchool = {name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type)};
       }
       provincesController.getAllProvinces((provinces) => {
         companiesController.getAllCompanies((companies) => {
@@ -141,7 +147,12 @@ module.exports = function (passport) {
         // Send Email to admin to advise the creation of a new school
         const message = `Email: ${newSchool.name}\n${newSchool.description}`;
         const callbackMessage = 'Thank you, we will get back to you shortly';
-        email.sendEmail('julieneric11@gmail.com', 'newschoolcreated@englishinchina.com', `School Created ${newSchool.name}`, message, callbackMessage, req, () => {
+        email.sendEmail('julieneric11@gmail.com',
+        'newschoolcreated@englishinchina.com',
+        `School Created ${newSchool.name}`,
+        message,
+        callbackMessage,
+        req, () => {
           // redirect the user to its new school
           res.redirect(`/school/id/${newSchool.id}`);
         });
@@ -149,7 +160,7 @@ module.exports = function (passport) {
     });
 
   router.post('/addschoolgetstarted', isAuthenticated, (req, res) => {
-    const school = { name: encodeURIComponent(req.body.name), schoolType: encodeURIComponent(req.body.schoolType) };
+    const school = {name: encodeURIComponent(req.body.name), schoolType: encodeURIComponent(req.body.schoolType)};
     res.redirect(`/school/addschool?name=${school.name}&type=${school.schoolType}`);
   });
 
@@ -176,8 +187,10 @@ module.exports = function (passport) {
           school,
         },
         (err, html) => {
-          if (err) { console.log(err); } else {
-            res.send({ html });
+          if (err) {
+            console.log(err);
+          } else {
+            res.send({html});
           }
         },
       );
@@ -185,10 +198,10 @@ module.exports = function (passport) {
   });
 
   router.post('/addphoto', (req, res) => {
-    const picture = { url: req.body.pictureUrl, description: req.body.description };
+    const picture = {url: req.body.pictureUrl, description: req.body.description};
     async.waterfall(
       [
-      // 1 First find the school
+        // 1 First find the school
         async.apply((picture, next) => {
           schools.findSchoolById(req.body.id, (school) => {
             next(null, picture, school);
@@ -223,7 +236,7 @@ module.exports = function (passport) {
 
 
       ],
-      (err, callback) => { },
+      (err, callback) => {},
     );
   });
 
@@ -241,8 +254,10 @@ module.exports = function (passport) {
           pictureInfo: pictureinfo,
         },
         (err, html) => {
-          if (err) { res.send({ html: err.toString() }); } else {
-            res.send({ html });
+          if (err) {
+            res.send({html: err.toString()});
+          } else {
+            res.send({html});
           }
         },
       );
@@ -258,7 +273,7 @@ module.exports = function (passport) {
         res.redirect(`/school/id/${schoolId}`);
       });
     } else {
-      req.flash('error', "You don't have administrator rights.");
+      req.flash('error', 'You don\'t have administrator rights.');
       return res.redirect('/');
     }
   });
@@ -349,7 +364,7 @@ module.exports = function (passport) {
         res.redirect(`/school/id/${schoolId}`);
       });
     } else {
-      req.flash('error', "You don't have administrator rights.");
+      req.flash('error', 'You don\'t have administrator rights.');
       return res.redirect('/');
     }
   });
@@ -369,8 +384,10 @@ module.exports = function (passport) {
         jadefunctions,
         scripts: [scripts.util],
       }, (err, html) => {
-        if (err) { console.log(err); } else {
-          res.send({ html });
+        if (err) {
+          console.log(err);
+        } else {
+          res.send({html});
         }
       });
     }, 6, page, true, req);
@@ -402,8 +419,10 @@ module.exports = function (passport) {
           moment,
           criteriaScore: review.criteria,
         }, (err, html) => {
-          if (err) { console.log(err); } else {
-            res.send({ html });
+          if (err) {
+            console.log(err);
+          } else {
+            res.send({html});
           }
         });
       } else {
@@ -441,7 +460,7 @@ module.exports = function (passport) {
         }, reviewId, userId, type),
 
         function addHelpful(review, userId, type, done) {
-          review.helpfuls.push({ user: userId });
+          review.helpfuls.push({user: userId});
           const hf = review.helpfuls[0];
           console.log(hf); // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
           console.log(hf.isNew); // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
@@ -452,7 +471,7 @@ module.exports = function (passport) {
             // if (err) return handleError(err)
             // console.log('Success!');
             if (err) {
-              res.send({ result: '0' });
+              res.send({result: '0'});
             } else {
               // res.send({result:"1", reviewId:documents._id , numberOfHelpfuls:documents.helpfuls.length});
               document.hasHF = true;
@@ -460,8 +479,10 @@ module.exports = function (passport) {
                 review: document,
                 loggedin: 'true',
               }, (err, html) => {
-                if (err) { console.log(err); } else {
-                  res.send({ html, result: '1', reviewId: document.id });
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.send({html, result: '1', reviewId: document.id});
                 }
               });
             }
@@ -472,10 +493,15 @@ module.exports = function (passport) {
         function sendEmailToReviewUser(review) {
           const user = review.user;
           if (user.email != undefined) {
-          // var message = "Hi " + review.user.username + "! " + review.helpfuls.length + " people think your review is helpful.\n Take a look : http://englishinchina.co/school/id/" + review.foreignId.id;
-            const message = email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
+            email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
               const callbackMessage = 'Thank you';
-              email.sendEmail(user.email, 'reviews@englishinchina.com', `Review Feedback on ${review.foreignId.name}`, message, callbackMessage, req, () => { });
+              email.sendEmail(user.email,
+                'reviews@englishinchina.com',
+                `Review Feedback on ${review.foreignId.name}`,
+                message,
+                callbackMessage,
+                req,
+                () => {});
             });
           }
         },
@@ -549,8 +575,10 @@ module.exports = function (passport) {
     });
   });
 
-  var validateCity = function (queryElement) {
-    if (queryElement == undefined) { return -1; }
+  let validateCity = function(queryElement) {
+    if (queryElement == undefined) {
+      return -1;
+    }
     return queryElement;
   };
 
@@ -630,7 +658,7 @@ module.exports = function (passport) {
         res.redirect('/');
       });
     } else {
-      req.flash('error', "You don't have administrator rights.");
+      req.flash('error', 'You don\'t have administrator rights.');
       return res.redirect('/');
     }
   });

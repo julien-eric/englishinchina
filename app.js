@@ -35,10 +35,17 @@ const app = express();
 // });
 // ////////////////////////////
 
+/**
+ * Used by stylus
+ * @param {*} str String
+ * @param {*} path Path
+ * @return {*} Return function
+ */
 function compile(str, path) {
   return stylus(str)
     .set('filename', path);
 }
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

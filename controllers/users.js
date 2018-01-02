@@ -8,10 +8,10 @@ module.exports = {
   getAllUsers(callback) {
     User.find().exec((err, userList) => {
       if (err) {
- console.log(err);
-} else {
- callback(userList);
-}
+        console.log(err);
+      } else {
+        callback(userList);
+      }
     });
   },
 
@@ -38,11 +38,11 @@ module.exports = {
 
     // Replace undefined values by empty strings
     if (user.address == undefined) {
- user.address = '';
-}
+      user.address = '';
+    }
     if (user.gender == undefined) {
- user.gender = '';
-}
+      user.gender = '';
+    }
     // if(user.username == "admin"){
     //     user.admin = true;
     // }

@@ -33,7 +33,7 @@ module.exports = {
   },
 
   addImage(image, callback) {
-    Image.create(image, (err, createdImage) => {
+    return Image.create(image, (err, createdImage) => {
       callback(err, createdImage);
     });
   },

@@ -4,10 +4,11 @@ module.exports = {
     "extends": "google",
     "rules": {
         "max-len": [WARN, 140],
-        "new-cap": ["error", { "capIsNewExceptionPattern": "^express\.." }],
-        "guard-for-in": OFF
+        "new-cap": ["error", {"capIsNewExceptionPattern": "^express\.."}],
+        "guard-for-in": OFF,
+        "padded-blocks": OFF
     },
     "parserOptions": {
-        "ecmaVersion": 6
-    }
+        "ecmaVersion": 2017
+    },
 };

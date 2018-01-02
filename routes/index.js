@@ -1,5 +1,5 @@
+// import {getLogger} from '../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/nodemailer/lib/shared';
 const express = require('express');
-
 const router = express.Router();
 const schools = require('../controllers/schools');
 const companies = require('../controllers/companies');
@@ -8,7 +8,6 @@ const email = require('../controllers/email');
 // var provinces = require('../provinces');
 const pictures = require('../pictures');
 const aws = require('aws-sdk');
-const url = require('url');
 const moment = require('moment');
 const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
@@ -21,19 +20,25 @@ const crypto = require('crypto');
 const scripts = require('../scripts').scripts;
 const bCrypt = require('bcrypt-nodejs');
 
-/** **********************************************************************************************************
- *isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
-  Passport adds this method to request object. A middleware is allowed to add properties to
-  request and response objects
- ************************************************************************************************************ */
-const isAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+/** ********************************************************************************************************************************
+ * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
+ Passport adds this method to request object. A middleware is allowed to add properties to
+ request and response objects
+ * @param {*} req HTTP Request
+ * @param {*} res HTTP Request
+ * @param {*} next callback
+ * @return {Object} The return of the callback function
+ *********************************************************************************************************************************/
+const isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
   // if the user is not authenticated then redirect him to the login page
   res.redirect('/login');
 };
 
 
-module.exports = function (passport) {
+module.exports = function(passport) {
   /** ********************************************************************************************************************************
      //USER RELATED GET AND POST ROUTES
      ********************************************************************************************************************************** */
@@ -69,7 +74,11 @@ module.exports = function (passport) {
       function getSchools(provinces, featuredSchoolList, popularCities, popularProvinces) {
         const pageSize = 5;
         let admin = false;
-        if (req.user == undefined || req.user.admin == undefined) { admin = false; } else { admin = req.user.admin; }
+        if (req.user == undefined || req.user.admin == undefined) {
+          admin = false;
+        } else {
+          admin = req.user.admin;
+        }
 
         schools.getSchools((count, schoolList) => {
           const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
@@ -124,7 +133,11 @@ module.exports = function (passport) {
         const pageSize = 5;
         let admin = false;
 
-        if (req.user == undefined || req.user.admin == undefined) { admin = false; } else { admin = req.user.admin; }
+        if (req.user == undefined || req.user.admin == undefined) {
+          admin = false;
+        } else {
+          admin = req.user.admin;
+        }
         schools.getSchools((count, schoolList) => {
           const trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
           res.render('home', {
@@ -272,10 +285,16 @@ module.exports = function (passport) {
         redirect = req.body.redirecturl;
       }
       passport.authenticate('login', (err, user, info) => {
-        if (err) { return next(err); }
-        if (!user) { return res.redirect('/login'); }
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return res.redirect('/login');
+        }
         req.logIn(user, (err) => {
-          if (err) { return next(err); }
+          if (err) {
+            return next(err);
+          }
           return res.redirect(redirect);
         });
       })(req, res, next);
@@ -290,8 +309,10 @@ module.exports = function (passport) {
         scripts: [scripts.util],
       },
       (err, html) => {
-        if (err) { console.log(err); } else {
-          res.send({ html });
+        if (err) {
+          console.log(err);
+        } else {
+          res.send({html});
         }
       },
     );
@@ -302,7 +323,7 @@ module.exports = function (passport) {
      ************************************************************************************************************ */
   router.get(
     '/login/facebook',
-    passport.authenticate('facebook', { scope: 'email' }),
+    passport.authenticate('facebook', {scope: 'email'}),
   );
 
 
@@ -360,13 +381,13 @@ module.exports = function (passport) {
 
   router.post('/forgot', (req, res, next) => {
     async.waterfall([
-      function (done) {
+      function(done) {
         crypto.randomBytes(20, (err, buf) => {
           const token = buf.toString('hex');
           done(err, token);
         });
       },
-      function (token, done) {
+      function(token, done) {
         usersController.findUserByEmail(req.body.email, (err, user) => {
           if (!user) {
             req.flash('error', 'No account with that email address exists.');
@@ -381,7 +402,7 @@ module.exports = function (passport) {
           });
         });
       },
-      function (token, user, done) {
+      function(token, user, done) {
         email.resetPassword(req, user, token, req, done);
 
         // var smtpTransport = nodemailer.createTransport({
@@ -416,7 +437,7 @@ module.exports = function (passport) {
   });
 
   router.get('/reset/:token', (req, res) => {
-    usersController.findUserByToken(req.params.token, { $gt: Date.now() }, (err, user) => {
+    usersController.findUserByToken(req.params.token, {$gt: Date.now()}, (err, user) => {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
         return res.redirect('/forgot');
@@ -430,14 +451,14 @@ module.exports = function (passport) {
   });
 
   router.post('/reset/:token', (req, res) => {
-    usersController.findUserByToken(req.params.token, { $gt: Date.now() }, (err, user) => {
+    usersController.findUserByToken(req.params.token, {$gt: Date.now()}, (err, user) => {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
         return res.redirect('back');
       }
 
       // Generates hash using bCrypt
-      const createHash = function (password) {
+      const createHash = function(password) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
       };
       user.password = createHash(req.body.password);
@@ -445,7 +466,7 @@ module.exports = function (passport) {
       user.resetPasswordExpires = undefined;
 
       user.save((err) => {
-        req.logIn(user, err => res.redirect('/'));
+        req.logIn(user, (err) => res.redirect('/'));
       });
     });
   });
@@ -453,7 +474,13 @@ module.exports = function (passport) {
   router.post('/contactus', (req, res) => {
     const message = `Email: ${req.body.email}\n${req.body.content}`;
     const callbackMessage = 'Thank you, we will get back to you shortly';
-    email.sendEmail('julieneric11@gmail.com', 'contactusfeedback@englishinchina.com', 'Feedback comment from user', message, callbackMessage, req, () => {
+    email.sendEmail('julieneric11@gmail.com',
+      'contactusfeedback@englishinchina.com',
+      'Feedback comment from user',
+      message,
+      callbackMessage,
+      req,
+      () => {
       res.redirect('/');
     });
   });
@@ -535,32 +562,34 @@ module.exports = function (passport) {
       });
     });
 
-  router.get('/articles/:url', (req, res) => {
+  router.get('/articles/:url', async (req, res) => {
+
     const url = req.params.url;
-    articlesController.getArticleByURL(url, (article) => {
-      res.render('article/article', {
-        article,
-        user: req.user,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        moment,
-        scripts: [scripts.util],
-      });
+    let article = await articlesController.getArticleByURL(url);
+    res.render('article/article', {
+      article,
+      user: req.user,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      moment,
+      scripts: [scripts.util],
     });
+
   });
 
-  router.get('/articles', (req, res) => {
-    articlesController.getArticles((articles) => {
-      articles = jadefunctions.trunkArticlesContent(articles, 150);
-      res.render('article/articles', {
-        articles,
-        user: req.user,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        moment,
-        scripts: [scripts.util],
-      });
+  router.get('/articles', async (req, res) => {
+
+    let articles = await articlesController.getArticles();
+    articles = jadefunctions.trunkArticlesContent(articles, 150);
+    res.render('article/articles', {
+      articles,
+      user: req.user,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      moment,
+      scripts: [scripts.util],
     });
+
   });
 
 
@@ -617,22 +646,22 @@ module.exports = function (passport) {
     });
 
     const s3 = new aws.S3();
-    const s3_params = {
+    const S3Params = {
       Bucket: 'englishinchinaasia',
       Key: req.query.file_name,
       Expires: 60,
       ContentType: req.query.file_type,
       ACL: 'public-read',
     };
-    s3.getSignedUrl('putObject', s3_params, (err, data) => {
+    s3.getSignedUrl('putObject', S3Params, (err, data) => {
       if (err) {
         console.log(err);
       } else {
-        const return_data = {
+        const returnData = {
           signed_request: data,
           url: req.query.file_name,
         };
-        res.write(JSON.stringify(return_data));
+        res.write(JSON.stringify(returnData));
         res.end();
       }
     });
