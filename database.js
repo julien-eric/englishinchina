@@ -1,5 +1,17 @@
-module.exports = {
-  url: 'mongodb://jueri:Montreal123!@ds049624.mongolab.com:49624/englishinchina',
-  urldev: 'mongodb://jueri:Montreal123!@ds035333.mlab.com:35333/englishinchinadev',
-  urllocalhost: 'mongodb://127.0.0.1:27017',
+const settings = require('simplesettings');
+
+let Database = function() {};
+
+Database.prototype.getUrl = function() {
+  switch (settings.get('environment')) {
+    case 'development':
+      return settings.get('databaseUrl').urldev;
+      break;
+    case 'production':
+      return settings.get('databaseUrl').url;
+      break;
+  }
 };
+
+
+module.exports = new Database();

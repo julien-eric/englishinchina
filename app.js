@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const stylus = require('stylus');
 const favicon = require('serve-favicon');
 const flash = require('express-flash');
+const database = require('./database');
 
 
 // Connect to DB
@@ -17,7 +18,8 @@ const flash = require('express-flash');
 //    //mongoose.connection.db.dropCollection('Province', function(err, result) {});
 // });
 // Reset DB
-mongoose.connect(dbConfig.url);
+
+mongoose.connect(database.getUrl());
 
 
 // // AWS TO BE SET IN HEROKU NEVER IN APP ITSELF
