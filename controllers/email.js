@@ -1,61 +1,64 @@
-var nodemailer = require('nodemailer');
-var smtpTransport = require("nodemailer-smtp-transport");
+let nodemailer = require('nodemailer');
 
 module.exports = {
 
-    sendEmail : function(to, from, subject, text, callbackMessage,req, done){
+    sendEmail: function(to, from, subject, text, callbackMessage, req, done) {
+        let smtpTransport = nodemailer.createTransport({
+            service: 'sendGrid',
+            host: 'smtp.sendgrid.net',
+            secureConnection: false,
+            port: 587,
+            auth: {
+                user: 'jueri',
+                pass: 'Montreal123!',
+            },
+        });
 
+        let mailOptions = {
+            to: to,
+            from: from,
+            subject: subject,
+            text: text,
+            html: text,
+        };
 
-            var smtpTransport = nodemailer.createTransport({
-                service: "sendGrid",
-                host : "smtp.sendgrid.net",
-                secureConnection : false,
-                port: 587,
-                auth : {
-                    user : "jueri",
-                    pass : "Montreal123!"
-                }
-            });
-
-            var mailOptions = {
-                to: to,
-                from: from,
-                subject: subject,
-                text: text,
-                html: text
-            };
-
-            smtpTransport.sendMail(mailOptions, function(err) {
-                req.flash('info', callbackMessage);
-                done(err, 'done');
-            });
-
+        smtpTransport.sendMail(mailOptions, function(err) {
+            req.flash('info', callbackMessage);
+            done(err, 'done');
+        });
     },
 
-    createReviewHelpfulMessage: function(res, name, numberHF, schoolId, callback){
+    createReviewHelpfulMessage: function(res, name, numberHF, schoolId, callback) {
         res.render('email', {
-                name: name,
-                numberHF:numberHF,
-                schoolId: schoolId
-            },
+            name: name,
+            numberHF: numberHF,
+            schoolId: schoolId,
+        },
             function(err, html) {
-                if(err)
+                if (err) {
                     console.log(err);
-                else{
+                } else {
                     callback(html);
                 }
-            })
+            });
     },
 
-    resetPassword : function(req, user, token, req, done){
-        var text = 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+    resetPassword: function(req, user, token, req, done) {
+        let text = 'You are receiving this because you (or someone else) have requested ' +
+            'the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
             'http://' + req.headers.host + '/reset/' + token + '\n\n' +
             'If you did not request this, please ignore this email and your password will remain unchanged.\n';
 
-        var callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.'
+        let callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.';
 
-        module.exports.sendEmail(user.email,'passwordreset@englishinchina.co','English in China Password Reset', text, callbackMessage, req, done);
-    }
+        module.exports.sendEmail(user.email, 'passwordreset@englishinchina.co',
+            'English in China Password Reset',
+            text,
+            callbackMessage,
+            req,
+            done
+        );
+    },
 
-}
+};

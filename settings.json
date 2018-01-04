@@ -1,0 +1,21 @@
+{
+  "environment":{
+    "default": "development"
+  },
+
+  "webAddress": {
+    "default": "127.0.0.1",
+    "describe": "The address to set up the nodejs website application on"
+  },
+
+  "webPort": {
+    "default": 3000,
+    "describe": "The port number to set up the nodejs website application on"
+  },
+
+  "databaseUrl" : {
+    "url": "mongodb://jueri:Montreal123!@ds049624.mongolab.com:49624/englishinchina",
+    "urldev": "mongodb://jueri:Montreal123!@ds035333.mlab.com:35333/englishinchinadev",
+    "urllocalhost": "mongodb://127.0.0.1:27017"
+  }
+}

@@ -1,40 +1,41 @@
-var Article = require('./../models/article');
-var imagesController = require('./images');
+const Article = require('./../models/article');
+const imagesController = require('./images');
 
 module.exports = {
 
-    addArticle: function (user, article, callback) {
-        var url = article.title.replace(/\s/g, '-').replace(/'+/g, '').toLowerCase();
-        Article.create({title: article.title, url:url, user:user, pictureUrl: article.avatarUrl, content: article.content, kicker: article.kicker}, function(err, newArticle){
-            imagesController.addImage({
-                    type: 4,
-                    user: null,
-                    school: null,
-                    description: newArticle.title,
-                    url: newArticle.pictureUrl,
-                    date: Date.now()
-                },
-                function(err, image){
-                    if(!err){
-                        callback(err, newArticle);
-                    }
-                    else{
-                        callback(err, newArticle);
-                    }
-                });
-        });
-    },
+  addArticle: async (user, article) => {
+    const url = article.title.replace(/\s/g, '-').replace(/'+/g, '').toLowerCase();
+    let newArticle;
 
-    getArticleByURL: function (url, callback){
-        Article.findOne({url:url}).populate("user").exec(function(err,article){
-            callback(article);
-        });
-    },
-
-    getArticles: function(callback){
-        Article.find().populate("user").exec(function(err,articles) {
-            callback(articles);
-        });
+    try {
+      newArticle = await Article.create({
+        title: article.title,
+        url,
+        user,
+        pictureUrl: article.avatarUrl,
+        content: article.content,
+        kicker: article.kicker,
+      });
+      return imagesController.addImage({
+        type: 4,
+        user: null,
+        school: null,
+        description: newArticle.title,
+        url: newArticle.pictureUrl,
+        date: Date.now(),
+      });
+    } catch (error) {
+      return error;
     }
 
-}
+  },
+
+  getArticleByURL(url) {
+    return Article.findOne({url}).populate('user').exec();
+  },
+
+  getArticles() {
+    return Article.find().populate('user').exec();
+  },
+
+};
