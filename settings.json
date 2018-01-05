@@ -8,7 +8,7 @@
     "describe": "The address to set up the nodejs website application on"
   },
 
-  "webPort": {
+  "PORT": {
     "default": 3000,
     "describe": "The port number to set up the nodejs website application on"
   },

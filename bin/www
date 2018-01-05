@@ -4,7 +4,7 @@ const app = require('../app');
 const settings = require('simplesettings');
 
 // Setting up configs
-const port = settings.get('webPort');
+const port = settings.get('PORT');
 
 app.set('port', port);
 var server = app.listen(app.get('port'), function () {
