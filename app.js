@@ -3,12 +3,11 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const dbConfig = require('./database');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
 const favicon = require('serve-favicon');
 const flash = require('express-flash');
-const database = require('./database');
+const settings = require('simplesettings');
 
 
 // Connect to DB
@@ -19,23 +18,9 @@ const database = require('./database');
 // });
 // Reset DB
 
-mongoose.connect(database.getUrl());
-
-
-// // AWS TO BE SET IN HEROKU NEVER IN APP ITSELF
-// const AWS_ACCESS_KEY = process.env.S3_KEY;
-// const AWS_SECRET_KEY = process.env.S3_SECRET;
-// const S3_BUCKET = process.env.S3_BUCKET;
+mongoose.connect(settings.get('DB_URL'));
 
 const app = express();
-
-// REMOVE THIS AND RUN FROM BIN
-// var debug = require('debug')('passport-mongo');
-// app.set('port', process.env.PORT || 3000);
-// var server = app.listen(app.get('port'), function() {
-//  debug('Express server listening on port ' + server.address().port);
-// });
-// ////////////////////////////
 
 /**
  * Used by stylus
@@ -77,11 +62,7 @@ app.use(expressSession({
   resave: true,
   saveUninitialized: true,
 }));
-// app.use(expressSession({
-//    cookie: { maxAge: 100* 60000 },
-//    secret: 'mySecretKey',
-//    saveUninitialized: true,
-//    resave: true}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

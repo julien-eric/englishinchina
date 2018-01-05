@@ -1,13 +1,13 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
-const fbConfig = require('../fb.js');
+const settings = require('simplesettings');
 
 module.exports = function(passport) {
   passport.use('facebook', new FacebookStrategy(
     {
-      clientID: fbConfig.appID,
-      clientSecret: fbConfig.appSecret,
-      callbackURL: fbConfig.callbackUrl,
+      clientID: settings.get('FCB_APP_ID'),
+      clientSecret: settings.get('FCB_APP_SECRET'),
+      callbackURL: settings.get('FCB_CB_URL'),
       profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
     },
 

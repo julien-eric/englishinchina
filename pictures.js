@@ -2,6 +2,7 @@ const gm = require('gm');
 const aws = require('aws-sdk');
 const mime = require('mime');
 const pictureinfo = require('./pictureinfo');
+const settings = require('simplesettings');
 
 
 const resizeImageAsync = function(bucket, gmImage, filename, size, prefix) {
@@ -33,10 +34,14 @@ const resizeImageAsync = function(bucket, gmImage, filename, size, prefix) {
 module.exports = {
 
   createResponsivePictures(url, filename, filesize, callback) {
-    aws.config.update({accessKeyId: 'AKIAJFGLJ3FU42D22YKQ', secretAccessKey: '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'});
+    aws.config.update(
+      {
+        accessKeyId: settings.get('S3_KEY'),
+        secretAccessKey: settings.get('S3_SECRET')
+      });
     const S3 = new aws.S3();
     const S3Params = {
-      Bucket: 'englishinchinaasia',
+      Bucket: settings.get('S3_BUCKET'),
       Key: filename,
     };
     S3.getObject(S3Params, (err, data) => {

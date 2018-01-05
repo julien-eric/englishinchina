@@ -19,6 +19,8 @@ const async = require('async');
 const crypto = require('crypto');
 const scripts = require('../scripts').scripts;
 const bCrypt = require('bcrypt-nodejs');
+const settings = require('simplesettings');
+const fcbAppId = settings.get('FCB_APP_ID');
 
 /** ********************************************************************************************************************************
  * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -85,6 +87,7 @@ module.exports = function(passport) {
 
           res.render('home', {
             title: 'English in China',
+            fcbAppId,
             main: true,
             featuredSchoolList,
             schools: truckSchoolList,
@@ -142,6 +145,7 @@ module.exports = function(passport) {
           const trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
           res.render('home', {
             title: `English in China - Page ${page}`,
+            fcbAppId,
             schools: trunkSchoolList,
             user: req.user,
             provinces,
@@ -169,6 +173,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('company/addcompany', {
         title: 'Add Company - English in China',
+        fcbAppId,
         message: req.flash('message'),
         scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
       });
@@ -191,6 +196,7 @@ module.exports = function(passport) {
       companies.findCompanyById(req.params.id, (company) => {
         res.render('company/editcompany', {
           title: `Edit ${company.name} - English in China`,
+          fcbAppId,
           company,
           message: req.flash('message'),
           pictureInfo: pictureinfo,
@@ -245,6 +251,7 @@ module.exports = function(passport) {
         const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
         res.render('company/company', {
           title: `${company.name} - English in China`,
+          fcbAppId,
           company,
           user: req.user,
           moment,
@@ -274,6 +281,7 @@ module.exports = function(passport) {
       // Display the Login page with any flash message, if any
       res.render('login', {
         title: 'Login - English in China',
+        fcbAppId,
         message: req.flash('message'),
         scripts: [scripts.util],
       });
@@ -304,6 +312,7 @@ module.exports = function(passport) {
     res.render(
       'loginpanel', {
         title: 'Login - English in China',
+        fcbAppId,
         message: req.flash('message'),
         redirecturl: req.query.url,
         scripts: [scripts.util],
@@ -347,6 +356,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('register', {
         title: 'Sign up - English in China',
+        fcbAppId,
         message: req.flash('message'),
         scripts: [scripts.util],
       });
@@ -373,6 +383,7 @@ module.exports = function(passport) {
   router.get('/forgot', (req, res) => {
     res.render('forgot', {
       title: 'Forgot your Password - English in China',
+      fcbAppId,
       user: req.user,
       pictureInfo: pictureinfo,
       scripts: [scripts.util],
@@ -444,6 +455,7 @@ module.exports = function(passport) {
       }
       res.render('reset', {
         title: 'Reset Password - English in China',
+        fcbAppId,
         pictureInfo: pictureinfo,
         scripts: [scripts.util],
       });
@@ -481,8 +493,8 @@ module.exports = function(passport) {
       callbackMessage,
       req,
       () => {
-      res.redirect('/');
-    });
+        res.redirect('/');
+      });
   });
 
   /** **********************************************************************************************************
@@ -493,6 +505,7 @@ module.exports = function(passport) {
     reviews.findReviewsByUser(req.user._id, (reviews) => {
       res.render('user', {
         title: `User ${req.user.username} - English in China`,
+        fcbAppId,
         user: req.user,
         reviews,
         pictureInfo: pictureinfo,
@@ -510,6 +523,7 @@ module.exports = function(passport) {
       usersController.findUserById(req.user._id, (user) => {
         res.render('edituser', {
           title: `Edit Profile - ${user.username} - English in China`,
+          fcbAppId,
           user,
           pictureInfo: pictureinfo,
           jadefunctions,
@@ -531,6 +545,7 @@ module.exports = function(passport) {
       reviews.findReviewsByUser(usern, (reviews) => {
         res.render('user', {
           title: `User ${usern.username} - English in China`,
+          fcbAppId,
           user: req.user,
           usern,
           reviews,
@@ -550,6 +565,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('article/addarticle', {
         pictureInfo: pictureinfo,
+        fcbAppId,
         user: req.user,
         jadefunctions,
         moment,
@@ -567,6 +583,7 @@ module.exports = function(passport) {
     const url = req.params.url;
     let article = await articlesController.getArticleByURL(url);
     res.render('article/article', {
+      fcbAppId,
       article,
       user: req.user,
       pictureInfo: pictureinfo,
@@ -582,6 +599,7 @@ module.exports = function(passport) {
     let articles = await articlesController.getArticles();
     articles = jadefunctions.trunkArticlesContent(articles, 150);
     res.render('article/articles', {
+      fcbAppId,
       articles,
       user: req.user,
       pictureInfo: pictureinfo,
@@ -625,6 +643,7 @@ module.exports = function(passport) {
       usersController.getAllUsers((users) => {
         res.render('allusers', {
           title: 'Users - English in China',
+          fcbAppId,
           users,
           pictureInfo: pictureinfo,
           jadefunctions,
@@ -640,14 +659,15 @@ module.exports = function(passport) {
      * sign_s3 : GET get signed request to upload to server directly.
      ************************************************************************************************************ */
   router.get('/sign_s3', (req, res) => {
-    aws.config.update({
-      accessKeyId: 'AKIAJFGLJ3FU42D22YKQ',
-      secretAccessKey: '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',
-    });
+    aws.config.update(
+      {
+        accessKeyId: settings.get('S3_KEY'),
+        secretAccessKey: settings.get('S3_SECRET')
+      });
 
     const s3 = new aws.S3();
     const S3Params = {
-      Bucket: 'englishinchinaasia',
+      Bucket: settings.get('S3_BUCKET'),
       Key: req.query.file_name,
       Expires: 60,
       ContentType: req.query.file_type,

@@ -14,6 +14,8 @@ const pictureinfo = require('../pictureinfo');
 const criteria = require('../criteria').criteria;
 const async = require('async');
 const scripts = require('../scripts').scripts;
+const settings = require('simplesettings');
+const fcbAppId = settings.get('FCB_APP_ID');
 
 /**
  * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -87,6 +89,7 @@ module.exports = function(passport) {
 
           res.render('school/school', {
             title: `${school.name} - English in China`,
+            fcbAppId,
             edit: schoolOwner,
             school,
             user: req.user,
@@ -127,6 +130,7 @@ module.exports = function(passport) {
         companiesController.getAllCompanies((companies) => {
           res.render('school/addschool', {
             title: 'Add School - English in China',
+            fcbAppId,
             user: req.user,
             pictureInfo: pictureinfo,
             provinces,
@@ -173,6 +177,7 @@ module.exports = function(passport) {
     schools.findSchoolById(req.params.id, (school) => {
       res.render('addphoto', {
         title: 'Upload Picture - English in China',
+        fcbAppId,
         school,
         scripts: [scripts.util],
       });
@@ -316,6 +321,7 @@ module.exports = function(passport) {
         schools.findSchoolById(schoolId, (school) => {
           res.render('writereview', {
             title: `Write Review for ${school.name} - English in China`,
+            fcbAppId,
             user: req.user,
             school,
             criteria,
@@ -379,6 +385,7 @@ module.exports = function(passport) {
     reviews.findReviews(schoolId, (reviews) => {
       res.render('school/schoolreviews', {
         title: 'Reviews - English in China',
+        fcbAppId,
         reviews,
         pictureInfo: pictureinfo,
         jadefunctions,
@@ -429,6 +436,7 @@ module.exports = function(passport) {
         reviews.findReviews(review.foreignId.id, (otherReviews) => {
           res.render('school/review', {
             title: `${review.foreignId.name} - review by ${review.user.username} - ${review.comment} - English in China`,
+            fcbAppId,
             review,
             reviews: otherReviews,
             pictureInfo: pictureinfo,
@@ -557,6 +565,7 @@ module.exports = function(passport) {
         provincesController.getAllProvinces((provinces) => {
           res.render('search', {
             title: `${searchMessage} Schools - English in China`,
+            fcbAppId,
             schools: schoolList,
             user: req.user,
             provinces,
@@ -593,6 +602,7 @@ module.exports = function(passport) {
         citiesController.getCitiesByProvince(school.province.code, (cities) => {
           companiesController.getAllCompanies((companies) => {
             res.render('school/editschool', {
+              fcbAppId,
               school,
               user: req.user,
               reviews,
