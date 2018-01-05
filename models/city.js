@@ -6,5 +6,5 @@ module.exports = mongoose.model('City', {
   chineseName: String,
   x: Number,
   y: Number,
-  code: Number,
+  code: Number
 });

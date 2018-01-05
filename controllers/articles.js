@@ -14,7 +14,7 @@ module.exports = {
         user,
         pictureUrl: article.avatarUrl,
         content: article.content,
-        kicker: article.kicker,
+        kicker: article.kicker
       });
       return imagesController.addImage({
         type: 4,
@@ -22,7 +22,7 @@ module.exports = {
         school: null,
         description: newArticle.title,
         url: newArticle.pictureUrl,
-        date: Date.now(),
+        date: Date.now()
       });
     } catch (error) {
       return error;
@@ -36,6 +36,6 @@ module.exports = {
 
   getArticles() {
     return Article.find().populate('user').exec();
-  },
+  }
 
 };

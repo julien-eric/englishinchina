@@ -14,16 +14,13 @@ module.exports = mongoose.model('User', {
   useFacebookPic: Boolean,
   fb: {
     id: String,
-    access_token: String,
-    firstName: String,
-    lastName: String,
-    email: String,
+    access_token: String
   },
   twitter: {
     id: String,
     token: String,
     username: String,
     displayName: String,
-    lastStatus: String,
-  },
+    lastStatus: String
+  }
 });

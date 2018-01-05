@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const helpful = new Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  dateCreated: {type: Date, default: Date.now},
+  dateCreated: {type: Date, default: Date.now}
 });
 
 const Review = new Schema({
@@ -26,9 +26,9 @@ const Review = new Schema({
     c5: Number,
     c6: Number,
     c7: Number,
-    c8: Number,
+    c8: Number
   },
-  average_rating: Number,
+  average_rating: Number
 });
 
 Review.post('save', (document) => {

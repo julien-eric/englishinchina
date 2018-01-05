@@ -92,7 +92,7 @@ module.exports = {
             address: school.address,
             phone: school.phone,
             pictureUrl: school.avatarUrl,
-            averageRating: -1,
+            averageRating: -1
           }, (err, newSchool) => {
             next(err, province, city, newSchool);
           });
@@ -105,7 +105,7 @@ module.exports = {
               school: createdSchool,
               description: createdSchool.name,
               url: createdSchool.pictureUrl,
-              date: Date.now(),
+              date: Date.now()
             },
             (err, image) => {
               if (!err) {
@@ -118,7 +118,7 @@ module.exports = {
               // next(err, province, city, image);
             },
           );
-        },
+        }
       ],
       (err, callback) => {
         if (err) {
@@ -200,7 +200,7 @@ module.exports = {
               school: editedSchool,
               description: editedSchool.name,
               url: editedSchool.pictureUrl,
-              date: Date.now(),
+              date: Date.now()
             },
             (err, image) => {
               if (!err) {
@@ -212,7 +212,7 @@ module.exports = {
               }
             },
           );
-        },
+        }
 
       ],
       (err, callback) => {
@@ -371,7 +371,7 @@ module.exports = {
     reviews.findReviews(schoolId, (reviews) => {
       let averageScore = 0;
       const criteria = {
-        c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, c7: 0, c8: 0,
+        c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, c7: 0, c8: 0
       };
       for (const review in reviews) {
         averageScore += reviews[review].average_rating;
@@ -400,5 +400,5 @@ module.exports = {
         }
       });
     });
-  },
+  }
 };

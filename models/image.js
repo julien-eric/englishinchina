@@ -13,5 +13,5 @@ module.exports = mongoose.model('Image', {
   company: {type: mongoose.Schema.Types.ObjectId, ref: 'Company'},
   description: String,
   url: String,
-  date: Date,
+  date: Date
 });

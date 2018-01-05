@@ -23,5 +23,5 @@ module.exports = {
   THUMBNAIL_SIZE: 350,
   FACEBOOK: '',
   LARGE: 'lg_',
-  LARGE_SIZE: 1663,
+  LARGE_SIZE: 1663
 };

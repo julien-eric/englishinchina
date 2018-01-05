@@ -46,7 +46,7 @@ module.exports = {
     Image.findOneAndUpdate({_id: image._id}, {url: image.url}, (err, editedImage) => {
       callback(err, editedImage);
     });
-  },
+  }
 
 
 };

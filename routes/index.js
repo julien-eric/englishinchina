@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const schools = require('../controllers/schools');
-const companies = require('../controllers/companies');
 const reviews = require('../controllers/reviews');
 const email = require('../controllers/email');
 // var provinces = require('../provinces');
@@ -14,7 +13,6 @@ const pictureinfo = require('../pictureinfo');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const usersController = require('../controllers/users');
-const articlesController = require('../controllers/articles');
 const async = require('async');
 const crypto = require('crypto');
 const scripts = require('../scripts').scripts;
@@ -101,10 +99,10 @@ module.exports = function(passport) {
             currentPage: 1,
             total: count,
             totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-            scripts: [scripts.librater, scripts.util, scripts.rating],
+            scripts: [scripts.librater, scripts.util, scripts.rating]
           });
         }, pageSize, 0, admin);
-      },
+      }
     ], (err) => {
       if (err) console.log(err);
       // res.redirect('/');
@@ -156,118 +154,13 @@ module.exports = function(passport) {
             currentPage: page,
             total: count,
             totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-            scripts: [scripts.librater, scripts.util, scripts.rating],
+            scripts: [scripts.librater, scripts.util, scripts.rating]
           });
         }, pageSize, page - 1, admin);
-      },
+      }
     ], (err) => {
       if (err) console.log(err);
       // res.redirect('/');
-    });
-  });
-
-  /** ********************************************************************************************************************************
-     //COMPANY RELATED ROUTES
-    ********************************************************************************************************************************** */
-  router.route('/company/addcompany')
-    .get((req, res) => {
-      res.render('company/addcompany', {
-        title: 'Add Company - English in China',
-        fcbAppId,
-        message: req.flash('message'),
-        scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-      });
-    })
-    .post((req, res) => {
-      const company = {
-        name: req.body.name,
-        description: req.body.description,
-        website: req.body.website,
-        pictureUrl: req.body.pictureUrl,
-        logoUrl: req.body.logoUrl,
-      };
-      companies.addCompany(company, (newCompany) => {
-        res.redirect(`/company/id/${newCompany.id}`);
-      });
-    });
-
-  router.route('/company/edit/:id')
-    .get((req, res) => {
-      companies.findCompanyById(req.params.id, (company) => {
-        res.render('company/editcompany', {
-          title: `Edit ${company.name} - English in China`,
-          fcbAppId,
-          company,
-          message: req.flash('message'),
-          pictureInfo: pictureinfo,
-          scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-        });
-      });
-    })
-    .post((req, res) => {
-      const company = {
-        id: req.params.id,
-        name: req.body.name,
-        description: req.body.description,
-        website: req.body.website,
-        pictureUrl: req.body.pictureUrl,
-        logoUrl: req.body.logoUrl,
-      };
-      companies.editCompany(company, (err, newCompany) => {
-        res.redirect(`/company/id/${newCompany.id}`);
-      });
-    });
-
-
-  router.get('/company/id/:id', (req, res) => {
-    async.waterfall([
-      function findCompany(done) {
-        companies.findCompanyById(req.params.id, (company) => {
-          done(null, company);
-        });
-      },
-
-      function getPopularCities(company, done) {
-        citiesController.getMostPopularCities((popularCities) => {
-          done(null, company, popularCities);
-        });
-      },
-      function getPopularProvinces(company, popularCities, done) {
-        provincesController.getMostPopularProvinces((popularProvinces) => {
-          done(null, company, popularCities, popularProvinces);
-        });
-      },
-      function getSchoolList(company, popularCities, popularProvinces, done) {
-        schools.findSchoolsByCompany(company.id, (err, schoolList) => {
-          done(err, company, popularCities, popularProvinces, schoolList);
-        });
-      },
-      function getprovincesByCompany(company, popularCities, popularProvinces, schoolList, done) {
-        provincesController.getMostPopularProvincesbyCompany(req.params.id, (provincesByCompany) => {
-          done(null, company, popularCities, popularProvinces, schoolList, provincesByCompany);
-        });
-      },
-      function finish(company, popularCities, popularProvinces, schoolList, provincesByCompany) {
-        const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
-        res.render('company/company', {
-          title: `${company.name} - English in China`,
-          fcbAppId,
-          company,
-          user: req.user,
-          moment,
-          jadefunctions,
-          popularCities,
-          popularProvinces,
-          provincesByCompany,
-          schools: truckSchoolList,
-          pictureInfo: pictureinfo,
-          scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage],
-        });
-      },
-    ], (err, callback) => {
-      if (err) {
-        console.log(err);
-      }
     });
   });
 
@@ -277,13 +170,12 @@ module.exports = function(passport) {
      ************************************************************************************************************ */
   router.route('/login')
     .get((req, res) => {
-      // citiesController.pushCities(citiesController.citiesToPush);
       // Display the Login page with any flash message, if any
       res.render('login', {
         title: 'Login - English in China',
         fcbAppId,
         message: req.flash('message'),
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       });
     })
     .post((req, res, next) => {
@@ -315,7 +207,7 @@ module.exports = function(passport) {
         fcbAppId,
         message: req.flash('message'),
         redirecturl: req.query.url,
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       },
       (err, html) => {
         if (err) {
@@ -343,7 +235,7 @@ module.exports = function(passport) {
     '/login/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect: '/',
-      failureRedirect: '/',
+      failureRedirect: '/'
     }),
   );
 
@@ -358,13 +250,13 @@ module.exports = function(passport) {
         title: 'Sign up - English in China',
         fcbAppId,
         message: req.flash('message'),
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       });
     })
     .post(passport.authenticate('signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
-      failureFlash: true,
+      failureFlash: true
     }));
 
 
@@ -386,7 +278,7 @@ module.exports = function(passport) {
       fcbAppId,
       user: req.user,
       pictureInfo: pictureinfo,
-      scripts: [scripts.util],
+      scripts: [scripts.util]
     });
   });
 
@@ -440,7 +332,7 @@ module.exports = function(passport) {
         //    req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
         //    done(err, 'done');
         // });
-      },
+      }
     ], (err) => {
       if (err) return next(err);
       res.redirect('/forgot');
@@ -457,7 +349,7 @@ module.exports = function(passport) {
         title: 'Reset Password - English in China',
         fcbAppId,
         pictureInfo: pictureinfo,
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       });
     });
   });
@@ -510,7 +402,7 @@ module.exports = function(passport) {
         reviews,
         pictureInfo: pictureinfo,
         jadefunctions,
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       });
     });
   });
@@ -527,7 +419,7 @@ module.exports = function(passport) {
           user,
           pictureInfo: pictureinfo,
           jadefunctions,
-          scripts: [scripts.util],
+          scripts: [scripts.util]
         });
       });
     })
@@ -552,64 +444,11 @@ module.exports = function(passport) {
           pictureInfo: pictureinfo,
           jadefunctions,
           moment,
-          scripts: [scripts.util],
+          scripts: [scripts.util]
         });
       });
     });
   });
-
-  /** **********************************************************************************************************
-     * ARTICLES
-     ************************************************************************************************************ */
-  router.route('/articles/add')
-    .get((req, res) => {
-      res.render('article/addarticle', {
-        pictureInfo: pictureinfo,
-        fcbAppId,
-        user: req.user,
-        jadefunctions,
-        moment,
-        scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-      });
-    })
-    .post((req, res) => {
-      articlesController.addArticle(req.user, req.body, (err, article) => {
-        res.redirect(`/articles/${article.url}`);
-      });
-    });
-
-  router.get('/articles/:url', async (req, res) => {
-
-    const url = req.params.url;
-    let article = await articlesController.getArticleByURL(url);
-    res.render('article/article', {
-      fcbAppId,
-      article,
-      user: req.user,
-      pictureInfo: pictureinfo,
-      jadefunctions,
-      moment,
-      scripts: [scripts.util],
-    });
-
-  });
-
-  router.get('/articles', async (req, res) => {
-
-    let articles = await articlesController.getArticles();
-    articles = jadefunctions.trunkArticlesContent(articles, 150);
-    res.render('article/articles', {
-      fcbAppId,
-      articles,
-      user: req.user,
-      pictureInfo: pictureinfo,
-      jadefunctions,
-      moment,
-      scripts: [scripts.util],
-    });
-
-  });
-
 
   /** **********************************************************************************************************
      * This method is not the general one to view a different user.
@@ -648,7 +487,7 @@ module.exports = function(passport) {
           pictureInfo: pictureinfo,
           jadefunctions,
           moment,
-          scripts: [scripts.util],
+          scripts: [scripts.util]
         });
       });
     } else {
@@ -671,7 +510,7 @@ module.exports = function(passport) {
       Key: req.query.file_name,
       Expires: 60,
       ContentType: req.query.file_type,
-      ACL: 'public-read',
+      ACL: 'public-read'
     };
     s3.getSignedUrl('putObject', S3Params, (err, data) => {
       if (err) {
@@ -679,7 +518,7 @@ module.exports = function(passport) {
       } else {
         const returnData = {
           signed_request: data,
-          url: req.query.file_name,
+          url: req.query.file_name
         };
         res.write(JSON.stringify(returnData));
         res.end();

@@ -96,7 +96,7 @@ module.exports = {
     const breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br ' + '/>' : '<br>';
     // str = str.replace("\r\n", "\n").replace("\r", "\n")
     return (`${str}`).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, `$1${breakTag}$2`);
-  },
+  }
 
 
 };

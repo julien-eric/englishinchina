@@ -20,9 +20,9 @@ module.exports = mongoose.model('School', {
     c5: Number,
     c6: Number,
     c7: Number,
-    c8: Number,
+    c8: Number
   },
   averageRating: Number,
   validated: Boolean,
-  photos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}],
+  photos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}]
 });

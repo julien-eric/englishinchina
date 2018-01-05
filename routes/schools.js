@@ -104,10 +104,10 @@ module.exports = function(passport) {
             popularProvinces,
             relatedSchools,
             pictureInfo: pictureinfo,
-            scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage],
+            scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
           });
         }, 6, 1, true, req);
-      },
+      }
 
     ], (err, callback) => {
       if (err) {
@@ -136,7 +136,7 @@ module.exports = function(passport) {
             provinces,
             companies,
             scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-            incompleteSchool,
+            incompleteSchool
           });
         });
       });
@@ -179,7 +179,7 @@ module.exports = function(passport) {
         title: 'Upload Picture - English in China',
         fcbAppId,
         school,
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       });
     });
   });
@@ -189,7 +189,7 @@ module.exports = function(passport) {
       res.render(
         'addphoto', {
           title: 'Upload Picture - English in China',
-          school,
+          school
         },
         (err, html) => {
           if (err) {
@@ -222,7 +222,7 @@ module.exports = function(passport) {
               school,
               url: picture.url,
               description: picture.description,
-              date: Date.now(),
+              date: Date.now()
             },
             (error, image) => {
               if (!error) {
@@ -237,7 +237,7 @@ module.exports = function(passport) {
               // next(err, province, city, image);
             },
           );
-        },
+        }
 
 
       ],
@@ -256,7 +256,7 @@ module.exports = function(passport) {
           title: 'View Picture - English in China',
           photo: image[0],
           admin,
-          pictureInfo: pictureinfo,
+          pictureInfo: pictureinfo
         },
         (err, html) => {
           if (err) {
@@ -330,10 +330,10 @@ module.exports = function(passport) {
             reviews: reviewList,
             pictureInfo: pictureinfo,
             jadefunctions,
-            scripts: [scripts.util, scripts.libcalendar, scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview],
+            scripts: [scripts.util, scripts.libcalendar, scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview]
           });
         });
-      },
+      }
 
     ], (err, callback) => {
       if (err) {
@@ -389,7 +389,7 @@ module.exports = function(passport) {
         reviews,
         pictureInfo: pictureinfo,
         jadefunctions,
-        scripts: [scripts.util],
+        scripts: [scripts.util]
       }, (err, html) => {
         if (err) {
           console.log(err);
@@ -424,7 +424,7 @@ module.exports = function(passport) {
           scripts: [scripts.util],
           criteria,
           moment,
-          criteriaScore: review.criteria,
+          criteriaScore: review.criteria
         }, (err, html) => {
           if (err) {
             console.log(err);
@@ -444,7 +444,7 @@ module.exports = function(passport) {
             scripts: [scripts.util, scripts.libbarchart, scripts.schoolpage],
             criteria,
             moment,
-            criteriaScore: review.criteria,
+            criteriaScore: review.criteria
           });
         }, 9, 1, true);
       }
@@ -485,7 +485,7 @@ module.exports = function(passport) {
               document.hasHF = true;
               res.render('helpfulshort', {
                 review: document,
-                loggedin: 'true',
+                loggedin: 'true'
               }, (err, html) => {
                 if (err) {
                   console.log(err);
@@ -512,7 +512,7 @@ module.exports = function(passport) {
                 () => {});
             });
           }
-        },
+        }
 
       ],
       // ERROR MANAGEMENT
@@ -574,10 +574,10 @@ module.exports = function(passport) {
             popularProvinces,
             searchMessage: `You searched for ${searchMessage}`,
             jadefunctions,
-            scripts: [scripts.librater, scripts.util, scripts.rating],
+            scripts: [scripts.librater, scripts.util, scripts.rating]
           });
         });
-      },
+      }
     ], (err) => {
       if (err) return next(err);
       res.redirect('/');
@@ -611,7 +611,7 @@ module.exports = function(passport) {
               companies,
               jadefunctions,
               pictureInfo: pictureinfo,
-              scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
+              scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
             });
           });
         });

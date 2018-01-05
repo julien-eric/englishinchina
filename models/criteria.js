@@ -10,7 +10,7 @@ const Criteria = new Schema({
   cri_supportOnArrivalandVisa: Number,
   cri_salaryVsCOLiving: Number,
   cri_respectForContract: Number,
-  cri_pollution: Number,
+  cri_pollution: Number
 });
 
 module.exports = mongoose.model('Criteria', Criteria);

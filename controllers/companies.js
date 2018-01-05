@@ -39,7 +39,7 @@ module.exports = {
           description: company.description,
           website: company.website,
           pictureUrl: company.pictureUrl,
-          logoUrl: company.logoUrl,
+          logoUrl: company.logoUrl
         }, (err, createdCompany) => {
           if (!err) {
             done(err, createdCompany, callback);
@@ -55,7 +55,7 @@ module.exports = {
           school: null,
           description: createdCompany.name,
           url: createdCompany.logoUrl,
-          date: Date.now(),
+          date: Date.now()
         }, (err, logoImage) => {
           done(err, createdCompany, logoImage, callback);
         });
@@ -69,7 +69,7 @@ module.exports = {
           school: null,
           description: createdCompany.name,
           url: createdCompany.pictureUrl,
-          date: Date.now(),
+          date: Date.now()
         }, (err, coverImage) => {
           done(err, createdCompany, logoImage, coverImage, callback);
         });
@@ -85,12 +85,12 @@ module.exports = {
 
       function finish(newCompany) {
         callback(newCompany);
-      },
+      }
 
     ], (err) => {
       if (err) console.log(err);
       // res.redirect('/');
     });
-  },
+  }
 };
 

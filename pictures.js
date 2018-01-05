@@ -18,7 +18,7 @@ const resizeImageAsync = function(bucket, gmImage, filename, size, prefix) {
         Key: prefix + filename,
         Body: buf,
         ContentType: mime.lookup(filename),
-        ACL: 'public-read',
+        ACL: 'public-read'
       };
       bucket.putObject(bucketContent, (err, res) => {
         if (err) {
@@ -42,12 +42,12 @@ module.exports = {
     const S3 = new aws.S3();
     const S3Params = {
       Bucket: settings.get('S3_BUCKET'),
-      Key: filename,
+      Key: filename
     };
     S3.getObject(S3Params, (err, data) => {
-      resizeImageAsync(s3, gm(data.Body), filename, pictureinfo.THUMBNAIL_SIZE, pictureinfo.THUMBNAIL);
-      resizeImageAsync(s3, gm(data.Body), filename, pictureinfo.LARGE_SIZE, pictureinfo.LARGE);
+      resizeImageAsync(S3, gm(data.Body), filename, pictureinfo.THUMBNAIL_SIZE, pictureinfo.THUMBNAIL);
+      resizeImageAsync(S3, gm(data.Body), filename, pictureinfo.LARGE_SIZE, pictureinfo.LARGE);
     });
-  },
+  }
 
 };

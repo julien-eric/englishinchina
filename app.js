@@ -41,7 +41,7 @@ app.use(favicon(`${__dirname}/public/favicon.ico`));
 
 app.use(stylus.middleware({
   src: `${__dirname}/public`,
-  compile,
+  compile
 }));
 
 app.use(logger('dev'));
@@ -60,7 +60,7 @@ app.use(expressSession({
   cookie: {expires: new Date(Date.now() + (30 * 86400 * 1000))},
   secret: 'mySecretKey',
   resave: true,
-  saveUninitialized: true,
+  saveUninitialized: true
 }));
 
 app.use(passport.initialize());
@@ -90,9 +90,13 @@ initPassport(passport);
 const routes = require('./routes/index')(passport);
 const schoolRoutes = require('./routes/schools')(passport);
 const functionRoutes = require('./routes/function')(passport);
+const companyRoutes = require('./routes/companies')(passport);
+const articleRoutes = require('./routes/articles')(passport);
 
 app.use('/', routes);
 app.use('/school', schoolRoutes);
+app.use('/company', companyRoutes);
+app.use('/article', articleRoutes);
 app.use('/function', functionRoutes);
 
 
@@ -113,7 +117,7 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err,
+      error: err
     });
   });
 }

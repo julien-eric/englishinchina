@@ -60,7 +60,7 @@ module.exports = {
       address: user.address,
       admin: user.admin,
       useFacebookPic,
-      avatarUrl: user.avatarUrl,
+      avatarUrl: user.avatarUrl
     }, (err, editedUser) => {
       if (err) {
         console.log(err);
@@ -68,6 +68,6 @@ module.exports = {
         callback(editedUser);
       }
     });
-  },
+  }
 };
 

@@ -8,5 +8,5 @@ module.exports = mongoose.model('Article', {
   dateCreated: {type: Date, default: Date.now},
   pictureUrl: String,
   content: String,
-  kicker: String,
+  kicker: String
 });

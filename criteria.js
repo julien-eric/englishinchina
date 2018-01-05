@@ -10,7 +10,7 @@ module.exports = {
       name: 'Support given by school before and upon arrival',
       description: 'How has the school helped you take care of everything that was needed in the process of moving to China,' +
         'was it present or did it leave you on your own? Upon immediate arrival, did the school have staff dedicated to help you' +
-        'with the sometimes unpleasant transition experienced when moving to a new country?',
+        'with the sometimes unpleasant transition experienced when moving to a new country?'
     },
     {
       code: 2,
@@ -19,7 +19,7 @@ module.exports = {
       name: 'Work environment and management',
       description: 'Was the work environment agreeable and welcoming? Was the dynamic between foreign teachers' +
         ' and the rest of the school staff united or was communication sometimes difficult. In addition, think about' +
-        ' your experience dealing with management, have you had any problems or was everything dealt with professionally.',
+        ' your experience dealing with management, have you had any problems or was everything dealt with professionally.'
     },
     {
       code: 3,
@@ -27,7 +27,7 @@ module.exports = {
       shortName: 'Resources',
       name: 'Academic Resources',
       description: 'Did your school provide the ressources necessary(curriculums, workbooks, computers) to prepare your classes,' +
-      ' or were you left to do most of it on your own.',
+      ' or were you left to do most of it on your own.'
     },
     {
       code: 4,
@@ -35,7 +35,7 @@ module.exports = {
       shortName: 'Accomodation',
       name: 'Reliability of Provided Accomodation',
       description: 'Were you provided with the accomodation formula promised either by phone or through the contract. Is it big enough,' +
-      ' clean, and ready for new teachers arrival, are utilities functioning properly? (gas, water, electricity, shower, stove, etc. )',
+      ' clean, and ready for new teachers arrival, are utilities functioning properly? (gas, water, electricity, shower, stove, etc. )'
     },
     {
       code: 5,
@@ -43,7 +43,7 @@ module.exports = {
       shortName: 'Location',
       name: 'Location and accessibility',
       description: 'Is the school well situated? Is accessibility or remoteness become an issue, do you have to take an' +
-      ' hour bus to be anywhere?',
+      ' hour bus to be anywhere?'
     },
     {
       code: 6,
@@ -52,7 +52,7 @@ module.exports = {
       name: 'Salary, workload and cost of living',
       description: 'After having settled down and covered most initial expenses, do you believe the salary is reasonable' +
       ' in terms of the amount of work expected from you as well as in accordance to the cost of living there? How does it' +
-      ' compare to that of other schools in the same area?',
+      ' compare to that of other schools in the same area?'
     },
     {
       code: 7,
@@ -61,7 +61,7 @@ module.exports = {
       name: 'Attention given to respecting contract',
       description: 'Contracts can sometimes be overlooked when circumstances become trying, favors are done to help out.' +
       ' But if it is a constant battle to keep your workload within the negociated terms, then the contract is not being' +
-      ' respected. What was your experience in dealing with workload, accomodation and holidays?',
+      ' respected. What was your experience in dealing with workload, accomodation and holidays?'
     },
     {
       code: 8,
@@ -69,7 +69,7 @@ module.exports = {
       shortName: 'Dynamic',
       name: 'Dynamic amongst Teachers',
       description: 'In a place like China, given the language and cultural barriers, your colleagues and your friends are often' +
-      ' the same people, and ultimately they will shape your experience.',
-    },
-  ],
+      ' the same people, and ultimately they will shape your experience.'
+    }
+  ]
 };

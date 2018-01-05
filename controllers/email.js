@@ -10,8 +10,8 @@ module.exports = {
             port: 587,
             auth: {
                 user: 'jueri',
-                pass: 'Montreal123!',
-            },
+                pass: 'Montreal123!'
+            }
         });
 
         let mailOptions = {
@@ -19,7 +19,7 @@ module.exports = {
             from: from,
             subject: subject,
             text: text,
-            html: text,
+            html: text
         };
 
         smtpTransport.sendMail(mailOptions, function(err) {
@@ -32,7 +32,7 @@ module.exports = {
         res.render('email', {
             name: name,
             numberHF: numberHF,
-            schoolId: schoolId,
+            schoolId: schoolId
         },
             function(err, html) {
                 if (err) {
@@ -59,6 +59,6 @@ module.exports = {
             req,
             done
         );
-    },
+    }
 
 };

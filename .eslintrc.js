@@ -7,7 +7,8 @@ module.exports = {
         "new-cap": ["error", {"capIsNewExceptionPattern": "^express\.."}],
         "guard-for-in": OFF,
         "padded-blocks": OFF,
-        "linebreak-style": ["error", "windows"]
+        "linebreak-style": ["error", "windows"],
+        "comma-dangle": ["error", "never"],
     },
     "parserOptions": {
         "ecmaVersion": 2017

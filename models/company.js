@@ -6,5 +6,5 @@ module.exports = mongoose.model('Company', {
   website: String,
   pictureUrl: String,
   logoUrl: String,
-  photos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}],
+  photos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}]
 });

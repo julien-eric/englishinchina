@@ -44,9 +44,9 @@ module.exports = {
         c5: req.body.cri_locationAccesibility,
         c6: req.body.cri_salaryVsCOLiving,
         c7: req.body.cri_respectForContract,
-        c8: req.body.cri_dynamicTeachers,
+        c8: req.body.cri_dynamicTeachers
       },
-      average_rating: calculateAverage(req.body),
+      average_rating: calculateAverage(req.body)
     }, onReturn);
   },
 
@@ -149,5 +149,5 @@ module.exports = {
       }
     }
     return distribution;
-  },
+  }
 };

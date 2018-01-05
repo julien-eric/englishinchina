@@ -72,7 +72,7 @@ module.exports = {
     School.aggregate([
       {$group: {_id: '$province', number: {$sum: 1}, pictureUrl: {$first: '$pictureUrl'}}},
       {$sort: {number: -1}},
-      {$limit: 9},
+      {$limit: 9}
     ]).exec((err, transactions) => {
       if (err) {
         console.log(err);
@@ -95,7 +95,7 @@ module.exports = {
         {$match: {company: company._id}},
         {$group: {_id: '$province', number: {$sum: 1}, pictureUrl: {$first: '$pictureUrl'}}},
         {$sort: {number: -1}},
-        {$limit: 9},
+        {$limit: 9}
       ]).exec((err, transactions) => {
         if (err) {
           console.log(err);
@@ -111,5 +111,5 @@ module.exports = {
         });
       });
     });
-  },
+  }
 };
