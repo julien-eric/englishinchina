@@ -4,7 +4,7 @@ const moment = require('moment');
 const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const articlesController = require('../controllers/articles');
-const scripts = require('../scripts').scripts;
+const scripts = require('../public/scripts');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 
