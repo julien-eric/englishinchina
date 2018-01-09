@@ -5,6 +5,7 @@ const router = express.Router();
 const schools = require('../controllers/schools');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
+const companies = require('../controllers/companies');
 const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const async = require('async');
@@ -31,7 +32,7 @@ module.exports = function(passport) {
         pictureUrl: req.body.pictureUrl,
         logoUrl: req.body.logoUrl
       };
-      companies.addCompany(company, (newCompany) => {
+      companies.addCompany(company).then((newCompany) => {
         res.redirect(`/company/id/${newCompany.id}`);
       });
     });
@@ -58,7 +59,7 @@ module.exports = function(passport) {
         pictureUrl: req.body.pictureUrl,
         logoUrl: req.body.logoUrl
       };
-      companies.editCompany(company, (err, newCompany) => {
+      companies.editCompany(company).then((newCompany) => {
         res.redirect(`/company/id/${newCompany.id}`);
       });
     });

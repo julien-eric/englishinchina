@@ -2,7 +2,7 @@ let nodemailer = require('nodemailer');
 
 module.exports = {
 
-    sendEmail: function(to, from, subject, text, callbackMessage, req, done) {
+    sendEmail: function(to, from, subject, text, callbackMessage, req) {
         let smtpTransport = nodemailer.createTransport({
             service: 'sendGrid',
             host: 'smtp.sendgrid.net',
@@ -24,7 +24,11 @@ module.exports = {
 
         smtpTransport.sendMail(mailOptions, function(err) {
             req.flash('info', callbackMessage);
-            done(err, 'done');
+            if (!err) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject(err);
+            }
         });
     },
 
@@ -43,7 +47,7 @@ module.exports = {
             });
     },
 
-    resetPassword: function(req, user, token, req, done) {
+    resetPassword: function(req, user, token, req) {
         let text = 'You are receiving this because you (or someone else) have requested ' +
             'the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -56,8 +60,7 @@ module.exports = {
             'English in China Password Reset',
             text,
             callbackMessage,
-            req,
-            done
+            req
         );
     }
 

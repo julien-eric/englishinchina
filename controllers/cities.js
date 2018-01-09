@@ -16,7 +16,7 @@ module.exports = {
           if (city.province === '' || city.province === null) {
             city.province = {_id: '56a879c04c7fd9141e6f8f89', code: 13};
           }
-          provincesController.helpInitCities(city, city.province.code, (cityinfo, province) => {
+          provincesController.helpInitCities(city.province.code, (cityinfo, province) => {
             module.exports.citiesToPush.push({
               province,
               pinyinName: cityinfo.pinyinName,
@@ -44,61 +44,28 @@ module.exports = {
   },
 
   getCitiesByProvince(provinceCode, callback) {
-    provincesController.getProvinceByCode(provinceCode, (err, province) => {
-      if (!err) {
-        City
-          .find({province})
-          .sort({pinyinName: 1})
-          .exec((err, result) => {
-            if (err) {
-              console.log(err);
-            } else {
-              callback(result);
-            }
-          });
-      }
+    return provincesController.getProvinceByCode(provinceCode).then((province) => {
+      return City.find({province}).sort({pinyinName: 1}).exec();
     });
   },
 
   getAllCities(callback) {
-    City.find((err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(result);
-      }
-    }).populate('province', 'code');
+    return City.find().populate('province', 'code').exec();
   },
 
   getCityByCode(cityCode, callback) {
-    City.findOne({code: cityCode}, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(result);
-      }
-    });
+    return City.findOne({code: cityCode});
   },
 
-  getMostPopularCities(callback) {
+  async getMostPopularCities(callback) {
+
     // At the moment featured schools are schools with the highest ratings
-    School.aggregate([
+    let transactions = await School.aggregate([
       {$group: {_id: '$city', number: {$sum: 1}, pictureUrl: {$first: '$pictureUrl'}}},
       {$sort: {number: -1}},
       {$limit: 9}
-    ]).exec((err, transactions) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      City.populate(transactions, {path: '_id'}, (err, popularCities) => {
-        // Your populated translactions are inside populatedTransactions
-        if (err) {
-          console.log(err);
-        } else {
-          callback(popularCities);
-        }
-      });
-    });
+    ]).exec();
+
+    return City.populate(transactions, {path: '_id'});
   }
 };

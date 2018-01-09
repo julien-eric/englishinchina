@@ -1,10 +1,7 @@
-// import {getLogger} from '../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/nodemailer/lib/shared';
 const express = require('express');
 const router = express.Router();
 const schools = require('../controllers/schools');
-const reviews = require('../controllers/reviews');
 const email = require('../controllers/email');
-// var provinces = require('../provinces');
 const pictures = require('../pictures');
 const aws = require('aws-sdk');
 const moment = require('moment');
@@ -13,7 +10,6 @@ const pictureinfo = require('../pictureinfo');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const usersController = require('../controllers/users');
-const async = require('async');
 const crypto = require('crypto');
 const scripts = require('../scripts').scripts;
 const bCrypt = require('bcrypt-nodejs');
@@ -46,121 +42,76 @@ module.exports = function(passport) {
   /** **********************************************************************************************************
      *HOME PAGE : Root page fromwhere users can search schools. Page can be loaded even if users are not logged in
      ************************************************************************************************************ */
-  router.get('/', (req, res) => {
-    async.waterfall([
-      // 1) First get provinces list
-      function getProvinces(done) {
-        provincesController.getAllProvinces((provinces) => {
-          done(null, provinces);
-        });
-      },
-      // 2) Then get featured schools for jumbotron
-      function getFeaturedSchools(provinces, done) {
-        schools.featuredSchools((err, featuredSchoolList) => {
-          done(null, provinces, featuredSchoolList);
-        });
-      },
-      function getPopularCities(provinces, featuredSchoolList, done) {
-        citiesController.getMostPopularCities((popularCities) => {
-          done(null, provinces, featuredSchoolList, popularCities);
-        });
-      },
-      function getPopularProvinces(provinces, featuredSchoolList, popularCities, done) {
-        provincesController.getMostPopularProvinces((popularProvinces) => {
-          done(null, provinces, featuredSchoolList, popularCities, popularProvinces);
-        });
-      },
-      // 3) Lastly Get paginated list of schools
-      function getSchools(provinces, featuredSchoolList, popularCities, popularProvinces) {
-        const pageSize = 5;
-        let admin = false;
-        if (req.user == undefined || req.user.admin == undefined) {
-          admin = false;
-        } else {
-          admin = req.user.admin;
-        }
+  router.get('/', async (req, res) => {
 
-        schools.getSchools((count, schoolList) => {
-          const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
+    let provinces = await provincesController.getAllProvinces();
+    let featuredSchools = await schools.featuredSchools();
+    let popularCities = await citiesController.getMostPopularCities();
+    let popularProvinces = await provincesController.getMostPopularProvinces();
 
-          res.render('home', {
-            title: 'English in China',
-            fcbAppId,
-            main: true,
-            featuredSchoolList,
-            schools: truckSchoolList,
-            user: req.user,
-            provinces,
-            pictureInfo: pictureinfo,
-            jadefunctions,
-            popularCities,
-            popularProvinces,
-            cities: {},
-            currentPage: 1,
-            total: count,
-            totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-            scripts: [scripts.librater, scripts.util, scripts.rating]
-          });
-        }, pageSize, 0, admin);
-      }
-    ], (err) => {
-      if (err) console.log(err);
-      // res.redirect('/');
+    const pageSize = 5;
+    let admin = false;
+    if (req.user == undefined || req.user.admin == undefined) {
+      admin = false;
+    } else {
+      admin = req.user.admin;
+    }
+
+    let schoolList = await schools.getSchools(pageSize, 0, admin);
+    const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
+
+    res.render('home', {
+      title: 'English in China',
+      fcbAppId,
+      main: true,
+      featuredSchoolList: featuredSchools,
+      schools: truckSchoolList,
+      user: req.user,
+      provinces,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      popularCities,
+      popularProvinces,
+      cities: {},
+      currentPage: 1,
+      total: schoolList.count,
+      totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
+      scripts: [scripts.librater, scripts.util, scripts.rating]
     });
   });
 
 
-  router.get('/page/:page', (req, res) => {
-    async.waterfall([
-      // 1) First get provinces list
-      function getProvinces(done) {
-        provincesController.getAllProvinces((provinces) => {
-          done(null, provinces);
-        });
-      },
-      function getPopularCities(provinces, done) {
-        citiesController.getMostPopularCities((popularCities) => {
-          done(null, provinces, popularCities);
-        });
-      },
-      function getPopularProvinces(provinces, popularCities, done) {
-        provincesController.getMostPopularProvinces((popularProvinces) => {
-          done(null, provinces, popularCities, popularProvinces);
-        });
-      },
-      // 3) Lastly Get paginated list of schools
-      function getSchools(provinces, popularCities, popularProvinces) {
-        const page = req.params.page;
-        const pageSize = 5;
-        let admin = false;
+  router.get('/page/:page', async (req, res) => {
 
-        if (req.user == undefined || req.user.admin == undefined) {
-          admin = false;
-        } else {
-          admin = req.user.admin;
-        }
-        schools.getSchools((count, schoolList) => {
-          const trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
-          res.render('home', {
-            title: `English in China - Page ${page}`,
-            fcbAppId,
-            schools: trunkSchoolList,
-            user: req.user,
-            provinces,
-            pictureInfo: pictureinfo,
-            jadefunctions,
-            popularCities,
-            popularProvinces,
-            currentPage: page,
-            total: count,
-            totalPages: ((count - (count % pageSize)) / pageSize) + 1,
-            scripts: [scripts.librater, scripts.util, scripts.rating]
-          });
-        }, pageSize, page - 1, admin);
-      }
-    ], (err) => {
-      if (err) console.log(err);
-      // res.redirect('/');
+    let provinces = await provincesController.getAllProvinces();
+    let popularCities = await citiesController.getMostPopularCities();
+    let popularProvinces = await provincesController.getMostPopularProvinces();
+
+    const page = req.params.page;
+    const pageSize = 5;
+    let admin = false;
+
+    if (req.user == undefined || req.user.admin == undefined) {
+      admin = false;
+    } else {
+      admin = req.user.admin;
+    }
+    let schoolList = await schools.getSchools(pageSize, page - 1, admin);
+    const trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
+    res.render('home', {
+      title: `English in China - Page ${page}`,
+      fcbAppId,
+      schools: trunkSchoolList,
+      user: req.user,
+      provinces,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      popularCities,
+      popularProvinces,
+      currentPage: page,
+      total: schoolList.count,
+      totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
+      scripts: [scripts.librater, scripts.util, scripts.rating]
     });
   });
 
@@ -282,97 +233,57 @@ module.exports = function(passport) {
     });
   });
 
-  router.post('/forgot', (req, res, next) => {
-    async.waterfall([
-      function(done) {
-        crypto.randomBytes(20, (err, buf) => {
-          const token = buf.toString('hex');
-          done(err, token);
-        });
-      },
-      function(token, done) {
-        usersController.findUserByEmail(req.body.email, (err, user) => {
-          if (!user) {
-            req.flash('error', 'No account with that email address exists.');
-            return res.redirect('/forgot');
-          }
+  router.post('/forgot', async (req, res, next) => {
 
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    const buffer = crypto.randomBytes(20);
+    const token = buffer.toString('hex');
 
-          user.save((err) => {
-            done(err, token, user);
-          });
-        });
-      },
-      function(token, user, done) {
-        email.resetPassword(req, user, token, req, done);
+    let user = await usersController.findUserByEmail(req.body.email);
+    if (!user) {
+      req.flash('error', 'No account with that email address exists.');
+      return res.redirect('/forgot');
+    }
 
-        // var smtpTransport = nodemailer.createTransport({
-        //    service: "sendGrid",
-        //    host : "smtp.sendgrid.net",
-        //    secureConnection : false,
-        //    port: 587,
-        //    auth : {
-        //        user : "jueri",
-        //        pass : "Montreal123!"
-        //    }
-        // });
-        //
-        // var mailOptions = {
-        //    to: user.email,
-        //    from: 'passwordreset@englishinchina.co',
-        //    subject: 'English in China Password Reset',
-        //    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        //    'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        //    'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        //    'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-        // };
-        // smtpTransport.sendMail(mailOptions, function(err) {
-        //    req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-        //    done(err, 'done');
-        // });
-      }
-    ], (err) => {
-      if (err) return next(err);
-      res.redirect('/forgot');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+    await email.resetPassword(req, user, token, req);
+    req.flash('info', 'An email has been sent to reset your password.');
+    return res.redirect('/forgot');
+
+  });
+
+  router.get('/reset/:token', async (req, res) => {
+    let user = await usersController.findUserByToken(req.params.token, {$gt: Date.now()});
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    res.render('reset', {
+      title: 'Reset Password - English in China',
+      fcbAppId,
+      pictureInfo: pictureinfo,
+      scripts: [scripts.util]
     });
   });
 
-  router.get('/reset/:token', (req, res) => {
-    usersController.findUserByToken(req.params.token, {$gt: Date.now()}, (err, user) => {
-      if (!user) {
-        req.flash('error', 'Password reset token is invalid or has expired.');
-        return res.redirect('/forgot');
-      }
-      res.render('reset', {
-        title: 'Reset Password - English in China',
-        fcbAppId,
-        pictureInfo: pictureinfo,
-        scripts: [scripts.util]
-      });
-    });
-  });
+  router.post('/reset/:token', async (req, res) => {
+    let user = await usersController.findUserByToken(req.params.token, {$gt: Date.now()});
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('back');
+    }
 
-  router.post('/reset/:token', (req, res) => {
-    usersController.findUserByToken(req.params.token, {$gt: Date.now()}, (err, user) => {
-      if (!user) {
-        req.flash('error', 'Password reset token is invalid or has expired.');
-        return res.redirect('back');
-      }
+    // Generate hash using bCrypt
+    const createHash = function(password) {
+      return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    };
+    user.password = createHash(req.body.password);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
 
-      // Generates hash using bCrypt
-      const createHash = function(password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-      };
-      user.password = createHash(req.body.password);
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpires = undefined;
-
-      user.save((err) => {
-        req.logIn(user, (err) => res.redirect('/'));
-      });
-    });
+    await user.save();
+    req.login(user, (err) => res.redirect('/'));
   });
 
   router.post('/contactus', (req, res) => {
@@ -383,27 +294,25 @@ module.exports = function(passport) {
       'Feedback comment from user',
       message,
       callbackMessage,
-      req,
-      () => {
-        res.redirect('/');
-      });
+      req
+    );
+    res.redirect('/');
   });
 
   /** **********************************************************************************************************
      *USER :   GET : If user is authenticated, send him to view myprofile page, else redirect to login
      * This method is not the general one to view a different user.
      ************************************************************************************************************ */
-  router.get('/user', isAuthenticated, (req, res) => {
-    reviews.findReviewsByUser(req.user._id, (reviews) => {
-      res.render('user', {
-        title: `User ${req.user.username} - English in China`,
-        fcbAppId,
-        user: req.user,
-        reviews,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        scripts: [scripts.util]
-      });
+  router.get('/user', isAuthenticated, async (req, res) => {
+    let reviews = await reviews.findReviewsByUser(req.user._id);
+    res.render('user', {
+      title: `User ${req.user.username} - English in China`,
+      fcbAppId,
+      user: req.user,
+      reviews,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      scripts: [scripts.util]
     });
   });
 
@@ -411,53 +320,51 @@ module.exports = function(passport) {
      *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
   router.route('/user/edit')
-    .get((req, res) => {
-      usersController.findUserById(req.user._id, (user) => {
-        res.render('edituser', {
-          title: `Edit Profile - ${user.username} - English in China`,
-          fcbAppId,
-          user,
-          pictureInfo: pictureinfo,
-          jadefunctions,
-          scripts: [scripts.util]
-        });
+    .get(async (req, res) => {
+      let user = await usersController.findUserById(req.user._id);
+      res.render('edituser', {
+        title: `Edit Profile - ${user.username} - English in China`,
+        fcbAppId,
+        user,
+        pictureInfo: pictureinfo,
+        jadefunctions,
+        scripts: [scripts.util]
       });
     })
-    .post((req, res) => {
-      usersController.updateUser(req.body, (user) => {
-        res.redirect('/user/edit');
-      });
+    .post(async (req, res) => {
+      let user = await usersController.updateUser(req.body);
+      res.redirect('/user/edit');
     });
 
   /** **********************************************************************************************************
      *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
-  router.get('/user/:id', (req, res) => {
-    usersController.findUserById(req.params.id, (usern) => {
-      reviews.findReviewsByUser(usern, (reviews) => {
-        res.render('user', {
-          title: `User ${usern.username} - English in China`,
-          fcbAppId,
-          user: req.user,
-          usern,
-          reviews,
-          pictureInfo: pictureinfo,
-          jadefunctions,
-          moment,
-          scripts: [scripts.util]
-        });
+  router.get('/user/:id', async (req, res) => {
+
+    try { // Get user and reviews then render user page
+      let usern = await usersController.findUserById(req.params.id);
+      let reviews = await reviews.findReviewsByUser(usern);
+      res.render('user', {
+        title: `User ${usern.username} - English in China`,
+        fcbAppId,
+        user: req.user,
+        usern,
+        reviews,
+        pictureInfo: pictureinfo,
+        jadefunctions,
+        moment,
+        scripts: [scripts.util]
       });
-    });
+    } catch (error) {
+      getLogger().error(error);
+    }
+
   });
 
-  /** **********************************************************************************************************
-     * This method is not the general one to view a different user.
-     ************************************************************************************************************ */
-  router.get('/cities/:provincecode', (req, res) => {
+  router.get('/cities/:provincecode', async (req, res) => {
     const provCode = req.params.provincecode;
-    citiesController.getCitiesByProvince(provCode, (cities) => {
-      res.send(cities);
-    });
+    let cities = await citiesController.getCitiesByProvince(provCode);
+    res.send(cities);
   });
 
   /** ********************************************************************************************************************************
@@ -477,18 +384,17 @@ module.exports = function(passport) {
   /** **********************************************************************************************************
      *GETUSERS :
      ************************************************************************************************************ */
-  router.get('/allusers', isAuthenticated, (req, res) => {
+  router.get('/allusers', isAuthenticated, async (req, res) => {
     if (req.user.admin) {
-      usersController.getAllUsers((users) => {
-        res.render('allusers', {
-          title: 'Users - English in China',
-          fcbAppId,
-          users,
-          pictureInfo: pictureinfo,
-          jadefunctions,
-          moment,
-          scripts: [scripts.util]
-        });
+      let users = await usersController.getAllUsers();
+      res.render('allusers', {
+        title: 'Users - English in China',
+        fcbAppId,
+        users,
+        pictureInfo: pictureinfo,
+        jadefunctions,
+        moment,
+        scripts: [scripts.util]
       });
     } else {
       return 'nice try';

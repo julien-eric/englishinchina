@@ -2,51 +2,28 @@ const Image = require('./../models/image');
 
 module.exports = {
 
-  getAllImages(callback) {
-    Image.find().exec((err, images) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(images);
-      }
-    });
+  getAllImages() {
+    return Image.find().exec();
   },
 
-  getImagesBySchool(school, callback) {
-    Image.find({school: school._id}).exec((err, images) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(images);
-      }
-    });
+  getImagesBySchool(school) {
+    return Image.find({school: school._id}).exec();
   },
 
-  getImageById(id, callback) {
-    Image.find({_id: id}).populate('user').populate('school').exec((err, image) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(image);
-      }
-    });
+  getImageById(id) {
+    return Image.find({_id: id}).populate('user').populate('school').exec();
   },
 
-  addImage(image, callback) {
-    return Image.create(image, (err, createdImage) => {
-      callback(err, createdImage);
-    });
+  addImage(image) {
+    return Image.create(image);
   },
 
-  deleteImage(photoId, callback) {
-    Image.find({_id: photoId}).remove(callback);
+  deleteImage(photoId) {
+    return Image.find({_id: photoId}).remove().exec();
   },
 
-  updateImage(image, callback) {
-    Image.findOneAndUpdate({_id: image._id}, {url: image.url}, (err, editedImage) => {
-      callback(err, editedImage);
-    });
+  updateImage(image) {
+    return Image.findOneAndUpdate({_id: image._id}, {url: image.url});
   }
-
 
 };

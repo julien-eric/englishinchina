@@ -5,37 +5,25 @@ const User = require('./../models/user');
 
 module.exports = {
 
-  getAllUsers(callback) {
-    User.find().exec((err, userList) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(userList);
-      }
-    });
+  getAllUsers() {
+    return User.find().exec();
   },
 
-  findUserById(id, callback) {
-    User.findOne({_id: id}).exec((err, user) => {
-      callback(user);
-    });
+  findUserById(id) {
+    return User.findOne({_id: id}).exec();
   },
 
-  findUserByEmail(email, callback) {
-    User.findOne({email}).exec((err, user) => {
-      callback(err, user);
-    });
+  findUserByEmail(email) {
+    return User.findOne({email}).exec();
   },
 
-  findUserByToken(token, expiryDate, callback) {
-    User.findOne({resetPasswordToken: token, resetPasswordExpires: expiryDate}).exec((err, user) => {
-      callback(err, user);
-    });
+  findUserByToken(token, expiryDate) {
+    return User.findOne({resetPasswordToken: token, resetPasswordExpires: expiryDate}).exec();
   },
 
-  updateUser(user, callback) {
-    let useFacebookPic = false;
+  updateUser(user) {
 
+    user.useFacebookPic = false;
     // Replace undefined values by empty strings
     if (user.address == undefined) {
       user.address = '';
@@ -48,26 +36,10 @@ module.exports = {
     // }
     // else{user.admin=false;}
     if (user.avatarUrl.indexOf('englishinchina') == -1) {
-      useFacebookPic = true;
+      user.useFacebookPic = true;
     }
 
-    User.findOneAndUpdate({_id: user.id}, {
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      gender: user.gender,
-      address: user.address,
-      admin: user.admin,
-      useFacebookPic,
-      avatarUrl: user.avatarUrl
-    }, (err, editedUser) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(editedUser);
-      }
-    });
+    return User.findOneAndUpdate({_id: user.id}, user);
   }
 };
 

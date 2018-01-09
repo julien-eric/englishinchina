@@ -152,14 +152,14 @@ module.exports = function(passport) {
         const message = `Email: ${newSchool.name}\n${newSchool.description}`;
         const callbackMessage = 'Thank you, we will get back to you shortly';
         email.sendEmail('julieneric11@gmail.com',
-        'newschoolcreated@englishinchina.com',
-        `School Created ${newSchool.name}`,
-        message,
-        callbackMessage,
-        req, () => {
-          // redirect the user to its new school
-          res.redirect(`/school/id/${newSchool.id}`);
-        });
+          'newschoolcreated@englishinchina.com',
+          `School Created ${newSchool.name}`,
+          message,
+          callbackMessage,
+          req, () => {
+            // redirect the user to its new school
+            res.redirect(`/school/id/${newSchool.id}`);
+          });
       });
     });
 
@@ -348,12 +348,11 @@ module.exports = function(passport) {
      * schoolID : integer
      * review : string
      ************************************************************************************************************ */
-  router.post('/insertreview', (req, res) => {
-    reviews.insertReviewforSchool(req, (schoolId, averageRating) => {
-      schools.findSchoolById(schoolId, (school) => {
-        res.redirect(`/school/id/${school._id}`);
-      });
-    });
+  router.post('/insertreview', async (req, res) => {
+
+    await reviews.insertReviewforSchool(req);
+    let school = await schools.findSchoolById(req.body._id);
+    res.redirect(`/school/id/${school._id}`);
   });
 
   /** **********************************************************************************************************

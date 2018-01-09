@@ -21,10 +21,9 @@ module.exports = function(passport) {
         scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
       });
     })
-    .post((req, res) => {
-      articlesController.addArticle(req.user, req.body, (err, article) => {
-        res.redirect(`/article/${article.url}`);
-      });
+    .post(async (req, res) => {
+      let article = await articlesController.addArticle(req.user, req.body);
+      res.redirect(`/article/${article.url}`);
     });
 
   router.get('/:url', async (req, res) => {
