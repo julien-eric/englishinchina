@@ -9,17 +9,7 @@ const favicon = require('serve-favicon');
 const flash = require('express-flash');
 const settings = require('simplesettings');
 
-
-// Connect to DB
-// mongoose.connect(dbConfig.urldev,function(){
-//  /* Drop the DB */
-//    mongoose.connection.db.dropDatabase();
-//    //mongoose.connection.db.dropCollection('Province', function(err, result) {});
-// });
-// Reset DB
-
 mongoose.connect(settings.get('DB_URL'));
-
 const app = express();
 
 /**
