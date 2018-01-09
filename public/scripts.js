@@ -1,5 +1,4 @@
 module.exports = {
-  scripts: {
     librater: '/javascripts/libs/rater.min.js',
     libslider: '/javascripts/libs/bootstrap-slider.js',
     libbarchart: '/javascripts/libs/jquery.horizBarChart.min.js',
@@ -12,5 +11,4 @@ module.exports = {
     writereview: '/javascripts/writereview.js',
     schoolpage: '/javascripts/schoolpage.js',
     tinyMCE: '/javascripts/tinymce2.js'
-  }
 };
