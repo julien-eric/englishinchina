@@ -8,6 +8,7 @@ const stylus = require('stylus');
 const favicon = require('serve-favicon');
 const flash = require('express-flash');
 const settings = require('simplesettings');
+const fcbAppId = settings.get('FCB_APP_ID');
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
@@ -23,11 +24,24 @@ function compile(str, path) {
     .set('filename', path);
 }
 
+// Set variables used in views app-wide
+app.locals.fcbAppId = fcbAppId;
+// let checkAdmin = function(req, res, next) {
+//   if (req.user && req.user.admin) {
+//     res.locals.admin = req.user.admin;
+//   } else {
+//     res.locals.admin = false;
+//   }
+//   next();
+// };
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(`${__dirname}/public/favicon.ico`));
+// app.use(checkAdmin);
 
 app.use(stylus.middleware({
   src: `${__dirname}/public`,
@@ -72,23 +86,21 @@ const initPassport = require('./passport/init');
 
 initPassport(passport);
 
-
 /** *************************************************************
  * ROUTES, currently only has main routes and school's
  * @type {router|exports}
  ************************************************************** */
 const routes = require('./routes/index')(passport);
+const awsRoutes = require('./routes/aws')(passport);
 const schoolRoutes = require('./routes/schools')(passport);
-const functionRoutes = require('./routes/function')(passport);
 const companyRoutes = require('./routes/companies')(passport);
 const articleRoutes = require('./routes/articles')(passport);
 
 app.use('/', routes);
+app.use('/', awsRoutes);
 app.use('/school', schoolRoutes);
 app.use('/company', companyRoutes);
 app.use('/article', articleRoutes);
-app.use('/function', functionRoutes);
-
 
 /** *************************************************************
  catch 404 and forward to error handler

@@ -5,8 +5,6 @@ const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const articlesController = require('../controllers/articles');
 const scripts = require('../public/scripts');
-const settings = require('simplesettings');
-const fcbAppId = settings.get('FCB_APP_ID');
 
 module.exports = function(passport) {
 
@@ -14,7 +12,6 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('article/addarticle', {
         pictureInfo: pictureinfo,
-        fcbAppId,
         user: req.user,
         jadefunctions,
         moment,
@@ -31,7 +28,6 @@ module.exports = function(passport) {
     const url = req.params.url;
     let article = await articlesController.getArticleByURL(url);
     res.render('article/article', {
-      fcbAppId,
       article,
       user: req.user,
       pictureInfo: pictureinfo,
@@ -47,7 +43,6 @@ module.exports = function(passport) {
     let articles = await articlesController.getArticles();
     articles = jadefunctions.trunkArticlesContent(articles, 150);
     res.render('article/articles', {
-      fcbAppId,
       articles,
       user: req.user,
       pictureInfo: pictureinfo,

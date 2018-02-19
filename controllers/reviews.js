@@ -15,10 +15,10 @@ const calculateAverage = function(review) {
     Number(review.cri_supportOnArrivalandVisa)) / 8;
 };
 
-const processHelpfulsForReviews = function(reviews) {
-  return reviews.forEach((review) => {
+const checkUserForHelpful = function(reviews, userId) {
+  reviews.forEach((review) => {
     review.helpfuls.forEach((helpful) => {
-      if (helpful.user.id == req.user._id.id) {
+      if (helpful.user.id == userId) {
         review.hasHF = true;
       }
     });
@@ -54,7 +54,7 @@ module.exports = {
 
   },
 
-  async findReviews(schoolId, callback, pageSize, page, populate) {
+  async findReviews(schoolId, pageSize, page, populate, userId) {
 
     let findReviewsQuery = Review.find({objectType: 0, foreignId: schoolId});
     if (pageSize && page) {
@@ -63,9 +63,10 @@ module.exports = {
     if (populate) {
       findReviewsQuery.populate('user');
     }
-    let reviews = await findReviewsQuery.exec(onReturn);
-    reviews = processHelpfulsForReviews(reviews);
-
+    let reviews = await findReviewsQuery.exec();
+    if (reviews.length > 0 && userId) {
+      checkUserForHelpful(reviews, userId);
+    }
     return Promise.resolve(reviews);
 
   },
@@ -78,13 +79,14 @@ module.exports = {
     return Review.count({objectType: 0, foreignId: schoolId}).exec();
   },
 
-  findReviewsByUser(userId, callback) {
+  findReviewsByUser(userId) {
     return Review.find({objectType: 0, user: userId}).populate('user').populate('school').exec();
   },
 
-  async findReviewById(reviewId, userId, callback) {
-    let reviews = Review.find({_id: reviewId}).populate('user').populate('foreignId').exec();
-    return Promise.resolve(processHelpfulsForReviews(reviews));
+  async findReviewById(reviewId, userId) {
+    let reviews = await Review.find({_id: reviewId}).populate('user').populate('foreignId').exec();
+    checkUserForHelpful(reviews, userId);
+    return Promise.resolve(reviews);
   },
 
   createReviewDistribution(reviews) {

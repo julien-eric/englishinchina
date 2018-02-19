@@ -9,7 +9,7 @@ module.exports = {
       shortName: 'Support',
       name: 'Support given by school before and upon arrival',
       description: 'How has the school helped you take care of everything that was needed in the process of moving to China,' +
-        'was it present or did it leave you on your own? Upon immediate arrival, did the school have staff dedicated to help you' +
+        'was it present or did it leave you on your own? Upon immediate arrival, did the school have staff dedicated to helping you' +
         'with the sometimes unpleasant transition experienced when moving to a new country?'
     },
     {
@@ -26,15 +26,15 @@ module.exports = {
       label: 'cri_resourcesAvailability',
       shortName: 'Resources',
       name: 'Academic Resources',
-      description: 'Did your school provide the ressources necessary(curriculums, workbooks, computers) to prepare your classes,' +
-      ' or were you left to do most of it on your own.'
+      description: 'Did your school provide the resources necessary(curriculums, workbooks, computers) to prepare your classes,' +
+      ' or were you left to do most of it on your own?'
     },
     {
       code: 4,
       label: 'cri_accomodationProvided',
       shortName: 'Accomodation',
       name: 'Reliability of Provided Accomodation',
-      description: 'Were you provided with the accomodation formula promised either by phone or through the contract. Is it big enough,' +
+      description: 'Were you provided with the accommodation formula promised either by phone or through the contract? Is it big enough,' +
       ' clean, and ready for new teachers arrival, are utilities functioning properly? (gas, water, electricity, shower, stove, etc. )'
     },
     {
@@ -60,8 +60,8 @@ module.exports = {
       shortName: 'Contract',
       name: 'Attention given to respecting contract',
       description: 'Contracts can sometimes be overlooked when circumstances become trying, favors are done to help out.' +
-      ' But if it is a constant battle to keep your workload within the negociated terms, then the contract is not being' +
-      ' respected. What was your experience in dealing with workload, accomodation and holidays?'
+      ' But if it is a constant battle to keep your workload within the negotiated terms, then the contract is not being' +
+      ' respected. What was your experience in dealing with workload, accommodation and holidays?'
     },
     {
       code: 8,
