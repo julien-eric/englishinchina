@@ -3,11 +3,11 @@ block content
       li.single-review(id="#{review._id}")
          .user-picture
                if review.user.fb && review.user.useFacebookPic
-                  .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
-                  .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}');")
+                  .default-user-picture.image-holder.rounded-circle.fcb(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.rounded-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}');")
                else
-                  .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
-                  .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
+                  .default-user-picture.image-holder.rounded-circle.th(style="background-image: url('/images/default-user.png');")
+                  .profile-img.image-holder.rounded-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(review.user.avatarUrl)}');")
          .user-information
             if review.user
                if review.user.firstName && review.user.lastName

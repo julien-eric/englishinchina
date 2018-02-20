@@ -8,7 +8,7 @@ block content
                      .row
                         h1.align-center  Review #{school.name}
                         .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                           .img-responsive.school-image-preview(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');")
+                           .img-fluid.school-image-preview(style="background-image: url('#{pictureInfo.returnLarge(school.pictureUrl)}');")
                               #schoolid.hidden(value="#{school.id}")
                         //include school/schoolreviews
                         form(action='/school/insertreview', method='POST')

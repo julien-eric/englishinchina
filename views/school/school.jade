@@ -15,7 +15,7 @@ block content
                div.description-container
                   p.login-title !{school.description}
                h5#read-more
-                  #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
+                  #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
                span.clearfix
 
             .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
@@ -54,11 +54,11 @@ block content
 
                .clearfix
                if reviewsCount > 6
-                  #load-more-reviews.btn.btn-default.btn-lg Load More
+                  #load-more-reviews.btn.btn-secondary.btn-lg Load More
                if locals.user
-                  a#review.btn.btn-default.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+                  a#review.btn.btn-secondary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
                else
-                  .ajax-login.pointer#review.btn.btn-default.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+                  .ajax-login.pointer#review.btn.btn-secondary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
 
             .page-block.col-sm-12.col-md-12.col-lg-12
                include ../populargrid/popularcategorieshoriz
@@ -79,18 +79,4 @@ block content
                      | based on
                      span(itemprop="ratingCount") #{reviewsCount}
                      |  user ratings.
-
-
-   <!-- Modal -->
-   button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
-   .modal.fade#myModal(role="dialog")
-      .modal-dialog
-         .modal-content
-            .modal-header
-               button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-               h4.modal-title
-            #modal-body.modal-body.modal-wrapper
-            button#closemodal(type="button" class="btn-gray btn btn-info btn-lg btn-block" data-dismiss="modal") CLOSE
-
-   <!-- Modal -->
 

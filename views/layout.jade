@@ -27,11 +27,11 @@ html
       each js in scripts
         script(src=js)
   body
-    //include ./preheader.jade
-    include ./header.jade
-    include ./navbar2.jade
+    include ./header/header.jade
+    include ./header/navbar2.jade
     include flash-errors
     block content
     include ./footer.jade
+    include ./modal.jade
   meta(name="viewport", content="width=device-width, initial-scale=1")
 

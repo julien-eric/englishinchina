@@ -87,7 +87,7 @@ module.exports = function(passport) {
   router.route('/login')
     .get((req, res) => {
       // Display the Login page with any flash message, if any
-      res.render('login', {
+      res.render('login/login', {
         title: 'Login - English in China',
         message: req.flash('message'),
         scripts: [scripts.util]
@@ -117,7 +117,7 @@ module.exports = function(passport) {
 
   router.get('/loginajax', (req, res) => {
     res.render(
-      'loginpanel', {
+      'login/loginpanel', {
         title: 'Login - English in China',
         message: req.flash('message'),
         redirecturl: req.query.url,

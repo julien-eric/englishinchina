@@ -1,0 +1,11 @@
+<!-- Modal -->
+button.hidden#modal(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Open Small Modal
+.modal.fade#myModal(role="dialog")
+  .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title
+        #modal-body.modal-body.modal-wrapper
+        button#closemodal(type="button" class="btn-gray btn btn-info btn-lg btn-block" data-dismiss="modal") CLOSE
+<!-- Modal -->

@@ -1,7 +1,7 @@
 extends ../layout
 block content
     div.school-page
-        .img-responsive.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(company.pictureUrl)}');")
+        .img-fluid.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(company.pictureUrl)}');")
             .container.darkbg
                 h1.school-page-name #{company.name}
                 #schoolid.hidden(value="#{company.id}")
@@ -20,7 +20,7 @@ block content
                     div.description-container
                         p.login-title !{company.description}
                     h5#read-more
-                        #description-readmore.description-readmore.btn.btn-default.btn-sm Read Full Description
+                        #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
                     span.clearfix
                 .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
                     - var photos = company.photos

@@ -8,7 +8,7 @@ if searchMessage
                div.col-sm-4.col-md-4.school-list-image.nopadding
                   a(href="/school/id/#{school.id}")
                      .img-container
-                        .img-frame.img-responsive(width="100%", style="background-image: url('#{pictureInfo.returnThumbnail(school.pictureUrl)}');")
+                        .img-frame.img-fluid(width="100%", style="background-image: url('#{pictureInfo.returnThumbnail(school.pictureUrl)}');")
                   .clearfix
                div.col-sm-7.col-md-7.school-list-information
                   a(href="/school/id/#{school.id}")

@@ -8,11 +8,11 @@ block content
             if photo.user
                .user-picture
                   if photo.user.fb && photo.user.useFacebookPic
-                     .default-user-picture.image-holder.img-circle.fcb(style="background-image: url('/images/default-user.png');")
-                     .profile-img.image-holder.img-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(photo.user.avatarUrl)}');")
+                     .default-user-picture.image-holder.rounded-circle.fcb(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.rounded-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(photo.user.avatarUrl)}');")
                   else
-                     .default-user-picture.image-holder.img-circle.th(style="background-image: url('/images/default-user.png');")
-                     .profile-img.image-holder.img-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(photo.user.avatarUrl)}');")
+                     .default-user-picture.image-holder.rounded-circle.th(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.rounded-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(photo.user.avatarUrl)}');")
                .user-information
                   if photo.user
                      if photo.user.firstName && photo.user.lastName

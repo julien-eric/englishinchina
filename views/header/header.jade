@@ -1,0 +1,58 @@
+include ../fcb-js-sdk
+nav.navbar.fixed-top.navbar-light.bg-faded
+  a.navbar-brand(href='#') Fixed top
+
+//- nav.fixed-top.navbar.navbar-default.navbar-custom.navbar-nosideborder
+//-     .container
+//-         .navbar-header
+//-             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+//-                 span.sr-only Toggle navigation
+//-                 span.icon-bar
+//-                 span.icon-bar
+//-                 span.icon-bar
+//-             a.pull-left(href='/')
+//-                 img.nav-logo(src="/images/logo3.png")
+//-             a.pull-left.hidden-xs(href='/')
+//-                 img.nav-brand(src="/images/title-xs.png")
+//-             a.pull-left.hidden-sm.hidden-md.hidden-lg(href='/')
+//-                 img.nav-brand(src="/images/title-xs.png")
+//-         .collapse.navbar-collapse#bs-example-navbar-collapse-1
+//-             ul.nav.navbar-nav
+//-                 li.active
+//-                     a(href='/')
+//-                         | Home
+//-                         span.sr-only (current)
+//-                 li
+//-                     a(href='/article')
+//-                         | Articles
+//-                         span.sr-only (current)
+//-             ul.nav.navbar-nav.navbar-right
+//-                 if locals.user
+//-                     li
+//-                         a(href='/school/addschool')
+//-                             span.navbar-icon.glyphicon.glyphicon-plus-sign
+//-                             | Add School
+//-                     li.dropdown
+//-                         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+//-                             | #{user.username}
+//-                             span.caret
+//-                         ul.dropdown-menu
+//-                             li
+//-                                 a(href='/user/edit') My Profile
+//-                             li.divider(role='separator')
+//-                             li
+//-                                 a(href='/signout') Sign Out
+//-                     li.profile-picture.profile-picture.hidden-xs
+//-                         if locals.user.fb && locals.user.useFacebookPic
+//-                             div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
+//-                             div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+//-                         else
+//-                             div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
+//-                             div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+//-                 else
+//-                     li
+//-                         a.ajax-login(href='#') Log In
+//-                     li
+//-                         a(href='/signup') Sign Up
+//- .paddingundernav
+

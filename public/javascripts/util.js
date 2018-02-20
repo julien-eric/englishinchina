@@ -137,6 +137,28 @@ $(document).ready(() => {
     return strVal;
   }
 
+  $('.ajax-login').click(() => {
+    const xhr = new XMLHttpRequest();
+    const pathname = window.location.pathname;
+    xhr.open('GET', `/loginajax?url=${pathname}`);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          $('#modal-body').empty();
+          const response = JSON.parse(xhr.responseText);
+          const elements = $($.parseHTML(response.html));
+          $.each(elements, (index, element) => {
+            $(element).appendTo('#modal-body');
+          });
+          $('#modal').trigger('click');
+          setUploadFile();
+        } else {
+          alert('Problem.');
+        }
+      }
+    };
+    xhr.send();
+  });
 
   setLightboxOnReadmore();
   setUploadFile();
