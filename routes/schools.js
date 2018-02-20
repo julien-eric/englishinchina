@@ -130,31 +130,29 @@ module.exports = function(passport) {
      * Param : School id
      ************************************************************************************************************ */
   router.get('/addphoto/:id', (req, res) => {
-    schools.findSchoolById(req.params.id, (school) => {
-      res.render('addphoto', {
-        title: 'Upload Picture - English in China',
-        school,
-        scripts: [scripts.util]
-      });
+    let school = schools.findSchoolById(req.params.id);
+    res.render('addphoto', {
+      title: 'Upload Picture - English in China',
+      school,
+      scripts: [scripts.util]
     });
   });
 
-  router.get('/addphotoajax/:id', (req, res) => {
-    schools.findSchoolById(req.params.id, (school) => {
-      res.render(
-        'addphoto', {
-          title: 'Upload Picture - English in China',
-          school
-        },
-        (err, html) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.send({html});
-          }
-        },
-      );
-    });
+  router.get('/addphotoajax/:id', async (req, res) => {
+    let school = schools.findSchoolById(req.params.id);
+    res.render(
+      'addphoto', {
+        title: 'Upload Picture - English in China',
+        school
+      },
+      (err, html) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send({html});
+        }
+      },
+    );
   });
 
   router.post('/addphoto', async (req, res) => {
