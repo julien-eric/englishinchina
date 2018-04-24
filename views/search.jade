@@ -1,20 +1,16 @@
 extends layout
 block content
+      .container.my-5
+            if searchMessage
+                  h2.searchmessage #{searchMessage}
+      include searchnavigation
+      .container   
+            div.row
+                  .card-columns
+                        include schoollist
+                  include sidebar
 
-   .splash2
-      .splash-image-container
-         .splash-image(style="background-image: url('/images/chinag3.jpg');")
-      .splash-text.col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
-         h1 Find Any School in China
-         include searchnavigation
-
-   .container
-      div.row
-         div.col-sm-12.col-md-8
-            include schoollist
-         include sidebar
-      hr
-   .container
-      //div.row
-      include populargrid/popularcategories
-         //include popularcategories
+            //- .container
+            //-       //div.row
+            //-       include populargrid/popularcategories
+            //-             //include popularcategories

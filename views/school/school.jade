@@ -1,82 +1,84 @@
 extends ../layout
 block content
-   div.school-page
+   .school-page.mb-5
       include schoolheader
-      .school-container
-         .container.school-content
-            span.clearfix
-            .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
-               h2 Description
-               hr
-               if edit
-                  h4
-                     a.btn.btn-primary.btn-lg(href="/school/edit/#{school.id}") Edit Your School
-               span.clearfix
-               div.description-container
-                  p.login-title !{school.description}
-               h5#read-more
-                  #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
-               span.clearfix
+      .container-fluid.bg-light.border-top.py-2.border-bottom
+            .container.mb-1
+                  include locationbreadcrumb
+      .container.bg-white.pt-3           
+            .row
+                  .school-content.col-sm-12.col-lg-8
+                        h2.font-weight-light Description
+                        p.login-title !{school.description}
+                        h5#read-more
+                        #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
+                        span.clearfix
 
-            .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
-               -var photos = school.photos
-               include ../photogrid
+                        //- if(relatedSchools)
+                        //-    .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4.visible-lg
+                        //-       -var relatedschools = relatedschools
+                        //-       include relatedschools
 
-            if(relatedSchools)
-               .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4.visible-lg
-                  -var relatedschools = relatedschools
-                  include relatedschools
+                        //- include schooladminsection
 
-            include schooladminsection
+                        //- //RATING
+                        //- span.clearfix
+                        //- #reviews
+                        //-    if reviewsCount > 0
+                        //-       .page-block.cards.col-sm-12.col-md-8.col-lg-8
+                        //-          ul.nav.nav-pills
+                        //-             li.active
+                        //-                a.no-padding-left(data-toggle="pill" href="#tabrating") Rating
+                        //-             li
+                        //-                a(data-toggle="pill" href="#tabbreakdown") Breakdown
+                        //-          hr
+                        //-          .tab-content
+                        //-             .tab-pane.fade.in.active(id="tabrating")
+                        //-                include ratingcard
+                        //-             .tab-pane.fade(id="tabbreakdown")
+                        //-                include schoolbreakdown
+                        //-          .clearfix
+                        //-       .clearfix
+                  .col-lg-4
+                        include ratingcard
+                        button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                              i.mdi.mdi-plus-circle(aria-hidden='true')
+                              span  Write a Review
+                        
+            .photos.mt-5.clearfix
+                  h3 Photos
+                  hr
+                  -var photos = school.photos
+                  include ../photogrid
+                  
+            
 
-            //RATING
-            span.clearfix
-            #reviews
-               if reviewsCount > 0
-                  .page-block.cards.col-sm-12.col-md-8.col-lg-8
-                     ul.nav.nav-pills
-                        li.active
-                           a.no-padding-left(data-toggle="pill" href="#tabrating") Rating
-                        li
-                           a(data-toggle="pill" href="#tabbreakdown") Breakdown
-                     hr
-                     .tab-content
-                        .tab-pane.fade.in.active(id="tabrating")
-                           include ratingcard
-                        .tab-pane.fade(id="tabbreakdown")
-                           include schoolbreakdown
-                     .clearfix
-                  .clearfix
-
-            .page-block.col-sm-12.col-md-12.col-lg-12
-               h3 Reviews (#{reviewsCount})
-               include schoolreviews
-
-               .clearfix
-               if reviewsCount > 6
+            h3 Reviews (#{reviewsCount})
+            hr
+            include schoolreviews
+            if reviewsCount > 6
                   #load-more-reviews.btn.btn-secondary.btn-lg Load More
-               if locals.user
-                  a#review.btn.btn-secondary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
-               else
-                  .ajax-login.pointer#review.btn.btn-secondary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
+                        //- if locals.user
+                        //-       a#review.btn.btn-secondary.btn-lg(href="/school/id/#{school.id}/writereview") Write A Review
+                        //- else
+                        //-       .ajax-login.pointer#review.btn.btn-secondary.btn-lg.disabled(href="/school/id/#{school.id}/writereview") Login To Review
 
-            .page-block.col-sm-12.col-md-12.col-lg-12
-               include ../populargrid/popularcategorieshoriz
-               //.clearfix
+                        //- .page-block.col-sm-12.col-md-12.col-lg-12
+                        //-    include ../populargrid/popularcategorieshoriz
+                        //-    //.clearfix
 
-            #lightbox
-               //p Click to close
-               #lightboxcontent
+                        //- #lightbox
+                        //-    //p Click to close
+                        //-    #lightboxcontent
 
-            if reviewsCount > 0
-               div.hidden(itemscope='', itemtype='"http://schema.org/Product"')
-                  img(itemprop="image", src=pictureInfo.returnThumbnail(school.pictureUrl), alt=school.name)
-                  span(itemprop="name") #{(school.name)}
-                  div(itemprop="aggregateRating", itemscope="", itemtype="http://schema.org/AggregateRating")
-                     span(itemprop="ratingValue") #{jadefunctions.roundToPoint5(school.averageRating)}
-                     | out of
-                     span(itemprop="bestRating") 5
-                     | based on
-                     span(itemprop="ratingCount") #{reviewsCount}
-                     |  user ratings.
-
+                        //- if reviewsCount > 0
+                        //-    div.hidden(itemscope='', itemtype='"http://schema.org/Product"')
+                        //-       img(itemprop="image", src=pictureInfo.returnThumbnail(school.pictureUrl), alt=school.name)
+                        //-       span(itemprop="name") #{(school.name)}
+                        //-       div(itemprop="aggregateRating", itemscope="", itemtype="http://schema.org/AggregateRating")
+                        //-          span(itemprop="ratingValue") #{jadefunctions.roundToPoint5(school.averageRating)}
+                        //-          | out of
+                        //-          span(itemprop="bestRating") 5
+                        //-          | based on
+                        //-          span(itemprop="ratingCount") #{reviewsCount}
+                        //-          |  user ratings.

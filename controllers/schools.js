@@ -198,8 +198,10 @@ SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceI
     query.where('city').equals(city);
   }
 
+  console.time('exec');
   let schoolList = await query.exec();
   let searchQuery = this.getQueryMessage(queryInfo);
+  console.timeEnd('exec');
   return {list: schoolList, query: searchQuery};
 };
 

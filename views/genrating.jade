@@ -1,0 +1,12 @@
+- var avgRating = jadefunctions.roundToPoint5(school.averageRating);
+- var i = 0;
+//- h1 #{jadefunctions.roundToPoint5(school.averageRating)}
+while i < 5
+  - var leftOver = avgRating-i;
+  if leftOver > 1
+    i.mdi.mdi-star(aria-hidden='true')
+  else if leftOver == 0.5
+    i.mdi.mdi-star-half(aria-hidden='true')
+  else
+    i.mdi.mdi-star-outline(aria-hidden='true')
+  - i++

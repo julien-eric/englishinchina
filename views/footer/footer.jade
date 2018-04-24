@@ -1,0 +1,32 @@
+footer.bg-dark.text-light-secondary.font-weight-light.py-5
+    .container
+        .row
+            .col-sm-12.col-md-6.col-lg-6
+                h2.font-weight-light.text-light Second Language World
+                p Our mission at Second Language World is to make it possible for English Teachers looking for a job in China to be as informed as possible. We also hope to bring a needed layer of transparency into Chinese English Schools.
+                p
+                    a.text-light-secondary(href='#')
+                        i.mdi.mdi-map-marker(aria-hidden='true')
+                        |  Based in Montreal, Canada 	
+                p
+                    a.text-light-secondary(href='#')
+                        i.mdi.mdi-email(aria-hidden='true')
+                        |  secondlanguageworld@gmail.com
+                h1
+                    a.text-light-secondary(href='#') 
+                        i.mdi.mdi-facebook-box(aria-hidden='true')
+                    a.text-light-secondary(href='#') 
+                        i.mdi.mdi-twitter-box(aria-hidden='true')
+                    a.text-light-secondary(href='#') 
+                        i.mdi.mdi-linkedin-box(aria-hidden='true')
+                    a.text-light-secondary(href='#') 
+                        i.mdi.mdi-skype(aria-hidden='true')
+
+            .col-sm-12.col-md-5.col-lg-5
+                h2.font-weight-light.text-light Contact Us
+                form(action='/contactus', method='POST')
+                    .form-group
+                        input.bg-darker.text-light-secondary(type='email', name='email', class='form-control', placeholder='Email',required)
+                    .form-group
+                        textarea.bg-darker.text-light-secondary(rows='4', name='content', class='form-control', placeholder='Content', style="width: 100%",    required)
+                    button(class='btn btn-light', type='submit') Submit

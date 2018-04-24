@@ -30,15 +30,20 @@ module.exports = {
 
   insertReviewforSchool(req) {
 
+    let user = null;
+    if (req.user) {
+      user = req.user._id;
+    }
+
     return Review.create({
-      user: req.user._id,
+      user: user,
       objectType: 0,
-      foreignId: req.body.school,
+      foreignId: req.body.schoolId,
       comment: req.body.comment,
       anonymous: req.body.anonymous,
       position: req.body.position,
-      dateEmployed: new Date(moment(req.body.dateEmployed, 'dddd, MMMM Do YYYY').format()),
-      dateReleased: new Date(moment(req.body.dateReleased, 'dddd, MMMM Do YYYY').format()),
+      dateEmployed: new Date(moment(req.body.dateEmployed, 'MMMM Do YYYY').format()),
+      dateReleased: new Date(moment(req.body.dateReleased, 'MMMM Do YYYY').format()),
       criteria: {
         c1: req.body.cri_supportOnArrivalandVisa,
         c2: req.body.cri_managementAdministration,

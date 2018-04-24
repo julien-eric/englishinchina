@@ -1,39 +1,58 @@
 block content
-   span.clearfix
-   h2 Photos
-   hr
-
-   if(isCompany)
-      .school-img-list
-         each photo in photos
-            //.item.col-sm-4.col-md-3.col-lg-3(id="#{photo._id}")
-            a.school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(href="#{pictureInfo.returnLarge(photo.url)}" data-toggle="lightbox" data-gallery="school-photos" data-footer="#{photo.description}" width="100%",id=photo._id, src="#{pictureInfo.returnThumbnail(photo.url)}")
-               .school-img-list-item(style="background-image: url('#{pictureInfo.returnThumbnail(photo.url)}');")
-                  //if locals.user && locals.user.admin
-                  //   .picture-corner
-                  //      a.btn.btn-primary.btn-lg(href="/school/deletephoto/#{photo._id}/#{school._id}") X
-                  //   .picture-corner
-                  //      a.btn.btn-primary.btn-lg(href="/school/updatecoverphoto/#{photo.id}/"+"#{photo.school.id}" role="button") O
-         .school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
-            if locals.user
-               #ajax-add-photo.school-img-list-item.add-photo(href="/company/addphotoajax/#{company.id}")
+      .photos.clearfix
+            if photos.length <= 4
+                  .mdb-lightbox.clearfix.no-margin
+                        each photo in photos
+                                    include photo-figure
             else
-               .ajax-login.school-img-list-item.add-photo(href="/loginajax")
-   else
-      .school-img-list
-         each photo in photos
-            //.item.col-sm-4.col-md-3.col-lg-3(id="#{photo._id}")
-            a.school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(href="#{pictureInfo.returnLarge(photo.url)}" data-toggle="lightbox" data-gallery="school-photos" data-footer="#{photo.description}" width="100%",id=photo._id, src="#{pictureInfo.returnThumbnail(photo.url)}")
-               .school-img-list-item(style="background-image: url('#{pictureInfo.returnThumbnail(photo.url)}');")
-                  if locals.user && locals.user.admin
-                     .picture-corner
-                        a.btn.btn-primary.btn-lg(href="/school/deletephoto/#{photo._id}/#{school._id}") X
-                     .picture-corner
-                        a.btn.btn-primary.btn-lg(href="/school/updatecoverphoto/#{photo.id}/" + "#{school._id}" role="button") O
-         if locals.user
-            .school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
-               #ajax-add-photo.school-img-list-item.add-photo(href="/school/addphotoajax/#{school.id}")
-         else
-            .school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
-               .ajax-login.school-img-list-item.add-photo(href="/loginajax")
-.clearfix
+                  .mdb-lightbox.clearfix.no-margin
+                        -var photo = photos[0]
+                        include photo-figure
+                        -var photo = photos[1]
+                        include photo-figure
+                        -var photo = photos[2]
+                        include photo-figure
+                        -var photo = photos[3]
+                        include photo-figure
+                        #collapsePhoto.clearfix.collapse(aria-labelledby='headingPhoto', data-parent='#accordion-photo')
+                              each photo,index in photos
+                                    if index >= 4
+                                          include photo-figure
+                  #show-more.row.my-3.show-more
+                        .col-12
+                              a(data-toggle='collapse', href='#collapsePhoto', role='button', aria-expanded='false', aria-controls='collapsePhoto')
+                                    | Show more 
+                                    i.mdi.mdi-chevron-down(aria-hidden='true')
+                  #show-less.row.my-3.show-more.d-none
+                        .col-12
+                              a(data-toggle='collapse', href='#collapsePhoto', role='button', aria-expanded='false', aria-controls='collapsePhoto')
+                                    | Show less 
+                                    i.mdi.mdi-chevron-up(aria-hidden='true')
+      
+      
+
+
+
+
+      //- #accordion-photo.mb-2.clear-fix
+      //-       .photos
+      //-             #collapsePhoto.collapse(aria-labelledby='headingPhoto', data-parent='#accordion-photo')
+      //-                   .mdb-lightbox.no-margin
+      //-                         each photo,index in photos
+      //-                               figure.col-md-4
+      //-                                     a(href="#{pictureInfo.returnLarge(photo.url)}", data-size='1600x1067')
+      //-                                           img.img-fluid(alt='picture', src='#{pictureInfo.returnThumbnail(photo.url)}')
+      
+      //- .col-md-12
+      //-       #mdb-lightbox-ui
+      //- .card-columns
+      //- each photo,i in photos
+      //-       .col-md-4.col-lg-4
+      //-             a(href="#{pictureInfo.returnLarge(photo.url)}" data-toggle="lightbox" data-gallery="school-photos" data-footer="#{photo.description}", id=photo._id, src="#{pictureInfo.returnThumbnail(photo.url)}")
+      //-                   .school-img-list-item(style="height: 100px; background-image: url('#{pictureInfo.returnThumbnail(photo.url)}');")
+      //- if locals.user
+      //-       .school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
+      //-       #ajax-add-photo.school-img-list-item.add-photo(href="/school/addphotoajax/#{school.id}")
+      //- else
+      //-       .school-image-item.img-fluid.col-xs-4.col-sm-4.col-md-3.col-lg-4(width="100%")
+      //-       .ajax-login.school-img-list-item.add-photo(href="/loginajax")

@@ -3,48 +3,17 @@ const striptags = require('striptags');
 
 module.exports = {
 
-  /**
-   * Shorter Description for lists that do not require full description.
-   * @param {*} schoolList  Array of schools to truncate
-   * @param {*} length Position at which to truncate
-   * @return {string} Truncated List
-   */
-  trunkSchoolDescription(schoolList, length) {
-    schoolList.forEach((school) => {
-      if (length > school.description.length) {
-        length = school.description.length;
+  trunkContentArray(array, attribute, length) {
+    array.forEach((element) => {
+      if (length > element[attribute].length) {
+        length = element[attribute].length;
       }
-      let description = school.description;
-      description = striptags(description);
-      description = description.substring(0, length);
-      school.description = `${description.substring(0, description.lastIndexOf(' '))}...`;
-    });
-    return schoolList;
-  },
-
-  trunkArticlesContent(articles, length) {
-    articles.forEach((article) => {
-      if (length > article.content.length) {
-        length = article.content.length;
-      }
-      let content = article.content;
+      let content = element[attribute];
       content = striptags(content);
       content = content.substring(0, length);
-      article.content = `${content.substring(0, content.lastIndexOf(' '))}...`;
+      element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
     });
-    return articles;
-  },
-
-  trunkSchoolReviews(reviews, length) {
-    reviews.forEach((review) => {
-      if (length > review.comment.length) {
-        length = review.comment.length;
-      }
-      let comment = review.comment.substring(0, length);
-      comment = `${comment.substring(0, comment.lastIndexOf(' '))}...`;
-      review.comment = comment;
-    });
-    return reviews;
+    return array;
   },
 
   returnNameforSchoolType(code) {
@@ -56,6 +25,21 @@ module.exports = {
       case 2:
         return 'Cont.Training School';
     }
+  },
+
+  /**
+   * Return Average
+   */
+  returnAverage(array, attribute) {
+    let sum = 0;
+    let length = 0;
+    array.forEach((element) => {
+      if (element[attribute] != -1) {
+        sum += element[attribute];
+        length += 1;
+      }
+    });
+    return sum / length;
   },
 
   /**

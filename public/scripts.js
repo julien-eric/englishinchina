@@ -1,4 +1,5 @@
 module.exports = {
+    typeahead: '/javascripts/libs/typeahead.bundle.min.js',
     librater: '/javascripts/libs/rater.min.js',
     libslider: '/javascripts/libs/bootstrap-slider.js',
     libbarchart: '/javascripts/libs/jquery.horizBarChart.min.js',

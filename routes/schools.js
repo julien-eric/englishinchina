@@ -40,6 +40,7 @@ module.exports = function(passport) {
         userId = req.user._id.id;
       }
       let reviewList = await reviews.findReviews(school, 6, 1, true, userId);
+      reviewList = jadefunctions.trunkContentArray(reviewList, 'comment', 190);
 
       let schoolOwner = false;
       if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
@@ -239,19 +240,6 @@ module.exports = function(passport) {
   });
 
   /** **********************************************************************************************************
-     *insertCommentforSchool : POST insertreview on school
-     * userID : integer
-     * schoolID : integer
-     * review : string
-     ************************************************************************************************************ */
-  router.post('/insertreview', async (req, res) => {
-
-    await reviews.insertReviewforSchool(req);
-    let school = await schools.findSchoolById(req.body.school);
-    res.redirect(`/school/id/${school._id}`);
-  });
-
-  /** **********************************************************************************************************
      *deleteReview : Delete Review
      * userID : integer
      * schoolID : integer
@@ -387,12 +375,12 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo;
-      const province = req.query.province;
-      const city = validateCity(req.query.city);
+      const province = validateQuery(req.query.province);
+      const city = validateQuery(req.query.city);
 
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
-        searchResults.list = jadefunctions.trunkSchoolDescription(searchResults.list, 180);
+        searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
       }
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
@@ -417,8 +405,27 @@ module.exports = function(passport) {
     }
   });
 
-  let validateCity = function(queryElement) {
-    if (queryElement == undefined) {
+  /** **********************************************************************************************************
+     *searchSchool : Method for search all schools, it will return any school that has some of the information
+     * Param : Query, string that will be looked for as part of the schools name
+     * [Province] optional.
+     * [City] optional
+     ************************************************************************************************************ */
+  router.get('/query', async (req, res) => {
+
+    try {
+      const schoolInfo = req.query.schoolInfo || undefined;
+      const province = validateQuery(req.query.province);
+      const city = validateQuery(req.query.city);
+      let searchResults = await schools.searchSchools(schoolInfo, province, city);
+      res.send(JSON.stringify(searchResults.list));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+  let validateQuery = function(queryElement) {
+    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '') {
       return -1;
     }
     return queryElement;

@@ -1,6 +1,32 @@
-extends ../layout
-block content
-        div.container.login-page
-            .row
-                div.login-form.col-sm-8.offset-sm-2.col-md-6.offset-md-3
-                    include registerpanel
+extends image-splash
+block card
+    .card.text-dark.my-5
+        .card-header.border-bottom-0
+                .text-center
+                    img(src='/images/logo6.gif', width='', height='40', alt='')
+        .card-body.text-left
+                .text-center
+                    h1.mt-3.mb-5.text-light.font-weight-bold Sign up 
+                    if message.length > 0
+                                p.rounded.bg-light.text-danger.py-1.mb-5 #{message}            
+                form(class='form-signin', action='/signup', autocomplete="off", method='POST')
+                        .md-form.mb-5
+                                i.fa.prefix.mdi.mdi-account(aria-hidden='true')
+                                input#schoolInfo.form-control(type='text', name='username', placeholder='Display Name',required, autocomplete="off", autofocus)
+                                label(for='username') Display Name
+                        .md-form.mb-5
+                                i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+                                input#schoolInfo.form-control(type='email', name='email', placeholder='Email',required, autofocus)
+                                label(for='email') Email
+                        .md-form
+                                i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
+                                input#schoolInfo.form-control(type='password', name='password', placeholder='Password', required)
+                                label.control-label(for='password') Password
+                        .text-center
+                                button.btn.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Register
+                        p.text-center( style="font-size: 0.8rem;")
+                                |Already have an account?&nbsp;
+                                a(href="/login") Login
+        .card-footer.border-0.bg-dark.text-light
+                include social-login
+            

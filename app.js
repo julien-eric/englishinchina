@@ -5,10 +5,12 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
+const sassMiddleware = require('node-sass-middleware');
 const favicon = require('serve-favicon');
 const flash = require('express-flash');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
+const SCSS_DEBUG = false;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
@@ -46,6 +48,23 @@ app.use(favicon(`${__dirname}/public/favicon.ico`));
 app.use(stylus.middleware({
   src: `${__dirname}/public`,
   compile
+}));
+
+const src = path.join(__dirname, 'public', 'scss');
+const dst = path.join(__dirname, 'public', 'stylesheets');
+
+if (!SCSS_DEBUG) {
+  console.log('WARNING: SCSS is not recompiling (not debug)');
+}
+
+app.use(sassMiddleware({
+  /* Options */
+  src: src,
+  dest: dst,
+  debug: SCSS_DEBUG,
+  outputStyle: 'compressed',
+  // indentedSyntax: true, // Add this to use SASS files
+  prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
 app.use(logger('dev'));
@@ -95,12 +114,14 @@ const awsRoutes = require('./routes/aws')(passport);
 const schoolRoutes = require('./routes/schools')(passport);
 const companyRoutes = require('./routes/companies')(passport);
 const articleRoutes = require('./routes/articles')(passport);
+const reviewRoutes = require('./routes/reviews')(passport);
 
 app.use('/', routes);
 app.use('/', awsRoutes);
 app.use('/school', schoolRoutes);
 app.use('/company', companyRoutes);
 app.use('/article', articleRoutes);
+app.use('/review', reviewRoutes);
 
 /** *************************************************************
  catch 404 and forward to error handler

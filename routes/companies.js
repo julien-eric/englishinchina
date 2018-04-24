@@ -61,12 +61,13 @@ module.exports = function(passport) {
 
 
   router.get('/id/:id', async (req, res) => {
-    let company = await companies.findCompanyById(req.params.id);
+    let companyId = req.params.id;
+    let company = await companies.findCompanyById(companyId);
     let popularCities = await citiesController.getMostPopularCities();
     let popularProvinces = await provincesController.getMostPopularProvinces();
     let schoolList = await schools.findSchoolsByCompany(company.id);
-    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(req.params.id);
-    const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
+    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
+    const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
     res.render('company/company', {
       title: `${company.name} - English in China`,
       company,

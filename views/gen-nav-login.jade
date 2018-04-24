@@ -1,0 +1,29 @@
+if locals.user
+    li.nav-item.dropdown
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            span.caret
+                | #{user.username}
+        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+            a.dropdown-item(href='/user/edit') My Profile
+            a.dropdown-item(href='/signout') Sign Out
+    li.hidden-xs
+        if locals.user.fb && locals.user.useFacebookPic
+            //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
+            //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
+            .user-picture
+                img.rounded-circle(src='#{pictureInfo.returnFacebookPicture(user.avatarUrl)}', height='40',  alt='Cinque Terre')
+        else
+            //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
+            //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
+            .user-picture
+                img.rounded-circle(src='#{pictureInfo.returnThumbnail(user.avatarUrl)}', height='40', alt='Cinque Terre')
+else
+    //- li.nav-item
+        //- a.nav-link(href='#') Login 
+        //- button#elicit-email.btn.btn-link(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+        //- button#elicit-email.btn.btn-link(type='button')
+        //-   | Login
+    li.nav-item
+        a.nav-link(href='/login') Login
+    li.nav-item
+        a.nav-link(href='/signup') Sign up

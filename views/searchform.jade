@@ -1,0 +1,22 @@
+form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+        .col-lg-5.mt-2
+              .md-form
+                  if magnify
+                    i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                  input#schoolInfo.form-control(type='text', name='schoolInfo')
+                  label(for='schoolInfo') School Name
+        .col-lg
+              .md-form
+                    select#provinceSelect.mdb-select(name="province")
+                          option(value='', disabled='', selected='') Province
+                          each province,i in provinces
+                                option(value=province.code) #{province.name} - #{province.chineseName}
+        .col-lg
+              .md-form
+                    select#city-select.mdb-select.empty(name="city", disabled='')
+                          option(value='', selected='') City
+
+        .col-lg.mt-2
+              button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
+                    i.mdi.mdi-magnify(aria-hidden='true')
+                    span  Search

@@ -41,7 +41,7 @@ module.exports = function(passport) {
   router.get('/', async (req, res) => {
 
     let articles = await articlesController.getArticles();
-    articles = jadefunctions.trunkArticlesContent(articles, 150);
+    articles = jadefunctions.trunkContentArray(articles, 'content', 150);
     res.render('article/articles', {
       articles,
       user: req.user,

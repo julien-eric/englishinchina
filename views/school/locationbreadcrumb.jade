@@ -1,0 +1,12 @@
+nav(aria-label='breadcrumb')
+  ol.breadcrumb.mb-0
+    i.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+    li.breadcrumb-item
+      a(href='/school/search?schoolInfo=&province=#{school.province.code}&city=-1') China
+    li.breadcrumb-item
+      a(href='/school/search?schoolInfo=&province=#{school.province.code}&city=-1') #{school.province.name}
+    li.breadcrumb-item.active(aria-current='page')
+      if school.city
+        a(href='/school/search?schoolInfo=&province=-1&city=#{school.city.code}') #{jadefunctions.capitalize(school.city.pinyinName)}
+      else
+        a(href='/school/search?schoolInfo=&province=-1&city=1') Dongying

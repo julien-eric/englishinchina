@@ -1,0 +1,39 @@
+.text-left.mb-3
+      .md-form
+            i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+            input#searchCompanies.form-control(type='text', value='', name='searchCompanies')
+            label(for='searchCompanies') Search Companies
+             
+.card-columns
+  if schools
+      each company in popularCompanies
+            .card.text-right
+              .display-grid
+                  a.view.overlay.card-img(href="/company/id/#{company._id}")
+                        img.card-img-top(src='#{pictureInfo.returnThumbnail(company.pictureUrl)}', alt='Card image')
+                        //- .card-img-overlay
+                        //-       h5.card-title Card title    
+                              
+                  a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href="/company/id/#{company._id}")
+                    i.text-white.mdi.mdi-chevron-double-right(aria-hidden='true')
+                  .card-body.text-center
+                        h3.font-weight-light.card-title 
+                              a.text-dark(href="/company/id/#{company._id}")
+                                    | #{company.name}
+                        hr
+                        p.card-text #{company.description}
+                        .row.justify-content-center.text-muted
+                              .col-3
+                                    i.mdi.mdi-school(aria-hidden='true')      
+                                    |  #{company.schools.length}
+                              -var avg = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
+                              if avg != 'NaN'
+                                    .col-3
+                                          i.mdi.mdi-star(aria-hidden='true')      
+                                          |  #{avg}
+                  //- .card-body.text-center
+                  //-       a.btn.btn-primary.text-light.mr-1(href='/company/id/#{company.id}') See Company
+      .card.bg-primary.text-white.border-0.text-center
+            .card-body
+                  a.btn.btn-link.text-light.mr-1(href='') See All Companies
+                    i.mdi.mdi-chevron-double-right(aria-hidden='true') 

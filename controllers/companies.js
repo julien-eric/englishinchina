@@ -15,6 +15,20 @@ module.exports = {
     return Company.findOneAndUpdate({_id: company.id}, company).exec();
   },
 
+  countSchoolsPerCompany(companyId) {
+    return Company.aggregate([
+      {
+        $lookup:
+          {
+            from: 'schools',
+            localField: '_id',
+            foreignField: 'company',
+            as: 'schools'
+          }
+      }
+    ]).exec();
+  },
+
   async addCompany(company) {
 
     try { // First create company then add images
