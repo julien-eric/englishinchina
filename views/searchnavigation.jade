@@ -1,16 +1,20 @@
 nav.navbar-expand-md
-      .container.bg-white.d-lg-block.d-none
-                  //- Stupid double form hack because some navbar features counteract with mdbootstrap..
-                  form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
-                        .row
-                              -var magnify = true;
-                              include searchform
+      //- .container.bg-white.d-lg-block.d-none
+      //-             //- Stupid double form hack because some navbar features counteract with mdbootstrap..
+      //-             form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+      //-                   .row
+      //-                         -var magnify = true;
+      //-                         -var provinceSelect = 'provinceSelect';
+      //-                         -var citySelect = 'citySelect';
+      //-                         include searchform
       p.text-center.d-lg-none.mb-0
             a.btn.btn-lg.btn-link(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample') 
                   i.mdi.mdi-magnify(aria-hidden='true')
                   | Search
                   i.mdi.mdi-chevron-down(aria-hidden='true')
-      #collapseExample.collapse.col-md-12.zindex-pop
+      #collapseExample.collapse.show.col-md-12.zindex-pop
             .container.bg-white
-                  -var magnify = false;
-                  include searchform
+                  form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+                        .row
+                              -var magnify = false;
+                              include searchform

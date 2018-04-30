@@ -1,0 +1,12 @@
+ul.px-3.nav.nav-tabs.nav-justified.bg-primary(role='tablist')
+    each cprovince,i in provincesByCompany
+        if(i == 0)
+            li.nav-item
+              a.nav-link.active(data-toggle='pill', href='##{cprovince._id.code}', role='tab')
+                p.my-0 #{cprovince._id.name}
+                p.my-0 (#{cprovince.number})
+        else
+            li.nav-item
+                  a.nav-link(data-toggle='pill', href='##{cprovince._id.code}', role='tab')
+                    p.my-0 #{cprovince._id.name}
+                    p.my-0 (#{cprovince.number})

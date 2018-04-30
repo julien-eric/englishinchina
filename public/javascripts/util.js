@@ -184,24 +184,24 @@ $(document).ready(() => {
     $('.mdb-select').material_select();
   });
 
-  $('#city-select.empty').prop('disabled', 'disabled');
+  $('#citySelect.empty').prop('disabled', 'disabled');
 
   $('#provinceSelect').on('change', function() {
-    $('#city-select option:gt(0)').remove(); // remove all options, but not the first
-    $('#city-select').prop('disabled', 'disabled');
-    $('#city-select').siblings("input").prop('disabled', 'disabled');
+    $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
+    $('#citySelect').prop('disabled', 'disabled');
+    $('#citySelect').siblings("input").prop('disabled', 'disabled');
     $.ajax({
       url: `/cities/${this.value}`,
       success(results) {
-        $('#city-select').prop('disabled', false);
-        $('#city-select').siblings("input").prop('disabled', false);
-        const $element = $('#city-select');
+        const element = $('#citySelect');
+        element.prop('disabled', false);
+        element.siblings("input").prop('disabled', false);
         for (let i = 0; i < results.length; i++) {
-          $element.append($('<option></option>')
+          element.append($('<option></option>')
             .attr('value', results[i].code).text(`${capitalize(results[i].pinyinName)} - ${results[i].chineseName}`));
         }
-        $('#city-select').material_select('destroy');
-        $('#city-select').material_select();
+        element.material_select('destroy');
+        element.material_select();
       },
     });
   });

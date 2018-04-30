@@ -382,18 +382,28 @@ module.exports = function(passport) {
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
         searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
       }
-      let popularCities = await citiesController.getMostPopularCities();
-      let popularProvinces = await provincesController.getMostPopularProvinces();
+      
+      // let popularCities = await citiesController.getMostPopularCities();
+      // let popularProvinces = await provincesController.getMostPopularProvinces();
+      let popularCities = undefined;
+      let popularProvinces = undefined;
+
       let provinces = await provincesController.getAllProvinces();
+      let cities = undefined;
+      if (province) {
+        cities = await citiesController.getCitiesByProvince(province);
+      }
       res.render('search', {
         title: `${searchResults.query} Schools - English in China`,
         schools: searchResults.list,
         user: req.user,
         provinces,
+        cities,
         pictureInfo: pictureinfo,
         popularCities,
         popularProvinces,
         searchMessage: `You searched for ${searchResults.query}`,
+        searchInfo: searchResults.searchInfo,
         jadefunctions,
         scripts: [scripts.librater, scripts.util, scripts.rating]
       });

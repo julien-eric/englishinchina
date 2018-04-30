@@ -65,7 +65,7 @@ module.exports = function(passport) {
     let company = await companies.findCompanyById(companyId);
     let popularCities = await citiesController.getMostPopularCities();
     let popularProvinces = await provincesController.getMostPopularProvinces();
-    let schoolList = await schools.findSchoolsByCompany(company.id);
+    let schoolList = await schools.findSchoolsByCompany(company);
     let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
     const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
     res.render('company/company', {

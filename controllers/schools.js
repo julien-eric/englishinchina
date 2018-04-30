@@ -159,10 +159,14 @@ SchoolsController.prototype.findSchoolsByProvince = function(province) {
 };
 
 SchoolsController.prototype.findSchoolsByCompany = function(company) {
-  return School.find({company})
-    .populate('province')
-    .populate('city')
-    .exec();
+
+  return School.aggregate([
+    {$match: {company: company._id}},
+    {$lookup: {from: 'provinces', localField: 'province', foreignField: '_id', as: 'province'}},
+    {$unwind: '$province'},
+    {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
+    {$unwind: '$city'}
+  ]).exec();
 };
 
 SchoolsController.prototype.findSchoolsByCompanySortbyRating = function(company) {
@@ -170,6 +174,7 @@ SchoolsController.prototype.findSchoolsByCompanySortbyRating = function(company)
     .sort({averageRating: -1})
     .populate('province')
     .populate('city')
+    .populate('company')
     .limit(3)
     .exec();
 };
@@ -179,30 +184,34 @@ SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceI
   let queryInfo = {};
   queryInfo.school = schoolInfo;
 
-  let query = School
-    .find({name: new RegExp(schoolInfo, 'i')})
-    .populate('province')
-    .populate('city')
-    .limit(10);
-
+  let transactions = School.aggregate([
+    {$match: {name: new RegExp(schoolInfo, 'i')}},
+    {$sort: {number: -1}}
+  ]);
 
   if (provinceInfo != MISSING) {
     province = await provincesController.getProvinceByCode(provinceInfo);
     queryInfo.province = province.name;
-    query.where('province').equals(province);
+    transactions._pipeline.push({$match: {province: province._id}});
   }
 
   if (cityInfo != MISSING) {
     city = await citiesController.getCityByCode(cityInfo);
     queryInfo.city = city.pinyinName;
-    query.where('city').equals(city);
+    transactions._pipeline.push({$match: {city: city._id}});
   }
 
-  console.time('exec');
-  let schoolList = await query.exec();
+  transactions._pipeline = transactions._pipeline.concat([
+    {$lookup: {from: 'provinces', localField: 'province', foreignField: '_id', as: 'province'}},
+    {$unwind: '$province'},
+    {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
+    {$unwind: '$city'},
+    {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}}
+  ]);
+
+  let schoolList = await transactions.exec();
   let searchQuery = this.getQueryMessage(queryInfo);
-  console.timeEnd('exec');
-  return {list: schoolList, query: searchQuery};
+  return {list: schoolList, query: searchQuery, searchInfo: {province: provinceInfo, city: cityInfo, schoolInfo: schoolInfo}};
 };
 
 SchoolsController.prototype.getQueryMessage = function(queryInfo) {

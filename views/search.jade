@@ -1,14 +1,14 @@
 extends layout
 block content
-      .container.my-5
+      .container.text-center.my-5
             if searchMessage
                   h2.searchmessage #{searchMessage}
-      include searchnavigation
+                  p.text-muted There are #{schools.length} schools related to your search
+      .my-5
+            include searchnavigation
       .container   
-            div.row
-                  .card-columns
-                        include schoollist
-                  include sidebar
+            include schoollist
+            //- include sidebar
 
             //- .container
             //-       //div.row

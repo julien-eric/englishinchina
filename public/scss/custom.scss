@@ -16,11 +16,7 @@ $standard-height: 190px;
 $landing-page-height: 560px;
 $school-header-height: 340px;
 $theme-colors: ( "primary": $slw-primary, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
-
-
 $review-image-dimension: 60px;
-
-
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
 // Bootstrap & MDB
@@ -388,8 +384,8 @@ $value in $theme-colors {
 }
 
 .review-image {
-    height:$review-image-dimension;
-    width:$review-image-dimension;
+    height: $review-image-dimension;
+    width: $review-image-dimension;
 }
 
 .image-container {
@@ -398,20 +394,38 @@ $value in $theme-colors {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-}​
+}
 
-.image-container:hover {
+​ .image-container:hover {
     opacity: .8;
 }
 
-.show-more {
-    background-color: #82b1ff !important; 
+.blurred {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    -webkit-filter: brightness(25%);
+    filter: brightness(25%);
 }
+
+.show-more {
+    background-color: #82b1ff !important;
+}
+
 .show-more:not(.show) {
     background: transparent !important;
 }
+
 // @media (max-width: 768px) {
 //     .navbar:not(.top-nav-collapse) {
 //         background: #82b1ff !important;
 //     } 
 // }
+
+@media(max-width: 480px) {
+    .display-3 {
+      font-size: 3.5rem;
+    }
+  }

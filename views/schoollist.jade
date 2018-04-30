@@ -1,24 +1,9 @@
-if schools
-      each school in schools
-            .card
-                  img.card-img-top(src='#{pictureInfo.returnThumbnail(school.pictureUrl)}', alt='Card image')
-                  .card-body
-                        h3.font-weight-light.card-title 
-                              a.text-dark(href="/school/id/#{school.id}")
-                                    | #{school.name}
-                        h6.card-subtitle.font-weight-light.mb-2.text-muted #{jadefunctions.returnNameforSchoolType(school.schoolType)}
-                              if(school.company)
-                                    span &nbsp;|&nbsp;
-                                          a(href="/company/id/#{school.company.id}") #{school.company.name}
-                              if school.averageRating > 0
-                                    span &nbsp;|&nbsp;
-                                          include genrating
-                        
-                        p.card-text #{school.description}
-                  //- ul.list-group.list-group-flush
-                  //-       li.list-group-item
-                  //-             include school/locationbreadcrumb
-                  .card-body
-                        a.btn.btn-primary.text-light.mr-1(href='/school/id/#{school.id}') See School
-                        if(school.company)
-                              a.btn.btn-primary.text-light(href='/company/id/#{school.company.id}') See Company
+block content
+      if schools.length > 0
+            .row
+                  each school in schools
+                        .col-sm-12.col-md-6.col-lg-4.mb-3
+                              include schoolcard
+      else
+            
+                  include search-noschool

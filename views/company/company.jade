@@ -1,69 +1,133 @@
 extends ../layout
 block content
-    div.school-page
-        .img-fluid.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(company.pictureUrl)}');")
-            .container.darkbg
-                h1.school-page-name #{company.name}
-                #schoolid.hidden(value="#{company.id}")
-                if company.website
-                    h4
-                        a(href="#{company.website}")
-                            span.school-glyphicon.glyphicon.glyphicon-home
-                            | #{company.website}
-        .school-container
-            .container.school-content
-                span.clearfix
-                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
-                    h2 Description
-                    hr
-                    span.clearfix
-                    div.description-container
-                        p.login-title !{company.description}
-                    h5#read-more
-                        #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
-                    span.clearfix
-                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
-                    - var photos = company.photos
-                    - var isCompany = true
-                    include ../photogrid
-                span.clearfix
-
-                //.col-xs-12.col-sm-12.col-md-12.col-lg-88.footer-box
-                //    h2.has-hr#popular-cities #{company.name} | Schools
-                //    hr
-                //    span.clearfix
-                //    include ../schoollist
-
-                .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
-                    h2.has-hr#popular-cities #{company.name} | Locations
+   .school-page.mb-5
+        include companyheader
+        //-   .container-fluid.bg-light.border-top.py-2.border-bottom
+        //-         .container.mb-1
+        //-               include locationbreadcrumb
+        .container.bg-white.pt-3           
+                        
+            .container
+                .pt-5.pb-2
+                    h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                        i.mdi.mdi-map-marker(aria-hidden='true')
+                        | Our locations
+                    p.text-center.text-muted Look for #{company.name} in all of our locations around the World
                     hr
                     span.clearfix
                     .row
                         .locations.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12
-                            ul.nav.nav-pills
-                                each cprovince,i in provincesByCompany
-                                    if(i == 0)
-                                        li.active
-                                            a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
-                                    else
-                                        li
-                                            a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
+                                include companylocations
                             -var schoolList = schools
-                            .tab-content
+                            .tab-content.px-0
                                 each cprovince,i in provincesByCompany
                                     -var schools2 = []
                                     if(i == 0)
-                                        .tab-pane.fade.in.active(id="#{cprovince._id.code}")
+                                        .tab-pane.fade.in.active.show(id="#{cprovince._id.code}", role='tabpanel')
                                             each school in schoolList
                                                 if(school.province.code == cprovince._id.code)
                                                     -schools2.push(school)
                                             -var schools = schools2
                                             include ../schoollist
                                     else
-                                        .tab-pane.fade(id="#{cprovince._id.code}")
+                                        .tab-pane.fade(id="#{cprovince._id.code}", role='tabpanel')
                                             each school in schoolList
                                                 if(school.province.code == cprovince._id.code)
                                                     -schools2.push(school)
                                             -var schools = schools2
                                             include ../schoollist
+            .row
+                  .school-content.col-sm-12.col-lg-8
+                        h2.font-weight-light Description
+                        p.login-title !{company.description}
+                        h5#read-more
+                        #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
+                        span.clearfix
+                //-   .col-lg-4
+                //-         include ratingcard
+                //-         button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                //-               i.mdi.mdi-plus-circle(aria-hidden='true')
+                //-               span  Write a Review
+
+            .photos.mt-5.clearfix
+                  h3 Photos
+                  hr
+                  -var photos = company.photos
+                  include ../photogrid
+
+
+            //- h3 Reviews (#{reviewsCount})
+            //- hr
+            //- include schoolreviews
+            //- if reviewsCount > 6
+            //-       #load-more-reviews.btn.btn-secondary.btn-lg Load More
+
+//- extends ../layout
+//- block content
+//-     div.school-page
+//-         .img-fluid.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(company.pictureUrl)}');")
+//-             .container.darkbg
+//-                 h1.school-page-name #{company.name}
+//-                 #schoolid.hidden(value="#{company.id}")
+//-                 if company.website
+//-                     h4
+//-                         a(href="#{company.website}")
+//-                             span.school-glyphicon.glyphicon.glyphicon-home
+//-                             | #{company.website}
+//-         .school-container
+//-             .container.school-content
+//-                 span.clearfix
+//-                 .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
+//-                     h2 Description
+//-                     hr
+//-                     span.clearfix
+//-                     div.description-container
+//-                         p.login-title !{company.description}
+//-                     h5#read-more
+//-                         #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
+//-                     span.clearfix
+//-                 .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4
+//-                     - var photos = company.photos
+//-                     - var isCompany = true
+//-                     include ../photogrid
+//-                 span.clearfix
+
+//-                 //.col-xs-12.col-sm-12.col-md-12.col-lg-88.footer-box
+//-                 //    h2.has-hr#popular-cities #{company.name} | Schools
+//-                 //    hr
+//-                 //    span.clearfix
+//-                 //    include ../schoollist
+
+//-                 .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-8
+//-                     h2.has-hr#popular-cities #{company.name} | Locations
+//-                     hr
+//-                     span.clearfix
+//-                     .row
+//-                         .locations.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12
+//-                             ul.nav.nav-pills
+//-                                 each cprovince,i in provincesByCompany
+//-                                     if(i == 0)
+//-                                         li.active
+//-                                             a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
+//-                                     else
+//-                                         li
+//-                                             a(data-toggle="pill" href="##{cprovince._id.code}") #{cprovince._id.name} (#{cprovince.number})
+//-                             -var schoolList = schools
+//-                             .tab-content
+//-                                 each cprovince,i in provincesByCompany
+//-                                     -var schools2 = []
+//-                                     if(i == 0)
+//-                                         .tab-pane.fade.in.active(id="#{cprovince._id.code}")
+//-                                             each school in schoolList
+//-                                                 if(school.province.code == cprovince._id.code)
+//-                                                     -schools2.push(school)
+//-                                             -var schools = schools2
+//-                                             include ../schoollist
+//-                                     else
+//-                                         .tab-pane.fade(id="#{cprovince._id.code}")
+//-                                             each school in schoolList
+//-                                                 if(school.province.code == cprovince._id.code)
+//-                                                     -schools2.push(school)
+//-                                             -var schools = schools2
+//-                                             include ../schoollist
 

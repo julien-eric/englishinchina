@@ -41,19 +41,27 @@ block content
                         //-       .clearfix
                   .col-lg-4
                         include ratingcard
-                        button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                        button.btn.btn-lg.btn-block.btn-primary.mb-2(type='submit')
                               i.mdi.mdi-plus-circle(aria-hidden='true')
                               span  Write a Review
+                        button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                              i.mdi.mdi-plus-circle(aria-hidden='true')
+                              span  Add a Picture
                         
             .photos.mt-5.clearfix
-                  h3 Photos
+                  h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                        //- i.mdi.mdi-image(aria-hidden='true')
+                        | Photos
+                  p.text-center.text-muted What others have been saying about #{school.name}
                   hr
                   -var photos = school.photos
                   include ../photogrid
                   
             
-
-            h3 Reviews (#{reviewsCount})
+            h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                  //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
+                  |  Reviews 
+            p.text-center.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
             hr
             include schoolreviews
             if reviewsCount > 6

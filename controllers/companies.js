@@ -15,7 +15,7 @@ module.exports = {
     return Company.findOneAndUpdate({_id: company.id}, company).exec();
   },
 
-  countSchoolsPerCompany(companyId) {
+  countSchoolsPerCompany() {
     return Company.aggregate([
       {
         $lookup:

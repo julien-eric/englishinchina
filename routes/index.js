@@ -56,7 +56,6 @@ module.exports = function(passport) {
         popularProvinces,
         popularCompanies,
         splashText,
-        cities: {},
         currentPage: 1,
         total: schoolList.count,
         totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
