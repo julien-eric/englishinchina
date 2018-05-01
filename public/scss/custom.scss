@@ -2,6 +2,7 @@
 // Option A: Include all of Bootstrap
 // Your variable overrides
 $slw-primary: #47a347;
+$slw-lightgreen: #beecbe;
 $slw-primary-darker: #307430;
 $slw-danger: #ff4136;
 $slw-secondary: #5bc0de;
@@ -15,7 +16,7 @@ $enable-shadows: true;
 $standard-height: 190px;
 $landing-page-height: 560px;
 $school-header-height: 340px;
-$theme-colors: ( "primary": $slw-primary, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
+$theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
 $review-image-dimension: 60px;
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
@@ -56,6 +57,13 @@ $link-color: $slw-primary;
 $value in $theme-colors {
     .text-shadow-#{$color} {
         text-shadow: 2px 2px $value;
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .swatch-#{$color} {
+        color: color-yiq($value);
     }
 }
 
@@ -423,9 +431,8 @@ $value in $theme-colors {
 //         background: #82b1ff !important;
 //     } 
 // }
-
 @media(max-width: 480px) {
     .display-3 {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
-  }
+}

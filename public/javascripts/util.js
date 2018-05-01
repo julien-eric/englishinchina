@@ -166,7 +166,7 @@ $(document).ready(() => {
             $(element).appendTo('#modal-body');
           });
           // $('#modal-title').val(xhr.response);
-          $('#login-modal').modal('show')
+          $('#slw-modal').modal('show')
           setUploadFile();
         } else {
           alert('Problem.');

@@ -10,7 +10,7 @@ const favicon = require('serve-favicon');
 const flash = require('express-flash');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
-const SCSS_DEBUG = false;
+const SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();

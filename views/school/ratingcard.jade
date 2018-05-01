@@ -7,21 +7,15 @@ if reviewsCount > 0
                               i.mdi.mdi-star(aria-hidden='true')
                               |  School Rating
             #collapseOne.collapse.show(aria-labelledby='headingOne', data-parent='#accordion')
-                  .card-body
-                        h1.text-center.display-2.font-weight-heavy #{jadefunctions.roundToPoint5(school.averageRating)}
-                        h1.text-center.display-5.text-primary 
-                              include ../genrating
-                        h4.font-weight-light.display-5.text-center
-                              i.mdi.mdi-account(aria-hidden='true')
-                              | #{reviewsCount} review(s)
-                        //- p Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute.
+                  -var avgRating = jadefunctions.roundToPoint5(school.averageRating);
+                  include ratingcardbody 
       .card
             #headingTwo.card-header.text-center
                   h5.mb-0
                         button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo') Collapsible Group Item #2
             #collapseTwo.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
                   .card-body
-                        | Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                        include schoolbreakdown
   
 
 

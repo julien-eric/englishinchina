@@ -6,6 +6,7 @@ const router = express.Router();
 const schools = require('../controllers/schools');
 const reviews = require('../controllers/reviews');
 const images = require('../controllers/images');
+const usersController = require('../controllers/users');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const companiesController = require('../controllers/companies');
@@ -282,10 +283,9 @@ module.exports = function(passport) {
   router.get('/reviews/:id', async (req, res) => {
     let ajax = decodeURIComponent(req.query.ajax);
     const reviewId = req.params.id;
-    const userId = req.user;
+    const userId = await usersController.findUserById(req.user._id);
 
-    let reviewList = await reviews.findReviewById(reviewId, userId);
-    const review = reviewList[0];
+    const review = await reviews.findReviewById(reviewId, userId._id);
     review.comment = jadefunctions.nl2br(review.comment, false);
 
     if (ajax) {
@@ -325,41 +325,52 @@ module.exports = function(passport) {
   /** **************************************************************************************************************
      * This review was helpful
      ************************************************************************************************************** */
+  // router.post('/helpfuls/:type/:id', async (req, res) => {
   router.post('/helpfuls/:type/:id', utils.isAuthenticated, async (req, res) => {
-    const reviewId = req.params.id;
-    const userId = req.user;
 
-    let review = await reviews.findReviewById(reviewId, userId);
-    review.helpfuls.push({user: userId});
-    const hf = review.helpfuls[0];
-    hf.isNew;
-    let updatedReview = await review.save();
+    try {
 
-    updatedReview.hasHF = true;
-    res.render('helpfulshort', {
-      review: updatedReview,
-      loggedin: 'true'
-    }, (err, html) => {
-      if (err) {
-        console.log(err);
+      const reviewId = req.params.id;
+      const userId = await usersController.findUserById(req.user._id);
+      let review = await reviews.findReviewById(reviewId, userId._id);
+
+      // Update Review to account for new helpful
+      let updatedReview = undefined;
+      if (!review.hasHF) {
+        updatedReview = await reviews.addHelpful(review, {user: userId});
+        updatedReview.hasHF = true;
       } else {
-        res.send({html, result: '1', reviewId: updatedReview.id});
+        updatedReview = await reviews.removeHelpful(review, {user: userId});
+        updatedReview.hasHF = false;
       }
-    });
 
-    // In the background send email to user who has written the review
-    const user = review.user;
-    if (user.email != undefined) {
-      email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
-        const callbackMessage = 'Thank you';
-        email.sendEmail(user.email,
-          'reviews@englishinchina.com',
-          `Review Feedback on ${review.foreignId.name}`,
-          message,
-          callbackMessage,
-          req,
-          () => {});
+      res.render('helpfulshort', {
+        review: updatedReview,
+        loggedin: 'true'
+      }, (err, html) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send({html, result: '1', reviewId: updatedReview.id});
+        }
       });
+
+      // In the background send email to user who has written the review
+      const user = review.user;
+      if (user.email != undefined) {
+        email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
+          const callbackMessage = 'Thank you';
+          email.sendEmail(user.email,
+            'reviews@englishinchina.com',
+            `Review Feedback on ${review.foreignId.name}`,
+            message,
+            callbackMessage,
+            req,
+            () => {});
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
 
   });
@@ -382,7 +393,7 @@ module.exports = function(passport) {
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
         searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
       }
-      
+
       // let popularCities = await citiesController.getMostPopularCities();
       // let popularProvinces = await provincesController.getMostPopularProvinces();
       let popularCities = undefined;

@@ -1,16 +1,16 @@
-.school-breakdown-card
-   .criteria-name.col-xs-5.col-sm-3.col-md-3.col-lg-3
-      ul.breakdown-criteria.nopadding
-         li #{criteria[0].shortName}
-         li #{criteria[1].shortName}
-         li #{criteria[2].shortName}
-         li #{criteria[3].shortName}
-         li #{criteria[4].shortName}
-         li #{criteria[5].shortName}
-         li #{criteria[6].shortName}
-         li #{criteria[7].shortName}
-   .col-xs-7.col-sm-9.col-md-9.col-lg-9.no-side-padding
-      ul.chart
+.row
+      //-    .criteria-name.col-xs-5.col-sm-3.col-md-3.col-lg-3
+      //-       ul.breakdown-criteria.nopadding
+      //-          li #{criteria[0].shortName}
+      //-          li #{criteria[1].shortName}
+      //-          li #{criteria[2].shortName}
+      //-          li #{criteria[3].shortName}
+      //-          li #{criteria[4].shortName}
+      //-          li #{criteria[5].shortName}
+      //-          li #{criteria[6].shortName}
+      //-          li #{criteria[7].shortName}
+   .col-xs-7.col-sm-9.col-md-9.col-lg-9
+      ul.chart.pl-0
          li(title=Math.round(criteriaScore.c1*10)/10)
             span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c1))
          li(title=Math.round(criteriaScore.c2*10)/10)

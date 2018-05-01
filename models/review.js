@@ -31,10 +31,10 @@ const Review = new Schema({
   average_rating: Number
 });
 
-Review.post('save', (document) => {
+Review.post('save', async (document) => {
   console.log('Inserted review : %s : (%s)', document._id, document.comment);
   const schools = require('../controllers/schools');
-  schools.updateAverageRating(document.foreignId);
+  await schools.updateAverageRating(document.foreignId);
 });
 
 Review.post('remove', (document) => {

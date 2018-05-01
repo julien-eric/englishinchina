@@ -16,13 +16,19 @@ const calculateAverage = function(review) {
 };
 
 const checkUserForHelpful = function(reviews, userId) {
+  if (!reviews.length) {
+    reviews = [reviews];
+  }
+
   reviews.forEach((review) => {
     review.helpfuls.forEach((helpful) => {
-      if (helpful.user.id == userId) {
+      if (helpful.user.id.equals(userId)) {
         review.hasHF = true;
       }
     });
   });
+
+  return reviews;
 };
 
 module.exports = {
@@ -89,9 +95,23 @@ module.exports = {
   },
 
   async findReviewById(reviewId, userId) {
-    let reviews = await Review.find({_id: reviewId}).populate('user').populate('foreignId').exec();
-    checkUserForHelpful(reviews, userId);
-    return Promise.resolve(reviews);
+    let reviews = await Review.findOne({_id: reviewId}).populate('user').populate('foreignId').exec();
+    reviews = checkUserForHelpful(reviews, userId.id);
+    return Promise.resolve(reviews[0]);
+  },
+
+  addHelpful(review, helpful) {
+    return Review.findOneAndUpdate(
+      {_id: review._id},
+      {$push: {helpfuls: helpful}}
+    ).exec();
+  },
+
+  removeHelpful(review, helpful) {
+    return Review.findOneAndUpdate(
+      {_id: review._id},
+      {$pull: {helpfuls: {user: helpful.user._id}}}
+    ).exec();
   },
 
   createReviewDistribution(reviews) {
