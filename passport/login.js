@@ -33,7 +33,9 @@ let processLoginReturn = function(req, email, password, done) {
   }).catch((err) => {
 
     // In case of any error, return using the done method
-    if (err) {return done(err);}
+    if (err) {
+      return done(err);
+    }
 
   });
 };

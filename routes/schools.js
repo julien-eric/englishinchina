@@ -336,7 +336,7 @@ module.exports = function(passport) {
 
       const reviewId = req.params.id;
       const userId = await usersController.findUserById(req.user._id);
-      let review = await reviews.findReviewById(reviewId, userId._id);
+      let review = await reviews.findReviewById(reviewId, userId);
 
       // Update Review to account for new helpful
       let updatedReview = undefined;

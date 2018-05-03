@@ -20,7 +20,9 @@ let processFacebookReturn = function(accessToken, refreshToken, profile, done) {
   }).then((user) => {
 
     // If there's a user, return immediately
-    if (user) {return Promise.resolve(user);}
+    if (user) {
+      return Promise.resolve(user);
+    }
 
     // if there is no user found with that facebook id, create them
     let newUser = new User();
