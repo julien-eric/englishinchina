@@ -1,5 +1,7 @@
 const striptags = require('striptags');
-
+const htmlparser = require('htmlparser');
+const parsedToHtml = require('htmlparser-to-html');
+const _ = require('underscore');
 
 module.exports = {
 
@@ -27,8 +29,54 @@ module.exports = {
     }
   },
 
+  splitDescription(description, length) {
+
+    return new Promise(function(resolve, reject) {
+
+      if (length > description.length) {
+        return resolve(description);
+      }
+
+      let handle = function(error, dom) {
+        if (error) {
+          console.log(error);
+        } else {
+          handleDom(dom);
+        }
+      };
+
+      let handleDom = function(dom) {
+
+        let sum = 0;
+
+        if (dom.length <= 1) {
+          return resolve(description);
+        }
+
+        let breakIndex = _.findIndex(dom, (domElement) => {
+          let stringHtml = parsedToHtml(domElement);
+          sum = sum + stringHtml.length;
+          return sum >= length;
+        });
+
+        // return breakIndex;
+        return resolve({
+          short: parsedToHtml(_.first(dom, breakIndex + 1)),
+          long: parsedToHtml(_.rest(dom, breakIndex + 1))
+        });
+      };
+
+      let handler = new htmlparser.DefaultHandler(handle);
+      let parser = new htmlparser.Parser(handler);
+      parser.parseComplete(description);
+    });
+  },
+
   /**
-   * Return Average
+   *returnAverage : Return the average of a single property for an array
+   * @param {*} array The array from which to get the property
+   * @param {*} attribute The numerial property
+   * @return {number}
    */
   returnAverage(array, attribute) {
     let sum = 0;

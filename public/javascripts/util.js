@@ -142,12 +142,24 @@ $(document).ready(() => {
     $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
   });
 
+  //Photogrid
   $('#collapsePhoto').on('show.bs.collapse', () => {
-    $('#show-more').toggleClass('d-none');
-    $('#show-less').toggleClass('d-none');
+    $('.photos #show-more').toggleClass('d-none');
+    $('.photos #show-less').toggleClass('d-none');
   });
 
   $('#collapsePhoto').on('hide.bs.collapse', () => {
+    $('.photos #show-more').toggleClass('d-none');
+    $('.photos #show-less').toggleClass('d-none');
+  });
+
+  //School descriptions
+  $('#collapseDescription').on('show.bs.collapse', () => {
+    $('.description #show-more').toggleClass('d-none');
+    $('.description #show-less').toggleClass('d-none');
+  });
+
+  $('#collapseDescription').on('hide.bs.collapse', () => {
     $('#show-more').toggleClass('d-none');
     $('#show-less').toggleClass('d-none');
   });

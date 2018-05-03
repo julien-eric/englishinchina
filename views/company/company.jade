@@ -37,12 +37,9 @@ block content
                                             -var schools = schools2
                                             include ../schoollist
             .row
-                  .school-content.col-sm-12.col-lg-8
-                        h2.font-weight-light Description
-                        p.login-title !{company.description}
-                        h5#read-more
-                        #description-readmore.description-readmore.btn.btn-secondary.btn-sm Read Full Description
-                        span.clearfix
+                  .description.col-sm-12.col-lg-8
+                        -var element = company
+                        include ../school/description
                 //-   .col-lg-4
                 //-         include ratingcard
                 //-         button.btn.btn-lg.btn-block.btn-primary(type='submit')

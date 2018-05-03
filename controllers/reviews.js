@@ -96,8 +96,12 @@ module.exports = {
 
   async findReviewById(reviewId, userId) {
     let reviews = await Review.findOne({_id: reviewId}).populate('user').populate('foreignId').exec();
-    reviews = checkUserForHelpful(reviews, userId.id);
-    return Promise.resolve(reviews[0]);
+    if (userId) {
+      reviews = checkUserForHelpful(reviews, userId._id.id);
+      return Promise.resolve(reviews[0]);
+    } else {
+      return Promise.resolve(reviews);
+    }
   },
 
   addHelpful(review, helpful) {

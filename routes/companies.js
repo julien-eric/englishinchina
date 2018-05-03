@@ -63,6 +63,7 @@ module.exports = function(passport) {
   router.get('/id/:id', async (req, res) => {
     let companyId = req.params.id;
     let company = await companies.findCompanyById(companyId);
+    company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
     let popularCities = await citiesController.getMostPopularCities();
     let popularProvinces = await provincesController.getMostPopularProvinces();
     let schoolList = await schools.findSchoolsByCompany(company);

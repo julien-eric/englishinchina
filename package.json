@@ -21,6 +21,8 @@
     "express-session": "^1.0.2",
     "getmdl-select": "^2.0.1",
     "gm": "*",
+    "htmlparser": "^1.7.7",
+    "htmlparser-to-html": "0.0.6",
     "jade": "~1.11.0",
     "jquery-bar-rating": "*",
     "mdbootstrap": "^4.5.0",

@@ -1,3 +1,4 @@
+//- li(title=Math.round(criteriaScore.c1*10)/10)
 .row
       //-    .criteria-name.col-xs-5.col-sm-3.col-md-3.col-lg-3
       //-       ul.breakdown-criteria.nopadding
@@ -9,24 +10,43 @@
       //-          li #{criteria[5].shortName}
       //-          li #{criteria[6].shortName}
       //-          li #{criteria[7].shortName}
-   .col-xs-7.col-sm-9.col-md-9.col-lg-9
-      ul.chart.pl-0
-         li(title=Math.round(criteriaScore.c1*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c1))
-         li(title=Math.round(criteriaScore.c2*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c2))
-         li(title=Math.round(criteriaScore.c3*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c3))
-         li(title=Math.round(criteriaScore.c4*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c4))
-         li(title=Math.round(criteriaScore.c5*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c5))
-         li(title=Math.round(criteriaScore.c6*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c6))
-         li(title=Math.round(criteriaScore.c7*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c7))
-         li(title=Math.round(criteriaScore.c8*10)/10)
-            span.bar(data-number=jadefunctions.scale1to4(criteriaScore.c8))
-         li.reference-bar.hidden
-            span.bar(data-number=5)
-   .clearfix
+      .col
+            ul.chart.pl-0
+                  li.my-2
+                        h2
+                              i.mdi.mdi-cisco-webex.text-muted(aria-hidden='true')
+                              |  Environment
+                  li(title=criteria[0].shortName)
+                        - var value = criteriaScore.c1
+                        include bar
+                  li(title=criteria[1].shortName)
+                        - var value = criteriaScore.c2
+                        include bar
+                  li.mb-2(title=criteria[2].shortName)
+                        - var value = criteriaScore.c3
+                        include bar
+                  li.my-2 
+                        h2
+                              i.mdi.mdi-salesforce.text-muted(aria-hidden='true')
+                              |  School
+                  li(title=criteria[3].shortName)
+                        - var value = criteriaScore.c4
+                        include bar
+                  li(title=criteria[4].shortName)
+                        - var value = criteriaScore.c5
+                        include bar
+                  li.mb-2(title=criteria[5].shortName)
+                        - var value = criteriaScore.c6
+                        include bar
+                  li.my-2
+                        h2
+                              i.mdi.mdi-reddit.text-muted(aria-hidden='true')
+                              |  Management
+                  li(title=criteria[6].shortName)
+                        - var value = criteriaScore.c7
+                        include bar
+                  li(title=criteria[7].shortName)
+                        - var value = criteriaScore.c8
+                        include bar
+                  li.reference-bar.d-none
+                        span.bar(data-number=5)

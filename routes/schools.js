@@ -42,6 +42,7 @@ module.exports = function(passport) {
       }
       let reviewList = await reviews.findReviews(school, 6, 1, true, userId);
       reviewList = jadefunctions.trunkContentArray(reviewList, 'comment', 190);
+      school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
 
       let schoolOwner = false;
       if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
@@ -283,9 +284,12 @@ module.exports = function(passport) {
   router.get('/reviews/:id', async (req, res) => {
     let ajax = decodeURIComponent(req.query.ajax);
     const reviewId = req.params.id;
-    const userId = await usersController.findUserById(req.user._id);
+    let userId = undefined;
+    if (req.user) {
+      userId = await usersController.findUserById(req.user._id);
+    }
 
-    const review = await reviews.findReviewById(reviewId, userId._id);
+    const review = await reviews.findReviewById(reviewId, userId);
     review.comment = jadefunctions.nl2br(review.comment, false);
 
     if (ajax) {
