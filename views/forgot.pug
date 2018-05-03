@@ -1,0 +1,15 @@
+extends layout
+block content
+    .splash
+        .splash-image-container
+            .splash-gradient
+        div.container.login-page
+            div.login-form.col-sm-8.offset-sm-2.col-md-6.offset-md-3
+                .panel
+                    .panel-body.flat-body
+                        legend Forgot Password
+                        form(method='POST')
+                            .form-group
+                                label(for='email') Email
+                                input.form-control.input-lg(type='text', name='email', autofocus)
+                            button(class='btn btn-lg btn-block btn-eic',type='submit') Reset Password

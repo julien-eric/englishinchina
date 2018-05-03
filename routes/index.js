@@ -6,28 +6,44 @@ const moment = require('moment');
 const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const provincesController = require('../controllers/provinces');
+const companiesController = require('../controllers/companies');
 const citiesController = require('../controllers/cities');
 const usersController = require('../controllers/users');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
+// const jade = require('jade');
+
+// let handleRenderError = (err, html) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     res.send({html});
+//   }
+// };
 
 module.exports = function(passport) {
 
   // Home Page
   router.get('/', async (req, res) => {
 
+
     try {
-      const pageSize = 5;
+      const pageSize = 6;
       let schoolList = await schools.getSchools(pageSize, 0, res.locals.admin);
       let provinces = await provincesController.getAllProvinces();
       let featuredSchools = await schools.featuredSchools();
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
+      // let popularCompanies = await companiesController.getAllCompanies();
+      let popularCompanies = await companiesController.countSchoolsPerCompany();
 
-      const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
-      res.render('home', {
+      const splashText = require('../splash-text.json');
+      // let result = jadefunctions.returnAverage(popularCompanies[0].schools, 'averageRating');
+      const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
+      popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
+      res.render('home/home', {
         title: 'English in China',
         main: true,
         featuredSchoolList: featuredSchools,
@@ -38,7 +54,8 @@ module.exports = function(passport) {
         jadefunctions,
         popularCities,
         popularProvinces,
-        cities: {},
+        popularCompanies,
+        splashText,
         currentPage: 1,
         total: schoolList.count,
         totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
@@ -63,8 +80,8 @@ module.exports = function(passport) {
     const pageSize = 5;
 
     let schoolList = await schools.getSchools(pageSize, page - 1, admin);
-    const trunkSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
-    res.render('home', {
+    // const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
+    res.render('home/home', {
       title: `English in China - Page ${page}`,
       schools: trunkSchoolList,
       user: req.user,
@@ -87,8 +104,9 @@ module.exports = function(passport) {
   router.route('/login')
     .get((req, res) => {
       // Display the Login page with any flash message, if any
-      res.render('login', {
+      res.render('login/login', {
         title: 'Login - English in China',
+        hideHeader: true,
         message: req.flash('message'),
         scripts: [scripts.util]
       });
@@ -117,7 +135,7 @@ module.exports = function(passport) {
 
   router.get('/loginajax', (req, res) => {
     res.render(
-      'loginpanel', {
+      'login/loginpanel', {
         title: 'Login - English in China',
         message: req.flash('message'),
         redirecturl: req.query.url,
@@ -160,9 +178,10 @@ module.exports = function(passport) {
      ************************************************************************************************************ */
   router.route('/signup')
     .get((req, res) => {
-      res.render('register', {
+      res.render('login/register', {
         title: 'Sign up - English in China',
-        message: req.flash('message'),
+        hideHeader: true,
+        message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });
     })
@@ -281,8 +300,9 @@ module.exports = function(passport) {
   router.route('/user/edit')
     .get(async (req, res) => {
       let user = await usersController.findUserById(req.user._id);
-      res.render('edituser', {
+      res.render('login/edituser', {
         title: `Edit Profile - ${user.username} - English in China`,
+        hideHeader: true,
         user,
         pictureInfo: pictureinfo,
         jadefunctions,

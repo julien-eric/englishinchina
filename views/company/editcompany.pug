@@ -1,0 +1,42 @@
+extends ../layout
+block content
+   div.container.login-page
+      div.login-form.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-8.offset-lg-2
+         .panel.panel-default
+            .panel-body.flat-body
+               h3.text-center.login-title Edit Company
+               form(action='/company/edit/#{company.id}', method='POST')
+                  .form-group
+                     input#id(type="hidden", name="id", value=company.id)
+                  .form-group
+                     label.control-label(for='Name') Name
+                     input(type='text', name='name', class='form-control', placeholder='Company Name', value=company.name, required, autofocus)
+                  .form-group
+                     label.control-label(for='Picture') Picture
+                     .progress
+                        #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
+                           span.sr-only 0% Complete
+                     img.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src=pictureInfo.returnLarge(company.pictureUrl))
+                     input#avatarUrl(type="hidden" name="pictureUrl" accept="image/*" value=company.pictureUrl)
+                     span(class="btn btn-default btn-file") Browse
+                        input#file_input(type="file")
+                  .form-group
+                     label.control-label(for='Logo') Logo
+                     .progress
+                        #progress-bar-picture2.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
+                           span.sr-only 0% Complete
+                     img.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src=pictureInfo.returnLarge(company.logoUrl))
+                     input#logoUrl(type="hidden" name="logoUrl" accept="image/*" value=company.logoUrl)
+                     span(class="btn btn-default btn-file") Browse
+                        input#file_input2(type="file")
+                  .form-group
+                     label.control-label(for='Website') Website
+                     input(type='text', name='website', class='form-control', placeholder='Website URL',value=company.website)
+                  .form-group
+                     label.control-label(for='Description') Description
+                     textarea#description-textarea(rows='20', name='description', class='form-control', placeholder='Description', style="width: 100%", required) #{company.description}
+                  button(class='btn btn-lg btn-primary btn-block btn-eic', type='submit') Submit
+                  span.clearfix
+               #message
+                  if message
+                     h1.text-center.error-message #{message}

@@ -27,7 +27,7 @@ module.exports = {
             if (!err) {
                 return Promise.resolve();
             } else {
-                return Promise.reject(err);
+                // return Promise.reject(err);
             }
         });
     },

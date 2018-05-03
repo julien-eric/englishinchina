@@ -1,0 +1,55 @@
+.search-navigation-bar.col-md-12.zindex-pop
+      .container
+             form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+                  .row
+                        .col-lg-7.mt-2
+                              .md-form
+                                    input#schoolInfo.form-control(type='text', name='schoolInfo')
+                                    label(for='schoolInfo') School Name
+                        .col-lg
+                              .md-form
+                                    select.mdb-select
+                                          option(value='', disabled='', selected='') Choose your country
+                                          option(value='1') Australia
+                                          option(value='2') Austria
+                                          option(value='3') Germany
+                        .col-lg.mt-2
+                              .md-form
+                                    input#form16.form-control(type='text')
+                                    label(for='form16') Country
+                        .col-lg
+                              button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
+                                    i.mdi.mdi-magnify(aria-hidden='true')
+                                    span Search
+                              //- .row
+                              //-       .col-lg-6.col-sm-12
+                              //-             .md-form
+                              //-                   i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                              //-                   input#schoolInfo.form-control(type='text', name='schoolInfo')
+                              //-                   label(for='schoolInfo') School Name
+                                    //- .col-lg.col-sm-12.mt-3
+                                    //-       select.mdb-select
+                                    //-             option(value='', disabled='', selected='') Choose your option
+                                    //-             option(value='1') Option 1
+                                    //-             option(value='2') Option 2
+                                    //-             option(value='3') Option 3
+                                    //-       label Example label
+                              
+                                    //- .form-group.col-lg-6.col-sm-12.mb-lg-0
+                                    //-       input.col-sm-12.search-navigation-inputs.form-control.form-control-lg(type='text', placeholder='School Name', name='schoolInfo')
+                                    //- .form-group.col-lg-2.col-sm-12.mb-lg-0
+                                    //-       select.col-sm-12#provinceSelect.search-navigation-inputs.form-control.form-control-lg(name="province")
+                                    //-             option(value="-1") Province
+                                    //-             option(value="-1") =============
+                                    //-             optgroup(label="Provinces")
+                                    //-             each province,i in provinces
+                                    //-                   option(value=province.code) #{province.name} - #{province.chineseName}
+                                    //-             li.nav-item
+                                    //-                   a.nav-link(href='#') Pricing
+                                    //- .form-group.col-lg-2.col-sm-12.mb-lg-0
+                                    //-       select.col-sm-12#city-select.empty.search-navigation-inputs.form-control.form-control-lg(name="city")
+                                    //-             option(value="-1") City
+                                    //- .form-group.col-lg-2.col-sm-12.mb-lg-0
+                                    //-       button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
+                                    //-             i.mdi.mdi-magnify(aria-hidden='true')
+                                    //-             span Search

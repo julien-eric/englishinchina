@@ -16,13 +16,19 @@ const calculateAverage = function(review) {
 };
 
 const checkUserForHelpful = function(reviews, userId) {
+  if (!reviews.length) {
+    reviews = [reviews];
+  }
+
   reviews.forEach((review) => {
     review.helpfuls.forEach((helpful) => {
-      if (helpful.user.id == userId) {
+      if (helpful.user.id.equals(userId)) {
         review.hasHF = true;
       }
     });
   });
+
+  return reviews;
 };
 
 module.exports = {
@@ -30,15 +36,20 @@ module.exports = {
 
   insertReviewforSchool(req) {
 
+    let user = null;
+    if (req.user) {
+      user = req.user._id;
+    }
+
     return Review.create({
-      user: req.user._id,
+      user: user,
       objectType: 0,
-      foreignId: req.body.school,
+      foreignId: req.body.schoolId,
       comment: req.body.comment,
       anonymous: req.body.anonymous,
       position: req.body.position,
-      dateEmployed: new Date(moment(req.body.dateEmployed, 'dddd, MMMM Do YYYY').format()),
-      dateReleased: new Date(moment(req.body.dateReleased, 'dddd, MMMM Do YYYY').format()),
+      dateEmployed: new Date(moment(req.body.dateEmployed, 'MMMM Do YYYY').format()),
+      dateReleased: new Date(moment(req.body.dateReleased, 'MMMM Do YYYY').format()),
       criteria: {
         c1: req.body.cri_supportOnArrivalandVisa,
         c2: req.body.cri_managementAdministration,
@@ -84,9 +95,27 @@ module.exports = {
   },
 
   async findReviewById(reviewId, userId) {
-    let reviews = await Review.find({_id: reviewId}).populate('user').populate('foreignId').exec();
-    checkUserForHelpful(reviews, userId);
-    return Promise.resolve(reviews);
+    let reviews = await Review.findOne({_id: reviewId}).populate('user').populate('foreignId').exec();
+    if (userId) {
+      reviews = checkUserForHelpful(reviews, userId._id.id);
+      return Promise.resolve(reviews[0]);
+    } else {
+      return Promise.resolve(reviews);
+    }
+  },
+
+  addHelpful(review, helpful) {
+    return Review.findOneAndUpdate(
+      {_id: review._id},
+      {$push: {helpfuls: helpful}}
+    ).exec();
+  },
+
+  removeHelpful(review, helpful) {
+    return Review.findOneAndUpdate(
+      {_id: review._id},
+      {$pull: {helpfuls: {user: helpful.user._id}}}
+    ).exec();
   },
 
   createReviewDistribution(reviews) {

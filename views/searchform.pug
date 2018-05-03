@@ -1,0 +1,43 @@
+form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+        .col-lg-4.mt-2
+              .md-form
+                  if magnify
+                    i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                  -var schoolInfo = ""
+                  if searchInfo && searchInfo.schoolInfo
+                        -schoolInfo = searchInfo.schoolInfo
+                  input#schoolInfo.form-control(type='text', value=schoolInfo, name='schoolInfo')
+                  label(for='schoolInfo') School Name
+        //- Provinces
+        .col-lg
+              .md-form
+                    select#provinceSelect.mdb-select(name="province")
+                          option(value='', disabled='', selected='') Province
+                          each province,i in provinces
+                              if searchInfo && province.code == searchInfo.province 
+                                    option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
+                              else
+                                    option(value=province.code) #{province.name} - #{province.chineseName}
+        //- Cities
+        .col-lg
+              .md-form  
+                  if(cities)
+                        select#citySelect.mdb-select(name="city")
+                              if searchInfo && searchInfo.city
+                                    option(value='') City
+                              else
+                                    option(value='', selected='') City
+                              each city in cities
+                                    if searchInfo && city.code == searchInfo.city
+                                          option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                                    else
+                                          option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+
+                  else
+                        select#citySelect.mdb-select.empty(name="city", disabled='true')
+                              option(value='', selected='') City
+
+        .col-lg.mt-2
+              button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
+                    i.mdi.mdi-magnify(aria-hidden='true')
+                    span  Search

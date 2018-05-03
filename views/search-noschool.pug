@@ -1,0 +1,41 @@
+.row.justify-content-center
+    .col-sm-12.col-md-12.col-lg-12.mb-5.text-center
+        h5.display-5 There is no school by the name "#{schoolInfo}" on Second Language World, what would you like to do:
+.row.justify-content-center
+    include noreviewcard
+    .col-md-1.col-lg-1.text-center.mb-5
+        .row.h-100
+            .col-sm-12.align-self-center
+                    h3.display-5 OR
+
+    .col-sm-12.col-md-6.col-lg-4.mb-5
+        .card.text-center.h-100
+              .display-grid
+                    a.view.overlay.card-img(href="/review/")
+                        //- img.card-img-top(src='#{pictureInfo.returnThumbnail(school.pictureUrl)}', alt='Card image')
+                        .image-container.blurred.bg-primary
+                    .card-img-overlay.text-white.my-5
+                        h2.card-title Create School
+                        if schoolInfo
+                          p.text-muted "#{schoolInfo}"
+                        //- p
+                        //-   | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                        //- p Last updated 3 mins ago
+
+                    a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href="/review/")
+                        i.text-white.mdi.mdi-plus(aria-hidden='true')
+                    .card-body
+                        p There is no school by this name currently on Second Language World, help the community by creating a school with this name so future teachers 
+
+    //- .col-sm-12.col-md-6.col-lg-4.mb-5
+    //-   .card.text-center.h-100.bg-primary.text-white.border-0.text-center
+    //-       .card-body
+    //-           a.btn.btn-link.mr-1(href='') 
+    //-               span.text-white Write Review
+    //-             //- i.mdi.mdi-plus.text-white(aria-hidden='true') 
+    //- .col-sm-12.col-md-6.col-lg-4.mb-5
+    //-   .card.text-center.h-100.bg-primary.text-white.border-0.text-center
+    //-       .card-body
+    //-           a.btn.btn-link.mr-1(href='') 
+    //-               span.text-white Create School
+    //-               //- i.mdi.mdi-plus.text-white(aria-hidden='true') 

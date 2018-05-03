@@ -6,6 +6,7 @@ const router = express.Router();
 const schools = require('../controllers/schools');
 const reviews = require('../controllers/reviews');
 const images = require('../controllers/images');
+const usersController = require('../controllers/users');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const companiesController = require('../controllers/companies');
@@ -40,6 +41,8 @@ module.exports = function(passport) {
         userId = req.user._id.id;
       }
       let reviewList = await reviews.findReviews(school, 6, 1, true, userId);
+      reviewList = jadefunctions.trunkContentArray(reviewList, 'comment', 190);
+      school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
 
       let schoolOwner = false;
       if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
@@ -239,19 +242,6 @@ module.exports = function(passport) {
   });
 
   /** **********************************************************************************************************
-     *insertCommentforSchool : POST insertreview on school
-     * userID : integer
-     * schoolID : integer
-     * review : string
-     ************************************************************************************************************ */
-  router.post('/insertreview', async (req, res) => {
-
-    await reviews.insertReviewforSchool(req);
-    let school = await schools.findSchoolById(req.body.school);
-    res.redirect(`/school/id/${school._id}`);
-  });
-
-  /** **********************************************************************************************************
      *deleteReview : Delete Review
      * userID : integer
      * schoolID : integer
@@ -294,10 +284,12 @@ module.exports = function(passport) {
   router.get('/reviews/:id', async (req, res) => {
     let ajax = decodeURIComponent(req.query.ajax);
     const reviewId = req.params.id;
-    const userId = req.user;
+    let userId = undefined;
+    if (req.user) {
+      userId = await usersController.findUserById(req.user._id);
+    }
 
-    let reviewList = await reviews.findReviewById(reviewId, userId);
-    const review = reviewList[0];
+    const review = await reviews.findReviewById(reviewId, userId);
     review.comment = jadefunctions.nl2br(review.comment, false);
 
     if (ajax) {
@@ -337,41 +329,52 @@ module.exports = function(passport) {
   /** **************************************************************************************************************
      * This review was helpful
      ************************************************************************************************************** */
+  // router.post('/helpfuls/:type/:id', async (req, res) => {
   router.post('/helpfuls/:type/:id', utils.isAuthenticated, async (req, res) => {
-    const reviewId = req.params.id;
-    const userId = req.user;
 
-    let review = await reviews.findReviewById(reviewId, userId);
-    review.helpfuls.push({user: userId});
-    const hf = review.helpfuls[0];
-    hf.isNew;
-    let updatedReview = await review.save();
+    try {
 
-    updatedReview.hasHF = true;
-    res.render('helpfulshort', {
-      review: updatedReview,
-      loggedin: 'true'
-    }, (err, html) => {
-      if (err) {
-        console.log(err);
+      const reviewId = req.params.id;
+      const userId = await usersController.findUserById(req.user._id);
+      let review = await reviews.findReviewById(reviewId, userId._id);
+
+      // Update Review to account for new helpful
+      let updatedReview = undefined;
+      if (!review.hasHF) {
+        updatedReview = await reviews.addHelpful(review, {user: userId});
+        updatedReview.hasHF = true;
       } else {
-        res.send({html, result: '1', reviewId: updatedReview.id});
+        updatedReview = await reviews.removeHelpful(review, {user: userId});
+        updatedReview.hasHF = false;
       }
-    });
 
-    // In the background send email to user who has written the review
-    const user = review.user;
-    if (user.email != undefined) {
-      email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
-        const callbackMessage = 'Thank you';
-        email.sendEmail(user.email,
-          'reviews@englishinchina.com',
-          `Review Feedback on ${review.foreignId.name}`,
-          message,
-          callbackMessage,
-          req,
-          () => {});
+      res.render('helpfulshort', {
+        review: updatedReview,
+        loggedin: 'true'
+      }, (err, html) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send({html, result: '1', reviewId: updatedReview.id});
+        }
       });
+
+      // In the background send email to user who has written the review
+      const user = review.user;
+      if (user.email != undefined) {
+        email.createReviewHelpfulMessage(res, review.user.username, review.helpfuls.length, review.foreignId.id, (message) => {
+          const callbackMessage = 'Thank you';
+          email.sendEmail(user.email,
+            'reviews@englishinchina.com',
+            `Review Feedback on ${review.foreignId.name}`,
+            message,
+            callbackMessage,
+            req,
+            () => {});
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
 
   });
@@ -387,25 +390,35 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo;
-      const province = req.query.province;
-      const city = validateCity(req.query.city);
+      const province = validateQuery(req.query.province);
+      const city = validateQuery(req.query.city);
 
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
-        searchResults.list = jadefunctions.trunkSchoolDescription(searchResults.list, 180);
+        searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
       }
-      let popularCities = await citiesController.getMostPopularCities();
-      let popularProvinces = await provincesController.getMostPopularProvinces();
+
+      // let popularCities = await citiesController.getMostPopularCities();
+      // let popularProvinces = await provincesController.getMostPopularProvinces();
+      let popularCities = undefined;
+      let popularProvinces = undefined;
+
       let provinces = await provincesController.getAllProvinces();
+      let cities = undefined;
+      if (province) {
+        cities = await citiesController.getCitiesByProvince(province);
+      }
       res.render('search', {
         title: `${searchResults.query} Schools - English in China`,
         schools: searchResults.list,
         user: req.user,
         provinces,
+        cities,
         pictureInfo: pictureinfo,
         popularCities,
         popularProvinces,
         searchMessage: `You searched for ${searchResults.query}`,
+        searchInfo: searchResults.searchInfo,
         jadefunctions,
         scripts: [scripts.librater, scripts.util, scripts.rating]
       });
@@ -417,8 +430,27 @@ module.exports = function(passport) {
     }
   });
 
-  let validateCity = function(queryElement) {
-    if (queryElement == undefined) {
+  /** **********************************************************************************************************
+     *searchSchool : Method for search all schools, it will return any school that has some of the information
+     * Param : Query, string that will be looked for as part of the schools name
+     * [Province] optional.
+     * [City] optional
+     ************************************************************************************************************ */
+  router.get('/query', async (req, res) => {
+
+    try {
+      const schoolInfo = req.query.schoolInfo || undefined;
+      const province = validateQuery(req.query.province);
+      const city = validateQuery(req.query.city);
+      let searchResults = await schools.searchSchools(schoolInfo, province, city);
+      res.send(JSON.stringify(searchResults.list));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+  let validateQuery = function(queryElement) {
+    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '') {
       return -1;
     }
     return queryElement;

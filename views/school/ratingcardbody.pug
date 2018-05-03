@@ -1,0 +1,8 @@
+.card-body
+    h1.text-center.display-2.font-weight-heavy #{avgRating}
+    h1.text-center.display-5.text-primary
+        include ../genrating
+    if reviewsCount      
+        h4.font-weight-light.display-5.text-center
+            i.mdi.mdi-account(aria-hidden='true')
+            | #{reviewsCount} review(s)

@@ -10,6 +10,7 @@
     "aws-sdk": "*",
     "bcrypt-nodejs": "*",
     "body-parser": "~1.13.2",
+    "bootstrap": "^4.1.0",
     "bootstrap-slider": "*",
     "connect-flash": "^0.1.1",
     "connect-mongo": "*",
@@ -18,20 +19,29 @@
     "express": "~4.13.1",
     "express-flash": "0.0.2",
     "express-session": "^1.0.2",
+    "getmdl-select": "^2.0.1",
     "gm": "*",
+    "htmlparser": "^1.7.7",
+    "htmlparser-to-html": "0.0.6",
     "jade": "~1.11.0",
     "jquery-bar-rating": "*",
+    "mdbootstrap": "^4.5.0",
     "mime": "^1.3.6",
     "moment": "*",
-    "mongoose": "~4.13.2",
+    "mongoose": "^4.13.12",
     "morgan": "^1.9.0",
+    "node-sass": "^4.7.2",
+    "node-sass-middleware": "^0.11.0",
     "nodemailer": "^2.3.2",
     "nodemailer-smtp-transport": "^2.4.2",
     "passport": "~0.2.0",
     "passport-facebook": "~1.0.0",
     "passport-local": "~1.0.0",
+    "pug": "^2.0.3",
+    "save": "^2.3.2",
     "serve-favicon": "^2.4.5",
     "simplesettings": "^0.0.4",
+    "smartwizard": "^4.3.1",
     "striptags": "*",
     "stylus": "*",
     "underscore": "^1.8.3"
@@ -39,6 +49,7 @@
   "devDependencies": {
     "eslint": "^4.11.0",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "pug-lint": "^2.5.0"
   }
 }

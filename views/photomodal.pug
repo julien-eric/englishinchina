@@ -1,0 +1,28 @@
+block content
+   .col-sm-12.col-md-10.offset-md-1.col-lg-10.offset-lg-1.review-wrapper
+      li.photo-modal(id="#{photo._id}")
+         img#dynamic.image-lightbox(src=pictureInfo.returnLarge(photo.url))
+         .padding
+         span.clearfix
+         .col-sm-12
+            if photo.user
+               .user-picture
+                  if photo.user.fb && photo.user.useFacebookPic
+                     .default-user-picture.image-holder.rounded-circle.fcb(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.rounded-circle.fcb(style="background-image: url('#{pictureInfo.returnFacebookPicture(photo.user.avatarUrl)}');")
+                  else
+                     .default-user-picture.image-holder.rounded-circle.th(style="background-image: url('/images/default-user.png');")
+                     .profile-img.image-holder.rounded-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(photo.user.avatarUrl)}');")
+               .user-information
+                  if photo.user
+                     if photo.user.firstName && photo.user.lastName
+                        a.name(href="/user/#{photo.user._id}") #{photo.user.firstName} #{photo.user.lastName}
+                     else
+                        a.name(href="/user/#{photo.user._id}") #{photo.user.username}
+                     .date #{photo.date.getDate()}/#{photo.date.getUTCMonth()+1}/#{photo.date.getUTCFullYear()}
+            .padding
+            span.clearfix
+            .review-description !{photo.description}
+            if admin
+               a.btn.btn-primary.btn-lg(href="/school/updatecoverphoto/#{photo.id}/"+"#{photo.school.id}" role="button") Make Cover Picture
+      .clearfix

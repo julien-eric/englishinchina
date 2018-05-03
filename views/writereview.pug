@@ -1,0 +1,142 @@
+extends layout
+block content
+      .container
+            .py-5
+                  h1.text-center.font-weight-light Review a School
+            form#form-form-0(action='/', method='post')
+            form#form-form-1(action='/', method='post')
+            form#form-form-2(action='/', method='post')
+            form#form-form-3(action='/', method='post')
+            form#form-form-4(action='/', method='post')
+            form.col-lg-8.offset-lg-2.needs-validation#review-form(action='/review', method='POST' novalidate='')
+                  #smartwizard
+                        ul
+                              li
+                                    a(href='#step-1')
+                                          | Step 1
+                                          br
+                                          small Let's find your school
+                              li
+                                    a(href='#step-2')
+                                          | Step 2
+                                          br
+                                          small Evaluate
+                              li
+                                    a(href='#step-3')
+                                          | Step 3
+                                          br
+                                          small Your relation to the school
+                              li
+                                    a(href='#step-4')
+                                          | Step 4
+                                          br
+                                          small Write a comment
+                              li
+                                    a(href='#step-5')
+                                          | Step 5
+                                          br
+                                          small Your Information
+                              li
+                                    a(href='#step-6')
+                                          | Step 6
+                                          br
+                                          small Review and Submit
+                        div.pt-5
+                              
+                              #step-1
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
+                                    #form-step-0(role='form', data-toggle='validator')
+                                          p.py-3 First, let's find your school. Please take the time to thoroughly search for terms that might be related to the school after you've entered the province and city the school is located in. Duplicates are harder to manage and there's a lower chance that your comment will be read if it's posted on a newly created school rather than one that's already attracted some attention
+                                          .form-row.pb-3
+                                                .form-group.col-lg-6.col-sm-12.mb-lg-0
+                                                      label(for='nothing') Province
+                                                      select.col-sm-12#provinceSelect.search-navigation-inputs.form-control.form-control-lg.form-form-0(form="form-form-0" placeholder="Province" name="province")
+                                                            option(value='-1') Province
+                                                            //- optgroup(label="Provinces")
+                                                            each province,i in provinces
+                                                                  option(value=province.code) #{province.name} - #{province.chineseName}
+                                                .form-group.col-lg-6.col-sm-12.mb-lg-0
+                                                      label(for='nothing') City
+                                                      select.col-sm-12#city-select.empty.search-navigation-inputs.form-control.form-control-lg.form-form-0(form="form-form-0" name="city")
+                                                            option(value="-1") City
+                                          .form-group
+                                                label(for='nothing') School name *
+                                                input#schoolInfo.typeahead.form-control.form-control-lg.form-form-0(name="schoolInfo" type="text" required)
+                                                input#schoolId(type="hidden" name="schoolId" form="review-form")
+                                                .invalid-feedback
+                                                      | Please choose a username.
+
+                                          .form-group
+                                                .form-check
+                                                      input#exampleCheck1.form-check-input(type='checkbox' disabled)
+                                                      label.form-check-label(for='exampleCheck1') Create school with this name
+                                          
+                              #step-2
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 Evaluate
+                                    #form-step-1(role='form', data-toggle='validator')
+                                          .pb-5
+                                          each criterium,i in criteria
+                                                .pb-5
+                                                      h4 #{criterium.code}. #{criterium.name}
+                                                      .form-group
+                                                            p #{criterium.description}
+                                                            .form-row
+                                                                  .slidecontainer.col-md-10.pt-1
+                                                                        input.form-control.form-control-lg.form-form-1.slider(id='slider'+i name="#{criterium.label}" form="form-form-1" type='range', min='1', max='5', value='2')
+                                                                  .text-center.font-weight-light.col-md-2(id='ex'+(i+1)+'CurrentSliderValLabel') Score:
+                                                                        span.output(id='criteria'+i) 1
+                                                                        span /5
+                              #step-3
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 Your relationship with the school
+                                    #form-step-2(role='form', data-toggle='validator')
+                                          p Let us know about your relationship with the school. Getting an idea of when you worked there can be important to other teachers, the reputation of schools can change over time and it would be unfortunate if a bad review couldn't be overwritten by a pletora of positive ones. The position as a teacher and the salaray won't ever be divulged in public and only serve to create an average of the school. 
+                                          .pb-5
+                                          .form-group
+                                                label.criteria.control-label(for='nothing') Position in School *
+                                                select.form-control.form-control-lg.form-form-2(name="position" form="form-form-2" required)
+                                                      option(value="") Position in School
+                                                      option(selected="true" value="1") Teacher
+                                                      option(value="2") Teacher's Assistant(TA)
+                                                      option(value="3") Head Teacher
+                                                .invalid-feedback
+                                                      | Please indicate your position in the school.
+                                          label.criteria.control-label(for='nothing') Salary per month
+                                          .input-group.mb-3
+                                                input.form-control.form-control-lg.form-form-2(type='number' form="form-form-2" placeholder="Salary" aria-label="Recipient's username" aria-describedby='basic-addon2')
+                                                .input-group-append
+                                                      span#basic-addon2.input-group-text CNY(¥)/month
+                                          .form-row.pb-3
+                                                //- label.criteria.control-label(for='nothing') Period of employment
+                                                .form-group.col-lg-6.col-sm-12.mb-lg-0
+                                                      label(for='nothing') From *
+                                                      #datetimepicker1.calendar.input-group.date
+                                                            input.form-control.form-control-lg.form-form-2(type="text" form="form-form-2" name="dateEmployed" value="Start Date", placeholder="Start Date" required)
+                                                            span.input-group-addon
+                                                            span.glyphicon.glyphicon-calendar
+                                                .form-group.col-lg-6.col-sm-12.mb-lg-0
+                                                      label(for='nothing') To *
+                                                      #datetimepicker2.calendar.input-group.date
+                                                            input.form-control.form-control-lg.form-form-2(type="text" form="form-form-2" name="dateReleased" value="End Date" placeholder="End Date" required)
+                                                            span.input-group-addon
+                                                            span.glyphicon.glyphicon-calendar
+                              #step-4
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 Write about your experience 
+                                          span.text-secondary (optional)
+                                    p.py-2 Is there anything else you wish to say about the school, or about the city in terms of how it affected your experience teaching abroad
+                                    #form-step-3(role='form', data-toggle='validator')
+                                          .form-group
+                                                textarea.form-form-3(rows='8' form="form-form-3" name='comment' class='form-control' placeholder='Type your comment here')
+                              #step-5
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 User Information
+                                    #form-step-4(role='form' data-toggle='validator')
+                                          p Would you like to login or sign up? Or would you rather submit this anonymously
+
+                              #step-6
+                                    h2.font-weight-light.border-bottom.border-gray.pb-2 Review and finalize
+                                    #form-step-5(role='form' data-toggle='validator')
+                                          p We're giving you a chance to finalize your review before you submit it, at this point you can navigate back to any step and modify anything. You won't be able to edit a review after it is submitted so please make sure you have taken the time to check all the information you entered. Your taking the time to write this review is very much appreciated!       
+                                          
+                  .text-right.pb-5
+                        button#prev-btn.btn.btn-lg.btn-secondary.text-light(type='button') Previous
+                        button#next-btn.btn.btn-lg.btn-primary.ml-2(type='button') Next
+                        button#submit-btn.d-none.btn.btn-lg.btn-warning.ml-2(type='button') Submit

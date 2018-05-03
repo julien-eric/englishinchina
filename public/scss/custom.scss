@@ -1,0 +1,466 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+// Your variable overrides
+$slw-primary: #47a347;
+$slw-lightgreen: #beecbe;
+$slw-primary-darker: #307430;
+$slw-danger: #ff4136;
+$slw-secondary: #5bc0de;
+$slw-secondary-darker: #3691ad;
+$slw-cool-purple: #9d99c1;
+$slw-light-secondary: #d8d8d8;
+$slw-dark: #2e2e2e;
+$slw-darker: #1b1b1b;
+$enable-gradients: true;
+$enable-shadows: true;
+$standard-height: 190px;
+$landing-page-height: 560px;
+$school-header-height: 340px;
+$theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
+$review-image-dimension: 60px;
+@import "node_modules/bootstrap/scss/bootstrap";
+// CORE
+// Bootstrap & MDB
+@import "node_modules/mdbootstrap/scss/core/bootstrap/functions";
+@import "node_modules/mdbootstrap/scss/core/bootstrap/variables";
+@import "node_modules/mdbootstrap/scss/core/mixins";
+// @import "node_modules/mdbootstrap/scss/core/colors";
+@import "./mdbcolors";
+@import "node_modules/mdbootstrap/scss/core/variables";
+$link-color: $slw-primary;
+@import "node_modules/mdbootstrap/scss/core/global";
+@import "node_modules/mdbootstrap/scss/core/helpers";
+@import "node_modules/mdbootstrap/scss/core/typography";
+@import "node_modules/mdbootstrap/scss/core/masks";
+@import "node_modules/mdbootstrap/scss/core/waves";
+@import "node_modules/mdbootstrap/scss/free/forms";
+@import "node_modules/mdbootstrap/scss/free/animations-basic";
+@import "node_modules/mdbootstrap/scss/free/animations-extended";
+@import "node_modules/mdbootstrap/scss/free/buttons";
+@import "node_modules/mdbootstrap/scss/free/cards";
+@import "node_modules/mdbootstrap/scss/free/dropdowns";
+@import "node_modules/mdbootstrap/scss/free/navbars";
+@import "node_modules/mdbootstrap/scss/free/pagination";
+@import "node_modules/mdbootstrap/scss/free/badges";
+@import "node_modules/mdbootstrap/scss/free/modals";
+@import "node_modules/mdbootstrap/scss/free/carousels";
+@import "node_modules/mdbootstrap/scss/free/forms";
+@import "node_modules/mdbootstrap/scss/free/input-group";
+@import "node_modules/mdbootstrap/scss/free/msc";
+@import "node_modules/mdbootstrap/scss/free/footers";
+@import "node_modules/mdbootstrap/scss/free/list-group";
+@import "node_modules/mdbootstrap/scss/free/tables";
+// $primary-color: $slw-primary;
+// $error-color:  $slw-danger;
+// $success-color:  $slw-primary;
+@each $color,
+$value in $theme-colors {
+    .text-shadow-#{$color} {
+        text-shadow: 2px 2px $value;
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .swatch-#{$color} {
+        color: color-yiq($value);
+    }
+}
+
+.zindex-pop {
+    z-index: $zindex-dropdown;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+    color: $slw-primary;
+}
+
+// Adjusting number of cards per column and deck  
+.card-columns {
+    @include media-breakpoint-only(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(sm) {
+        column-count: 2;
+    }
+}
+
+.card-deck {
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
+    @include media-breakpoint-only(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(sm) {
+        column-count: 2;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+//PRE HEADER
+/////////////////////////////////////////////////////////////////////////////////////
+.pre-header {
+    padding: 0;
+    font-size: 13px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .7);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//HOMEPAGE SPLASH LANDING
+////////////////////////////////////////////////////////////////////////////////////////////////
+.splash {
+    min-height: $landing-page-height;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+
+.splash .splash-image {
+    min-height: $landing-page-height;
+    width: 110%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.splash .splash-image-container {
+    min-height: $landing-page-height;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-bottom: 50px;
+    -webkit-filter: brightness(75%);
+    filter: brightness(75%);
+}
+
+.splash .splash-text {
+    margin-top: 135px;
+    position: relative;
+}
+
+.splash p {
+    font-weight: 400;
+}
+
+.splash-carousel {
+    height: 500px;
+    background-position: center center;
+    background-repeat: repeat;
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 3px 3px 1000px 0 #000000; // border-radius: 20px;
+    top: 0;
+    left: 0;
+}
+
+.search-navigation-bar {
+    position: absolute;
+    bottom: 100px;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.search-bar nav {
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
+    box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
+}
+
+.search-bar {
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    -webkit-box-shadow: 0px 0px 10px 0px #808080;
+    -moz-box-shadow: 0px 0px 10px 0px #808080;
+    box-shadow: 0px 0px 10px 0px #808080;
+    border-radius: 5px;
+}
+
+.search-bar form {
+    margin: 10px 0;
+    padding-left: 15px;
+}
+
+.search-bar .form-group {
+    padding: 0 15px 0 0;
+}
+
+.img-container {
+    height: $standard-height;
+}
+
+.img-frame {
+    height: $standard-height;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #eee;
+}
+
+//SLIDERS
+.slidecontainer {
+    width: 100%;
+    /* Width of the outside container */
+}
+
+/* The slider itself */
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+
+.slider:hover {
+    opacity: 1;
+    /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+// // @import "./typeaheadjs.scss";
+// .twitter-typeahead {
+//   display: inherit !important;
+// }
+// .tt-menu {
+//   flex: 0 0 100%;
+//   max-width: 100%;
+//   width: 100%;
+//   min-height: 1px
+// }
+.btn {
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; // margin: .375rem;
+    border: 0;
+    border-radius: .125rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word; // color: #fff;
+}
+
+// .card-img-overlay:hover {
+//   background: rgba(0,0,0,.22);
+// }
+// .badge, .btn, .btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover, .btn:disabled:active, .btn:disabled:focus, .btn:disabled:hover, .card, .card-wrapper .back, .card-wrapper .front, .card.card-cascade.wider .card-body, .counter, .dropdown-content, .jumbotron, .md-form input[type=date].input-alternate, .md-form input[type=datetime-local].input-alternate, .md-form input[type=email].input-alternate, .md-form input[type=number].input-alternate, .md-form input[type=password].input-alternate, .md-form input[type=search-md].input-alternate, .md-form input[type=search].input-alternate, .md-form input[type=tel].input-alternate, .md-form input[type=text].input-alternate, .md-form input[type=time].input-alternate, .md-form input[type=url].input-alternate, .md-form textarea.md-textarea.input-alternate, .md-pills .nav-link.active, .md-pills .show>.nav-link, .mdb-autocomplete-wrap, .media .media-left img, .modal-dialog.cascading-modal .modal-c-tabs .nav-tabs, .modal-dialog.modal-notify .modal-header, .navbar, .pagination .page-item.active .page-link, .pricing-card .price .version, .side-nav, .z-depth-1 {
+//   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+// }
+// .btn-link {
+//   box-shadow: 0 0 0 0;
+// }
+// .nav-prof-pic {
+//   height:40px;
+// }
+.card-text {
+    font-size: 0.9rem;
+    color: #747373;
+}
+
+.card .btn-action {
+    margin-top: -1.44rem;
+    margin-bottom: -1.44rem;
+}
+
+// .overlay .mask {
+//   opacity: 0;
+//   -webkit-transition: all .4s ease-in-out;
+//   -o-transition: all .4s ease-in-out;
+//   transition: all .4s ease-in-out;
+// }
+// .view .mask {
+//   position: absolute;
+//   top: 0;
+//   overflow: hidden;
+//   width: 100%;
+//   height: 100%;
+//   background-attachment: fixed;
+// }
+.display-grid {
+    display: grid;
+}
+
+.btn-floating {
+    width: 2.75rem;
+    height: 2.75rem; // position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .22), 0 2px 10px 0 rgba(0, 0, 0, .18);
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin: 10px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-floating i {
+    display: inline-block;
+    width: inherit;
+    text-align: center;
+    color: #fff;
+}
+
+.btn-floating i {
+    font-size: 1.25rem;
+    line-height: 2.75rem;
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: $slw-primary;
+}
+
+.school-header {
+    position: relative;
+    min-height: $school-header-height;
+}
+
+.jumbotron-school {
+    min-height: $school-header-height;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -webkit-filter: brightness(75%);
+    filter: brightness(75%);
+}
+
+.jumbotron-content {
+    position: absolute; // width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.review-image {
+    height: $review-image-dimension;
+    width: $review-image-dimension;
+}
+
+.image-container {
+    height: 12rem;
+    background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+​ .image-container:hover {
+    opacity: .8;
+}
+
+.blurred {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    -webkit-filter: brightness(25%);
+    filter: brightness(25%);
+}
+
+.show-more {
+    background-color: #82b1ff !important;
+}
+
+.show-more:not(.show) {
+    background: transparent !important;
+}
+
+// @media (max-width: 768px) {
+//     .navbar:not(.top-nav-collapse) {
+//         background: #82b1ff !important;
+//     } 
+// }
+@media(max-width: 480px) {
+    .display-3 {
+        font-size: 3.5rem;
+    }
+}
+
+.chart {
+    width: 90% !important;
+}
+
+.chart li {
+    height: 40px !important;
+    line-height: 40px !important;
+    margin-top: 1px !important;
+}
+
+.chart li .bar {
+    border-radius: 2px 5px 5px 2px !important; // border-radius: 0px 20px 20px 0px !important;
+    background: $slw-primary !important;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.chart li:before {
+    font-size: 17px !important;
+    // left: 10px !important;
+}
+
+@media screen and (max-width: 480px) {
+    .chart li {
+        height: auto !important;
+        line-height: inherit !important;
+    }
+}

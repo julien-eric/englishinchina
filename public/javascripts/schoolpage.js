@@ -21,29 +21,6 @@ $(document).ready(() => {
     $(this).ekkoLightbox();
   });
 
-  $('.ajax-login').click(() => {
-    const xhr = new XMLHttpRequest();
-    const pathname = window.location.pathname;
-    xhr.open('GET', `/loginajax?url=${pathname}`);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          $('#modal-body').empty();
-          const response = JSON.parse(xhr.responseText);
-          const elements = $($.parseHTML(response.html));
-          $.each(elements, (index, element) => {
-            $(element).appendTo('#modal-body');
-          });
-          $('#modal').trigger('click');
-          setUploadFile();
-        } else {
-          alert('Problem.');
-        }
-      }
-    };
-    xhr.send();
-  });
-
   $('#ajax-add-photo').click(() => {
     const schoolid = $('#schoolid').attr('value');
     const xhr = new XMLHttpRequest();
@@ -68,16 +45,8 @@ $(document).ready(() => {
   });
 
   $(document).on('click', '.helpful', function(e) {
-    e.preventDefault();
-    let element;
-    let reviewId;
-    if ($(this).closest('.list-group-review')[0]) {
-      element = $(this).closest('.list-group-review')[0];
-      reviewId = element.id;
-    } else if ($(this).closest('.single-review')[0]) {
-      element = $(this).closest('.single-review')[0];
-      reviewId = element.id;
-    }
+    const reviewId = this.getAttribute('reviewid');
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `/school/helpfuls/0/${reviewId}`);
     xhr.onreadystatechange = function() {
@@ -86,7 +55,7 @@ $(document).ready(() => {
           const result = JSON.parse(xhr.responseText);
           if (result.result == '1') {
             const elements = $($.parseHTML(result.html));
-            $(`.hf_${result.reviewId}`).replaceWith(elements);
+            $(`#hf-${result.reviewId}`).replaceWith(elements);
           }
         } else {
           alert('Problem.');
@@ -96,21 +65,22 @@ $(document).ready(() => {
     xhr.send();
   });
 
-  $('.readmore').click(function(e) {
-    e.preventDefault();
-    const reviewid = $(this).closest('.list-group-review')[0].id;
+  $('#slw-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    const reviewId = button.data('reviewid');
+    const reviewerName = button.data('reviewuser');
+    $('#modal-body').empty();
+
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/school/reviews/${reviewid}?ajax=true`);
+    xhr.open('GET', `/school/reviews/${reviewId}?ajax=true`);
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          $('#modal-body').empty();
           const response = JSON.parse(xhr.responseText);
           const elements = $($.parseHTML(response.html));
           $.each(elements, (index, element) => {
             $(element).appendTo('#modal-body');
           });
-          $('#modal').trigger('click');
           $('.rating').rate({
             readonly: false,
           });
@@ -125,7 +95,10 @@ $(document).ready(() => {
       }
     };
     xhr.send();
-  });
+
+    var modal = $(this)
+    modal.find('.modal-title').text('Review from ' + reviewerName)
+  })
 
   $('#load-more-reviews').click(() => {
     const schoolid = $('#schoolid').attr('value');

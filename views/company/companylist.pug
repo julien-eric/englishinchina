@@ -1,0 +1,16 @@
+.text-left.mb-3
+      .md-form
+            i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+            input#searchCompanies.form-control(type='text', value='', name='searchCompanies')
+            label(for='searchCompanies') Search Companies
+if popularCompanies
+      .row
+            each company in popularCompanies
+                  .col-sm-12.col-md-6.col-lg-4.mb-3
+                        include companycard
+            .col-sm-12.col-md-6.col-lg-4.mb-3
+                  .card.bg-primary.text-white.text-center
+                        .card-body
+                              a.btn.btn-link.mr-1(href='') 
+                                    span.text-white See All Companies
+                                    i.mdi.mdi-chevron-double-right.text-white(aria-hidden='true') 

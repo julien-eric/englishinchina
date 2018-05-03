@@ -13,12 +13,13 @@ let createHash = function(password) {
 let processSignupReturn = function(req, username, password, done) {
 
   // Find a user in Mongo with provided username
-  User.findOne({username}).then((user) => {
+  User.findOne({email: req.param('email')}).then((user) => {
 
     // Already exists
     if (user) {
-      console.log(`User already exists with username: ${username}`);
-      return done(null, false, req.flash('message', 'User Already Exists'));
+      let message = 'User already exists with email: ' + req.param('email');
+      // return Promise.resolve(new Error(message));
+      return done(null, false, req.flash('signupMessage', message));
     }
 
     // If there is no user with that email, create the user

@@ -1,0 +1,28 @@
+#carouselExampleIndicators.carousel.slide(data-ride='carousel')
+  ol.carousel-indicators
+    li.active(data-target='#carouselExampleIndicators', data-slide-to='0')
+    li(data-target='#carouselExampleIndicators', data-slide-to='1')
+    li(data-target='#carouselExampleIndicators', data-slide-to='2')
+    li(data-target='#carouselExampleIndicators', data-slide-to='3')
+  .carousel-inner
+    each splashItem, i in splashText
+      .carousel-item(class=i===0 ? "active" : "")
+        .splash
+          .splash-image-container
+            .splash-image(style="background-image: url('" + splashItem.image + "');")
+            //- .shadow
+          .splash-text.col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+            h1.text-shadow-cool-purple.font-weight-bold.display-3 #{splashItem.title}
+            p.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashItem.text}
+            if splashItem.button1
+              .btn-group
+                button.btn.btn-primary.btn-lg.px-5(type='submit') #{splashItem.button1}
+                  i.mdi.mdi-chevron-double-right(aria-hidden='true')
+              
+    //- include ../searchnavigation
+  a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+    span.carousel-control-prev-icon(aria-hidden='true')
+    span.sr-only Previous
+  a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+    span.carousel-control-next-icon(aria-hidden='true')
+    span.sr-only Next

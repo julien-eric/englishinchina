@@ -1,0 +1,11 @@
+//- avgRating has to be defined prior to the inclusion of this template
+- var i = 0;
+while i < 5
+  - var leftOver = avgRating-i;
+  if leftOver >= 1
+    i.mdi.mdi-star(aria-hidden='true')
+  else if leftOver == 0.5
+    i.mdi.mdi-star-half(aria-hidden='true')
+  else
+    i.mdi.mdi-star-outline(aria-hidden='true')
+  - i++

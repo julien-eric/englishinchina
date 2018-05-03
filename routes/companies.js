@@ -12,6 +12,30 @@ const scripts = require('../public/scripts');
 
 module.exports = function(passport) {
 
+  router.get('/id/:id', async (req, res) => {
+    let companyId = req.params.id;
+    let company = await companies.findCompanyById(companyId);
+    company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
+    let popularCities = await citiesController.getMostPopularCities();
+    let popularProvinces = await provincesController.getMostPopularProvinces();
+    let schoolList = await schools.findSchoolsByCompany(company);
+    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
+    const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
+    res.render('company/company', {
+      title: `${company.name} - English in China`,
+      company,
+      user: req.user,
+      moment,
+      jadefunctions,
+      popularCities,
+      popularProvinces,
+      provincesByCompany,
+      schools: truckSchoolList,
+      pictureInfo: pictureinfo,
+      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+    });
+  });
+
   router.route('/addcompany')
     .get((req, res) => {
       res.render('company/addcompany', {
@@ -58,29 +82,6 @@ module.exports = function(passport) {
         res.redirect(`/company/id/${newCompany.id}`);
       });
     });
-
-
-  router.get('/id/:id', async (req, res) => {
-    let company = await companies.findCompanyById(req.params.id);
-    let popularCities = await citiesController.getMostPopularCities();
-    let popularProvinces = await provincesController.getMostPopularProvinces();
-    let schoolList = await schools.findSchoolsByCompany(company.id);
-    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(req.params.id);
-    const truckSchoolList = jadefunctions.trunkSchoolDescription(schoolList, 150);
-    res.render('company/company', {
-      title: `${company.name} - English in China`,
-      company,
-      user: req.user,
-      moment,
-      jadefunctions,
-      popularCities,
-      popularProvinces,
-      provincesByCompany,
-      schools: truckSchoolList,
-      pictureInfo: pictureinfo,
-      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
-    });
-  });
 
   return router;
 };

@@ -1,0 +1,22 @@
+.school-header
+    .jumbotron.jumbotron-fluid.jumbotron-school(style='background-image: url(' + pictureInfo.returnLarge(company.pictureUrl) + ');')  
+    .jumbotron-content.text-center.container-fluid
+        .py-5
+        h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{company.name}
+        .py-1
+        if company.website
+            a.btn.btn-lg.btn-primary(href="#{company.website}")
+                    i.mdi.mdi-web(aria-hidden='true')
+                    |  Visit Website
+        //- if school.company
+        //-     a.btn.btn-lg.btn-primary(href="/company/id/#{school.company.id}")
+        //-             i.mdi.mdi-clipboard-check(aria-hidden='true')
+        //-             |  See Company
+        //- if school.address
+        //-     a.btn.btn-lg.btn-primary(href="#")
+        //-             i.mdi.mdi-map-marker(aria-hidden='true')
+        //-             |  See in Maps
+        //- if school.phone
+        //-     a.btn.btn-lg.btn-primary(href="#{school.phone}")
+        //-             i.mdi.mdi-cellphone(aria-hidden='true')
+        //-             |  Contact

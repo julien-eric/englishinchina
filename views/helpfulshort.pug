@@ -1,0 +1,32 @@
+if review.hasHF
+      button.col-auto.btn.btn-lightgreen.active.helpful.text-dark(type='button', id="hf-#{review._id}", reviewid="#{review._id}") 
+            i.mdi.mdi-thumb-up.text-dark(aria-hidden='true')
+            span.text-dark  Helpful
+else 
+      button.col-auto.btn.btn-lightgreen.helpful.text-dark(type='button', id="hf-#{review._id}", reviewid="#{review._id}") 
+            i.mdi.mdi-thumb-up.text-dark(aria-hidden='true')
+            span.text-dark  Helpful
+
+//- - var logn = false
+//- - var classes = "hf_" + review.id + " "
+
+//- if loggedin == "true" || locals.user
+//-    - logn = true
+
+//- //LOGGED IN HASNT VOTED
+//- if logn && !review.hasHF
+//-    a.helpful.btn.btn-secondary.btn-sm(class="#{classes}", href="#")
+//-       span.glyphicon.glyphicon-thumbs-up
+//-       |&nbsp;Helpful #{review.helpfuls.length}
+
+//- //LOGGED IN HAS ALREADY VOTED
+//- if logn && review.hasHF
+//-    a.helpful.btn.btn-secondary.btn-sm.disabled.hasHF(class="#{classes}", href="#")
+//-       span.glyphicon.glyphicon-thumbs-up
+//-       |&nbsp;Helpful #{review.helpfuls.length}
+
+//- //ISNT LOGGED IN
+//- if !logn
+//-    .ajax-login.helpful.btn.btn-secondary.btn-sm.disabled.pointer(class="#{classes}", href="/loginajax")
+//-       span.glyphicon.glyphicon-thumbs-up
+//-       |&nbsp;Helpful #{review.helpfuls.length}

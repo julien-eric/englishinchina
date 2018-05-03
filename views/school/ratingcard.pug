@@ -1,0 +1,54 @@
+if reviewsCount > 0
+#accordion.mb-2
+      .card
+            #headingOne.card-header.text-center
+                  h5.text-uppercase.mb-0
+                        button.btn.btn-link.text-white(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
+                              i.mdi.mdi-star(aria-hidden='true')
+                              |  School Rating
+            #collapseOne.collapse.show(aria-labelledby='headingOne', data-parent='#accordion')
+                  -var avgRating = jadefunctions.roundToPoint5(school.averageRating);
+                  include ratingcardbody 
+      .card
+            #headingTwo.card-header.text-center
+                  h5.mb-0
+                        button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo') Collapsible Group Item #2
+            #collapseTwo.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
+                  .card-body
+                        include schoolbreakdown
+  
+
+
+//-    .school-rating-card.col-lg-8
+//-       .col-xs-4.col-sm-4.col-md-4.col-lg-4.align-center.no-side-padding
+//-             .school-rating #{jadefunctions.roundToPoint5(school.averageRating)}
+//-             .center
+//-                #rating.rating.overall-rating(data-rate-value="#{jadefunctions.roundToPoint5(school.averageRating)}")
+//-             p #{reviewsCount}  Reviews
+//-       .star-rating-row.col-xs-2.col-sm-1.col-md-1.col-lg-1
+//-          p
+//-             span.spacious 1
+//-             span.inline.glyphicon.glyphicon-star
+//-          p
+//-             span.spacious 2
+//-             span.inline.glyphicon.glyphicon-star
+//-          p
+//-             span.spacious 3
+//-             span.inline.glyphicon.glyphicon-star
+//-          p
+//-             span.spacious 4
+//-             span.inline.glyphicon.glyphicon-star
+//-          p
+//-             span.spacious 5
+//-             span.inline.glyphicon.glyphicon-star
+//-       .col-xs-5.col-sm-6.col-md-6.col-lg-6.no-side-padding
+//-          ul.chart
+//-             for dis in reviewDistribution
+//-                //li(title=dis)
+//-                if dis == 0
+//-                   li
+//-                      span.bar(data-number=0.05)
+//-                else
+//-                   li
+//-                      span.bar(data-number=dis)
+//-       .clearfix
