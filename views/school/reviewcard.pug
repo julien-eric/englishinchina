@@ -2,10 +2,11 @@
 .card.h-100
     .card-header.border-bottom-0.bg-transparent.pb-0
           .row
-                .col-sm-3.pr-0
+                .col-auto.pr-0
                       include ../genuserpic
-                .col-sm-9
+                .col-auto
                       if review.user
+                      
                               if review.user.firstName && review.user.lastName
                                     -username = review.user.firstName + review.user.lastName
                               else
