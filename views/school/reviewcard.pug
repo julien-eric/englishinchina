@@ -11,7 +11,7 @@
                                     -username = review.user.firstName + review.user.lastName
                               else
                                     -username = review.user.username
-                              a.name(href="/user/#{review.user._id}") #{username}
+                              a.name(href='/user/' + review.user._id) #{username}
                               if Date.parse(review.dateEmployed) != 0 && Date.parse(review.dateReleased) != 0
                                     .card-subtitle.text-muted #{moment(review.dateEmployed).format("MMM YYYY")+" to " + moment(review.dateReleased).format("MMM YYYY")}
                               else

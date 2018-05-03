@@ -3,11 +3,11 @@
   if review.user.fb && review.user.useFacebookPic
       //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
       //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
-      img.rounded-circle.img-fluid.review-image(src='#{pictureInfo.returnFacebookPicture(review.user.avatarUrl)}',  alt='Cinque Terre')
+      img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnFacebookPicture(review.user.avatarUrl),  alt='Cinque Terre')
   else
       //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
       //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-      img.rounded-circle.img-fluid.review-image(src='#{pictureInfo.returnThumbnail(review.user.avatarUrl)}', alt='Cinque Terre')
+      img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnThumbnail(review.user.avatarUrl), alt='Cinque Terre')
 //-     if review.user
 //-         if review.user.fb && review.user.useFacebookPic
 //-             .default-user-picture.image-holder.rounded-circle.fcb(style="background-image: url('/images/default-user.png');")

@@ -11,12 +11,12 @@ if locals.user
             //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
             //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
             .user-picture
-                img.rounded-circle(src='#{pictureInfo.returnFacebookPicture(user.avatarUrl)}', height='40',  alt='Cinque Terre')
+                img.rounded-circle(src=pictureInfo.returnFacebookPicture(user.avatarUrl), height='40',  alt='Cinque Terre')
         else
             //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
             //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
             .user-picture
-                img.rounded-circle(src='#{pictureInfo.returnThumbnail(user.avatarUrl)}', height='40', alt='Cinque Terre')
+                img.rounded-circle(src=pictureInfo.returnThumbnail(user.avatarUrl), height='40', alt='Cinque Terre')
 else
     //- li.nav-item
         //- a.nav-link(href='#') Login 

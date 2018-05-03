@@ -3,8 +3,7 @@
             i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
             input#searchCompanies.form-control(type='text', value='', name='searchCompanies')
             label(for='searchCompanies') Search Companies
-
-  if popularCompanies
+if popularCompanies
       .row
             each company in popularCompanies
                   .col-sm-12.col-md-6.col-lg-4.mb-3

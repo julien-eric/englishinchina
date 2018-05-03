@@ -34,7 +34,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
 
       if (length > description.length) {
-        return resolve(description);
+        return resolve(undefined);
       }
 
       let handle = function(error, dom) {
@@ -50,7 +50,7 @@ module.exports = {
         let sum = 0;
 
         if (dom.length <= 1) {
-          return resolve(description);
+          return resolve(undefined);
         }
 
         let breakIndex = _.findIndex(dom, (domElement) => {

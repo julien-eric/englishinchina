@@ -1,0 +1,56 @@
+-var max = 7;
+-var isCity = true;
+if popularCities.length < 7
+    - max = popularCities.length
+.popular-cities
+    if isHorizontal
+        #myCarousel2.carousel.slide(data-ride='carousel')
+            // Indicators
+            //ol.carousel-indicators
+            //    li.active(data-target='#myCarousel2', data-slide-to='0')
+            //    li(data-target='#myCarousel2', data-slide-to='1')
+            //    li(data-target='#myCarousel2', data-slide-to='2')
+
+            // Wrapper for slides
+            .carousel-inner(role='listbox')
+                .item.active
+                    - for (var i = 0; i < 2; ++i)
+                        if popularCities[i] && popularCities[i]._id
+                            - var item = {code:popularCities[i]._id.code, picture:popularCities[i].pictureUrl, pName:popularCities[i]._id.pinyinName, cName:popularCities[i]._id.chineseName, number:popularCities[i].number}
+                        if(i == 0 || i == 6)
+                            include largecell
+                        else
+                            include smallcell
+                .item
+                    - for (var i = 2; i < 5; ++i)
+                        if popularCities[i] && popularCities[i]._id
+                            - var item = {code:popularCities[i]._id.code, picture:popularCities[i].pictureUrl, pName:popularCities[i]._id.pinyinName, cName:popularCities[i]._id.chineseName, number:popularCities[i].number}
+                        if(i == 0 || i == 6)
+                            include largecell
+                        else
+                            include smallcell
+                .item
+                    - for (var i = 5; i < max; ++i)
+                        if popularCities[i] && popularCities[i]._id
+                            - var item = {code:popularCities[i]._id.code, picture:popularCities[i].pictureUrl, pName:popularCities[i]._id.pinyinName, cName:popularCities[i]._id.chineseName, number:popularCities[i].number}
+                        if(i == 0 || i == 6)
+                            include largecell
+                        else
+                            include smallcell
+
+            // Left and right controls
+            a.left.carousel-control(href='#myCarousel2', role='button', data-slide='prev')
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                span.sr-only Previous
+            a.right.carousel-control(href='#myCarousel2', role='button', data-slide='next')
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                span.sr-only Next
+            .clearfix
+    else
+        - for (var i = 0; i < max; ++i)
+            if popularCities[i] && popularCities[i]._id
+                - var item = {code:popularCities[i]._id.code, picture:popularCities[i].pictureUrl, pName:popularCities[i]._id.pinyinName, cName:popularCities[i]._id.chineseName, number:popularCities[i].number}
+            if(i == 0 || i == 6)
+                include largecell
+            else
+                include smallcell
