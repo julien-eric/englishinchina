@@ -1,9 +1,9 @@
-nav.navbar.pre-header.navbar-dark.bg-dark.navbar-expand-md
+nav.navbar.pre-header.navbar-dark.bg-dark.navbar-expand-lg.navbar-template
   .container
-    button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarsExampleContainer', aria-controls='navbarsExampleContainer', aria-expanded='false', aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    #navbarsExampleContainer.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
+    .d-flex.flex-row.order-3.order-lg-2
+      //- button.navbar-toggler(type='button', data-toggle='collapse', data-target='#preNavDropdown')
+      //-   span.navbar-toggler-icon
+      ul.navbar-nav.flex-row
         li.nav-item
           a.nav-link.padding-first-left(href='#')
             i.mdi.mdi-facebook-box(aria-hidden='true')
@@ -16,7 +16,8 @@ nav.navbar.pre-header.navbar-dark.bg-dark.navbar-expand-md
         li.nav-item
           a.nav-link.padding-first-left(href='#')
             i.mdi.mdi-linkedin-box(aria-hidden='true')
-            |    SLWorld
+    #preNavDropdown.collapse.navbar-collapse.order-2.order-lg-3
+      ul.navbar-nav.ml-auto
         li.nav-item
           a.nav-link.padding-first-left(href='#')
             i.mdi.mdi-map-marker(aria-hidden='true')
@@ -25,4 +26,7 @@ nav.navbar.pre-header.navbar-dark.bg-dark.navbar-expand-md
           a.nav-link(href='#')
             i.mdi.mdi-email(aria-hidden='true')
             |  secondlanguageworld@gmail.com
-
+        li.nav-item
+          a.nav-link.padding-first-left(href='#')
+            i.mdi.mdi-star(aria-hidden='true')
+            |    SLWorld
