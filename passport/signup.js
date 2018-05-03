@@ -38,7 +38,7 @@ let processSignupReturn = function(req, username, password, done) {
 
   }).then((savedUser) => {
 
-    console.log('User Registration succesful');
+    console.log('User Registration successful');
     return done(null, savedUser);
 
   }).catch((err) => {
