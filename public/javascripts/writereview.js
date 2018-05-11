@@ -41,6 +41,9 @@ $(document).ready(() => {
       $('.form-form-2').attr('form', 'form-form-2')
     }
 
+    $('html,body').animate({
+      scrollTop: $('#write-review-title').offset().top
+    }, 'slow');
   });
 
   allPrevBtn.click(function() {

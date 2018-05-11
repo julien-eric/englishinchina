@@ -449,8 +449,6 @@ module.exports = function(passport) {
     }
   });
 
-
-
   /** **********************************************************************************************************
      *editSchool: GET loads page to edit existing school
      * Param : SchoolID, id of school to load
