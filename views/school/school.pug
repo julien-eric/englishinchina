@@ -45,10 +45,11 @@ block content
                               #load-more-reviews.btn.btn-secondary.btn-lg Load More
 
 
-                  .ratings.mt-5.clearfix
-                        h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                              //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
-                              |  Rating 
-                        p.text-center.text-muted Distribution and breakdown of the reviews for #{school.name}
-                        hr
-                        include schoolbreakdown
+                  if school.averageRating != -1
+                        .ratings.mt-5.clearfix
+                              h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                                    //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
+                                    |  Rating 
+                              p.text-center.text-muted Distribution and breakdown of the reviews for #{school.name}
+                              hr
+                              include schoolbreakdown
