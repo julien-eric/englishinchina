@@ -113,7 +113,7 @@ $(document).ready(() => {
             return school;
           });
         } else {
-          return ['No Results Found'];
+          return undefined;
         }
       },
     }
@@ -132,6 +132,12 @@ $(document).ready(() => {
           return school.name;
         }
       },
+      templates: {
+        notFound: ['<div class="mx-2 empty-message"><b>No results found</b></div>'],
+        suggestion: function(data) {
+          return '<div>' + data.name + '</div>';
+        }
+      }
     }
   ).blur(function() {
 
