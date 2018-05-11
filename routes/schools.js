@@ -227,7 +227,7 @@ module.exports = function(passport) {
     let numberOfReviews = await reviews.findNumberofReviews(schoolId);
     let reviewList = await reviews.findReviews(schoolId);
     let school = await schools.findSchoolById(schoolId);
-    res.render('writereview', {
+    res.render('review/writereview', {
       title: `Write Review for ${school.name} - English in China`,
       user: req.user,
       school,
@@ -390,8 +390,8 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo;
-      const province = validateQuery(req.query.province);
-      const city = validateQuery(req.query.city);
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
 
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
@@ -440,8 +440,8 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo || undefined;
-      const province = validateQuery(req.query.province);
-      const city = validateQuery(req.query.city);
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       res.send(JSON.stringify(searchResults.list));
     } catch (error) {
@@ -449,12 +449,7 @@ module.exports = function(passport) {
     }
   });
 
-  let validateQuery = function(queryElement) {
-    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '') {
-      return -1;
-    }
-    return queryElement;
-  };
+
 
   /** **********************************************************************************************************
      *editSchool: GET loads page to edit existing school

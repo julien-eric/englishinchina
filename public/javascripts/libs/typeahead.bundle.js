@@ -6,7 +6,7 @@
 
 (function(root, factory) {
     if (typeof define === "function" && define.amd) {
-        define("bloodhound", [ "jquery" ], function(a0) {
+        define("bloodhound", ["jquery"], function(a0) {
             return root["Bloodhound"] = factory(a0);
         });
     } else if (typeof exports === "object") {
@@ -262,7 +262,7 @@
             LOCAL_STORAGE = null;
         }
         function PersistentStorage(namespace, override) {
-            this.prefix = [ "__", namespace, "__" ].join("");
+            this.prefix = ["__", namespace, "__"].join("");
             this.ttlKey = "__ttl__";
             this.keyMatcher = new RegExp("^" + _.escapeRegExChars(this.prefix));
             this.ls = override || LOCAL_STORAGE;
@@ -309,7 +309,7 @@
             },
             clear: function() {
                 var i, keys = gatherMatchingKeys(this.keyMatcher);
-                for (i = keys.length; i--; ) {
+                for (i = keys.length; i--;) {
                     this.remove(keys[i]);
                 }
                 return this;
@@ -432,7 +432,7 @@
             },
             add: function(data) {
                 var that = this;
-                data = _.isArray(data) ? data : [ data ];
+                data = _.isArray(data) ? data : [data];
                 _.each(data, function(datum) {
                     var id, tokens;
                     that.datums[id = that.identify(datum)] = datum;
@@ -919,7 +919,7 @@
 
 (function(root, factory) {
     if (typeof define === "function" && define.amd) {
-        define("typeahead.js", [ "jquery" ], function(a0) {
+        define("typeahead.js", ["jquery"], function(a0) {
             return factory(a0);
         });
     } else if (typeof exports === "object") {
@@ -1116,7 +1116,8 @@
             var css = {
                 wrapper: {
                     position: "relative",
-                    display: "inline-block"
+                    display: "inline-block",
+                    width: "100%"
                 },
                 hint: {
                     position: "absolute",
@@ -1140,7 +1141,11 @@
                     top: "100%",
                     left: "0",
                     zIndex: "100",
-                    display: "none"
+                    display: "none",
+                    flex: "0 0 100%",
+                    maxwidth: "100%",
+                    width: "100%",
+                    minheight: "1px"
                 },
                 ltr: {
                     left: "0",
@@ -1250,8 +1255,8 @@
             types = types.split(splitter);
             args = [].slice.call(arguments, 1);
             while ((type = types.shift()) && (callbacks = this._callbacks[type])) {
-                syncFlush = getFlush(callbacks.sync, this, [ type ].concat(args));
-                asyncFlush = getFlush(callbacks.async, this, [ type ].concat(args));
+                syncFlush = getFlush(callbacks.sync, this, [type].concat(args));
+                asyncFlush = getFlush(callbacks.async, this, [type].concat(args));
                 syncFlush() && nextTick(asyncFlush);
             }
             return this;
@@ -1305,7 +1310,7 @@
             if (!o.node || !o.pattern) {
                 return;
             }
-            o.pattern = _.isArray(o.pattern) ? o.pattern : [ o.pattern ];
+            o.pattern = _.isArray(o.pattern) ? o.pattern : [o.pattern];
             regex = getRegex(o.pattern, o.caseSensitive, o.wordsOnly);
             traverse(o.node, hightlightTextNode);
             function hightlightTextNode(textNode) {
@@ -1396,25 +1401,25 @@
             _managePreventDefault: function managePreventDefault(keyName, $e) {
                 var preventDefault;
                 switch (keyName) {
-                  case "up":
-                  case "down":
-                    preventDefault = !withModifier($e);
-                    break;
+                    case "up":
+                    case "down":
+                        preventDefault = !withModifier($e);
+                        break;
 
-                  default:
-                    preventDefault = false;
+                    default:
+                        preventDefault = false;
                 }
                 preventDefault && $e.preventDefault();
             },
             _shouldTrigger: function shouldTrigger(keyName, $e) {
                 var trigger;
                 switch (keyName) {
-                  case "tab":
-                    trigger = !withModifier($e);
-                    break;
+                    case "tab":
+                        trigger = !withModifier($e);
+                        break;
 
-                  default:
-                    trigger = true;
+                    default:
+                        trigger = true;
                 }
                 return trigger;
             },
@@ -1533,6 +1538,8 @@
         });
         return Input;
         function buildOverflowHelper($input) {
+            let labelSiblings = $input.siblings('label');
+            let insertAfter = labelSiblings.length < 1? $input : labelSiblings;
             return $('<pre aria-hidden="true"></pre>').css({
                 position: "absolute",
                 visibility: "hidden",
@@ -1547,7 +1554,7 @@
                 textIndent: $input.css("text-indent"),
                 textRendering: $input.css("text-rendering"),
                 textTransform: $input.css("text-transform")
-            }).insertAfter($input);
+            }).insertAfter(insertAfter);
         }
         function areQueriesEquivalent(a, b) {
             return Input.normalizeQuery(a) === Input.normalizeQuery(b);
@@ -2235,7 +2242,7 @@
                 www = WWW(o.classNames);
                 return this.each(attach);
                 function attach() {
-                    var $input, $wrapper, $hint, $menu, defaultHint, defaultMenu, eventBus, input, menu, typeahead, MenuConstructor;
+                    var $input, $siblings, $wrapper, $hint, $menu, defaultHint, defaultMenu, eventBus, input, menu, typeahead, MenuConstructor;
                     _.each(datasets, function(d) {
                         d.highlight = !!o.highlight;
                     });
@@ -2249,10 +2256,14 @@
                     defaultMenu && ($menu = $(www.html.menu).css(www.css.menu));
                     $hint && $hint.val("");
                     $input = prepInput($input, www);
+                    $siblings = $input.siblings();
                     if (defaultHint || defaultMenu) {
                         $wrapper.css(www.css.wrapper);
                         $input.css(defaultHint ? www.css.input : www.css.inputWithNoHint);
-                        $input.wrap($wrapper).parent().prepend(defaultHint ? $hint : null).append(defaultMenu ? $menu : null);
+                        $input.wrap($wrapper).parent()
+                            .prepend(defaultHint ? $hint : null)
+                            .append($siblings.length > 0 ? $siblings : null)
+                            .append(defaultMenu ? $menu : null);
                     }
                     MenuConstructor = defaultMenu ? DefaultMenu : Menu;
                     eventBus = new EventBus({

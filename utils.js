@@ -32,5 +32,13 @@ module.exports = {
     }
     // if the user is not authenticated then redirect him to the login page
     res.redirect('/login');
+  },
+
+  validateQuery: function(queryElement) {
+    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '' || queryElement == 'null' || queryElement == null) {
+      return -1;
+    }
+    return queryElement;
   }
+
 };

@@ -17,7 +17,8 @@ block content
                               //- include schooladminsection
                         .col-lg-4
                               include ratingcard
-                              button.btn.btn-lg.btn-block.btn-primary.mb-2(type='submit')
+                              -var query = '?schoolId=' +  school.id;
+                              a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Write a Review
                               button.btn.btn-lg.btn-block.btn-primary(type='submit')
