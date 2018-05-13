@@ -15,7 +15,7 @@ $enable-gradients: true;
 $enable-shadows: true;
 $standard-height: 190px;
 $landing-page-height: 560px;
-$school-header-height: 340px;
+$school-header-height: 540px;
 $theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
 $review-image-dimension: 60px;
 @import "node_modules/bootstrap/scss/bootstrap";
@@ -150,7 +150,7 @@ $value in $theme-colors {
 }
 
 .splash .splash-text {
-    margin-top: 135px;
+    margin-top: 6rem;
     position: relative;
 }
 
@@ -382,12 +382,12 @@ input[type=range]+.thumb {
     color: $slw-primary;
 }
 
-.school-header {
+#school-header {
     position: relative;
     min-height: $school-header-height;
 }
 
-.jumbotron-school {
+#jumbotron-background {
     min-height: $school-header-height;
     width: 100%;
     position: absolute;
@@ -399,7 +399,7 @@ input[type=range]+.thumb {
     filter: brightness(75%);
 }
 
-.jumbotron-content {
+#jumbotron-content {
     position: absolute; // width: 100%;
     left: 0;
     top: 0;
@@ -447,7 +447,7 @@ input[type=range]+.thumb {
 // }
 @media(max-width: 480px) {
     .display-3 {
-        font-size: 3.5rem;
+        font-size: 2.8rem;
     }
 }
 

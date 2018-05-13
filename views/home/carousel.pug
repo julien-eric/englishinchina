@@ -7,7 +7,7 @@
   .carousel-inner
     each splashItem, i in splashText
       .carousel-item(class=i===0 ? "active" : "")
-        .splash
+        #splash.splash
           .splash-image-container
             .splash-image(style="background-image: url('" + splashItem.image + "');")
             //- .shadow

@@ -4,17 +4,35 @@ $(document).ready(() => {
     speed: 1800,
   });
 
-  const height = $('.description-container').height();
-  if (height > 550) {
-    $('.description-container').animate({'max-height': '550px'}, 500, () => {});
-    $('#read-more').click(() => {
-      $('.description-container').animate({'max-height': '2000px'}, 500, () => {
-        $('#read-more').remove();
-      });
-    });
-  } else {
-    $('#read-more').remove();
-  }
+
+  // $('#school-header').height(height2);
+
+  var height2 = $('#jumbotron-content').height() + 100;
+  $('#jumbotron-background').css('min-height', height2);
+  $('#school-header').css('min-height', height2);
+
+  $(window).on('resize', () => {
+    var height3 = $('#jumbotron-content').height() + 100;
+    $('#jumbotron-background').css('min-height', height3);
+    $('#school-header').css('min-height', height3);
+  });
+
+//   var $window = $(window).on('resize', function(){
+//     var height = $(this).height() - $header.height() + $footer.height();
+//     $content.height(height);
+//  }).trigger('resize'); //on page load
+
+  // const height = $('.description-container').height();
+  // if (height > 550) {
+  //   $('.description-container').animate({'max-height': '550px'}, 500, () => {});
+  //   $('#read-more').click(() => {
+  //     $('.description-container').animate({'max-height': '2000px'}, 500, () => {
+  //       $('#read-more').remove();
+  //     });
+  //   });
+  // } else {
+  //   $('#read-more').remove();
+  // }
 
   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
