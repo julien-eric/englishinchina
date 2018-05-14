@@ -27,8 +27,7 @@
                         .row.justify-content-center.text-muted
                               if avg != '-1.0'
                                     .col-3
-                                          i.mdi.mdi-star(aria-hidden='true')      
-                                          |  #{avg}
+                                          include ../genratingshort
                               if school.reviews
                                     .col-3
                                           i.mdi.mdi-message-text(aria-hidden='true')      

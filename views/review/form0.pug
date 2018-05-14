@@ -4,13 +4,15 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
       .row
             .col-lg-6
                   .md-form
-                        select#provinceSelect.mdb-select(name="province")
+                        select#provinceSelect.mdb-select(name="province" required)
                               option(value='', disabled='', selected='') Province
                               each province,i in provinces
                                     if searchInfo && province.code == searchInfo.province 
                                           option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                                     else
                                           option(value=province.code) #{province.name} - #{province.chineseName}
+                        label.col-12.px-0(for='province', data-error='doskos', data-success='Thank you') Province
+      
             .col-lg-6
                   .md-form  
                         if(cities)

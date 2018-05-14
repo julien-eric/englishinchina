@@ -128,7 +128,26 @@ module.exports = {
     const breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br ' + '/>' : '<br>';
     // str = str.replace("\r\n", "\n").replace("\r", "\n")
     return (`${str}`).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, `$1${breakTag}$2`);
-  }
+  },
 
+  ratingColor(rating, bgOrText) {
+    let colorClass = '';
+
+    if (rating > 3.9) {
+      colorClass = 'rating-great';
+    } else if (rating > 2.9) {
+      colorClass = 'rating-good';
+    } else if (rating > 1.9) {
+      colorClass = 'rating-medium';
+    } else {
+      colorClass = 'rating-bad';
+    }
+
+    if (bgOrText == 'bg') {
+      return 'bg-' + colorClass;
+    } else {
+      return 'text-' + colorClass;
+    }
+  }
 
 };

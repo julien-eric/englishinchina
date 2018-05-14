@@ -18,5 +18,4 @@
                 -var avg = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
                 if avg != 'NaN'
                     .col-3
-                        i.mdi.mdi-star(aria-hidden='true')      
-                        |  #{avg}
+                        include ../genratingshort

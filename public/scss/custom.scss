@@ -16,8 +16,16 @@ $enable-shadows: true;
 $standard-height: 190px;
 $landing-page-height: 560px;
 $school-header-height: 540px;
-$theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker);
 $review-image-dimension: 60px;
+
+// Rating colors
+$rating-great:#47a347;
+$rating-good: #76bf33; 
+$rating-medium: #e6e13d; 
+$rating-bad: #c73d13; 
+
+$theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
 // Bootstrap & MDB
@@ -451,9 +459,9 @@ input[type=range]+.thumb {
     }
 }
 
-.chart li .bar {
-  background: $slw-primary !important;
-}
+// .chart li .bar {
+//   background: $slw-primary !important;
+// }
 
 //STEPPER 
 .steps-form {

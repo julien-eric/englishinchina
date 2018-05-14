@@ -25,14 +25,14 @@ block content
                                         if(school.province.code == cprovince._id.code)
                                             -schools2.push(school)
                                     -var schools = schools2
-                                    include ../schoollist
+                                    include ../school/schoollist
                             else
                                 .tab-pane.fade(id=cprovince._id.code, role='tabpanel')
                                     each school in schoolList
                                         if(school.province.code == cprovince._id.code)
                                             -schools2.push(school)
                                     -var schools = schools2
-                                    include ../schoollist
+                                    include ../school/schoollist
             .row
                 .description.col-sm-12.col-lg-8
                     -var element = company
