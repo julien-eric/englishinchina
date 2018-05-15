@@ -89,10 +89,12 @@ function isSpecialInput(field) {
       return true;
     case 'schoolInfo':
       return true;
+    case 'positionSelect':
+      return true;
     case 'start-date':
-      // return true;
+    // return true;
     case 'end-date':
-      // return true;
+    // return true;
 
     default:
       return false;
@@ -123,15 +125,22 @@ function validateSpecialInputs(field) {
       }
 
       break;
-    case 'schoolId':
-      // if (field.value == '') {
-      //   valid = false
-      //   let sibling = $('#' + elementId).siblings('.tt-input');
-      //   console.log(sibling.attr('id') + ' : ' + sibling.val());
-      //   $('#' + elementId).siblings('.tt-input').addClass('invalid');
-      // } else {
-      //   $('#' + elementId).siblings('.tt-input').removeClass('invalid');
-      // }
+
+    case 'positionSelect':
+      if (field.value == '') {
+
+        //School Name Empty. Invalid reset SchoolId
+        $('#' + elementId).siblings('.select-dropdown').addClass('invalid');
+        $('#' + elementId).siblings('.select-dropdown').removeClass('valid');
+        valid = false
+
+      } else {
+
+        //Input is verified. Valid
+        $('#' + elementId).siblings('.select-dropdown').addClass('valid');
+        $('#' + elementId).siblings('.select-dropdown').removeClass('invalid');
+
+      }
       break;
 
     case 'schoolInfo':

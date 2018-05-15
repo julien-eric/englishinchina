@@ -1,6 +1,9 @@
 .row.justify-content-center
     .col-sm-12.col-md-12.col-lg-12.mb-5.text-center
-        h5.display-5 There is no school by the name "#{schoolInfo}" on Second Language World, what would you like to do:
+        if schoolInfo != ""
+            h5.display-5 There are no schools by the name "#{schoolInfo}" on Second Language World, what would you like to do:
+        else
+            h5.display-5 There are no schools found for your search on Second Language World, what would you like to do:
 .row.justify-content-center
     include noreviewcard
     .col-md-1.col-lg-1.text-center.mb-5

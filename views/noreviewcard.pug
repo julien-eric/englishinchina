@@ -6,8 +6,8 @@
                 .image-container.blurred.bg-primary
             .card-img-overlay.text-white.my-5
                 h2.card-title Write Review
-                
-            -var query = '?schoolId=' +  school.id;
+
+            -var query = school? '?schoolId=' +  school.id : "";
             a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href="/review/" + query)
                 i.text-white.mdi.mdi-plus(aria-hidden='true')
             .card-body
