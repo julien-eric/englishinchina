@@ -22,7 +22,7 @@ module.exports = function(passport) {
     let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
     const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
     res.render('company/company', {
-      title: `${company.name} - English in China`,
+      title: `${company.name} - Second Language World`,
       company,
       user: req.user,
       moment,
@@ -39,7 +39,7 @@ module.exports = function(passport) {
   router.route('/addcompany')
     .get((req, res) => {
       res.render('company/addcompany', {
-        title: 'Add Company - English in China',
+        title: 'Add Company - Second Language World',
         message: req.flash('message'),
         scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
       });
@@ -61,7 +61,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       companies.findCompanyById(req.params.id, (company) => {
         res.render('company/editcompany', {
-          title: `Edit ${company.name} - English in China`,
+          title: `Edit ${company.name} - Second Language World`,
           company,
           message: req.flash('message'),
           pictureInfo: pictureinfo,

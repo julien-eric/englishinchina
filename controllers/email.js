@@ -57,7 +57,7 @@ module.exports = {
         let callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.';
 
         module.exports.sendEmail(user.email, 'passwordreset@englishinchina.co',
-            'English in China Password Reset',
+            'Second Language World Password Reset',
             text,
             callbackMessage,
             req
