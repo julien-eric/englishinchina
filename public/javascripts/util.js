@@ -128,6 +128,10 @@ function upload_file(file, number, signed_request, url) {
 $(document).ready(() => {
   const page = 2;
 
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
   function capitalize(str) {
     strVal = '';
     str = str.split(' ');
