@@ -21,7 +21,7 @@ block content
                               a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Write a Review
-                              button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                              a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school.id)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Add a Picture
 
@@ -32,6 +32,7 @@ block content
                         p.text-center.text-muted What others have been saying about #{school.name}
                         hr
                         -var photos = school.photos
+                        -var itemId = school.id
                         include ../photogrid
 
                   .reviews.mt-5.clearfix

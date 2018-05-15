@@ -20,7 +20,7 @@ AwsManager.prototype.getSignedUrl = function(operation, s3Params) {
 
 AwsManager.prototype.getObject = function(filename) {
   const s3Params = {Bucket: settings.get('S3_BUCKET'), Key: filename};
-  return this.S3.getObject(s3Params);
+  return this.S3.getObject(s3Params).promise();
 };
 
 AwsManager.prototype.putObject = function(object, s3Params) {
@@ -32,7 +32,7 @@ AwsManager.prototype.putObject = function(object, s3Params) {
     ContentType: 'jpg',
     ACL: 'public-read'
   });
-  return object.putObject(s3Params);
+  return this.S3.putObject(s3Params).promise();
 
 };
 

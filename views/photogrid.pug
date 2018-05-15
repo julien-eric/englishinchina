@@ -1,9 +1,10 @@
 block content
       .photos.clearfix.my-5
-            if photos.length <= 4
+            if photos.length <= 3
                   .mdb-lightbox.clearfix.no-margin
                         each photo in photos
                                     include photo-figure
+                        include add-photo-figure
             else
                   .mdb-lightbox.clearfix.no-margin
                         -var photo = photos[0]
@@ -18,6 +19,7 @@ block content
                               each photo,index in photos
                                     if index >= 4
                                           include photo-figure
+                              include add-photo-figure
                   #show-more.row.my-3.show-more
                         .col-12
                               a(data-toggle='collapse', href='#collapsePhoto', role='button', aria-expanded='false', aria-controls='collapsePhoto')

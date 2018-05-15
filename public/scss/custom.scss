@@ -17,15 +17,13 @@ $standard-height: 190px;
 $landing-page-height: 560px;
 $school-header-height: 540px;
 $review-image-dimension: 60px;
-
+$image-container-height: 12rem;
 // Rating colors
 $rating-great:#47a347;
-$rating-good: #76bf33; 
-$rating-medium: #e6e13d; 
-$rating-bad: #c73d13; 
-
+$rating-good: #76bf33;
+$rating-medium: #e6e13d;
+$rating-bad: #c73d13;
 $theme-colors: ( "primary": $slw-primary, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
-
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
 // Bootstrap & MDB
@@ -292,6 +290,16 @@ input[type=range]+.thumb {
     background-color: $slw-primary !important;
 }
 
+.add-photo-container {
+    position: relative;
+    height: $image-container-height;
+}
+
+.absolute {
+    position: absolute;
+    width: 100%;
+}
+
 @import "./typeaheadjs.scss";
 // .twitter-typeahead {
 //   display: inherit !important;
@@ -419,7 +427,7 @@ input[type=range]+.thumb {
 }
 
 .image-container {
-    height: 12rem;
+    height: $image-container-height;
     background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -462,7 +470,6 @@ input[type=range]+.thumb {
 // .chart li .bar {
 //   background: $slw-primary !important;
 // }
-
 //STEPPER 
 .steps-form {
     display: table;

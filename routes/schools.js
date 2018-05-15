@@ -132,8 +132,8 @@ module.exports = function(passport) {
      *Addphoto : Add photo to a school
      * Param : School id
      ************************************************************************************************************ */
-  router.get('/addphoto/:id', (req, res) => {
-    let school = schools.findSchoolById(req.params.id);
+  router.get('/addphoto/:id', async (req, res) => {
+    let school = await schools.findSchoolById(req.params.id);
     res.render('addphoto', {
       title: 'Upload Picture - English in China',
       school,

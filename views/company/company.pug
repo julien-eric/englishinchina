@@ -50,6 +50,7 @@ block content
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
                 -var photos = company.photos
+                -var itemId = company.id
                 include ../photogrid
 
             //- h3 Reviews (#{reviewsCount})
