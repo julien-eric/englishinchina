@@ -12,18 +12,10 @@
             hr
             p.card-text #{company.description}
             .row.justify-content-center.text-muted
-<<<<<<< Updated upstream
-                .col-3
-=======
                 .col-4
->>>>>>> Stashed changes
                     i.mdi.mdi-school(aria-hidden='true')      
                     |  #{company.schools.length}
                 -var avg = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
                 if avg != 'NaN'
-<<<<<<< Updated upstream
-                    .col-3
-=======
                     .col-4
->>>>>>> Stashed changes
                         include ../genratingshort
