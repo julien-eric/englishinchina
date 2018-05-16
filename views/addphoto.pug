@@ -1,6 +1,7 @@
 extends layout
 block content
       .container
+<<<<<<< Updated upstream
             .card.text-dark.my-5.col-md-6.offset-md-3
                   .card-header.border-bottom-0
                         .text-center
@@ -69,3 +70,38 @@ block content
       //-             #message
       //-                   if message
       //-                   h1.text-center.error-message #{message}
+=======
+            .row.justify-content-md-center
+                  .col-md-6
+                        .card.text-dark.my-5
+                              .card-header.border-bottom-0
+                                    .text-center
+                                          img(src='/images/logo6.gif', width='', height='40', alt='')
+                              .card-body.text-left
+                                    .text-center
+                                                h1.mt-3.mb-5.text-light.font-weight-bold Add Photo
+                                    form(action='/school/addphoto', method='POST')
+                                          .form-group
+                                                input#id(type="hidden", name="id", value=school.id)
+
+                                          .form-group
+                                                img#preview.d-none.img-fluid(src="/images/default.png")
+                                                .md-form
+                                                      .file-field
+                                                            .btn.btn-primary.btn-sm.float-left.ml-0
+                                                                  span Choose file
+                                                                  input#file_input(type='file')
+                                                                  input#avatarUrl.d-none( name="pictureUrl" accept="image/*" value="/public/default.png")
+                                                            .file-path-wrapper
+                                                                  input.file-path.validate(type='text', placeholder='Upload your file')
+                                                .progress(style='height: 12px')
+                                                      #progress-bar-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                                                      span.sr-only 0% Complete
+                                          .md-form
+                                                //- i.fa.fa-pencil.prefix
+                                                textarea#textareaPrefix.form-control.md-textarea(type='text', name='description',  rows='1', required)
+                                                label(for='textareaPrefix') Description
+
+                                          .text-center
+                                                button.btn.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Add Photo
+>>>>>>> Stashed changes
