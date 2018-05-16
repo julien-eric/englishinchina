@@ -36,6 +36,38 @@ module.exports = function(passport) {
     });
   });
 
+  /** **********************************************************************************************************
+   *searchCompany : Method for search companies , it will return any company that has some of the information
+   * Param : Query, string that will be looked for as part of the companys name
+   ************************************************************************************************************ */
+  router.get('/search', async (req, res) => {
+
+    try {
+      const companyInfo = req.query.companyInfo;
+
+      let searchResults = await companies.searchCompanies(companyInfo);
+      if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
+        searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
+      }
+
+      res.render('search', {
+        title: `${searchResults.query} Companies - Second Language World`,
+        companies: searchResults.list,
+        user: req.user,
+        pictureInfo: pictureinfo,
+        searchMessage: `You searched for ${searchResults.query}`,
+        searchInfo: searchResults.searchInfo,
+        jadefunctions,
+        scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
+    }
+  });
+
   router.route('/addcompany')
     .get((req, res) => {
       res.render('company/addcompany', {

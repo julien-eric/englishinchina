@@ -420,7 +420,7 @@ module.exports = function(passport) {
         searchMessage: `You searched for ${searchResults.query}`,
         searchInfo: searchResults.searchInfo,
         jadefunctions,
-        scripts: [scripts.librater, scripts.util, scripts.rating]
+        scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {
       res.render('error', {

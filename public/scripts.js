@@ -11,6 +11,7 @@ module.exports = {
     rating: '/javascripts/rating.js',
     writereview: '/javascripts/writereview.js',
     reviewvalidation: '/javascripts/reviewvalidation.js',
+    typeaheadwrapper: '/javascripts/typeahead-wrapper.js',
     schoolpage: '/javascripts/schoolpage.js',
     tinyMCE: '/javascripts/tinymce2.js'
 };

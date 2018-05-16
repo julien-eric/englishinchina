@@ -28,7 +28,6 @@ module.exports = function(passport) {
   // Home Page
   router.get('/', async (req, res) => {
 
-
     try {
       const pageSize = 6;
       let schoolList = await schools.getSchools(pageSize, 0, res.locals.admin);
@@ -59,7 +58,7 @@ module.exports = function(passport) {
         currentPage: 1,
         total: schoolList.count,
         totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
-        scripts: [scripts.librater, scripts.util, scripts.rating]
+        scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {
       res.render('error', {

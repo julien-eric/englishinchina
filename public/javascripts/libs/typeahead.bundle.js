@@ -1144,7 +1144,8 @@
                     display: "none",
                     flex: "0 0 100%",
                     maxwidth: "100%",
-                    width: "100%",
+                    width: "auto",
+                    minwidth: "100%",
                     minheight: "1px"
                 },
                 ltr: {

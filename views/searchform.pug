@@ -1,26 +1,37 @@
 form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
-        .col-lg-4.mt-2
-              .md-form
-                  if magnify
-                    i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+      .col-lg-4.mt-2
+            //- .md-form
+            //-       if magnify
+            //-             i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+            //-       -var schoolInfo = ""
+            //-       if searchInfo && searchInfo.schoolInfo
+            //-             -schoolInfo = searchInfo.schoolInfo
+            //-       input#schoolInfo.form-control(type='text', value=schoolInfo, name='schoolInfo')
+            //-       label(for='schoolInfo') School Name
+            .form-group.md-form
                   -var schoolInfo = ""
+                  -var schoolId = ""
+                  if searchInfo && searchInfo.school
+                        -schoolInfo = searchInfo.school.name
+                        -schoolId = searchInfo.school.id
                   if searchInfo && searchInfo.schoolInfo
                         -schoolInfo = searchInfo.schoolInfo
-                  input#schoolInfo.form-control(type='text', value=schoolInfo, name='schoolInfo')
-                  label(for='schoolInfo') School Name
-        //- Provinces
-        .col-lg
-              .md-form
-                    select#provinceSelect.mdb-select(name="province")
-                          option(value='', disabled='', selected='') Province
-                          each province,i in provinces
+                  input#schoolInfo.typeahead.form-control.form-form-0(name="schoolInfo" value=schoolInfo type="text" required)
+                  label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+                  input#schoolId.d-none(name="schoolId" value=schoolId)
+      //- Provinces
+      .col-lg
+            .md-form
+                  select#provinceSelect.mdb-select(name="province")
+                        option(value='', disabled='', selected='') Province
+                        each province,i in provinces
                               if searchInfo && province.code == searchInfo.province 
                                     option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                               else
                                     option(value=province.code) #{province.name} - #{province.chineseName}
-        //- Cities
-        .col-lg
-              .md-form  
+      //- Cities
+      .col-lg
+            .md-form  
                   if(cities)
                         select#citySelect.mdb-select(name="city")
                               if searchInfo && searchInfo.city
@@ -37,7 +48,7 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
                         select#citySelect.mdb-select.empty(name="city", disabled='true')
                               option(value='', selected='') City
 
-        .col-lg.mt-2
-              button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
-                    i.mdi.mdi-magnify(aria-hidden='true')
-                    span  Search
+      .col-lg.mt-2
+            button.col-sm-12.btn.btn-rounded.btn-lg.btn-primary.border-0(type='submit') 
+                  i.mdi.mdi-magnify(aria-hidden='true')
+                  span  Search

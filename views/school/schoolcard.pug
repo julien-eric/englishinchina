@@ -26,10 +26,10 @@
                   if school.reviews || avg != '-1.0'
                         .row.justify-content-center.text-muted
                               if avg != '-1.0'
-                                    .col-3
+                                    .col-4
                                           include ../genratingshort
                               if school.reviews
-                                    .col-3
+                                    .col-4
                                           i.mdi.mdi-message-text(aria-hidden='true')      
                                           |  #{school.reviews.length}
             //- if(school.company)
