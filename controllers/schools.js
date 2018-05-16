@@ -165,7 +165,8 @@ SchoolsController.prototype.findSchoolsByCompany = function(company) {
     {$lookup: {from: 'provinces', localField: 'province', foreignField: '_id', as: 'province'}},
     {$unwind: '$province'},
     {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
-    {$unwind: '$city'}
+    {$unwind: '$city'},
+    {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}}
   ]).exec();
 };
 

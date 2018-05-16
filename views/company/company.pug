@@ -6,36 +6,33 @@ block content
         //-         .container.mb-1
         //-               include locationbreadcrumb
         .container.bg-white.pt-3           
-
-            .container
-                .pt-5.pb-2
-                    h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                        //- i.mdi.mdi-map-marker(aria-hidden='true')
-                        | Our locations
-                    p.text-center.text-muted Look for #{company.name} in all of our locations around the World
-                    hr
-                    span.clearfix
-                    .row
-                        .locations.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12
-                            include companylocations
-                            -var schoolList = schools
-                            .tab-content.px-0
-                                each cprovince,i in provincesByCompany
-                                    -var schools2 = []
-                                    if(i == 0)
-                                        .tab-pane.fade.in.active.show(id=cprovince._id.code, role='tabpanel')
-                                            each school in schoolList
-                                                if(school.province.code == cprovince._id.code)
-                                                    -schools2.push(school)
-                                            -var schools = schools2
-                                            include ../schoollist
-                                    else
-                                        .tab-pane.fade(id=cprovince._id.code, role='tabpanel')
-                                            each school in schoolList
-                                                if(school.province.code == cprovince._id.code)
-                                                    -schools2.push(school)
-                                            -var schools = schools2
-                                            include ../schoollist
+            h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                //- i.mdi.mdi-map-marker(aria-hidden='true')
+                | Our locations
+            p.text-center.text-muted Look for #{company.name} in all of our locations around the World
+            hr
+            .pt-5.pb-2
+                span.clearfix
+                .locations
+                    include companylocations
+                    -var schoolList = schools
+                    .tab-content.px-0
+                        each cprovince,i in provincesByCompany
+                            -var schools2 = []
+                            if(i == 0)
+                                .tab-pane.fade.in.active.show(id=cprovince._id.code, role='tabpanel')
+                                    each school in schoolList
+                                        if(school.province.code == cprovince._id.code)
+                                            -schools2.push(school)
+                                    -var schools = schools2
+                                    include ../school/schoollist
+                            else
+                                .tab-pane.fade(id=cprovince._id.code, role='tabpanel')
+                                    each school in schoolList
+                                        if(school.province.code == cprovince._id.code)
+                                            -schools2.push(school)
+                                    -var schools = schools2
+                                    include ../school/schoollist
             .row
                 .description.col-sm-12.col-lg-8
                     -var element = company
@@ -53,6 +50,7 @@ block content
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
                 -var photos = company.photos
+                -var itemId = company.id
                 include ../photogrid
 
             //- h3 Reviews (#{reviewsCount})

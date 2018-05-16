@@ -4,21 +4,26 @@ $(document).ready(() => {
     speed: 1800,
   });
 
-  const height = $('.description-container').height();
-  if (height > 550) {
-    $('.description-container').animate({'max-height': '550px'}, 500, () => {});
-    $('#read-more').click(() => {
-      $('.description-container').animate({'max-height': '2000px'}, 500, () => {
-        $('#read-more').remove();
-      });
-    });
-  } else {
-    $('#read-more').remove();
-  }
+  var height2 = $('#jumbotron-content').height() + 100;
+  $('#jumbotron-background').css('min-height', height2);
+  $('#school-header').css('min-height', height2);
 
+  $(window).on('resize', () => {
+    var height3 = $('#jumbotron-content').height() + 100;
+    $('#jumbotron-background').css('min-height', height3);
+    $('#school-header').css('min-height', height3);
+  });
+
+
+  // EKKO LIGHTBOX
   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
+  });
+
+  // MDB Lightbox Init
+  $(function() {
+    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
   });
 
   $('#ajax-add-photo').click(() => {
@@ -65,7 +70,7 @@ $(document).ready(() => {
     xhr.send();
   });
 
-  $('#slw-modal').on('show.bs.modal', function (event) {
+  $('#slw-modal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     const reviewId = button.data('reviewid');
     const reviewerName = button.data('reviewuser');

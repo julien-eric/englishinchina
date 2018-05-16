@@ -7,13 +7,15 @@ module.exports = {
 
   trunkContentArray(array, attribute, length) {
     array.forEach((element) => {
-      if (length > element[attribute].length) {
-        length = element[attribute].length;
+      if (element[attribute].length != 0) {
+        if (length > element[attribute].length) {
+          length = element[attribute].length;
+        }
+        let content = element[attribute];
+        content = striptags(content);
+        content = content.substring(0, length);
+        element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
       }
-      let content = element[attribute];
-      content = striptags(content);
-      content = content.substring(0, length);
-      element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
     });
     return array;
   },
@@ -128,7 +130,26 @@ module.exports = {
     const breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br ' + '/>' : '<br>';
     // str = str.replace("\r\n", "\n").replace("\r", "\n")
     return (`${str}`).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, `$1${breakTag}$2`);
-  }
+  },
 
+  ratingColor(rating, bgOrText) {
+    let colorClass = '';
+
+    if (rating > 3.9) {
+      colorClass = 'rating-great';
+    } else if (rating > 2.9) {
+      colorClass = 'rating-good';
+    } else if (rating > 1.9) {
+      colorClass = 'rating-medium';
+    } else {
+      colorClass = 'rating-bad';
+    }
+
+    if (bgOrText == 'bg') {
+      return 'bg-' + colorClass;
+    } else {
+      return 'text-' + colorClass;
+    }
+  }
 
 };

@@ -1,4 +1,4 @@
-if reviewsCount > 0
+
 #accordion.mb-2
       .card
             #headingOne.card-header.text-center
@@ -6,16 +6,12 @@ if reviewsCount > 0
                         button.btn.btn-link.text-white(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
                               i.mdi.mdi-star(aria-hidden='true')
                               |  School Rating
-            #collapseOne.collapse.show(aria-labelledby='headingOne', data-parent='#accordion')
-                  -var avgRating = jadefunctions.roundToPoint5(school.averageRating);
-                  include ratingcardbody 
-      .card
-            #headingTwo.card-header.text-center
-                  h5.mb-0
-                        button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo') Collapsible Group Item #2
-            #collapseTwo.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
-                  .card-body
-                        include schoolbreakdown
+            #collapseOne.collapse(aria-labelledby='headingOne', data-parent='#accordion' class=reviewsCount > 0 ? 'show' : '')
+                  if reviewsCount > 0 
+                        -var avgRating = jadefunctions.roundToPoint5(school.averageRating);
+                        include ratingcardbody 
+                  else
+                        h3.py-5.text-center No Reviews Yet
   
 
 

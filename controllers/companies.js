@@ -15,6 +15,26 @@ module.exports = {
     return Company.findOneAndUpdate({_id: company.id}, company).exec();
   },
 
+  async searchCompanies(companyInfo) {
+
+    let transactions = Company.aggregate([
+      {$match: {name: new RegExp(companyInfo, 'i')}},
+      {$sort: {number: -1}},
+      {
+        $lookup:
+          {
+            from: 'schools',
+            localField: '_id',
+            foreignField: 'company',
+            as: 'schools'
+          }
+      }
+    ]);
+
+    let companies = await transactions.exec();
+    return {list: companies, query: companyInfo, searchInfo: {companyInfo: companyInfo}};
+  },
+
   countSchoolsPerCompany() {
     return Company.aggregate([
       {

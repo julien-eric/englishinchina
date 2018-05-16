@@ -7,11 +7,11 @@
   .carousel-inner
     each splashItem, i in splashText
       .carousel-item(class=i===0 ? "active" : "")
-        .splash
+        #splash.splash
           .splash-image-container
             .splash-image(style="background-image: url('" + splashItem.image + "');")
             //- .shadow
-          .splash-text.col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+          .splash-text.col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2.mb-5
             h1.text-shadow-cool-purple.font-weight-bold.display-3 #{splashItem.title}
             p.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashItem.text}
             if splashItem.button1

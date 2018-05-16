@@ -22,7 +22,7 @@ module.exports = function(passport) {
     let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
     const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
     res.render('company/company', {
-      title: `${company.name} - English in China`,
+      title: `${company.name} - Second Language World`,
       company,
       user: req.user,
       moment,
@@ -36,10 +36,42 @@ module.exports = function(passport) {
     });
   });
 
+  /** **********************************************************************************************************
+   *searchCompany : Method for search companies , it will return any company that has some of the information
+   * Param : Query, string that will be looked for as part of the companys name
+   ************************************************************************************************************ */
+  router.get('/search', async (req, res) => {
+
+    try {
+      const companyInfo = req.query.companyInfo;
+
+      let searchResults = await companies.searchCompanies(companyInfo);
+      if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
+        searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
+      }
+
+      res.render('search', {
+        title: `${searchResults.query} Companies - Second Language World`,
+        companies: searchResults.list,
+        user: req.user,
+        pictureInfo: pictureinfo,
+        searchMessage: `You searched for ${searchResults.query}`,
+        searchInfo: searchResults.searchInfo,
+        jadefunctions,
+        scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
+    }
+  });
+
   router.route('/addcompany')
     .get((req, res) => {
       res.render('company/addcompany', {
-        title: 'Add Company - English in China',
+        title: 'Add Company - Second Language World',
         message: req.flash('message'),
         scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
       });
@@ -61,7 +93,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       companies.findCompanyById(req.params.id, (company) => {
         res.render('company/editcompany', {
-          title: `Edit ${company.name} - English in China`,
+          title: `Edit ${company.name} - Second Language World`,
           company,
           message: req.flash('message'),
           pictureInfo: pictureinfo,

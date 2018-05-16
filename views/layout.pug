@@ -4,24 +4,21 @@ html
     if title
       title #{title}
     else
-      title= "English in China"
+      title= "Second Language World"
     meta(property='og:url', content='https://www.facebook.com/englishinchinaco/')
     meta(property='og:type', content='website')
-    meta(property='og:title', content='English in China')
-    meta(property='og:description', content='English in China catalogs every school, university and English organization in the country in a way that has never been done before. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations')
+    meta(property='og:title', content='Second Language World')
+    meta(property='og:description', content='Second Language World catalogs every school, university and English organization in the country in a way that has never been done before. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations')
     meta(property='og:image', content='http://englishinchina.co/images/chinag3.jpg')
     
     //- CSS 
     link(rel='stylesheet', href='https://cdn.materialdesignicons.com/2.1.99/css/materialdesignicons.min.css')
     link(rel='stylesheet', href='/stylesheets/mdbootstappro.min.css')
     link(rel='stylesheet', href='/stylesheets/custom.css')
-    link(rel='stylesheet', href='/stylesheets/smart_wizard.min.css')
-    link(rel='stylesheet', href='/stylesheets/smart_wizard_theme_dots.min.css')
-    link(rel='stylesheet', href='/stylesheets/smart_wizard_theme_circles.min.css')
-    link(rel='stylesheet', href='/stylesheets/smart_wizard_theme_arrows.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-datetimepicker.min.css')
     link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
-    //- include analytics
+    link(rel='stylesheet', href='/stylesheets/ekko-lightbox.css')
+    if analytics
+      include analytics
 
   body
     if !hideHeader
@@ -39,7 +36,7 @@ html
     //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
     //- script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js')
     script(type='text/javascript', src='/javascripts/libs/mdbootstrappro.min.js')
-    script(src='/javascripts/libs/jquery.smartWizard.min.js')
+    //- script(src='/javascripts/libs/jquery.smartWizard.min.js')
     script(src='/javascripts/libs/nouislider.min.js')
     if scripts
       each js in scripts

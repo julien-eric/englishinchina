@@ -1,30 +1,71 @@
-//extends layout
+extends layout
 block content
-      //div.container
-      div.login-form.col-sm-12.col-md-12.col-lg-12
-         .panel.panel-default.no-border
-            .panel-body.flat-body
-               h3.text-center.login-title Add Picture
-               form(action='/school/addphoto', method='POST')
-                  .form-group
-                     input#id(type="hidden", name="id", value=school.id)
+      .container
+            .card.text-dark.my-5.col-md-6.offset-md-3
+                  .card-header.border-bottom-0
+                        .text-center
+                              img(src='/images/logo6.gif', width='', height='40', alt='')
+                  .card-body.text-left
+                        .text-center
+                                    h1.mt-3.mb-5.text-light.font-weight-bold Add Photo
+                        form(action='/school/addphoto', method='POST')
+                              .form-group
+                                    input#id(type="hidden", name="id", value=school.id)
 
-                  .form-group
-                     label.control-label(for='Picture') Picture
-                     .progress
-                        #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
-                           span.sr-only 0% Complete
-                     img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src="/images/default.png")
-                     input#avatarUrl(type="hidden" name="pictureUrl" accept="image/*" value="/public/default.png")
-                     span(class="btn btn-default btn-file") Browse
-                        input#file_input(type="file")
+                              .form-group
+                                    //- label.control-label(for='Picture') Picture
+                                    img#preview.d-none.img-fluid(src="/images/default.png")
+                                    //- span(class="btn btn-default btn-file") Browse
+                                    //-       input#file_input(type="file")
+                                          
+                                    .md-form
+                                          .file-field
+                                                .btn.btn-primary.btn-sm.float-left.ml-0
+                                                      span Choose file
+                                                      input#file_input(type='file')
+                                                      input#avatarUrl.d-none( name="pictureUrl" accept="image/*" value="/public/default.png")
+                                                .file-path-wrapper
+                                                      input.file-path.validate(type='text', placeholder='Upload your file')
+                                    .progress(style='height: 12px')
+                                          #progress-bar-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                                          span.sr-only 0% Complete
+                              .md-form
+                                    //- i.fa.fa-pencil.prefix
+                                    textarea#textareaPrefix.form-control.md-textarea(type='text', rows='1')
+                                    label(for='textareaPrefix') Description
 
-                  .form-group
-                     label.control-label(for='Description') Description
-                     textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
+                              //- .form-group
+                              //- label.control-label(for='Description') 
+                              //- textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
 
-                  button(class='btn btn-lg btn-block btn-eic', type='submit') Submit
-                  span.clearfix
-               #message
-                  if message
-                     h1.text-center.error-message #{message}
+                              .text-center
+                                    button.btn.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Add Photo
+
+      //- .container
+      //-       div.login-form.col-sm-12.col-md-12.col-lg-12
+      //-       .panel.panel-default.no-border
+      //-             .panel-body.flat-body
+      //-             h3.text-center.login-title Add Picture
+      //-             form(action='/school/addphoto', method='POST')
+      //-                   .form-group
+      //-                   input#id(type="hidden", name="id", value=school.id)
+
+      //-                   .form-group
+      //-                   label.control-label(for='Picture') Picture
+      //-                   .progress
+      //-                         #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
+      //-                         span.sr-only 0% Complete
+      //-                   img#preview.img-thumbnail.col-sm-12.col-md-12.col-lg-12(src="/images/default.png")
+      //-                   input#avatarUrl(type="hidden" name="pictureUrl" accept="image/*" value="/public/default.png")
+      //-                   span(class="btn btn-default btn-file") Browse
+      //-                         input#file_input(type="file")
+
+      //-                   .form-group
+      //-                   label.control-label(for='Description') Description
+      //-                   textarea(rows='5', name='description', class='form-control', placeholder='Description',required)
+
+      //-                   button(class='btn btn-lg btn-block btn-eic', type='submit') Submit
+      //-                   span.clearfix
+      //-             #message
+      //-                   if message
+      //-                   h1.text-center.error-message #{message}

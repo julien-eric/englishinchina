@@ -1,5 +1,5 @@
 module.exports = {
-    typeahead: '/javascripts/libs/typeahead.bundle.min.js',
+    typeahead: '/javascripts/libs/typeahead.bundle.js',
     librater: '/javascripts/libs/rater.min.js',
     libslider: '/javascripts/libs/bootstrap-slider.js',
     libbarchart: '/javascripts/libs/jquery.horizBarChart.min.js',
@@ -10,6 +10,8 @@ module.exports = {
     util: '/javascripts/util.js',
     rating: '/javascripts/rating.js',
     writereview: '/javascripts/writereview.js',
+    reviewvalidation: '/javascripts/reviewvalidation.js',
+    typeaheadwrapper: '/javascripts/typeahead-wrapper.js',
     schoolpage: '/javascripts/schoolpage.js',
     tinyMCE: '/javascripts/tinymce2.js'
 };

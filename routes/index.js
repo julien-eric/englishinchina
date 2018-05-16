@@ -28,7 +28,6 @@ module.exports = function(passport) {
   // Home Page
   router.get('/', async (req, res) => {
 
-
     try {
       const pageSize = 6;
       let schoolList = await schools.getSchools(pageSize, 0, res.locals.admin);
@@ -44,7 +43,7 @@ module.exports = function(passport) {
       const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
       popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
       res.render('home/home', {
-        title: 'English in China',
+        title: 'Second Language World',
         main: true,
         featuredSchoolList: featuredSchools,
         schools: truckSchoolList,
@@ -59,7 +58,7 @@ module.exports = function(passport) {
         currentPage: 1,
         total: schoolList.count,
         totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
-        scripts: [scripts.librater, scripts.util, scripts.rating]
+        scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {
       res.render('error', {
@@ -82,7 +81,7 @@ module.exports = function(passport) {
     let schoolList = await schools.getSchools(pageSize, page - 1, admin);
     // const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
     res.render('home/home', {
-      title: `English in China - Page ${page}`,
+      title: `Second Language World - Page ${page}`,
       schools: trunkSchoolList,
       user: req.user,
       provinces,
@@ -105,7 +104,7 @@ module.exports = function(passport) {
     .get((req, res) => {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
-        title: 'Login - English in China',
+        title: 'Login - Second Language World',
         hideHeader: true,
         message: req.flash('message'),
         scripts: [scripts.util]
@@ -136,7 +135,7 @@ module.exports = function(passport) {
   router.get('/loginajax', (req, res) => {
     res.render(
       'login/loginpanel', {
-        title: 'Login - English in China',
+        title: 'Login - Second Language World',
         message: req.flash('message'),
         redirecturl: req.query.url,
         scripts: [scripts.util]
@@ -179,7 +178,7 @@ module.exports = function(passport) {
   router.route('/signup')
     .get((req, res) => {
       res.render('login/register', {
-        title: 'Sign up - English in China',
+        title: 'Sign up - Second Language World',
         hideHeader: true,
         message: req.flash('signupMessage'),
         scripts: [scripts.util]
@@ -206,7 +205,7 @@ module.exports = function(passport) {
      ************************************************************************************************************ */
   router.get('/forgot', (req, res) => {
     res.render('forgot', {
-      title: 'Forgot your Password - English in China',
+      title: 'Forgot your Password - Second Language World',
       user: req.user,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
@@ -240,7 +239,7 @@ module.exports = function(passport) {
       return res.redirect('/forgot');
     }
     res.render('reset', {
-      title: 'Reset Password - English in China',
+      title: 'Reset Password - Second Language World',
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
     });
@@ -285,7 +284,7 @@ module.exports = function(passport) {
   router.get('/user', utils.isAuthenticated, async (req, res) => {
     let reviews = await reviews.findReviewsByUser(req.user._id);
     res.render('user', {
-      title: `User ${req.user.username} - English in China`,
+      title: `User ${req.user.username} - Second Language World`,
       user: req.user,
       reviews,
       pictureInfo: pictureinfo,
@@ -301,7 +300,7 @@ module.exports = function(passport) {
     .get(async (req, res) => {
       let user = await usersController.findUserById(req.user._id);
       res.render('login/edituser', {
-        title: `Edit Profile - ${user.username} - English in China`,
+        title: `Edit Profile - ${user.username} - Second Language World`,
         hideHeader: true,
         user,
         pictureInfo: pictureinfo,
@@ -323,7 +322,7 @@ module.exports = function(passport) {
       let usern = await usersController.findUserById(req.params.id);
       let reviews = await reviews.findReviewsByUser(usern);
       res.render('user', {
-        title: `User ${usern.username} - English in China`,
+        title: `User ${usern.username} - Second Language World`,
         user: req.user,
         usern,
         reviews,
@@ -352,7 +351,7 @@ module.exports = function(passport) {
     try {
       let users = await usersController.getAllUsers();
       res.render('allusers', {
-        title: 'Users - English in China',
+        title: 'Users - Second Language World',
         users,
         pictureInfo: pictureinfo,
         jadefunctions,

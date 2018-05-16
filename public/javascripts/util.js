@@ -99,7 +99,7 @@ function upload_file(file, number, signed_request, url) {
   xhr.onload = function() {
     if (xhr.status === 200) {
       const preview = $('#preview');
-      preview.toggle();
+      preview.toggleClass('d-none');
       preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
       if (number == 1) {
         document.getElementById('avatarUrl').value = url;
@@ -127,6 +127,10 @@ function upload_file(file, number, signed_request, url) {
 
 $(document).ready(() => {
   const page = 2;
+
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
 
   function capitalize(str) {
     strVal = '';

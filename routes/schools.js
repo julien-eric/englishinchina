@@ -51,7 +51,7 @@ module.exports = function(passport) {
       const reviewDistribution = reviews.createReviewDistribution(reviewList);
 
       res.render('school/school', {
-        title: `${school.name} - English in China`,
+        title: `${school.name} - Second Language World`,
         edit: schoolOwner,
         school,
         user: req.user,
@@ -90,7 +90,7 @@ module.exports = function(passport) {
         let provinces = await provincesController.getAllProvinces();
         let companies = await companiesController.getAllCompanies();
         res.render('school/addschool', {
-          title: 'Add School - English in China',
+          title: 'Add School - Second Language World',
           user: req.user,
           pictureInfo: pictureinfo,
           provinces,
@@ -132,10 +132,10 @@ module.exports = function(passport) {
      *Addphoto : Add photo to a school
      * Param : School id
      ************************************************************************************************************ */
-  router.get('/addphoto/:id', (req, res) => {
-    let school = schools.findSchoolById(req.params.id);
+  router.get('/addphoto/:id', async (req, res) => {
+    let school = await schools.findSchoolById(req.params.id);
     res.render('addphoto', {
-      title: 'Upload Picture - English in China',
+      title: 'Upload Picture - Second Language World',
       school,
       scripts: [scripts.util]
     });
@@ -145,7 +145,7 @@ module.exports = function(passport) {
     let school = schools.findSchoolById(req.params.id);
     res.render(
       'addphoto', {
-        title: 'Upload Picture - English in China',
+        title: 'Upload Picture - Second Language World',
         school
       },
       (err, html) => {
@@ -180,7 +180,7 @@ module.exports = function(passport) {
     images.getImageById(req.params.id, (image) => {
       res.render(
         'photomodal', {
-          title: 'View Picture - English in China',
+          title: 'View Picture - Second Language World',
           photo: image[0],
           pictureInfo: pictureinfo
         },
@@ -227,8 +227,8 @@ module.exports = function(passport) {
     let numberOfReviews = await reviews.findNumberofReviews(schoolId);
     let reviewList = await reviews.findReviews(schoolId);
     let school = await schools.findSchoolById(schoolId);
-    res.render('writereview', {
-      title: `Write Review for ${school.name} - English in China`,
+    res.render('review/writereview', {
+      title: `Write Review for ${school.name} - Second Language World`,
       user: req.user,
       school,
       criteria,
@@ -264,7 +264,7 @@ module.exports = function(passport) {
       const schoolId = req.params.schoolid;
       let reviews = await reviews.findReviews(schoolId, 6, page, true, req.user._id.id);
       res.render('school/schoolreviews', {
-        title: 'Reviews - English in China',
+        title: 'Reviews - Second Language World',
         reviews,
         pictureInfo: pictureinfo,
         jadefunctions,
@@ -312,7 +312,7 @@ module.exports = function(passport) {
     } else {
       reviews.findReviews(review.foreignId.id, (otherReviews) => {
         res.render('school/review', {
-          title: `${review.foreignId.name} - review by ${review.user.username} - ${review.comment} - English in China`,
+          title: `${review.foreignId.name} - review by ${review.user.username} - ${review.comment} - Second Language World`,
           review,
           reviews: otherReviews,
           pictureInfo: pictureinfo,
@@ -390,8 +390,8 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo;
-      const province = validateQuery(req.query.province);
-      const city = validateQuery(req.query.city);
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
 
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
@@ -409,7 +409,7 @@ module.exports = function(passport) {
         cities = await citiesController.getCitiesByProvince(province);
       }
       res.render('search', {
-        title: `${searchResults.query} Schools - English in China`,
+        title: `${searchResults.query} Schools - Second Language World`,
         schools: searchResults.list,
         user: req.user,
         provinces,
@@ -420,7 +420,7 @@ module.exports = function(passport) {
         searchMessage: `You searched for ${searchResults.query}`,
         searchInfo: searchResults.searchInfo,
         jadefunctions,
-        scripts: [scripts.librater, scripts.util, scripts.rating]
+        scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {
       res.render('error', {
@@ -440,21 +440,14 @@ module.exports = function(passport) {
 
     try {
       const schoolInfo = req.query.schoolInfo || undefined;
-      const province = validateQuery(req.query.province);
-      const city = validateQuery(req.query.city);
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
       let searchResults = await schools.searchSchools(schoolInfo, province, city);
       res.send(JSON.stringify(searchResults.list));
     } catch (error) {
       res.send(error);
     }
   });
-
-  let validateQuery = function(queryElement) {
-    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '') {
-      return -1;
-    }
-    return queryElement;
-  };
 
   /** **********************************************************************************************************
      *editSchool: GET loads page to edit existing school
