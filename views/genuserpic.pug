@@ -3,10 +3,10 @@
         if review.user.fb && review.user.useFacebookPic
             //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
             //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
-            img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnFacebookPicture(review.user.avatarUrl),  alt='Cinque Terre')
+            img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnFacebookPicture(review.user.avatarUrl),  alt=review.user.username)
         else if review.user.avatarUrl == '/public/default.png'
-            img.rounded-circle.img-fluid.review-image(src='/images/default-user.png', alt='Cinque Terre')
+            img.rounded-circle.img-fluid.review-image(src='/images/default-user.png', alt=review.user.username)
         else
-            img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnThumbnail(review.user.avatarUrl), alt='Cinque Terre')
+            img.rounded-circle.img-fluid.review-image(src=pictureInfo.returnThumbnail(review.user.avatarUrl), alt=review.user.username)
     else
-            img.rounded-circle.img-fluid.review-image(src='/images/default-user.png', alt='Cinque Terre')
+            img.rounded-circle.img-fluid.review-image(src='/images/default-user.png', alt='Username')
