@@ -50,7 +50,11 @@ block content
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
                 -var photos = company.photos
+<<<<<<< Updated upstream
                 -var itemId = company.id
+=======
+                -var link = "/company/addphoto/" + company.id
+>>>>>>> Stashed changes
                 include ../photogrid
 
             //- h3 Reviews (#{reviewsCount})
