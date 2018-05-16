@@ -1,14 +1,13 @@
 block content
       .row.my-5
             .col-md-12
-                  #mdb-lightbox-ui
                   if photos.length <= 3
-                        .mdb-lightbox.clearfix.no-margin
+                        .lightbox.clearfix.no-margin
                               each photo in photos
                                           include photo-figure
                               include add-photo-figure
                   else
-                        .mdb-lightbox.clearfix.no-margin
+                        .lightbox.clearfix.no-margin
                               -var photo = photos[0]
                               include photo-figure
                               -var photo = photos[1]

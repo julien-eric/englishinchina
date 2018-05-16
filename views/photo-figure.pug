@@ -1,5 +1,3 @@
 figure.col-md-3
-    a(href=pictureInfo.returnLarge(photo.url), data-size='1600x1067')
+    a(href=pictureInfo.returnLarge(photo.url), data-toggle="lightbox")
         .image-container(style='background-image: url(' + pictureInfo.returnThumbnail(photo.url) + ');')
-        //- img.img-fluid(src=pictureInfo.returnThumbnail(photo.url))  
-              //- img.hidden.img-fluid(alt='picture', src='#{pictureInfo.returnThumbnail(photo.url)}')

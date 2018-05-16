@@ -14,10 +14,12 @@ $(document).ready(() => {
     $('#school-header').css('min-height', height3);
   });
 
-  // $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-  //   event.preventDefault();
-  //   $(this).ekkoLightbox();
-  // });
+
+  // EKKO LIGHTBOX
+  $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
 
   // MDB Lightbox Init
   $(function() {
