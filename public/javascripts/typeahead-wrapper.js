@@ -129,7 +129,7 @@ $(document).ready(() => {
     // If page requires this input's validation, trigger it
     if (onReviewPage) {
       validateField($('#schoolInfo')[0]);
-      $('#add-school-name').text($(this).val());
+      $('#addSchoolName').val($(this).val());
     }
   });
 

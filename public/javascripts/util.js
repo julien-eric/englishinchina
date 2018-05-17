@@ -7,10 +7,11 @@ const setUploadFile = function() {
         alert('No file selected.');
       } else {
         get_signed_request(file, 1);
+        document.getElementById('avatarUrl').value = file.name;
       }
     };
   }
-
+  
   if (document.getElementById('file_input2')) {
     document.getElementById('file_input2').onchange = function() {
       const files = document.getElementById('file_input2').files;
@@ -19,50 +20,11 @@ const setUploadFile = function() {
         alert('No file selected.');
       } else {
         get_signed_request(file, 2);
+        document.getElementById('logoUrl').value = file.name;
       }
     };
   }
 };
-
-function setLightboxOnReadmore() {
-  const turnon = function() {
-    const original = $(this).closest('.list-group-review');
-    const element = original.clone();
-    element.find('.review-content').addClass('read-review');
-    element.find('h5').remove();
-    element.clone().appendTo('#lightboxcontent');
-    $('#lightbox').toggle();
-    $('body').addClass('noscroll');
-  };
-
-  const turnonPicture = function() {
-    let url = $(this).css('background-image');
-    url = url.substring(5);
-    url = url.substring(0, (url.length - 2));
-    url = url.replace('th_', '');
-    const img = $('<img id="dynamic">'); // Equivalent: $(document.createElement('img'))
-    img.addClass('image-lightbox');
-    img.attr('src', url);
-    img.appendTo('#lightboxcontent');
-
-
-    // var original = $(this).closest(".school-img-list-item");
-    // var element = original.clone()
-    // element.clone().appendTo("#lightboxcontent")
-    $('#lightbox').toggle();
-    $('body').addClass('noscroll');
-  };
-
-  const turnoff = function() {
-    const element = $('#lightboxcontent').empty();
-    $('#lightbox').toggle();
-    $('body').removeClass('noscroll');
-  };
-
-  // $(".readmore").click(turnon);
-  // $(".school-img-list-item").click(turnonPicture);
-  // $("#lightbox").click(turnoff);
-}
 
 function get_signed_request(file, number) {
   const xhr = new XMLHttpRequest();
@@ -197,7 +159,6 @@ $(document).ready(() => {
     xhr.send();
   });
 
-  setLightboxOnReadmore();
   setUploadFile();
 
   // Material Select Initialization

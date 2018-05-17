@@ -118,8 +118,12 @@ module.exports = function(passport) {
         callbackMessage,
         req);
 
-      // redirect the user to its new school
-      res.redirect(`/school/id/${newSchool.id}`);
+      if (req.body.ajax) {
+        res.send(JSON.stringify(newSchool));
+      } else {
+        // redirect the user to its new school
+        res.redirect(`/school/id/${newSchool.id}`);
+      }
     });
 
   router.post('/addschoolgetstarted', utils.isAuthenticated, (req, res) => {

@@ -126,7 +126,6 @@ $(document).ready(() => {
           $('.school-img-list-item').unbind();
           $('#lightbox').unbind();
           page++;
-          setLightboxOnReadmore();
         } else {
           alert('Problem.');
         }

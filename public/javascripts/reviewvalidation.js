@@ -28,7 +28,11 @@ function validateForm(event) {
     // Ignore buttons, fieldsets, etc.
     if (field.nodeName !== "INPUT" && field.nodeName !== "TEXTAREA" && field.nodeName !== "SELECT") continue;
 
-    formvalid = validateField(field);
+    let fieldValid = validateField(field);
+
+    if(!fieldValid) {
+      formvalid = false;
+    }
 
   }
 
@@ -91,6 +95,9 @@ function isSpecialInput(field) {
       return true;
     case 'positionSelect':
       return true;
+    case 'file_input':
+    case 'file_input2':
+      return true;
     case 'start-date':
     // return true;
     case 'end-date':
@@ -139,6 +146,24 @@ function validateSpecialInputs(field) {
         //Input is verified. Valid
         $('#' + elementId).siblings('.select-dropdown').addClass('valid');
         $('#' + elementId).siblings('.select-dropdown').removeClass('invalid');
+
+      }
+      break;
+
+    case 'file_input':
+    case 'file_input2':
+      if (field.value == '') {
+
+        //School Name Empty. Invalid reset SchoolId
+        $('.file-path').addClass('invalid');
+        $('.file-path').removeClass('valid');
+        valid = false
+
+      } else {
+
+        //Input is verified. Valid
+        $('.file-path').addClass('valid');
+        $('.file-path').removeClass('invalid');
 
       }
       break;

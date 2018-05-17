@@ -4,7 +4,7 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
       .row
             .col-lg-6
                   .md-form
-                        select#provinceSelect.mdb-select(name="province")
+                        select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
                               option(value='', disabled='', selected='') Province
                               each province,i in provinces
                                     if searchInfo && province.code == searchInfo.province 
@@ -15,7 +15,7 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
             .col-lg-6
                   .md-form  
                         if(cities)
-                              select#citySelect.mdb-select(name="city")
+                              select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
                                     if searchInfo && searchInfo.city
                                           option(value='') City
                                     else
