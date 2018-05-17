@@ -95,8 +95,8 @@ module.exports = function(passport) {
           pictureInfo: pictureinfo,
           provinces,
           companies,
-          scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-          incompleteSchool
+          incompleteSchool,
+          scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper, scripts.libtinyMCE, scripts.tinyMCE]
         });
       } catch (error) {
         res.render('error', {

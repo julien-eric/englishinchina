@@ -1,8 +1,8 @@
 #noSchoolGroup.form-group.d-none
   .form-check
-    input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#collapseExample')
-    label.form-check-label(for='noSchool') Create school with this name
+    input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible' disabled)
+    label.form-check-label(for='noSchool') Create school with this name (please specify province and city)
 
-#collapseExample.collapse
-  .card.card-body
-    | Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+#addSchoolCollapsible.collapse
+  .card.card-body.my-3
+    include add-school-review-form

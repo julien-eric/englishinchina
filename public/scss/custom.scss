@@ -513,3 +513,7 @@ input[type=range]+.thumb {
 .md-form input[type=text]+label.active:after {
     transform: none !important;
 }
+
+[type=checkbox]:checked+label:before {
+    border-color: transparent $slw-primary $slw-primary transparent !important;
+}

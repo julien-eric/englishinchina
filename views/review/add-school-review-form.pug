@@ -1,0 +1,44 @@
+h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
+#form-step-0(role='form', data-toggle='validator')
+  p.py-3 Before considering this, please make sure you have looked thoroughly to make sure the school you are looking for doesn't exist by a similar yet different name somewhere on our site!
+  .row
+    .col-lg-12
+      .form-group
+        .row
+          .col-lg-6
+            #preview.image-container.bg-primary
+            //- img#preview.img-container.bg-primary-darker.d-none.img-fluid(src=)
+          .col-lg-6
+            h3#add-school-name Default
+            .md-form
+              .file-field
+                .btn.btn-primary.btn-sm.float-left.ml-0
+                  span Choose file
+                  input#file_input(type='file')
+                  input#avatarUrl.d-none( name="pictureUrl" accept="image/*" value="/public/default.png")
+                .file-path-wrapper
+                  input.file-path.validate(type='text', placeholder='Upload your file')
+            .progress(style='height: 12px')
+              #progress-bar-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+              span.sr-only 0% Complete
+    .col-lg-12
+      .form-group
+        .md-form
+          i.fa.fa-globe.prefix
+          input(type='text', name='website', class='form-control', placeholder='Website URL(not required)')
+          label(for='inputIconEx1') Website
+        .md-form
+          i.fa.fa-map-marker.prefix
+          input(type='text', name='address', class='form-control', placeholder='Address(not required)')
+          label(for='inputIconEx1') Physical Address
+        .md-form
+          i.fa.fa-phone.prefix
+          input(type='text', name='phone', class='form-control', placeholder='Phone Number(not required)')
+          label(for='inputIconEx1') Phone
+    .col-lg-12
+      .md-form
+        i.fa.fa-pencil.prefix
+        textarea#textareaPrefix.form-control.md-textarea(type='text', name='description',  rows='5', required)
+        label(for='textareaPrefix') Description
+
+  button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Create School

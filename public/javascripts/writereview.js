@@ -5,6 +5,7 @@ $(function() {
 
 $(document).ready(() => {
   let schoolList;
+  let locationSpecified;
 
   /***********************
    * STEPPER 
@@ -98,5 +99,12 @@ $(document).ready(() => {
     }
   });
 
+  $('#citySelect').change(function() {
+    if ($(this).val() != '') {
+      // $('#noSchool').prop('disabled', false);
+    } else {
+      $('#noSchool').prop('disabled', true);
+    }
+  });
 
 });

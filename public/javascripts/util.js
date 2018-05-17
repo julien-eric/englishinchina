@@ -99,8 +99,13 @@ function upload_file(file, number, signed_request, url) {
   xhr.onload = function() {
     if (xhr.status === 200) {
       const preview = $('#preview');
-      preview.toggleClass('d-none');
-      preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
+
+      if(preview.is('img')) {
+        preview.toggleClass('d-none');
+        preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
+      } else if(preview.is('div')) {
+        preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")"); 
+      }
       if (number == 1) {
         document.getElementById('avatarUrl').value = url;
       } else {
