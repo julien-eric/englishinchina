@@ -16,7 +16,7 @@ block content
                               //-       include relatedschools
                               //- include schooladminsection
                         .col-lg-4
-                              include ratingcard
+                              include ../ratingcard
                               -var query = '?schoolId=' +  school.id;
                               a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
@@ -41,7 +41,7 @@ block content
                               |  Reviews 
                         p.text-center.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
                         hr
-                        include schoolreviews
+                        include ../review/reviews
                         if reviewsCount > 6
                               #load-more-reviews.btn.btn-secondary.btn-lg Load More
 

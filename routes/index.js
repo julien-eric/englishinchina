@@ -13,7 +13,6 @@ const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
-// const jade = require('jade');
 
 // let handleRenderError = (err, html) => {
 //   if (err) {
@@ -35,11 +34,9 @@ module.exports = function(passport) {
       let featuredSchools = await schools.featuredSchools();
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
-      // let popularCompanies = await companiesController.getAllCompanies();
-      let popularCompanies = await companiesController.countSchoolsPerCompany();
+      let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
       const splashText = require('../splash-text.json');
-      // let result = jadefunctions.returnAverage(popularCompanies[0].schools, 'averageRating');
       const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
       popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
       res.render('home/home', {

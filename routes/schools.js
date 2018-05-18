@@ -267,7 +267,7 @@ module.exports = function(passport) {
       const page = req.params.page;
       const schoolId = req.params.schoolid;
       let reviews = await reviews.findReviews(schoolId, 6, page, true, req.user._id.id);
-      res.render('school/schoolreviews', {
+      res.render('reviews/reviews', {
         title: 'Reviews - Second Language World',
         reviews,
         pictureInfo: pictureinfo,
@@ -297,7 +297,7 @@ module.exports = function(passport) {
     review.comment = jadefunctions.nl2br(review.comment, false);
 
     if (ajax) {
-      res.render('school/schoolreview', {
+      res.render('review/review', {
         review,
         loggedin: 'true',
         pictureInfo: pictureinfo,

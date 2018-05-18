@@ -2,12 +2,8 @@ extends ../layout
 block content
     .school-page.mb-5
         include companyheader
-        //-   .container-fluid.bg-light.border-top.py-2.border-bottom
-        //-         .container.mb-1
-        //-               include locationbreadcrumb
         .container.bg-white.pt-3           
             h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                //- i.mdi.mdi-map-marker(aria-hidden='true')
                 | Our locations
             p.text-center.text-muted Look for #{company.name} in all of our locations around the World
             hr
@@ -19,15 +15,7 @@ block content
                     .tab-content.px-0
                         each cprovince,i in provincesByCompany
                             -var schools2 = []
-                            if(i == 0)
-                                .tab-pane.fade.in.active.show(id=cprovince._id.code, role='tabpanel')
-                                    each school in schoolList
-                                        if(school.province.code == cprovince._id.code)
-                                            -schools2.push(school)
-                                    -var schools = schools2
-                                    include ../school/schoollist
-                            else
-                                .tab-pane.fade(id=cprovince._id.code, role='tabpanel')
+                                .tab-pane.fade.in.show(id=cprovince._id.code, class=i==0? 'active': '', role='tabpanel')
                                     each school in schoolList
                                         if(school.province.code == cprovince._id.code)
                                             -schools2.push(school)
@@ -37,15 +25,13 @@ block content
                 .description.col-sm-12.col-lg-8
                     -var element = company
                     include ../school/description
-                //-   .col-lg-4
-                //-         include ratingcard
-                //-         button.btn.btn-lg.btn-block.btn-primary(type='submit')
-                //-               i.mdi.mdi-plus-circle(aria-hidden='true')
-                //-               span  Write a Review
-
+                .col-lg-4
+                    include ../ratingcard
+                    button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                        i.mdi.mdi-plus-circle(aria-hidden='true')
+                        span  Write a Review
             .photos.mt-5.clearfix
                 h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                    //- i.mdi.mdi-image(aria-hidden='true')
                     | Photos
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
@@ -53,8 +39,13 @@ block content
                 -var link = "/company/addphoto/" + company.id
                 include ../photogrid
 
-            //- h3 Reviews (#{reviewsCount})
-            //- hr
-            //- include schoolreviews
-            //- if reviewsCount > 6
-            //-       #load-more-reviews.btn.btn-secondary.btn-lg Load More
+            .reviews.mt-5.clearfix
+                h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                        //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
+                        |  Reviews 
+                p.text-center.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
+                hr
+                -var reviews = company.reviews
+                include ../review/reviews
+                if company.reviews.length > 6
+                    #load-more-reviews.btn.btn-secondary.btn-lg Load More

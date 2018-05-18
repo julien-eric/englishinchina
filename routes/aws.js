@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pictures = require('../pictures');
 const awsManager = require('../awsmanager');
+const uuidv1 = require('uuid/v1');
 
 module.exports = function(passport) {
 
@@ -10,7 +11,7 @@ module.exports = function(passport) {
      * pictureURL : string
      ************************************************************************************************************ */
   router.post('/pictureuploaded', (req, res) => {
-    pictures.createResponsivePictures(req.query.url, req.query.filename, req.query.filesize, () => {
+    pictures.createResponsivePictures(req.query.url, req.query.filesize, () => {
     });
   });
 
@@ -19,11 +20,13 @@ module.exports = function(passport) {
      ************************************************************************************************************ */
   router.get('/sign_s3', async (req, res) => {
     try {
-      const s3Params = {Key: req.query.file_name, ContentType: req.query.file_type};
+      const extension = req.query.file_name.substring(req.query.file_name.indexOf('.'), req.query.file_name.length);
+      const fileHash = uuidv1() + extension;
+      const s3Params = {Key: fileHash, ContentType: req.query.file_type};
       const signedRequest = await awsManager.getSignedUrl('putObject', s3Params);
       const returnData = {
         signed_request: signedRequest,
-        url: req.query.file_name
+        url: fileHash
       };
       res.write(JSON.stringify(returnData));
     } catch (error) {

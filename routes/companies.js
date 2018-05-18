@@ -4,7 +4,6 @@ const moment = require('moment');
 const router = express.Router();
 const schools = require('../controllers/schools');
 const provincesController = require('../controllers/provinces');
-const citiesController = require('../controllers/cities');
 const companies = require('../controllers/companies');
 const jadefunctions = require('./jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
@@ -14,23 +13,21 @@ module.exports = function(passport) {
 
   router.get('/id/:id', async (req, res) => {
     let companyId = req.params.id;
-    let company = await companies.findCompanyById(companyId);
+    let company = await companies.findCompanyWithSchoolsAndReviews(companyId);
     company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
-    let popularCities = await citiesController.getMostPopularCities();
-    let popularProvinces = await provincesController.getMostPopularProvinces();
+
     let schoolList = await schools.findSchoolsByCompany(company);
     let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
-    const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
+    schoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
+    company.reviews = jadefunctions.trunkContentArray(company.reviews, 'comment', 190);
     res.render('company/company', {
       title: `${company.name} - Second Language World`,
       company,
       user: req.user,
       moment,
       jadefunctions,
-      popularCities,
-      popularProvinces,
       provincesByCompany,
-      schools: truckSchoolList,
+      schools: schoolList,
       pictureInfo: pictureinfo,
       scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
     });

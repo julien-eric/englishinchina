@@ -66,6 +66,10 @@ $value in $theme-colors {
     }
 }
 
+.no-drop-shadow {
+    box-shadow: 0 0  !important;
+}
+
 @each $color,
 $value in $theme-colors {
     .swatch-#{$color} {
