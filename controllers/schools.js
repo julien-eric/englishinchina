@@ -4,6 +4,7 @@ const citiesController = require('./cities');
 const companiesController = require('./companies');
 const reviewsController = require('./reviews');
 const imagesController = require('./images');
+const _ = require('underscore');
 const MISSING = -1;
 
 let SchoolsController = function() {};
@@ -183,10 +184,13 @@ SchoolsController.prototype.findSchoolsByCompanySortbyRating = function(company)
 SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceInfo, cityInfo) {
 
   let queryInfo = {};
+  let schoolList = undefined;
   queryInfo.school = schoolInfo;
 
+  let regex = new RegExp(returnRegex(schoolInfo));
+
   let transactions = School.aggregate([
-    {$match: {name: new RegExp(schoolInfo, 'i')}},
+    {$match: {name: {$regex: regex, $options: 'i'}}},
     {$sort: {number: -1}}
   ]);
 
@@ -210,7 +214,11 @@ SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceI
     {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}}
   ]);
 
-  let schoolList = await transactions.exec();
+  try {
+    schoolList = await transactions.exec();
+  } catch (error) {
+    console.log(error);
+  }
   let searchQuery = this.getQueryMessage(queryInfo);
   return {list: schoolList, query: searchQuery, searchInfo: {province: provinceInfo, city: cityInfo, schoolInfo: schoolInfo}};
 };
@@ -284,6 +292,32 @@ SchoolsController.prototype.updateAverageRating = async function(schoolId) {
   criteria.c8 /= reviews.length;
 
   return School.findOneAndUpdate({_id: schoolId}, {averageRating: averageScore, criteria});
+};
+
+let returnRegex = function(schoolInfo) {
+
+  let words = schoolInfo.split(' ');
+
+  if (words[words.length - 1] == '') {
+    words = _.first(words, words.length - 1);
+  }
+
+  if (words.length == 1) {
+    return schoolInfo;
+  }
+
+  let regex = '';
+  for (let index = 0; index < words.length; index++) {
+    let item = words[index];
+    if (index == words.length - 1) {
+      regex += item;
+    } else {
+      regex += item + '|';
+    }
+  }
+
+  return regex;
+
 };
 
 let schoolsController = new SchoolsController();
