@@ -11,7 +11,7 @@ $slw-cool-purple: #9d99c1;
 $slw-light-secondary: #d8d8d8;
 $slw-dark: #2e2e2e;
 $slw-darker: #1b1b1b;
-$enable-gradients: true;
+$enable-gradients: false;
 $enable-shadows: true;
 $standard-height: 190px;
 $landing-page-height: 560px;
@@ -516,6 +516,12 @@ input[type=range]+.thumb {
 
 .md-form input[type=text]+label.active:after {
     transform: none !important;
+}
+
+@media (max-width: 760px){
+    .modal-backdrop, .side-modal {
+        display: block !important;
+    }
 }
 
 [type=checkbox]:checked+label:before {
