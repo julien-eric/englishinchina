@@ -8,7 +8,7 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
             //-             -schoolInfo = searchInfo.schoolInfo
             //-       input#schoolInfo.form-control(type='text', value=schoolInfo, name='schoolInfo')
             //-       label(for='schoolInfo') School Name
-            .form-group.md-form
+            .form-group.md-form.search-nav-form
                   -var schoolInfo = ""
                   -var schoolId = ""
                   if searchInfo && searchInfo.school
@@ -21,7 +21,7 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
                   input#schoolId.d-none(name="schoolId" value=schoolId)
       //- Provinces
       .col-lg
-            .md-form
+            .md-form.search-nav-form
                   select#provinceSelect.mdb-select(name="province")
                         option(value='', disabled='', selected='') Province
                         each province,i in provinces
@@ -31,7 +31,7 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
                                     option(value=province.code) #{province.name} - #{province.chineseName}
       //- Cities
       .col-lg
-            .md-form  
+            .md-form.search-nav-form  
                   if(cities)
                         select#citySelect.mdb-select(name="city")
                               if searchInfo && searchInfo.city

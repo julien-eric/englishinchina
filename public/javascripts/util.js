@@ -11,7 +11,7 @@ const setUploadFile = function() {
       }
     };
   }
-  
+
   if (document.getElementById('file_input2')) {
     document.getElementById('file_input2').onchange = function() {
       const files = document.getElementById('file_input2').files;
@@ -62,11 +62,11 @@ function upload_file(file, number, signed_request, url) {
     if (xhr.status === 200) {
       const preview = $('#preview');
 
-      if(preview.is('img')) {
+      if (preview.is('img')) {
         preview.toggleClass('d-none');
         preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
-      } else if(preview.is('div')) {
-        preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")"); 
+      } else if (preview.is('div')) {
+        preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")");
       }
       if (number == 1) {
         document.getElementById('avatarUrl').value = url;
@@ -162,8 +162,13 @@ $(document).ready(() => {
   setUploadFile();
 
   // Material Select Initialization
-  $(document).ready(function() {
-    $('.mdb-select').material_select();
+  $('.mdb-select').material_select();
+
+  /* affix the navbar after scroll below header */
+  $('.main-header').affix({
+    offset: {
+      top: $('#search-navigation').offset().top
+    }
   });
 
   $('#citySelect.empty').prop('disabled', 'disabled');

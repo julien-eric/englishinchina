@@ -9,8 +9,8 @@ $slw-secondary: #5bc0de;
 $slw-secondary-darker: #3691ad;
 $slw-cool-purple: #9d99c1;
 $slw-light-secondary: #d8d8d8;
-$slw-dark: #2e2e2e;
-$slw-darker: #1b1b1b;
+$slw-dark: #1f1f1f;
+$slw-darker: #151515;
 $enable-gradients: false;
 $enable-shadows: true;
 $standard-height: 190px;
@@ -67,7 +67,7 @@ $value in $theme-colors {
 }
 
 .no-drop-shadow {
-    box-shadow: 0 0  !important;
+    box-shadow: 0 0 !important;
 }
 
 @each $color,
@@ -155,12 +155,12 @@ $value in $theme-colors {
     top: 0;
     bottom: 0;
     margin-bottom: 50px;
-    -webkit-filter: brightness(75%);
-    filter: brightness(75%);
+    -webkit-filter: brightness(55%);
+    filter: brightness(55%);
 }
 
 .splash .splash-text {
-    margin-top: 6rem;
+    margin-top: 15rem;
     position: relative;
 }
 
@@ -396,8 +396,7 @@ input[type=range]+.thumb {
 }
 
 .image-container {
-    height: $image-container-height;
-    // background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
+    height: $image-container-height; // background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -425,7 +424,8 @@ input[type=range]+.thumb {
     background: transparent !important;
 }
 
-@media(max-width: 480px) {
+// Example usage:
+@include media-breakpoint-down(md) {
     .display-3 {
         font-size: 2.8rem;
     }
@@ -518,8 +518,13 @@ input[type=range]+.thumb {
     transform: none !important;
 }
 
-@media (max-width: 760px){
-    .modal-backdrop, .side-modal {
+.search-nav-form {
+    margin-bottom: 0rem;
+}
+
+@media (max-width: 760px) {
+    .modal-backdrop,
+    .side-modal {
         display: block !important;
     }
 }
