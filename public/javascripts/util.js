@@ -165,11 +165,11 @@ $(document).ready(() => {
   $('.mdb-select').material_select();
 
   /* affix the navbar after scroll below header */
-  $('.main-header').affix({
-    offset: {
-      top: $('#search-navigation').offset().top
-    }
-  });
+  // $('.main-header').affix({
+  //   offset: {
+  //     top: $('#search-navigation').offset().top
+  //   }
+  // });
 
   $('#citySelect.empty').prop('disabled', 'disabled');
 
