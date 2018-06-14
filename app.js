@@ -16,6 +16,9 @@ const SCSS_DEBUG = true;
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
+// let jobCrawler = require('./jobCrawler/jobCrawler');
+// jobCrawler.init('http://www.eslcafe.com/jobs/china/');
+
 /**
  * Used by stylus
  * @param {*} str String
@@ -119,6 +122,7 @@ const schoolRoutes = require('./routes/schools')(passport);
 const companyRoutes = require('./routes/companies')(passport);
 const articleRoutes = require('./routes/articles')(passport);
 const reviewRoutes = require('./routes/reviews')(passport);
+const jobRoutes = require('./routes/jobs')(passport);
 
 app.use('/', routes);
 app.use('/', awsRoutes);
@@ -126,6 +130,7 @@ app.use('/school', schoolRoutes);
 app.use('/company', companyRoutes);
 app.use('/article', articleRoutes);
 app.use('/review', reviewRoutes);
+app.use('/job', jobRoutes);
 
 /** *************************************************************
  catch 404 and forward to error handler

@@ -1,0 +1,42 @@
+h2.font-weight-light.border-bottom.border-gray.pb-2 Contact Information
+#form-step-0(role='form', data-toggle='validator')
+      p In order to post a job offer, you must registered with Second Language World. You can post as a recruiter, a company or even as a school. 
+      
+      if user
+            .row.pt-3.justify-content-center
+                  .col-lg-12
+                  .col-lg-6
+                        p.text-center You will be posting this job offer as: 
+                        .card.testimonial-card
+                              // Background color
+                              .card-up.bg-primary-darker
+                              // Avatar
+                              .avatar.mx-auto.white
+                                    -var cardUser = user
+                                    img.rounded-circle.testionial-pic(height="110" src=jadefunctions.returnImageForUser(user))
+                              .card-body
+                                    // Name
+                                    h4.card-title #{user.username}
+                                    //- hr
+                                    //- // Quotation
+                                    //- p
+                                    //-       i.fa.fa-quote-left
+                                    //-       |  We should eventually add the number of reviews or job offers or some stats here, similar to school and company cards 
+                        
+
+            button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
+      
+      else
+            .card.card-body.my-5
+                  .row
+                        .col-sm-12.mb-3
+                              .text-center
+                                    h1.text-warning
+                                          i.mdi.mdi-alert-circle(aria-hidden='true')
+                              //- hr
+                        .col-sm-12
+                              p You must be logged in to your account to proceed with filling in a job offer
+                              p Already have an account? 
+                                    a(href="/login") Login
+                              p Enjoy everything the SLWorld Community has to offer by 
+                                    a(href="/signup") creating an account

@@ -27,7 +27,9 @@ block content
                         // First Step
                         #step-0.row.setup-content
                               .col-md-12
-                                    include review-form0
+                                    -var formName = 'review-form'
+                                    -var step = 0
+                                    include find-school
 
                         // Second Step
                         #step-1.row.setup-content

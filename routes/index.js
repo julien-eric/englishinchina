@@ -3,7 +3,7 @@ const router = express.Router();
 const schools = require('../controllers/schools');
 const email = require('../controllers/email');
 const moment = require('moment');
-const jadefunctions = require('./jadeutilityfunctions');
+const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const provincesController = require('../controllers/provinces');
 const companiesController = require('../controllers/companies');
@@ -65,6 +65,10 @@ module.exports = function(passport) {
     }
   });
 
+  // TODO User Types
+  router.get('/user-types', async (req, res) => {
+
+  });
 
   router.get('/page/:page', async (req, res) => {
 
@@ -102,7 +106,6 @@ module.exports = function(passport) {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
         title: 'Login - Second Language World',
-        hideHeader: true,
         message: req.flash('message'),
         scripts: [scripts.util]
       });
@@ -176,7 +179,6 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('login/register', {
         title: 'Sign up - Second Language World',
-        hideHeader: true,
         message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });
@@ -298,7 +300,6 @@ module.exports = function(passport) {
       let user = await usersController.findUserById(req.user._id);
       res.render('login/edituser', {
         title: `Edit Profile - ${user.username} - Second Language World`,
-        hideHeader: true,
         user,
         pictureInfo: pictureinfo,
         jadefunctions,

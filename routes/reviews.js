@@ -4,7 +4,7 @@ const moment = require('moment');
 const criteria = require('../criteria').criteria;
 const schools = require('../controllers/schools');
 const reviews = require('../controllers/reviews');
-const jadefunctions = require('./jadeutilityfunctions');
+const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const schoolsController = require('../controllers/schools');
@@ -21,7 +21,6 @@ module.exports = function(passport) {
   router.get('/', async (req, res) => {
 
     try {
-
 
       const searchInfo = {};
       const schoolId = utils.validateQuery(req.query.schoolId);
@@ -76,7 +75,7 @@ module.exports = function(passport) {
     try {
       await reviews.insertReviewforSchool(req);
       let school = await schools.findSchoolById(req.body.schoolId);
-      res.redirect('/school/id/' + school.id);
+      res.redirect('/school/' + school.id);
     } catch (error) {
       res.send(error);
     }

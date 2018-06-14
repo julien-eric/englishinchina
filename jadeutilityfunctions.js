@@ -1,6 +1,7 @@
 const striptags = require('striptags');
 const htmlparser = require('htmlparser');
 const parsedToHtml = require('htmlparser-to-html');
+const pictureInfo = require('./pictureinfo');
 const _ = require('underscore');
 
 module.exports = {
@@ -130,6 +131,20 @@ module.exports = {
     const breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br ' + '/>' : '<br>';
     // str = str.replace("\r\n", "\n").replace("\r", "\n")
     return (`${str}`).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, `$1${breakTag}$2`);
+  },
+
+  returnImageForUser(user) {
+    if (user) {
+      if (user.fb && user.useFacebookPic) {
+        return pictureInfo.returnFacebookPicture(user.avatarUrl);
+      } else if (user.avatarUrl == '/public/default.png') {
+        return '/images/default-user.png';
+      } else {
+        return pictureInfo.returnThumbnail(user.avatarUrl);
+      }
+    } else {
+      return '/images/default-user.png';
+    }
   },
 
   ratingColor(rating, bgOrText) {

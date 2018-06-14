@@ -1,5 +1,5 @@
 h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
-#form-step-0(role='form', data-toggle='validator')
+div(role='form', data-toggle='validator', id='form-step' + step)
       p.py-3 First, let's find your school. Please take the time to thoroughly search for terms that might be related to the school after you've entered the province and city the school is located in. Duplicates are harder to manage and there's a lower chance that your comment will be read if it's posted on a newly created school rather than one that's already attracted some attention
       .row
             .col-lg-6
@@ -11,7 +11,6 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
                                           option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                                     else
                                           option(value=province.code) #{province.name} - #{province.chineseName}
-      
             .col-lg-6
                   .md-form  
                         if(cities)
@@ -35,9 +34,12 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
                         if searchInfo && searchInfo.school
                               -schoolInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
-                        input#schoolInfo.typeahead.form-control.form-form-0(name="schoolInfo" value=schoolInfo type="text"  form="form-form-0" required)
+                        input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step, required)
                         label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
-                        input#schoolId.d-none(name="schoolId" value=schoolId form="review-form")
-            include review-form01
-
+                        input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
+            include find-school-create-option
+      
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
+      if step != 0
+            button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous
+

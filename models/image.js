@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 // 2 user
 // 3 company
 // 4 article
+// 5 job
 
 module.exports = mongoose.model('Image', {
   type: Number,

@@ -5,7 +5,7 @@ block content
       include review/review
    div.container
       h2
-         a.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1(href="/school/id/#{review.foreignId.id}") More reviews on #{review.foreignId.name}
+         a.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1(href="/school/#{review.foreignId.id}") More reviews on #{review.foreignId.name}
       .otherreviews.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1
          include review/reviews
-         a.btn.btn-primary.btn-lg(href="/school/id/#{review.foreignId.id}") See School
+         a.btn.btn-primary.btn-lg(href="/school/#{review.foreignId.id}") See School

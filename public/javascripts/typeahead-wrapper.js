@@ -47,11 +47,11 @@ var schools = new Bloodhound({
 $(document).ready(() => {
 
   var pathname = window.location.pathname;
-  var onReviewPage = true;
+  var autoTriggerValidation = false;
   notFoundTemplate = ['<div class="mx-2 empty-message"><b>No results found</b></div>'];
 
-  if (pathname.indexOf('review') == -1){
-    onReviewPage = false;
+  if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1){
+    autoTriggerValidation = true;
     notFoundTemplate = undefined;
   }
 
@@ -86,12 +86,12 @@ $(document).ready(() => {
       });
     }
 
-    if (hasSelection == null && onReviewPage) {
+    if (hasSelection == null && autoTriggerValidation) {
       $('#noSchoolGroup').removeClass('d-none');
     }
 
     // If page requires this input's validation, trigger it
-    if (onReviewPage) {
+    if (autoTriggerValidation) {
       validateField($('#schoolInfo')[0]);
     }
 
@@ -107,7 +107,7 @@ $(document).ready(() => {
     $('#noSchoolGroup').addClass('d-none');
 
     // If page requires this input's validation, trigger it
-    if (onReviewPage) {
+    if (autoTriggerValidation) {
       validateField($('#schoolInfo')[0]);
     }
   });
@@ -121,13 +121,13 @@ $(document).ready(() => {
       });
     }
 
-    if (!hasSelection && onReviewPage) {
+    if (!hasSelection && autoTriggerValidation) {
       $('#schoolId').val('');
       $('#noSchoolGroup').removeClass('d-none');
     }
 
     // If page requires this input's validation, trigger it
-    if (onReviewPage) {
+    if (autoTriggerValidation) {
       validateField($('#schoolInfo')[0]);
       $('#addSchoolName').val($(this).val());
     }

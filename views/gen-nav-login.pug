@@ -16,6 +16,10 @@ if locals.user
 else
 
     li.nav-item
-        a.nav-link(href='/login') Login
+        a.nav-link(href='/login') 
+            i.fa.prefix.mdi.mdi-account(aria-hidden='true')
+            | Login
     li.nav-item
-        a.nav-link(href='/signup') Sign up
+        a.nav-link(href='/signup') 
+            //- i.fa.prefix.mdi.mdi-account-plus(aria-hidden='true')
+            | Sign up

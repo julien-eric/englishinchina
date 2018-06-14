@@ -1,0 +1,57 @@
+#form-step-1(role='form', data-toggle='validator')
+      h2.font-weight-light.border-bottom.border-gray.pb-2 Job Title And Contact
+      p.pb-3 Let's try to make your job offer as extensive and informative as possible, but let's also keep it simple. Users react to strong titles and well-organized text the most. 
+      .row
+            .col-lg-12
+                  .form-group.md-form
+                        //- i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                        input#title.form-form-2.form-control.validate(type='text' name='title' form="form-form-2" required)
+                        label.col-12.px-0(for='title') Title 
+      .row
+            .col-lg-12
+                  .form-group.md-form
+                        //- i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                        input#kicker.form-form-2.form-control.validate(type='text' name='kicker' form="form-form-2")
+                        label.col-12.px-0(for='kicker') Second Title (Kicker)
+      
+      .row
+            .col-lg-12
+                  .form-group.md-form
+                        //- i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
+                        input#email.form-form-2.form-control.validate(type='email' name='email' form="form-form-2" required)
+                        label.col-12.px-0(for='email') Contact Email*
+                        p.text-small This is the email that will be visible on the job offer page, more often than not this email is managed by HR or the recruitment departement, please be careful if you enter a personal email as this will be displayed publicly
+      
+      h2.font-weight-light.border-bottom.border-gray.pt-5.pb-2 Contract Information
+      p.pb-3 Let's try to make your job offer as extensive and informative as possible, but let's also keep it simple. Users react to strong titles and well-organized text the most. 
+
+      .row
+            hr
+            .col-lg-12
+                  .form-group.md-form
+                        input#salary.form-form-2.form-control.validate(type='number' name='salary' form="form-form-2" placeholder="Salary" aria-label="Recipient's username" aria-describedby='basic-addon2' min="1000" max="100000" required)
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (greater than 1000)', data-success='Thank you') Salary in Chinese Yuan per month
+                              i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries should be per month in chinese yuan (renminbi)" )
+
+      .row.pt-3
+            .col-lg-6.pb-3
+                  .md-form
+                        input#start-date.form-form-2.form-control.datepicker.validate(placeholder='Start Date', name='startDate', form="form-form-2", type='text' onblur='validateField(this)' required)
+                        label(for='start-date', data-error='Please correct', data-success='Thank you' ) Start Date
+            .col-lg-6.pb-3
+                  .md-form
+                        input#end-date.form-form-2.form-control.datepicker.validate(placeholder='End date', name='endDate', form="form-form-2" , type='text' onblur='validateField(this)')
+                        label(for='end-date', data-error='Please correct', data-success='Thank you') End date
+      
+      h2.font-weight-light.border-bottom.border-gray.pt-5.pb-2 Description
+      p.pb-3 Please keep this short and effective and do not repeat the information from the other sections.
+      .row
+            hr
+            .col-lg-12
+                  .md-form
+                        //- i.fa.fa-pencil.prefix
+                        textarea#textareaPrefix.form-form-2.form-control.md-textarea(type='text', class='form-control', name='description', form="form-form-2", rows='10', required)
+                        label(for='textareaPrefix') Description
+
+      button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
+      button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous

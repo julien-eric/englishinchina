@@ -1,0 +1,12 @@
+.row
+    .col-lg-5.mb-5.mt-lg-0
+        img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
+    .col-lg-7
+        a(href="/job/" + job.id)
+            h2.font-weight-bold #{job.title}
+        h3 #{job.kicker}
+        h4 #{moment(job.startDate).format("MMM YYYY") + " - " + job.salary}
+        //- h4 #{job.}
+        p #{job.description}
+    .col-12
+        hr

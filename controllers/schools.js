@@ -38,6 +38,7 @@ SchoolsController.prototype.getSchools = async function(pageSize, page) {
 
 SchoolsController.prototype.addSchool = async function(user, school) {
 
+  let userId = user ? user._id : null;
   let province = await provincesController.getProvinceByCode(school.province);
   let city = await citiesController.getCityByCode(school.city);
   let company = null;
@@ -45,7 +46,7 @@ SchoolsController.prototype.addSchool = async function(user, school) {
     company = await companiesController.findCompanyById(school.company);
   }
   let createdSchool = await School.create({
-    user: user._id,
+    user: userId,
     name: school.name,
     description: school.description,
     website: school.website,
@@ -60,7 +61,7 @@ SchoolsController.prototype.addSchool = async function(user, school) {
   });
   let image = await imagesController.addImage({
     type: 1,
-    user: null,
+    user: userId,
     school: createdSchool,
     description: createdSchool.name,
     url: createdSchool.pictureUrl,
@@ -185,9 +186,15 @@ SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceI
 
   let queryInfo = {};
   let schoolList = undefined;
+  let regex = undefined;
+
   queryInfo.school = schoolInfo;
 
-  let regex = new RegExp(returnRegex(schoolInfo));
+  if (queryInfo.school) {
+    regex = new RegExp(returnRegex(queryInfo.school));
+  } else {
+    regex = new RegExp('');
+  }
 
   let transactions = School.aggregate([
     {$match: {name: {$regex: regex, $options: 'i'}}},
@@ -257,6 +264,19 @@ SchoolsController.prototype.getQueryMessage = function(queryInfo) {
 
 SchoolsController.prototype.emptySchoolCollection = function() {
   return School.remove({});
+};
+
+SchoolsController.prototype.selectSplashSchool = function(schools) {
+  let splashSchool = {averageRating: -1};
+  schools.forEach((school) => {
+    if (school.averageRating > splashSchool.averageRating) {
+      splashSchool = school;
+    }
+  });
+  if (splashSchool.averageRating == -1) {
+    splashSchool = schools[0];
+  }
+  return splashSchool;
 };
 
 SchoolsController.prototype.updateCoverPicture = function(schoolId, newPictureUrl) {

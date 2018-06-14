@@ -3,9 +3,10 @@
     .splash-image-container
       .splash-image(style="background-image: url('" + splashText.image + "');")
     .splash-text.col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2.mb-5
-      h1.text-uppercase.text-shadow-cool-purple.font-weight-bold.display-3 #{splashText.title}
-      h3.font-weight-bold.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
-      //- if splashText.button1
-      //-   .btn-group
-      //-     button.btn.btn-primary.btn-lg.px-5(type='submit') #{splashText.button1}
-      //-       i.mdi.mdi-chevron-double-right(aria-hidden='true')
+      h1.text-uppercase.text-shadow-darker.font-weight-bold.display-3 #{splashText.title}
+      //- h3.font-weight-bold.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
+      h3.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
+      if splashText.button1
+        .btn-group
+          a.btn.btn-primary.btn-lg.px-5(href='/job') #{splashText.button1}
+            i.mdi.mdi-chevron-double-right(aria-hidden='true')

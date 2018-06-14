@@ -1,25 +1,25 @@
 .card.text-right.h-100
     .display-grid
-        a.view.overlay.card-img(href='/company/id/' + company._id)
+        a.view.overlay.card-img(href='/company/' + company._id)
             //- img.card-img-top(src='#{pictureInfo.returnThumbnail(company.pictureUrl)}', alt='Card image')
             .image-container(style='background-image: url(' + pictureInfo.returnThumbnail(company.pictureUrl) + ');')             
-        a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href='/company/id/' + company._id)
+        a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href='/company/' + company._id)
             i.text-white.mdi.mdi-chevron-double-right(aria-hidden='true')
         .card-body.text-center
             h3.font-weight-light.card-title 
-                a.text-dark(href='/company/id/' + company._id)
+                a.text-dark(href='/company/' + company._id)
                     | #{company.name}
             hr
             p.card-text #{company.description}
             .row.justify-content-center.text-muted
-                .col-3
+                .chip.chip-md
                     i.mdi.mdi-school(aria-hidden='true')      
-                    |  #{company.schools.length}
+                    |  #{company.schools.length} Schools
                 -var avg = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
                 if avg != 'NaN'
-                    .col-4
+                    .chip.chip-md
                         include ../genratingshort
                 if company.reviews && company.reviews.length > 0
-                    .col-3
+                    .chip.chip-md
                             i.mdi.mdi-message-text(aria-hidden='true')      
-                            |  #{company.reviews.length}
+                            |  #{company.reviews.length} Reviews

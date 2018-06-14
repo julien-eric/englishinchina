@@ -1,10 +1,11 @@
 extends ../layout
 block content
       .school-page.mb-5
+
             include schoolheader
-            .container-fluid.bg-light.border-top.py-2.border-bottom
-                  .container.mb-1
-                        include locationbreadcrumb
+            include school-tabs
+            include ../review/splash-review
+            
             .container.bg-white.pt-3           
                   .row
                         .description.col-sm-12.col-lg-8

@@ -1,13 +1,28 @@
 extends ../layout
 block content
     .school-page.mb-5
+
         include companyheader
-        .container.bg-white.pt-3           
-            h1.display-4#popular-cities.text-center.font-weight-bold.text 
+        include company-tabs
+        include ../review/splash-review
+         
+        .container.bg-white.pt-3(data-spy="scroll" data-target="#company-navigation" data-offset="0")           
+            .row
+                #description.description.col-sm-12.col-lg-8
+                    hr
+                    -var element = company
+                    include ../school/description
+                .col-lg-4
+                    include ../ratingcard
+                    button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                        i.mdi.mdi-plus-circle(aria-hidden='true')
+                        span  Write a Review
+                    include ../utils/share-box
+            h1.display-4#locations.text-center.font-weight-bold.text 
                 | Our locations
             p.text-center.text-muted Look for #{company.name} in all of our locations around the World
             hr
-            .pt-5.pb-2
+            .py-2
                 span.clearfix
                 .locations
                     include companylocations
@@ -21,17 +36,8 @@ block content
                                             -schools2.push(school)
                                     -var schools = schools2
                                     include ../school/schoollist
-            .row
-                .description.col-sm-12.col-lg-8
-                    -var element = company
-                    include ../school/description
-                .col-lg-4
-                    include ../ratingcard
-                    button.btn.btn-lg.btn-block.btn-primary(type='submit')
-                        i.mdi.mdi-plus-circle(aria-hidden='true')
-                        span  Write a Review
             .photos.mt-5.clearfix
-                h1.display-4#popular-cities.text-center.font-weight-bold.text 
+                h1.display-4#photos.text-center.font-weight-bold.text 
                     | Photos
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
@@ -40,9 +46,9 @@ block content
                 include ../photogrid
 
             .reviews.mt-5.clearfix
-                h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                        //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
-                        |  Reviews 
+                h1.display-4#reviews.text-center.font-weight-bold.text 
+                    //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
+                    |  Reviews 
                 p.text-center.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
                 hr
                 -var reviews = company.reviews
