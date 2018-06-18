@@ -5,10 +5,9 @@
                   h5.text-uppercase.mb-0
                         button.btn.btn-link.text-white(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
                               i.mdi.mdi-star(aria-hidden='true')
-                              |  School Rating
-            #collapseOne.collapse(aria-labelledby='headingOne', data-parent='#accordion' class=reviewsCount > 0 ? 'show' : '')
-                  if reviewsCount > 0 
-                        -var avgRating = jadefunctions.roundToPoint5(school.averageRating);
+                              | Rating
+            #collapseOne.collapse(aria-labelledby='headingOne', data-parent='#accordion' class=reviews.length > 0 ? 'show' : '')
+                  if reviews.length > 0 
                         .card-body
                               include ratingcardbody 
                   else

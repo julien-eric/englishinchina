@@ -1,5 +1,8 @@
 extends ../layout
 block content
+      -var reviews = school.reviews
+      -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
+      
       .school-page.mb-5
 
             include schoolheader
@@ -43,8 +46,6 @@ block content
                         p.text-center.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
                         hr
                         include ../review/reviews
-                        if reviewsCount > 6
-                              #load-more-reviews.btn.btn-secondary.btn-lg Load More
 
 
                   if school.averageRating != -1

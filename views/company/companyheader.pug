@@ -17,8 +17,7 @@
                         .chip.chip-md
                             i.mdi.mdi-message-text(aria-hidden='true')      
                             |  #{company.reviews.length} Reviews
-                    -var avg = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
-                    if avg != 'NaN'
+                    if averageRating != 'NaN'
                         .chip.chip-md
                             include ../genratingshort
 

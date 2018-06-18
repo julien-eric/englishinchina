@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const School = require('./../models/school');
 const provincesController = require('./provinces');
 const citiesController = require('./cities');
@@ -147,13 +149,44 @@ SchoolsController.prototype.findSchoolByName = function(name) {
   return School.findOne({name}).exec();
 };
 
-SchoolsController.prototype.findSchoolById = function(id) {
-  return School.findOne({_id: id})
-    .populate('province')
-    .populate('city')
-    .populate('photos')
-    .populate('company')
-    .exec();
+SchoolsController.prototype.findSchoolById = async function(id) {
+
+  let pipeline = [
+    {$match: {_id: ObjectId(id)}},
+    {$lookup: {from: 'provinces', localField: 'province', foreignField: '_id', as: 'province'}},
+    {$unwind: '$province'},
+    {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
+    {$unwind: '$city'},
+    {$lookup: {from: 'companies', localField: 'company', foreignField: '_id', as: 'company'}},
+    {$unwind: '$company'},
+    {$lookup: {from: 'images', localField: 'photos', foreignField: '_id', as: 'photos'}},
+    {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}},
+    {$unwind: {path: '$reviews', preserveNullAndEmptyArrays: true}},
+    {$lookup: {from: 'users', localField: 'reviews.user', foreignField: '_id', as: 'reviews.user'}},
+    {$unwind: {path: '$reviews.user', preserveNullAndEmptyArrays: true}},
+    {
+      $group: {
+        _id: '$_id',
+        user: {$first: '$user'},
+        name: {$first: '$name'},
+        description: {$first: '$description'},
+        website: {$first: '$website'},
+        address: {$first: '$address'},
+        phone: {$first: '$phone'},
+        province: {$first: '$province'},
+        city: {$first: '$city'},
+        company: {$first: '$company'},
+        schoolType: {$first: '$schoolType'},
+        pictureUrl: {$first: '$pictureUrl'},
+        criteria: {$first: '$criteria'},
+        averageRating: {$first: '$averageRating'},
+        validated: {$first: '$validated'},
+        photos: {$first: '$photos'},
+        reviews: {$addToSet: '$reviews'}
+      }
+    }
+  ];
+  return (await School.aggregate(pipeline).exec())[0];
 };
 
 SchoolsController.prototype.findSchoolsByProvince = function(province) {

@@ -449,34 +449,22 @@ module.exports = function(passport) {
       let school = await schools.findSchoolById(req.params.id);
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
-      let relatedSchools;
-      if (school.company && school.company.id) {
-        relatedSchools = await schools.findSchoolsByCompanySortbyRating(school.company.id);
-      }
-      let numberOfReviews = await reviews.findNumberofReviews(school._id);
       
-      let userId = 0;
-      if (req.user) {
-        userId = req.user._id.id;
-      }
-      let reviewList = await reviews.findReviews(school, 6, 1, true, userId);
-      reviewList = jadefunctions.trunkContentArray(reviewList, 'comment', 190);
+      school.reviews = jadefunctions.trunkContentArray(school.reviews, 'comment', 190);
       school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
-      let splashReview = reviews.selectSplashReview(reviewList);
+      let splashReview = reviews.selectSplashReview(school.reviews);
       
       let schoolOwner = false;
       if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
         schoolOwner = true;
       }
-      const reviewDistribution = reviews.createReviewDistribution(reviewList);
+      const reviewDistribution = reviews.createReviewDistribution(school.reviews);
 
       res.render('school/school', {
         title: `${school.name} - Second Language World`,
         edit: schoolOwner,
         school,
         user: req.user,
-        reviewsCount: numberOfReviews,
-        reviews: reviewList,
         reviewDistribution,
         splashReview,
         criteria,
@@ -485,7 +473,6 @@ module.exports = function(passport) {
         jadefunctions,
         popularCities,
         popularProvinces,
-        relatedSchools,
         pictureInfo: pictureinfo,
         scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
       });

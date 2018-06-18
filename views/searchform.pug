@@ -16,7 +16,7 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
                         -schoolId = searchInfo.school.id
                   if searchInfo && searchInfo.schoolInfo
                         -schoolInfo = searchInfo.schoolInfo
-                  input#schoolInfo.typeahead.form-control.form-form-0(name="schoolInfo" value=schoolInfo type="text")
+                  input#schoolInfo.typeahead.form-control.form-form-0(name="schoolInfo" placeholder="School name" value=schoolInfo type="text")
                   label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
                   input#schoolId.d-none(name="schoolId" value=schoolId)
       //- Provinces

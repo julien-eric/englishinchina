@@ -17,10 +17,10 @@
         .row.my-3.justify-content-center
             .col-lg-6
                 .row.justify-content-center
-                        if reviewsCount > 0
+                        if reviews.length > 0
                             .chip.chip-md
                                 i.mdi.mdi-message-text(aria-hidden='true')      
-                                |  #{reviewsCount} Reviews
+                                |  #{reviews.length} Reviews
                         if school.photos.length > 0
                             .chip.chip-md
                                 i.mdi.mdi-image(aria-hidden='true')      

@@ -23,54 +23,15 @@ module.exports = {
   async findCompanyWithSchoolsAndReviews(id) {
 
     let companies = await Company.aggregate([
-      {
-        $match: {_id: ObjectId(id)}
-      },
-      { // Left Join with schools
-        $lookup:
-          {
-            from: 'schools',
-            localField: '_id',
-            foreignField: 'company',
-            as: 'schools'
-          }
-      },
-      {
-        $unwind: {
-          path: '$schools',
-          preserveNullAndEmptyArrays: true
-        }
-      },
-      { // Left Join with reviews
-        $lookup:
-          {
-            from: 'reviews',
-            localField: 'schools._id',
-            foreignField: 'foreignId',
-            as: 'reviews'
-          }
-      },
-      {
-        $unwind: {
-          path: '$reviews',
-          preserveNullAndEmptyArrays: true
-        }
-      },
-      { // Left Join with users
-        $lookup:
-          {
-            from: 'users',
-            localField: 'reviews.user',
-            foreignField: '_id',
-            as: 'reviews.user'
-          }
-      },
-      {
-        $unwind: {
-          path: '$reviews.user',
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      {$match: {_id: ObjectId(id)}},
+      {$lookup: {from: 'schools', localField: '_id', foreignField: 'company', as: 'schools'}},
+      {$unwind: {path: '$schools', preserveNullAndEmptyArrays: true}},
+      {$lookup: {from: 'images', localField: 'schools.photos', foreignField: '_id', as: 'photos'}},
+      {$unwind: {path: '$photos'}},
+      {$lookup: {from: 'reviews', localField: 'schools._id', foreignField: 'foreignId', as: 'reviews'}},
+      {$unwind: {path: '$reviews', preserveNullAndEmptyArrays: true}},
+      {$lookup: {from: 'users', localField: 'reviews.user', foreignField: '_id', as: 'reviews.user'}},
+      {$unwind: {path: '$reviews.user', preserveNullAndEmptyArrays: true}},
       {
         $group: {
           _id: '$_id',
@@ -81,7 +42,8 @@ module.exports = {
           logoUrl: {$first: '$logoUrl'},
           photos: {$first: '$photos'},
           schools: {$addToSet: '$schools'},
-          reviews: {$addToSet: '$reviews'}
+          reviews: {$addToSet: '$reviews'},
+          photos: {$addToSet: '$photos'}
         }
       }
     ]).exec();
@@ -96,12 +58,12 @@ module.exports = {
     return Company.aggregate([
       {
         $lookup:
-          {
-            from: 'schools',
-            localField: '_id',
-            foreignField: 'company',
-            as: 'schools'
-          }
+        {
+          from: 'schools',
+          localField: '_id',
+          foreignField: 'company',
+          as: 'schools'
+        }
       },
       {
         $unwind: {
@@ -111,12 +73,12 @@ module.exports = {
       },
       {
         $lookup:
-          {
-            from: 'reviews',
-            localField: 'schools._id',
-            foreignField: 'foreignId',
-            as: 'reviews'
-          }
+        {
+          from: 'reviews',
+          localField: 'schools._id',
+          foreignField: 'foreignId',
+          as: 'reviews'
+        }
       },
       {
         $unwind: {
@@ -151,12 +113,12 @@ module.exports = {
       {$sort: {number: -1}},
       {
         $lookup:
-          {
-            from: 'schools',
-            localField: '_id',
-            foreignField: 'company',
-            as: 'schools'
-          }
+        {
+          from: 'schools',
+          localField: '_id',
+          foreignField: 'company',
+          as: 'schools'
+        }
       }
     ]);
 
@@ -168,12 +130,12 @@ module.exports = {
     return Company.aggregate([
       {
         $lookup:
-          {
-            from: 'schools',
-            localField: '_id',
-            foreignField: 'company',
-            as: 'schools'
-          }
+        {
+          from: 'schools',
+          localField: '_id',
+          foreignField: 'company',
+          as: 'schools'
+        }
       }
     ]).exec();
   },

@@ -28,22 +28,16 @@ module.exports = function(passport) {
   router.get('/', async (req, res) => {
 
     try {
-      const pageSize = 6;
-      let schoolList = await schools.getSchools(pageSize, 0, res.locals.admin);
       let provinces = await provincesController.getAllProvinces();
-      let featuredSchools = await schools.featuredSchools();
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
       let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
       const splashText = require('../splash-text.json');
-      const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
       popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
       res.render('home/home', {
         title: 'Second Language World',
         main: true,
-        featuredSchoolList: featuredSchools,
-        schools: truckSchoolList,
         user: req.user,
         provinces,
         pictureInfo: pictureinfo,
@@ -53,8 +47,6 @@ module.exports = function(passport) {
         popularCompanies,
         splashText,
         currentPage: 1,
-        total: schoolList.count,
-        totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
         scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {

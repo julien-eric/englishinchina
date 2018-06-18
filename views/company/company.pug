@@ -1,5 +1,8 @@
 extends ../layout
 block content
+    -var reviews = company.reviews
+    -var averageRating = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
+    
     .school-page.mb-5
 
         include companyheader
@@ -51,7 +54,6 @@ block content
                     |  Reviews 
                 p.text-center.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
                 hr
-                -var reviews = company.reviews
                 include ../review/reviews
-                if company.reviews.length > 6
+                if reviews.length > 6
                     #load-more-reviews.btn.btn-secondary.btn-lg Load More
