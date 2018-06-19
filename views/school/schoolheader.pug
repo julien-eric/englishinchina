@@ -25,8 +25,7 @@
                             .chip.chip-md
                                 i.mdi.mdi-image(aria-hidden='true')      
                                 |  #{school.photos.length} Photos
-                        -var avg = jadefunctions.roundToPoint5(school.averageRating)
-                        if avg != 'NaN'
+                        if averageRating != -1
                             .chip.chip-md
                                 include ../genratingshort
 
@@ -35,7 +34,7 @@
                     i.mdi.mdi-web(aria-hidden='true')
                     |  Visit Website
         if school.company
-            a.btn.btn-lightgreen(href='/company/' + school.company.id)
+            a.btn.btn-lightgreen(href='/company/' + school.company._id)
                     i.mdi.mdi-clipboard-check(aria-hidden='true')
                     |  See Company
         if school.address

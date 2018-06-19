@@ -34,6 +34,12 @@ function compile(str, path) {
 app.locals.fcbAppId = fcbAppId;
 if (environment == 'production') {
   app.locals.analytics = true;
+} else {
+  process.on('unhandledRejection', (error, p) => {
+    // application specific logging, throwing an error, or other logic here
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', error);
+    console.log(error.stack);
+  });
 }
 // let checkAdmin = function(req, res, next) {
 //   if (req.user && req.user.admin) {

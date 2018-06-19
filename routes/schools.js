@@ -449,11 +449,11 @@ module.exports = function(passport) {
       let school = await schools.findSchoolById(req.params.id);
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
-      
+
       school.reviews = jadefunctions.trunkContentArray(school.reviews, 'comment', 190);
       school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
       let splashReview = reviews.selectSplashReview(school.reviews);
-      
+
       let schoolOwner = false;
       if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
         schoolOwner = true;
@@ -482,7 +482,7 @@ module.exports = function(passport) {
         error: error
       });
     }
-});
+  });
 
   return router;
 };

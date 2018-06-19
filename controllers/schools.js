@@ -11,6 +11,12 @@ const MISSING = -1;
 
 let SchoolsController = function() {};
 
+let unpluck = function(array) {
+  return _.filter(array, function(element) {
+    return Object.getOwnPropertyNames(element).length != 0;
+  });
+};
+
 SchoolsController.prototype.getAllSchools = function() {
   return School.find().exec();
 };
@@ -186,7 +192,10 @@ SchoolsController.prototype.findSchoolById = async function(id) {
       }
     }
   ];
-  return (await School.aggregate(pipeline).exec())[0];
+
+  let school = (await School.aggregate(pipeline).exec())[0];
+  school.reviews = unpluck(school.reviews);
+  return school;
 };
 
 SchoolsController.prototype.findSchoolsByProvince = function(province) {
