@@ -15,7 +15,7 @@ let addSchoolCallback = function(data) {
   }
 }
 
-let ajaxAddSchool = function(url, ) {
+let ajaxAddSchool = function(url) {
 
   $.ajax({
     type: "POST",

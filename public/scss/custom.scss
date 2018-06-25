@@ -607,6 +607,14 @@ input[type=range]+.thumb {
   width: 52px;
 }
 
+@media (max-width: 576px) {
+  .classic-tabs li a {
+    padding: 20px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+
 .classic-tabs li a.active {
   color: $slw-lightgreen;
 }

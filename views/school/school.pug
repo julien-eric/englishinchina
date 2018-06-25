@@ -11,7 +11,7 @@ block content
             
             .container.bg-white.pt-3           
                   .row
-                        .description.col-sm-12.col-lg-8
+                        #description.description.col-sm-12.col-lg-8
                               -var element = school;
                               include description
                               //- if(relatedSchools)
@@ -21,15 +21,16 @@ block content
                               //- include schooladminsection
                         .col-lg-4
                               include ../ratingcard
-                              -var query = '?schoolId=' +  school.id;
+                              -var query = '?schoolId=' +  school._id;
                               a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Write a Review
-                              a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school.id)
+                              a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school._id)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Add a Picture
+                              include ../utils/share-box
 
-                  .photos.mt-5.clearfix
+                  #photos.photos.mt-5.clearfix
                         h1.display-4#popular-cities.text-center.font-weight-bold.text 
                               //- i.mdi.mdi-image(aria-hidden='true')
                               | Photos
@@ -39,7 +40,7 @@ block content
                         -var link = "/school/addphoto/" + school.id
                         include ../photogrid
 
-                  .reviews.mt-5.clearfix
+                  #reviews.reviews.mt-5.clearfix
                         h1.display-4#popular-cities.text-center.font-weight-bold.text 
                               //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
                               |  Reviews 
@@ -49,7 +50,7 @@ block content
 
 
                   if school.averageRating != -1
-                        .ratings.mt-5.clearfix
+                        #rating.ratings.mt-5.clearfix
                               h1.display-4#popular-cities.text-center.font-weight-bold.text 
                                     //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
                                     |  Rating 
