@@ -35,7 +35,7 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                               -schoolInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
                         input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step, required)
-                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
             include find-school-create-option
       

@@ -30,7 +30,7 @@ function validateForm(event) {
 
     let fieldValid = validateField(field);
 
-    if(!fieldValid) {
+    if (!fieldValid) {
       formvalid = false;
     }
 
@@ -111,6 +111,10 @@ function isSpecialInput(field) {
 function validateSpecialInputs(field) {
   let valid = true;
   let elementId = field.getAttribute('id');
+
+  if (!field.required) {
+    return true;
+  }
 
   switch (elementId) {
 

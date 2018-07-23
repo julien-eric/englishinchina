@@ -1,4 +1,5 @@
 const Job = require('./../models/job');
+const moment = require('moment');
 
 let findPicture = function(job) {
   if (!job.pictureUrl) {
@@ -26,9 +27,9 @@ module.exports = {
 
   addJob: (user, job) => {
 
-    // if (job.school) {
-
-    // }
+    if (job.schoolId == -1 || job.schoolId == '') {
+      job.schoolId = undefined;
+    }
 
     return Job.create({
       title: job.title,

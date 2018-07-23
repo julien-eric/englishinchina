@@ -17,13 +17,23 @@ module.exports = function(passport) {
     .get(async (req, res) => {
 
       try {
+        
+        const province = utils.validateQuery(req.query.province);
 
         let jobs = await jobsController.getAllJobs();
+        let provinces = await provincesController.getAllProvinces();
+        let cities = undefined;
+        if (province) {
+          cities = await citiesController.getCitiesByProvince(province);
+        }
+
         jobs = jadefunctions.trunkContentArray(jobs, 'title', 120);
         jobs = jadefunctions.trunkContentArray(jobs, 'description', 250);
         res.render('job/jobs-list', {
           title: `Jobs - Second Language World`,
           jobs,
+          provinces,
+          cities,
           moment,
           user: req.user,
           pictureInfo: pictureinfo,

@@ -2,31 +2,32 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Location
 div(role='form', data-toggle='validator', id='form-step' + step)
       p.py-3 Let's see if the school you are posting a job offer for already exists in our system. Specifying the school will allow for candidates to take a look at other teachers' experiences at the school and will increase the odds of finding the right candidate for the right job.
       .row
+            .col-lg-6.form-group
+                  select#provinceSelect.mdb-select.add-school-form.validate(name="province", form="form-form-" + step required)
+                        option(value='', disabled='', selected='') Province
+                        each province,i in provinces
+                              if searchInfo && province.code == searchInfo.province 
+                                    option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
+                              else
+                                    option(value=province.code) #{province.name} - #{province.chineseName}
+                  label.col-12.px-0(for='province', data-error='School has not been selected properly', data-success='Thank you.') Province
             .col-lg-6
-                  .md-form
-                        select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form" required)
-                              option(value='', disabled='', selected='') Province
-                              each province,i in provinces
-                                    if searchInfo && province.code == searchInfo.province 
-                                          option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
-                                    else
-                                          option(value=province.code) #{province.name} - #{province.chineseName}
-            .col-lg-6
-                  .md-form  
-                        if(cities)
-                              select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form" required)
-                                    if searchInfo && searchInfo.city
-                                          option(value='') City
-                                    else
-                                          option(value='', selected='') City
-                                    each city in cities
-                                          if searchInfo && city.code == searchInfo.city
-                                                option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-                                          else
-                                                option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-                        else
-                              select#citySelect.mdb-select.empty(name="city", disabled='true')
+                  if(cities)
+                        select#citySelect.mdb-select.add-school-form(name="city", form="form-form-" + step required)
+                              if searchInfo && searchInfo.city
+                                    option(value='') City
+                              else
                                     option(value='', selected='') City
+                              each city in cities
+                                    if searchInfo && city.code == searchInfo.city
+                                          option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                                    else
+                                          option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                        label.col-12.px-0(for='city', data-error='School has not been selected properly', data-success='Thank you.') City
+                  else
+                        select#citySelect.mdb-select.empty(name="city", disabled='true')
+                              option(value='', selected='') City
+                        label.col-12.px-0(for='city', data-error='School has not been selected properly', data-success='Thank you.') City
             .col-lg-12
                   .form-group.md-form.mb-5
                         -var schoolInfo = ""
@@ -34,9 +35,9 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                         if searchInfo && searchInfo.school
                               -schoolInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
-                        input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step, required)
-                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+                        input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step)
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
+                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School Name
             include ../review/find-school-create-option
       
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next

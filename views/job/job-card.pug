@@ -4,9 +4,9 @@
     .col-lg-7
         a(href="/job/" + job.id)
             h2.font-weight-bold #{job.title}
-        h3 #{job.kicker}
-        h4 #{moment(job.startDate).format("MMM YYYY") + " - " + job.salary}
-        //- h4 #{job.}
+        h4 #{job.kicker}
+        h5 #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
+        h5 #{job.salary}CNY
         p #{job.description}
     .col-12
         hr
