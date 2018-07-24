@@ -19,10 +19,10 @@
                               span &nbsp;|&nbsp;
                                     a(href='/company/' + school.company.id) #{school.company.name}
                   p.card-text #{school.description}
-                  -var avg = jadefunctions.roundToPoint5(school.averageRating)
+                  -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
                   if school.reviews || avg != '-1.0'
                         .row.justify-content-center.text-muted
-                              if avg != '-1.0'
+                              if averageRating != '-1.0'
                                     .chip.chip-md
                                           include ../genratingshort
                               if school.photos.length > 0
