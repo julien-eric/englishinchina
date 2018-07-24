@@ -164,7 +164,7 @@ SchoolsController.prototype.findSchoolById = async function(id) {
     {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
     {$unwind: '$city'},
     {$lookup: {from: 'companies', localField: 'company', foreignField: '_id', as: 'company'}},
-    {$unwind: '$company'},
+    {$unwind: {path: '$company', preserveNullAndEmptyArrays: true}},
     {$lookup: {from: 'images', localField: 'photos', foreignField: '_id', as: 'photos'}},
     {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}},
     {$unwind: {path: '$reviews', preserveNullAndEmptyArrays: true}},
