@@ -102,6 +102,10 @@ function isSpecialInput(field) {
     // return true;
     case 'end-date':
     // return true;
+    case 'provinceSelect':
+      return true;
+    case 'citySelect':
+      return true;
 
     default:
       return false;
@@ -194,6 +198,24 @@ function validateSpecialInputs(field) {
         //Both inputs are verified. Valid
         $('#' + elementId).addClass('valid');
         $('#' + elementId).removeClass('invalid');
+
+      }
+      break;
+
+    case 'provinceSelect':
+    case 'citySelect':
+      if (field.value == '') {
+
+        //School Name Empty. Invalid reset SchoolId
+        $('#' + elementId).siblings('input').addClass('invalid');
+        $('#' + elementId).siblings('input').removeClass('valid');
+        valid = false
+
+      } else {
+
+        //Input is verified. Valid
+        $('#' + elementId).siblings('input').addClass('valid');
+        $('#' + elementId).siblings('input').removeClass('invalid');
 
       }
       break;

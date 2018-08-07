@@ -74,6 +74,35 @@ describe('Jobs', function() {
     });
 
 
+    it('should add province and city', async function() {
+
+      let sampleUser = (await users.getAllUsers())[0];
+
+      let sampleJob = jobTemplate;
+      sampleJob.schoolId = (await schools.getAllSchools())[0].id;
+      sampleJob.cityId = (await cities.getAllCities())[0].id;
+      sampleJob.provinceId = (await provinces.getAllProvinces())[0].id;
+      sampleJob.companyId = (await companies.getAllCompanies())[0].id;
+
+      let addedJob = await jobs.addJob(sampleUser, sampleJob);
+      expect(addedJob.city._bsontype).to.be.equal('ObjectID');
+      expect(addedJob.province._bsontype).to.be.equal('ObjectID');
+    });
+
+    it('should add correctly when the endDate is not specified', async function() {
+
+      let sampleUser = (await users.getAllUsers())[0];
+
+      let sampleJob = jobTemplate;
+      sampleJob.schoolId = (await schools.getAllSchools())[0].id;
+      sampleJob.cityId = (await cities.getAllCities())[0].id;
+      sampleJob.provinceId = (await provinces.getAllProvinces())[0].id;
+      sampleJob.companyId = (await companies.getAllCompanies())[0].id;
+      sampleJob.endDate = undefined;
+
+      let addedJob = await jobs.addJob(sampleUser, sampleJob);
+      expect(addedJob.id).to.be.a('string');
+    });
 
   });
 

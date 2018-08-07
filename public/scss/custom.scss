@@ -208,7 +208,7 @@ $value in $theme-colors {
 }
 
 .splash .splash-text {
-  margin-top: 17rem;
+  margin-top: 15rem;
   position: relative;
 }
 
@@ -443,6 +443,10 @@ input[type=range]+.thumb {
   width: $review-image-dimension;
 }
 
+.review-content{
+  font-size:14px;
+}
+
 .image-container {
   height: $image-container-height; // background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
   background-size: cover;
@@ -620,8 +624,8 @@ input[type=range]+.thumb {
 }
 
 
-$slw-hollow-input: #ededed;
-$slw-inset-dark: #e2e2e2;
+$slw-hollow-input: #f5f5f5;
+$slw-inset-dark: #ebebeb;
 
 .form-control.search-filter {
   padding: .375rem .75rem;
@@ -654,4 +658,12 @@ $slw-inset-dark: #e2e2e2;
 }
 .custom-select:focus {
   background-color: white;
+}
+
+.select-wrapper input.select-dropdown.invalid {
+  border-bottom: 2px solid #f44336;
+}
+
+.select-wrapper input.select-dropdown.valid {
+  border-bottom: 2px solid #00c851;
 }

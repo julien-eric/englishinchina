@@ -40,7 +40,7 @@ module.exports = function(passport) {
           provinces,
           companies,
           incompleteSchool,
-          scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper, scripts.libtinyMCE, scripts.tinyMCE]
+          scripts: [scripts.util, scripts.fileUploader, scripts.typeahead, scripts.typeaheadwrapper, scripts.libtinyMCE, scripts.tinyMCE]
         });
       } catch (error) {
         res.render('error', {
@@ -85,7 +85,7 @@ module.exports = function(passport) {
     res.render('addphoto', {
       title: 'Upload Picture - Second Language World',
       school,
-      scripts: [scripts.util]
+      scripts: [scripts.util, scripts.fileUploader]
     });
   });
 
@@ -390,7 +390,7 @@ module.exports = function(passport) {
               companies,
               jadefunctions,
               pictureInfo: pictureinfo,
-              scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+              scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
             });
           });
         });

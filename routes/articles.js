@@ -15,7 +15,7 @@ module.exports = function(passport) {
         user: req.user,
         jadefunctions,
         moment,
-        scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+        scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
       });
     })
     .post(async (req, res) => {

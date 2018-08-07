@@ -49,7 +49,7 @@ module.exports = function(passport) {
       res.render('company/addcompany', {
         title: 'Add Company - Second Language World',
         message: req.flash('message'),
-        scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+        scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
       });
     })
     .post((req, res) => {
@@ -73,7 +73,7 @@ module.exports = function(passport) {
           company,
           message: req.flash('message'),
           pictureInfo: pictureinfo,
-          scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+          scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
         });
       });
     })

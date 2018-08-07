@@ -1,97 +1,3 @@
-const setUploadFile = function() {
-  if (document.getElementById('file_input')) {
-    document.getElementById('file_input').onchange = function() {
-      const files = document.getElementById('file_input').files;
-      const file = files[0];
-      if (file == null) {
-        alert('No file selected.');
-      } else {
-        get_signed_request(file, 1);
-        document.getElementById('avatarUrl').value = file.name;
-      }
-    };
-  }
-
-  if (document.getElementById('file_input2')) {
-    document.getElementById('file_input2').onchange = function() {
-      const files = document.getElementById('file_input2').files;
-      const file = files[0];
-      if (file == null) {
-        alert('No file selected.');
-      } else {
-        get_signed_request(file, 2);
-        document.getElementById('logoUrl').value = file.name;
-      }
-    };
-  }
-};
-
-function get_signed_request(file, number) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/sign_s3?file_name=${file.name}&file_type=${file.type}`);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        upload_file(file, number, response.signed_request, response.url);
-      } else {
-        alert('Could not get signed URL.');
-      }
-    }
-  };
-  xhr.send();
-}
-
-function upload_file(file, number, signed_request, url) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('PUT', signed_request);
-  xhr.setRequestHeader('x-amz-acl', 'public-read');
-  xhr.upload.onprogress = function(event) {
-    if (event.lengthComputable) {
-      // evt.loaded the bytes browser receive
-      // evt.total the total bytes seted by the header
-      const percentComplete = (event.loaded / event.total) * 100;
-      if (number == 1) {
-        $('#progress-bar-picture').css('width', `${percentComplete}%`).attr('aria-valuenow', percentComplete);
-      } else {
-        $('#progress-bar-picture2').css('width', `${percentComplete}%`).attr('aria-valuenow', percentComplete);
-      }
-    }
-  };
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      const preview = $('#preview');
-
-      if (preview.is('img')) {
-        preview.toggleClass('d-none');
-        preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
-      } else if (preview.is('div')) {
-        preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")");
-      }
-      if (number == 1) {
-        document.getElementById('avatarUrl').value = url;
-      } else {
-        document.getElementById('logoUrl').value = url;
-      }
-      xhr2 = new XMLHttpRequest();
-      xhr2.open('POST', `/pictureuploaded?url=${url}&filename=${file.name}&filesize=${file.size}`);
-      if (xhr2.readyState === 4) {
-        if (xhr2.status === 200) {
-          const response = JSON.parse(xhr2.responseText);
-          alert('WORKED.');
-        } else {
-          alert('FAILED.');
-        }
-      }
-      xhr2.send();
-    }
-  };
-  xhr.onerror = function(err) {
-    alert(`Could not upload file.${err}`);
-  };
-  xhr.send(file);
-}
-
 $(document).ready(() => {
   const page = 2;
 
@@ -159,17 +65,12 @@ $(document).ready(() => {
     xhr.send();
   });
 
-  setUploadFile();
+  
+  let fileUploader = new FileUploader();
+  fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
 
   // Material Select Initialization
   $('.mdb-select').material_select();
-
-  /* affix the navbar after scroll below header */
-  // $('.main-header').affix({
-  //   offset: {
-  //     top: $('#search-navigation').offset().top
-  //   }
-  // });
 
   $('#citySelect.empty').prop('disabled', 'disabled');
 

@@ -3,23 +3,23 @@ div(role='form', data-toggle='validator', id='form-step' + step)
       p.py-3 Let's see if the school you are posting a job offer for already exists in our system. Specifying the school will allow for candidates to take a look at other teachers' experiences at the school and will increase the odds of finding the right candidate for the right job.
       .row
             .col-lg-6.form-group
-                  select#provinceSelect.mdb-select.add-school-form.validate(name="province", form="form-form-" + step required)
+                  select#provinceSelect.form-form-1.mdb-select.add-school-form.validate(name="provinceId", form="form-form-" + step required)
                         option(value='', disabled='', selected='') Province
                         each province,i in provinces
-                              if searchInfo && province.code == searchInfo.province 
+                              if job && job.province && province.code == job.province 
                                     option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                               else
                                     option(value=province.code) #{province.name} - #{province.chineseName}
                   label.col-12.px-0(for='province', data-error='School has not been selected properly', data-success='Thank you.') Province
             .col-lg-6
                   if(cities)
-                        select#citySelect.mdb-select.add-school-form(name="city", form="form-form-" + step required)
-                              if searchInfo && searchInfo.city
+                        select#citySelect.form-form-1.mdb-select.add-school-form(name="cityId", form="form-form-" + step required)
+                              if job && job.city
                                     option(value='') City
                               else
                                     option(value='', selected='') City
                               each city in cities
-                                    if searchInfo && city.code == searchInfo.city
+                                    if job && job.city && city.code == job.city
                                           option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
                                     else
                                           option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
@@ -37,7 +37,9 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                               -schoolId = searchInfo.school.id
                         input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step)
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
-                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School Name
+                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School Name (Optional)
+                        p.text-small Start typing for results to show, select province and city to narrow down research. It is not necessary to specify a school for the location for a job offer but linking it to a school can direct the teacher to other teacher's reviews and help the selection in both ways.
+
             include ../review/find-school-create-option
       
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next

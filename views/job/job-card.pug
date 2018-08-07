@@ -5,8 +5,22 @@
         a(href="/job/" + job.id)
             h2.font-weight-bold #{job.title}
         h4 #{job.kicker}
-        h5 #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
-        h5 #{job.salary}CNY
+        p.mb-2
+            i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+            | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+        p.mb-2
+            i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
+            | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
+        p.mb-2
+            i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+            | Posted on #{moment(job.createdDate).format("MMM YYYY")}
+        p.mb-2
+            i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
+            | #{job.salary} CNY/Month
+        p.mb-2 
+            i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
+            | #{job.email}
         p #{job.description}
+
     .col-12
         hr

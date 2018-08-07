@@ -9,13 +9,12 @@ module.exports = {
   trunkContentArray(array, attribute, length) {
     array.forEach((element) => {
       if (element[attribute].length != 0) {
-        if (length > element[attribute].length) {
-          length = element[attribute].length;
+        if (length < element[attribute].length) {
+          let content = element[attribute];
+          content = striptags(content);
+          content = content.substring(0, length);
+          element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
         }
-        let content = element[attribute];
-        content = striptags(content);
-        content = content.substring(0, length);
-        element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
       }
     });
     return array;

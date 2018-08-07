@@ -8,6 +8,7 @@ module.exports = {
     libekkolightbox: '/javascripts/libs/ekko-lightbox.min.js',
     libtinyMCE: '//cdn.tinymce.com/4/tinymce.min.js',
     util: '/javascripts/util.js',
+    fileUploader: '/javascripts/file-uploader.js',
     rating: '/javascripts/rating.js',
     writereview: '/javascripts/writereview.js',
     reviewvalidation: '/javascripts/reviewvalidation.js',
