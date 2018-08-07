@@ -28,7 +28,11 @@ function validateForm(event) {
     // Ignore buttons, fieldsets, etc.
     if (field.nodeName !== "INPUT" && field.nodeName !== "TEXTAREA" && field.nodeName !== "SELECT") continue;
 
-    formvalid = validateField(field);
+    let fieldValid = validateField(field);
+
+    if (!fieldValid) {
+      formvalid = false;
+    }
 
   }
 
@@ -91,10 +95,17 @@ function isSpecialInput(field) {
       return true;
     case 'positionSelect':
       return true;
+    case 'file_input':
+    case 'file_input2':
+      return true;
     case 'start-date':
     // return true;
     case 'end-date':
     // return true;
+    case 'provinceSelect':
+      return true;
+    case 'citySelect':
+      return true;
 
     default:
       return false;
@@ -104,6 +115,10 @@ function isSpecialInput(field) {
 function validateSpecialInputs(field) {
   let valid = true;
   let elementId = field.getAttribute('id');
+
+  if (!field.required) {
+    return true;
+  }
 
   switch (elementId) {
 
@@ -143,6 +158,24 @@ function validateSpecialInputs(field) {
       }
       break;
 
+    case 'file_input':
+    case 'file_input2':
+      if (field.value == '') {
+
+        //School Name Empty. Invalid reset SchoolId
+        $('.file-path').addClass('invalid');
+        $('.file-path').removeClass('valid');
+        valid = false
+
+      } else {
+
+        //Input is verified. Valid
+        $('.file-path').addClass('valid');
+        $('.file-path').removeClass('invalid');
+
+      }
+      break;
+
     case 'schoolInfo':
       let schoolIdInput = $('#' + elementId).siblings('#schoolId');
       if (field.value == '') {
@@ -165,6 +198,24 @@ function validateSpecialInputs(field) {
         //Both inputs are verified. Valid
         $('#' + elementId).addClass('valid');
         $('#' + elementId).removeClass('invalid');
+
+      }
+      break;
+
+    case 'provinceSelect':
+    case 'citySelect':
+      if (field.value == '') {
+
+        //School Name Empty. Invalid reset SchoolId
+        $('#' + elementId).siblings('input').addClass('invalid');
+        $('#' + elementId).siblings('input').removeClass('valid');
+        valid = false
+
+      } else {
+
+        //Input is verified. Valid
+        $('#' + elementId).siblings('input').addClass('valid');
+        $('#' + elementId).siblings('input').removeClass('invalid');
 
       }
       break;

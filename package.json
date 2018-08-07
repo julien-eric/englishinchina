@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "eslint": "eslint --ignore-path /node_modules/*"
+    "eslint": "eslint --ignore-path /node_modules/*",
+    "test": "mocha"
   },
   "dependencies": {
     "aws-sdk": "*",
@@ -12,6 +13,7 @@
     "body-parser": "~1.13.2",
     "bootstrap": "^4.1.0",
     "bootstrap-slider": "*",
+    "cheerio": "^1.0.0-rc.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "*",
     "cookie-parser": "~1.3.5",
@@ -38,18 +40,23 @@
     "passport-facebook": "~1.0.0",
     "passport-local": "~1.0.0",
     "pug": "^2.0.3",
+    "request": "^2.87.0",
     "save": "^2.3.2",
     "serve-favicon": "^2.4.5",
     "simplesettings": "^0.0.4",
     "smartwizard": "^4.3.1",
     "striptags": "*",
     "stylus": "*",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "url-parse": "^1.4.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-import": "^2.8.0",
+    "mocha": "^5.2.0",
     "pug-lint": "^2.5.0"
   }
 }

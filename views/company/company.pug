@@ -1,17 +1,31 @@
 extends ../layout
 block content
+    -var reviews = company.reviews
+    -var averageRating = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
+    
     .school-page.mb-5
+
         include companyheader
-        //-   .container-fluid.bg-light.border-top.py-2.border-bottom
-        //-         .container.mb-1
-        //-               include locationbreadcrumb
-        .container.bg-white.pt-3           
-            h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                //- i.mdi.mdi-map-marker(aria-hidden='true')
+        include company-tabs
+        include ../review/splash-review
+         
+        .container.bg-white.pt-3(data-spy="scroll" data-target="#company-navigation" data-offset="0")           
+            .row
+                #description.description.col-sm-12.col-lg-8
+                    hr
+                    -var element = company
+                    include ../school/description
+                .col-lg-4
+                    include ../ratingcard
+                    button.btn.btn-lg.btn-block.btn-primary(type='submit')
+                        i.mdi.mdi-plus-circle(aria-hidden='true')
+                        span  Write a Review
+                    include ../utils/share-box
+            h1.display-4#locations.text-center.font-weight-bold.text 
                 | Our locations
             p.text-center.text-muted Look for #{company.name} in all of our locations around the World
             hr
-            .pt-5.pb-2
+            .py-2
                 span.clearfix
                 .locations
                     include companylocations
@@ -19,46 +33,27 @@ block content
                     .tab-content.px-0
                         each cprovince,i in provincesByCompany
                             -var schools2 = []
-                            if(i == 0)
-                                .tab-pane.fade.in.active.show(id=cprovince._id.code, role='tabpanel')
+                                .tab-pane.fade.in.show(id=cprovince._id.code, class=i==0? 'active': '', role='tabpanel')
                                     each school in schoolList
                                         if(school.province.code == cprovince._id.code)
                                             -schools2.push(school)
                                     -var schools = schools2
                                     include ../school/schoollist
-                            else
-                                .tab-pane.fade(id=cprovince._id.code, role='tabpanel')
-                                    each school in schoolList
-                                        if(school.province.code == cprovince._id.code)
-                                            -schools2.push(school)
-                                    -var schools = schools2
-                                    include ../school/schoollist
-            .row
-                .description.col-sm-12.col-lg-8
-                    -var element = company
-                    include ../school/description
-                //-   .col-lg-4
-                //-         include ratingcard
-                //-         button.btn.btn-lg.btn-block.btn-primary(type='submit')
-                //-               i.mdi.mdi-plus-circle(aria-hidden='true')
-                //-               span  Write a Review
-
             .photos.mt-5.clearfix
-                h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                    //- i.mdi.mdi-image(aria-hidden='true')
+                h1.display-4#photos.text-center.font-weight-bold.text 
                     | Photos
                 p.text-center.text-muted What others have been saying about #{company.name}
                 hr
                 -var photos = company.photos
-<<<<<<< Updated upstream
-                -var itemId = company.id
-=======
                 -var link = "/company/addphoto/" + company.id
->>>>>>> Stashed changes
                 include ../photogrid
 
-            //- h3 Reviews (#{reviewsCount})
-            //- hr
-            //- include schoolreviews
-            //- if reviewsCount > 6
-            //-       #load-more-reviews.btn.btn-secondary.btn-lg Load More
+            .reviews.mt-5.clearfix
+                h1.display-4#reviews.text-center.font-weight-bold.text 
+                    //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
+                    |  Reviews 
+                p.text-center.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
+                hr
+                include ../review/reviews
+                if reviews.length > 6
+                    #load-more-reviews.btn.btn-secondary.btn-lg Load More

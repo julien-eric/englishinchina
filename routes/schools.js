@@ -10,7 +10,7 @@ const usersController = require('../controllers/users');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const companiesController = require('../controllers/companies');
-const jadefunctions = require('./jadeutilityfunctions');
+const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const criteria = require('../criteria').criteria;
 const scripts = require('../public/scripts');
@@ -20,62 +20,6 @@ module.exports = function(passport) {
   /** ********************************
     //SCHOOL ROUTES
     ********************************** */
-  /** **********************************************************************************************************
-     *getSchoolById : Method to search for specific school by its ID. will return school and render page.
-     * ID: school's id.
-     ************************************************************************************************************ */
-  router.get('/id/:id', async (req, res) => {
-
-    try {
-      let school = await schools.findSchoolById(req.params.id);
-      let popularCities = await citiesController.getMostPopularCities();
-      let popularProvinces = await provincesController.getMostPopularProvinces();
-      let relatedSchools;
-      if (school.company && school.company.id) {
-        relatedSchools = await schools.findSchoolsByCompanySortbyRating(school.company.id);
-      }
-      let numberOfReviews = await reviews.findNumberofReviews(school._id);
-
-      let userId = 0;
-      if (req.user) {
-        userId = req.user._id.id;
-      }
-      let reviewList = await reviews.findReviews(school, 6, 1, true, userId);
-      reviewList = jadefunctions.trunkContentArray(reviewList, 'comment', 190);
-      school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
-
-      let schoolOwner = false;
-      if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
-        schoolOwner = true;
-      }
-      const reviewDistribution = reviews.createReviewDistribution(reviewList);
-
-      res.render('school/school', {
-        title: `${school.name} - Second Language World`,
-        edit: schoolOwner,
-        school,
-        user: req.user,
-        reviewsCount: numberOfReviews,
-        reviews: reviewList,
-        reviewDistribution,
-        criteria,
-        moment,
-        criteriaScore: school.criteria,
-        jadefunctions,
-        popularCities,
-        popularProvinces,
-        relatedSchools,
-        pictureInfo: pictureinfo,
-        scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
-      });
-    } catch (error) {
-      res.render('error', {
-        message: error.message,
-        error: error
-      });
-    }
-  });
-
   /** **********************************************************************************************************
      *AddSchool : Method for loading page for creating a new school. As well as POST request from website to process creation
      * Param : user, verify user validity and store in DB, to enable editing school
@@ -95,8 +39,8 @@ module.exports = function(passport) {
           pictureInfo: pictureinfo,
           provinces,
           companies,
-          scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE],
-          incompleteSchool
+          incompleteSchool,
+          scripts: [scripts.util, scripts.fileUploader, scripts.typeahead, scripts.typeaheadwrapper, scripts.libtinyMCE, scripts.tinyMCE]
         });
       } catch (error) {
         res.render('error', {
@@ -118,8 +62,12 @@ module.exports = function(passport) {
         callbackMessage,
         req);
 
-      // redirect the user to its new school
-      res.redirect(`/school/id/${newSchool.id}`);
+      if (req.body.ajax) {
+        res.send(JSON.stringify(newSchool));
+      } else {
+        // redirect the user to its new school
+        res.redirect(`/school/${newSchool.id}`);
+      }
     });
 
   router.post('/addschoolgetstarted', utils.isAuthenticated, (req, res) => {
@@ -137,7 +85,7 @@ module.exports = function(passport) {
     res.render('addphoto', {
       title: 'Upload Picture - Second Language World',
       school,
-      scripts: [scripts.util]
+      scripts: [scripts.util, scripts.fileUploader]
     });
   });
 
@@ -173,7 +121,7 @@ module.exports = function(passport) {
     const xschool = school.toObject();
     xschool.photos.push(image);
     await schools.updatePictures(xschool);
-    res.redirect(`/school/id/${school._id}`);
+    res.redirect(`/school/${school._id}`);
   });
 
   router.get('/getphoto/:id', (req, res) => {
@@ -200,7 +148,7 @@ module.exports = function(passport) {
     const schoolId = req.params.schoolid;
 
     images.deleteImage(photoId, (err, numberOfPhotosDeleted) => {
-      res.redirect(`/school/id/${schoolId}`);
+      res.redirect(`/school/${schoolId}`);
     });
   });
 
@@ -215,32 +163,6 @@ module.exports = function(passport) {
     });
   });
 
-  /** ********************************************************************************************************************************
-     //REVIEWS
-     ********************************************************************************************************************************** */
-  /** **********************************************************************************************************
-     *WriteReview : Page for users to write review for school specified by id
-     * Param : School id
-     ************************************************************************************************************ */
-  router.get('/id/:id/writereview', utils.isAuthenticated, async (req, res) => {
-    const schoolId = req.params.id;
-    let numberOfReviews = await reviews.findNumberofReviews(schoolId);
-    let reviewList = await reviews.findReviews(schoolId);
-    let school = await schools.findSchoolById(schoolId);
-    res.render('review/writereview', {
-      title: `Write Review for ${school.name} - Second Language World`,
-      user: req.user,
-      school,
-      criteria,
-      moment,
-      reviewsCount: numberOfReviews,
-      reviews: reviewList,
-      pictureInfo: pictureinfo,
-      jadefunctions,
-      scripts: [scripts.util, scripts.libcalendar, scripts.libbsdatetimepicker, scripts.libslider, scripts.writereview]
-    });
-  });
-
   /** **********************************************************************************************************
      *deleteReview : Delete Review
      * userID : integer
@@ -251,7 +173,7 @@ module.exports = function(passport) {
     const reviewId = req.params.reviewid;
     const schoolId = req.params.schoolid;
     reviews.deleteReview(reviewId, (err, document, result) => {
-      res.redirect(`/school/id/${schoolId}`);
+      res.redirect(`/school/${schoolId}`);
     });
   });
 
@@ -263,7 +185,7 @@ module.exports = function(passport) {
       const page = req.params.page;
       const schoolId = req.params.schoolid;
       let reviews = await reviews.findReviews(schoolId, 6, page, true, req.user._id.id);
-      res.render('school/schoolreviews', {
+      res.render('reviews/reviews', {
         title: 'Reviews - Second Language World',
         reviews,
         pictureInfo: pictureinfo,
@@ -293,7 +215,7 @@ module.exports = function(passport) {
     review.comment = jadefunctions.nl2br(review.comment, false);
 
     if (ajax) {
-      res.render('school/schoolreview', {
+      res.render('review/review', {
         review,
         loggedin: 'true',
         pictureInfo: pictureinfo,
@@ -386,7 +308,7 @@ module.exports = function(passport) {
      * [Province] optional.
      * [City] optional
      ************************************************************************************************************ */
-  router.get('/search', async (req, res) => {
+  router.get('/search/', async (req, res) => {
 
     try {
       const schoolInfo = req.query.schoolInfo;
@@ -436,7 +358,7 @@ module.exports = function(passport) {
      * [Province] optional.
      * [City] optional
      ************************************************************************************************************ */
-  router.get('/query', async (req, res) => {
+  router.get('/query/', async (req, res) => {
 
     try {
       const schoolInfo = req.query.schoolInfo || undefined;
@@ -468,7 +390,7 @@ module.exports = function(passport) {
               companies,
               jadefunctions,
               pictureInfo: pictureinfo,
-              scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+              scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
             });
           });
         });
@@ -483,7 +405,7 @@ module.exports = function(passport) {
         return handleError(err);
       }
 
-      res.redirect(`/school/id/${editedSchool._id}`);
+      res.redirect(`/school/${editedSchool._id}`);
     });
   });
 
@@ -515,6 +437,51 @@ module.exports = function(passport) {
     schools.deleteSchool(req.params.id, (err, deletedSchool) => {
       res.redirect('/');
     });
+  });
+
+  /** **********************************************************************************************************
+     *getSchoolById : Method to search for specific school by its ID. will return school and render page.
+     * ID: school's id.
+     ************************************************************************************************************ */
+  router.get('/:id', async (req, res) => {
+
+    try {
+      let school = await schools.findSchoolById(req.params.id);
+      let popularCities = await citiesController.getMostPopularCities();
+      let popularProvinces = await provincesController.getMostPopularProvinces();
+
+      school.reviews = jadefunctions.trunkContentArray(school.reviews, 'comment', 190);
+      school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
+      let splashReview = reviews.selectSplashReview(school.reviews);
+
+      let schoolOwner = false;
+      if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
+        schoolOwner = true;
+      }
+      const reviewDistribution = reviews.createReviewDistribution(school.reviews);
+
+      res.render('school/school', {
+        title: `${school.name} - Second Language World`,
+        edit: schoolOwner,
+        school,
+        user: req.user,
+        reviewDistribution,
+        splashReview,
+        criteria,
+        moment,
+        criteriaScore: school.criteria,
+        jadefunctions,
+        popularCities,
+        popularProvinces,
+        pictureInfo: pictureinfo,
+        scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
+    }
   });
 
   return router;

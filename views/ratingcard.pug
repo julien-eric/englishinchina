@@ -1,0 +1,14 @@
+
+#accordion.mb-2
+      .card.border-0
+            #headingOne.card-header.text-center.border-top-5-primary.border-bottom-0
+                  h5.text-uppercase.mb-0
+                        button.btn.btn-link.text-white(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
+                              i.mdi.mdi-star(aria-hidden='true')
+                              | Rating
+            #collapseOne.collapse(aria-labelledby='headingOne', data-parent='#accordion' class=reviews.length > 0 ? 'show' : '')
+                  if reviews.length > 0 
+                        .card-body
+                              include ratingcardbody 
+                  else
+                        h3.py-5.text-center No Reviews Yet

@@ -8,30 +8,18 @@ if locals.user
             a.dropdown-item(href='/signout') Sign Out
     li.hidden-xs
         if locals.user.fb && locals.user.useFacebookPic
-            //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
-            //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
             .user-picture
-<<<<<<< Updated upstream
-                img.rounded-circle(src=pictureInfo.returnFacebookPicture(user.avatarUrl), height='40',  alt='Cinque Terre')
-=======
                 img.rounded-circle(src=pictureInfo.returnFacebookPicture(user.avatarUrl), width='40', height='40',  alt='Cinque Terre')
->>>>>>> Stashed changes
         else
-            //- div.default-user-picture.rounded-circle(style="background-image: url('/images/default-user.png');")
-            //- div.profile-img.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
             .user-picture
-<<<<<<< Updated upstream
-                img.rounded-circle(src=pictureInfo.returnThumbnail(user.avatarUrl), height='40', alt='Cinque Terre')
-=======
                 img.rounded-circle(src=pictureInfo.returnThumbnail(user.avatarUrl), width='40', height='40', alt='Cinque Terre')
->>>>>>> Stashed changes
 else
-    //- li.nav-item
-        //- a.nav-link(href='#') Login 
-        //- button#elicit-email.btn.btn-link(type='button', data-toggle='modal', data-target='#exampleModalCenter')
-        //- button#elicit-email.btn.btn-link(type='button')
-        //-   | Login
+
     li.nav-item
-        a.nav-link(href='/login') Login
+        a.nav-link(href='/login') 
+            i.fa.prefix.mdi.mdi-account(aria-hidden='true')
+            | Login
     li.nav-item
-        a.nav-link(href='/signup') Sign up
+        a.nav-link(href='/signup') 
+            //- i.fa.prefix.mdi.mdi-account-plus(aria-hidden='true')
+            | Sign up

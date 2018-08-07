@@ -1,13 +1,17 @@
 extends ../layout
 block content
+      -var reviews = school.reviews
+      -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
+      
       .school-page.mb-5
+
             include schoolheader
-            .container-fluid.bg-light.border-top.py-2.border-bottom
-                  .container.mb-1
-                        include locationbreadcrumb
+            include school-tabs
+            include ../review/splash-review
+            
             .container.bg-white.pt-3           
                   .row
-                        .description.col-sm-12.col-lg-8
+                        #description.description.col-sm-12.col-lg-8
                               -var element = school;
                               include description
                               //- if(relatedSchools)
@@ -16,42 +20,37 @@ block content
                               //-       include relatedschools
                               //- include schooladminsection
                         .col-lg-4
-                              include ratingcard
-                              -var query = '?schoolId=' +  school.id;
+                              include ../ratingcard
+                              -var query = '?schoolId=' +  school._id;
                               a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Write a Review
-                              a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school.id)
+                              a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school._id)
                                     i.mdi.mdi-plus-circle(aria-hidden='true')
                                     span  Add a Picture
+                              include ../utils/share-box
 
-                  .photos.mt-5.clearfix
+                  #photos.photos.mt-5.clearfix
                         h1.display-4#popular-cities.text-center.font-weight-bold.text 
                               //- i.mdi.mdi-image(aria-hidden='true')
                               | Photos
                         p.text-center.text-muted What others have been saying about #{school.name}
                         hr
                         -var photos = school.photos
-<<<<<<< Updated upstream
-                        -var itemId = school.id
-=======
                         -var link = "/school/addphoto/" + school.id
->>>>>>> Stashed changes
                         include ../photogrid
 
-                  .reviews.mt-5.clearfix
+                  #reviews.reviews.mt-5.clearfix
                         h1.display-4#popular-cities.text-center.font-weight-bold.text 
                               //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
                               |  Reviews 
                         p.text-center.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
                         hr
-                        include schoolreviews
-                        if reviewsCount > 6
-                              #load-more-reviews.btn.btn-secondary.btn-lg Load More
+                        include ../review/reviews
 
 
                   if school.averageRating != -1
-                        .ratings.mt-5.clearfix
+                        #rating.ratings.mt-5.clearfix
                               h1.display-4#popular-cities.text-center.font-weight-bold.text 
                                     //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
                                     |  Rating 

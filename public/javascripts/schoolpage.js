@@ -15,6 +15,13 @@ $(document).ready(() => {
   });
 
 
+  $('#local-nav ul li a').click((elem) => {
+    let div = elem.currentTarget.getAttribute('href');
+    $('html,body').animate({
+      scrollTop: $(div).offset().top - 70
+    }, 'slow');
+  });
+
   // EKKO LIGHTBOX
   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
@@ -126,7 +133,6 @@ $(document).ready(() => {
           $('.school-img-list-item').unbind();
           $('#lightbox').unbind();
           page++;
-          setLightboxOnReadmore();
         } else {
           alert('Problem.');
         }

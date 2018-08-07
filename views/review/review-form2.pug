@@ -1,0 +1,31 @@
+h2.font-weight-light.border-bottom.border-gray.pb-2 Your relationship with the school
+#form-step-2(role='form', data-toggle='validator')
+      p Let us know about your relationship with the school. Getting an idea of when you worked there can be important to other teachers, the reputation of schools can change over time and it would be unfortunate if a bad review couldn't be overwritten by a pletora of positive ones. The position as a teacher and the salary won't ever be divulged in public and only serve to create an average of the school. 
+      .row.pt-3
+            .col-lg-12
+                  .md-form
+                        select#positionSelect.mdb-select.form-form-2(name="position" form="form-form-2" required)
+                              option(value="") Position in School
+                              option(value="1") Teacher
+                              option(value="2") Teacher's Assistant(TA)
+                              option(value="3") Head Teacher
+                        label.col-12.px-0(for='position', data-error='Please select a position', data-success='Thank you')
+      
+      .row
+            .col-lg-12
+                  .form-group.md-form
+                        input#salary.form-form-2.form-control.validate(type='number' name='salary' form="form-form-2" placeholder="Salary" aria-label="Recipient's username" aria-describedby='basic-addon2' min="1000" max="100000" )
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (greater than 1000)', data-success='Thank you') Salary 
+                              i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries are not saved as part of a review but simply aggregated anonymously to a school in order to calculate the average salary for a specific school (optional)" )
+      .row.pt-3
+            .col-lg-6.pb-3
+                  .md-form
+                        input#start-date.form-form-2.form-control.datepicker.validate(placeholder='Starting date', name='dateEmployed', form="form-form-2", type='text' onblur='validateField(this)' required)
+                        label(for='start-date', data-error='Please correct', data-success='Thank you' ) Started working...
+            .col-lg-6.pb-3
+                  .md-form
+                        input#end-date.form-form-2.form-control.datepicker.validate(placeholder='End date', name='dateReleased', form="form-form-2" , type='text' onblur='validateField(this)' required)
+                        label(for='end-date', data-error='Please correct', data-success='Thank you') Finished working...
+
+      button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
+      button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous

@@ -15,7 +15,7 @@ const resizeImageAsync = function(bucket, gmImage, filename, size, prefix) {
 
 module.exports = {
 
-  async createResponsivePictures(url, filename, filesize, callback) {
+  async createResponsivePictures(filename, filesize) {
     let bucket = await awsManager.getObject(filename);
     resizeImageAsync(bucket, gm(bucket.Body), filename, pictureinfo.THUMBNAIL_SIZE, pictureinfo.THUMBNAIL);
     resizeImageAsync(bucket, gm(bucket.Body), filename, pictureinfo.LARGE_SIZE, pictureinfo.LARGE);

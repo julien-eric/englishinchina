@@ -1,25 +1,20 @@
 extends ../layout
 block content
     include carousel
+    //- include ../header/header
     include ../searchnavigation
     include join-banner
-    //- include takeaction
     //- .container
     //-     include ../populargrid/popularcategories
     //-     .clearfix
+    include takeaction
 
     .container
         .pt-5.pb-2
-            h1.display-4#popular-cities.text-center.font-weight-bold Work for these 
+            h1.display-4.text-center.font-weight-bold Work for these 
                 span.text-muted(data-toggle='tooltip', data-placement='right', title='These schools are franchises whose schools are scattered around the World. For unaffiliated schools use the search function or find the company') schools*
             p.text-center.text-muted Check out their locations around the World 
             
         -var companies = popularCompanies
         include ../company/companylist
-        //- .py-5
-        //-     h1#popular-cities.text-center.font-weight-light Featured Schools
-        //-     p.text-center Check out our schools accross China 
-        //-     hr
-        //- .card-columns
-        //-     include ../schoollist
-        //-     include ../sidebar
+    

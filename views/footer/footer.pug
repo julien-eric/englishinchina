@@ -1,32 +1,46 @@
-footer.bg-dark.text-light-secondary.font-weight-light.py-5
+footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gray
     .container
-        .row
-            .col-sm-12.col-md-6.col-lg-6
-                h2.font-weight-light.text-light Second Language World
+        .row.justify-content-center
+            .col-sm-12.pt-3.pb-2.text-center
+                h1.display-4.text-white.text-center.font-weight-bold Second Language World
+                h3.font-weight-bold.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 Teach | Schools | Reviews | Jobs
+                //- p.text-center.text-muted Check out their locations around the World 
+            .col-sm-12.col-md-8.col-lg-8.text-center
+                hr.text-white.bg-white 
+                //- h2.font-weight-light.text-light Second Language World
                 p Our mission at Second Language World is to make it possible for ESL (English as a Second Language) Teachers looking for a job abroad to be as informed as possible. We also hope to bring a needed layer of transparency into ESL Schools.
                 p
                     a.text-light-secondary(href='#')
                         i.mdi.mdi-map-marker(aria-hidden='true')
                         |  Based in Montreal, Canada 	
                 p
-                    a.text-light-secondary(href='#')
+                    a.text-light-secondary(href='mailto:secondlanguageworld@gmail.com', alt='email Second Language World')
                         i.mdi.mdi-email(aria-hidden='true')
                         |  secondlanguageworld@gmail.com
+                .fb-page.mb-3(data-href='https://www.facebook.com/secondlanguageworld/', data-tabs='timeline', data-height='70', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
+                    blockquote.fb-xfbml-parse-ignore(cite='https://www.facebook.com/secondlanguageworld/')
+                        a(href='https://www.facebook.com/secondlanguageworld/') Second Language World
                 h1
-                    a.text-light-secondary(href='#') 
+                    a.text-light-secondary(href='https://www.facebook.com/secondlanguageworld/') 
                         i.mdi.mdi-facebook-box(aria-hidden='true')
-                    a.text-light-secondary(href='#') 
+                    a.text-light-secondary(href='https://twitter.com/englishchinaco') 
                         i.mdi.mdi-twitter-box(aria-hidden='true')
-                    a.text-light-secondary(href='#') 
+                    a.text-light-secondary(href='https://www.linkedin.com/company/secondlanguageworld/') 
                         i.mdi.mdi-linkedin-box(aria-hidden='true')
                     a.text-light-secondary(href='#') 
                         i.mdi.mdi-skype(aria-hidden='true')
+            .col-lg-6.col-md-12.col-sm-12.text-center
+                
 
-            .col-sm-12.col-md-5.col-lg-5
-                h2.font-weight-light.text-light Contact Us
-                form(action='/contactus', method='POST')
-                    .form-group
-                        input.bg-darker.text-light-secondary(type='email', name='email', class='form-control', placeholder='Email',required)
-                    .form-group
-                        textarea.bg-darker.text-light-secondary(rows='4', name='content', class='form-control', placeholder='Content', style="width: 100%",    required)
-                    button(class='btn btn-light', type='submit') Submit
+            //- .col-sm-12.col-md-5.col-lg-5
+            //-     h2.font-weight-light.text-light Contact Us
+            //-     form(action='/contactus', method='POST')
+            //-         .md-form
+            //-             //- i.fa.fa-pencil.prefix
+            //-             input#searchCompanies.text-light.form-control(type='email', name='email', value='' required)
+            //-             label(for='textareaPrefix') Email
+            //-         .md-form
+            //-             //- i.fa.fa-pencil.prefix
+            //-             textarea#textareaPrefix.text-light.form-control.md-textarea(type='email', name='content',  rows='1', required)
+            //-             label(for='textareaPrefix') Content
+            //-         button(class='btn btn-light', type='submit') Submit

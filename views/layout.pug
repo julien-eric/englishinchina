@@ -21,9 +21,8 @@ html
       include analytics
 
   body
-    if !hideHeader
-      include ./header/pre-header
-      include ./header/header
+    //- include ./header/pre-header
+    include ./header/header
     include flash-errors
     block content
     include ./footer/footer
@@ -38,6 +37,8 @@ html
     script(type='text/javascript', src='/javascripts/libs/mdbootstrappro.min.js')
     //- script(src='/javascripts/libs/jquery.smartWizard.min.js')
     script(src='/javascripts/libs/nouislider.min.js')
+    script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b203a7f0116c6d1')
+    
     if scripts
       each js in scripts
         script(src=js)

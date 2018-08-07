@@ -104,6 +104,19 @@ module.exports = {
     }
   },
 
+  selectSplashReview(reviews) {
+    let splashReview = {average_rating: -1};
+    reviews.forEach((review) => {
+      if (review.average_rating > splashReview.average_rating && review.comment) {
+        splashReview = review;
+      }
+    });
+    if (splashReview.average_rating == -1) {
+      return undefined;
+    }
+    return splashReview;
+  },
+
   addHelpful(review, helpful) {
     return Review.findOneAndUpdate(
       {_id: review._id},

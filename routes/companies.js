@@ -4,37 +4,13 @@ const moment = require('moment');
 const router = express.Router();
 const schools = require('../controllers/schools');
 const provincesController = require('../controllers/provinces');
-const citiesController = require('../controllers/cities');
 const companies = require('../controllers/companies');
-const jadefunctions = require('./jadeutilityfunctions');
+const reviewsController = require('../controllers/reviews');
+const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 
 module.exports = function(passport) {
-
-  router.get('/id/:id', async (req, res) => {
-    let companyId = req.params.id;
-    let company = await companies.findCompanyById(companyId);
-    company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
-    let popularCities = await citiesController.getMostPopularCities();
-    let popularProvinces = await provincesController.getMostPopularProvinces();
-    let schoolList = await schools.findSchoolsByCompany(company);
-    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
-    const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
-    res.render('company/company', {
-      title: `${company.name} - Second Language World`,
-      company,
-      user: req.user,
-      moment,
-      jadefunctions,
-      popularCities,
-      popularProvinces,
-      provincesByCompany,
-      schools: truckSchoolList,
-      pictureInfo: pictureinfo,
-      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
-    });
-  });
 
   /** **********************************************************************************************************
    *searchCompany : Method for search companies , it will return any company that has some of the information
@@ -73,7 +49,7 @@ module.exports = function(passport) {
       res.render('company/addcompany', {
         title: 'Add Company - Second Language World',
         message: req.flash('message'),
-        scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+        scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
       });
     })
     .post((req, res) => {
@@ -85,7 +61,7 @@ module.exports = function(passport) {
         logoUrl: req.body.logoUrl
       };
       companies.addCompany(company).then((newCompany) => {
-        res.redirect(`/company/id/${newCompany.id}`);
+        res.redirect(`/company/${newCompany.id}`);
       });
     });
 
@@ -97,7 +73,7 @@ module.exports = function(passport) {
           company,
           message: req.flash('message'),
           pictureInfo: pictureinfo,
-          scripts: [scripts.util, scripts.libtinyMCE, scripts.tinyMCE]
+          scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
         });
       });
     })
@@ -111,9 +87,38 @@ module.exports = function(passport) {
         logoUrl: req.body.logoUrl
       };
       companies.editCompany(company).then((newCompany) => {
-        res.redirect(`/company/id/${newCompany.id}`);
+        res.redirect(`/company/${newCompany.id}`);
       });
     });
+
+  router.get('/:id', async (req, res) => {
+    let companyId = req.params.id;
+    let company = await companies.findCompanyWithSchoolsAndReviews(companyId);
+    company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
+
+    let schoolList = await schools.findSchoolsByCompany(company);
+    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
+    schoolList = jadefunctions.trunkContentArray(schoolList, 'description', 300);
+    company.reviews = jadefunctions.trunkContentArray(company.reviews, 'comment', 190);
+    let splashReview = reviewsController.selectSplashReview(company.reviews);
+    let splashSchool = undefined;
+    if (!splashReview) {
+      splashSchool = schools.selectSplashSchool(schoolList);
+    }
+    res.render('company/company', {
+      title: `${company.name} - Second Language World`,
+      company,
+      user: req.user,
+      moment,
+      splashReview,
+      splashSchool,
+      jadefunctions,
+      provincesByCompany,
+      schools: schoolList,
+      pictureInfo: pictureinfo,
+      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+    });
+  });
 
   return router;
 };

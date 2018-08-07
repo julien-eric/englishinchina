@@ -2,10 +2,10 @@ extends layout
 block content
    div.container
       h1.col-sm-10.offset-sm-1.col-md-6.offset-md-3.col-lg-6.offset-lg-3 Review for #{review.foreignId.name}
-      include school/schoolreview
+      include review/review
    div.container
       h2
-         a.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1(href="/school/id/#{review.foreignId.id}") More reviews on #{review.foreignId.name}
+         a.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1(href="/school/#{review.foreignId.id}") More reviews on #{review.foreignId.name}
       .otherreviews.col-sm-10.offset-sm-1.col-md-10.offset-md-1.col-lg-10.offset-lg-1
-         include school/schoolreviews
-         a.btn.btn-primary.btn-lg(href="/school/id/#{review.foreignId.id}") See School
+         include review/reviews
+         a.btn.btn-primary.btn-lg(href="/school/#{review.foreignId.id}") See School

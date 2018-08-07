@@ -1,8 +1,8 @@
-//- avgRating has to be defined prior to the inclusion of this template
-div(class=jadefunctions.ratingColor(avgRating, 'text'))
+//- averageRating has to be defined prior to the inclusion of this template
+div(class=jadefunctions.ratingColor(averageRating, 'text'))
   - var i = 0;
   while i < 5
-    - var leftOver = avgRating-i;
+    - var leftOver = averageRating-i;
     if leftOver >= 1
       i.mdi.mdi-star(aria-hidden='true')
     else if leftOver == 0.5

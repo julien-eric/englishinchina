@@ -16,9 +16,10 @@ if companies
             each company in companies
                   .col-sm-12.col-md-6.col-lg-4.mb-3
                         include companycard
-            .col-sm-12.col-md-6.col-lg-4.mb-3
-                  .card.bg-primary.text-white.text-center
-                        .card-body
-                              a.btn.btn-link.mr-1(href='') 
-                                    span.text-white See All Companies
-                                    i.mdi.mdi-chevron-double-right.text-white(aria-hidden='true') 
+            if companies.length > 6
+                  .col-sm-12.col-md-6.col-lg-4.mb-3
+                        .card.bg-primary.text-white.text-center
+                              .card-body
+                                    a.btn.btn-link.mr-1(href='') 
+                                          span.text-white See All Companies
+                                          i.mdi.mdi-chevron-double-right.text-white(aria-hidden='true') 

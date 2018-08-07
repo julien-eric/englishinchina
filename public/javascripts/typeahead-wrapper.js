@@ -2,6 +2,10 @@
 /***********************
  * TYPEAHEAD 
  ***********************/
+
+var schoolList = false;
+var notFoundTemplate;
+
 // Instantiate the Bloodhound suggestion engine
 var schools = new Bloodhound({
   datumTokenizer: function(datum) {
@@ -43,9 +47,13 @@ var schools = new Bloodhound({
 $(document).ready(() => {
 
   var pathname = window.location.pathname;
-  var onReviewPage = true;
-  if (pathname.indexOf('review') == -1)
-    onReviewPage = false;
+  var autoTriggerValidation = false;
+  notFoundTemplate = ['<div class="mx-2 empty-message"><b>No results found</b></div>'];
+
+  if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1){
+    autoTriggerValidation = true;
+    notFoundTemplate = undefined;
+  }
 
   $('.typeahead').typeahead({
     hint: true,
@@ -61,7 +69,7 @@ $(document).ready(() => {
         }
       },
       templates: {
-        notFound: ['<div class="mx-2 empty-message"><b>No results found</b></div>'],
+        notFound: notFoundTemplate,
         suggestion: function(data) {
           return '<div>' + data.name + ', <span class="text-muted text-capitalize">' + data.province.name + ', ' + data.city.pinyinName + '</span></div>';
         }
@@ -70,23 +78,59 @@ $(document).ready(() => {
   ).blur(function() {
 
     let hasSelection = null;
+
+    // If we find this inputs value in the schoolList we have a selection
     if (schoolList) {
       hasSelection = schoolList.find((school) => {
         return school.name == $(this).val();
       });
     }
-    if (hasSelection == null && onReviewPage) {
-      $('.typeahead').val('');
+
+    if (hasSelection == null && autoTriggerValidation) {
+      $('#noSchoolGroup').removeClass('d-none');
     }
-    if (onReviewPage) {
+
+    // If page requires this input's validation, trigger it
+    if (autoTriggerValidation) {
       validateField($('#schoolInfo')[0]);
     }
 
   });
 
   $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
+
+    // Set the schoolId to hidden input
     $('#schoolId').val(suggestion._id);
-    if (pathname.indexOf('review') != -1)
+
+    $('#noSchool').prop('checked', false);
+    $('#addSchoolCollapsible').collapse('hide');
+    $('#noSchoolGroup').addClass('d-none');
+
+    // If page requires this input's validation, trigger it
+    if (autoTriggerValidation) {
       validateField($('#schoolInfo')[0]);
+    }
   });
+
+  $('#schoolInfo').on('keyup', function(ev, suggestion, async, data) {
+
+    let hasSelection = false;
+    if (schoolList) {
+      hasSelection = schoolList.find((school) => {
+        return school.name == $(this).val();
+      });
+    }
+
+    if (!hasSelection && autoTriggerValidation) {
+      $('#schoolId').val('');
+      $('#noSchoolGroup').removeClass('d-none');
+    }
+
+    // If page requires this input's validation, trigger it
+    if (autoTriggerValidation) {
+      validateField($('#schoolInfo')[0]);
+      $('#addSchoolName').val($(this).val());
+    }
+  });
+
 });

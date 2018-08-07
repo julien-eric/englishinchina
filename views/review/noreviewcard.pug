@@ -1,0 +1,14 @@
+.col-sm-12.col-md-6.col-lg-4.mb-3
+    .card.text-center.h-100
+        .display-grid
+            a.view.overlay.card-img(href="/review/")
+                //- img.card-img-top(src='#{pictureInfo.returnThumbnail(school.pictureUrl)}', alt='Card image')
+                .image-container.blurred.bg-primary
+            .card-img-overlay.text-white.my-5
+                h2.card-title Write Review
+
+            -var query = school? '?schoolId=' +  school.id : "";
+            a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href="/review/" + query)
+                i.text-white.mdi.mdi-plus(aria-hidden='true')
+            .card-body
+                p Help other teachers around the world by writing a review

@@ -3,7 +3,7 @@ const router = express.Router();
 const schools = require('../controllers/schools');
 const email = require('../controllers/email');
 const moment = require('moment');
-const jadefunctions = require('./jadeutilityfunctions');
+const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const provincesController = require('../controllers/provinces');
 const companiesController = require('../controllers/companies');
@@ -13,7 +13,6 @@ const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
-// const jade = require('jade');
 
 // let handleRenderError = (err, html) => {
 //   if (err) {
@@ -29,24 +28,16 @@ module.exports = function(passport) {
   router.get('/', async (req, res) => {
 
     try {
-      const pageSize = 6;
-      let schoolList = await schools.getSchools(pageSize, 0, res.locals.admin);
       let provinces = await provincesController.getAllProvinces();
-      let featuredSchools = await schools.featuredSchools();
       let popularCities = await citiesController.getMostPopularCities();
       let popularProvinces = await provincesController.getMostPopularProvinces();
-      // let popularCompanies = await companiesController.getAllCompanies();
-      let popularCompanies = await companiesController.countSchoolsPerCompany();
+      let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
       const splashText = require('../splash-text.json');
-      // let result = jadefunctions.returnAverage(popularCompanies[0].schools, 'averageRating');
-      const truckSchoolList = jadefunctions.trunkContentArray(schoolList, 'description', 150);
       popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
       res.render('home/home', {
         title: 'Second Language World',
         main: true,
-        featuredSchoolList: featuredSchools,
-        schools: truckSchoolList,
         user: req.user,
         provinces,
         pictureInfo: pictureinfo,
@@ -56,8 +47,6 @@ module.exports = function(passport) {
         popularCompanies,
         splashText,
         currentPage: 1,
-        total: schoolList.count,
-        totalPages: ((schoolList.count - (schoolList.count % pageSize)) / pageSize) + 1,
         scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
       });
     } catch (error) {
@@ -68,6 +57,10 @@ module.exports = function(passport) {
     }
   });
 
+  // TODO User Types
+  router.get('/user-types', async (req, res) => {
+
+  });
 
   router.get('/page/:page', async (req, res) => {
 
@@ -105,7 +98,6 @@ module.exports = function(passport) {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
         title: 'Login - Second Language World',
-        hideHeader: true,
         message: req.flash('message'),
         scripts: [scripts.util]
       });
@@ -179,7 +171,6 @@ module.exports = function(passport) {
     .get((req, res) => {
       res.render('login/register', {
         title: 'Sign up - Second Language World',
-        hideHeader: true,
         message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });
@@ -301,7 +292,6 @@ module.exports = function(passport) {
       let user = await usersController.findUserById(req.user._id);
       res.render('login/edituser', {
         title: `Edit Profile - ${user.username} - Second Language World`,
-        hideHeader: true,
         user,
         pictureInfo: pictureinfo,
         jadefunctions,

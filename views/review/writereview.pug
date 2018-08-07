@@ -2,10 +2,11 @@ extends ../layout
 block content
       .container
             .py-5
-                  h1#write-review-title.text-center.font-weight-light Review a School
+                  h1.display-4.font-weight-bold#write-review-title.text-center Review a School
             form#form-form-0.validate-form(action='/', method='post')
             form#form-form-1.validate-form(action='/', method='post')
             form#form-form-2.validate-form(action='/', method='post')
+            form#add-school-form.validate-form(action='/', method='post')
             // Stepper
             .steps-form
                   .steps-row.setup-panel.d-flex.justify-content-between
@@ -26,19 +27,21 @@ block content
                         // First Step
                         #step-0.row.setup-content
                               .col-md-12
-                                    include form0
+                                    -var formName = 'review-form'
+                                    -var step = 0
+                                    include find-school
 
                         // Second Step
                         #step-1.row.setup-content
                               .col-md-12
-                                    include form1
+                                    include review-form1
 
                         // Third Step
                         #step-2.row.setup-content
                               .col-md-12
-                                    include form2
+                                    include review-form2
                               
                         // Fourth Step
                         #step-3.row.setup-content
                               .col-md-12
-                                    include form3
+                                    include review-form3

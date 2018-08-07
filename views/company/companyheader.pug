@@ -1,22 +1,27 @@
 #school-header
     #jumbotron-background.jumbotron-fluid.jumbotron-school(style='background-image: url(' + pictureInfo.returnLarge(company.pictureUrl) + ');')  
     #jumbotron-content.text-center.container-fluid
-        .py-5
+        .row.transparent-black.mb-5
+            .container
+                include company-map-breadcrumb 
+
         h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{company.name}
-        .py-1
+
+        .row.my-3.justify-content-center
+            .col-lg-6
+                .row.justify-content-center
+                    .chip.chip-md
+                        i.mdi.mdi-school(aria-hidden='true') 
+                        |  #{company.schools.length} Schools
+                    if company.reviews && company.reviews.length > 0
+                        .chip.chip-md
+                            i.mdi.mdi-message-text(aria-hidden='true')      
+                            |  #{company.reviews.length} Reviews
+                    if averageRating != 'NaN'
+                        .chip.chip-md
+                            include ../genratingshort
+
         if company.website
-            a.btn.btn-lg.btn-primary(href="#{company.website}")
-                    i.mdi.mdi-web(aria-hidden='true')
-                    |  Visit Website
-        //- if school.company
-        //-     a.btn.btn-lg.btn-primary(href="/company/id/#{school.company.id}")
-        //-             i.mdi.mdi-clipboard-check(aria-hidden='true')
-        //-             |  See Company
-        //- if school.address
-        //-     a.btn.btn-lg.btn-primary(href="#")
-        //-             i.mdi.mdi-map-marker(aria-hidden='true')
-        //-             |  See in Maps
-        //- if school.phone
-        //-     a.btn.btn-lg.btn-primary(href="#{school.phone}")
-        //-             i.mdi.mdi-cellphone(aria-hidden='true')
-        //-             |  Contact
+            a.btn.btn-lg.btn-primary(href="//"+company.website)
+                i.mdi.mdi-web(aria-hidden='true')
+                |  Visit Website

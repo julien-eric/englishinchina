@@ -1,12 +1,21 @@
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const School = require('./../models/school');
 const provincesController = require('./provinces');
 const citiesController = require('./cities');
 const companiesController = require('./companies');
 const reviewsController = require('./reviews');
 const imagesController = require('./images');
+const _ = require('underscore');
 const MISSING = -1;
 
 let SchoolsController = function() {};
+
+let unpluck = function(array) {
+  return _.filter(array, function(element) {
+    return Object.getOwnPropertyNames(element).length != 0;
+  });
+};
 
 SchoolsController.prototype.getAllSchools = function() {
   return School.find().exec();
@@ -37,6 +46,7 @@ SchoolsController.prototype.getSchools = async function(pageSize, page) {
 
 SchoolsController.prototype.addSchool = async function(user, school) {
 
+  let userId = user ? user._id : null;
   let province = await provincesController.getProvinceByCode(school.province);
   let city = await citiesController.getCityByCode(school.city);
   let company = null;
@@ -44,7 +54,7 @@ SchoolsController.prototype.addSchool = async function(user, school) {
     company = await companiesController.findCompanyById(school.company);
   }
   let createdSchool = await School.create({
-    user: user._id,
+    user: userId,
     name: school.name,
     description: school.description,
     website: school.website,
@@ -59,7 +69,7 @@ SchoolsController.prototype.addSchool = async function(user, school) {
   });
   let image = await imagesController.addImage({
     type: 1,
-    user: null,
+    user: userId,
     school: createdSchool,
     description: createdSchool.name,
     url: createdSchool.pictureUrl,
@@ -145,13 +155,47 @@ SchoolsController.prototype.findSchoolByName = function(name) {
   return School.findOne({name}).exec();
 };
 
-SchoolsController.prototype.findSchoolById = function(id) {
-  return School.findOne({_id: id})
-    .populate('province')
-    .populate('city')
-    .populate('photos')
-    .populate('company')
-    .exec();
+SchoolsController.prototype.findSchoolById = async function(id) {
+
+  let pipeline = [
+    {$match: {_id: ObjectId(id)}},
+    {$lookup: {from: 'provinces', localField: 'province', foreignField: '_id', as: 'province'}},
+    {$unwind: '$province'},
+    {$lookup: {from: 'cities', localField: 'city', foreignField: '_id', as: 'city'}},
+    {$unwind: '$city'},
+    {$lookup: {from: 'companies', localField: 'company', foreignField: '_id', as: 'company'}},
+    {$unwind: {path: '$company', preserveNullAndEmptyArrays: true}},
+    {$lookup: {from: 'images', localField: 'photos', foreignField: '_id', as: 'photos'}},
+    {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}},
+    {$unwind: {path: '$reviews', preserveNullAndEmptyArrays: true}},
+    {$lookup: {from: 'users', localField: 'reviews.user', foreignField: '_id', as: 'reviews.user'}},
+    {$unwind: {path: '$reviews.user', preserveNullAndEmptyArrays: true}},
+    {
+      $group: {
+        _id: '$_id',
+        user: {$first: '$user'},
+        name: {$first: '$name'},
+        description: {$first: '$description'},
+        website: {$first: '$website'},
+        address: {$first: '$address'},
+        phone: {$first: '$phone'},
+        province: {$first: '$province'},
+        city: {$first: '$city'},
+        company: {$first: '$company'},
+        schoolType: {$first: '$schoolType'},
+        pictureUrl: {$first: '$pictureUrl'},
+        criteria: {$first: '$criteria'},
+        averageRating: {$first: '$averageRating'},
+        validated: {$first: '$validated'},
+        photos: {$first: '$photos'},
+        reviews: {$addToSet: '$reviews'}
+      }
+    }
+  ];
+
+  let school = (await School.aggregate(pipeline).exec())[0];
+  school.reviews = unpluck(school.reviews);
+  return school;
 };
 
 SchoolsController.prototype.findSchoolsByProvince = function(province) {
@@ -183,10 +227,19 @@ SchoolsController.prototype.findSchoolsByCompanySortbyRating = function(company)
 SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceInfo, cityInfo) {
 
   let queryInfo = {};
+  let schoolList = undefined;
+  let regex = undefined;
+
   queryInfo.school = schoolInfo;
 
+  if (queryInfo.school) {
+    regex = new RegExp(returnRegex(queryInfo.school));
+  } else {
+    regex = new RegExp('');
+  }
+
   let transactions = School.aggregate([
-    {$match: {name: new RegExp(schoolInfo, 'i')}},
+    {$match: {name: {$regex: regex, $options: 'i'}}},
     {$sort: {number: -1}}
   ]);
 
@@ -210,7 +263,11 @@ SchoolsController.prototype.searchSchools = async function(schoolInfo, provinceI
     {$lookup: {from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews'}}
   ]);
 
-  let schoolList = await transactions.exec();
+  try {
+    schoolList = await transactions.exec();
+  } catch (error) {
+    console.log(error);
+  }
   let searchQuery = this.getQueryMessage(queryInfo);
   return {list: schoolList, query: searchQuery, searchInfo: {province: provinceInfo, city: cityInfo, schoolInfo: schoolInfo}};
 };
@@ -251,6 +308,19 @@ SchoolsController.prototype.emptySchoolCollection = function() {
   return School.remove({});
 };
 
+SchoolsController.prototype.selectSplashSchool = function(schools) {
+  let splashSchool = {averageRating: -1};
+  schools.forEach((school) => {
+    if (school.averageRating > splashSchool.averageRating) {
+      splashSchool = school;
+    }
+  });
+  if (splashSchool.averageRating == -1) {
+    splashSchool = schools[0];
+  }
+  return splashSchool;
+};
+
 SchoolsController.prototype.updateCoverPicture = function(schoolId, newPictureUrl) {
   return School.findOneAndUpdate({_id: schoolId}, {pictureUrl: newPictureUrl});
 };
@@ -284,6 +354,32 @@ SchoolsController.prototype.updateAverageRating = async function(schoolId) {
   criteria.c8 /= reviews.length;
 
   return School.findOneAndUpdate({_id: schoolId}, {averageRating: averageScore, criteria});
+};
+
+let returnRegex = function(schoolInfo) {
+
+  let words = schoolInfo.split(' ');
+
+  if (words[words.length - 1] == '') {
+    words = _.first(words, words.length - 1);
+  }
+
+  if (words.length == 1) {
+    return schoolInfo;
+  }
+
+  let regex = '';
+  for (let index = 0; index < words.length; index++) {
+    let item = words[index];
+    if (index == words.length - 1) {
+      regex += item;
+    } else {
+      regex += item + '|';
+    }
+  }
+
+  return regex;
+
 };
 
 let schoolsController = new SchoolsController();

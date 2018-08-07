@@ -1,0 +1,50 @@
+extends ../layout
+block content
+      .container
+            .pt-5
+            .py-5
+                  h1.display-4.font-weight-bold#write-review-title.text-center Add a Job Offer
+            .pb-5
+            form#form-form-0.validate-form(action='/', method='post')
+            form#form-form-1.validate-form(action='/', method='post')
+            form#form-form-2.validate-form(action='/', method='post')
+            form#add-school-form.validate-form(action='/', method='post')
+            // Stepper
+            .steps-form
+                  .steps-row.setup-panel.d-flex.justify-content-between
+                        .steps-step
+                              a.btn.btn-amber.btn-circle.waves-effect.ml-0(href='#step-0',  data-toggle='tooltip', data-placement='top', title='Let\'s find your school')
+                                    i.fa.fa-user(aria-hidden='true')
+                        .steps-step.disabled
+                              a.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-1', data-toggle='tooltip', data-placement='top', title='Review and comment')
+                                    i.fa.fa-map-marker(aria-hidden='true')
+                        .steps-step.disabled
+                              a.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-2', data-toggle='tooltip', data-placement='top', title='Other information')
+                                    i.fa.fa-pencil(aria-hidden='true')
+                        .steps-step.disabled
+                              a.btn.btn-blue-grey.btn-circle.waves-effect.mr-0(href='#step-3', data-toggle='tooltip', data-placement='top', title='Finish')
+                                    i.fa.fa-check(aria-hidden='true')
+            .row.justify-content-center.my-5
+                  form.col-lg-8#job-form(action='/job', method='POST' novalidate='')
+                        // First Step
+                        #step-0.row.setup-content
+                              .col-md-12
+                                    include job-poster-information
+                        
+                        // Second Step
+                        #step-1.row.setup-content
+                              .col-md-12
+                                    -var formName = 'job-form'
+                                    -var step = 1
+                                    include ./find-school-job
+
+                        // Third Step
+                        #step-2.row.setup-content
+                              .col-md-12
+                                    include job-information
+
+                              
+                        // Fourth Step
+                        #step-3.row.setup-content
+                              .col-md-12
+                                    include job-confirmation

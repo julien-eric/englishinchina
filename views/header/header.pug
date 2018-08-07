@@ -1,24 +1,39 @@
 include ../fcb-js-sdk
-nav.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-trans
+nav.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-white.navbar-trans(data-spy="affix")
     .container
-        a.pb-0.navbar-brand(href='/')
-            img(src='/images/logo6.gif', width='', height='40', alt='Second Language World')
+        a.pb-0.text-uppercase.navbar-brand(href='/')
+            img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
+            img(src='/images/logoname.svg', width='', height='22', alt='Second Language World')
+            //- |   SLWorld
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
         #navbarNavDropdown.collapse.navbar-collapse.justify-content-right
-            //- ul.navbar-nav
-            //-     li.nav-item
-            //-         a.nav-link(href='#')
-            //-             | Home 
-            //-             span.sr-only (current)
-                //- li.nav-item
-                //-     a.nav-link(href='#') Features
-                //- li.nav-item.dropdown
-                //-     a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                //-         | Dropdown link
-                //-     .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                //-         a.dropdown-item(href='#') Action
-                //-         a.dropdown-item(href='#') Another action
-                //-         a.dropdown-item(href='#') Something else here
+            ul.navbar-nav
+                li.nav-item.active
+                    a.nav-link(href='/')
+                        i.fa.prefix.mdi.mdi-home(aria-hidden='true')
+                        | Home 
+                        span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='/about-us') 
+                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                        | About us
+                li.nav-item
+                    a.nav-link(href='/contact') 
+                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                        //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+                        | Contact
+                li.nav-item.dropdown
+                    a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Services
+                    .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                        a.dropdown-item(href='/job') Jobs
+                        a.dropdown-item(href='/school/search') Schools
+                        a.dropdown-item(href='/company/search') Companies 
             ul.navbar-nav.ml-auto
+                //- li.nav-item
+                //-     a.my-0.btn.btn-outline-primary.no-drop-shadow.nav-link(href='/review') Write A Review  
                 include ../gen-nav-login
+
+
+//TODO https://www.codeply.com/go/LDHQhWUG0x Transparent nav bar

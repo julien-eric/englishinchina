@@ -1,0 +1,12 @@
+h1.text-center.font-weight-heavy(class=small? 'display-4' : 'display-2' ) #{averageRating}
+h1.text-center.display-5.text-primary
+    include genrating
+if singleReview
+else if school      
+    h4.font-weight-light.display-5.text-center
+        i.mdi.mdi-account(aria-hidden='true')
+        | #{reviews.length} review(s)
+else if company      
+    h4.font-weight-light.display-5.text-center
+        i.mdi.mdi-account(aria-hidden='true')
+        | #{company.schools.length} school(s)
