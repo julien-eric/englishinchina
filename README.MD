@@ -1,5 +1,6 @@
-Required : 
+# Make sure of these things
 
-Local MongoDB server or remote. 
-Graphicsmagick installed on local system
-NPM install
+- Graphicsmagick is installed on the local system
+- MongoDB is running
+- ENV Variables are set correctly
+- NPM Install
