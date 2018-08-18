@@ -1,8 +1,8 @@
-var FileUploader = function() {
+var FileUploader = function () {
 
   let elements = [];
 
-  let init = function(inputId, urlPrefix, previewPrefix, progressPrefix) {
+  let init = function (inputId, urlPrefix, previewPrefix, progressPrefix) {
 
     if (document.getElementById(inputId)) {
 
@@ -29,7 +29,7 @@ var FileUploader = function() {
 
   };
 
-  let getSignedRequest = function(file, index) {
+  let getSignedRequest = function (file, index) {
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/sign_s3?file_name=${file.name}&file_type=${file.type}`);
@@ -59,7 +59,7 @@ var FileUploader = function() {
       }
     };
 
-    xhr.onload = function() {
+    xhr.onload = function () {
       if (xhr.status === 200) {
         const preview = $('#' + element.previewPrefix + '-' + element.inputId);
 
@@ -85,7 +85,7 @@ var FileUploader = function() {
       }
     };
 
-    xhr.onerror = function(err) {
+    xhr.onerror = function (err) {
       alert(`Could not upload file.${err}`);
     };
 
@@ -96,3 +96,11 @@ var FileUploader = function() {
     init: init
   }
 }
+
+$(document).ready(() => {
+  let fileUploader = new FileUploader();
+  fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
+});
+
+
+

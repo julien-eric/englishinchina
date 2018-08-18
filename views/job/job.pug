@@ -33,7 +33,7 @@ block content
           hr.my-2
           p.mb-0 
             i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
-            | #{job.email}
+            a(href='mailto:' + job.email) #{job.email}
       .row
         .col-lg-12
           p #{job.description}

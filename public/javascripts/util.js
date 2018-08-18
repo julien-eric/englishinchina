@@ -65,10 +65,6 @@ $(document).ready(() => {
     xhr.send();
   });
 
-  
-  let fileUploader = new FileUploader();
-  fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
-
   // Material Select Initialization
   $('.mdb-select').material_select();
 
