@@ -11,9 +11,6 @@ $(document).ready(() => {
       });
     },
     plugins: 'link paste',
-    toolbar: 'link undo redo styleselect bold italic outdent indent bullist numlist',
-    content_css: [
-      'http://englishinchina.co/stylesheets/style.css',
-    ],
+    toolbar: 'link undo redo styleselect bold italic outdent indent bullist numlist'
   });
 });

@@ -6,7 +6,7 @@ module.exports = {
     libmoment: '/javascripts/libs/moment.min.js',
     libbsdatetimepicker: '/javascripts/libs/bootstrap-datetimepicker.min.js',
     libekkolightbox: '/javascripts/libs/ekko-lightbox.min.js',
-    libtinyMCE: '//cloud.tinymce.com/stable/tinymce.min.js',
+    libtinyMCE: 'https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=9nc4tsvmt9he7zsqga33qz5r5zn6ajz0i1cm9vxpr6ttjsd4',
     util: '/javascripts/util.js',
     fileUploader: '/javascripts/file-uploader.js',
     rating: '/javascripts/rating.js',
