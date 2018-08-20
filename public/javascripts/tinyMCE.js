@@ -1,6 +1,6 @@
 $(document).ready(() => {
   tinymce.init({
-    selector: '#description-textarea',
+    selector: '#job-description-textarea',
     menubar: false,
     style_formats: [
       {title: 'Header', format: 'h3'},
@@ -10,7 +10,8 @@ $(document).ready(() => {
         editor.save();
       });
     },
-    toolbar: 'undo redo styleselect bold italic outdent indent bullist numlist',
+    plugins: 'link paste',
+    toolbar: 'link undo redo styleselect bold italic outdent indent bullist numlist',
     content_css: [
       'http://englishinchina.co/stylesheets/style.css',
     ],

@@ -6,7 +6,7 @@ module.exports = {
     libmoment: '/javascripts/libs/moment.min.js',
     libbsdatetimepicker: '/javascripts/libs/bootstrap-datetimepicker.min.js',
     libekkolightbox: '/javascripts/libs/ekko-lightbox.min.js',
-    libtinyMCE: '//cdn.tinymce.com/4/tinymce.min.js',
+    libtinyMCE: '//cloud.tinymce.com/stable/tinymce.min.js',
     util: '/javascripts/util.js',
     fileUploader: '/javascripts/file-uploader.js',
     rating: '/javascripts/rating.js',
@@ -14,5 +14,5 @@ module.exports = {
     reviewvalidation: '/javascripts/reviewvalidation.js',
     typeaheadwrapper: '/javascripts/typeahead-wrapper.js',
     schoolpage: '/javascripts/schoolpage.js',
-    tinyMCE: '/javascripts/tinymce2.js'
+    tinyMCE: '/javascripts/tinymce.js'
 };

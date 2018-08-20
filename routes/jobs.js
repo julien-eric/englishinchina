@@ -12,7 +12,7 @@ const scripts = require('../public/scripts');
 const utils = require('../utils');
 const url = require('url');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   router.route('/')
     .get(async (req, res) => {
@@ -30,7 +30,7 @@ module.exports = function(passport) {
 
         jobs = jadefunctions.trunkContentArray(jobs, 'title', 120);
         jobs = jadefunctions.trunkContentArray(jobs, 'description', 250);
-        res.render('job/jobs-list', {
+        res.render('job/job-home', {
           title: `Jobs - Second Language World`,
           jobs,
           provinces,
@@ -92,7 +92,7 @@ module.exports = function(passport) {
       if (schoolId != -1) {
         // If we have a school we have all the information we need
         const school = await schoolsController.findSchoolById(schoolId);
-        searchInfo.school = {name: school.name, id: school.id};
+        searchInfo.school = { name: school.name, id: school.id };
         searchInfo.province = school.province.code;
         searchInfo.city = school.city.code;
         cities = await citiesController.getCitiesByProvince(searchInfo.province);
@@ -120,7 +120,9 @@ module.exports = function(passport) {
         pictureInfo: pictureinfo,
         searchInfo,
         jadefunctions,
-        scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.reviewvalidation, scripts.typeaheadwrapper]
+        scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
+               scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, 
+               scripts.libtinyMCE, scripts.tinyMCE, scripts.reviewvalidation, scripts.typeaheadwrapper]
       });
 
     } catch (error) {
@@ -130,6 +132,77 @@ module.exports = function(passport) {
       });
     }
   });
+
+  /** **********************************************************************************************************
+     *searchJob : Method for search all jobs, it will return any job that has some of the information
+     * Param : Query, string that will be looked for as part of the jobs name
+     * [Province] optional.
+     * [City] optional
+     ************************************************************************************************************ */
+  router.get('/search/', async (req, res) => {
+
+    try {
+      const jobInfo = req.query.jobInfo;
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
+
+      let searchResults = await jobsController.searchJobs(jobInfo, province, city);
+      if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
+        searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
+      }
+
+      // let popularCities = await citiesController.getMostPopularCities();
+      // let popularProvinces = await provincesController.getMostPopularProvinces();
+      let popularCities = undefined;
+      let popularProvinces = undefined;
+
+      let provinces = await provincesController.getAllProvinces();
+      let cities = undefined;
+      if (province) {
+        cities = await citiesController.getCitiesByProvince(province);
+      }
+      res.render('job/job-search', {
+        title: `${searchResults.query} Jobs - Second Language World`,
+        jobs: searchResults.list,
+        user: req.user,
+        provinces,
+        cities,
+        pictureInfo: pictureinfo,
+        popularCities,
+        popularProvinces,
+        moment,
+        searchMessage: `You searched for ${searchResults.query}`,
+        searchInfo: searchResults.searchInfo,
+        jadefunctions,
+        scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
+    }
+  });
+
+  /** **********************************************************************************************************
+     *queryJob : Method for search all jobs, it will return any job that has some of the information
+     * Param : Query, string that will be looked for as part of the jobs name
+     * [Province] optional.
+     * [City] optional
+     ************************************************************************************************************ */
+  router.get('/query/', async (req, res) => {
+
+    try {
+      const jobInfo = req.query.jobInfo || undefined;
+      const province = utils.validateQuery(req.query.province);
+      const city = utils.validateQuery(req.query.city);
+      let searchResults = await jobsController.searchJobs(jobInfo, province, city);
+      res.send(JSON.stringify(searchResults.list));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
 
   router.get('/:id', async (req, res) => {
     let job = await jobsController.getJob(req.params.id);
