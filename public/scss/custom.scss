@@ -679,3 +679,17 @@ $slw-inset-dark: #ebebeb;
   overflow: auto;
   transition: max-height 0.55s ease-in;
 }
+
+.rating-bar-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 8px;
+  border-radius: 2px 5px 5px 2px !important;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #d6d6d6;
+  transition: width 0.6s ease;
+  // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}

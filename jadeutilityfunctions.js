@@ -33,13 +33,13 @@ module.exports = {
 
   splitDescription(description, length) {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
 
       if (length > description.length) {
         return resolve(undefined);
       }
 
-      let handle = function(error, dom) {
+      let handle = function (error, dom) {
         if (error) {
           console.log(error);
         } else {
@@ -47,7 +47,7 @@ module.exports = {
         }
       };
 
-      let handleDom = function(dom) {
+      let handleDom = function (dom) {
 
         let sum = 0;
 
@@ -100,6 +100,16 @@ module.exports = {
   roundToPoint5(rating) {
     let number = (Math.round(rating * 2)) / 2;
     return number.toFixed(1);
+  },
+
+  /**
+   *roundToPoint5 : Round to specified number of decimal places for any number.
+   * @param {*} number to be rounded
+   * @return {number}
+   */
+  roundToDecimalPlace(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return (Math.round(value * multiplier) / multiplier).toFixed(precision || 0);
   },
 
   /**

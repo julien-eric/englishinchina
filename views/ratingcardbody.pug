@@ -1,6 +1,12 @@
-h1.text-center.font-weight-heavy(class=small? 'display-4' : 'display-2' ) #{averageRating}
-h1.text-center.display-5.text-primary
-    include genrating
+if small
+    h1.text-center.font-weight-heavy #{averageRating}
+    h2.text-center.display-5.text-primary
+        include genrating
+else
+    h1.text-center.font-weight-heavy.display-2 #{averageRating}
+    h1.text-center.display-5.text-primary
+        include genrating
+
 if singleReview
 else if school      
     h4.font-weight-light.display-5.text-center
