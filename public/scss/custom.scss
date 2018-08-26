@@ -455,7 +455,7 @@ input[type=range]+.thumb {
 }
 
 .image-container-default {
-  background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
+  background-image: url("https://cdn3.volusion.com/tyzky.ynqff/v/vspfiles/photos/432-2.jpg");
 }
 
 ​ .image-container:hover {
@@ -693,3 +693,26 @@ $slw-inset-dark: #ebebeb;
   transition: width 0.6s ease;
   // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+
+.img-overlay {
+  position: relative;
+  height: 230px;
+  // max-width: 100%;
+  background-size: cover;
+  background-position: center; 
+  // height: auto;
+}
+
+.img-caption {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(23, 23, 23, 0.58);
+}
+
+// .img-caption:hover {
+//     position: absolute;
+//     bottom: 0px;
+//     left: 0px;
+//     background-color: rgba(23, 23, 23, 0.58);
+// }

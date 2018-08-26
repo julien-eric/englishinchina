@@ -1,7 +1,7 @@
 module.exports = {
 
   returnFacebookPicture(file) {
-    return `https://englishinchinaasia.s3.amazonaws.com/${module.exports.THUMBNAIL}${file}`;
+    return `${module.exports.THUMBNAIL}${file}`;
   },
 
   returnThumbnail(file) {
