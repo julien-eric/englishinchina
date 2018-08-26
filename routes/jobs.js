@@ -213,7 +213,7 @@ module.exports = function (passport) {
       moment,
       pictureInfo: pictureinfo,
       jadefunctions,
-      scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment]
+      scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
     });
   });
 

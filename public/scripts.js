@@ -9,6 +9,7 @@ module.exports = {
     libtinyMCE: 'https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=9nc4tsvmt9he7zsqga33qz5r5zn6ajz0i1cm9vxpr6ttjsd4',
     util: '/javascripts/util.js',
     fileUploader: '/javascripts/file-uploader.js',
+    readMore: '/javascripts/read-more.js',
     rating: '/javascripts/rating.js',
     writereview: '/javascripts/writereview.js',
     reviewvalidation: '/javascripts/reviewvalidation.js',

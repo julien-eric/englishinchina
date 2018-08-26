@@ -667,3 +667,15 @@ $slw-inset-dark: #ebebeb;
 .select-wrapper input.select-dropdown.valid {
   border-bottom: 2px solid #00c851;
 }
+
+.show-more-container{
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.55s ease-out;
+}
+
+.show-more-container.expand{
+  max-height: 9000px;
+  overflow: auto;
+  transition: max-height 0.55s ease-in;
+}
