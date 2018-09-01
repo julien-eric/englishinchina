@@ -89,6 +89,35 @@ module.exports = function(passport) {
     });
   });
 
+  router.get('/about', async (req, res) => {
+
+    try {
+      let provinces = await provincesController.getAllProvinces();
+      let popularCities = await citiesController.getMostPopularCities();
+      let popularProvinces = await provincesController.getMostPopularProvinces();
+
+      const splashText = require('../splash-text.json');
+      res.render('home/about', {
+        title: 'Second Language World',
+        main: true,
+        user: req.user,
+        provinces,
+        pictureInfo: pictureinfo,
+        jadefunctions,
+        popularCities,
+        popularProvinces,
+        splashText,
+        currentPage: 1,
+        scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
+    }
+  });
+
   /** **********************************************************************************************************
      *LOGIN :   GET : Root Path, login page.
      *          POST: Send user login request. redirect to home if sucessful, try again if failure

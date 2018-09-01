@@ -3,19 +3,24 @@ block content
     include carousel
     //- include ../header/header
     include ../searchnavigation
-    include join-banner
+    //- include join-banner
     //- .container
     //-     include ../populargrid/popularcategories
     //-     .clearfix
-    include takeaction
 
     .container
-        .pt-5.pb-2
-            //- h1.display-4.text-center.font-weight-bold Work for these 
-                //- span.text-muted(data-toggle='tooltip', data-placement='right', title='These schools are franchises whose schools are scattered around the World. For unaffiliated schools use the search function or find the company') schools*
+        //- .container.pt-5.pb-5
+        //- h1.text-center.font-weight-light Contribute to SLWorld
+        //- p.text-center Help teachers and schools all around the world to find their match and make the World a better place
+        //- hr
+        .pt-5.mt-5.pb-2
+            h1.display-4.text-center.font-weight-bold Discover Amazing New Places!
             p.text-center.text-muted Check out their locations around the World 
+            hr
         include ../populargrid/popularprovinces
-    
+
+    //- include takeaction
+
     .container
         .pt-5.pb-2
             h1.display-4.text-center.font-weight-bold Work for these 

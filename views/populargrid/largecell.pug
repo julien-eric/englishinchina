@@ -1,10 +1,10 @@
 a.col-sm-8.col-md-8.col-lg-8.col-xs-8.px-1.py-1(href="/school/search?schoolInfo=&province=#{item.code}&city=-1")
       .img-overlay(style='background-image: url(' + pictureInfo.returnLarge(item.picture) + ');')
-            .img-caption.col-lg-12.pl-5.pt-3
-                  h4.mb-3      
-                        i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-                              | #{item.pName} - China
-                              //- if item.number == 1
-                              //-       | #{item.number} school
-                              //- else
-                              //-       | #{item.number} schools
+            .img-caption.col-lg-12.pl-3.pt-3
+                  h4.text-white.mb-3  #{item.pName}   
+                        //- i.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+                        //- | #{item.pName}
+                        //- if item.number == 1
+                        //-       | #{item.number} school
+                        //- else
+                        //-       | #{item.number} schools
