@@ -1,7 +1,7 @@
 $(document).ready(() => {
   const page = 2;
 
-  $(function() {
+  $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   });
 
@@ -15,7 +15,7 @@ $(document).ready(() => {
   }
 
   // MDB Lightbox Init
-  $(function() {
+  $(function () {
     $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
   });
 
@@ -45,7 +45,7 @@ $(document).ready(() => {
     const xhr = new XMLHttpRequest();
     const pathname = window.location.pathname;
     xhr.open('GET', '/login');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           $('#modal-body').empty();
@@ -65,12 +65,28 @@ $(document).ready(() => {
     xhr.send();
   });
 
+  // Navbar transparency removal
+  if ($('.main-header').hasClass('bg-transparent')) {
+    var scroll_start = 0;
+    $(document).scroll(function () {
+      scroll_start = $(this).scrollTop();
+      if (scroll_start > 1) {
+        $(".main-header").addClass('bg-white');
+        $(".main-header").removeClass('bg-transparent');
+      } else {
+        $(".main-header").removeClass('bg-white');
+        $(".main-header").addClass('bg-transparent');
+      }
+    });
+  }
+
+
   // Material Select Initialization
   $('.mdb-select').material_select();
 
   $('#citySelect.empty').prop('disabled', 'disabled');
 
-  $('#provinceSelect').on('change', function() {
+  $('#provinceSelect').on('change', function () {
     $('#citySelect option:gt(0)').remove(); // remove all options, but not the first
     $('#citySelect').prop('disabled', 'disabled');
     $('#citySelect').siblings("input").prop('disabled', 'disabled');

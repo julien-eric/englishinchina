@@ -1,3 +1,5 @@
+const splashContent = require('./splash-text');
+
 module.exports = {
 
   returnFacebookPicture(file) {
@@ -12,11 +14,23 @@ module.exports = {
   },
 
   returnLarge(file) {
-    return `https://englishinchinaasia.s3.amazonaws.com/${module.exports.LARGE}${file}`;
+    if (file) {
+      return `https://englishinchinaasia.s3.amazonaws.com/${module.exports.LARGE}${file}`;
+    } else {
+      return splashContent.image;
+    }
   },
 
   trunkFileName(file) {
-    return `https://englishinchinaasia.s3.amazonaws.com/${module.exports.LARGE}${file}`;
+    if (file) {
+      return `https://englishinchinaasia.s3.amazonaws.com/${module.exports.LARGE}${file}`;
+    } else {
+      return splashContent.image;
+    }
+  },
+
+  returnCSSBgImageAttr(file) {
+      return 'background-image: url(' + this.returnLarge(file) + ');';
   },
 
   THUMBNAIL: 'th_',

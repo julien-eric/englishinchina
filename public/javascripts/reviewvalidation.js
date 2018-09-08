@@ -91,7 +91,7 @@ function isSpecialInput(field) {
   switch (field.getAttribute('id')) {
     case 'schoolId':
       return true;
-    case 'schoolInfo':
+    case 'queryInfo':
       return true;
     case 'positionSelect':
       return true;
@@ -176,7 +176,7 @@ function validateSpecialInputs(field) {
       }
       break;
 
-    case 'schoolInfo':
+    case 'queryInfo':
       let schoolIdInput = $('#' + elementId).siblings('#schoolId');
       if (field.value == '') {
 

@@ -1,0 +1,16 @@
+form.form-inline
+  ul.nav.nav-pills
+    li.nav-item
+      a.nav-link.disabled(href='#') Sort: 
+  //- .col-auto.my-1
+    //- label.my-1.mr-2(for='sortByRating') Rating
+  select#sortByRating.browser-default.custom-select.my-1.mr-sm-2
+    option(value='') Rating...
+    option(value='ratingUp', selected = (searchInfo.sort == 'ratingUp' || !searchInfo.sort? true : false )) High to Low
+    option(value='ratingDown', selected = (searchInfo.sort == 'ratingDown'? true : false )) Low to High
+
+  select#sortByName.browser-default.custom-select.my-1.mr-sm-2
+    option(selected='' value='') Name...
+    option(value='alphaUp', selected = (searchInfo.sort == 'alphaUp'? true : false )) A to Z
+    option(value='alphaDown', selected = (searchInfo.sort == 'alphaDown'? true : false )) Z to A
+

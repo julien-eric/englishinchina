@@ -29,17 +29,17 @@ module.exports = function(passport) {
       if (schoolId != -1) {
         // If we have a school we have all the information we need
         const school = await schoolsController.findSchoolById(schoolId);
-        searchInfo.school = {name: school.name, id: school.id};
+        searchInfo.school = {name: school.name, id: school._id};
         searchInfo.province = school.province.code;
         searchInfo.city = school.city.code;
-        cities = await citiesController.getCitiesByProvince(searchInfo.province);
+        cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
       } else {
         // If we don't have a school, we still might have a province-city
         searchInfo.province = utils.validateQuery(req.query.province);
         searchInfo.city = utils.validateQuery(req.query.city);
 
         if (searchInfo.province) {
-          cities = await citiesController.getCitiesByProvince(searchInfo.province);
+          cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
         }
       }
 
@@ -75,7 +75,7 @@ module.exports = function(passport) {
     try {
       await reviews.insertReviewforSchool(req);
       let school = await schools.findSchoolById(req.body.schoolId);
-      res.redirect('/school/' + school.id);
+      res.redirect('/school/' + school._id);
     } catch (error) {
       res.send(error);
     }

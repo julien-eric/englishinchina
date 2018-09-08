@@ -1,0 +1,13 @@
+block content
+
+      if !limit
+            -var limit = schools.length       
+      .row
+            - for (var i = 0; i < limit; ++i)
+                  -var school = schools[i]
+                  .col-sm-12.col-md-12.col-lg-4.mb-3
+                              include schoolcard-hor
+
+                  //- else
+                        
+                  //-             include ../search-noschool

@@ -1,0 +1,25 @@
+#school-header
+    #jumbotron-background.jumbotron.jumbotron-fluid(style=pictureInfo.returnCSSBgImageAttr(bannerPicture) + 'margin-top: -4rem; margin-bottom: 0rem;')  
+        //- .row.transparent-black.mb-5
+        //-     .container
+        //-         -var bread1 = {url:'/', title:'Home'}
+        //-         -var bread2 = {url:province/province.code, title:province.name }
+        //-         include ../breadcrumb
+    #jumbotron-content.text-center.container-fluid
+        .py-5
+        if city
+            h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.display-3 #{city.pinyinName}, #{province.name}
+        if !city && province
+            h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{province.name}
+
+        .row.my-3.justify-content-center
+            .col-lg-6
+                .row.justify-content-center
+                        if schools.length > 0
+                            .chip.chip-md
+                                i.mdi.mdi-message-text(aria-hidden='true')      
+                                |  #{schools.length} Schools
+                        if jobs.length > 0
+                            .chip.chip-md
+                                i.mdi.mdi-image(aria-hidden='true')      
+                                |  #{jobs.length} Jobs

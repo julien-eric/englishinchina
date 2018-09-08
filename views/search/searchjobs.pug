@@ -1,4 +1,4 @@
-form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method='GET')
+form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/job/search', method='GET')
      
       //- Provinces
       .col-lg.my-3
@@ -31,18 +31,18 @@ form.col-sm-12.px-0.pt-3.pt-lg-0(role='search', action='/school/search', method=
                               option(value='', selected='') City
       .col-lg-4.my-3
             .form-group.search-nav-form
-                  -var schoolInfo = ""
+                  -var queryInfo = ""
                   -var schoolId = ""
                   if searchInfo && searchInfo.school
-                        -schoolInfo = searchInfo.school.name
+                        -queryInfo = searchInfo.school.name
                         -schoolId = searchInfo.school.id
-                  if searchInfo && searchInfo.schoolInfo
-                        -schoolInfo = searchInfo.schoolInfo
-                  input#schoolInfo.typeahead.form-control.search-filter.form-form-0(name="schoolInfo" placeholder="School Related Terms" value=schoolInfo type="text")
-                  //- label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+                  if searchInfo && searchInfo.queryInfo
+                        -queryInfo = searchInfo.queryInfo
+                  input#queryInfo.typeahead.form-control.search-filter.form-form-0(name="queryInfo" placeholder="Job Related Terms" value=queryInfo type="text")
+                  //- label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
                   input#schoolId.d-none(name="schoolId" value=schoolId)
 
       .col-lg.my-3
             button.col-sm-12.btn.btn-rounded.btn-primary.border-0.my-0(type='submit') 
                   i.mdi.mdi-magnify(aria-hidden='true')
-                  span  Search Schools
+                  span  Search

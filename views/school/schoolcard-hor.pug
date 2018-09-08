@@ -1,0 +1,30 @@
+.card
+      .row
+        .col-lg-4.col-md-12
+          a.view.overlay.card-img(href='/school/'+ school._id)
+            //- img.card-img-top(src='#{pictureInfo.returnThumbnail(school.pictureUrl)}', alt='Card image')
+            .card-image-container(style='background-image: url(' + pictureInfo.returnThumbnail(school.pictureUrl) + ');')
+            //- img.w-100(src=pictureInfo.returnThumbnail(school.pictureUrl), alt='Card image')
+        .col-lg-8.col-md-12.text-center.text-md-left.px-3.py-3
+          .card-block.px-3.mx-0
+            h3.font-weight-bold.card-title.px-0 
+              a.text-dark(href='/school/'+ school._id)
+                | #{school.name}
+            h6.card-subtitle.font-weight-light.mb-2.text-muted #{jadefunctions.returnNameforSchoolType(school.schoolType)}
+              if(school.company)
+                span &nbsp;|&nbsp;
+                  a(href='/company/' + school.company.id) #{school.company.name}        
+            p.card-text #{school.description}
+            -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
+            if school.reviews || avg != '-1.0'
+              if averageRating != '-1.0'
+                .chip.chip-md
+                  include ../genratingshort
+              if school.photos.length > 0
+                .chip.chip-md
+                  i.mdi.mdi-image(aria-hidden='true')      
+                  |  #{school.photos.length} Photos
+              if school.reviews
+                .chip.chip-md
+                  i.mdi.mdi-message-text(aria-hidden='true')      
+                  |  #{school.reviews.length} Reviews

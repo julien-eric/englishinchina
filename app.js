@@ -129,6 +129,7 @@ const companyRoutes = require('./routes/companies')(passport);
 const articleRoutes = require('./routes/articles')(passport);
 const reviewRoutes = require('./routes/reviews')(passport);
 const jobRoutes = require('./routes/jobs')(passport);
+const provinceRoutes = require('./routes/provinces')(passport);
 
 app.use('/', routes);
 app.use('/', awsRoutes);
@@ -137,6 +138,7 @@ app.use('/company', companyRoutes);
 app.use('/article', articleRoutes);
 app.use('/review', reviewRoutes);
 app.use('/job', jobRoutes);
+app.use('/province', provinceRoutes);
 
 /** *************************************************************
  catch 404 and forward to error handler

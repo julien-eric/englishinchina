@@ -6,12 +6,12 @@ $(function() {
 let addSchoolCallback = function(data) {
   let school = JSON.parse(data);
   if (school && school._id && school.name) {
-    $('#schoolInfo').val(school.name);
+    $('#queryInfo').val(school.name);
     $('#schoolId').val(school._id);
     $('#addSchoolCollapsible').collapse('hide');
     $('#addSchoolCollapsible').collapse('dispose');
     $('#noSchool').prop('disabled', true);
-    validateField($('#schoolInfo')[0]);
+    validateField($('#queryInfo')[0]);
   }
 }
 

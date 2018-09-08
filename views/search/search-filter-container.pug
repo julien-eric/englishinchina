@@ -1,0 +1,8 @@
+nav#search-navigation.navbar-expand-md
+      p.text-center.d-lg-none.mb-0
+            a.btn.btn-lg.btn-link(data-toggle='collapse', href='#collapseFilter', role='button', aria-expanded='false', aria-controls='collapseFilter') 
+                  | Filter
+                  i.mdi.mdi-chevron-down(aria-hidden='true')
+      #collapseFilter.collapse.show.col-md-12.zindex-pop
+            .container
+                  include search-filter-inner

@@ -1,0 +1,21 @@
+extends ../layout
+block content
+      
+      include search-header
+      .bg-dark.py-2
+            include search-navigation-container
+      .bg-light.py-2.mb-5
+            include search-filter-container
+
+      if schools
+            .container   
+                  include ../school/schoollist
+      if companies
+            .container.text-center.my-5
+                  if searchMessage
+                        h2.searchmessage #{searchMessage}
+                        p.text-muted There are #{companies.length} companies related to your search
+            .container.my-5   
+                  include ../company/companylist
+      if jobs
+            h1 Jobs

@@ -1,0 +1,45 @@
+#school-header
+    #jumbotron-background.jumbotron.jumbotron-fluid(style='background-image: url(' + pictureInfo.returnLarge(province.pictureUrl) + ');')  
+    #jumbotron-content.text-center.container-fluid
+        .row.transparent-black.mb-5
+            .container
+                -var bread1 = {url:'/', title:'Home'}
+                -var bread2 = {url:province/province.code, title:province.name }
+                include ../breadcrumb
+        .py-5
+        h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{province.name}
+        //- h2.text-muted.text-light.font-weight-light
+        //-     if school.company
+        //-         | #{school.company.name}
+        //-     if school.company && school.schoolType
+        //-         | |
+        //-     if school.schoolType
+        //-         | #{jadefunctions.returnNameforSchoolType(school.schoolType)}
+        
+        //- .row.my-3.justify-content-center
+        //-     .col-lg-6
+        //-         .row.justify-content-center
+        //-                 if reviews.length > 0
+        //-                     .chip.chip-md
+        //-                         i.mdi.mdi-message-text(aria-hidden='true')      
+        //-                         |  #{reviews.length} Reviews
+        //-                 if school.photos.length > 0
+        //-                     .chip.chip-md
+        //-                         i.mdi.mdi-image(aria-hidden='true')      
+        //-                         |  #{school.photos.length} Photos
+        //-                 if averageRating != -1
+        //-                     .chip.chip-md
+        //-                         include ../genratingshort
+
+        a.btn.btn-lightgreen(href='school.website')
+                i.mdi.mdi-web(aria-hidden='true')
+                |  Visit Website
+        a.btn.btn-lightgreen(href='/company/' + 'school.company._id')
+                i.mdi.mdi-clipboard-check(aria-hidden='true')
+                |  See Company
+        a.btn.btn-lightgreen(href="#")
+                i.mdi.mdi-map-marker(aria-hidden='true')
+                |  See in Maps
+        a.btn.btn-lightgreen(href='school.phone')
+            i.mdi.mdi-cellphone(aria-hidden='true')
+                |  Contact
