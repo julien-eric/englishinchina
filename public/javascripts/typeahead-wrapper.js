@@ -11,6 +11,7 @@ let currentQuery;
 let TypeaheadWrapper = function () {
   this.dataSources = [];
   this.autoTriggerValidation = false;
+  this.schoolList;
   let pathname = window.location.pathname;
 
   if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1) {
@@ -114,7 +115,7 @@ TypeaheadWrapper.prototype.notFoundTemplate = function (element) {
   notFoundTemplate = ['<div class="mx-2 empty-message"><b>No results found</b></div>'];
 
   if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1) {
-    autoTriggerValidation = true;
+    this.autoTriggerValidation = true;
     notFoundTemplate = undefined;
   }
 }
@@ -166,18 +167,18 @@ $(document).ready(() => {
     let hasSelection = null;
 
     // If we find this inputs value in the schoolList we have a selection
-    if (schoolList) {
-      hasSelection = schoolList.find((school) => {
+    if (typeaheadWrapper.schoolList) {
+      hasSelection = typeaheadWrapper.schoolList.find((school) => {
         return school.name == $(this).val();
       });
     }
 
-    if (hasSelection == null && autoTriggerValidation) {
+    if (hasSelection == null && typeaheadWrapper.autoTriggerValidation) {
       $('#noSchoolGroup').removeClass('d-none');
     }
 
     // If page requires this input's validation, trigger it
-    if (autoTriggerValidation) {
+    if (typeaheadWrapper.autoTriggerValidation) {
       validateField($('#queryInfo')[0]);
     }
 
@@ -194,7 +195,7 @@ $(document).ready(() => {
     $('#noSchoolGroup').addClass('d-none');
 
     // If page requires this input's validation, trigger it
-    if (autoTriggerValidation) {
+    if (typeaheadWrapper.autoTriggerValidation) {
       validateField($('#queryInfo')[0]);
     }
   });
@@ -202,19 +203,19 @@ $(document).ready(() => {
   $('#queryInfo').on('keyup', function (ev, suggestion, async, data) {
 
     let hasSelection = false;
-    if (schoolList) {
-      hasSelection = schoolList.find((school) => {
+    if (typeaheadWrapper.schoolList) {
+      hasSelection = typeaheadWrapper.schoolList.find((school) => {
         return school.name == $(this).val();
       });
     }
 
-    if (!hasSelection && autoTriggerValidation) {
+    if (!hasSelection && typeaheadWrapper.autoTriggerValidation) {
       $('#schoolId').val('');
       $('#noSchoolGroup').removeClass('d-none');
     }
 
     // If page requires this input's validation, trigger it
-    if (autoTriggerValidation) {
+    if (typeaheadWrapper.autoTriggerValidation) {
       validateField($('#queryInfo')[0]);
       $('#addSchoolName').val($(this).val());
     }
