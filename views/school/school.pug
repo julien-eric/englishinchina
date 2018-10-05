@@ -2,6 +2,7 @@ extends ../layout
 block content
       -var reviews = school.reviews
       -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
+      -var query = '?schoolId=' +  school._id;
       
       .school-page.mb-5
 
@@ -31,16 +32,27 @@ block content
                               include ../utils/share-box
 
                   #photos.photos.mt-5.clearfix
-                        h2#popular-cities.text Photos
+                        .row
+                              .col-auto
+                                    h2 Photos
+                              .col.text-right
+                                    -var link = "/school/addphoto/" + school._id
+                                    a.btn.btn-sm.btn-link.pr-0(href=link) Add Photo 
+                                          i.mdi.mdi-library-plus(aria-hidden='true')
                         p.text-muted What others have been saying about #{school.name}
                         hr
                         -var photos = school.photos
-                        -var link = "/school/addphoto/" + school.id
                         include ../photogrid
 
                   if school.averageRating != -1
                         #rating.ratings.mt-5.clearfix
-                              h2#popular-cities.text Rating & Reviews 
+                              .row
+                                    .col-auto
+                                          h2#popular-cities.text Rating & Reviews 
+                                    .col.text-right
+                                          a.btn.btn-sm.btn-link.pr-0(href='/review' + query) Add Review 
+                                                i.mdi.mdi-library-plus(aria-hidden='true')
+                              
                               p.text-muted Distribution and breakdown of the reviews for #{school.name}
                               hr
                               include schoolbreakdown
