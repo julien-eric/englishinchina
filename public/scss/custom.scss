@@ -20,11 +20,16 @@ $landing-page-height: 800px;
 $school-header-height: 540px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
+
 // Rating colors
 $rating-great:#47a347;
 $rating-good: #76bf33;
-$rating-medium: #e6e13d;
-$rating-bad: #c73d13;
+$rating-medium: #87a56a;
+$rating-bad: #68745c;
+// $rating-great:#47a347;
+// $rating-good: #76bf33;
+// $rating-medium: #e6e13d;
+// $rating-bad: #c73d13;
 $theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "dark-transparent": $slw-dark-transparent, "antique-white": $slw-antique-white, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
@@ -657,6 +662,7 @@ input[type=range]+.thumb {
   height: 52px;
   width: 52px;
 }
+
 @media (min-width: 62em){
   .classic-tabs li:first-child {
     margin-left: inherit;
@@ -785,6 +791,7 @@ $slw-inset-dark: #ebebeb;
 .typeahead-header {
   background-color: $slw-cool-purple;
   color: white;
+  text-transform: capitalize;
   height:2rem;
 }
 

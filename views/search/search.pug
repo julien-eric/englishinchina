@@ -7,15 +7,26 @@ block content
       .bg-light.py-2.mb-5
             include search-filter-container
 
-      if schools
+      if schools && schools.length > 0
             .container   
+                  .row
+                        .col-auto
+                              h2 Schools
+                        .col.text-right
+                              a.btn.btn-sm.btn-link.pr-0(href="#") Add School 
+                                    i.mdi.mdi-library-plus(aria-hidden='true')          
+                  //- p.text-muted Distribution and breakdown of the reviews for #{school.name}
+                  hr.mt-0
                   include ../school/schoollist
-      if companies
-            .container.text-center.my-5
-                  if searchMessage
-                        h2.searchmessage #{searchMessage}
-                        p.text-muted There are #{companies.length} companies related to your search
+      if companies && companies.length > 0
             .container.my-5   
+                  .row
+                        .col-auto
+                              h2 Companies
+                        //- .col.text-right
+                        //-       a.btn.btn-sm.btn-link.pr-0(href="#") Add Company 
+                        //-             i.mdi.mdi-library-plus(aria-hidden='true')
+                  hr.mt-0
                   include ../company/companylist
-      if jobs
-            h1 Jobs
+      //- if jobs
+      //-       h1 Jobs

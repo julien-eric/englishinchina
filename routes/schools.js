@@ -107,7 +107,7 @@ module.exports = function(passport) {
   });
 
   router.post('/addphoto', async (req, res) => {
-    const picture = {url: req.body.pictureUrl, description: req.body.description};
+    const picture = {url: req.body.urlSchoolUserPicture, description: req.body.description};
     let school = await schools.findSchoolById(req.body.id);
     let image = await images.addImage(
       {
@@ -118,9 +118,8 @@ module.exports = function(passport) {
         description: picture.description,
         date: Date.now()
       });
-    const xschool = school.toObject();
-    xschool.photos.push(image);
-    await schools.updatePictures(xschool);
+    school.photos.push(image);
+    await schools.updatePictures(school);
     res.redirect(`/school/${school._id}`);
   });
 

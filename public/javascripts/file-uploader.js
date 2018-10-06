@@ -100,6 +100,7 @@ var FileUploader = function () {
 $(document).ready(() => {
   let fileUploader = new FileUploader();
   fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
+  fileUploader.init('school-user-picture', 'url', 'preview', 'progress');
 });
 
 

@@ -174,3 +174,16 @@ $(document).ready(() => {
 
 
 });
+
+function countChar(textArea) {
+  let charNumber = textArea.value.length;
+  let charNumberElem = $('#charNumber');
+  charNumberElem.text(charNumber);
+  if(charNumber < 140) {
+    charNumberElem.addClass('text-danger');
+    charNumberElem.removeClass('text-primary');
+  } else if (charNumber > 140) {
+    charNumberElem.addClass('text-primary');
+    charNumberElem.removeClass('text-danger');
+  }
+};

@@ -5,14 +5,27 @@ const Review = require('./../models/review');
 const moment = require('moment');
 
 const calculateAverage = function(review) {
-  return (Number(review.cri_dynamicTeachers) +
-    Number(review.cri_accomodationProvided) +
-    Number(review.cri_managementAdministration) +
-    Number(review.cri_locationAccesibility) +
-    Number(review.cri_resourcesAvailability) +
-    Number(review.cri_respectForContract) +
-    Number(review.cri_salaryVsCOLiving) +
-    Number(review.cri_supportOnArrivalandVisa)) / 8;
+  return (Number(review.c1) +
+    Number(review.c2) +
+    Number(review.c3) +
+    Number(review.c4) +
+    Number(review.c5) +
+    Number(review.c6) +
+    Number(review.c7) +
+    Number(review.c8)) / 8;
+};
+
+const convertCriteriaToOnFive = function(review) {
+  return {
+    c1: review.cri_supportOnArrivalandVisa/2,
+    c2: review.cri_managementAdministration/2,
+    c3: review.cri_resourcesAvailability/2,
+    c4: review.cri_accomodationProvided/2,
+    c5: review.cri_locationAccesibility/2,
+    c6: review.cri_salaryVsCOLiving/2,
+    c7: review.cri_respectForContract/2,
+    c8: review.cri_dynamicTeachers/2
+  }
 };
 
 const checkUserForHelpful = function(reviews, userId) {
@@ -41,6 +54,8 @@ module.exports = {
       user = req.user._id;
     }
 
+    let criteria = convertCriteriaToOnFive(req.body);
+
     return Review.create({
       user: user,
       objectType: 0,
@@ -50,17 +65,8 @@ module.exports = {
       position: req.body.position,
       dateEmployed: new Date(moment(req.body.dateEmployed, 'MMMM Do YYYY').format()),
       dateReleased: new Date(moment(req.body.dateReleased, 'MMMM Do YYYY').format()),
-      criteria: {
-        c1: req.body.cri_supportOnArrivalandVisa,
-        c2: req.body.cri_managementAdministration,
-        c3: req.body.cri_resourcesAvailability,
-        c4: req.body.cri_accomodationProvided,
-        c5: req.body.cri_locationAccesibility,
-        c6: req.body.cri_salaryVsCOLiving,
-        c7: req.body.cri_respectForContract,
-        c8: req.body.cri_dynamicTeachers
-      },
-      average_rating: calculateAverage(req.body)
+      criteria: criteria,
+      average_rating: calculateAverage(criteria)
     });
 
   },
