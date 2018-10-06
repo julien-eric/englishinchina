@@ -21,9 +21,10 @@ block content
                         i.mdi.mdi-plus-circle(aria-hidden='true')
                         span  Write a Review
                     include ../utils/share-box
-            h1.display-4#locations.text-center.font-weight-bold.text 
-                | Our locations
-            p.text-center.text-muted Look for #{company.name} in all of our locations around the World
+            .row
+                .col-auto
+                        h2 Our locations
+            p.text-muted Look for #{company.name} in all of our locations around the World
             hr
             .py-2
                 span.clearfix
@@ -40,20 +41,28 @@ block content
                                     -var schools = schools2
                                     include ../school/schoollist
             .photos.mt-5.clearfix
-                h1.display-4#photos.text-center.font-weight-bold.text 
-                    | Photos
-                p.text-center.text-muted What others have been saying about #{company.name}
+                .row
+                        .col-auto
+                            h2 Photos
+                        //- .col.text-right
+                        //-     -var link = "/school/addphoto/" + school._id
+                        //-     a.btn.btn-sm.btn-link.pr-0(href=link) Add Photo 
+                        //-             i.mdi.mdi-library-plus(aria-hidden='true')
+                p.text-muted What others have been saying about #{company.name}
                 hr
                 -var photos = company.photos
                 -var link = "/company/addphoto/" + company.id
                 include ../photogrid
 
             .reviews.mt-5.clearfix
-                h1.display-4#reviews.text-center.font-weight-bold.text 
-                    //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
-                    |  Reviews 
-                p.text-center.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
+                .row
+                    .col-auto
+                            h2#popular-cities.text Rating & Reviews 
+                    //- .col.text-right
+                    //-         a.btn.btn-sm.btn-link.pr-0(href='/review' + query) Add Review 
+                    //-             i.mdi.mdi-library-plus(aria-hidden='true')
+                p.text-muted What others have been saying about #{company.name}. #{company.reviews.length} Reviews
                 hr
                 include ../review/reviews
-                if reviews.length > 6
-                    #load-more-reviews.btn.btn-secondary.btn-lg Load More
+                //- if reviews.length > 6
+                //-     #load-more-reviews.btn.btn-secondary.btn-lg Load More
