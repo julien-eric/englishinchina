@@ -17,9 +17,12 @@ form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
       .col-lg.my-1.px-1
             .search-nav-form
                   select#provinceSelect.custom-select.search-filter.browser-default(name="province")
-                        option(value='', disabled='', selected='') Province
+                        if searchInfo && searchInfo.provinceCode
+                              option(value='') Province
+                        else
+                              option(value='', selected='') Province
                         each province,i in provinces
-                              if searchInfo && province.code == searchInfo.province 
+                              if searchInfo && province.code == searchInfo.provinceCode 
                                     option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                               else
                                     option(value=province.code) #{province.name} - #{province.chineseName}
@@ -29,12 +32,12 @@ form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
             .search-nav-form  
                   if(cities)
                         select#citySelect.custom-select.search-filter.browser-default(name="city")
-                              if searchInfo && searchInfo.city
+                              if searchInfo && searchInfo.cityCode
                                     option(value='') City
                               else
                                     option(value='', selected='') City
                               each city in cities
-                                    if searchInfo && city.code == searchInfo.city
+                                    if searchInfo && city.code == searchInfo.cityCode
                                           option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
                                     else
                                           option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}

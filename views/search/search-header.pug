@@ -1,16 +1,13 @@
 #school-header
     #jumbotron-background.jumbotron.jumbotron-fluid(style=pictureInfo.returnCSSBgImageAttr(bannerPicture) + 'margin-top: -4rem; margin-bottom: 0rem;')  
-        //- .row.transparent-black.mb-5
-        //-     .container
-        //-         -var bread1 = {url:'/', title:'Home'}
-        //-         -var bread2 = {url:province/province.code, title:province.name }
-        //-         include ../breadcrumb
     #jumbotron-content.text-center.container-fluid
         .py-5
-        if city
-            h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.display-3 #{city.pinyinName}, #{province.name}
-        if !city && province
-            h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{province.name}
+        if searchInfo.city != -1
+            h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.city.pinyinName}, #{searchInfo.province.name}
+        if !searchInfo.city && searchInfo.province != -1
+            h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.province.name}
+        else if !!searchInfo.queryInfo
+            h2.text-white.text-shadow-dark.font-weight-bold "#{searchInfo.queryInfo}"
 
         .row.my-3.justify-content-center
             .col-lg-6

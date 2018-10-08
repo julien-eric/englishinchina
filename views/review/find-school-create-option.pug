@@ -1,6 +1,9 @@
 #noSchoolGroup.form-group.d-none
   .form-check
-    input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible' disabled)
+    if searchInfo.city
+      input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible')
+    else
+      input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible' disabled)
     label.form-check-label(for='noSchool') Create school with this name (please specify province and city)
 
 #addSchoolCollapsible.collapse

@@ -154,7 +154,7 @@ $(document).ready(() => {
   })
   
   
-  // Map craete school button submission
+  // Map create school button submission
   $('#addSchool').click(function(event) {
     
     // Intercept create school form submission
@@ -171,7 +171,8 @@ $(document).ready(() => {
     $('#add-school-form').submit();
   });
 
-
+  //Validation feedback for the user coming for a specific school (it's already selected)
+  validateField($('#queryInfo')[0])
 
 });
 

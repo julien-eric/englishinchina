@@ -54,7 +54,7 @@ module.exports = function(passport) {
         pictureInfo: pictureinfo,
         searchInfo,
         jadefunctions,
-        scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.reviewvalidation, scripts.typeaheadwrapper]
+        scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
       });
 
     } catch (error) {

@@ -72,6 +72,12 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (queryUrl, queryIn
         if ($('#queryInfo').val() != -1) {
           url += '?' + queryInfoName + '=' + query;
         }
+        if($('#provinceSelect')){
+          url += '&province' + '=' + $('#provinceSelect').val();
+        }
+        if($('#citySelect')){
+          url += '&city' + '=' + $('#citySelect').val();
+        }
         return url;
 
       },
@@ -220,5 +226,7 @@ $(document).ready(() => {
       $('#addSchoolName').val($(this).val());
     }
   });
+
+
 
 });

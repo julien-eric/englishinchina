@@ -31,6 +31,10 @@ module.exports = {
     return Province.findOne({ code }).exec();
   },
 
+  /**
+   * 
+   * @param {Int} code 
+   */
   async getProvincePic(code) {
     // At the moment picture is based on school with highest rating
     let provinceId = await Province.findOne({ code }).exec();

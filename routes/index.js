@@ -80,42 +80,42 @@ module.exports = function (passport) {
 
       const searchInfo = {};
       searchInfo.queryInfo = req.query.queryInfo;
-      searchInfo.province = utils.validateQuery(req.query.province);
-      searchInfo.city = utils.validateQuery(req.query.city);
       searchInfo.sort = req.query.sort;
+      searchInfo.provinceCode = utils.validateQuery(req.query.province);
+      searchInfo.cityCode = utils.validateQuery(req.query.city);
+      searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
+      searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
 
       let schools = [];
       let companies = [];
       let jobs = [];
 
-      schools = await schoolsController.searchSchools(searchInfo.queryInfo, searchInfo.province, searchInfo.city, utils.getSchoolSortingObject(searchInfo.sort));
+      schools = await schoolsController.searchSchools(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, utils.getSchoolSortingObject(searchInfo.sort));
       if (schools != undefined && schools.list != undefined && schools.list.length > 0) {
         schools.list = jadefunctions.trunkContentArray(schools.list, 'description', 150);
       }
 
-      companies = await companiesController.searchCompanies(searchInfo.queryInfo, searchInfo.province, searchInfo.city);
+      companies = await companiesController.searchCompanies(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
       if (companies != undefined && companies.list != undefined && companies.list.length > 0) {
         companies.list = jadefunctions.trunkContentArray(companies.list, 'description', 150);
       }
 
-      jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.province, searchInfo.city);
+      jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
       if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
         jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 150);
       }
 
       let bannerPicture
-      if (searchInfo.city != -1) {
-        bannerPicture = await citiesController.getCityPic(searchInfo.city);
-        let city = await citiesController.getCityByCode(searchInfo.city);
-        searchInfo.province = city.province.code;
-      } else if (searchInfo.province != -1) {
-        bannerPicture = await provincesController.getProvincePic(searchInfo.province);
+      if (searchInfo.cityCode) {
+        bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
+      } else if (searchInfo.provinceCode) {
+        bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
       }
 
       let provinces = await provincesController.getAllProvinces();
       let cities = undefined;
-      if (searchInfo.province) {
-        cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
+      if (searchInfo.provinceCode) {
+        cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
       }
 
       // title: `${searchResults.query} Schools - Second Language World`,

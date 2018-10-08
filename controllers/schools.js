@@ -65,7 +65,7 @@ SchoolsController.prototype.addSchool = async function (user, school) {
     company,
     address: school.address,
     phone: school.phone,
-    pictureUrl: school.avatarUrl,
+    pictureUrl: school.urlNewSchoolPicture,
     averageRating: -1
   });
   let image = await imagesController.addImage({
