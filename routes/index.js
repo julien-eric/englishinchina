@@ -106,7 +106,7 @@ module.exports = function (passport) {
       }
 
       let bannerPicture
-      if (searchInfo.cityCode) {
+      if (searchInfo.cityCode != -1) {
         bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
       } else if (searchInfo.provinceCode) {
         bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
@@ -114,7 +114,7 @@ module.exports = function (passport) {
 
       let provinces = await provincesController.getAllProvinces();
       let cities = undefined;
-      if (searchInfo.provinceCode) {
+      if (searchInfo.provinceCode != -1) {
         cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
       }
 
