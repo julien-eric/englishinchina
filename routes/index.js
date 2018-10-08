@@ -81,10 +81,17 @@ module.exports = function (passport) {
       const searchInfo = {};
       searchInfo.queryInfo = req.query.queryInfo;
       searchInfo.sort = req.query.sort;
-      searchInfo.provinceCode = utils.validateQuery(req.query.province);
+
       searchInfo.cityCode = utils.validateQuery(req.query.city);
-      searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
       searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
+      searchInfo.provinceCode = utils.validateQuery(req.query.province);
+
+      if (searchInfo.cityCode && searchInfo.provinceCode == -1) {
+        searchInfo.provinceCode = searchInfo.city.province.code;
+        searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode);
+      }
+
+      searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
 
       let schools = [];
       let companies = [];
@@ -106,12 +113,13 @@ module.exports = function (passport) {
       }
 
       let bannerPicture
-      if (searchInfo.cityCode != -1) {
+      if (searchInfo.city) {
         bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
       } else if (searchInfo.provinceCode) {
         bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
       }
 
+      // Fetch list of all provinces and cities.
       let provinces = await provincesController.getAllProvinces();
       let cities = undefined;
       if (searchInfo.provinceCode != -1) {
