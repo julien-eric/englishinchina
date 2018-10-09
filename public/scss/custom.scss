@@ -11,19 +11,26 @@ $slw-cool-purple: #9d99c1;
 $slw-light-secondary: #d8d8d8;
 $slw-dark: #1f1f1f;
 $slw-darker: #151515;
+$slw-dark-transparent: rgba(23, 23, 23, 0.58);
+$slw-antique-white: #faebd7;
 $enable-gradients: false;
 $enable-shadows: true;
 $standard-height: 190px;
-$landing-page-height: 560px;
+$landing-page-height: 800px;
 $school-header-height: 540px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
+
 // Rating colors
 $rating-great:#47a347;
 $rating-good: #76bf33;
-$rating-medium: #e6e13d;
-$rating-bad: #c73d13;
-$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+$rating-medium: #87a56a;
+$rating-bad: #68745c;
+// $rating-great:#47a347;
+// $rating-good: #76bf33;
+// $rating-medium: #e6e13d;
+// $rating-bad: #c73d13;
+$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "dark-transparent": $slw-dark-transparent, "antique-white": $slw-antique-white, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
 // Bootstrap & MDB
@@ -117,13 +124,45 @@ $value in $theme-colors {
   }
 }
 
+h1 {
+  font-family: 'Bree Serif', sans-serif;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.mb-12 {
+  margin-bottom: 12rem;
+}
 .zindex-pop {
   z-index: $zindex-dropdown;
 }
 
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus {
-  color: $slw-primary;
+.navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
+  color: white;
+}
+
+.navbar.navbar-light.main-header.transparent.collapsed {
+  box-shadow: none;
+  background-color: transparent;
+  transition: background-color 0.5s linear;
+}
+
+.navbar.navbar-light.main-header.transparent {
+  box-shadow: none;
+  background-color: white;
+  transition: background-color 0.5s linear;
+}
+
+.navbar.navbar-light.main-header {
+  transition: background-color 0.5s linear;
+}
+
+.nav-bar-slide-in {
+  width: 0;
+  overflow: hidden;
+  transition: width 1s linear;
 }
 
 .text-small {
@@ -173,6 +212,8 @@ $value in $theme-colors {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 .splash {
   min-height: $landing-page-height;
+  margin-top: -4rem;
+  padding-top:4rem;
   overflow: hidden;
   position: relative;
   color: #fff;
@@ -188,7 +229,7 @@ $value in $theme-colors {
   top: 0;
   bottom: 0;
   display: block;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -202,24 +243,18 @@ $value in $theme-colors {
   right: 0;
   top: 0;
   bottom: 0;
-  margin-bottom: 50px;
+  // margin-bottom: 50px;
   -webkit-filter: brightness(55%);
   filter: brightness(55%);
 }
 
 .splash .splash-text {
-  margin-top: 15rem;
+  padding-top: 9rem;
   position: relative;
 }
 
 .splash p {
   font-weight: 400;
-}
-
-.splash-carousel {
-  height: 500px;
-  background-position: center center;
-  background-repeat: repeat;
 }
 
 .shadow {
@@ -250,7 +285,6 @@ $value in $theme-colors {
 }
 
 .search-bar {
-  border-radius: 0;
   margin: 0;
   padding: 0;
   background-color: #f2f2f2;
@@ -353,8 +387,9 @@ input[type=range]+.thumb {
 }
 
 @import "./typeaheadjs.scss";
+
 .btn {
-  padding: .84rem 2.14rem;
+  padding: .84rem 0.74rem;
   font-size: .81rem;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out; // margin: .375rem;
@@ -364,6 +399,10 @@ input[type=range]+.thumb {
   text-transform: uppercase;
   white-space: normal;
   word-wrap: break-word; // color: #fff;
+}
+
+.btn.btn-link {
+  color:inherit !important;
 }
 
 .card-text {
@@ -430,6 +469,9 @@ input[type=range]+.thumb {
   bottom: 0;
   -webkit-filter: brightness(75%);
   filter: brightness(75%);
+  
+  background-position: center center;
+  background-size: cover;
 }
 
 #jumbotron-content {
@@ -447,15 +489,30 @@ input[type=range]+.thumb {
   font-size:14px;
 }
 
+
+.card-image-container {
+  height: 12rem;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+}
+
+@include media-breakpoint-up(lg) {
+  .card-image-container {
+    height: 100%;
+  }
+}
+
 .image-container {
   height: $image-container-height; // background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  cursor: pointer;
 }
 
 .image-container-default {
-  background-image: url("http://i.stack.imgur.com/2OrtT.jpg");
+  background-image: url("https://cdn3.volusion.com/tyzky.ynqff/v/vspfiles/photos/432-2.jpg");
 }
 
 ​ .image-container:hover {
@@ -611,7 +668,14 @@ input[type=range]+.thumb {
   width: 52px;
 }
 
+@media (min-width: 62em){
+  .classic-tabs li:first-child {
+    margin-left: inherit;
+  }
+}
+
 @media (max-width: 576px) {
+
   .classic-tabs li a {
     padding: 20px 10px;
     font-size: 0.8rem;
@@ -680,7 +744,7 @@ $slw-inset-dark: #ebebeb;
   transition: max-height 0.55s ease-in;
 }
 
-.rating-bar-background {
+.rating-bar-background { 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -692,4 +756,50 @@ $slw-inset-dark: #ebebeb;
   background-color: #d6d6d6;
   transition: width 0.6s ease;
   // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.img-overlay {
+  position: relative;
+  height: 230px;
+  // max-width: 100%;
+  background-size: cover;
+  background-position: center; 
+  // height: auto;
+  transform-origin: 50% 50%;
+  transition: transform 0.3s linear;
+  overflow: hidden;
+}
+
+.img-caption {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(23, 23, 23, 0.58);
+}
+
+.img-overlay:hover{    
+  transform: scale(1.01) rotate(0.1deg);
+}
+
+.bg-transparent{
+  background-color: rgba(23, 23, 23, 0.58);
+}
+
+.border-radius-2 {
+  border-radius: 2px 5px 5px 2px !important;
+}
+
+.border-radius-5 {
+  border-radius: 5px !important;
+}
+
+.typeahead-header {
+  background-color: $slw-cool-purple;
+  color: white;
+  text-transform: capitalize;
+  height:2rem;
+}
+
+.anything {
+  color:black;
 }

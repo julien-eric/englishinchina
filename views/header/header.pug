@@ -1,13 +1,11 @@
-include ../fcb-js-sdk
-nav.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-white.navbar-trans(data-spy="affix")
+nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
     .container
         a.pb-0.text-uppercase.navbar-brand(href='/')
             img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
             img(src='/images/logoname.svg', width='', height='22', alt='Second Language World')
-            //- |   SLWorld
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
-        #navbarNavDropdown.collapse.navbar-collapse.justify-content-right
+        #navbarNavDropdown.collapse.navbar-collapse.justify-content-right.mt-3.mt-lg-0
             ul.navbar-nav
                 li.nav-item.active
                     a.nav-link(href='/')
@@ -15,7 +13,7 @@ nav.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-white.navbar-
                         | Home 
                         span.sr-only (current)
                 li.nav-item
-                    a.nav-link(href='/about-us') 
+                    a.nav-link(href='/about') 
                         i.fa.prefix.mdi.mdi-question(aria-hidden="true")
                         | About us
                 li.nav-item
@@ -34,6 +32,3 @@ nav.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-white.navbar-
                 //- li.nav-item
                 //-     a.my-0.btn.btn-outline-primary.no-drop-shadow.nav-link(href='/review') Write A Review  
                 include ../gen-nav-login
-
-
-//TODO https://www.codeply.com/go/LDHQhWUG0x Transparent nav bar

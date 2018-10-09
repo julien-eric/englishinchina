@@ -2,6 +2,9 @@ span.twitter-typeahead {
     .tt-menu {
         @extend .dropdown-menu;
         min-width: 100%;
+        padding: 0 0;
+        max-height: 20rem;
+        overflow-y: auto;
     }
     .tt-suggestion {
         @extend .dropdown-item;
@@ -20,5 +23,8 @@ span.twitter-typeahead {
         .tt-input {
             width: 100%;
         }
+    }
+    .typeahead-scrollable{
+        font-weight: bold;
     }
 }

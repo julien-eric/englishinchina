@@ -2,6 +2,7 @@ const Job = require('./../models/job');
 const moment = require('moment');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
+const utils = require('../utils');
 const MISSING = -1;
 
 let findPicture = function (job) {
@@ -74,7 +75,7 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
   queryInfo.job = jobInfo;
 
   if (queryInfo.job) {
-    regex = new RegExp(returnRegex(queryInfo.job));
+    regex = new RegExp(utils.returnRegex(queryInfo.job));
   } else {
     regex = new RegExp('');
   }

@@ -1,0 +1,59 @@
+extends ../layout
+block content
+      
+      .school-page.mb-5
+
+            include province-header
+            //- include school-tabs
+            //- include ../review/splash-review
+            
+            .container.bg-white.pt-3   
+
+                if schools.length > 0
+                    .pt-5.mt-5.pb-2
+                        h1.display-4.text-center.font-weight-bold Schools in #{province.name} 
+                        p.text-center.text-muted Check out their locations around the World 
+                    -var limit = 3
+                    include ../school/schoollist
+                    .mt-3.pb-2.text-center
+                        a.btn.btn-link.text-center.text-muted(href='/search?province=' + province.code) See all schools in #{province.name}  
+
+                //- if jobs.length > 0
+                //-     .pt-5.mt-5.pb-2
+                //-         h1.display-4.text-center.font-weight-bold Jobs in #{province.name} 
+                //-         p.text-center.text-muted Job opportunities in the province of #{province.name} 
+                //-     -var limit = 3
+                //-     include ../job/joblist
+                //-     .mt-3.pb-2.text-center
+                //-         a.btn.btn-link.text-center.text-muted(href='/search?searchInfo=""&province=' + province.code + '&city=""') See all schools in #{province.name}  
+
+
+                //-         .col-lg-4
+                //-               include ../ratingcard
+                //-               -var query = '?schoolId=' +  school._id;
+                //-               a.btn.btn-lg.btn-block.btn-primary.mb-2(href='/review' + query)
+                //-                     i.mdi.mdi-plus-circle(aria-hidden='true')
+                //-                     span  Write a Review
+                //-               a.btn.btn-lg.btn-block.btn-primary(href="/school/addphoto/" + school._id)
+                //-                     i.mdi.mdi-plus-circle(aria-hidden='true')
+                //-                     span  Add a Picture
+                //-               include ../utils/share-box
+
+                //-   #photos.photos.mt-5.clearfix
+                //-         h2#popular-cities.text Photos
+                //-         p.text-muted What others have been saying about #{school.name}
+                //-         hr
+                //-         -var photos = school.photos
+                //-         -var link = "/school/addphoto/" + school.id
+                //-         include ../photogrid
+
+                //-   if school.averageRating != -1
+                //-         #rating.ratings.mt-5.clearfix
+                //-               h2#popular-cities.text Rating & Reviews 
+                //-               p.text-muted Distribution and breakdown of the reviews for #{school.name}
+                //-               hr
+                //-               include schoolbreakdown
+                //-               hr
+                //-               include ../review/reviews
+
+

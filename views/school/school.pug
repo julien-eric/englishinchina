@@ -2,6 +2,7 @@ extends ../layout
 block content
       -var reviews = school.reviews
       -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
+      -var query = '?schoolId=' +  school._id;
       
       .school-page.mb-5
 
@@ -31,29 +32,35 @@ block content
                               include ../utils/share-box
 
                   #photos.photos.mt-5.clearfix
-                        h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                              //- i.mdi.mdi-image(aria-hidden='true')
-                              | Photos
-                        p.text-center.text-muted What others have been saying about #{school.name}
+                        .row
+                              .col-auto
+                                    h2 Photos
+                              .col.text-right
+                                    -var link = "/school/addphoto/" + school._id
+                                    a.btn.btn-sm.btn-link.pr-0(href=link) Add Photo 
+                                          i.mdi.mdi-library-plus(aria-hidden='true')
+                        p.text-muted What others have been saying about #{school.name}
                         hr
                         -var photos = school.photos
-                        -var link = "/school/addphoto/" + school.id
                         include ../photogrid
 
                   if school.averageRating != -1
                         #rating.ratings.mt-5.clearfix
-                              h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                                    //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
-                                    |  Rating 
-                              p.text-center.text-muted Distribution and breakdown of the reviews for #{school.name}
+                              .row
+                                    .col-auto
+                                          h2#popular-cities.text Rating & Reviews 
+                                    .col.text-right
+                                          a.btn.btn-sm.btn-link.pr-0(href='/review' + query) Add Review 
+                                                i.mdi.mdi-library-plus(aria-hidden='true')
+                              
+                              p.text-muted Distribution and breakdown of the reviews for #{school.name}
                               hr
                               include schoolbreakdown
+                              hr
+                              include ../review/reviews
 
-                  #reviews.reviews.mt-5.clearfix
-                        h1.display-4#popular-cities.text-center.font-weight-bold.text 
-                              //- i.mdi.mdi-message-text.display-7.text-muted(aria-hidden='true')
-                              |  Reviews 
-                        p.text-center.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
-                        hr
-                        include ../review/reviews
+                  //- #reviews.reviews.mt-5.clearfix
+                  //-       h2#popular-cities.text Reviews 
+                  //-       p.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
+                        
 

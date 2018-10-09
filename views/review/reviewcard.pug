@@ -1,39 +1,34 @@
 - var username = 'username'
 - var averageRating = jadefunctions.roundToPoint5(review.average_rating);
-.card.h-100
-      .card-header.border-bottom-0.bg-transparent.pb-0
-            .row.align-items-center
-                  .col-auto.pr-0
-                        .mt-1
-                              -var cardUser = review.user
-                              include ../genuserpic
-                  .col-auto
+.user-information.border-bottom-0.bg-transparent.pb-0
+      .row.align-items-center
+            .col-auto
+                  h6
                         if review.user
 
                               if review.user.firstName && review.user.lastName
                                     -username = review.user.firstName + review.user.lastName
                               else
                                     -username = review.user.username
-                              a.name(href='/user/' + review.user._id) #{username}
+                              a.name.font-weight-bold(href='/user/' + review.user._id) #{username}
                         else 
-                              a.name(href='#') An SLWorld User  
+                              a.name.font-weight-bold(href='#') An SLWorld User  
                         if Date.parse(review.dateEmployed) != 0 && Date.parse(review.dateReleased) != 0
                               .card-subtitle.text-muted.mt-0 #{moment(review.dateEmployed).format("MMM YYYY")+" to " + moment(review.dateReleased).format("MMM YYYY")}
                         else
                               .card-subtitle.text-muted.mt-0 Posted in #{moment(review.dateCreated).format("MMM YYYY")}
                         if review.average_rating
                               include ../genrating
-      .card-body.py-0
-            hr
-            if review.comment != ""
-                  .review-content !{review.comment}
-            else
-                  -var singleReview = true
-                  -var small = true
-                  include ../ratingcardbody
-      .card-footer.border-top-0.bg-transparent
-            .row.justify-content-center
-                  include ../helpfulshort
-                  button.col-auto.btn.btn-link.readmore(type='button', data-toggle="modal", data-target="#slw-modal", data-reviewuser=username, data-reviewid=review._id) 
-                        i.mdi.mdi-arrange-bring-forward(aria-hidden='true')
-                        |  Read More 
+.py-0
+      hr.mt-0
+      if review.comment != ""
+            .review-content !{review.comment}
+      else
+            -var singleReview = true
+            -var small = true
+            include ../ratingcardbody
+.border-top-0.bg-transparent
+      //- include ../helpfulshort
+      button.col-auto.btn.btn-sm.btn-link.readmore.pl-0.ml-0(type='button', data-toggle="modal", data-target="#slw-modal", data-reviewuser=username, data-reviewid=review._id) 
+            //- i.mdi.mdi-arrange-bring-forward(aria-hidden='true')
+            |  Read More 

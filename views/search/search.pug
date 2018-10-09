@@ -1,0 +1,36 @@
+extends ../layout
+block content
+      
+      include search-header
+      .bg-dark.py-2
+            include search-navigation-container
+      .bg-light.py-2.mb-5
+            include search-filter-container
+
+      .container   
+            .row
+                  .col-auto
+                        h2 Schools
+                  .col.text-right
+                        a.btn.btn-sm.btn-link.pr-0(href="/review") Add School 
+                              i.mdi.mdi-library-plus(aria-hidden='true')          
+            //- p.text-muted Distribution and breakdown of the reviews for #{school.name}
+            hr.mt-0
+            if schools && schools.length > 0
+                  include ../school/schoollist
+            else
+                  p Sorry, we couldn't find any matches for the specified terms.
+
+
+      if companies && companies.length > 0
+            .container.my-5   
+                  .row
+                        .col-auto
+                              h2 Companies
+                        //- .col.text-right
+                        //-       a.btn.btn-sm.btn-link.pr-0(href="#") Add Company 
+                        //-             i.mdi.mdi-library-plus(aria-hidden='true')
+                  hr.mt-0
+                  include ../company/companylist
+      //- if jobs
+      //-       h1 Jobs

@@ -6,12 +6,12 @@ $(function() {
 let addSchoolCallback = function(data) {
   let school = JSON.parse(data);
   if (school && school._id && school.name) {
-    $('#schoolInfo').val(school.name);
+    $('#queryInfo').val(school.name);
     $('#schoolId').val(school._id);
     $('#addSchoolCollapsible').collapse('hide');
     $('#addSchoolCollapsible').collapse('dispose');
     $('#noSchool').prop('disabled', true);
-    validateField($('#schoolInfo')[0]);
+    validateField($('#queryInfo')[0]);
   }
 }
 
@@ -154,7 +154,7 @@ $(document).ready(() => {
   })
   
   
-  // Map craete school button submission
+  // Map create school button submission
   $('#addSchool').click(function(event) {
     
     // Intercept create school form submission
@@ -171,6 +171,20 @@ $(document).ready(() => {
     $('#add-school-form').submit();
   });
 
-
+  //Validation feedback for the user coming for a specific school (it's already selected)
+  validateField($('#queryInfo')[0])
 
 });
+
+function countChar(textArea) {
+  let charNumber = textArea.value.length;
+  let charNumberElem = $('#charNumber');
+  charNumberElem.text(charNumber);
+  if(charNumber < 140) {
+    charNumberElem.addClass('text-danger');
+    charNumberElem.removeClass('text-primary');
+  } else if (charNumber > 140) {
+    charNumberElem.addClass('text-primary');
+    charNumberElem.removeClass('text-danger');
+  }
+};

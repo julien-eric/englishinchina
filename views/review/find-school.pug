@@ -1,4 +1,4 @@
-h2.font-weight-light.border-bottom.border-gray.pb-2 Let's find your school
+h2.font-weight-light.border-bottom.border-gray.pb-2 Find or Create School
 div(role='form', data-toggle='validator', id='form-step' + step)
       p.py-3 First, let's find your school. Please take the time to thoroughly search for terms that might be related to the school after you've entered the province and city the school is located in. Duplicates are harder to manage and there's a lower chance that your comment will be read if it's posted on a newly created school rather than one that's already attracted some attention
       .row
@@ -29,13 +29,13 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                                     option(value='', selected='') City
             .col-lg-12
                   .form-group.md-form.mb-5
-                        -var schoolInfo = ""
+                        -var queryInfo = ""
                         -var schoolId = ""
                         if searchInfo && searchInfo.school
-                              -schoolInfo = searchInfo.school.name
+                              -queryInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
-                        input#schoolInfo.typeahead.form-control(name="schoolInfo", value=schoolInfo type="text", class="form-form-" + step, form="form-form-" + step, required)
-                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
+                        input#queryInfo.typeahead.form-control(name="queryInfo" value=queryInfo datasets="schools" type="text", class="form-form-" + step, form="form-form-" + step, required)
+                        label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
             include find-school-create-option
       

@@ -1,7 +1,7 @@
 .row.justify-content-center
     .col-sm-12.col-md-12.col-lg-12.mb-5.text-center
-        if schoolInfo != ""
-            h5.display-5 There are no schools by the name "#{schoolInfo}" on Second Language World, what would you like to do:
+        if queryInfo != ""
+            h5.display-5 There are no schools by the name "#{queryInfo}" on Second Language World, what would you like to do:
         else
             h5.display-5 There are no schools found for your search on Second Language World, what would you like to do:
 .row.justify-content-center
@@ -19,8 +19,8 @@
                         .image-container.blurred.bg-primary
                     .card-img-overlay.text-white.my-5
                         h2.card-title Create School
-                        if schoolInfo
-                          p.text-muted "#{schoolInfo}"
+                        if queryInfo
+                          p.text-muted "#{queryInfo}"
                         //- p
                         //-   | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
                         //- p Last updated 3 mins ago

@@ -5,23 +5,26 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
     .col-lg-12
       .form-group
         .row
-          .col-lg-6
-            #preview.image-container.image-container-default.bg-primary
-          .col-lg-6
+          .col-lg-12
             .md-form
               input#addSchoolName(type='text', name='name', form="add-school-form", class='form-control', placeholder='Default', required)
               label(for='inputIconEx1') School Name
-            .md-form
-              .file-field
-                .btn.btn-primary.btn-sm.float-left.ml-0
-                  span Choose photo
-                  input#file_input(type='file', form="add-school-form", required)
-                  input#avatarUrl.add-school-form.d-none(name="avatarUrl" form="add-school-form" accept="image/*" value="/public/default.png" required)
-                .file-path-wrapper
-                  input.file-path.validate(type='text', placeholder='Upload your file')
-            .progress(style='height: 12px')
-              #progress-bar-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
-              span.sr-only 0% Complete
+        .row
+            hr
+            .col-lg-6
+                  #preview-new-school-picture.image-container.image-container-default.bg-primary
+            .col-lg-6
+                  .md-form
+                    .file-field
+                      .btn.btn-primary.btn-sm.float-left.ml-0
+                        span Choose photo
+                        input#new-school-picture(type='file', form="add-school-form", required)
+                        input#url-new-school-picture.add-school-form.d-none(name="urlNewSchoolPicture" form="add-school-form" accept="image/*" value="/public/default.png" required)
+                      .file-path-wrapper
+                          input.file-path.validate(type='text', placeholder='Upload your file')
+                  .progress(style='height: 12px')
+                    #progress-new-school-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                    span.sr-only 0% Complete
     .col-lg-12
       .form-group
         input#add-school-ajax.d-none(type='text', name='ajax', form="add-school-form", class='form-control', value='true')

@@ -14,6 +14,7 @@ module.exports = {
     writereview: '/javascripts/writereview.js',
     reviewvalidation: '/javascripts/reviewvalidation.js',
     typeaheadwrapper: '/javascripts/typeahead-wrapper.js',
-    schoolpage: '/javascripts/schoolpage.js',
+    schoolPage: '/javascripts/school-page.js',
+    searchPage: '/javascripts/search-page.js',
     tinyMCE: '/javascripts/tinymce.js'
 };

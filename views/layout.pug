@@ -13,6 +13,7 @@ html
     
     //- CSS 
     link(rel='stylesheet', href='https://cdn.materialdesignicons.com/2.1.99/css/materialdesignicons.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bree+Serif|Raleway')
     link(rel='stylesheet', href='/stylesheets/mdbootstappro.min.css')
     link(rel='stylesheet', href='/stylesheets/custom.css')
     link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
@@ -21,9 +22,9 @@ html
       include analytics
 
   body
-    //- include ./header/pre-header
-    include ./header/header
+    
     include flash-errors
+    include ./header/header
     block content
     include ./footer/footer
     include ./footer/copyright

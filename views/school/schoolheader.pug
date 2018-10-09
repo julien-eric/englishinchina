@@ -3,7 +3,10 @@
     #jumbotron-content.text-center.container-fluid
         .row.transparent-black.mb-5
             .container
-                include school-map-breadcrumb
+                -var bread1 = {url:'/', title:'Home'}
+                -var bread2 = {url:'/search', title:'Schools'}
+                -var bread3 = {url:'/school/search?queryInfo=&province=-1&city=', title:school.name }
+                include ../breadcrumb
         .py-5
         h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{school.name}
         h2.text-muted.text-light.font-weight-light

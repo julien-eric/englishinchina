@@ -8,7 +8,7 @@ module.exports = {
  * @param {*} next callback
  * @return {Object} The return of the callback function
  */
-  isAuthenticated: function(req, res, next) {
+  isAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     }
@@ -24,7 +24,7 @@ module.exports = {
   * @param {*} res HTTP Request
   * @param {*} next callback
   */
-  isAdmin: function(req, res, next) {
+  isAdmin: function (req, res, next) {
     if (req.user && req.user.admin) {
       req.admin = req.user.admin;
     } else {
@@ -34,11 +34,56 @@ module.exports = {
     res.redirect('/login');
   },
 
-  validateQuery: function(queryElement) {
+  validateQuery: function (queryElement) {
     if (queryElement == undefined || queryElement == 'undefined' || queryElement == '' || queryElement == 'null' || queryElement == null) {
       return -1;
     }
     return queryElement;
+  },
+
+  getSchoolSortingObject: function (sortingQuery) {
+    if (sortingQuery == undefined || sortingQuery == 'undefined' || sortingQuery == '' || sortingQuery == 'null' || sortingQuery == null) {
+      return undefined;
+    }
+    else {
+      if (sortingQuery == 'ratingUp') {
+        return { attribute: 'averageRating', order: -1 }
+      } else if (sortingQuery == 'ratingDown') {
+        return { attribute: 'averageRating', order: 1 }
+      } else if (sortingQuery == 'alphaUp') {
+        return { attribute: 'name', order: 1 }
+      } else if (sortingQuery == 'alphaDown') {
+        return { attribute: 'name', order: -1 }
+      }
+    }
+    return sortingQuery;
+  },
+
+
+  returnRegex: function (queryInfo) {
+
+    let words = queryInfo.split(' ');
+
+    if (words[words.length - 1] == '') {
+      words = _.first(words, words.length - 1);
+    }
+
+    if (words.length == 1) {
+      return queryInfo;
+    }
+
+    let regex = '';
+    for (let index = 0; index < words.length; index++) {
+      let item = words[index];
+      if (index == words.length - 1) {
+        regex += item;
+      } else {
+        regex += item + '|';
+      }
+    }
+
+    return regex;
+
   }
 
 };

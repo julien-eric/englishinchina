@@ -30,13 +30,13 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Where is your school?
                                     option(value='', selected='') City
             .col-lg-12
                   .form-group.md-form.mb-5
-                        -var schoolInfo = ""
+                        -var queryInfo = ""
                         -var schoolId = ""
                         if searchInfo && searchInfo.school
-                              -schoolInfo = searchInfo.school.name
+                              -queryInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
-                        input#schoolInfo.typeahead.form-control.form-form-0(name="schoolInfo" value=schoolInfo type="text"  form="form-form-0" required)
-                        label.col-12.px-0(for='schoolInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+                        input#queryInfo.typeahead.form-control.form-form-0(name="queryInfo" value=queryInfo type="text"  form="form-form-0" required)
+                        label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
                         input#schoolId.d-none(name="schoolId" value=schoolId form="review-form")
 
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next

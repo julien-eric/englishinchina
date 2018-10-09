@@ -116,7 +116,7 @@ module.exports = function(passport) {
       provincesByCompany,
       schools: schoolList,
       pictureInfo: pictureinfo,
-      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
     });
   });
 

@@ -107,7 +107,7 @@ module.exports = function(passport) {
   });
 
   router.post('/addphoto', async (req, res) => {
-    const picture = {url: req.body.pictureUrl, description: req.body.description};
+    const picture = {url: req.body.urlSchoolUserPicture, description: req.body.description};
     let school = await schools.findSchoolById(req.body.id);
     let image = await images.addImage(
       {
@@ -118,9 +118,8 @@ module.exports = function(passport) {
         description: picture.description,
         date: Date.now()
       });
-    const xschool = school.toObject();
-    xschool.photos.push(image);
-    await schools.updatePictures(xschool);
+    school.photos.push(image);
+    await schools.updatePictures(school);
     res.redirect(`/school/${school._id}`);
   });
 
@@ -239,7 +238,7 @@ module.exports = function(passport) {
           reviews: otherReviews,
           pictureInfo: pictureinfo,
           jadefunctions,
-          scripts: [scripts.util, scripts.libbarchart, scripts.schoolpage],
+          scripts: [scripts.util, scripts.libbarchart, scripts.schoolPage],
           criteria,
           moment,
           criteriaScore: review.criteria
@@ -311,11 +310,12 @@ module.exports = function(passport) {
   router.get('/search/', async (req, res) => {
 
     try {
-      const schoolInfo = req.query.schoolInfo;
+      const queryInfo = req.query.queryInfo;
       const province = utils.validateQuery(req.query.province);
       const city = utils.validateQuery(req.query.city);
+      const sorting = req.query.sort;
 
-      let searchResults = await schools.searchSchools(schoolInfo, province, city);
+      let searchResults = await schools.searchSchools(queryInfo, province, city, sorting);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
         searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
       }
@@ -328,7 +328,7 @@ module.exports = function(passport) {
       let provinces = await provincesController.getAllProvinces();
       let cities = undefined;
       if (province) {
-        cities = await citiesController.getCitiesByProvince(province);
+        cities = await citiesController.getProvinceCitiesByCode(province);
       }
       res.render('search', {
         title: `${searchResults.query} Schools - Second Language World`,
@@ -361,10 +361,10 @@ module.exports = function(passport) {
   router.get('/query/', async (req, res) => {
 
     try {
-      const schoolInfo = req.query.schoolInfo || undefined;
+      const queryInfo = req.query.queryInfo || undefined;
       const province = utils.validateQuery(req.query.province);
       const city = utils.validateQuery(req.query.city);
-      let searchResults = await schools.searchSchools(schoolInfo, province, city);
+      let searchResults = await schools.searchSchools(queryInfo, province, city);
       res.send(JSON.stringify(searchResults.list));
     } catch (error) {
       res.send(error);
@@ -379,7 +379,7 @@ module.exports = function(passport) {
   router.get('/edit/:id', utils.isAuthenticated, (req, res) => {
     schools.findSchoolById(req.params.id, (school) => {
       provincesController.getAllProvinces((provinces) => {
-        citiesController.getCitiesByProvince(school.province.code, (cities) => {
+        citiesController.getProvinceCitiesByCode(school.province.code, (cities) => {
           companiesController.getAllCompanies((companies) => {
             res.render('school/editschool', {
               school,
@@ -474,7 +474,7 @@ module.exports = function(passport) {
         popularCities,
         popularProvinces,
         pictureInfo: pictureinfo,
-        scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolpage]
+        scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
       });
     } catch (error) {
       res.render('error', {

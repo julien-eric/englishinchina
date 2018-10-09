@@ -25,7 +25,7 @@ module.exports = function (passport) {
         let provinces = await provincesController.getAllProvinces();
         let cities = undefined;
         if (province) {
-          cities = await citiesController.getCitiesByProvince(province);
+          cities = await citiesController.getProvinceCitiesByCode(province);
         }
 
         jobs = jadefunctions.trunkContentArray(jobs, 'title', 120);
@@ -95,14 +95,14 @@ module.exports = function (passport) {
         searchInfo.school = { name: school.name, id: school.id };
         searchInfo.province = school.province.code;
         searchInfo.city = school.city.code;
-        cities = await citiesController.getCitiesByProvince(searchInfo.province);
+        cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
       } else {
         // If we don't have a school, we still might have a province-city
         searchInfo.province = utils.validateQuery(req.query.province);
         searchInfo.city = utils.validateQuery(req.query.city);
 
         if (searchInfo.province) {
-          cities = await citiesController.getCitiesByProvince(searchInfo.province);
+          cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
         }
       }
 
@@ -159,7 +159,7 @@ module.exports = function (passport) {
       let provinces = await provincesController.getAllProvinces();
       let cities = undefined;
       if (province) {
-        cities = await citiesController.getCitiesByProvince(province);
+        cities = await citiesController.getProvinceCitiesByCode(province);
       }
       res.render('job/job-search', {
         title: `${searchResults.query} Jobs - Second Language World`,
