@@ -65,20 +65,31 @@ $(document).ready(() => {
     xhr.send();
   });
 
+
   // Navbar transparency removal
-  if ($('.main-header').hasClass('bg-transparent')) {
+  if ($('#main-header').hasClass('transparent')) {
     var scroll_start = 0;
+
     $(document).scroll(function () {
       scroll_start = $(this).scrollTop();
       if (scroll_start > 1) {
-        $(".main-header").addClass('bg-white');
-        $(".main-header").removeClass('bg-transparent');
+        $("#main-header").addClass('bg-white');
+        $("#main-header").removeClass('transparent');
       } else {
-        $(".main-header").removeClass('bg-white');
-        $(".main-header").addClass('bg-transparent');
+        $("#main-header").removeClass('bg-white');
+        $("#main-header").addClass('transparent');
       }
     });
   }
+      
+  $('#main-header').on('hide.bs.collapse', function () {
+    $("#main-header").addClass('collapsed');
+  })
+      
+  $('#main-header').on('show.bs.collapse', function () {
+    $("#main-header").removeClass('collapsed');
+  })
+  
 
 
   // Material Select Initialization

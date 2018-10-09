@@ -6,7 +6,7 @@ if locals.user
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
             a.dropdown-item(href='/user/edit') My Profile
             a.dropdown-item(href='/signout') Sign Out
-    li.hidden-xs
+    li.d-none.d-md-inherit
         //- h1 #{locals.user.fb}
         //- h1 #{locals.user.useFacebookPic}
         if locals.user.fb && locals.user.useFacebookPic

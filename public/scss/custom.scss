@@ -139,18 +139,23 @@ body {
   z-index: $zindex-dropdown;
 }
 
-
-
-.main-header.bg-transparent .navbar-nav a {
+.navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
   color: white;
 }
 
-.main-header.bg-transparent {
+.navbar.navbar-light.main-header.transparent.collapsed {
   box-shadow: none;
+  background-color: transparent;
   transition: background-color 0.5s linear;
 }
 
-.main-header {
+.navbar.navbar-light.main-header.transparent {
+  box-shadow: none;
+  background-color: white;
+  transition: background-color 0.5s linear;
+}
+
+.navbar.navbar-light.main-header {
   transition: background-color 0.5s linear;
 }
 
