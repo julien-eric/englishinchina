@@ -15,8 +15,6 @@ const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
 
-// const pickBannerPicture
-
 module.exports = function (passport) {
 
   // Home Page
@@ -25,6 +23,7 @@ module.exports = function (passport) {
     try {
       let provinces = await provincesController.getAllProvinces();
       let popularCities = await citiesController.getMostPopularCities();
+      let featuredJobs = await jobsController.getFeaturedJobs();
       let popularProvinces = await provincesController.getMostPopularProvinces();
       let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
@@ -37,6 +36,7 @@ module.exports = function (passport) {
         provinces,
         pictureInfo: pictureinfo,
         jadefunctions,
+        featuredJobs,
         popularCities,
         popularProvinces,
         popularCompanies,

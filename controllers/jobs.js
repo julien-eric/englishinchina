@@ -13,7 +13,6 @@ let findPicture = function (job) {
   }
 };
 
-
 let JobsController = function () { };
 
 JobsController.prototype.getJob = async (id) => {
@@ -24,6 +23,14 @@ JobsController.prototype.getJob = async (id) => {
 
 JobsController.prototype.getAllJobs = async () => {
   let jobs = await Job.find().populate('school').populate('province').populate('city').exec();
+  jobs.forEach((job) => {
+    findPicture(job);
+  });
+  return jobs;
+};
+
+JobsController.prototype.getFeaturedJobs = async () => {
+  let jobs = await Job.find().sort({dateCreated: 'descending'}).limit(3).populate('school').populate('province').populate('city').exec();
   jobs.forEach((job) => {
     findPicture(job);
   });
