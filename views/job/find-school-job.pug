@@ -29,16 +29,16 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                               option(value='', selected='') City
                         label.col-12.px-0(for='city', data-error='School has not been selected properly', data-success='Thank you.') City
             .col-lg-12
-                  .form-group.md-form.mb-5
+                  .form-group.md-form
                         -var queryInfo = ""
                         -var schoolId = ""
                         if searchInfo && searchInfo.school
                               -queryInfo = searchInfo.school.name
                               -schoolId = searchInfo.school.id
-                        input#queryInfo.typeahead.form-control(name="queryInfo", value=queryInfo type="text", class="form-form-" + step, form="form-form-" + step)
+                        input#queryInfo.typeahead.form-control(name="queryInfo", value=queryInfo type="text", datasets="schools", class="form-form-" + step, form="form-form-" + step)
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
                         label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School Name (Optional)
-                        p.text-small Start typing for results to show, select province and city to narrow down research. It is not necessary to specify a school for the location for a job offer but linking it to a school can direct the teacher to other teacher's reviews and help the selection in both ways.
+                  p.mb-5.text-small Start typing for results to show, select province and city to narrow down research. It is not necessary to specify a school for the location for a job offer but linking it to a school can direct the teacher to other teacher's reviews and help the selection in both ways.
 
             include ../review/find-school-create-option
       

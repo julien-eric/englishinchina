@@ -12,6 +12,8 @@ let TypeaheadWrapper = function () {
   this.dataSources = [];
   this.autoTriggerValidation = false;
   this.schoolList;
+  this.currentQueryCallback;
+  this.currentQueryDatasets = [];
   let pathname = window.location.pathname;
 
   if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1) {
@@ -47,7 +49,7 @@ TypeaheadWrapper.prototype.initDatasets = function (bloodhoundDatasets) {
       this.dataSources.push(this.createDataset('provinces', 5, provinceSource, 'name', suggestionTemplate))
     }
 
-    if (dataset == 'cities'){
+    if (dataset == 'cities') {
       let citySource = this.createBloodhoundDataset('/querycities', 'searchInfo');
       let suggestionTemplate = function (element) {
         return '<div>' + element.pinyinName + '</span></div>';
@@ -66,16 +68,16 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (queryUrl, queryIn
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
       wildcard: '%QUERY',
-      rateLimitWait: 300,
+      rateLimitWait: 100,
       url: queryUrl,
       replace: function (url, query) {
         if ($('#queryInfo').val() != -1) {
           url += '?' + queryInfoName + '=' + query;
         }
-        if($('#provinceSelect')){
+        if ($('#provinceSelect')) {
           url += '&province' + '=' + $('#provinceSelect').val();
         }
-        if($('#citySelect')){
+        if ($('#citySelect')) {
           url += '&city' + '=' + $('#citySelect').val();
         }
         return url;
@@ -108,22 +110,50 @@ TypeaheadWrapper.prototype.createDataset = function (name, limit, source, attrib
     },
     templates: {
       header: '<div class="typeahead-header pl-3 pt-1">' + name + '</div>',
-      notFound: this.notFoundTemplate,
+      notFound: TypeaheadWrapper.prototype.notFoundTemplate.bind(this),
       suggestion: suggestionTemplate
     }
   }
 };
 
-TypeaheadWrapper.prototype.notFoundTemplate = function (element) {
-  var a = element;
+TypeaheadWrapper.prototype.notFoundTemplate = function (element, context) {
 
+  let query = element.query;
+  let dataset = element.dataset;
   let pathname = window.location.pathname;
-  notFoundTemplate = ['<div class="mx-2 empty-message"><b>No results found</b></div>'];
 
-  if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1) {
-    this.autoTriggerValidation = true;
-    notFoundTemplate = undefined;
+  let generateMessage = function (message) {
+    return ['<div class="mx-2 text-small empty-message"><b>' + message + '</b></div>'];
+  };
+
+  let handleTemplate = function (query) {
+    if (pathname.indexOf('review') != -1) {
+      this.autoTriggerValidation = true;
+      return generateMessage('No school found for <span class="font-italic">' + query + '</span> (Check box below to proceed with school creation) ');
+    } else if (pathname.indexOf('job') != -1) {
+      this.autoTriggerValidation = true;
+      return generateMessage('No school in our system for <span class="font-italic">' + query + '</span>');
+    } else {
+      return generateMessage('No quick results found for <span class="font-italic">' + query + '</span> (Press Enter to search) ');
+    }
   }
+
+  if (this.dataSources.length == 1) {
+    return handleTemplate(query);
+  }
+
+  if (query === this.currentQueryCallback) {
+
+    this.currentQueryDatasets.push(dataset);
+    if (this.currentQueryDatasets.length == this.dataSources.length) {
+      return handleTemplate(query);
+    }
+  } else {
+    this.currentQueryCallback = query;
+    this.currentQueryDatasets = [];
+    this.currentQueryDatasets.push(dataset);
+  }
+
 }
 
 TypeaheadWrapper.prototype.handleSubmit = function (e) {
