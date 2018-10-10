@@ -86,7 +86,7 @@ module.exports = function (passport) {
       searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
       searchInfo.provinceCode = utils.validateQuery(req.query.province);
 
-      if (searchInfo.cityCode && searchInfo.provinceCode == -1) {
+      if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
         searchInfo.provinceCode = searchInfo.city.province.code;
         searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode);
       }
@@ -115,7 +115,7 @@ module.exports = function (passport) {
       let bannerPicture
       if (searchInfo.city) {
         bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
-      } else if (searchInfo.provinceCode) {
+      } else if (searchInfo.province) {
         bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
       }
 
