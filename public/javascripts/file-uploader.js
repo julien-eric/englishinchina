@@ -2,6 +2,16 @@ var FileUploader = function () {
 
   let elements = [];
 
+  let getElementIndex = function (elements, id) {
+    let picturePreviewIndex = -1;
+    elements.forEach(function (element, index) {
+      if (element.inputId == id) {
+        picturePreviewIndex = index;
+      }
+    });
+    return picturePreviewIndex;
+  }
+
   let init = function (inputId, urlPrefix, previewPrefix, progressPrefix) {
 
     if (document.getElementById(inputId)) {
@@ -21,7 +31,7 @@ var FileUploader = function () {
         if (file == null) {
           alert('No file selected.');
         } else {
-          getSignedRequest(file, elements.length - 1);
+          getSignedRequest(file, getElementIndex(elements, inputId));
           document.getElementById(urlPrefix + '-' + inputId).value = file.name;
         }
       };
