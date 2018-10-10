@@ -109,7 +109,7 @@ $(document).ready(() => {
     xhr.send();
 
     var modal = $(this)
-    modal.find('.modal-title').text('Review from ' + reviewerName)
+    modal.find('.modal-title').text('User Review')
   })
 
   // $('#load-more-reviews').click(() => {

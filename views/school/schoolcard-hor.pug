@@ -10,11 +10,15 @@
             h3.font-weight-bold.card-title.px-0 
               a.text-dark(href='/school/'+ school._id)
                 | #{school.name}
-            h6.card-subtitle.font-weight-light.mb-2.text-muted #{jadefunctions.returnNameforSchoolType(school.schoolType)}
-              if(school.company)
-                span &nbsp;|&nbsp;
-                  a(href='/company/' + school.company.id) #{school.company.name}        
-            p.card-text #{school.description}
+            h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize 
+              i.mdi.mdi-map-marker(aria-hidden='true') 
+              | China / 
+              a(href='/search?queryInfo=&province=' + school.province.code + '&city=-1') #{school.province.name} / 
+              a(href='/search?queryInfo=&city=' + school.city.code) #{school.city.pinyinName} 
+              //- if(school.company)
+              //-   span &nbsp; | &nbsp;
+              //-   a(href='/company/' + school.company.id) #{school.company.name}        
+            p #{school.description}
             -var averageRating = jadefunctions.roundToPoint5(school.averageRating)
             if school.reviews || avg != '-1.0'
               if averageRating != '-1.0'

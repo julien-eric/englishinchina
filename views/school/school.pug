@@ -12,14 +12,25 @@ block content
             
             .container.bg-white.pt-3           
                   .row
-                        #description.description.col-sm-12.col-lg-8
-                              -var element = school;
-                              include description
-                              //- if(relatedSchools)
-                              //-    .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4.visible-lg
-                              //-       -var relatedschools = relatedschools
-                              //-       include relatedschools
-                              //- include schooladminsection
+                        .col-sm-12.col-lg-8
+                              .location
+                                    -var bread1 = {url:'/', title:'China'}
+                                    -var bread2 = {url:'/search?province=' + school.province.code, title:school.province.name}
+                                    -var bread3 = {url:'/search?queryInfo=&city=' + school.city.code, title:school.city.pinyinName }
+                                    include ./location-breadcrumb
+                                    //- h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize 
+                                    //-       i.mdi.mdi-map-marker(aria-hidden='true') 
+                                    //-       | China / 
+                                    //-       a(href='/search?queryInfo=&province=' + school.province.code + '&city=-1') #{school.province.name} / 
+                                    //-       a(href='/search?queryInfo=&city=' + school.city.code) #{school.city.pinyinName} 
+                              #description.description
+                                    -var element = school;
+                                    include description
+                                    //- if(relatedSchools)
+                                    //-    .page-block.col-xs-12.col-sm-12.col-md-12.col-lg-4.visible-lg
+                                    //-       -var relatedschools = relatedschools
+                                    //-       include relatedschools
+                                    //- include schooladminsection
                         .col-lg-4
                               include ../ratingcard
                               -var query = '?schoolId=' +  school._id;
@@ -58,9 +69,5 @@ block content
                               include schoolbreakdown
                               hr
                               include ../review/reviews
-
-                  //- #reviews.reviews.mt-5.clearfix
-                  //-       h2#popular-cities.text Reviews 
-                  //-       p.text-muted What others have been saying about #{school.name}. #{reviewsCount} Reviews
                         
 
