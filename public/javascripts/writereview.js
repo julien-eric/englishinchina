@@ -1,9 +1,9 @@
 // Tooltips Initialization
-$(function() {
+$(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-let addSchoolCallback = function(data) {
+let addSchoolCallback = function (data) {
   let school = JSON.parse(data);
   if (school && school._id && school.name) {
     $('#queryInfo').val(school.name);
@@ -15,7 +15,7 @@ let addSchoolCallback = function(data) {
   }
 }
 
-let ajaxAddSchool = function(url) {
+let ajaxAddSchool = function (url) {
 
   $.ajax({
     type: "POST",
@@ -25,7 +25,7 @@ let ajaxAddSchool = function(url) {
   });
 }
 
-let returnFormName = function(pathname) {
+let returnFormName = function (pathname) {
   if (pathname.indexOf('review') != -1) {
     return 'review-form';
   } else if (pathname.indexOf('job') != -1) {
@@ -49,116 +49,124 @@ $(document).ready(() => {
   let allWells = $('.setup-content');
   let allNextBtn = $('.nextBtn');
   let allPrevBtn = $('.prevBtn');
+  let currentStep = -1;
 
   allWells.hide();
 
-  navListItems.click(function(e) {
+  navListItems.click(function (e, curStepValue) {
     e.preventDefault();
     let $target = $($(this).attr('href'));
     let $item = $(this);
-    let step = $target.attr('id').slice('5')
+    let goToStep = $target.attr('id').slice('5')
+    let goToStepBtn = $('div.setup-panel div a[href="#step-' + goToStep + '"]');
 
-    if (!$item.hasClass('disabled')) {
-      // Toggle active navlink
-      navListItems.removeClass('active')
-      $item.addClass('active');
-      allWells.hide();
-      $target.show();
+    let pressButton = function () {
+      if (!$item.hasClass('disabled')) {
+        // Toggle active navlink and display correct page
+        navListItems.removeClass('active')
+        $item.addClass('active');
+        allWells.hide();
+        $target.show();
+        currentStep = goToStep;
+      }
+
+      // If on final step, change the 'nested' fields to review-form to be submitted along
+      if (goToStep == 3) {
+        $('.form-form-0').attr('form', finalFormName)
+        $('.form-form-1').attr('form', finalFormName)
+        $('.form-form-2').attr('form', finalFormName)
+
+      } else {
+        $('.form-form-0').attr('form', 'form-form-0')
+        $('.form-form-1').attr('form', 'form-form-1')
+        $('.form-form-2').attr('form', 'form-form-2')
+      }
+
+      // $('html,body').animate({
+      //   scrollTop: $('#write-review-title').offset().top
+      // }, 'slow');
     }
 
-    //On final step, change the 'nested' fields to review-form to be submitted along
-    if (step == 3) {
-      $('.form-form-0').attr('form', finalFormName)
-      $('.form-form-1').attr('form', finalFormName)
-      $('.form-form-2').attr('form', finalFormName)
-      
+    let form = $('#form-form-' + currentStep);
+    if (form.length) {
+      form.submit(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (event.currentTarget.checkValidity()) {
+          goToStepBtn.parent().removeClass('disabled');
+          pressButton();
+        }
+      });
+      form.submit();
     } else {
-      $('.form-form-0').attr('form', 'form-form-0')
-      $('.form-form-1').attr('form', 'form-form-1')
-      $('.form-form-2').attr('form', 'form-form-2')
+      pressButton();
     }
-    
-    $('html,body').animate({
-      scrollTop: $('#write-review-title').offset().top
-    }, 'slow');
   });
 
-  allPrevBtn.click(function() {
+  allPrevBtn.click(function () {
     let curStep = $(this).closest(".setup-content");
     let curStepBtn = curStep.attr("id");
     let prevStepSteps = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
     prevStepSteps.removeAttr('disabled').trigger('click');
   });
-  
-  allNextBtn.click(function() {
-    let curStep = $(this).closest(".setup-content");
-    let curStepBtn = curStep.attr("id");
-    let step = curStepBtn.slice('5');
+
+  allNextBtn.click(function () {
+
+    let curStepElement = $(this).closest(".setup-content");
+    let curStepBtn = curStepElement.attr("id");
+    let curStepValue = curStepBtn.slice('5');
     let nextStepSteps = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a");
-    let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email']");
-    let isValid = true;
-    
-    let form = $('#form-form-' + step);
-    if (form.length) {
-      form.submit(function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (event.currentTarget.checkValidity()) {
-          nextStepSteps.parent().removeClass('disabled');
-          nextStepSteps.trigger('click');
-        }
-      });
-    }
-    form.submit();
-    
+    nextStepSteps.trigger('click', [curStepValue]);
   });
-  
+
   $('div.setup-panel div a.btn-amber').trigger('click');
-  
+
   let sliders = $('.slider');
   let outputs = $('.output');
-  
-  Array.prototype.filter.call(sliders, function(slider, item) {
-    slider.oninput = function() {
+
+  Array.prototype.filter.call(sliders, function (slider, item) {
+    slider.oninput = function () {
       outputs[item].innerHTML = this.value;
     }
   });
-  
+
   $('.datepicker').pickadate({
     formatSubmit: 'MMMM Do YYYY',
-    onSet: function(context) {
+    onSet: function (context) {
       validateField(this.$node[0]);
     },
-    onStart: function() {
+    onStart: function () {
       $('#start-date').removeAttr('readonly');
       $('#end-date').removeAttr('readonly');
     }
   });
-  
-  $('#citySelect').change(function() {
+
+  $('#citySelect').change(function () {
     if ($(this).val() != '') {
       $('#noSchool').prop('disabled', false);
     } else {
       $('#noSchool').prop('disabled', true);
     }
   });
-  
+
   // On collapse, change school name input to be part of add-school-form
-  $('#addSchoolCollapsible').on('shown.bs.collapse', function() {
+  $('#addSchoolCollapsible').on('shown.bs.collapse', function () {
     $('#provinceSelect').prop('required', true);
     $('#citySelect').prop('required', true);
   })
-  $('#addSchoolCollapsible').on('hidden.bs.collapse', function() {
+  $('#addSchoolCollapsible').on('hidden.bs.collapse', function () {
     $('#provinceSelect').prop('required', false);
     $('#citySelect').prop('required', false);
   })
-  
-  
+
+
   // Map create school button submission
-  $('#addSchool').click(function(event) {
-    
+  $('#addSchool').click(function (event) {
+
     // Intercept create school form submission
-    $('#add-school-form').submit(function(event) {
+    $('#add-school-form').submit(function (event) {
       event.preventDefault();
       event.stopPropagation();
       if (event.currentTarget.checkValidity()) {
@@ -180,7 +188,7 @@ function countChar(textArea) {
   let charNumber = textArea.value.length;
   let charNumberElem = $('#charNumber');
   charNumberElem.text(charNumber);
-  if(charNumber < 140) {
+  if (charNumber < 140) {
     charNumberElem.addClass('text-danger');
     charNumberElem.removeClass('text-primary');
   } else if (charNumber > 140) {

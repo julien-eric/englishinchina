@@ -11,8 +11,9 @@ const schoolsController = require('../controllers/schools');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
+const tokensController = require('../submissiontokens');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   /** **********************************************************************************************************
        *WriteReview : Page for users to write review for school specified by id
@@ -29,7 +30,7 @@ module.exports = function(passport) {
       if (schoolId != -1) {
         // If we have a school we have all the information we need
         const school = await schoolsController.findSchoolById(schoolId);
-        searchInfo.school = {name: school.name, id: school._id};
+        searchInfo.school = { name: school.name, id: school._id };
         searchInfo.province = school.province.code;
         searchInfo.city = school.city.code;
         cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
@@ -43,6 +44,7 @@ module.exports = function(passport) {
         }
       }
 
+      let token = tokensController.createToken();
       let provinces = await provincesController.getAllProvinces();
       res.render('review/writereview', {
         title: `Write Review - SLW`,
@@ -53,6 +55,7 @@ module.exports = function(passport) {
         cities,
         pictureInfo: pictureinfo,
         searchInfo,
+        tokenValue: token.value,
         jadefunctions,
         scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
       });
@@ -73,9 +76,28 @@ module.exports = function(passport) {
      ************************************************************************************************************ */
   router.post('/', async (req, res) => {
     try {
-      await reviews.insertReviewforSchool(req);
+
       let school = await schools.findSchoolById(req.body.schoolId);
+      let schoolUrl = '/school/' + school._id;
+      let token = tokensController.recuperateToken(req.body.submissionTokenVal);
+      
+      if (token.state == tokensController.ALIVE) {
+        
+        token.processing();
+        token.setUrl(schoolUrl);
+        await reviews.insertReviewforSchool(req);
+        token.processed();
+
+      } else if (token.state == tokensController.PROCESSING) {
+        console.log('Token ' + token.value + ' is already being processed');
+      } else if (token.state == tokensController.PROCESSED) {
+        console.log('Token ' + token.value + ' has already been processed');
+      } else if (token.state == tokensController.TIMED_OUT) {
+        console.log('Token ' + token.value + ' has timed out');
+      }
+
       res.redirect('/school/' + school._id);
+
     } catch (error) {
       res.send(error);
     }

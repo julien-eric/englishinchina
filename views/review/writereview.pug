@@ -24,10 +24,12 @@ block content
                                     i.fa.fa-check(aria-hidden='true')
             .row.justify-content-center.my-5
                   form.col-lg-8#review-form(action='/review', method='POST' novalidate='')
+                        -var formName = 'review-form'
+                        input#token.d-none(name="submissionTokenVal" value=tokenValue form=formName)
+
                         // First Step
                         #step-0.row.setup-content
                               .col-md-12
-                                    -var formName = 'review-form'
                                     -var step = 0
                                     include find-school
 
