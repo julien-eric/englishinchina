@@ -1,9 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
+const uuidv1 = require('uuid/v1');
 
 let signupParams = {
-  passReqToCallback: true // allows us to pass back the entire request to the callback
+  passReqToCallback: true
 };
 
 let createHash = function(password) {
@@ -24,11 +25,15 @@ let processSignupReturn = function(req, username, password, done) {
 
     // If there is no user with that email, create the user
     const newUser = new User();
+    const token = uuidv1();
+
 
     // set the user's local credentials
+    newUser.token = token;
     newUser.username = username;
     newUser.password = createHash(password);
     newUser.email = req.param('email');
+    newUser.anonymous = req.param('anonymous');
     newUser.avatarUrl = req.param('avatarUrl');
     newUser.firstName = req.param('firstName');
     newUser.lastName = req.param('lastName');
