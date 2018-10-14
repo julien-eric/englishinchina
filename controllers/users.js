@@ -21,25 +21,8 @@ module.exports = {
     return User.findOne({resetPasswordToken: token, resetPasswordExpires: expiryDate}).exec();
   },
 
-  updateUser(user) {
-
-    user.useFacebookPic = false;
-    // Replace undefined values by empty strings
-    if (user.address == undefined) {
-      user.address = '';
-    }
-    if (user.gender == undefined) {
-      user.gender = '';
-    }
-    // if(user.username == "admin"){
-    //     user.admin = true;
-    // }
-    // else{user.admin=false;}
-    if (user.avatarUrl.indexOf('englishinchina') == -1) {
-      user.useFacebookPic = true;
-    }
-
-    return User.findOneAndUpdate({_id: user.id}, user);
+  updateUser(userId, userFields) {
+    return User.findOneAndUpdate({_id: userId}, userFields).exec();
   }
 };
 

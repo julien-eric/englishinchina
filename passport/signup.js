@@ -2,6 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
 const uuidv1 = require('uuid/v1');
+const emailController = require('../controllers/email');
 
 let signupParams = {
   passReqToCallback: true
@@ -44,6 +45,7 @@ let processSignupReturn = function(req, username, password, done) {
   }).then((savedUser) => {
 
     console.log('User Registration successful');
+    emailController.emailVerification(req, savedUser);
     return done(null, savedUser);
 
   }).catch((err) => {

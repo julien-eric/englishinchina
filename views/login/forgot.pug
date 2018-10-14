@@ -1,0 +1,38 @@
+extends image-splash
+block card
+    .card.text-dark.my-5
+        .card-header.border-bottom-0
+                .text-center
+                    img(src='/images/logo.svg', width='', height='40', alt='')
+        .card-body.text-left
+                .text-center
+                        h1.mt-3.mb-5.text-light.font-weight-bold Reset Password 
+                        //- if message.length > 0
+                        //-         p.rounded.bg-light.text-danger.py-1.mb-5 #{message}
+                form(class='form-signin', action='/forgot', method='POST')
+                        if(redirecturl)
+                                .form-group.hidden
+                                        input.form-control.form-control-lg(type='text', name='redirecturl', placeholder='Username', value=redirecturl)
+                        .md-form.mb-5
+                                i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+                                input.form-control(type='text', name='email', placeholder='Email',required, autofocus)
+                                label(for='email') Email
+                                p.text-small A link to reset your password will be sent to this email.
+                        button.btn.btn-lg.btn-block.btn-primary(type='submit') Reset Password
+//- block content
+//-     .splash
+//-         .splash-image-container
+//-             .splash-gradient
+//-         div.container.login-page
+//-             div.login-form.col-sm-8.offset-sm-2.col-md-6.offset-md-3
+//-                 .panel
+//-                     .panel-body.flat-body
+//-                         form(class='form-signin', action='/reset', method='POST')
+//-                             .md-form.mb-5
+//-                                     i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+//-                                     input.form-control(type='text', name='email', placeholder='Email',required, autofocus)
+//-                                     label(for='email') Email
+//-                             .form-group
+//-                                 label(for='email') Email
+//-                                 input.form-control.input-lg(type='email', name='email', required, autofocus)
+//-                             button.btn.btn-lg.btn-block.btn-primary(type='submit') Reset Password
