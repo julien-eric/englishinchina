@@ -14,11 +14,13 @@ block content
                                         .md-form
                                             input#addSchoolName(type='text', name='name', class='form-control', placeholder='Company Name', required)
                                             label(for='inputIconEx1') Company Name
-                                .row
+                                .row.my-3
+                                    
                                     hr
                                     .col-lg-6
                                         #preview-new-company-picture.image-container.image-container-default.bg-primary
                                     .col-lg-6
+                                        h3 Company Cover Picture
                                         .md-form
                                             .file-field
                                                 .btn.btn-primary.btn-sm.float-left.ml-0
@@ -29,6 +31,23 @@ block content
                                                     input.file-path.validate(type='text', placeholder='Upload your file')
                                         .progress(style='height: 12px')
                                             #progress-new-company-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                                            span.sr-only 0% Complete
+                                .row.my-3
+                                    hr
+                                    .col-lg-6
+                                        #preview-new-company-logo.image-container.image-container-default.bg-primary
+                                    .col-lg-6
+                                        h3 Company Logo
+                                        .md-form
+                                            .file-field
+                                                .btn.btn-primary.btn-sm.float-left.ml-0
+                                                    span Choose photo
+                                                    input#new-company-logo(type='file', required)
+                                                    input#url-new-company-logo.d-none(name="urlNewCompanyLogo" accept="image/*" value="/public/default.png" required)
+                                                .file-path-wrapper
+                                                    input.file-path.validate(type='text', placeholder='Upload your file')
+                                        .progress(style='height: 12px')
+                                            #progress-new-company-logo.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
                                             span.sr-only 0% Complete
                         .col-lg-12
                             .form-group

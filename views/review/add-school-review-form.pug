@@ -25,6 +25,10 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
                   .progress(style='height: 12px')
                     #progress-new-school-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
                     span.sr-only 0% Complete
+
+    .col-lg-12
+      include ../company/company-select
+    
     .col-lg-12
       .form-group
         input#add-school-ajax.d-none(type='text', name='ajax', form="add-school-form", class='form-control', value='true')

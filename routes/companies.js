@@ -58,7 +58,7 @@ module.exports = function(passport) {
         description: req.body.description,
         website: req.body.website,
         pictureUrl: req.body.urlNewCompanyPicture,
-        logoUrl: req.body.logoUrl
+        logoUrl: req.body.urlNewCompanyLogo
       };
       let newCompany = await companies.addCompany(company);
       res.redirect(`/company/${newCompany.id}`);
@@ -82,8 +82,8 @@ module.exports = function(passport) {
         name: req.body.name,
         description: req.body.description,
         website: req.body.website,
-        pictureUrl: req.body.pictureUrl,
-        logoUrl: req.body.logoUrl
+        pictureUrl: req.body.urlNewCompanyPicture,
+        logoUrl: req.body.urlNewCompanyLogo
       };
       companies.editCompany(company).then((newCompany) => {
         res.redirect(`/company/${newCompany.id}`);
