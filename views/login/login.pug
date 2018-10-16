@@ -6,7 +6,7 @@ block card
                     img(src='/images/logo.svg', width='', height='40', alt='')
         .card-body.text-left
                 .text-center
-                        h1.mt-3.mb-5.text-light.font-weight-bold Sign in 
+                        h3.mt-1.mb-3.text-light.font-weight-bold Sign in 
                         if message.length > 0
                                 p.rounded.bg-light.text-danger.py-1.mb-5 #{message}
                 form(class='form-signin', action='/login', method='POST')
@@ -26,11 +26,11 @@ block card
                                         span.font-weight-bold( style="font-size: 0.85rem;") Password?
                         .text-center
                                 button.btn.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Login
-                        p.text-center( style="font-size: 0.8rem;")
+                        p.mb-0.text-center( style="font-size: 0.8rem;")
                                 |Don't have an account yet?&nbsp;
                                 a(href="/signup") Sign up
 
-        .card-footer.border-0.bg-dark.text-light
+        .card-footer.border-0.bg-light.text-dark
                 include social-login
 
 
