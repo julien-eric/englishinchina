@@ -30,7 +30,7 @@ TypeaheadWrapper.prototype.initDatasets = function (bloodhoundDatasets) {
       let suggestionTemplate = function (element) {
         return '<div>' + element.name + ', <span class="text-muted text-capitalize">' + element.province.name + ', ' + element.city.pinyinName + '</span></div>';
       }
-      this.dataSources.push(this.createDataset('schools', 5, schoolSource, 'name', suggestionTemplate));
+      this.dataSources.push(this.createDataset('schools', 20, schoolSource, 'name', suggestionTemplate));
     }
 
     if (dataset == 'jobs') {

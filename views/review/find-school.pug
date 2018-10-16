@@ -2,31 +2,6 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Find or Create School
 div(role='form', data-toggle='validator', id='form-step' + step)
       p.py-3 First, let's find your school. Please take the time to thoroughly search for terms that might be related to the school after you've entered the province and city the school is located in. Duplicates are harder to manage and there's a lower chance that your comment will be read if it's posted on a newly created school rather than one that's already attracted some attention
       .row
-            .col-lg-6
-                  .md-form
-                        select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
-                              option(value='', disabled='', selected='') Province
-                              each province,i in provinces
-                                    if searchInfo && province.code == searchInfo.province 
-                                          option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
-                                    else
-                                          option(value=province.code) #{province.name} - #{province.chineseName}
-            .col-lg-6
-                  .md-form  
-                        if(cities)
-                              select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
-                                    if searchInfo && searchInfo.city
-                                          option(value='') City
-                                    else
-                                          option(value='', selected='') City
-                                    each city in cities
-                                          if searchInfo && city.code == searchInfo.city
-                                                option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-                                          else
-                                                option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-                        else
-                              select#citySelect.mdb-select.empty(name="city", disabled='true')
-                                    option(value='', selected='') City
             .col-lg-12
                   .form-group.md-form.mb-5
                         -var queryInfo = ""
@@ -37,7 +12,37 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                         input#queryInfo.typeahead.form-control(name="queryInfo" value=queryInfo datasets="schools" type="text", class="form-form-" + step, form="form-form-" + step, required)
                         label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
-            include find-school-create-option
+      //- .row
+      //-       .col-12
+      //-             label.text-small.col-12.px-0(for='queryInfo') Filter by
+
+      //-       .col-lg-6
+      //-             .md-form
+      //-                   select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
+      //-                         option(value='', disabled='', selected='') Province
+      //-                         each province,i in provinces
+      //-                               if searchInfo && province.code == searchInfo.province 
+      //-                                     option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
+      //-                               else
+      //-                                     option(value=province.code) #{province.name} - #{province.chineseName}
+      //-       .col-lg-6
+      //-             .md-form  
+      //-                   if(cities)
+      //-                         select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
+      //-                               if searchInfo && searchInfo.city
+      //-                                     option(value='') City
+      //-                               else
+      //-                                     option(value='', selected='') City
+      //-                               each city in cities
+      //-                                     if searchInfo && city.code == searchInfo.city
+      //-                                           option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+      //-                                     else
+      //-                                           option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+      //-                   else
+      //-                         select#citySelect.mdb-select.empty(name="city", disabled='true')
+      //-                               option(value='', selected='') City
+
+      include find-school-create-option
       
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
       if step != 0
