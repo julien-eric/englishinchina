@@ -13,6 +13,7 @@ const jobsController = require('../controllers/jobs');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
+const uuidv1 = require('uuid/v1');
 const utils = require('../utils');
 
 module.exports = function (passport) {
@@ -317,7 +318,7 @@ module.exports = function (passport) {
      *FORGOT :   GET : Forgot your password page
      ************************************************************************************************************ */
   router.get('/forgot', (req, res) => {
-    res.render('forgot', {
+    res.render('login/forgot', {
       title: 'Forgot your Password - Second Language World',
       user: req.user,
       pictureInfo: pictureinfo,
@@ -327,8 +328,7 @@ module.exports = function (passport) {
 
   router.post('/forgot', async (req, res, next) => {
 
-    const buffer = crypto.randomBytes(20);
-    const token = buffer.toString('hex');
+    const token = crypto.randomBytes(20).toString('hex');
 
     let user = await usersController.findUserByEmail(req.body.email);
     if (!user) {
@@ -345,21 +345,26 @@ module.exports = function (passport) {
 
   });
 
+  /** **********************************************************************************************************
+   *PASSWORD RESET
+  ************************************************************************************************************ */
+
   router.get('/reset/:token', async (req, res) => {
     let user = await usersController.findUserByToken(req.params.token, { $gt: Date.now() });
     if (!user) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/forgot');
     }
-    res.render('reset', {
+    res.render('login/reset', {
       title: 'Reset Password - Second Language World',
+      token: user.resetPasswordToken,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
     });
   });
 
-  router.post('/reset/:token', async (req, res) => {
-    let user = await usersController.findUserByToken(req.params.token, { $gt: Date.now() });
+  router.post('/reset', async (req, res) => {
+    let user = await usersController.findUserByToken(req.body.token, { $gt: Date.now() });
     if (!user) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('back');
@@ -377,16 +382,28 @@ module.exports = function (passport) {
     req.login(user, (err) => res.redirect('/'));
   });
 
-  router.post('/contactus', (req, res) => {
-    const message = `Email: ${req.body.email}\n${req.body.content}`;
-    const callbackMessage = 'Thank you, we will get back to you shortly';
-    email.sendEmail('julieneric11@gmail.com',
-      'contactusfeedback@englishinchina.com',
-      'Feedback comment from user',
-      message,
-      callbackMessage,
-      req
-    );
+
+
+  /** **********************************************************************************************************
+     *EMAIL VERIFICATION
+     * If token is correct and not expired, this will redirect a logged in user to the main page
+     ************************************************************************************************************ */
+  router.get('/emailverification/:email', async (req, res) => {
+
+    try {
+
+      let token = req.query.token;
+      let user = await usersController.findUserByEmail(req.params.email);
+      if (!user.verified) {
+        if (user.token == token) {
+          let updatedUser = await usersController.updateUser(user._id, { verified: true });
+          req.login(updatedUser, (err) => res.redirect('/'));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     res.redirect('/');
   });
 
@@ -453,6 +470,19 @@ module.exports = function (passport) {
     const provCode = req.params.provincecode;
     let cities = await citiesController.getProvinceCitiesByCode(provCode);
     res.send(cities);
+  });
+
+  router.post('/contactus', (req, res) => {
+    const message = `Email: ${req.body.email}\n${req.body.content}`;
+    const callbackMessage = 'Thank you, we will get back to you shortly';
+    email.sendEmail('julieneric11@gmail.com',
+      'contactusfeedback@englishinchina.com',
+      'Feedback comment from user',
+      message,
+      callbackMessage,
+      req
+    );
+    res.redirect('/');
   });
 
   /** **********************************************************************************************************

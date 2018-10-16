@@ -112,6 +112,8 @@ $(document).ready(() => {
   fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
   fileUploader.init('school-user-picture', 'url', 'preview', 'progress');
   fileUploader.init('new-school-picture', 'url', 'preview', 'progress');
+  fileUploader.init('new-company-picture', 'url', 'preview', 'progress');
+  fileUploader.init('new-company-logo', 'url', 'preview', 'progress');
 });
 
 

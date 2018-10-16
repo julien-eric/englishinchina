@@ -6,20 +6,24 @@ block card
                     img(src='/images/logo.svg', width='', height='40', alt='')
         .card-body.text-left
                 .text-center
-                    h1.mt-3.mb-5.text-light.font-weight-bold Sign up 
-                    if message.length > 0
-                                p.rounded.bg-light.text-danger.py-1.mb-5 #{message}            
+                    h3.mt-1.mb-3.text-light.font-weight-bold Sign up 
+                if message.length > 0
+                        p.rounded.bg-light.text-danger.py-1.mb-5 #{message}            
                 form(class='form-signin', action='/signup', autocomplete="off", method='POST')
-                        .md-form.mb-5
-                                i.fa.prefix.mdi.mdi-account(aria-hidden='true')
-                                input.form-control(type='text', name='username', placeholder='Display Name',required, autocomplete="off", autofocus)
-                                label(for='username') Display Name
-                        .md-form.mb-5
-                                i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+                        .md-form
+                                //- i.fa.prefix.mdi.mdi-account(aria-hidden='true')
+                                input.form-control(type='text', name='username', placeholder='Username',required, autocomplete="off", autofocus)
+                                label(for='username') Username
+                        .form-check.pl-0
+                                input#anonymous.form-check-input(type='checkbox' name="anonymous")
+                                label.form-check-label(for='anonymous') Make me anonymous on across SLWorld
+                                p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn off anonymous later on.
+                        .md-form.my-5
+                                //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
                                 input.form-control(type='email', name='email', placeholder='Email',required, autofocus)
                                 label(for='email') Email
-                        .md-form
-                                i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
+                        .md-form.mb-5
+                                //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
                                 input.form-control(type='password', name='password', placeholder='Password', required)
                                 label.control-label(for='password') Password
                         .text-center
@@ -27,6 +31,7 @@ block card
                         p.text-center( style="font-size: 0.8rem;")
                                 |Already have an account?&nbsp;
                                 a(href="/login") Login
-        .card-footer.border-0.bg-dark.text-light
+                        hr
+        .card-footer.border-0.bg-light.text-dark
                 include social-login
             

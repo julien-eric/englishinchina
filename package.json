@@ -42,6 +42,7 @@
     "pug": "^2.0.3",
     "request": "^2.87.0",
     "save": "^2.3.2",
+    "sendgrid": "^5.2.3",
     "serve-favicon": "^2.4.5",
     "simplesettings": "^0.0.4",
     "smartwizard": "^4.3.1",

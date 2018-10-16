@@ -4,6 +4,7 @@ const moment = require('moment');
 const criteria = require('../criteria').criteria;
 const schools = require('../controllers/schools');
 const reviews = require('../controllers/reviews');
+const companiesController = require('../controllers/companies');
 const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
@@ -45,6 +46,7 @@ module.exports = function (passport) {
       }
 
       let token = tokensController.createToken();
+      let companies = await companiesController.getAllCompanies();
       let provinces = await provincesController.getAllProvinces();
       res.render('review/writereview', {
         title: `Write Review - SLW`,
@@ -53,6 +55,7 @@ module.exports = function (passport) {
         moment,
         provinces,
         cities,
+        companies,
         pictureInfo: pictureinfo,
         searchInfo,
         tokenValue: token.value,

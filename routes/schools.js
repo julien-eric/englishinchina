@@ -16,7 +16,7 @@ const criteria = require('../criteria').criteria;
 const scripts = require('../public/scripts');
 const utils = require('../utils');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   /** ********************************
     //SCHOOL ROUTES
     ********************************** */
@@ -29,7 +29,7 @@ module.exports = function(passport) {
       try {
         let incompleteSchool;
         if (req.query.name !== undefined || req.query.schoolType !== undefined) {
-          incompleteSchool = {name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type)};
+          incompleteSchool = { name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type) };
         }
         let provinces = await provincesController.getAllProvinces();
         let companies = await companiesController.getAllCompanies();
@@ -70,12 +70,6 @@ module.exports = function(passport) {
       }
     });
 
-  router.post('/addschoolgetstarted', utils.isAuthenticated, (req, res) => {
-    const school = {name: encodeURIComponent(req.body.name), schoolType: encodeURIComponent(req.body.schoolType)};
-    res.redirect(`/school/addschool?name=${school.name}&type=${school.schoolType}`);
-  });
-
-
   /** **********************************************************************************************************
      *Addphoto : Add photo to a school
      * Param : School id
@@ -100,14 +94,14 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html});
+          res.send({ html });
         }
       },
     );
   });
 
   router.post('/addphoto', async (req, res) => {
-    const picture = {url: req.body.urlSchoolUserPicture, description: req.body.description};
+    const picture = { url: req.body.urlSchoolUserPicture, description: req.body.description };
     let school = await schools.findSchoolById(req.body.id);
     let image = await images.addImage(
       {
@@ -133,9 +127,9 @@ module.exports = function(passport) {
         },
         (err, html) => {
           if (err) {
-            res.send({html: err.toString()});
+            res.send({ html: err.toString() });
           } else {
-            res.send({html});
+            res.send({ html });
           }
         },
       );
@@ -227,7 +221,7 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html});
+          res.send({ html });
         }
       });
     } else {
@@ -262,10 +256,10 @@ module.exports = function(passport) {
       // Update Review to account for new helpful
       let updatedReview = undefined;
       if (!review.hasHF) {
-        updatedReview = await reviews.addHelpful(review, {user: userId});
+        updatedReview = await reviews.addHelpful(review, { user: userId });
         updatedReview.hasHF = true;
       } else {
-        updatedReview = await reviews.removeHelpful(review, {user: userId});
+        updatedReview = await reviews.removeHelpful(review, { user: userId });
         updatedReview.hasHF = false;
       }
 
@@ -276,7 +270,7 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html, result: '1', reviewId: updatedReview.id});
+          res.send({ html, result: '1', reviewId: updatedReview.id });
         }
       });
 
@@ -291,7 +285,7 @@ module.exports = function(passport) {
             message,
             callbackMessage,
             req,
-            () => {});
+            () => { });
         });
       }
     } catch (error) {
@@ -452,6 +446,7 @@ module.exports = function(passport) {
 
       school.reviews = jadefunctions.trunkContentArray(school.reviews, 'comment', 190);
       school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
+      school.description = jadefunctions.nl2br(school.description, false);
       let splashReview = reviews.selectSplashReview(school.reviews);
 
       let schoolOwner = false;
