@@ -11,7 +11,6 @@ let currentQuery;
 let TypeaheadWrapper = function () {
   this.dataSources = [];
   this.autoTriggerValidation = false;
-  this.schoolList;
   this.currentQueryCallback;
   this.currentQueryDatasets = [];
   let pathname = window.location.pathname;
@@ -105,7 +104,16 @@ TypeaheadWrapper.prototype.createDataset = function (name, limit, source, attrib
     display: function (element) {
       if (element) {
         element.type = name;
-        return element[attributeName];
+        if(name == 'schools') {
+          return element.name + ', ' + element.province.name + ', ' + element.city.pinyinName;
+        } else if (name == 'jobs') {
+          return element.title;
+        } else if (name == 'cities') {
+          return element.pinyinName + ', ' + element.province.name;
+        } else if (name == 'provinces') {
+          return element.name + ', China';
+        }
+        
       }
     },
     templates: {
@@ -200,22 +208,12 @@ $(document).ready(() => {
     typeaheadWrapper.dataSources
   ).blur(function () {
 
-    let hasSelection = null;
-
-    // If we find this inputs value in the schoolList we have a selection
-    if (typeaheadWrapper.schoolList) {
-      hasSelection = typeaheadWrapper.schoolList.find((school) => {
-        return school.name == $(this).val();
-      });
-    }
-
-    if (hasSelection == null && typeaheadWrapper.autoTriggerValidation) {
-      $('#noSchoolGroup').removeClass('d-none');
-    }
-
     // If page requires this input's validation, trigger it
     if (typeaheadWrapper.autoTriggerValidation) {
-      validateField($('#queryInfo')[0]);
+      let valid = validateField($('#queryInfo')[0]);
+      if (!valid) {
+        $('#noSchoolGroup').removeClass('d-none');
+      }
     }
 
   });
@@ -238,14 +236,15 @@ $(document).ready(() => {
 
   $('#queryInfo').on('keyup', function (ev, suggestion, async, data) {
 
-    let hasSelection = false;
-    if (typeaheadWrapper.schoolList) {
-      hasSelection = typeaheadWrapper.schoolList.find((school) => {
-        return school.name == $(this).val();
-      });
+    // get keycode of current keypress event
+    let code = (ev.keyCode || ev.which);
+
+    // do nothing if it's an arrow key or enter
+    if (code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+      return;
     }
 
-    if (!hasSelection && typeaheadWrapper.autoTriggerValidation) {
+    if (typeaheadWrapper.autoTriggerValidation) {
       $('#schoolId').val('');
       $('#noSchoolGroup').removeClass('d-none');
     }

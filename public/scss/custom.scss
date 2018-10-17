@@ -244,8 +244,8 @@ body {
   top: 0;
   bottom: 0;
   // margin-bottom: 50px;
-  -webkit-filter: brightness(40%);
-  filter: brightness(40%);
+  -webkit-filter: brightness(45%);
+  filter: brightness(45%);
 }
 
 .splash .splash-text {
@@ -777,9 +777,10 @@ $slw-inset-dark: #ebebeb;
 
 .img-caption {
     position: absolute;
+    height: 100%;
     top: 0px;
     left: 0px;
-    background-color: rgba(23, 23, 23, 0.58);
+    background-color: rgba(23, 23, 23, 0.38);
 }
 
 .img-overlay:hover{    

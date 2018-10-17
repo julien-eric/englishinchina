@@ -53,24 +53,6 @@ module.exports = function (passport) {
     }
   });
 
-  router.get('/searchall', async (req, res) => {
-
-    try {
-      let searchResults = {};
-      const searchInfo = req.query.searchInfo || undefined;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
-      searchResults.cities = await citiesController.getCityByPinyinName(searchInfo);
-      searchResults.provinces = await provincesController.getProvinceByPinyinName(searchInfo);
-      searchResults.jobs = (await jobsController.searchJobs(searchInfo, province, city)).list;
-      searchResults.schools = (await schoolsController.searchSchools(searchInfo, province, city)).list;
-
-      res.send(JSON.stringify(searchResults));
-    } catch (error) {
-      res.send(error);
-    }
-  });
-
   /** **********************************************************************************************************
      *search : Method for search site, it will return any school, company, job that has some of the information
      * Param : Query, string that will be looked for

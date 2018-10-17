@@ -35,6 +35,11 @@ var FileUploader = function () {
           document.getElementById(urlPrefix + '-' + inputId).value = file.name;
         }
       };
+
+      document.getElementById(previewPrefix + '-' + inputId).onclick = () => {
+        $('#' + inputId).trigger('click');
+      };
+
     }
 
   };

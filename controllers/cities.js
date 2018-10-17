@@ -64,9 +64,8 @@ module.exports = {
   async getCityByPinyinName(name) {
     return City.find(
       { 'pinyinName': { "$regex": name, "$options": "i" } },
-      function (err, docs) {
-      }
-    ).exec();
+      function (err, docs) {}
+    ).populate('province').exec();
   },
 
 

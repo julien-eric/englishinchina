@@ -37,8 +37,6 @@ let returnFormName = function (pathname) {
 
 
 $(document).ready(() => {
-  let schoolList;
-  let locationSpecified;
 
   let finalFormName = returnFormName(window.location.pathname);
 
@@ -82,13 +80,13 @@ $(document).ready(() => {
         $('.form-form-2').attr('form', 'form-form-2')
       }
 
-      // $('html,body').animate({
-      //   scrollTop: $('#write-review-title').offset().top
-      // }, 'slow');
+      $('html,body').animate({
+        scrollTop: $('#write-review-title').offset().top
+      }, 'slow');
     }
 
     let form = $('#form-form-' + currentStep);
-    if (form.length) {
+    if (form.length && goToStep > currentStep) {
       form.submit(function (event) {
 
         event.preventDefault();
@@ -140,6 +138,27 @@ $(document).ready(() => {
     onStart: function () {
       $('#start-date').removeAttr('readonly');
       $('#end-date').removeAttr('readonly');
+    }
+  });
+
+  let from_picker = $("#start-date").pickadate('picker')
+  from_picker.set({ 'min': new Date(2000, 1, 1), 'max': Date.now() });
+  let to_picker = $("#end-date").pickadate('picker')
+  to_picker.set({ 'min': new Date(2000, 1, 1), 'max': 365 });
+
+  from_picker.on('set', function (event) {
+    if (event.select) {
+      to_picker.set('min', from_picker.get('select'))
+    } else if ('clear' in event) {
+      to_picker.set('min', false)
+    }
+  });
+
+  to_picker.on('set', function (event) {
+    if (event.select) {
+      from_picker.set('max', to_picker.get('select'))
+    } else if ('clear' in event) {
+      from_picker.set('max', false)
     }
   });
 

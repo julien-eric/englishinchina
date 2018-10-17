@@ -5,6 +5,10 @@
         a(href="/job/" + job.id)
             h2.font-weight-bold #{job.title}
         h4 #{job.kicker}
+        if(job.school)
+            a.mb-2(href='/school/' + job.school._id)     
+              i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
+              | #{job.school.name}
         p.mb-2
             i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
             | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}

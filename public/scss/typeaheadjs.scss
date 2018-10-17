@@ -8,6 +8,7 @@ span.twitter-typeahead {
     }
     .tt-suggestion {
         @extend .dropdown-item;
+        cursor: pointer;
     }
     .tt-suggestion.tt-cursor {
         @extend .dropdown-item.active;

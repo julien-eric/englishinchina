@@ -1,6 +1,6 @@
 h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
 #form-step-01(role='form', data-toggle='validator')
-  p.py-3 Before considering this, please make sure you have looked thoroughly to make sure the school you are looking for doesn't exist by a similar yet different name somewhere on our site!
+  p.py-3.text-small Before considering this, please make sure you have looked thoroughly to make sure the school you are looking for doesn't exist by a similar yet different name somewhere on our site!
   .row
     .col-lg-12
       .form-group
@@ -9,26 +9,54 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
             .md-form
               input#addSchoolName(type='text', name='name', form="add-school-form", class='form-control', placeholder='Default', required)
               label(for='inputIconEx1') School Name
-        .row
-            hr
-            .col-lg-6
-                  #preview-new-school-picture.image-container.image-container-default.bg-primary
-            .col-lg-6
-                  .md-form
-                    .file-field
-                      .btn.btn-primary.btn-sm.float-left.ml-0
-                        span Choose photo
-                        input#new-school-picture(type='file', form="add-school-form", required)
-                        input#url-new-school-picture.add-school-form.d-none(name="urlNewSchoolPicture" form="add-school-form" accept="image/*" value="/public/default.png" required)
-                      .file-path-wrapper
-                        input.file-path.validate(type='text', placeholder='Upload your file')
-                  .progress(style='height: 12px')
-                    #progress-new-school-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
-                    span.sr-only 0% Complete
+        
+          .col-lg-6
+            .md-form
+              select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
+                option(value='', selected='') Province
+                each province,i in provinces
+                  if searchInfo && province.code == searchInfo.province 
+                    option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
+                  else
+                    option(value=province.code) #{province.name} - #{province.chineseName}
+              
+          .col-lg-6
+            .md-form
+              if(cities)
+                select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
+                  if searchInfo && searchInfo.city
+                    option(value='') City
+                  else
+                    option(value='', selected='') City
+                  each city in cities
+                    if searchInfo && city.code == searchInfo.city
+                      option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                    else
+                      option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+              else
+                select#citySelect.mdb-select.empty(name="city", disabled='true')
+                  option(value='', selected='') City
 
-    .col-lg-12
-      include ../company/company-select
-    
+          .col-lg-12
+            include ../company/company-select
+
+      .row
+          hr
+          .col-lg-12
+                #preview-new-school-picture.image-container.image-container-default.bg-primary
+          .col-lg-12
+                .md-form
+                  .file-field
+                    .btn.btn-primary.btn-sm.float-left.ml-0
+                      span Choose photo
+                      input#new-school-picture(type='file', form="add-school-form", required)
+                      input#url-new-school-picture.add-school-form.d-none(name="urlNewSchoolPicture" form="add-school-form" accept="image/*" value="/public/default.png" required)
+                    .file-path-wrapper
+                      input.file-path.validate(type='text', placeholder='Upload your file')
+                .progress(style='height: 12px')
+                  #progress-new-school-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                  span.sr-only 0% Complete
+  
     .col-lg-12
       .form-group
         input#add-school-ajax.d-none(type='text', name='ajax', form="add-school-form", class='form-control', value='true')
