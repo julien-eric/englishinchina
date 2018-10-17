@@ -4,8 +4,7 @@
       .row.align-items-center
             .col-auto
                   h6
-                        if review.user
-
+                        if review.user && !review.user.anonymous
                               if review.user.firstName && review.user.lastName
                                     -username = review.user.firstName + review.user.lastName
                               else

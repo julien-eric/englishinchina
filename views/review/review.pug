@@ -3,8 +3,7 @@
 block content
       .row.mb-3.justify-content-start.align-items-center
             .col-auto
-                  if review.user
-
+                  if review.user && !review.user.anonymous
                         if review.user.firstName && review.user.lastName
                               -username = review.user.firstName + review.user.lastName
                         else

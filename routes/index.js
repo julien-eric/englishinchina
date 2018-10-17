@@ -302,6 +302,7 @@ module.exports = function (passport) {
   router.get('/forgot', (req, res) => {
     res.render('login/forgot', {
       title: 'Forgot your Password - Second Language World',
+      main: true,
       user: req.user,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
@@ -339,6 +340,7 @@ module.exports = function (passport) {
     }
     res.render('login/reset', {
       title: 'Reset Password - Second Language World',
+      main: true,
       token: user.resetPasswordToken,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
@@ -410,18 +412,35 @@ module.exports = function (passport) {
      ************************************************************************************************************ */
   router.route('/user/edit')
     .get(async (req, res) => {
-      let user = await usersController.findUserById(req.user._id);
-      res.render('login/edituser', {
-        title: `Edit Profile - ${user.username} - Second Language World`,
-        user,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        scripts: [scripts.util]
-      });
+      try {
+
+        let user = await usersController.findUserById(req.user._id);
+        res.render('login/edituser', {
+          title: `Edit Profile - ${user.username} - Second Language World`,
+          main: true,
+          user,
+          pictureInfo: pictureinfo,
+          jadefunctions,
+          scripts: [scripts.util]
+        });
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
     })
     .post(async (req, res) => {
-      await usersController.updateUser(req.body);
-      res.redirect('/user/edit');
+      try {
+        req.body.anonymous? req.body.anonymous = true: req.body.anonymous = false;
+        await usersController.updateUser(req.body.id, req.body);
+        res.redirect('/user/edit');
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
     });
 
   /** **********************************************************************************************************

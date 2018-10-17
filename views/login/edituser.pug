@@ -14,7 +14,7 @@ block card
                         label(for='username') Username
                     .form-check.pl-0
                         -var isChecked = user.anonymous;
-                        input#anonymous.form-check-input(checked=isChecked  type='checkbox' value=user.anonymous name="anonymous")
+                        input#anonymous.form-check-input(checked=isChecked  type='checkbox' value='true' name="anonymous")
                         label.form-check-label(for='anonymous') Make me anonymous on across SLWorld
                         p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn off anonymous later on.
                     .text-center

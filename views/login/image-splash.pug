@@ -1,8 +1,13 @@
 extends ../layout
 block content
-    .splash(style="background-image: url('/images/chinag1.jpg');")
-        .container
-            .row.justify-content-md-center
-                div.col-md-10.col-sm-12.col-lg-6
-                    block card
+    #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+    #splash.splash.row.justify-content-center
+        .splash-image-container
+            .splash-image(style="background-image: url('/images/chinag1.jpg');")
+        .col-sm-12.col-md-9.col-lg-9.mb-5
+            .container
+                .row.justify-content-md-center
+                    div.col-md-10.col-sm-12.col-lg-6
+                        block card
+
         

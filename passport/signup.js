@@ -34,7 +34,7 @@ let processSignupReturn = function(req, username, password, done) {
     newUser.username = username;
     newUser.password = createHash(password);
     newUser.email = req.param('email');
-    newUser.anonymous = req.param('anonymous');
+    req.param('anonymous')? newUser.anonymous = true: newUser.anonymous = false;
     newUser.avatarUrl = req.param('avatarUrl');
     newUser.anonymous = req.param('anonymous');
     newUser.firstName = req.param('firstName');
