@@ -139,6 +139,15 @@ body {
   z-index: $zindex-dropdown;
 }
 
+.hamb-menu {
+  color:black;
+  font-size: 1.8rem;
+}
+
+.transparent .hamb-menu {
+  color:white;
+}
+
 .navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
   color: white;
 }
@@ -167,6 +176,25 @@ body {
 
 .text-small {
   font-size: 0.8rem;
+}
+
+.image-brand{
+  width: 120px;
+  height: 28px;
+  margin-bottom: -7px;
+  display: inline-block;
+  background-image: url('/images/logonameBlack.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.collapsed.transparent .image-brand {
+  background-image: url('/images/logonameWhite.svg');
+}
+
+.transparent .image-brand {
+  background-image: url('/images/logonameBlack.svg');
 }
 
 // Adjusting number of cards per column and deck  
@@ -452,6 +480,10 @@ input[type=range]+.thumb {
 .dropdown-content li>a,
 .dropdown-content li>span {
   color: $slw-primary;
+}
+
+.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: $slw-primary;
 }
 
 #school-header {

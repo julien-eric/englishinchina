@@ -1,10 +1,12 @@
+
 nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
     .container
         a.pb-0.text-uppercase.navbar-brand(href='/')
             img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
-            img(src='/images/logoname.svg', width='', height='22', alt='Second Language World')
+            .image-brand(alt='Second Language World')
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
-            span.navbar-toggler-icon
+            span.hamb-menu
+                i.mdi.mdi-menu(aria-hidden='true')
         #navbarNavDropdown.collapse.navbar-collapse.justify-content-right.mt-3.mt-lg-0
             ul.navbar-nav
                 li.nav-item.active
