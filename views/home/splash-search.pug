@@ -1,12 +1,6 @@
 .container
-      nav#search-navigation.navbar-expand-md.bg-dark-transparent.border-radius-2
-            p.text-center.d-lg-none.mb-0
-                  a.btn.btn-lg.btn-link(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample') 
-                        i.mdi.mdi-magnify(aria-hidden='true')
-                        | Search
-                        i.mdi.mdi-chevron-down(aria-hidden='true')
-            #collapseExample.collapse.show.col-md-12.zindex-pop
-                  form#search-all.px-0.pt-lg-0(role='search', action='/search', method='GET')
-                        .row
-                              -var magnify = false;
-                              include ./search-all
+      nav#search-navigation.navbar-expand-sm.bg-dark-transparent.border-radius-5
+            form#search-all.col-md-12.pt-lg-0(role='search', action='/search', method='GET')
+                  .row
+                        -var magnify = false;
+                        include ./search-all

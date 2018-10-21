@@ -27,10 +27,15 @@
 
       .row
             hr
-            .col-lg-12
+            .col-lg-6
                   .form-group.md-form
-                        input#salary.form-form-2.form-control.validate(type='number' name='salary' form="form-form-2" placeholder="Salary" aria-label="Recipient's username" aria-describedby='basic-addon2' min="1000" max="100000" required)
-                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (greater than 1000)', data-success='Thank you') Salary in Chinese Yuan per month
+                        input#salary.form-form-2.form-control.validate(type='number' name='salaryLower' form="form-form-2" placeholder="Salary Lower Bracket" aria-describedby='basic-addon2' min="1000" max="100000" required)
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (between 1000 and 100000)', data-success='Thank you') Monthly Salary (RMB) Lower Bracket
+                              i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries should be per month in chinese yuan (renminbi)" )
+            .col-lg-6
+                  .form-group.md-form
+                        input#salary.form-form-2.form-control.validate(type='number' name='salaryHigher' form="form-form-2" placeholder="Salary Higher Bracket" aria-describedby='basic-addon2' min="1000" max="100000" required)
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (between 1000 and 100000)', data-success='Thank you') Monthly Salary (RMB) Higher Bracket
                               i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries should be per month in chinese yuan (renminbi)" )
 
       .row.pt-3

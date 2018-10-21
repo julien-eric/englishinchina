@@ -238,6 +238,8 @@ body {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //HOMEPAGE SPLASH LANDING
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 .splash {
   min-height: $landing-page-height;
   margin-top: -4rem;
@@ -272,8 +274,8 @@ body {
   top: 0;
   bottom: 0;
   // margin-bottom: 50px;
-  -webkit-filter: brightness(45%);
-  filter: brightness(45%);
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
 }
 
 .splash .splash-text {
@@ -285,6 +287,19 @@ body {
   font-weight: 400;
 }
 
+@include media-breakpoint-down(md) {
+  .display-3 {
+    font-size: 2.8rem;
+  }
+  
+  .splash .splash-text {
+    padding-top: 4rem;
+  }
+
+  #splash-kicker {
+    font-size: 1.2rem;
+  }
+}
 .shadow {
   position: absolute;
   width: 100%;
@@ -350,7 +365,6 @@ body {
 }
 
 /* The slider itself */
-
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -546,6 +560,7 @@ input[type=range]+.thumb {
 
 .image-container-default {
   background-image: url("https://cdn3.volusion.com/tyzky.ynqff/v/vspfiles/photos/432-2.jpg");
+  border-radius: 5px;
 }
 
 ​ .image-container:hover {
@@ -568,13 +583,6 @@ input[type=range]+.thumb {
 
 .show-more:not(.show) {
   background: transparent !important;
-}
-
-// Example usage:
-@include media-breakpoint-down(md) {
-  .display-3 {
-    font-size: 2.8rem;
-  }
 }
 
 .description {
@@ -824,7 +832,7 @@ $slw-inset-dark: #ebebeb;
 }
 
 .border-radius-2 {
-  border-radius: 2px 5px 5px 2px !important;
+  border-radius: 2px !important;
 }
 
 .border-radius-5 {

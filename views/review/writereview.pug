@@ -11,16 +11,16 @@ block content
             .steps-form
                   .steps-row.setup-panel.d-flex.justify-content-between
                         .steps-step
-                              a.btn.btn-amber.btn-circle.waves-effect.ml-0(href='#step-0',  data-toggle='tooltip', data-placement='top', title='Let\'s find your school')
+                              a#step-0-indicator.btn.btn-amber.btn-circle.waves-effect.ml-0(href='#step-0',  data-toggle='tooltip', data-placement='top', title='Let\'s find your school')
                                     i.fa.fa-map-marker(aria-hidden='true')
                         .steps-step.disabled
-                              a.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-1', data-toggle='tooltip', data-placement='top', title='Review and comment')
+                              a#step-1-indicator.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-1', data-toggle='tooltip', data-placement='top', title='Rating and comment')
                                     i.fa.fa-pencil(aria-hidden='true')
                         .steps-step.disabled
-                              a.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-2', data-toggle='tooltip', data-placement='top', title='Other information')
+                              a#step-2-indicator.btn.btn-blue-grey.btn-circle.waves-effect(href='#step-2', data-toggle='tooltip', data-placement='top', title='Other information')
                                     i.fa.fa-photo(aria-hidden='true')
                         .steps-step.disabled
-                              a.btn.btn-blue-grey.btn-circle.waves-effect.mr-0(href='#step-3', data-toggle='tooltip', data-placement='top', title='Finish')
+                              a#step-3-indicator.btn.btn-blue-grey.btn-circle.waves-effect.mr-0(href='#step-3', data-toggle='tooltip', data-placement='top', title='Submit')
                                     i.fa.fa-check(aria-hidden='true')
             .row.justify-content-center.my-5
                   form.col-lg-8#review-form(action='/review', method='POST' novalidate='')

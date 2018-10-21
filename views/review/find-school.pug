@@ -12,10 +12,6 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                         input#queryInfo.typeahead.form-control(name="queryInfo" value=queryInfo datasets="schools" type="text", class="form-form-" + step, form="form-form-" + step, required)
                         label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
                         input#schoolId.d-none(name="schoolId" value=schoolId form=formName)
-      //- .row
-      //-       .col-12
-      //-             label.text-small.col-12.px-0(for='queryInfo') Filter by
-
 
       include find-school-create-option
       

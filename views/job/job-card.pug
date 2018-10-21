@@ -1,30 +1,69 @@
-.row
-    .col-lg-5.mb-5.mt-lg-0
-        img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
-    .col-lg-7
-        a(href="/job/" + job.id)
-            h2.font-weight-bold #{job.title}
-        h4 #{job.kicker}
-        if(job.school)
-            a.mb-2(href='/school/' + job.school._id)     
-              i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
-              | #{job.school.name}
-        p.mb-2
-            i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-            | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
-        p.mb-2
-            i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
-            | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
-        p.mb-2
-            i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-            | Posted on #{moment(job.createdDate).format("MMM YYYY")}
-        p.mb-2
-            i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
-            | #{job.salary} CNY/Month
-        p.mb-2 
-            i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
-            | #{job.email}
-        p #{job.description}
+//- .row
+//-     .col-lg-5.mb-5.mt-lg-0
+//-         img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
+//-     .col-lg-7
+//-         a(href="/job/" + job.id)
+//-             h2.font-weight-bold #{job.title}
+//-         h4 #{job.kicker}
+//-         if(job.school)
+//-             a.mb-2(href='/school/' + job.school._id)     
+//-               i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
+//-               | #{job.school.name}
+//-         p.mb-2
+//-             i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+//-             | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+//-         p.mb-2
+//-             i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
+//-             | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
+//-         p.mb-2
+//-             i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+//-             | Posted on #{moment(job.createdDate).format("MMM YYYY")}
+//-         p.mb-2
+//-             i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
+//-             | #{job.salary} CNY/Month
+//-         p.mb-2 
+//-             i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
+//-             | #{job.email}
+//-         p #{job.description}
 
-    .col-12
-        hr
+//-     .col-12
+//-         hr
+
+
+.card
+      .row
+        .col-lg-4.col-md-12
+          a.view.overlay.card-img(href="/job/" + job._id)
+            .card-image-container(style='background-image: url(' + pictureInfo.returnLarge(job.pictureUrl) + ');')
+        .col-lg-8.col-md-12.text-center.text-md-left.px-3.py-3
+          .card-block.px-3.mx-0
+            h3.font-weight-bold.card-title.px-0 
+              a.text-dark(href="/job/" + job._id)
+                | #{job.title}
+            h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize 
+              i.mdi.mdi-map-marker(aria-hidden='true') 
+              | China / 
+              a(href='/search?queryInfo=&province=' + job.province.code + '&city=-1') #{job.province.name} / 
+              a(href='/search?queryInfo=&city=' + job.city.code) #{job.city.pinyinName} 
+              //- if(school.company)
+              //-   span &nbsp; | &nbsp;
+              //-   a(href='/company/' + school.company.id) #{school.company.name}        
+            p #{job.description}
+            //- .chip.chip-md
+            //-     i.mdi.mdi-image(aria-hidden='true')      
+            //-     |  #{school.photos.length} Photos
+            //- .chip.chip-md.mb-2
+            //-     i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+            //-     | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+            .chip.chip-md.mb-2
+                i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
+                | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
+            .chip.chip-md.mb-2
+                i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+                | Posted on #{moment(job.createdDate).format("MMM YYYY")}
+            .chip.chip-md.mb-2
+                i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
+                | #{job.salary} CNY/Month
+            //- .chip.chip-md.mb-2 
+            //-     i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
+            //-     | #{job.email}

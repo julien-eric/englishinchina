@@ -9,33 +9,34 @@ h2.font-weight-light.border-bottom.border-gray.pb-2 Create a New School
             .md-form
               input#addSchoolName(type='text', name='name', form="add-school-form", class='form-control', placeholder='Default', required)
               label(for='inputIconEx1') School Name
-        
-          .col-lg-6
-            .md-form
-              select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
-                option(value='', selected='') Province
-                each province,i in provinces
-                  if searchInfo && province.code == searchInfo.province 
-                    option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
-                  else
-                    option(value=province.code) #{province.name} - #{province.chineseName}
-              
-          .col-lg-6
-            .md-form
-              if(cities)
-                select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
-                  if searchInfo && searchInfo.city
-                    option(value='') City
-                  else
-                    option(value='', selected='') City
-                  each city in cities
-                    if searchInfo && city.code == searchInfo.city
-                      option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+
+          if !job
+            .col-lg-6
+              .md-form
+                select#provinceSelect.mdb-select.add-school-form(name="province", form="add-school-form")
+                  option(value='', selected='') Province
+                  each province,i in provinces
+                    if searchInfo && province.code == searchInfo.province 
+                      option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
                     else
-                      option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-              else
-                select#citySelect.mdb-select.empty(name="city", disabled='true')
-                  option(value='', selected='') City
+                      option(value=province.code) #{province.name} - #{province.chineseName}
+                
+            .col-lg-6
+              .md-form
+                if(cities)
+                  select#citySelect.mdb-select.add-school-form(name="city", form="add-school-form")
+                    if searchInfo && searchInfo.city
+                      option(value='') City
+                    else
+                      option(value='', selected='') City
+                    each city in cities
+                      if searchInfo && city.code == searchInfo.city
+                        option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                      else
+                        option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
+                else
+                  select#citySelect.mdb-select.empty(name="city", disabled='true')
+                    option(value='', selected='') City
 
           .col-lg-12
             include ../company/company-select

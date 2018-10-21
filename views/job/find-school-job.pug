@@ -40,7 +40,8 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                         label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School Name (Optional)
                   p.mb-5.text-small Start typing for results to show, select province and city to narrow down research. It is not necessary to specify a school for the location for a job offer but linking it to a school can direct the teacher to other teacher's reviews and help the selection in both ways.
 
-            include ../review/find-school-create-option
+            .col-lg-12
+                  include ../review/find-school-create-option
       
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
       if step != 0

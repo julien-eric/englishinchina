@@ -3,6 +3,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+
 let addSchoolCallback = function (data) {
   let school = JSON.parse(data);
   if (school && school._id && school.name) {
@@ -25,7 +26,8 @@ let ajaxAddSchool = function (url) {
   });
 }
 
-let returnFormName = function (pathname) {
+let returnFormName = function () {
+  let pathname = window.location.pathname;
   if (pathname.indexOf('review') != -1) {
     return 'review-form';
   } else if (pathname.indexOf('job') != -1) {
@@ -35,10 +37,54 @@ let returnFormName = function (pathname) {
   }
 }
 
+let initDatePickers = function () {
+
+  let pathname = window.location.pathname;
+
+  $('.datepicker').pickadate({
+    formatSubmit: 'MMMM Do YYYY',
+    onSet: function (context) {
+      validateField(this.$node[0]);
+    },
+    onStart: function () {
+      $('#start-date').removeAttr('readonly');
+      $('#end-date').removeAttr('readonly');
+    }
+  });
+
+  let from_picker = $("#start-date").pickadate('picker');
+  let to_picker = $("#end-date").pickadate('picker');
+
+  if (pathname.indexOf('review') != -1) {
+    from_picker.set({ 'min': new Date(2000, 1, 1), 'max': Date.now() });
+    to_picker.set({ 'min': new Date(2000, 1, 1), 'max': 365 });
+  } else if (pathname.indexOf('job') != -1) {
+    from_picker.set({ 'min': Date.now() });
+    to_picker.set({ 'min': Date.now(), 'max': 1095 });
+  }
+
+  from_picker.on('set', function (event) {
+    if (event.select) {
+      to_picker.set('min', from_picker.get('select'))
+    } else if ('clear' in event) {
+      to_picker.set('min', false)
+    }
+  });
+
+  to_picker.on('set', function (event) {
+    if (event.select) {
+      from_picker.set('max', to_picker.get('select'))
+    } else if ('clear' in event) {
+      from_picker.set('max', false)
+    }
+  });
+
+
+};
 
 $(document).ready(() => {
 
-  let finalFormName = returnFormName(window.location.pathname);
+  let finalFormName = returnFormName();
 
   /***********************
    * STEPPER 
@@ -119,7 +165,13 @@ $(document).ready(() => {
     nextStepSteps.trigger('click', [curStepValue]);
   });
 
-  $('div.setup-panel div a.btn-amber').trigger('click');
+  //If we have the school as a param we start on Page 2
+  if ($('#schoolId').val() == '') {
+    $('#step-0-indicator').trigger('click');
+  } else {
+    $('#step-1-indicator').trigger('click');
+    $('#step-1-indicator').parent().removeClass('disabled');
+  }
 
   let sliders = $('.slider');
   let outputs = $('.output');
@@ -130,37 +182,7 @@ $(document).ready(() => {
     }
   });
 
-  $('.datepicker').pickadate({
-    formatSubmit: 'MMMM Do YYYY',
-    onSet: function (context) {
-      validateField(this.$node[0]);
-    },
-    onStart: function () {
-      $('#start-date').removeAttr('readonly');
-      $('#end-date').removeAttr('readonly');
-    }
-  });
-
-  let from_picker = $("#start-date").pickadate('picker')
-  from_picker.set({ 'min': new Date(2000, 1, 1), 'max': Date.now() });
-  let to_picker = $("#end-date").pickadate('picker')
-  to_picker.set({ 'min': new Date(2000, 1, 1), 'max': 365 });
-
-  from_picker.on('set', function (event) {
-    if (event.select) {
-      to_picker.set('min', from_picker.get('select'))
-    } else if ('clear' in event) {
-      to_picker.set('min', false)
-    }
-  });
-
-  to_picker.on('set', function (event) {
-    if (event.select) {
-      from_picker.set('max', to_picker.get('select'))
-    } else if ('clear' in event) {
-      from_picker.set('max', false)
-    }
-  });
+  initDatePickers();
 
   $('#citySelect').change(function () {
     if ($(this).val() != '') {

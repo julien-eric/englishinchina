@@ -140,7 +140,7 @@ TypeaheadWrapper.prototype.notFoundTemplate = function (element, context) {
       return generateMessage('No school found for <span class="font-italic">' + query + '</span> (Check box below to proceed with school creation) ');
     } else if (pathname.indexOf('job') != -1) {
       this.autoTriggerValidation = true;
-      return generateMessage('No school in our system for <span class="font-italic">' + query + '</span>');
+      return generateMessage('No school in our system for <span class="font-italic">' + query + '</span> in the location specified');
     } else {
       return generateMessage('No quick results found for <span class="font-italic">' + query + '</span> (Press Enter to search) ');
     }
