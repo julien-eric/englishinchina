@@ -4,16 +4,10 @@
 const Province = require('../models/province');
 const School = require('../models/school');
 const companiesController = require('./companies');
+let _ = require('underscore');
 
 
 module.exports = {
-
-  async initProvinces(provincesList, callback) {
-    let count = await Province.count({});
-    if (count == 0) {
-      return Province.create(provincesList);
-    }
-  },
 
   getAllProvinces() {
     return Province.find().sort({ name: 1 }).exec();
@@ -29,6 +23,10 @@ module.exports = {
 
   getProvinceByCode(code) {
     return Province.findOne({ code }).exec();
+  },
+
+  async getProvinceByName(name) {
+    return Province.findOne({ name: { $regex: new RegExp("^" + name.toLowerCase(), "i") } }).exec();
   },
 
   /**
@@ -52,20 +50,13 @@ module.exports = {
     }
   },
 
-  getProvinceByPinyinName(name) {
-    return Province.find(
-      { 'name': { "$regex": name, "$options": "i" } },
-      function (err, docs) {
-      }
-    ).exec();
+  async queryProvincesByName(name, limit) {
+    let provinceResults = await Province.find({ 'name': { "$regex": name, "$options": "i" } }).exec();
+    return { total: provinceResults.length, list: limit ? _.first(provinceResults, limit) : provinceResults }
   },
 
   getProvinceByChineseName(cityinfo) {
     return Province.findOne({ code: chineseName }).exec();
-  },
-
-  helpInitCities(provinceCode, callback) {
-    return Province.findOne({ code: provinceCode }).exec();
   },
 
   async getMostPopularProvinces() {

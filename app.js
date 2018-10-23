@@ -162,9 +162,4 @@ if (app.get('env') === 'development') {
   });
 }
 
-/** **********************************************
-*INIT Provinces
- *********************************************** */
-// provincesController.initProvinces(provinces.provinces);
-
 module.exports = app;

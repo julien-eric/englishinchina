@@ -1,3 +1,5 @@
+const _ = require('underscore');
+const utils = require('../utils');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const School = require('./../models/school');
@@ -6,9 +8,8 @@ const citiesController = require('./cities');
 const companiesController = require('./companies');
 const reviewsController = require('./reviews');
 const imagesController = require('./images');
-const utils = require('../utils');
-const _ = require('underscore');
 const MISSING = -1;
+const SHORT_LIST = [{ $project: { name: 1, province: 1, city: 1 } }]
 
 let SchoolsController = function () { };
 
@@ -225,11 +226,20 @@ SchoolsController.prototype.findSchoolsByCompanySortbyRating = function (company
     .exec();
 };
 
-SchoolsController.prototype.searchSchools = async function (queryInfo, provinceInfo, cityInfo, sorting) {
+/**
+ * @param  {String} queryInfo String to look for in the school's name
+ * @param  {String} provinceInfo Look for the school in this province
+ * @param  {String} cityInfo Look for the school in this city
+ * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
+ * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
+ * @param  {Number} limit The number of records to keep from the list
+ */
+SchoolsController.prototype.searchSchools = async function (queryInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
 
   let searchInfo = {};
   let schoolList = undefined;
   let regex = undefined;
+  let total;
 
   let sort = {};
   if (!sorting) {
@@ -251,13 +261,21 @@ SchoolsController.prototype.searchSchools = async function (queryInfo, provinceI
   ]);
 
   if (provinceInfo != MISSING) {
-    province = await provincesController.getProvinceByCode(provinceInfo);
+    if (provinceInfo.id != undefined) {
+      province = provinceInfo;
+    } else {
+      province = await provincesController.getProvinceByCode(provinceInfo);
+    }
     searchInfo.province = province.name;
     transactions._pipeline.push({ $match: { province: province._id } });
   }
 
   if (cityInfo != MISSING) {
-    city = await citiesController.getCityByCode(cityInfo);
+    if (cityInfo.id != undefined) {
+      city = cityInfo;
+    } else {
+      city = await citiesController.getCityByCode(cityInfo);
+    }
     searchInfo.city = city.pinyinName;
     transactions._pipeline.push({ $match: { city: city._id } });
   }
@@ -270,13 +288,21 @@ SchoolsController.prototype.searchSchools = async function (queryInfo, provinceI
     { $lookup: { from: 'reviews', localField: '_id', foreignField: 'foreignId', as: 'reviews' } }
   ]);
 
+  if (shortRecords) {
+    transactions._pipeline = transactions._pipeline.concat(SHORT_LIST);
+  }
+
   try {
     schoolList = await transactions.exec();
+    total = schoolList.length;
+    schoolList = _.first(schoolList, limit || 9999);
+
   } catch (error) {
     console.log(error);
   }
   let searchQuery = this.getQueryMessage(searchInfo);
-  return { list: schoolList, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, queryInfo: queryInfo } };
+  //Frontend Typeahead wrapper .limit() has bug (if result.number == limit), so this way we get both .count and limit in one query
+  return { list: schoolList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, queryInfo: queryInfo } };
 };
 
 SchoolsController.prototype.getQueryMessage = function (queryInfo) {

@@ -1,3 +1,5 @@
+let _ = require('underscore');
+
 module.exports = {
   /**
  * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
@@ -59,30 +61,55 @@ module.exports = {
     return sortingQuery;
   },
 
-
-  returnRegex: function (queryInfo) {
-
-    let words = queryInfo.split(' ');
+  splitWords: function (str) {
+    let words = str.split(' ');
 
     if (words[words.length - 1] == '') {
       words = _.first(words, words.length - 1);
     }
 
-    if (words.length == 1) {
-      return queryInfo;
-    }
+    return _.compact(words);
+  },
 
-    let regex = '';
-    for (let index = 0; index < words.length; index++) {
-      let item = words[index];
-      if (index == words.length - 1) {
-        regex += item;
+  returnPermutations: (inputArr) => {
+    let result = [];
+
+    const permute = (arr, m = []) => {
+      if (arr.length === 0) {
+        result.push(m)
       } else {
-        regex += item + '|';
+        for (let i = 0; i < arr.length; i++) {
+          let curr = arr.slice();
+          let next = curr.splice(i, 1);
+          permute(curr.slice(), m.concat(next))
+        }
       }
     }
 
-    return regex;
+    permute(inputArr)
+    return result;
+  },
+
+  returnRegex: function (str) {
+
+    let words = this.splitWords(str);
+
+    if (words.length == 1) {
+      return str;
+    }
+
+    let permutations = this.returnPermutations(words);
+    let permutationsRegex = '';
+    for (let i = 0; i < permutations.length; i++) {
+
+      let permutation = permutations[i].join('.*');
+      if (i != permutations.length - 1) {
+        permutationsRegex += permutation + '|'
+      } else {
+        permutationsRegex += permutation;
+      }
+    }
+    return permutationsRegex;
 
   }
 

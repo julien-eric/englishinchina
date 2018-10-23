@@ -1,3 +1,4 @@
+const _ = require('underscore');
 const Job = require('./../models/job');
 const moment = require('moment');
 const provincesController = require('../controllers/provinces');
@@ -73,7 +74,15 @@ JobsController.prototype.addJob = async (user, job) => {
   // });
 };
 
-JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo) {
+/**
+ * @param  {String} queryInfo String to look for in the school's name
+ * @param  {String} provinceInfo Look for the school in this province
+ * @param  {String} cityInfo Look for the school in this city
+ * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
+ * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
+ * @param  {Number} limit The number of records to keep from the list
+ */
+JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
 
   let queryInfo = {};
   let jobList = undefined;
@@ -113,11 +122,13 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
 
   try {
     jobList = await transactions.exec();
+    total = jobList.length;
+    jobList = _.first(jobList, limit || 9999);
   } catch (error) {
     console.log(error);
   }
   let searchQuery = this.getQueryMessage(queryInfo);
-  return { list: jobList, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, jobInfo: jobInfo } };
+  return { list: jobList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, jobInfo: jobInfo } };
 };
 
 JobsController.prototype.getQueryMessage = function(queryInfo) {

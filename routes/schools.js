@@ -10,11 +10,14 @@ const usersController = require('../controllers/users');
 const provincesController = require('../controllers/provinces');
 const citiesController = require('../controllers/cities');
 const companiesController = require('../controllers/companies');
+const searchController = require('../searchcontroller');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const criteria = require('../criteria').criteria;
 const scripts = require('../public/scripts');
 const utils = require('../utils');
+
+const MISSING = -1;
 
 module.exports = function (passport) {
   /** ********************************
@@ -355,11 +358,33 @@ module.exports = function (passport) {
   router.get('/query/', async (req, res) => {
 
     try {
-      const queryInfo = req.query.queryInfo || undefined;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
-      let searchResults = await schools.searchSchools(queryInfo, province, city);
-      res.send(JSON.stringify(searchResults.list));
+
+      let queryInfo = req.query.queryInfo || undefined;
+      let province = utils.validateQuery(req.query.province);
+      let city = utils.validateQuery(req.query.city);
+      const limit = parseInt(req.query.limit) || undefined;
+
+      let locationInfo = await searchController.pluckLocationTerms(queryInfo)
+
+      if (city == MISSING && locationInfo.location.city) {
+        city = locationInfo.location.city;
+      }
+
+      if (province == MISSING && locationInfo.location.province) {
+        province = locationInfo.location.province;
+      }
+
+      for (let i = 0; i < locationInfo.positiveTerms.length; i++) {
+        let firstOccurence = queryInfo.toLowerCase().indexOf(locationInfo.positiveTerms[i].toLowerCase());
+        if (firstOccurence != -1) {
+          queryInfo = queryInfo.substring(0, firstOccurence) +
+                      queryInfo.substring(firstOccurence +locationInfo.positiveTerms[i].length, queryInfo.length);
+        }
+      }
+
+
+      let searchResults = await schools.searchSchools(queryInfo, province, city, undefined, limit, true);
+      res.send(JSON.stringify({ query: 'schools', list: searchResults.list, total: searchResults.total }));
     } catch (error) {
       res.send(error);
     }

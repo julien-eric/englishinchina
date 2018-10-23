@@ -1,4 +1,4 @@
-.img-fluid.school-image-container(style="background-image: url('#{pictureInfo.returnLarge(article.pictureUrl)}');")
+.img-fluid.school-image-container(style="background-image: url('" + pictureInfo.returnLarge(article.pictureUrl) + "');")
     .container.darkbg
         h1.school-page-name #{article.title}
         #schoolid.hidden(value="#{article.id}")

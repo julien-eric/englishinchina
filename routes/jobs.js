@@ -194,10 +194,11 @@ module.exports = function (passport) {
 
     try {
       const jobInfo = req.query.jobInfo || undefined;
+      const limit = parseInt(req.query.limit) || undefined;
       const province = utils.validateQuery(req.query.province);
       const city = utils.validateQuery(req.query.city);
-      let searchResults = await jobsController.searchJobs(jobInfo, province, city);
-      res.send(JSON.stringify(searchResults.list));
+      let searchResults = await jobsController.searchJobs(jobInfo, province, city, undefined, limit, true);
+      res.send(JSON.stringify({ query:'jobs', list: searchResults.list, total: searchResults.total }));
     } catch (error) {
       res.send(error);
     }

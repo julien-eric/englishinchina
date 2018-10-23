@@ -1,46 +1,12 @@
 const provincesController = require('./provinces');
 const City = require('../models/city');
 const School = require('../models/school');
+let _ = require('underscore');
 
 module.exports = {
 
-  citiesToPush: [],
-
-  initCities(citieslist, callback) {
-    console.log('BEGINNING INITCITIES');
-    City.count({}, (err, count) => {
-      if (count === 0) {
-        let city;
-        for (const i in citieslist) {
-          city = citieslist[i];
-          if (city.province === '' || city.province === null) {
-            city.province = { _id: '56a879c04c7fd9141e6f8f89', code: 13 };
-          }
-          provincesController.helpInitCities(city.province.code, (cityinfo, province) => {
-            module.exports.citiesToPush.push({
-              province,
-              pinyinName: cityinfo.pinyinName,
-              chineseName: cityinfo.chineseName,
-              code: cityinfo.code,
-              x: cityinfo.x,
-              y: cityinfo.y
-            });
-          });
-        }
-      }
-    });
-    callback();
-  },
-
-  pushCities(citiesList, callback) {
-    City.create(citiesList, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Pushing cities : ${result}`);
-        callback(result);
-      }
-    });
+  async getAllCities() {
+    return City.find().populate('province', 'code').exec();
   },
 
   async getProvinceCitiesByCode(provinceCode) {
@@ -53,21 +19,18 @@ module.exports = {
     return City.find({ province }).sort({ pinyinName: 1 }).exec();
   },
 
-  async getAllCities() {
-    return City.find().populate('province', 'code').exec();
-  },
-
   async getCityByCode(cityCode) {
     return City.findOne({ code: cityCode }).populate('province', 'code').exec();
   },
 
-  async getCityByPinyinName(name) {
-    return City.find(
-      { 'pinyinName': { "$regex": name, "$options": "i" } },
-      function (err, docs) {}
-    ).populate('province').exec();
+  async getCityByName(name) {
+    return City.findOne({ pinyinName: { $regex: new RegExp("^" + name.toLowerCase(), "i") } }).populate('province', 'code').exec();
   },
 
+  async queryCityiesByPinyinName(name, limit) {
+    let cityResults = await City.find({ 'pinyinName': { "$regex": name, "$options": "i" } }).populate('province').exec();
+    return { total: cityResults.length, list: limit ? _.first(cityResults, limit) : cityResults }
+  },
 
   async getCityPic(code) {
     // At the moment picture is based on school with highest rating
@@ -77,9 +40,9 @@ module.exports = {
       { $match: { _id: cityId._id } },
       { $limit: 1 }
     ]).exec();
-    
+
     let city = await City.populate(transactions, { path: '_id' });
-    if(city.length > 0 ) {
+    if (city.length > 0) {
       return city[0].pictureUrl;
     } else {
       return undefined;

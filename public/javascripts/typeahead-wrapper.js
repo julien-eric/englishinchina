@@ -2,14 +2,16 @@
 /***********************
  * TYPEAHEAD 
  ***********************/
-
+let typeaheadWrapper;
 let resultList = false;
 let notFoundTemplate;
-let currentSelection = undefined;
 let currentQuery;
+let currentSelection = undefined;
+const datasetResultLimit = 5;
 
 let TypeaheadWrapper = function () {
   this.dataSources = [];
+  this.totalResults = {};
   this.autoTriggerValidation = false;
   this.currentQueryCallback;
   this.currentQueryDatasets = [];
@@ -67,7 +69,7 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (queryUrl, queryIn
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
       wildcard: '%QUERY',
-      rateLimitWait: 100,
+      rateLimitWait: 130,
       url: queryUrl,
       replace: function (url, query) {
         if ($('#queryInfo').val() != -1) {
@@ -79,17 +81,20 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (queryUrl, queryIn
         if ($('#citySelect')) {
           url += '&city' + '=' + $('#citySelect').val();
         }
+        url += '&limit=' + datasetResultLimit;
         return url;
 
       },
       transform: function (response) {
         // Map the remote source JSON array to a JavaScript object array
-        if (response.length > 0) {
-          return $.map(response, function (element) {
+        // response = JSON.parse(response);
+        if (response.list.length > 0) {
+          typeaheadWrapper.totalResults[response.query] = response.total;
+          return $.map(response.list, function (element) {
             return element;
           });
         } else {
-          return undefined;
+          return [];
         }
       },
     }
@@ -98,13 +103,13 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (queryUrl, queryIn
 
 TypeaheadWrapper.prototype.createDataset = function (name, limit, source, attributeName, suggestionTemplate) {
   return {
-    limit,
+    limit: 100,
     name,
     source,
     display: function (element) {
       if (element) {
         element.type = name;
-        if(name == 'schools') {
+        if (name == 'schools') {
           return element.name + ', ' + element.province.name + ', ' + element.city.pinyinName;
         } else if (name == 'jobs') {
           return element.title;
@@ -113,13 +118,45 @@ TypeaheadWrapper.prototype.createDataset = function (name, limit, source, attrib
         } else if (name == 'provinces') {
           return element.name + ', China';
         }
-        
+
       }
     },
     templates: {
-      header: '<div class="typeahead-header pl-3 pt-1">' + name + '</div>',
+      header: function (params) {
+        let datasetName = params.dataset;
+        return '<div class="typeahead-header pl-3 pt-1">' + datasetName + '</div>';
+      },
       notFound: TypeaheadWrapper.prototype.notFoundTemplate.bind(this),
-      suggestion: suggestionTemplate
+      suggestion: suggestionTemplate,
+      footer: function (params) {
+        let name = params.dataset;
+        let number = params.suggestions.length;
+        let message = '<div class="typeahead-footer text-small pl-3 py-1">Showing ' + number + '/' + typeaheadWrapper.totalResults[name] + ' ' + name;
+        if (number >= datasetResultLimit) {
+
+          switch (name) {
+            case 'schools':
+              message += ' - <a href="/search?queryInfo=' + params.query + '">see all results</a></div>';
+              break;
+
+            case 'jobs':
+              message += ' - <a href="/search?queryInfo=' + params.query + '">see all results</a></div>';
+              break;
+
+            case 'provinces':
+              message += ' - Try narrowing down your search</div>';
+              break;
+
+            case 'cities':
+              message += ' - Try narrowing down your search</div>';
+              break;
+          }
+          return message;
+
+        } else {
+          return undefined;
+        }
+      },
     }
   }
 };
@@ -195,7 +232,7 @@ TypeaheadWrapper.prototype.handleSubmit = function (e) {
 
 $(document).ready(() => {
 
-  let typeaheadWrapper = new TypeaheadWrapper();
+  typeaheadWrapper = new TypeaheadWrapper();
   let datasetNames = $('#queryInfo').attr('datasets').valueOf().split(' ');
   typeaheadWrapper.initDatasets(datasetNames);
   $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
@@ -256,6 +293,10 @@ $(document).ready(() => {
     }
   });
 
+  let pathname = window.location.pathname;
+  if (pathname.indexOf('review') == -1 && pathname.indexOf('job') == -1) {
+    $('#queryInfo').focus();
+  }
 
 
 });

@@ -13,7 +13,6 @@ const jobsController = require('../controllers/jobs');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
-const uuidv1 = require('uuid/v1');
 const utils = require('../utils');
 
 module.exports = function (passport) {
@@ -62,12 +61,14 @@ module.exports = function (passport) {
     try {
 
       const searchInfo = {};
-      searchInfo.queryInfo = req.query.queryInfo;
       searchInfo.sort = req.query.sort;
+
+      searchInfo.queryInfo = req.query.queryInfo;
 
       searchInfo.cityCode = utils.validateQuery(req.query.city);
       searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
       searchInfo.provinceCode = utils.validateQuery(req.query.province);
+
 
       if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
         searchInfo.provinceCode = searchInfo.city.province.code;
@@ -142,8 +143,9 @@ module.exports = function (passport) {
 
     try {
       const searchInfo = req.query.searchInfo || undefined;
-      let provinces = await provincesController.getProvinceByPinyinName(searchInfo);
-      res.send(JSON.stringify(provinces));
+      const limit = parseInt(req.query.limit) || undefined;
+      let provinces = await provincesController.queryProvincesByName(searchInfo, limit);
+      res.send(JSON.stringify({ query: 'provinces', list: provinces.list, total: provinces.total}));
     } catch (error) {
       res.send(error);
     }
@@ -157,8 +159,9 @@ module.exports = function (passport) {
 
     try {
       const searchInfo = req.query.searchInfo || undefined;
-      let cities = await citiesController.getCityByPinyinName(searchInfo);
-      res.send(JSON.stringify(cities));
+      const limit = parseInt(req.query.limit) || undefined;
+      let cities = await citiesController.queryCityiesByPinyinName(searchInfo, limit);
+      res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total}));
     } catch (error) {
       res.send(error);
     }
@@ -432,7 +435,7 @@ module.exports = function (passport) {
     })
     .post(async (req, res) => {
       try {
-        req.body.anonymous? req.body.anonymous = true: req.body.anonymous = false;
+        req.body.anonymous ? req.body.anonymous = true : req.body.anonymous = false;
         await usersController.updateUser(req.body.id, req.body);
         res.redirect('/user/edit');
       } catch (error) {
