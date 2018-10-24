@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const email = require('../controllers/email');
+const email = require('../controllers/emailscontrollerscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
-const schoolsController = require('../controllers/schools');
-const provincesController = require('../controllers/provinces');
-const companiesController = require('../controllers/companies');
-const citiesController = require('../controllers/cities');
-const usersController = require('../controllers/users');
-const jobsController = require('../controllers/jobs');
+const schoolsController = require('../controllers/schoolscontroller');
+const provincesController = require('../controllers/provincescontroller');
+const companiesController = require('../controllers/companiescontroller');
+const citiesController = require('../controllers/citiescontroller');
+const usersController = require('../controllers/usersController');
+const jobsController = require('../controllers/jobscontroller');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
@@ -204,7 +204,6 @@ module.exports = function (passport) {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
         title: 'Login - Second Language World',
-        main: true,
         message: req.flash('message'),
         scripts: [scripts.util]
       });
@@ -278,7 +277,6 @@ module.exports = function (passport) {
     .get((req, res) => {
       res.render('login/register', {
         title: 'Sign up - Second Language World',
-        main: true,
         message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });

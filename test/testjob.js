@@ -5,12 +5,12 @@ let expect = chai.expect;
 const mongoose = require('mongoose');
 mongoose.connect(settings.get('DB_URL'));
 
-let jobs = require('../controllers/jobs');
-let users = require('../controllers/users');
-let schools = require('../controllers/schools');
-let cities = require('../controllers/cities');
-let provinces = require('../controllers/provinces');
-let companies = require('../controllers/companies');
+let jobs = require('../controllers/jobscontroller');
+let users = require('../controllers/usersController');
+let schools = require('../controllers/schoolscontroller');
+let cities = require('../controllers/citiescontroller');
+let provinces = require('../controllers/provincescontroller');
+let companies = require('../controllers/companiescontroller');
 
 let jobTemplate = {
   title: 'Great Job Opportunity in Hejiang!',

@@ -1,4 +1,4 @@
-const provincesController = require('./provinces');
+const provincesController = require('./provincescontroller');
 const City = require('../models/city');
 const School = require('../models/school');
 let _ = require('underscore');

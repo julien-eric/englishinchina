@@ -1,7 +1,7 @@
 /**
  * Created by Julz on 11/28/2015.
  */
-const Review = require('./../models/review');
+const Review = require('../models/review');
 const moment = require('moment');
 
 const calculateAverage = function(review) {

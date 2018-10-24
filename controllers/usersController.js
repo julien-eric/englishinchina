@@ -1,7 +1,7 @@
 /**
  * Created by Julz on 11/20/2015.
  */
-const User = require('./../models/user');
+const User = require('../models/user');
 
 module.exports = {
 

@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
 const uuidv1 = require('uuid/v1');
-const emailController = require('../controllers/email');
+const emailController = require('../controllers/emailscontroller');
 
 let signupParams = {
   passReqToCallback: true

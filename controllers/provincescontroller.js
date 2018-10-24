@@ -3,7 +3,7 @@
  */
 const Province = require('../models/province');
 const School = require('../models/school');
-const companiesController = require('./companies');
+const companiesController = require('./companiescontroller');
 let _ = require('underscore');
 
 

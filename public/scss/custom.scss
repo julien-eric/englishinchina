@@ -20,6 +20,7 @@ $landing-page-height: 800px;
 $school-header-height: 540px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
+$pale-gray: #f1f1f1;
 
 // Rating colors
 $rating-great:#47a347;
@@ -30,7 +31,7 @@ $rating-bad: #68745c;
 // $rating-good: #76bf33;
 // $rating-medium: #e6e13d;
 // $rating-bad: #c73d13;
-$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "dark-transparent": $slw-dark-transparent, "antique-white": $slw-antique-white, "lightgreen": $slw-lightgreen, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "dark-transparent": $slw-dark-transparent, "antique-white": $slw-antique-white, "lightgreen": $slw-lightgreen, "pale-gray": $pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
 @import "node_modules/bootstrap/scss/bootstrap";
 // CORE
 // Bootstrap & MDB
@@ -75,6 +76,10 @@ $value in $theme-colors {
 
 .bg-inherit{
   background-color: inherit;
+}
+
+.content-pre-wrap{
+  white-space: pre-wrap;
 }
 
 @each $color,
@@ -148,6 +153,11 @@ body {
   color:white;
 }
 
+.navbar {
+  box-shadow: none;
+  border-bottom: solid 1px $pale-gray;
+}
+
 .navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
   color: white;
 }
@@ -155,17 +165,19 @@ body {
 .navbar.navbar-light.main-header.transparent.collapsed {
   box-shadow: none;
   background-color: transparent;
-  transition: background-color 0.5s linear;
+  border-bottom: none;
+  transition: background-color 0.5s linear, border-bottom 0.5s linear;
 }
 
 .navbar.navbar-light.main-header.transparent {
   box-shadow: none;
   background-color: white;
-  transition: background-color 0.5s linear;
+  border-bottom: solid 1px $pale-gray;
+  transition: background-color 0.5s linear, border-bottom 0.5s linear;
 }
 
 .navbar.navbar-light.main-header {
-  transition: background-color 0.5s linear;
+  transition: background-color 0.5s linear, border-bottom 0.5s linear;
 }
 
 .nav-bar-slide-in {

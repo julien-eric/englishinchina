@@ -1,5 +1,5 @@
 const Company = require('../models/company');
-const imagesController = require('./images');
+const imagesController = require('./imagescontroller');
 const mongoose = require('mongoose');
 const _ = require('underscore');
 const ObjectId = mongoose.Types.ObjectId;

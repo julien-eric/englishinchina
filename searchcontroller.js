@@ -1,6 +1,6 @@
 const _ = require('underscore');
-const provincesController = require('./controllers/provinces');
-const citiesController = require('./controllers/cities');
+const provincesController = require('./controllers/provincescontroller');
+const citiesController = require('./controllers/citiescontroller');
 const utils = require('./utils');
 
 let SearchController = function () {

@@ -1,8 +1,8 @@
 const _ = require('underscore');
-const Job = require('./../models/job');
+const Job = require('../models/job');
 const moment = require('moment');
-const provincesController = require('../controllers/provinces');
-const citiesController = require('../controllers/cities');
+const provincesController = require('./provincescontroller');
+const citiesController = require('./citiescontroller');
 const utils = require('../utils');
 const MISSING = -1;
 

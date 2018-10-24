@@ -1,5 +1,5 @@
-const Article = require('./../models/article');
-const imagesController = require('./images');
+const Article = require('../models/article');
+const imagesController = require('./imagescontroller');
 
 module.exports = {
 

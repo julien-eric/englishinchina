@@ -2,10 +2,10 @@ const express = require('express');
 const moment = require('moment');
 
 const router = express.Router();
-const schools = require('../controllers/schools');
-const provincesController = require('../controllers/provinces');
-const companies = require('../controllers/companies');
-const reviewsController = require('../controllers/reviews');
+const schools = require('../controllers/schoolscontroller');
+const provincesController = require('../controllers/provincescontroller');
+const companies = require('../controllers/companiescontroller');
+const reviewsController = require('../controllers/reviewscontroller');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');

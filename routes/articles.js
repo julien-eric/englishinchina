@@ -3,7 +3,7 @@ const router = express.Router();
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
-const articlesController = require('../controllers/articles');
+const articlesController = require('../controllers/articlescontroller');
 const scripts = require('../public/scripts');
 
 module.exports = function(passport) {
