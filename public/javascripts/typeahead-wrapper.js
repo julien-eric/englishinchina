@@ -293,6 +293,16 @@ $(document).ready(() => {
     }
   });
 
+  $('#queryInfo').click( function (ev, suggestion, async, data) {
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      let div = $('#queryInfo')
+      $('html,body').animate({
+        scrollTop: $(div).offset().top - 75
+      }, 'slow');
+     }
+  });
+  
+
   let pathname = window.location.pathname;
   if (pathname.indexOf('review') == -1 && pathname.indexOf('job') == -1) {
     $('#queryInfo').focus();

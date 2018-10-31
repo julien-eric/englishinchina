@@ -1,9 +1,8 @@
 extends form-container
 block card
-    .border.border-pale-gray.border-radius-5.text-dark.my-5
         .my-5.text-left.px-3.px-md-5.py-1
                 .text-center
-                    h3.mt-1.mb-5.text-light.font-weight-bold Sign up 
+                        h3.mt-1.mb-5.text-light.font-weight-bold Sign up 
                 if message.length > 0
                         p.rounded.bg-light.text-danger.py-1.mb-5 #{message}            
                 form(class='form-signin', action='/signup', autocomplete="off", method='POST')
@@ -28,6 +27,6 @@ block card
                         p.text-left.text-small
                                 |Already have an account?&nbsp;
                                 a(href="/login") Login
-        .border-0.bg-light.text-dark.py-3
+        .border-0.bg-light-secondary.text-dark.py-3
                 include social-login
             

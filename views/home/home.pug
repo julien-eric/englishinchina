@@ -3,12 +3,28 @@ block content
     include carousel
     include ../fcb-js-sdk
 
-    //- .container
-    //-     .pt-5.mt-5.pb-2
-    //-         h1.display-4.text-center.font-weight-bold Find Jobs Around The World!
-    //-         p.text-center.text-muted Find out about schools in beautiful locations around the World 
-    //-         //- hr
-    //-     include ../job/featured-jobs
+
+    .bg-dark.py-3
+        .container
+            .row.text-center
+                .col-md-6.py-3.text-md-right.text-white
+                    h2 Looking for a job?
+                    p Find amazing opportunities to teach around the world while immersing yourself in a new culture. Explore an endless job board and read reviews from other teachers to see if the options fit your needs.
+                    a.col-md-6.mx-0.px-5.btn.btn-lightgreen(href='/job') Find a job
+                .col-md-6.py-3.text-md-left.text-white
+                    h2 Your school is hiring?
+                    p Take advantage of a wide availibility of teachers from all around the world in just one place. Benefit from considerate exposure and go get all the information you need about teachers all on just one site.
+                    a.col-md-6.px-5.mx-0.btn.btn-lightgreen.text-dark(href='/job/add') Post a job offer
+
+    .container
+        .pt-5.mt-5.pb-2
+            h1.display-4.text-center.font-weight-bold Find Jobs In China!
+            p.text-center.text-muted Find out about schools in beautiful locations around the World 
+            //- hr
+        include ../job/featured-jobs
+
+    .container.pt-5.mt-5
+        include how-it-works
 
     .container
         .pt-5.mt-5.pb-2

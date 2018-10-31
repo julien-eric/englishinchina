@@ -410,7 +410,7 @@ module.exports = function (passport) {
   /** **********************************************************************************************************
      *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
-  router.route('/user/edit')
+  router.route('/user/edit', utils.isAuthenticated)
     .get(async (req, res) => {
       try {
 
@@ -519,7 +519,7 @@ module.exports = function (passport) {
   /** **********************************************************************************************************
      *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
-  router.get('/user/:id', async (req, res) => {
+  router.get('/user/:id', utils.isAuthenticated, async (req, res) => {
 
     try { // Get user and reviews then render user page
       let usern = await usersController.findUserById(req.params.id);
