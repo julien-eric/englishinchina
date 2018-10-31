@@ -1,0 +1,153 @@
+if user
+    .border.border-pale-gray.border-radius-5.text-dark.pb-5.px-3.px-md-5
+        h3.my-5.text-light.font-weight-bold Personal Information 
+        form(id='teacher-details', class='teacher-details', action='/user/teacher-details/' + user.id, method='POST')
+
+            if(redirectUrl)
+                    .form-group.d-none
+                            input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
+
+            .row
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'first-name'
+                    -textInput.name = 'firstName'
+                    -textInput.formName = 'teacher-details'
+                    -textInput.placeholder = 'First Name'
+                    -textInput.label = 'First Name'
+                    -textInput.required = true
+                    if user && user.firstName
+                        -textInput.value = user.firstName
+                    include ../input-templates/text-input
+                        
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'last-name'
+                    -textInput.name = 'lastName'
+                    -textInput.formName = 'teacher-details'
+                    -textInput.placeholder = 'Last Name'
+                    -textInput.label = 'Last Name'
+                    -textInput.required = true
+                    if user && user.lastName
+                        -textInput.value = user.lastName
+                    include ../input-templates/text-input
+
+            .row
+                .col-lg-6.form-group
+                    -var select = {}
+                    -select.options = countries 
+                    -select.label = 'Country you live in'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'livingCountry'
+                    -select.id = 'livingCountrySelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please select your country of citizenship'
+                    -select.crossRefAttributeValue = 'code'
+                    -select.crossRefAttributeName = 'name'
+                    -select.required = true
+                    if user && user.livingCountry
+                        - select.crossRefValue = user.livingCountry.code
+                    include ../input-templates/generic-select 
+        
+                .col-lg-6.form-group
+                    -var select = {}
+                    -select.options = countries 
+                    -select.label = 'Citizenship'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'citizenship'
+                    -select.id = 'citizenshipSelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please select your country of citizenship'
+                    -select.crossRefAttributeValue = 'code'
+                    -select.crossRefAttributeName = 'name'
+                    -select.required = true
+                    if user && user.citizenship
+                        - select.crossRefValue = user.citizenship.code
+                    include ../input-templates/generic-select 
+
+            .row
+                .col-lg-6
+                    -var datepicker = {}
+                    -datepicker.id = 'date-of-birth'
+                    -datepicker.name = 'dateOfBirth'
+                    -datepicker.formName = 'teacher-details'
+                    -datepicker.placeholder = 'Please Select'
+                    -datepicker.label = 'Date of Birth'
+                    -datepicker.errorMessage = 'Please select a date'
+                    -datepicker.required = true
+                    if user.dateOfBirth
+                        -datepicker.value = user.dateOfBirth
+                    include ../input-templates/date-field
+            
+            h3.my-5.text-light.font-weight-bold Teaching Experience
+            
+            .row
+                //- hr
+                .col-lg-6.form-group
+                        -var select = {}
+                        -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
+                        -select.label = 'Do you have a Teaching License'
+                        -select.placeholder = 'Please select'
+                        -select.name = 'teachingLicense'
+                        -select.id = 'teachingLicenseSelect'
+                        -select.formName = 'teacher-details'
+                        -select.errorMessage = 'Please specify whether you have a teaching license that recognizes you as a teacher'
+                        -select.crossRefAttributeValue = 'value'
+                        -select.crossRefAttributeName = 'optionLabel'
+                        -select.required = true
+                        if user.teachingDetails
+                            - select.crossRefValue = user.teachingDetails.teachingLicense
+                        include ../input-templates/generic-select 
+
+                .col-lg-6.form-group
+                        -var select = {}
+                        -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
+                        -select.label = 'Do you have an ESL Teaching Certificate'
+                        -select.placeholder = 'Please select'
+                        -select.name = 'eslCertificate'
+                        -select.id = 'eslCertificateSelect'
+                        -select.formName = 'teacher-details'
+                        -select.errorMessage = 'Please specify whether you have an ESL teaching certificate (e.g. ESL, TEFL, CELTA, DELTA)'
+                        -select.crossRefAttributeValue = 'value'
+                        -select.crossRefAttributeName = 'optionLabel'
+                        -select.required = true
+                        if user.teachingDetails
+                            - select.crossRefValue = user.teachingDetails.eslCertificate
+                        include ../input-templates/generic-select 
+                
+                .col-lg-6
+                    .form-group.md-form
+                            -var numberInput = {}
+                            -numberInput.id = 'yearsOfExperience'
+                            -numberInput.label = 'Years of Experience'
+                            -numberInput.placeholder = 'Enter a number'
+                            -numberInput.name = 'yearsOfExperience'
+                            -numberInput.min = 0
+                            -numberInput.max = 60
+                            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+                            -numberInput.tooltip = 'How many years of experience do you have teaching, whether in ESL or as a public/private school teacher'
+                            -numberInput.required = true
+                            if user.teachingDetails
+                                - numberInput.value = user.teachingDetails.yearsOfExperience
+                            include ../input-templates/generic-number-input 
+
+            h3.my-5.text-light.font-weight-bold Documents
+
+            .row
+                .col-lg-6
+                    -var fileInput = {}
+                    -fileInput.label = 'Choose file'
+                    -fileInput.placeholder = 'Upload your resume'
+                    -fileInput.id = 'resume'
+                    -fileInput.name = 'fileNameResume'
+                    -fileInput.formName = 'teacher-details'
+                    -fileInput.urlName = 'urlResume'
+                    -fileInput.required = true
+                    if user.teachingDetails && user.teachingDetails.fileNameResume
+                        -fileInput.value = user.teachingDetails.fileNameResume
+                        -fileInput.label = 'Change file'
+                        -fileInput.required = false
+                    include ../input-templates/file-uploader
+                    
+            button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='submit') Next
+

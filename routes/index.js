@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const email = require('../controllers/emailscontrollerscontroller');
+const email = require('../controllers/emailscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const schoolsController = require('../controllers/schoolscontroller');
 const provincesController = require('../controllers/provincescontroller');
+const countriesController = require('../controllers/countriescontroller');
 const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const usersController = require('../controllers/usersController');
@@ -65,9 +66,9 @@ module.exports = function (passport) {
 
       searchInfo.queryInfo = req.query.queryInfo;
 
-      searchInfo.cityCode = utils.validateQuery(req.query.city);
+      searchInfo.cityCode = utils.validateParam(req.query.city);
       searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
-      searchInfo.provinceCode = utils.validateQuery(req.query.province);
+      searchInfo.provinceCode = utils.validateParam(req.query.province);
 
 
       if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
@@ -145,7 +146,7 @@ module.exports = function (passport) {
       const searchInfo = req.query.searchInfo || undefined;
       const limit = parseInt(req.query.limit) || undefined;
       let provinces = await provincesController.queryProvincesByName(searchInfo, limit);
-      res.send(JSON.stringify({ query: 'provinces', list: provinces.list, total: provinces.total}));
+      res.send(JSON.stringify({ query: 'provinces', list: provinces.list, total: provinces.total }));
     } catch (error) {
       res.send(error);
     }
@@ -161,7 +162,7 @@ module.exports = function (passport) {
       const searchInfo = req.query.searchInfo || undefined;
       const limit = parseInt(req.query.limit) || undefined;
       let cities = await citiesController.queryCityiesByPinyinName(searchInfo, limit);
-      res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total}));
+      res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total }));
     } catch (error) {
       res.send(error);
     }
@@ -303,7 +304,6 @@ module.exports = function (passport) {
   router.get('/forgot', (req, res) => {
     res.render('login/forgot', {
       title: 'Forgot your Password - Second Language World',
-      main: true,
       user: req.user,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
@@ -341,7 +341,6 @@ module.exports = function (passport) {
     }
     res.render('login/reset', {
       title: 'Reset Password - Second Language World',
-      main: true,
       token: user.resetPasswordToken,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
@@ -416,13 +415,15 @@ module.exports = function (passport) {
       try {
 
         let user = await usersController.findUserById(req.user._id);
+        let countries = await countriesController.getCountries();
         res.render('login/edituser', {
           title: `Edit Profile - ${user.username} - Second Language World`,
-          main: true,
           user,
+          countries,
+          moment,
           pictureInfo: pictureinfo,
           jadefunctions,
-          scripts: [scripts.util]
+          scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader]
         });
       } catch (error) {
         res.render('error', {
@@ -433,9 +434,80 @@ module.exports = function (passport) {
     })
     .post(async (req, res) => {
       try {
-        req.body.anonymous ? req.body.anonymous = true : req.body.anonymous = false;
-        await usersController.updateUser(req.body.id, req.body);
+
+        let userParams = req.body;
+        req.body.anonymous ? userParams.anonymous = true : userParams.anonymous = false;
+        userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(userParams.livingCountry));
+        userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(userParams.citizenship));
+
+        await usersController.updateUser(userParams.id, userParams);
         res.redirect('/user/edit');
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
+    });
+
+  /** **********************************************************************************************************
+     *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
+    ************************************************************************************************************ */
+  router.route('/user/teacher-details/:id')
+    .get(async (req, res) => {
+      try {
+        let countries = await countriesController.getCountries();
+        let redirectUrl = req.query.redirectUrl;
+        res.render('login/teacher-details', {
+          title: 'Teacher Profile',
+          user: req.user,
+          redirectUrl,
+          countries,
+          moment,
+          pictureInfo: pictureinfo,
+          jadefunctions,
+          scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+        });
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
+    })
+    .post(async (req, res) => {
+      try {
+
+        let userParams = {};
+        userParams.id = utils.validateParam(req.params.id);
+        userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(req.body.livingCountry));
+        userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(req.body.citizenship));
+        userParams.dateOfBirth = new Date(moment(req.body.dateOfBirth, 'MMMM Do YYYY').format());
+
+        userParams.teachingDetails = {};
+        userParams.teachingDetails.eslCertificate = utils.validateParam(req.body.eslCertificate);
+        userParams.teachingDetails.teachingLicense = utils.validateParam(req.body.teachingLicense);
+        userParams.teachingDetails.yearsOfExperience = utils.validateParam(req.body.yearsOfExperience);
+        let fileNameResumePrevious = utils.validateParam(req.body.fileNameResumePrevious);
+
+        if (fileNameResumePrevious == -1) {
+          userParams.teachingDetails.urlResume = utils.validateParam(req.body.urlResume);
+          userParams.teachingDetails.fileNameResume = utils.validateParam(req.body.fileNameResume);
+        } else {
+          let user = await usersController.findUserById(userParams.id);
+          userParams.teachingDetails.urlResume = user.teachingDetails.urlResume
+          userParams.teachingDetails.fileNameResume = user.teachingDetails.fileNameResume
+        }
+
+        await usersController.updateUser(userParams.id, userParams);
+
+        let redirectUrl = utils.validateParam(req.body.redirectUrl);
+        if (redirectUrl != -1) {
+          res.redirect(redirectUrl);
+        } else {
+          res.redirect('/user/edit');
+        }
+
       } catch (error) {
         res.render('error', {
           message: error.message,

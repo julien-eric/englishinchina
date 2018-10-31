@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Conversation = require('../models/conversation');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -7,23 +8,30 @@ let ConversationController = function () { };
  * @param  {Object|Number|String} id «Object|Number|String» value of _id to query by
  * @returns {Conversation} Returns object that will resolve to a conversation, or undefined
  */
-ConversationController.prototype.getConversationById = async (id) => {
+ConversationController.prototype.getConversationById = async function (id) {
   return Conversation.findById(id).exec();
 };
 
-/** Takes two users to create a conversation, the id of a conversation is always the combination of the two user ids (whichever is lesser than goes in front)
- * @param {User} user1 One of the two users of the conversation
- * @param {User} user2 One of the two users of the conversation
- * @returns {Conversation} Returns newly created conversation
+/**
+ * @param  {Object|Number|String} id «Object|Number|String» value of _id to query by
+ * @returns {Conversation} Returns object that will resolve to a conversation, or undefined
  */
-ConversationController.prototype.createConversation = async (user1, user2) => {
-  let id;
-  if (user1.id < user.id) {
-    id = user1.id + user2.id
+ConversationController.prototype.getConversationByUsers = async function (user1, user2) {
+  let id = this.returnId(user1, user2);
+  return Conversation.findOneAndUpdate({ _id:id }, { verified:true}, { upsert: true, new: true }).exec();
+};
+
+/**
+ * @param  {User} user1 User to get/generate conversation ID with.
+ * @param  {User} user2 User to get/generate conversation ID with.
+ * @returns {String} The conversation ID based on the IDs of the two users.
+ */
+ConversationController.prototype.returnId = function (user1, user2) {
+  if (user1.id < user2.id) { 
+    return user1.id + user2.id
   } else {
-    id = user2.id + user1.id
+    return user2.id + user1.id
   }
-  return Conversation.create({ _id: new ObjectId(id) });
 };
 
 let conversationController = new ConversationController();

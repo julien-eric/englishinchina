@@ -43,41 +43,52 @@ let initDatePickers = function () {
 
   $('.datepicker').pickadate({
     formatSubmit: 'MMMM Do YYYY',
-    onSet: function (context) {
-      validateField(this.$node[0]);
-    },
+    // onSet: function (context) {
+    //   validateField(this.$node[0]);
+    // },
     onStart: function () {
       $('#start-date').removeAttr('readonly');
       $('#end-date').removeAttr('readonly');
+      $('#date-of-birth').removeAttr('readonly');
     }
   });
 
   let from_picker = $("#start-date").pickadate('picker');
   let to_picker = $("#end-date").pickadate('picker');
+  let date_of_birth_picker = $("#date-of-birth").pickadate('picker');
 
-  if (pathname.indexOf('review') != -1) {
-    from_picker.set({ 'min': new Date(2000, 1, 1), 'max': Date.now() });
-    to_picker.set({ 'min': new Date(2000, 1, 1), 'max': 365 });
-  } else if (pathname.indexOf('job') != -1) {
-    from_picker.set({ 'min': Date.now() });
-    to_picker.set({ 'min': Date.now(), 'max': 1095 });
+  if (from_picker && to_picker) {
+
+    if (pathname.indexOf('review') != -1) {
+      from_picker.set({ 'min': new Date(2000, 1, 1), 'max': Date.now() });
+      to_picker.set({ 'min': new Date(2000, 1, 1), 'max': 365 });
+    } else if (pathname.indexOf('job') != -1) {
+      from_picker.set({ 'min': Date.now() });
+      to_picker.set({ 'min': Date.now(), 'max': 1095 });
+    }
+    from_picker.on('set', function (event) {
+      if (event.select) {
+        to_picker.set('min', from_picker.get('select'))
+      } else if ('clear' in event) {
+        to_picker.set('min', false)
+      }
+    });
+
+    to_picker.on('set', function (event) {
+      if (event.select) {
+        from_picker.set('max', to_picker.get('select'))
+      } else if ('clear' in event) {
+        from_picker.set('max', false)
+      }
+    });
   }
 
-  from_picker.on('set', function (event) {
-    if (event.select) {
-      to_picker.set('min', from_picker.get('select'))
-    } else if ('clear' in event) {
-      to_picker.set('min', false)
-    }
-  });
+  if (date_of_birth_picker) {
+    date_of_birth_picker.set('min', new Date(1948, 1, 1));
+    date_of_birth_picker.set('max', -(18 * 365));
+  }
 
-  to_picker.on('set', function (event) {
-    if (event.select) {
-      from_picker.set('max', to_picker.get('select'))
-    } else if ('clear' in event) {
-      from_picker.set('max', false)
-    }
-  });
+
 
 
 };
@@ -221,7 +232,10 @@ $(document).ready(() => {
   });
 
   //Validation feedback for the user coming for a specific school (it's already selected)
-  validateField($('#queryInfo')[0])
+  let searchAll = $('#queryInfo')[0];
+  if (searchAll) {
+    validateField(searchAll)
+  }
 
 });
 

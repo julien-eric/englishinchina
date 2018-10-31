@@ -16,9 +16,6 @@ const SCSS_DEBUG = true;
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
-// let jobCrawler = require('./jobCrawler/jobCrawler');
-// jobCrawler.init('http://www.eslcafe.com/jobs/china/');
-
 /**
  * Used by stylus
  * @param {*} str String

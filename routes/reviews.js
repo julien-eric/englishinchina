@@ -25,7 +25,7 @@ module.exports = function (passport) {
     try {
 
       const searchInfo = {};
-      const schoolId = utils.validateQuery(req.query.schoolId);
+      const schoolId = utils.validateParam(req.query.schoolId);
       let cities = undefined;
 
       if (schoolId != -1) {
@@ -37,8 +37,8 @@ module.exports = function (passport) {
         cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
       } else {
         // If we don't have a school, we still might have a province-city
-        searchInfo.province = utils.validateQuery(req.query.province);
-        searchInfo.city = utils.validateQuery(req.query.city);
+        searchInfo.province = utils.validateParam(req.query.province);
+        searchInfo.city = utils.validateParam(req.query.city);
 
         if (searchInfo.province) {
           cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);

@@ -6,7 +6,7 @@ const provincesController = require('../controllers/provincescontroller');
 const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const schoolsController = require('../controllers/schoolscontroller');
-const jobsController = require('../controllers/jobs');
+const jobsController = require('../controllers/jobscontroller');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
@@ -19,7 +19,7 @@ module.exports = function (passport) {
 
             try {
 
-                const provinceCode = utils.validateQuery(req.params.code);
+                const provinceCode = utils.validateParam(req.params.code);
 
                 let schools = [];
                 let companies = [];

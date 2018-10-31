@@ -1,6 +1,6 @@
 const express = require('express');
 const moment = require('moment');
-const email = require('../controllers/emailscontrollerscontroller');
+const email = require('../controllers/emailscontroller');
 
 const router = express.Router();
 const schools = require('../controllers/schoolscontroller');
@@ -308,8 +308,8 @@ module.exports = function (passport) {
 
     try {
       const queryInfo = req.query.queryInfo;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
+      const province = utils.validateParam(req.query.province);
+      const city = utils.validateParam(req.query.city);
       const sorting = req.query.sort;
 
       let searchResults = await schools.searchSchools(queryInfo, province, city, sorting);
@@ -360,8 +360,8 @@ module.exports = function (passport) {
     try {
 
       let queryInfo = req.query.queryInfo || undefined;
-      let province = utils.validateQuery(req.query.province);
-      let city = utils.validateQuery(req.query.city);
+      let province = utils.validateParam(req.query.province);
+      let city = utils.validateParam(req.query.city);
       const limit = parseInt(req.query.limit) || undefined;
 
       let locationInfo = await searchController.pluckLocationTerms(queryInfo)

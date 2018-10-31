@@ -36,8 +36,12 @@ module.exports = {
     res.redirect('/login');
   },
 
-  validateQuery: function (queryElement) {
-    if (queryElement == undefined || queryElement == 'undefined' || queryElement == '' || queryElement == 'null' || queryElement == null) {
+  validateParam: function (queryElement) {
+    if (queryElement === 'true') {
+      return true;
+    } else if (queryElement === 'false') {
+      return false;
+    } else if (queryElement == undefined || queryElement == 'undefined' || queryElement == '' || queryElement == 'null' || queryElement == null) {
       return -1;
     }
     return queryElement;

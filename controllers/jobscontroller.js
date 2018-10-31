@@ -17,7 +17,7 @@ let findPicture = function (job) {
 let JobsController = function () { };
 
 JobsController.prototype.getJob = async (id) => {
-  let job = await Job.findOne({ _id: id }).populate('school').populate('province').populate('city').exec();
+  let job = await Job.findOne({ _id: id }).populate('user').populate('school').populate('province').populate('city').exec();
   findPicture(job);
   return job;
 };

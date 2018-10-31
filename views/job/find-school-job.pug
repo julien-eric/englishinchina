@@ -11,7 +11,7 @@ div(role='form', data-toggle='validator', id='form-step' + step)
                               else
                                     option(value=province.code) #{province.name} - #{province.chineseName}
                   label.col-12.px-0(for='province', data-error='School has not been selected properly', data-success='Thank you.') Province
-            .col-lg-6
+            .col-lg-6.form-group
                   if(cities)
                         select#citySelect.form-form-1.mdb-select.add-school-form(name="cityId", form="form-form-" + step required)
                               if job && job.city

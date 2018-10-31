@@ -1,0 +1,23 @@
+extends ../../layout
+block content
+    .container.py-5
+        .row
+            .col-lg-12
+                h1 Let's send a message
+                p This message will be sent to the employer along with your teaching experience information and your email.
+        form(id='message-employer', class='message-employer', action='/job/message/' + job.id, method='POST')
+            .row
+                .col-lg-12
+                    -var textArea = {}
+                    -textArea.id = 'tinymce-textarea'
+                    -textArea.name = 'message'
+                    -textArea.rows = 10
+                    -textArea.required = true
+                    -textArea.formName = 'message-employer'
+                    include ../../input-templates/text-area
+                    button.ml-0.my-3.btn.btn-md.btn-primary.btn-rounded.nextBtn(type='submit') Submit
+                
+
+
+        
+    

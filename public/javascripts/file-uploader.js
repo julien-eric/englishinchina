@@ -12,7 +12,7 @@ var FileUploader = function () {
     return picturePreviewIndex;
   }
 
-  let init = function (inputId, urlPrefix, previewPrefix, progressPrefix) {
+  let init = function (inputId, urlPrefix, previewPrefix, progressPrefix, fdbPrefix) {
 
     if (document.getElementById(inputId)) {
 
@@ -21,7 +21,8 @@ var FileUploader = function () {
         inputId,
         urlPrefix,
         previewPrefix,
-        progressPrefix
+        progressPrefix,
+        fdbPrefix
       }
       elements.push(newElement);
 
@@ -36,9 +37,12 @@ var FileUploader = function () {
         }
       };
 
-      document.getElementById(previewPrefix + '-' + inputId).onclick = () => {
-        $('#' + inputId).trigger('click');
-      };
+      let previewDiv = document.getElementById(previewPrefix + '-' + inputId);
+      if (previewDiv) {
+        document.getElementById(previewPrefix + '-' + inputId).onclick = () => {
+          $('#' + inputId).trigger('click');
+        };
+      }
 
     }
 
@@ -77,12 +81,16 @@ var FileUploader = function () {
     xhr.onload = function () {
       if (xhr.status === 200) {
         const preview = $('#' + element.previewPrefix + '-' + element.inputId);
+        const fdbLabel = $('#' + element.fdbPrefix + '-' + element.inputId);
+
 
         if (preview.is('img')) {
           preview.toggleClass('d-none');
           preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
         } else if (preview.is('div')) {
           preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")");
+        } else if (fdbLabel) {
+          fdbLabel.removeClass('d-none');
         }
         document.getElementById(element.urlPrefix + '-' + element.inputId).value = url;
 
@@ -119,6 +127,7 @@ $(document).ready(() => {
   fileUploader.init('new-school-picture', 'url', 'preview', 'progress');
   fileUploader.init('new-company-picture', 'url', 'preview', 'progress');
   fileUploader.init('new-company-logo', 'url', 'preview', 'progress');
+  fileUploader.init('resume', 'url', 'preview', 'progress', 'fdb-label');
 });
 
 
