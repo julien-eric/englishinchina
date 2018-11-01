@@ -2,7 +2,8 @@
 // Option A: Include all of Bootstrap
 // Your variable overrides
 $slw-primary: #447C1D;
-$slw-lightgreen: #95D469;
+// $slw-lightgreen: #95D469;
+$slw-lightgreen: rgb(118, 173, 78);
 $slw-primary-darker: rgb(32, 65, 8);
 $slw-danger: #ff4136;
 $slw-secondary: #5bc0de;
@@ -318,7 +319,7 @@ body {
 }
 
 .splash .splash-text {
-  padding-top: 9rem;
+  padding-top: 6rem;
   position: relative;
 }
 
@@ -478,7 +479,8 @@ input[type=range]+.thumb {
   cursor: pointer;
   text-transform: uppercase;
   white-space: normal;
-  word-wrap: break-word; // color: #fff;
+  word-wrap: break-word;
+  color: inherit !important;
 }
 
 .btn.btn-link {
