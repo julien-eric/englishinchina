@@ -15,6 +15,7 @@ const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
+const colors = require('../cities.json');
 
 module.exports = function (passport) {
 
@@ -152,6 +153,15 @@ module.exports = function (passport) {
     }
   });
 
+  router.get('/fetchprovinces', async (req, res) => {
+    try {
+      let provinces = await provincesController.getAllProvinces();
+      res.send(JSON.stringify({ query: 'provinces', list: provinces, total: provinces.length }));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
   /** **********************************************************************************************************
      *queryCities : Method for search all cities, it will return any city that has some of the information
      * Param : Query, string that will be looked for as part of the city's name
@@ -163,6 +173,16 @@ module.exports = function (passport) {
       const limit = parseInt(req.query.limit) || undefined;
       let cities = await citiesController.queryCityiesByPinyinName(searchInfo, limit);
       res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total }));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+  router.get('/fetchcities', async (req, res) => {
+
+    try {
+      let cities = await citiesController.getAllCities();
+      res.send(JSON.stringify({ query: 'provinces', list: cities, total: cities.length }));
     } catch (error) {
       res.send(error);
     }
@@ -495,8 +515,8 @@ module.exports = function (passport) {
           userParams.teachingDetails.fileNameResume = utils.validateParam(req.body.fileNameResume);
         } else {
           let user = await usersController.findUserById(userParams.id);
-          userParams.teachingDetails.urlResume = user.teachingDetails.urlResume
-          userParams.teachingDetails.fileNameResume = user.teachingDetails.fileNameResume
+          userParams.teachingDetails.urlResume = user.teachingDetails.urlResume;
+          userParams.teachingDetails.fileNameResume = user.teachingDetails.fileNameResume;
         }
 
         await usersController.updateUser(userParams.id, userParams);

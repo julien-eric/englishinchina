@@ -26,21 +26,21 @@ TypeaheadWrapper.prototype.initDatasets = function (bloodhoundDatasets) {
 
   bloodhoundDatasets.forEach((dataset) => {
 
-    if (dataset == 'schools') {
-      let schoolSource = this.createBloodhoundDataset('schools', '/school/query', 'queryInfo');
-      let suggestionTemplate = function (element) {
-        return '<div>' + element.name + ', <span class="text-muted text-capitalize">' + element.province.name + ', ' + element.city.pinyinName + '</span></div>';
-      }
-      this.dataSources.push(this.createDataset('schools', 20, schoolSource, 'name', suggestionTemplate));
-    }
+    // if (dataset == 'schools') {
+    //   let schoolSource = this.createBloodhoundDataset('schools', '/school/query', 'queryInfo');
+    //   let suggestionTemplate = function (element) {
+    //     return '<div>' + element.name + ', <span class="text-muted text-capitalize">' + element.province.name + ', ' + element.city.pinyinName + '</span></div>';
+    //   }
+    //   this.dataSources.push(this.createDataset('schools', 20, schoolSource, 'name', suggestionTemplate));
+    // }
 
-    if (dataset == 'jobs') {
-      let jobSource = this.createBloodhoundDataset('jobs','/job/query', 'jobInfo');
-      let suggestionTemplate = function (element) {
-        return '<div>' + element.title + ', China' + '</span></div>';
-      }
-      this.dataSources.push(this.createDataset('jobs', 5, jobSource, 'title', suggestionTemplate))
-    }
+    // if (dataset == 'jobs') {
+    //   let jobSource = this.createBloodhoundDataset('jobs','/job/query', 'jobInfo');
+    //   let suggestionTemplate = function (element) {
+    //     return '<div>' + element.title + ', China' + '</span></div>';
+    //   }
+    //   this.dataSources.push(this.createDataset('jobs', 5, jobSource, 'title', suggestionTemplate))
+    // }
 
     if (dataset == 'provinces') {
       let provinceSource = this.createBloodhoundDataset('provinces', '/fetchprovinces', 'searchInfo');
@@ -50,13 +50,13 @@ TypeaheadWrapper.prototype.initDatasets = function (bloodhoundDatasets) {
       this.dataSources.push(this.createDataset('provinces', 5, provinceSource, 'name', suggestionTemplate))
     }
 
-    if (dataset == 'cities') {
-      let citySource = this.createBloodhoundDataset('cities', '/fetchcities', 'searchInfo');
-      let suggestionTemplate = function (element) {
-        return '<div>' + element.pinyinName + '</span></div>';
-      }
-      this.dataSources.push(this.createDataset('cities', 5, citySource, 'pinyinName', suggestionTemplate))
-    }
+    // if (dataset == 'cities') {
+    //   let citySource = this.createBloodhoundDataset('cities', '/querycities', 'searchInfo');
+    //   let suggestionTemplate = function (element) {
+    //     return '<div>' + element.pinyinName + '</span></div>';
+    //   }
+    //   this.dataSources.push(this.createDataset('cities', 5, citySource, 'pinyinName', suggestionTemplate))
+    // }
 
   });
 };
@@ -67,20 +67,7 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (source, queryUrl,
 
   bloodHoundParams.queryTokenizer = Bloodhound.tokenizers.whitespace;
 
-  let transform = function (response) {
-    // Map the remote source JSON array to a JavaScript object array
-    // response = JSON.parse(response);
-    if (response.list.length > 0) {
-      typeaheadWrapper.totalResults[response.query] = response.total;
-      return $.map(response.list, function (element) {
-        return element;
-      });
-    } else {
-      return [];
-    }
-  }
-
-  if (source == 'schools' || source == 'jobs') {
+  if (source == 'schools' || source == 'jobs' || source == 'cities') {
 
     bloodHoundParams.datumTokenizer = function (datum) {
       return Bloodhound.tokenizers.whitespace(datum.value);
@@ -104,23 +91,47 @@ TypeaheadWrapper.prototype.createBloodhoundDataset = function (source, queryUrl,
         return url;
 
       },
-      transform: transform,
+      transform: function (response) {
+        // Map the remote source JSON array to a JavaScript object array
+        // response = JSON.parse(response);
+        if (!response.list && response.length > 0) {
+          typeaheadWrapper.totalResults['provinces'] = response.length;
+          return $.map(response, function (element) {
+            return element;
+          });
+        } else if (response.list.length > 0) {
+          typeaheadWrapper.totalResults[response.query] = response.total;
+          return $.map(response.list, function (element) {
+            return element;
+          });
+        } else {
+          return [];
+        }
+      },
     }
   }
 
-  if (source == 'provinces' || source == 'cities') {
+  if (source == 'provinces') {
 
-    bloodHoundParams.datumTokenizer = function (datum) {
-      if(datum.pinyinName)
-        return Bloodhound.tokenizers.whitespace(datum.pinyinName);
-      else
-        return Bloodhound.tokenizers.whitespace(datum.name);
+    bloodHoundParams.datumTokenizer = function (d) {
+      return Bloodhound.tokenizers.whitespace(d.code);
     }
  
     bloodHoundParams.prefetch = {
       url: queryUrl,
       cache: false,
-      transform: transform
+      transform: function (response) {
+        // Map the remote source JSON array to a JavaScript object array
+        // response = JSON.parse(response);
+        if (response.length > 0) {
+          typeaheadWrapper.totalResults['provinces'] = response.length;
+          return $.map(response, function (element) {
+            return element;
+          });
+        } else {
+          return [];
+        }
+      },
     }
   }
 
@@ -264,6 +275,7 @@ $(document).ready(() => {
   $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
 
   $('.typeahead').typeahead({
+    hint: true,
     highlight: true,
     minLength: 1
   },

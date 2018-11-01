@@ -1,6 +1,6 @@
 if user
-    .border.border-pale-gray.border-radius-5.text-dark.pb-5.px-3.px-md-5
-        h3.my-5.text-light.font-weight-bold Personal Information 
+    .border.border-pale-gray.border-radius-5.bg-white.text-dark.pb-5.px-3.px-md-5
+        h3.my-5.text-dark.font-weight-bold Personal Information 
         form(id='teacher-details', class='teacher-details', action='/user/teacher-details/' + user.id, method='POST')
 
             if(redirectUrl)
@@ -79,7 +79,7 @@ if user
                         -datepicker.value = user.dateOfBirth
                     include ../input-templates/date-field
             
-            h3.my-5.text-light.font-weight-bold Teaching Experience
+            h3.my-5.text-dark.font-weight-bold Teaching Experience
             
             .row
                 //- hr
@@ -131,7 +131,7 @@ if user
                                 - numberInput.value = user.teachingDetails.yearsOfExperience
                             include ../input-templates/generic-number-input 
 
-            h3.my-5.text-light.font-weight-bold Documents
+            h3.my-5.text-dark.font-weight-bold Documents
 
             .row
                 .col-lg-6
