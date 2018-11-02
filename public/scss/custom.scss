@@ -3,7 +3,7 @@
 // Your variable overrides
 $slw-primary: #447C1D;
 // $slw-lightgreen: #95D469;
-$slw-lightgreen: rgb(118, 173, 78);
+$slw-lightgreen: rgb(149, 202, 110);
 $slw-primary-darker: rgb(32, 65, 8);
 $slw-danger: #ff4136;
 $slw-secondary: #5bc0de;
@@ -226,6 +226,39 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+footer .image-brand {
+  background-image: url('/images/logonameWhite.svg');
+  width: 140px;
+  height: 48px;
+}
+
+footer hr {
+  border-top: 1px solid #555555;
+}
+
+footer label {
+  font-size: 0.8rem;
+  // text-transform: uppercase;
+}
+
+footer .form-group {
+  margin-top: 0.5rem;
+}
+
+footer .form-control {
+  color: #b6c3cf;
+  background-color: rgb(36, 36, 36);
+  border: 1px solid #5d5d5d;
+  border-radius: .25rem;
+}
+
+footer .form-control:focus {
+  color: #b6c3cf;
+  background-color: rgb(44, 44, 44);
+  border-color: #80d445;
+  box-shadow: 0 0 0 0.2rem rgba(68,124,29,0.25);
 }
 
 .collapsed.transparent .image-brand {
@@ -480,7 +513,7 @@ input[type=range]+.thumb {
   text-transform: uppercase;
   white-space: normal;
   word-wrap: break-word;
-  color: inherit !important;
+  // color: inherit !important;
 }
 
 .btn.btn-link {
