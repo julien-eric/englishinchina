@@ -15,7 +15,6 @@ const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
-const colors = require('../cities.json');
 
 module.exports = function (passport) {
 
@@ -225,7 +224,6 @@ module.exports = function (passport) {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
         title: 'Login - Second Language World',
-        message: req.flash('message'),
         scripts: [scripts.util]
       });
     })
@@ -298,14 +296,13 @@ module.exports = function (passport) {
     .get((req, res) => {
       res.render('login/register', {
         title: 'Sign up - Second Language World',
-        message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });
     })
     .post(passport.authenticate('signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
-      failureFlash: true
+      failureFlash: false
     }));
 
 
@@ -336,7 +333,7 @@ module.exports = function (passport) {
 
     let user = await usersController.findUserByEmail(req.body.email);
     if (!user) {
-      req.flash('error', 'No account with that email address exists.');
+      res.flash('error', 'No account with that email address exists.');
       return res.redirect('/forgot');
     }
 
@@ -344,7 +341,7 @@ module.exports = function (passport) {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
     await email.resetPassword(req, user, token, req);
-    req.flash('info', 'An email has been sent to reset your password.');
+    res.flash('info', 'An email has been sent to reset your password.');
     return res.redirect('/forgot');
 
   });
@@ -567,39 +564,16 @@ module.exports = function (passport) {
   });
 
   router.post('/contactus', (req, res) => {
-    const message = `Email: ${req.body.email}\n${req.body.content}`;
+    const message = `Email: ${req.body.emailContact}\n${req.body.message}`;
     const callbackMessage = 'Thank you, we will get back to you shortly';
     email.sendEmail('julieneric11@gmail.com',
-      'contactusfeedback@englishinchina.com',
+      'contactusfeedback@secondlanguage.world',
       'Feedback comment from user',
       message,
       callbackMessage,
       req
     );
     res.redirect('/');
-  });
-
-  /** **********************************************************************************************************
-     *GETUSERS :
-     ************************************************************************************************************ */
-  router.get('/allusers', utils.isAdmin, async (req, res) => {
-
-    try {
-      let users = await usersController.getAllUsers();
-      res.render('allusers', {
-        title: 'Users - Second Language World',
-        users,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        moment,
-        scripts: [scripts.util]
-      });
-    } catch (error) {
-      res.render('error', {
-        message: error.message,
-        error: error
-      });
-    }
   });
 
   return router;

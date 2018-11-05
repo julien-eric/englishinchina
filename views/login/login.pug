@@ -3,20 +3,32 @@ block card
         .my-5.text-left.px-3.px-md-5.py-1
                 .text-center
                         h3.mt-1.mb-5.text-light.font-weight-bold Sign in 
-                        if message.length > 0
-                                p.rounded.bg-light.text-danger.py-1.mb-5 #{message}
                 form(class='form-signin', action='/login', method='POST')
                         if(redirecturl)
                                 .form-group.hidden
                                         input.form-control.form-control-lg(type='text', name='redirecturl', placeholder='Username', value=redirecturl)
                         .md-form.mb-5
-                                //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
-                                input.form-control(type='text', name='email', placeholder='Email',required, autofocus)
-                                label(for='email') Email
+                                -var textInput = {}
+                                -textInput.id = 'email'
+                                -textInput.type = 'email'
+                                -textInput.name = 'email'
+                                -textInput.placeholder = 'Email'
+                                -textInput.label = 'Email'
+                                -textInput.required = true;
+                                if responseInfo && responseInfo.email
+                                        -textInput.value = responseInfo.email
+                                include ../input-templates/text-input
                         .md-form.form-group.mb-5
-                                //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
-                                input.form-control.mb-0(type='password', name='password', placeholder='Password', required)
-                                label.control-label(for='password') Password
+                                -var textInput = {}
+                                -textInput.id = 'password'
+                                -textInput.type = 'password'
+                                -textInput.name = 'password'
+                                -textInput.placeholder = 'Password'
+                                -textInput.label = 'Password'
+                                -textInput.required = true;
+                                if responseInfo && responseInfo.password
+                                        -textInput.value = responseInfo.password
+                                include ../input-templates/text-input
                                 p.text-primary.text-small.forgot-password
                                         a(href="/forgot") Forgot your 
                                                 span.font-weight-bold password?

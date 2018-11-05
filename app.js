@@ -3,11 +3,11 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const flash = require('express-flash-2');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
 const sassMiddleware = require('node-sass-middleware');
 const favicon = require('serve-favicon');
-const flash = require('express-flash');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
@@ -96,20 +96,11 @@ app.use(expressSession({
   saveUninitialized: true
 }));
 
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(flash());
-// app.use(function(req, res, next){
-//    res.locals.success_messages = req.flash('success_messages');
-//    res.locals.error_messages = req.flash('error_messages');
-//    next();
-// });
-
-/** *************************************************************
- * Using the flash middleware provided by connect-flash to store messages in session
- * and displaying in templates
- ************************************************************** */
 // Initialize Passport
 const initPassport = require('./passport/init');
 

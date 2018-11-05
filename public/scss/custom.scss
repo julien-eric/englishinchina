@@ -15,7 +15,7 @@ $slw-darker: #151515;
 $slw-dark-transparent: rgba(23, 23, 23, 0.58);
 $slw-antique-white: #faebd7;
 $enable-gradients: false;
-$enable-shadows: false;
+$enable-shadows: 'false';
 $standard-height: 190px;
 $landing-page-height: 600px;
 $school-header-height: 540px;
@@ -64,7 +64,6 @@ $link-color: $slw-primary;
 @import "node_modules/mdbootstrap/scss/free/footers";
 @import "node_modules/mdbootstrap/scss/free/list-group";
 @import "node_modules/mdbootstrap/scss/free/tables";
-
 $enable-shadows: false;
 // $primary-color: $slw-primary;
 // $error-color:  $slw-danger;
@@ -76,7 +75,7 @@ $value in $theme-colors {
   }
 }
 
-body{
+body {
   background-color: #f1f1f1;
 }
 
@@ -90,7 +89,6 @@ body{
 
 @each $color,
 $value in $theme-colors {
-
   .border-0 {
     border: none;
   }
@@ -106,7 +104,6 @@ $value in $theme-colors {
   .border-5-#{$color} {
     border: solid 5px $value;
   }
-
   .border-bottom-0 {
     border-bottom: none;
   }
@@ -239,8 +236,7 @@ footer hr {
 }
 
 footer label {
-  font-size: 0.8rem;
-  // text-transform: uppercase;
+  font-size: 0.8rem; // text-transform: uppercase;
 }
 
 footer .form-group {
@@ -258,7 +254,7 @@ footer .form-control:focus {
   color: #b6c3cf;
   background-color: rgb(44, 44, 44);
   border-color: #80d445;
-  box-shadow: 0 0 0 0.2rem rgba(68,124,29,0.25);
+  box-shadow: 0 0 0 0.2rem rgba(68, 124, 29, 0.25);
 }
 
 .collapsed.transparent .image-brand {
@@ -270,8 +266,39 @@ footer .form-control:focus {
 }
 
 .step-indicator {
-  height : 3.5rem;
+  height: 3.5rem;
   width: 3.5rem;
+}
+
+.z-depth-1,
+.jumbotron,
+.md-form input[type=text].input-alternate,
+.md-form input[type=password].input-alternate,
+.md-form input[type=email].input-alternate,
+.md-form input[type=url].input-alternate,
+.md-form input[type=time].input-alternate,
+.md-form input[type=date].input-alternate,
+.md-form input[type=datetime-local].input-alternate,
+.md-form input[type=tel].input-alternate,
+.md-form input[type=number].input-alternate,
+.md-form input[type=search-md].input-alternate,
+.md-form input[type=search].input-alternate,
+.md-form textarea.md-textarea.input-alternate,
+.btn,
+.btn.disabled:active,
+.btn.disabled:focus,
+.btn.disabled:hover,
+.btn:disabled:active,
+.btn:disabled:focus,
+.btn:disabled:hover,
+.card,
+.navbar,
+.pagination .page-item.active .page-link,
+.badge,
+.modal-dialog.cascading-modal .modal-c-tabs .nav-tabs,
+.modal-dialog.modal-notify .modal-header,
+.media .media-left img {
+  box-shadow: none;
 }
 
 // Adjusting number of cards per column and deck  
@@ -312,14 +339,20 @@ footer .form-control:focus {
   color: rgba(255, 255, 255, .7);
 }
 
+.flash-messages-container {
+  position: absolute;
+  top: 4rem;
+  z-index:999;
+  opacity: 0.8;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //HOMEPAGE SPLASH LANDING
 ////////////////////////////////////////////////////////////////////////////////////////////////
 .splash {
   min-height: $landing-page-height;
   margin-top: -4rem;
-  padding-top: 4rem;
-  // overflow: hidden;
+  padding-top: 4rem; // overflow: hidden;
   position: relative;
   color: #fff;
   text-align: center;
@@ -347,6 +380,7 @@ footer .form-control:focus {
   right: 0;
   top: 0;
   bottom: 0; // margin-bottom: 50px;
+  overflow-x: hidden;
   -webkit-filter: brightness(50%);
   filter: brightness(50%);
 }
@@ -512,8 +546,7 @@ input[type=range]+.thumb {
   cursor: pointer;
   text-transform: uppercase;
   white-space: normal;
-  word-wrap: break-word;
-  // color: inherit !important;
+  word-wrap: break-word; // color: inherit !important;
 }
 
 .btn.btn-link {

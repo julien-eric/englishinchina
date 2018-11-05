@@ -90,6 +90,10 @@ $(document).ready(() => {
     $("#main-header").removeClass('collapsed');
   })
   
+  setTimeout(function(){
+    // $('.flash-messages').fadeOut(500);
+    $('.flash-messages-container ').fadeOut(2000);
+  }, 2000);
 
 
   // Material Select Initialization

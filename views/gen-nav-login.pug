@@ -5,10 +5,11 @@ if locals.user
                 | #{user.username}
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
             a.dropdown-item(href='/user/edit') My Profile
+            if user.teachingDetails
+                a.dropdown-item(href='/user/teacher-details/' + user.id ) Teacher Profile
             a.dropdown-item(href='/signout') Sign Out
+
     li.d-none.d-md-inherit
-        //- h1 #{locals.user.fb}
-        //- h1 #{locals.user.useFacebookPic}
         if locals.user.fb && locals.user.useFacebookPic
             .user-picture
                 img.rounded-circle(src=pictureInfo.returnThumbnail(user.avatarUrl), width='40', height='40',  alt='Cinque Terre')

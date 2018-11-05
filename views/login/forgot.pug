@@ -3,8 +3,6 @@ block card
         .my-5.text-left.px-3.px-md-5.py-1
                 .text-center
                         h3.mt-1.mb-5.text-light.font-weight-bold Reset Password 
-                        //- if message.length > 0
-                        //-         p.rounded.bg-light.text-danger.py-1.mb-5 #{message}
                 form(class='form-signin', action='/forgot', method='POST')
                         if(redirecturl)
                                 .form-group.hidden

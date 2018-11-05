@@ -31,20 +31,23 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                 p.text-small.text-muted Second Language World is happy to connect with users from all around the world on Facebook.    
                 ul.list-unstyled
                     li.mb-1
-                        a.text-white(href='/about') Facebook
-                .fb-page.mb-3(data-href='https://www.facebook.com/secondlanguageworld/', data-tabs='timeline', data-height='70', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
-                    blockquote.fb-xfbml-parse-ignore(cite='https://www.facebook.com/secondlanguageworld/')
-                        a(href='https://www.facebook.com/secondlanguageworld/') Second Language World
+                        p.mb-1.text-white Email
+                        a.mt-1(href='mailto:secondlanguageworld@gmail.com') secondlanguageworld@gmail.com
+                    li.mb-1
+                        a.mb-1.text-white(href='https://www.facebook.com/secondlanguageworld/') Facebook
+                        .mt-1.fb-page.mb-3(data-href='https://www.facebook.com/secondlanguageworld/', data-tabs='timeline', data-height='70', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
+                            blockquote.fb-xfbml-parse-ignore(cite='https://www.facebook.com/secondlanguageworld/')
+                                a(href='https://www.facebook.com/secondlanguageworld/') Second Language World
 
             .col-md-6.py-3
                 h4.text-uppercase.text-small.text-lightgreen.mb-3 Contact Us 
                 p.text-small.text-muted For business inquiries or to learn more about Second Language World, feel free to contact us. An email address and a concise message is all you need. Our team will be more than happy to assist you!    
-                form#email-contact(action='/contactus', method='POST')
+                form#form-contact-us(action='/contactus', method='POST')
                     .form-group
                         -var textInput = {}
                         -textInput.id = 'email-contact'
                         -textInput.name = 'emailContact'
-                        -textInput.formName = 'email-contact'
+                        -textInput.formName = 'form-contact-us'
                         -textInput.placeholder = 'Your Email'
                         -textInput.label = 'Your Email'
                         -textInput.required = true
@@ -58,6 +61,5 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                         -textArea.placeholder = 'Your message'
                         -textArea.rows = 3
                         -textArea.required = true
-                        -textArea.formName = 'message-employer'
                         include ../input-templates/text-area
-                    //- button(class='btn btn-light', type='submit') Submit
+                    button.btn.btn-lightgreen.btn-sm.ml-0.mt-3(class='', type='submit') Submit

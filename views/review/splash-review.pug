@@ -1,29 +1,27 @@
-if splashReview
-  .bg-light
+if splashSchool || splashSchool
+  .bg-white.border-bottom.border-gray
       .container.py-3
           .card
               .card-body
                 .row.align-items-center
-                  .col-sm-1.text-center
-                    h1.color-primary
-                      i.mdi.mdi-format-quote-close(aria-hidden='true')  
-                  .col-sm-11
-                    p.font-italic.mb-0 #{splashReview.comment}
-                      span
-                        if splashReview.user
-                          a(href="#") - #{splashReview.user.username}
-                        else 
-                          a(href="#") - An SLWorld User
-else if splashSchool
-  .bg-light
-      .container.py-3
-          .card
-              .card-body
-                .row.align-items-center
-                  .col-sm-1.text-center
-                    h1.color-primary
-                      i.mdi.mdi-school(aria-hidden='true')  
-                  .col-sm-11
-                    p.font-italic.mb-0 #{splashSchool.description}
-                      span 
-                        a(href="#") - #{splashSchool.name}
+
+                  if splashReview
+                      .col-sm-1.text-center
+                        h1.color-primary
+                          i.mdi.mdi-format-quote-close(aria-hidden='true')  
+                      .col-sm-11
+                        p.font-italic.mb-0 #{splashReview.comment}
+                          span
+                            if splashReview.user
+                              a(href="#") - #{splashReview.user.username}
+                            else 
+                              a(href="#") - An SLWorld User
+
+                  else if splashSchool
+                      .col-sm-1.text-center
+                        h1.color-primary
+                          i.mdi.mdi-school(aria-hidden='true')  
+                      .col-sm-11
+                        p.font-italic.mb-0 #{splashSchool.description}
+                          span 
+                            a(href="#") - #{splashSchool.name}

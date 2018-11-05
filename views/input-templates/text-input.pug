@@ -1,10 +1,14 @@
+if !textInput.type
+    -textInput.type = 'text'
+
+
 if textInput.default 
     .form-group
         label(for=textInput.name) #{textInput.label}
-        input.form-control(type='text', id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
+        input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
 else
     .md-form
-        input.form-control(type='text', id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
+        input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
         label(for=textInput.name) #{textInput.label}
 
 -textInput = {}
