@@ -13,7 +13,8 @@ module.exports = mongoose.model('Job', {
   dateCreated: {type: Date, default: Date.now},
   pictureUrl: {type: String},
   description: String,
-  salary: Number,
+  salaryLower: Number,
+  salaryHigher: Number,
   kicker: String,
   startDate: Date,
   endDate: Date

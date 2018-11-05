@@ -2,10 +2,10 @@ const express = require('express');
 const moment = require('moment');
 
 const router = express.Router();
-const schools = require('../controllers/schools');
-const provincesController = require('../controllers/provinces');
-const companies = require('../controllers/companies');
-const reviewsController = require('../controllers/reviews');
+const schools = require('../controllers/schoolscontroller');
+const provincesController = require('../controllers/provincescontroller');
+const companies = require('../controllers/companiescontroller');
+const reviewsController = require('../controllers/reviewscontroller');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
@@ -52,17 +52,16 @@ module.exports = function(passport) {
         scripts: [scripts.util, scripts.fileUploader, scripts.libtinyMCE, scripts.tinyMCE]
       });
     })
-    .post((req, res) => {
+    .post(async (req, res) => {
       const company = {
         name: req.body.name,
         description: req.body.description,
         website: req.body.website,
-        pictureUrl: req.body.pictureUrl,
-        logoUrl: req.body.logoUrl
+        pictureUrl: req.body.urlNewCompanyPicture,
+        logoUrl: req.body.urlNewCompanyLogo
       };
-      companies.addCompany(company).then((newCompany) => {
-        res.redirect(`/company/${newCompany.id}`);
-      });
+      let newCompany = await companies.addCompany(company);
+      res.redirect(`/company/${newCompany.id}`);
     });
 
   router.route('/edit/:id')
@@ -83,8 +82,8 @@ module.exports = function(passport) {
         name: req.body.name,
         description: req.body.description,
         website: req.body.website,
-        pictureUrl: req.body.pictureUrl,
-        logoUrl: req.body.logoUrl
+        pictureUrl: req.body.urlNewCompanyPicture,
+        logoUrl: req.body.urlNewCompanyLogo
       };
       companies.editCompany(company).then((newCompany) => {
         res.redirect(`/company/${newCompany.id}`);
@@ -92,32 +91,41 @@ module.exports = function(passport) {
     });
 
   router.get('/:id', async (req, res) => {
-    let companyId = req.params.id;
-    let company = await companies.findCompanyWithSchoolsAndReviews(companyId);
-    company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
 
-    let schoolList = await schools.findSchoolsByCompany(company);
-    let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
-    schoolList = jadefunctions.trunkContentArray(schoolList, 'description', 300);
-    company.reviews = jadefunctions.trunkContentArray(company.reviews, 'comment', 190);
-    let splashReview = reviewsController.selectSplashReview(company.reviews);
-    let splashSchool = undefined;
-    if (!splashReview) {
-      splashSchool = schools.selectSplashSchool(schoolList);
+    try {
+      let companyId = req.params.id;
+      let company = await companies.findCompanyWithSchoolsAndReviews(companyId);
+      company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
+  
+      let schoolList = await schools.findSchoolsByCompany(company);
+      let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
+      schoolList = jadefunctions.trunkContentArray(schoolList, 'description', 300);
+      company.reviews = jadefunctions.trunkContentArray(company.reviews, 'comment', 190);
+      let splashReview = reviewsController.selectSplashReview(company.reviews);
+      let splashSchool = undefined;
+      if (!splashReview) {
+        splashSchool = schools.selectSplashSchool(schoolList);
+      }
+      res.render('company/company', {
+        title: `${company.name} - Second Language World`,
+        company,
+        user: req.user,
+        moment,
+        splashReview,
+        splashSchool,
+        jadefunctions,
+        provincesByCompany,
+        schools: schoolList,
+        pictureInfo: pictureinfo,
+        scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
+      });
+    } catch (error) {
+      res.render('error', {
+        message: error.message,
+        error: error
+      });
     }
-    res.render('company/company', {
-      title: `${company.name} - Second Language World`,
-      company,
-      user: req.user,
-      moment,
-      splashReview,
-      splashSchool,
-      jadefunctions,
-      provincesByCompany,
-      schools: schoolList,
-      pictureInfo: pictureinfo,
-      scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
-    });
+
   });
 
   return router;

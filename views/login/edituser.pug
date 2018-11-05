@@ -1,39 +1,93 @@
-extends image-splash
+extends form-container
 block card
-    .card.text-dark.my-5
-            .card-header.border-bottom-0
+            .my-5.text-left.px-3.px-md-5.py-1
                     .text-center
-                        img(src='/images/logo.svg', width='', height='40', alt='')
-            .card-body.text-left
-                    .text-center
-                        h1.display-4.my-3.font-weight-light Edit 
-                        form(class='form-signin', action='/user/edit', method='POST')
-                            .form-group
-                                input#id(type="hidden", name="id", value=user.id)
-                            .form-group
-                                label.control-label(for='Username') Username
-                                input(type='text', name='username', class='form-control', value=user.username, placeholder='Username',required, autofocus)
-                            .form-group
-                                label.control-label(for='Email') Email
-                                input(type='email', name='email', class='form-control', value=user.email, placeholder='Email',required)
-                            //- .form-group
-                            //-     label.control-label(for='Picture') Picture
-                            //-     .user-picture.preview
-                            //-         if user.fb
-                            //-             img.profile-img.register-picture.rounded-circle(src="/images/default-user.png")
-                            //-             img.profile-img#preview.edit-preview.register-picture.rounded-circle(src="#{pictureInfo.returnFacebookPicture(user.avatarUrl)}")
-                            //-             //.default-user-picture.register-picture.image-holder.rounded-circle(style="background-image: url('/images/default-user.png');")
-                            //-             //#preview.profile-img.register-picture.image-holder.rounded-circle(style="background-image: url('#{pictureInfo.returnFacebookPicture(user.avatarUrl)}');")
-                            //-         else
-                            //-             img.profile-img.register-picture.rounded-circle(src="/images/default-user.png")
-                            //-             img.profile-img#preview.edit-preview.register-picture.rounded-circle(src="#{pictureInfo.returnThumbnail(user.avatarUrl)}")
-                            //-             //.default-user-picture.register-pict
-                            //-             ure.image-holder.rounded-circle(style="background-image: url('/images/default-user.png');")
-                            //-             //#preview.profile-img.register-picture.image-holder.rounded-circle(style="background-image: url('#{pictureInfo.returnThumbnail(user.avatarUrl)}');")
-                            //-     .progress
-                            //-         #progress-bar-picture.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;")
-                            //-             span.sr-only 0% Complete
-                            //-     span(class="btn btn-default btn-file") Change Picture
-                            //-         input#file_input(type="file")
-                            //-     input#avatarUrl(type="hidden" name="avatarUrl" value=user.avatarUrl)
-                            button(class='btn btn-lg btn-block btn-eic', type='submit') Save Changes
+                            h3.mt-1.mb-5.text-light.font-weight-bold Edit
+                    form(class='form-signin', action='/user/edit', method='POST')
+                        .form-group
+                            input#id(type="hidden", name="id", value=user.id)
+                        .md-form
+                            input.form-control(type='text', name='username', placeholder='Username', value=user.username, required, autocomplete="off", autofocus)
+                            label(for='username') Username
+                        .form-check.pl-0.mb-5
+                            -var isChecked = user.anonymous;
+                            input#anonymous.form-check-input(checked=isChecked  type='checkbox' value='true' name="anonymous")
+                            label.form-check-label(for='anonymous') Make me anonymous on across SLWorld
+                            p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.
+                        .md-form.mb-5
+                            //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
+                            input.form-control(type='password', name='password', value='********', placeholder='Password', disabled, required)
+                            label.control-label(for='password') Password
+                            p.text-small.mt-1 
+                                a(href="/forgot") Request password change
+                        
+                         
+
+                        .row.my-3
+                            .col-lg-12
+                                h3.mb-5.text-dark.font-weight-bold Personal Information
+                            .col-lg-6
+                                .md-form
+                                    input.form-control(type='text', name='firstName', placeholder='First Name', value=user.firstName, autocomplete="off")
+                                    label(for='firstName') First Name
+                            .col-lg-6
+                                .md-form
+                                    input.form-control(type='text', name='lastName', placeholder='Last Name', value=user.lastName, autocomplete="off")
+                                    label(for='lastName') Last Name
+
+                        .row
+                            .col-lg-6.form-group
+                                -var select = {}
+                                -select.options = countries 
+                                -select.label = 'Country you live in'
+                                -select.placeholder = 'Please select'
+                                -select.name = 'livingCountry'
+                                -select.id = 'livingCountrySelect'
+                                -select.errorMessage = 'Please select your country of citizenship'
+                                -select.crossRefAttributeValue = 'code'
+                                -select.crossRefAttributeName = 'name'
+                                if user && user.livingCountry
+                                    - select.crossRefValue = user.livingCountry.code
+                                include ../input-templates/generic-select 
+                    
+                            .col-lg-6.form-group
+                                -var select = {}
+                                -select.options = countries 
+                                -select.label = 'Citizenship'
+                                -select.placeholder = 'Please select'
+                                -select.name = 'citizenship'
+                                -select.id = 'citizenshipSelect'
+                                -select.errorMessage = 'Please select your country of citizenship'
+                                -select.crossRefAttributeValue = 'code'
+                                -select.crossRefAttributeName = 'name'
+                                if user && user.citizenship
+                                    - select.crossRefValue = user.citizenship.code
+                                include ../input-templates/generic-select 
+
+                        
+                        .row
+                            .col-lg-6
+                                -var datepicker = {}
+                                -datepicker.id = 'date-of-birth'
+                                -datepicker.name = 'dateOfBirth'
+                                -datepicker.placeholder = 'Please Select'
+                                -datepicker.label = 'Date of Birth'
+                                -datepicker.errorMessage = 'Please select a date'
+                                if user.dateOfBirth
+                                    -datepicker.value = user.dateOfBirth
+                                include ../input-templates/date-field
+
+                        .text-center.mt-5
+                            button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Save Changes
+
+            .footer.border-0.bg-light.text-dark.py-3.my-5.px-3.px-md-5.py-1
+                .row.text-center
+                    .col-sm-12.border-radius-5.text-dark.pb-5.px-3.px-md-5
+                        .col-lg-12
+                            h3.my-5.text-dark.font-weight-bold Teacher Information
+                        .col-lg-12
+                            if user.teachingDetails
+                                a.btn.btn-md.btn-block.btn-lg.btn-link.px-5.px-5.mb-1(href='/user/teacher-details/' + user.id) View my teacher profile
+                            else
+                                a.btn.btn-md.btn-block.btn-lg.btn-link.px-5.px-5.mb-1(href='/user/teacher-details/' + user.id) Create my teacher profile
+

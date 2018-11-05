@@ -1,0 +1,9 @@
+.text-center.pt-5.mt-3
+    h4.text-white.font-weight-bold.mb-3  
+        //- i.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+        | #{item.pName}   
+    p.text-white
+        if item.number == 1
+                | #{item.number} school
+        else
+                | #{item.number} schools

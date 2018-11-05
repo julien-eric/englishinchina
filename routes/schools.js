@@ -1,22 +1,25 @@
 const express = require('express');
 const moment = require('moment');
-const email = require('../controllers/email');
+const email = require('../controllers/emailscontroller');
 
 const router = express.Router();
-const schools = require('../controllers/schools');
-const reviews = require('../controllers/reviews');
-const images = require('../controllers/images');
-const usersController = require('../controllers/users');
-const provincesController = require('../controllers/provinces');
-const citiesController = require('../controllers/cities');
-const companiesController = require('../controllers/companies');
+const schools = require('../controllers/schoolscontroller');
+const reviews = require('../controllers/reviewscontroller');
+const images = require('../controllers/imagescontroller');
+const usersController = require('../controllers/usersController');
+const provincesController = require('../controllers/provincescontroller');
+const citiesController = require('../controllers/citiescontroller');
+const companiesController = require('../controllers/companiescontroller');
+const searchController = require('../searchcontroller');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const criteria = require('../criteria').criteria;
 const scripts = require('../public/scripts');
 const utils = require('../utils');
 
-module.exports = function(passport) {
+const MISSING = -1;
+
+module.exports = function (passport) {
   /** ********************************
     //SCHOOL ROUTES
     ********************************** */
@@ -29,7 +32,7 @@ module.exports = function(passport) {
       try {
         let incompleteSchool;
         if (req.query.name !== undefined || req.query.schoolType !== undefined) {
-          incompleteSchool = {name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type)};
+          incompleteSchool = { name: decodeURIComponent(req.query.name), schoolType: parseInt(req.query.type) };
         }
         let provinces = await provincesController.getAllProvinces();
         let companies = await companiesController.getAllCompanies();
@@ -70,12 +73,6 @@ module.exports = function(passport) {
       }
     });
 
-  router.post('/addschoolgetstarted', utils.isAuthenticated, (req, res) => {
-    const school = {name: encodeURIComponent(req.body.name), schoolType: encodeURIComponent(req.body.schoolType)};
-    res.redirect(`/school/addschool?name=${school.name}&type=${school.schoolType}`);
-  });
-
-
   /** **********************************************************************************************************
      *Addphoto : Add photo to a school
      * Param : School id
@@ -100,14 +97,14 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html});
+          res.send({ html });
         }
       },
     );
   });
 
   router.post('/addphoto', async (req, res) => {
-    const picture = {url: req.body.urlSchoolUserPicture, description: req.body.description};
+    const picture = { url: req.body.urlSchoolUserPicture, description: req.body.description };
     let school = await schools.findSchoolById(req.body.id);
     let image = await images.addImage(
       {
@@ -133,9 +130,9 @@ module.exports = function(passport) {
         },
         (err, html) => {
           if (err) {
-            res.send({html: err.toString()});
+            res.send({ html: err.toString() });
           } else {
-            res.send({html});
+            res.send({ html });
           }
         },
       );
@@ -227,7 +224,7 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html});
+          res.send({ html });
         }
       });
     } else {
@@ -262,10 +259,10 @@ module.exports = function(passport) {
       // Update Review to account for new helpful
       let updatedReview = undefined;
       if (!review.hasHF) {
-        updatedReview = await reviews.addHelpful(review, {user: userId});
+        updatedReview = await reviews.addHelpful(review, { user: userId });
         updatedReview.hasHF = true;
       } else {
-        updatedReview = await reviews.removeHelpful(review, {user: userId});
+        updatedReview = await reviews.removeHelpful(review, { user: userId });
         updatedReview.hasHF = false;
       }
 
@@ -276,7 +273,7 @@ module.exports = function(passport) {
         if (err) {
           console.log(err);
         } else {
-          res.send({html, result: '1', reviewId: updatedReview.id});
+          res.send({ html, result: '1', reviewId: updatedReview.id });
         }
       });
 
@@ -291,7 +288,7 @@ module.exports = function(passport) {
             message,
             callbackMessage,
             req,
-            () => {});
+            () => { });
         });
       }
     } catch (error) {
@@ -311,8 +308,8 @@ module.exports = function(passport) {
 
     try {
       const queryInfo = req.query.queryInfo;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
+      const province = utils.validateParam(req.query.province);
+      const city = utils.validateParam(req.query.city);
       const sorting = req.query.sort;
 
       let searchResults = await schools.searchSchools(queryInfo, province, city, sorting);
@@ -361,11 +358,33 @@ module.exports = function(passport) {
   router.get('/query/', async (req, res) => {
 
     try {
-      const queryInfo = req.query.queryInfo || undefined;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
-      let searchResults = await schools.searchSchools(queryInfo, province, city);
-      res.send(JSON.stringify(searchResults.list));
+
+      let queryInfo = req.query.queryInfo || undefined;
+      let province = utils.validateParam(req.query.province);
+      let city = utils.validateParam(req.query.city);
+      const limit = parseInt(req.query.limit) || undefined;
+
+      let locationInfo = await searchController.pluckLocationTerms(queryInfo)
+
+      if (city == MISSING && locationInfo.location.city) {
+        city = locationInfo.location.city;
+      }
+
+      if (province == MISSING && locationInfo.location.province) {
+        province = locationInfo.location.province;
+      }
+
+      for (let i = 0; i < locationInfo.positiveTerms.length; i++) {
+        let firstOccurence = queryInfo.toLowerCase().indexOf(locationInfo.positiveTerms[i].toLowerCase());
+        if (firstOccurence != -1) {
+          queryInfo = queryInfo.substring(0, firstOccurence) +
+                      queryInfo.substring(firstOccurence +locationInfo.positiveTerms[i].length, queryInfo.length);
+        }
+      }
+
+
+      let searchResults = await schools.searchSchools(queryInfo, province, city, undefined, limit, true);
+      res.send(JSON.stringify({ query: 'schools', list: searchResults.list, total: searchResults.total }));
     } catch (error) {
       res.send(error);
     }
@@ -452,6 +471,7 @@ module.exports = function(passport) {
 
       school.reviews = jadefunctions.trunkContentArray(school.reviews, 'comment', 190);
       school.splitDescription = await jadefunctions.splitDescription(school.description, 600);
+      school.description = jadefunctions.nl2br(school.description, false);
       let splashReview = reviews.selectSplashReview(school.reviews);
 
       let schoolOwner = false;

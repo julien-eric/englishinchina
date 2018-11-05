@@ -2,7 +2,17 @@ var FileUploader = function () {
 
   let elements = [];
 
-  let init = function (inputId, urlPrefix, previewPrefix, progressPrefix) {
+  let getElementIndex = function (elements, id) {
+    let picturePreviewIndex = -1;
+    elements.forEach(function (element, index) {
+      if (element.inputId == id) {
+        picturePreviewIndex = index;
+      }
+    });
+    return picturePreviewIndex;
+  }
+
+  let init = function (inputId, urlPrefix, previewPrefix, progressPrefix, fdbPrefix) {
 
     if (document.getElementById(inputId)) {
 
@@ -11,7 +21,8 @@ var FileUploader = function () {
         inputId,
         urlPrefix,
         previewPrefix,
-        progressPrefix
+        progressPrefix,
+        fdbPrefix
       }
       elements.push(newElement);
 
@@ -21,10 +32,18 @@ var FileUploader = function () {
         if (file == null) {
           alert('No file selected.');
         } else {
-          getSignedRequest(file, elements.length - 1);
+          getSignedRequest(file, getElementIndex(elements, inputId));
           document.getElementById(urlPrefix + '-' + inputId).value = file.name;
         }
       };
+
+      let previewDiv = document.getElementById(previewPrefix + '-' + inputId);
+      if (previewDiv) {
+        document.getElementById(previewPrefix + '-' + inputId).onclick = () => {
+          $('#' + inputId).trigger('click');
+        };
+      }
+
     }
 
   };
@@ -62,12 +81,16 @@ var FileUploader = function () {
     xhr.onload = function () {
       if (xhr.status === 200) {
         const preview = $('#' + element.previewPrefix + '-' + element.inputId);
+        const fdbLabel = $('#' + element.fdbPrefix + '-' + element.inputId);
+
 
         if (preview.is('img')) {
           preview.toggleClass('d-none');
           preview.attr('src', `${'https://' + 'englishinchinaasia' + '.s3.amazonaws.com/'}${url}`);
         } else if (preview.is('div')) {
           preview.css("background-image", "url(https://englishinchinaasia.s3.amazonaws.com/" + url + ")");
+        } else if (fdbLabel) {
+          fdbLabel.removeClass('d-none');
         }
         document.getElementById(element.urlPrefix + '-' + element.inputId).value = url;
 
@@ -102,6 +125,9 @@ $(document).ready(() => {
   fileUploader.init('job-offer-picture', 'url', 'preview', 'progress');
   fileUploader.init('school-user-picture', 'url', 'preview', 'progress');
   fileUploader.init('new-school-picture', 'url', 'preview', 'progress');
+  fileUploader.init('new-company-picture', 'url', 'preview', 'progress');
+  fileUploader.init('new-company-logo', 'url', 'preview', 'progress');
+  fileUploader.init('resume', 'url', 'preview', 'progress', 'fdb-label');
 });
 
 

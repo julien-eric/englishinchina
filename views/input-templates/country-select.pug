@@ -1,0 +1,13 @@
+-var countryClassNames = '';
+if countryFormName
+    - countryClassNames = countryFormName
+
+// COUNTRY SELECT INPUT 
+select.mdb-select.add-school-form.validate(name=countrySelectName, id=countrySelectId, class=countryClassNames required)
+    option(value='', disabled='', selected='') #{countrySelectPlaceholder}
+    each country,i in countries
+            if country.code == selectedValue
+                option(value=country.code, selected='true') #{country.name}
+            else
+                option(value=country.code) #{country.name}
+label.col-12.px-0(for=selectInputName, data-error='Country has not been selected properly', data-success='Thank you.') #{countrySelectLabel}

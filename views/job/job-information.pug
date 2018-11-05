@@ -13,6 +13,7 @@
                         //- i.fa.prefix.mdi.mdi-magnify(aria-hidden='true')
                         input#kicker.form-form-2.form-control.validate(type='text' name='kicker' form="form-form-2")
                         label.col-12.px-0(for='kicker') Second Title (Kicker)
+                        p.text-small Also called "subtitle", this is eupplementary information that can provided to add to the title, it can be more lengthy but might be cut in list views.
       
       .row
             .col-lg-12
@@ -27,15 +28,21 @@
 
       .row
             hr
-            .col-lg-12
+            .col-lg-6
                   .form-group.md-form
-                        input#salary.form-form-2.form-control.validate(type='number' name='salary' form="form-form-2" placeholder="Salary" aria-label="Recipient's username" aria-describedby='basic-addon2' min="1000" max="100000" required)
-                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (greater than 1000)', data-success='Thank you') Salary in Chinese Yuan per month
+                        input#salary.form-form-2.form-control.validate(type='number' name='salaryLower' form="form-form-2" placeholder="Salary Lower Bracket" aria-describedby='basic-addon2' min="1000" max="100000" required)
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (between 1000 and 100000)', data-success='Thank you') Monthly Salary (RMB) Lower Bracket
+                              i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries should be per month in chinese yuan (renminbi)" )
+            .col-lg-6
+                  .form-group.md-form
+                        input#salary.form-form-2.form-control.validate(type='number' name='salaryHigher' form="form-form-2" placeholder="Salary Higher Bracket" aria-describedby='basic-addon2' min="1000" max="100000" required)
+                        label.col-12.px-0(for='salary', data-error='Please enter a monthly salary (between 1000 and 100000)', data-success='Thank you') Monthly Salary (RMB) Higher Bracket
                               i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title="Salaries should be per month in chinese yuan (renminbi)" )
 
       .row.pt-3
             .col-lg-6.pb-3
                   .md-form
+                        //- include ../input-templates/date-field
                         input#start-date.form-form-2.form-control.datepicker.validate(placeholder='Start Date', name='startDate', form="form-form-2", type='text' onblur='validateField(this)' required)
                         label(for='start-date', data-error='Please correct', data-success='Thank you' ) Start Date
             .col-lg-6.pb-3
@@ -47,20 +54,14 @@
       p.pb-3 This picture will be shown in the list of job offers as well as on the job offer page
       .row
             hr
-            .col-lg-6
-                  #preview-job-offer-picture.image-container.image-container-default.bg-primary
-            .col-lg-6
-                  .md-form
-                        .file-field
-                              .btn.btn-primary.btn-sm.float-left.ml-0
-                                    span Choose photo
-                                    input#job-offer-picture(type='file', form="form-form-2", required)
-                                    input#url-job-offer-picture.form-form-2.d-none(name="urlJobOfferPicture" form="form-form-2" accept="image/*" value="/public/default.png" required)
-                              .file-path-wrapper
-                                    input.file-path.validate(type='text', placeholder='Upload your file')
-                  .progress(style='height: 12px')
-                        #progress-job-offer-picture.progress-bar.bg-primary(role='progressbar', style='width: 0%; height: 12px', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
-                        span.sr-only 0% Complete
+            -var fileInput = {}
+            -fileInput.label = 'Choose photo'
+            -fileInput.placeholder = 'Upload a picture'
+            -fileInput.id = 'job-offer-picture'
+            -fileInput.urlName = 'urlJobOfferPicture'
+            -fileInput.formName = 'form-form-2'
+            -fileInput.isPicture = true
+            include ../input-templates/file-uploader-picture
 
       h2.font-weight-light.border-bottom.border-gray.pt-5.pb-2 Description
       p.pb-3 Please keep this short and effective and do not repeat the information from the other sections.
@@ -68,7 +69,7 @@
             hr
             .col-lg-12
                   .form-group
-                        textarea#job-description-textarea.form-form-2.form-control(type='text', class='form-control', name='description', form="form-form-2", rows='10', required)
+                        textarea#tinymce-textarea.form-form-2.form-control(type='text', class='form-control', name='description', form="form-form-2", rows='10', required)
 
       button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
       button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous

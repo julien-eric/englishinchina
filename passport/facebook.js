@@ -5,9 +5,9 @@ const settings = require('simplesettings');
 let facebookStrategyParams = {
   clientID: settings.get('FCB_APP_ID'),
   clientSecret: settings.get('FCB_APP_SECRET'),
-  callbackURL: settings.get('FCB_CB_URL'),
-  profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender']
+  callbackURL: settings.get('FCB_CB_URL')
 };
+// profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender']
 
 let processFacebookReturn = function(accessToken, refreshToken, profile, done) {
 
@@ -35,8 +35,8 @@ let processFacebookReturn = function(accessToken, refreshToken, profile, done) {
     newUser.email = (typeof profile.emails !== 'undefined' && profile.emails instanceof Array) ? profile.emails[0].value : '';
     newUser.firstName = profile.name.givenName;
     newUser.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
-    newUser.username = profile.name.givenName + ' ' + profile.name.familyName;
-    newUser.gender = profile.gender;
+    newUser.username = profile.displayName;
+    // newUser.gender = profile.gender;
     newUser.useFacebookPic = true;
 
     // save our user to the database

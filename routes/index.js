@@ -1,21 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const email = require('../controllers/email');
+const email = require('../controllers/emailscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
-const schoolsController = require('../controllers/schools');
-const provincesController = require('../controllers/provinces');
-const companiesController = require('../controllers/companies');
-const citiesController = require('../controllers/cities');
-const usersController = require('../controllers/users');
-const jobsController = require('../controllers/jobs');
+const schoolsController = require('../controllers/schoolscontroller');
+const provincesController = require('../controllers/provincescontroller');
+const countriesController = require('../controllers/countriescontroller');
+const companiesController = require('../controllers/companiescontroller');
+const citiesController = require('../controllers/citiescontroller');
+const usersController = require('../controllers/usersController');
+const jobsController = require('../controllers/jobscontroller');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
 const utils = require('../utils');
-
-// const pickBannerPicture
 
 module.exports = function (passport) {
 
@@ -25,6 +24,7 @@ module.exports = function (passport) {
     try {
       let provinces = await provincesController.getAllProvinces();
       let popularCities = await citiesController.getMostPopularCities();
+      let featuredJobs = await jobsController.getFeaturedJobs();
       let popularProvinces = await provincesController.getMostPopularProvinces();
       let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
@@ -37,6 +37,7 @@ module.exports = function (passport) {
         provinces,
         pictureInfo: pictureinfo,
         jadefunctions,
+        featuredJobs,
         popularCities,
         popularProvinces,
         popularCompanies,
@@ -52,24 +53,6 @@ module.exports = function (passport) {
     }
   });
 
-  router.get('/searchall', async (req, res) => {
-
-    try {
-      let searchResults = {};
-      const searchInfo = req.query.searchInfo || undefined;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
-      searchResults.cities = await citiesController.getCityByPinyinName(searchInfo);
-      searchResults.provinces = await provincesController.getProvinceByPinyinName(searchInfo);
-      searchResults.jobs = (await jobsController.searchJobs(searchInfo, province, city)).list;
-      searchResults.schools = (await schoolsController.searchSchools(searchInfo, province, city)).list;
-
-      res.send(JSON.stringify(searchResults));
-    } catch (error) {
-      res.send(error);
-    }
-  });
-
   /** **********************************************************************************************************
      *search : Method for search site, it will return any school, company, job that has some of the information
      * Param : Query, string that will be looked for
@@ -79,14 +62,16 @@ module.exports = function (passport) {
     try {
 
       const searchInfo = {};
-      searchInfo.queryInfo = req.query.queryInfo;
       searchInfo.sort = req.query.sort;
 
-      searchInfo.cityCode = utils.validateQuery(req.query.city);
-      searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
-      searchInfo.provinceCode = utils.validateQuery(req.query.province);
+      searchInfo.queryInfo = req.query.queryInfo;
 
-      if (searchInfo.cityCode && searchInfo.provinceCode == -1) {
+      searchInfo.cityCode = utils.validateParam(req.query.city);
+      searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
+      searchInfo.provinceCode = utils.validateParam(req.query.province);
+
+
+      if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
         searchInfo.provinceCode = searchInfo.city.province.code;
         searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode);
       }
@@ -115,7 +100,7 @@ module.exports = function (passport) {
       let bannerPicture
       if (searchInfo.city) {
         bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
-      } else if (searchInfo.provinceCode) {
+      } else if (searchInfo.province) {
         bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
       }
 
@@ -159,8 +144,18 @@ module.exports = function (passport) {
 
     try {
       const searchInfo = req.query.searchInfo || undefined;
-      let provinces = await provincesController.getProvinceByPinyinName(searchInfo);
-      res.send(JSON.stringify(provinces));
+      const limit = parseInt(req.query.limit) || undefined;
+      let provinces = await provincesController.queryProvincesByName(searchInfo, limit);
+      res.send(JSON.stringify({ query: 'provinces', list: provinces.list, total: provinces.total }));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+  router.get('/fetchprovinces', async (req, res) => {
+    try {
+      let provinces = await provincesController.getAllProvinces();
+      res.send(JSON.stringify({ query: 'provinces', list: provinces, total: provinces.length }));
     } catch (error) {
       res.send(error);
     }
@@ -174,8 +169,19 @@ module.exports = function (passport) {
 
     try {
       const searchInfo = req.query.searchInfo || undefined;
-      let cities = await citiesController.getCityByPinyinName(searchInfo);
-      res.send(JSON.stringify(cities));
+      const limit = parseInt(req.query.limit) || undefined;
+      let cities = await citiesController.queryCityiesByPinyinName(searchInfo, limit);
+      res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total }));
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+  router.get('/fetchcities', async (req, res) => {
+
+    try {
+      let cities = await citiesController.getAllCities();
+      res.send(JSON.stringify({ query: 'provinces', list: cities, total: cities.length }));
     } catch (error) {
       res.send(error);
     }
@@ -218,8 +224,6 @@ module.exports = function (passport) {
       // Display the Login page with any flash message, if any
       res.render('login/login', {
         title: 'Login - Second Language World',
-        main: true,
-        message: req.flash('message'),
         scripts: [scripts.util]
       });
     })
@@ -292,15 +296,13 @@ module.exports = function (passport) {
     .get((req, res) => {
       res.render('login/register', {
         title: 'Sign up - Second Language World',
-        main: true,
-        message: req.flash('signupMessage'),
         scripts: [scripts.util]
       });
     })
     .post(passport.authenticate('signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
-      failureFlash: true
+      failureFlash: false
     }));
 
 
@@ -317,7 +319,7 @@ module.exports = function (passport) {
      *FORGOT :   GET : Forgot your password page
      ************************************************************************************************************ */
   router.get('/forgot', (req, res) => {
-    res.render('forgot', {
+    res.render('login/forgot', {
       title: 'Forgot your Password - Second Language World',
       user: req.user,
       pictureInfo: pictureinfo,
@@ -327,12 +329,11 @@ module.exports = function (passport) {
 
   router.post('/forgot', async (req, res, next) => {
 
-    const buffer = crypto.randomBytes(20);
-    const token = buffer.toString('hex');
+    const token = crypto.randomBytes(20).toString('hex');
 
     let user = await usersController.findUserByEmail(req.body.email);
     if (!user) {
-      req.flash('error', 'No account with that email address exists.');
+      res.flash('error', 'No account with that email address exists.');
       return res.redirect('/forgot');
     }
 
@@ -340,10 +341,14 @@ module.exports = function (passport) {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
     await email.resetPassword(req, user, token, req);
-    req.flash('info', 'An email has been sent to reset your password.');
+    res.flash('info', 'An email has been sent to reset your password.');
     return res.redirect('/forgot');
 
   });
+
+  /** **********************************************************************************************************
+   *PASSWORD RESET
+  ************************************************************************************************************ */
 
   router.get('/reset/:token', async (req, res) => {
     let user = await usersController.findUserByToken(req.params.token, { $gt: Date.now() });
@@ -351,15 +356,16 @@ module.exports = function (passport) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/forgot');
     }
-    res.render('reset', {
+    res.render('login/reset', {
       title: 'Reset Password - Second Language World',
+      token: user.resetPasswordToken,
       pictureInfo: pictureinfo,
       scripts: [scripts.util]
     });
   });
 
-  router.post('/reset/:token', async (req, res) => {
-    let user = await usersController.findUserByToken(req.params.token, { $gt: Date.now() });
+  router.post('/reset', async (req, res) => {
+    let user = await usersController.findUserByToken(req.body.token, { $gt: Date.now() });
     if (!user) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('back');
@@ -377,16 +383,28 @@ module.exports = function (passport) {
     req.login(user, (err) => res.redirect('/'));
   });
 
-  router.post('/contactus', (req, res) => {
-    const message = `Email: ${req.body.email}\n${req.body.content}`;
-    const callbackMessage = 'Thank you, we will get back to you shortly';
-    email.sendEmail('julieneric11@gmail.com',
-      'contactusfeedback@englishinchina.com',
-      'Feedback comment from user',
-      message,
-      callbackMessage,
-      req
-    );
+
+
+  /** **********************************************************************************************************
+     *EMAIL VERIFICATION
+     * If token is correct and not expired, this will redirect a logged in user to the main page
+     ************************************************************************************************************ */
+  router.get('/emailverification/:email', async (req, res) => {
+
+    try {
+
+      let token = req.query.token;
+      let user = await usersController.findUserByEmail(req.params.email);
+      if (!user.verified) {
+        if (user.token == token) {
+          let updatedUser = await usersController.updateUser(user._id, { verified: true });
+          req.login(updatedUser, (err) => res.redirect('/'));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     res.redirect('/');
   });
 
@@ -409,26 +427,116 @@ module.exports = function (passport) {
   /** **********************************************************************************************************
      *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
-  router.route('/user/edit')
+  router.route('/user/edit', utils.isAuthenticated)
     .get(async (req, res) => {
-      let user = await usersController.findUserById(req.user._id);
-      res.render('login/edituser', {
-        title: `Edit Profile - ${user.username} - Second Language World`,
-        user,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        scripts: [scripts.util]
-      });
+      try {
+
+        let user = await usersController.findUserById(req.user._id);
+        let countries = await countriesController.getCountries();
+        res.render('login/edituser', {
+          title: `Edit Profile - ${user.username} - Second Language World`,
+          user,
+          countries,
+          moment,
+          pictureInfo: pictureinfo,
+          jadefunctions,
+          scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader]
+        });
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
     })
     .post(async (req, res) => {
-      await usersController.updateUser(req.body);
-      res.redirect('/user/edit');
+      try {
+
+        let userParams = req.body;
+        req.body.anonymous ? userParams.anonymous = true : userParams.anonymous = false;
+        userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(userParams.livingCountry));
+        userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(userParams.citizenship));
+
+        await usersController.updateUser(userParams.id, userParams);
+        res.redirect('/user/edit');
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
+    });
+
+  /** **********************************************************************************************************
+     *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
+    ************************************************************************************************************ */
+  router.route('/user/teacher-details/:id')
+    .get(async (req, res) => {
+      try {
+        let countries = await countriesController.getCountries();
+        let redirectUrl = req.query.redirectUrl;
+        res.render('login/teacher-details', {
+          title: 'Teacher Profile',
+          user: req.user,
+          redirectUrl,
+          countries,
+          moment,
+          pictureInfo: pictureinfo,
+          jadefunctions,
+          scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+        });
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
+    })
+    .post(async (req, res) => {
+      try {
+
+        let userParams = {};
+        userParams.id = utils.validateParam(req.params.id);
+        userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(req.body.livingCountry));
+        userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(req.body.citizenship));
+        userParams.dateOfBirth = new Date(moment(req.body.dateOfBirth, 'MMMM Do YYYY').format());
+
+        userParams.teachingDetails = {};
+        userParams.teachingDetails.eslCertificate = utils.validateParam(req.body.eslCertificate);
+        userParams.teachingDetails.teachingLicense = utils.validateParam(req.body.teachingLicense);
+        userParams.teachingDetails.yearsOfExperience = utils.validateParam(req.body.yearsOfExperience);
+        let fileNameResumePrevious = utils.validateParam(req.body.fileNameResumePrevious);
+
+        if (fileNameResumePrevious == -1) {
+          userParams.teachingDetails.urlResume = utils.validateParam(req.body.urlResume);
+          userParams.teachingDetails.fileNameResume = utils.validateParam(req.body.fileNameResume);
+        } else {
+          let user = await usersController.findUserById(userParams.id);
+          userParams.teachingDetails.urlResume = user.teachingDetails.urlResume;
+          userParams.teachingDetails.fileNameResume = user.teachingDetails.fileNameResume;
+        }
+
+        await usersController.updateUser(userParams.id, userParams);
+
+        let redirectUrl = utils.validateParam(req.body.redirectUrl);
+        if (redirectUrl != -1) {
+          res.redirect(redirectUrl);
+        } else {
+          res.redirect('/user/edit');
+        }
+
+      } catch (error) {
+        res.render('error', {
+          message: error.message,
+          error: error
+        });
+      }
     });
 
   /** **********************************************************************************************************
      *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
      ************************************************************************************************************ */
-  router.get('/user/:id', async (req, res) => {
+  router.get('/user/:id', utils.isAuthenticated, async (req, res) => {
 
     try { // Get user and reviews then render user page
       let usern = await usersController.findUserById(req.params.id);
@@ -455,27 +563,17 @@ module.exports = function (passport) {
     res.send(cities);
   });
 
-  /** **********************************************************************************************************
-     *GETUSERS :
-     ************************************************************************************************************ */
-  router.get('/allusers', utils.isAdmin, async (req, res) => {
-
-    try {
-      let users = await usersController.getAllUsers();
-      res.render('allusers', {
-        title: 'Users - Second Language World',
-        users,
-        pictureInfo: pictureinfo,
-        jadefunctions,
-        moment,
-        scripts: [scripts.util]
-      });
-    } catch (error) {
-      res.render('error', {
-        message: error.message,
-        error: error
-      });
-    }
+  router.post('/contactus', (req, res) => {
+    const message = `Email: ${req.body.emailContact}\n${req.body.message}`;
+    const callbackMessage = 'Thank you, we will get back to you shortly';
+    email.sendEmail('julieneric11@gmail.com',
+      'contactusfeedback@secondlanguage.world',
+      'Feedback comment from user',
+      message,
+      callbackMessage,
+      req
+    );
+    res.redirect('/');
   });
 
   return router;

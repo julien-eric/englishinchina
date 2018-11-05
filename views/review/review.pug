@@ -2,12 +2,8 @@
 - var averageRating = jadefunctions.roundToPoint5(review.average_rating);
 block content
       .row.mb-3.justify-content-start.align-items-center
-            .col-auto.pr-0
-                  -var cardUser = review.user
-                  include ../genuserpic
-            .col-sm-9
-                  if review.user
-
+            .col-auto
+                  if review.user && !review.user.anonymous
                         if review.user.firstName && review.user.lastName
                               -username = review.user.firstName + review.user.lastName
                         else
@@ -24,8 +20,9 @@ block content
       hr(style='margin-left:-15px; margin-right:-15px;')
       .row.mb-3
             .col-12
-                  .review-content !{review.comment}
+                  .review-content #{review.comment}
       .row.mb-3
             .card-body
-                  include ../ratingcardbody
+                  -var breakdownSm = true;
+                  include ../school/schoolbreakdown
 

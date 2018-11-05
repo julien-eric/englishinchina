@@ -1,29 +1,13 @@
-.row
+.row 
       ul.chart.pl-0.mb-0
-            - var value = criteriaScore.c1
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[0].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c2
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[1].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c3
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[2].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c4
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[3].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c5
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[4].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c6
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[5].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c7
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[6].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
-            - var value = criteriaScore.c8
-            li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[7].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
-                  include bar
+            - for (var i = 0; i < criteria.length; ++i)
+                  - var value = criteriaScore['c' + (i+1)]
+                  if(breakdownSm)
+                        li.col-sm-12.col-md-6.col-lg-6(title=criteria[i].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
+                              include bar
+                  else
+                        li.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[i].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
+                              include bar
             - var value = 5
             li.d-none.col-sm-12.col-md-6.col-lg-3.mb-3(title=criteria[7].shortName + " " + jadefunctions.roundToDecimalPlace(value, 1) + " ★")
                   include bar

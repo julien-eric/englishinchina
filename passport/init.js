@@ -16,7 +16,7 @@ module.exports = function(passport) {
     User.findById(id, (err, user) => {
       console.log('deserializing user:', user);
       done(err, user);
-    });
+    }).populate('livingCountry').populate('citizenship');
   });
 
   // Setting up Passport Strategies for Login and SignUp/Registration

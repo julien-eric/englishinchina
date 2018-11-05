@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
-const provincesController = require('../controllers/provinces');
-const companiesController = require('../controllers/companies');
-const citiesController = require('../controllers/cities');
-const schoolsController = require('../controllers/schools');
-const jobsController = require('../controllers/jobs');
+const provincesController = require('../controllers/provincescontroller');
+const companiesController = require('../controllers/companiescontroller');
+const citiesController = require('../controllers/citiescontroller');
+const schoolsController = require('../controllers/schoolscontroller');
+const jobsController = require('../controllers/jobscontroller');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
@@ -19,7 +19,7 @@ module.exports = function (passport) {
 
             try {
 
-                const provinceCode = utils.validateQuery(req.params.code);
+                const provinceCode = utils.validateParam(req.params.code);
 
                 let schools = [];
                 let companies = [];

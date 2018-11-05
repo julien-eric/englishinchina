@@ -15,6 +15,11 @@ block content
         .col-lg-6.mb-3
           img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
         .col-lg-6.mb-3
+          if(job.school)
+            a.mb-2(href='/school/' + job.school._id)  
+              i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
+              | #{job.school.name}
+            hr.my-2
           p.mb-0         
             i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
             | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
@@ -37,7 +42,7 @@ block content
       .row
         .col-lg-12
           .show-more-container
-            p !{job.description}
+            p.content-pre-wrap #{job.description}
           .show-more-link
             a(href='#') Show More
           .show-less-link.d-none

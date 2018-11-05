@@ -1,4 +1,5 @@
 span.twitter-typeahead {
+
     .tt-menu {
         @extend .dropdown-menu;
         min-width: 100%;
@@ -8,6 +9,8 @@ span.twitter-typeahead {
     }
     .tt-suggestion {
         @extend .dropdown-item;
+        padding: .25rem 1rem;
+        cursor: pointer;
     }
     .tt-suggestion.tt-cursor {
         @extend .dropdown-item.active;

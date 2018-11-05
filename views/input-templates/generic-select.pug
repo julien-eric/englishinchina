@@ -1,0 +1,12 @@
+// YEARS OF EXP SELECT INPUT
+//- each opt in select.options
+    h1 #{opt[select.crossRefAttributeValue] + ' ' + select.crossRefValue}
+select.mdb-select.add-school-form.validate(name=select.name, id=select.id, class=select.formName, form=select.formName, required=select.required)
+    option(value='', disabled='', selected='') #{select.placeholder}
+    each opt in select.options
+        if select.crossRefValue && opt[select.crossRefAttributeValue] && opt[select.crossRefAttributeValue].toString() == select.crossRefValue.toString()
+            option(value=opt[select.crossRefAttributeValue], selected='true') #{opt[select.crossRefAttributeName]}
+        else
+            option(value=opt[select.crossRefAttributeValue]) #{opt[select.crossRefAttributeName]}
+label.col-12.px-0(for=select.name, data-error=select.errorMessage, data-success='Thank you.') #{select.label}
+-var select = {}

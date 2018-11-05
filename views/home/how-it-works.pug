@@ -1,0 +1,53 @@
+.py-5
+    .container
+      .row.justify-content-center
+        h1.display-4.text-center.font-weight-bold How does it work?
+      .row.justify-content-center.my-5
+        .col-md-3
+          -var stepValue = 1
+          include step-indicator
+          .text-center.text-md-left
+            h2 Search our job board
+            p Explore all our opportunities and see if there's one you like. 
+        .col-md-3
+          -var stepValue = 2
+          include step-indicator
+          .text-center.text-md-left
+            h2 Create a Profile
+            p When you find a job, register to slworld and fill in your teacher information booklet.
+        .col-md-3
+          -var stepValue = 3
+          include step-indicator
+          .text-center.text-md-left
+            h2 Apply for a job
+            p Apply to any job you're interested in! Just write the employer a message. 
+        .col-md-3
+          -var stepValue = 4
+          include step-indicator
+          .text-center.text-md-left
+            h2 Wait for a reply
+            p Get your replies on here or by email.
+      .row.justify-content-center
+        .col-md-12.text-center
+          a.btn.btn-lg.btn-primary(href='/job') get started!
+
+
+        //-             -var stepValue = 1
+        //-   include step-indicator
+        //-   h2 Look for a job
+        //-   p Explore all our opportunities and see if there's one you like. 
+        //- .col-md-3
+        //-   -var stepValue = 2
+        //-   include step-indicator
+        //-   h2 Create a Profile
+        //-   p When you find a job, register to slworld and fill in your teacher information booklet.
+        //- .col-md-3
+        //-   -var stepValue = 3
+        //-   include step-indicator
+        //-   h2 Apply for a job
+        //-   p Apply to any job you're interested in! Just write the employer a message. 
+        //- .col-md-3
+        //-   -var stepValue = 4
+        //-   include step-indicator
+        //-   h2 Wait for a reply
+        //-   p Get your replies on here or by email.

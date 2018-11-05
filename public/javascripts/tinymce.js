@@ -1,6 +1,6 @@
 $(document).ready(() => {
     tinymce.init({
-      selector: '#job-description-textarea',
+      selector: '#tinymce-textarea',
       menubar: false,
       style_formats: [
         {title: 'Header', format: 'h3'},

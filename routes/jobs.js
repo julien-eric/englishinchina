@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
-const provincesController = require('../controllers/provinces');
-const companiesController = require('../controllers/companies');
-const citiesController = require('../controllers/cities');
-const schoolsController = require('../controllers/schools');
-const jobsController = require('../controllers/jobs');
+const provincesController = require('../controllers/provincescontroller');
+const companiesController = require('../controllers/companiescontroller');
+const citiesController = require('../controllers/citiescontroller');
+const schoolsController = require('../controllers/schoolscontroller');
+const jobsController = require('../controllers/jobscontroller');
+const messagesController = require('../controllers/messagescontroller');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
@@ -19,7 +20,7 @@ module.exports = function (passport) {
 
       try {
 
-        const province = utils.validateQuery(req.query.province);
+        const province = utils.validateParam(req.query.province);
 
         let jobs = await jobsController.getAllJobs();
         let provinces = await provincesController.getAllProvinces();
@@ -86,7 +87,7 @@ module.exports = function (passport) {
       };
 
       const searchInfo = {};
-      const schoolId = utils.validateQuery(req.query.schoolId);
+      const schoolId = utils.validateParam(req.query.schoolId);
       let cities = undefined;
 
       if (schoolId != -1) {
@@ -98,8 +99,8 @@ module.exports = function (passport) {
         cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
       } else {
         // If we don't have a school, we still might have a province-city
-        searchInfo.province = utils.validateQuery(req.query.province);
-        searchInfo.city = utils.validateQuery(req.query.city);
+        searchInfo.province = utils.validateParam(req.query.province);
+        searchInfo.city = utils.validateParam(req.query.city);
 
         if (searchInfo.province) {
           cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
@@ -121,8 +122,8 @@ module.exports = function (passport) {
         searchInfo,
         jadefunctions,
         scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
-               scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, 
-               scripts.libtinyMCE, scripts.tinyMCE, scripts.reviewvalidation, scripts.typeaheadwrapper]
+        scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview,
+        scripts.libtinyMCE, scripts.tinyMCE, scripts.reviewvalidation, scripts.typeaheadwrapper]
       });
 
     } catch (error) {
@@ -143,8 +144,8 @@ module.exports = function (passport) {
 
     try {
       const jobInfo = req.query.jobInfo;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
+      const province = utils.validateParam(req.query.province);
+      const city = utils.validateParam(req.query.city);
 
       let searchResults = await jobsController.searchJobs(jobInfo, province, city);
       if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
@@ -194,15 +195,48 @@ module.exports = function (passport) {
 
     try {
       const jobInfo = req.query.jobInfo || undefined;
-      const province = utils.validateQuery(req.query.province);
-      const city = utils.validateQuery(req.query.city);
-      let searchResults = await jobsController.searchJobs(jobInfo, province, city);
-      res.send(JSON.stringify(searchResults.list));
+      const limit = parseInt(req.query.limit) || undefined;
+      const province = utils.validateParam(req.query.province);
+      const city = utils.validateParam(req.query.city);
+      let searchResults = await jobsController.searchJobs(jobInfo, province, city, undefined, limit, true);
+      res.send(JSON.stringify({ query: 'jobs', list: searchResults.list, total: searchResults.total }));
     } catch (error) {
       res.send(error);
     }
   });
 
+  router.get('/apply/:id', utils.isAuthenticated, async (req, res) => {
+    res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=/job/message/' + req.params.id);
+  });
+
+
+  /** **********************************************************************************************************
+     *queryJob : Method for search all jobs, it will return any job that has some of the information
+     * Param : Query, string that will be looked for as part of the jobs name
+     * [Province] optional.
+     * [City] optional
+     ************************************************************************************************************ */
+  router.get('/message/:id', async (req, res) => {
+    let job = await jobsController.getJob(req.params.id);
+    res.render('job/application/message', {
+      title: 'Apply - ' + job.title,
+      user: req.user,
+      job,
+      moment,
+      pictureInfo: pictureinfo,
+      jadefunctions,
+      scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
+              scripts.readMore, scripts.libtinyMCE, scripts.tinyMCE]
+    });
+  });
+
+  router.post('/message/:id', async (req, res) => {
+    
+    let job = await jobsController.getJob(req.params.id);
+    let messageToSend = await utils.validateParam(req.body.message);
+    let message = await messagesController.createMessage(req.user, job.user, messageToSend);
+    res.redirect('/job/message/' + job.id);
+  });
 
   router.get('/:id', async (req, res) => {
     let job = await jobsController.getJob(req.params.id);

@@ -1,15 +1,15 @@
-#carouselExampleIndicators.carousel.slide(data-ride='carousel')
-  #splash.splash.row.justify-content-center
-    .splash-image-container
-      .splash-image(style="background-image: url('" + splashText.image + "');")
-    .splash-text.col-sm-12.col-md-9.col-lg-9.mb-5
-      h3.text-antique-white.text-shadow-darker.font-weight-bold.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
-      h1.text-uppercase.text-shadow-darker.font-weight-bold.display-3 #{splashText.title}
-      include splash-search
-      .row.justify-content-center
-        p.col-lg-8.mt-3 Second Language World catalogs every school, university and English organization in the World. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations 
-      if splashText.button1
-          a.btn.btn-warning.px-5(href='/job') #{splashText.button1}
-            i.mdi.mdi-chevron-double-right(aria-hidden='true')
-          a.btn.btn-mdb-color.px-5(href='/review') Review School
-            i.mdi.mdi-chevron-double-right(aria-hidden='true')
+.container-fluid
+  #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+    #splash.splash.row.justify-content-center
+      .splash-image-container
+        .splash-image(style="background-image: url('" + splashText.image + "');")
+      .splash-text.col-sm-12.col-md-9.col-lg-9.mb-5
+        p#splash-kicker.text-antique-white.text-shadow-darker.font-weight-light.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
+        //- h1.display-3 #{splashText.title}
+        .row.justify-content-center
+          //- p.col-lg-8.mt-3 Second Language World catalogs every school, university and English organization in the World. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations 
+          h1.display-3.col-lg-12 
+            | Teach in    
+            span.text-lightgreen China 
+          h2.col-lg-12.mt-1.mb-3 Discover what opportunities lie ahead. Right here, right now.
+        include splash-search
