@@ -40,7 +40,7 @@ describe.only('Messaging', function () {
         let sampleUser1 = (await usersController.getAllUsers())[Math.floor(Math.random() * 15) + 1];
         let sampleUser2 = (await usersController.getAllUsers())[Math.floor(Math.random() * 15) + 1];
         let newConversation = await conversationsController.getConversationByUsers(sampleUser1, sampleUser2);
-        let message = await messagesController.createMessage(sampleUser1, sampleUser2, "I'm interested in applying for this job offer");
+        let message = await messagesController.createMessage(sampleUser1, sampleUser2, 'I\'m interested in applying for this job offer');
 
         expect(message.conversation.id).to.be.equal(conversationsController.returnId(sampleUser1, sampleUser2));
         expect(message.user.id).to.be.equal(sampleUser1.id);
@@ -57,10 +57,10 @@ describe.only('Messaging', function () {
         let sampleUser1 = (await usersController.getAllUsers())[Math.floor(Math.random() * 15) + 1];
         let sampleUser2 = (await usersController.getAllUsers())[Math.floor(Math.random() * 15) + 1];
         let newConversation = await conversationsController.getConversationByUsers(sampleUser1, sampleUser2);
-        
-        let message = await messagesController.createMessage(sampleUser1, sampleUser2, "I'm interested in applying for this job offer");
-        let message2 = await messagesController.createMessage(sampleUser1, sampleUser2, "Please look at my resume");
-        let message3 = await messagesController.createMessage(sampleUser2, sampleUser1, "We will, thank you!");
+
+        let message = await messagesController.createMessage(sampleUser1, sampleUser2, 'I\'m interested in applying for this job offer');
+        let message2 = await messagesController.createMessage(sampleUser1, sampleUser2, 'Please look at my resume');
+        let message3 = await messagesController.createMessage(sampleUser2, sampleUser1, 'We will, thank you!');
 
         let messageConvo = await messagesController.getConversationMessages(sampleUser1, sampleUser2);
         let messageConvo2 = await messagesController.getConversationMessages(sampleUser2, sampleUser1);

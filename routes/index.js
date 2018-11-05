@@ -97,7 +97,7 @@ module.exports = function (passport) {
         jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 150);
       }
 
-      let bannerPicture
+      let bannerPicture;
       if (searchInfo.city) {
         bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
       } else if (searchInfo.province) {
@@ -382,8 +382,6 @@ module.exports = function (passport) {
     await user.save();
     req.login(user, (err) => res.redirect('/'));
   });
-
-
 
   /** **********************************************************************************************************
      *EMAIL VERIFICATION

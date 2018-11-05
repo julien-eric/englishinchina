@@ -53,16 +53,15 @@ module.exports = {
   getSchoolSortingObject: function (sortingQuery) {
     if (sortingQuery == undefined || sortingQuery == 'undefined' || sortingQuery == '' || sortingQuery == 'null' || sortingQuery == null) {
       return undefined;
-    }
-    else {
+    } else {
       if (sortingQuery == 'ratingUp') {
-        return { attribute: 'averageRating', order: -1 }
+        return { attribute: 'averageRating', order: -1 };
       } else if (sortingQuery == 'ratingDown') {
-        return { attribute: 'averageRating', order: 1 }
+        return { attribute: 'averageRating', order: 1 };
       } else if (sortingQuery == 'alphaUp') {
-        return { attribute: 'name', order: 1 }
+        return { attribute: 'name', order: 1 };
       } else if (sortingQuery == 'alphaDown') {
-        return { attribute: 'name', order: -1 }
+        return { attribute: 'name', order: -1 };
       }
     }
     return sortingQuery;
@@ -83,17 +82,17 @@ module.exports = {
 
     const permute = (arr, m = []) => {
       if (arr.length === 0) {
-        result.push(m)
+        result.push(m);
       } else {
         for (let i = 0; i < arr.length; i++) {
           let curr = arr.slice();
           let next = curr.splice(i, 1);
-          permute(curr.slice(), m.concat(next))
+          permute(curr.slice(), m.concat(next));
         }
       }
-    }
+    };
 
-    permute(inputArr)
+    permute(inputArr);
     return result;
   },
 
@@ -111,7 +110,7 @@ module.exports = {
 
       let permutation = permutations[i].join('.*');
       if (i != permutations.length - 1) {
-        permutationsRegex += permutation + '|'
+        permutationsRegex += permutation + '|';
       } else {
         permutationsRegex += permutation;
       }

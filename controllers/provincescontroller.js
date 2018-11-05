@@ -9,31 +9,32 @@ let _ = require('underscore');
 
 module.exports = {
 
-  getAllProvinces() {
+  getAllProvinces () {
     return Province.find().sort({ name: 1 }).exec();
   },
 
-  getProvinceByCode(code) {
+  getProvinceByCode (code) {
     return Province.findOne({ code }).exec();
   },
 
-  getProvinceById(provinceId) {
+  getProvinceById (provinceId) {
     return Province.findOne({ _id: provinceId }).exec();
   },
 
-  getProvinceByCode(code) {
+  getProvinceByCode (code) {
     return Province.findOne({ code }).exec();
   },
 
-  async getProvinceByName(name) {
-    return Province.findOne({ name: { $regex: new RegExp("^" + name.toLowerCase(), "i") } }).exec();
+  async getProvinceByName (name) {
+    return Province.findOne({ name: { $regex: new RegExp('^' + name.toLowerCase(), 'i') } }).exec();
   },
 
   /**
-   * 
-   * @param {Int} code 
+   *
+   * @param {Int} code
+   * @return {String} Returns a picture url in the form of a string, or undefined
    */
-  async getProvincePic(code) {
+  async getProvincePic (code) {
     // At the moment picture is based on school with highest rating
     let provinceId = await Province.findOne({ code }).exec();
     let transactions = await School.aggregate([
@@ -50,16 +51,16 @@ module.exports = {
     }
   },
 
-  async queryProvincesByName(name, limit) {
-    let provinceResults = await Province.find({ 'name': { "$regex": name, "$options": "i" } }).exec();
-    return { total: provinceResults.length, list: limit ? _.first(provinceResults, limit) : provinceResults }
+  async queryProvincesByName (name, limit) {
+    let provinceResults = await Province.find({ 'name': { '$regex': name, '$options': 'i' } }).exec();
+    return { total: provinceResults.length, list: limit ? _.first(provinceResults, limit) : provinceResults };
   },
 
-  getProvinceByChineseName(cityinfo) {
+  getProvinceByChineseName (cityinfo) {
     return Province.findOne({ code: chineseName }).exec();
   },
 
-  async getMostPopularProvinces() {
+  async getMostPopularProvinces () {
 
     // At the moment featured schools are schools with the highest ratings
     let transactions = await School.aggregate([
@@ -70,7 +71,7 @@ module.exports = {
     return Province.populate(transactions, { path: '_id' });
   },
 
-  async getMostPopularProvincesbyCompany(companyId) {
+  async getMostPopularProvincesbyCompany (companyId) {
 
     let company = await companiesController.findCompanyById(companyId);
 

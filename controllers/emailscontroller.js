@@ -1,20 +1,20 @@
 const helper = require('sendgrid').mail;
 const settings = require('simplesettings');
-var sg = require('sendgrid')(settings.get('SENDGRID_API_KEY'));
+const sg = require('sendgrid')(settings.get('SENDGRID_API_KEY'));
 
 module.exports = {
 
     sendEmail: function (to, from, subject, text) {
 
-        let to_email = new helper.Email(to);
-        let from_email = new helper.Email(from);
+        let toEmail = new helper.Email(to);
+        let fromEmail = new helper.Email(from);
         let content = new helper.Content('text/plain', text);
-        let mail = new helper.Mail(from_email, subject, to_email, content);
+        let mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
         let request = sg.emptyRequest({
             method: 'POST',
             path: '/v3/mail/send',
-            body: mail.toJSON(),
+            body: mail.toJSON()
         });
 
         sg.API(request, function (error, response) {
@@ -30,8 +30,6 @@ module.exports = {
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
             req.headers.origin + '/emailverification/' + user.email + '?token=' + user.token + '\n\n';
 
-        let callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.';
-
         module.exports.sendEmail(
             user.email,
             'emailverification@secondlanguage.world',
@@ -46,8 +44,6 @@ module.exports = {
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
             req.headers.origin + '/reset/' + user.resetPasswordToken + '\n\n' +
             'If you did not request this, please ignore this email and your password will remain unchanged.\n';
-
-        let callbackMessage = 'An e-mail has been sent to ' + user.email + ' with further instructions.';
 
         module.exports.sendEmail(
             user.email,

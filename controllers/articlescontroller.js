@@ -23,11 +23,11 @@ module.exports = {
     });
   },
 
-  getArticleByURL(url) {
-    return Article.findOne({url}).populate('user').exec();
+  getArticleByURL (url) {
+    return Article.findOne({ url }).populate('user').exec();
   },
 
-  getArticles() {
+  getArticles () {
     return Article.find().populate('user').exec();
   }
 

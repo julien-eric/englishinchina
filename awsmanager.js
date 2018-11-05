@@ -2,12 +2,12 @@ const _ = require('underscore');
 const aws = require('aws-sdk');
 const settings = require('simplesettings');
 
-let AwsManager = function() {
-  aws.config.update({accessKeyId: settings.get('S3_KEY'), secretAccessKey: settings.get('S3_SECRET')});
+let AwsManager = function () {
+  aws.config.update({ accessKeyId: settings.get('S3_KEY'), secretAccessKey: settings.get('S3_SECRET') });
   this.S3 = new aws.S3();
 };
 
-AwsManager.prototype.getSignedUrl = function(operation, s3Params) {
+AwsManager.prototype.getSignedUrl = function (operation, s3Params) {
   s3Params = _.defaults(s3Params, {
     Bucket: settings.get('S3_BUCKET'),
     Key: 'filename_' + Date.now(),
@@ -18,12 +18,12 @@ AwsManager.prototype.getSignedUrl = function(operation, s3Params) {
   return this.S3.getSignedUrl(operation, s3Params);
 };
 
-AwsManager.prototype.getObject = function(filename) {
-  const s3Params = {Bucket: settings.get('S3_BUCKET'), Key: filename};
+AwsManager.prototype.getObject = function (filename) {
+  const s3Params = { Bucket: settings.get('S3_BUCKET'), Key: filename };
   return this.S3.getObject(s3Params).promise();
 };
 
-AwsManager.prototype.putObject = function(object, s3Params) {
+AwsManager.prototype.putObject = function (object, s3Params) {
 
   s3Params = _.defaults(s3Params, {
     Bucket: settings.get('S3_BUCKET'),

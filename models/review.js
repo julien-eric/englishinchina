@@ -3,20 +3,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const helpful = new Schema({
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  dateCreated: {type: Date, default: Date.now}
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  dateCreated: { type: Date, default: Date.now }
 });
 
 const Review = new Schema({
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   objectType: Number, /* School:0 */
-  foreignId: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
+  foreignId: { type: mongoose.Schema.Types.ObjectId, ref: 'School' },
   comment: String,
   anonymous: Boolean,
   position: Number, /* FT 1, TA 2, HT3 */
   dateEmployed: Date,
   dateReleased: Date,
-  dateCreated: {type: Date, default: Date.now},
+  dateCreated: { type: Date, default: Date.now },
   helpfuls: [helpful],
   criteria: {
     c1: Number,

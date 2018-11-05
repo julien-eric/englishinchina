@@ -10,7 +10,7 @@ const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   /** **********************************************************************************************************
    *searchCompany : Method for search companies , it will return any company that has some of the information
@@ -96,7 +96,7 @@ module.exports = function(passport) {
       let companyId = req.params.id;
       let company = await companies.findCompanyWithSchoolsAndReviews(companyId);
       company.splitDescription = await jadefunctions.splitDescription(company.description, 600);
-  
+
       let schoolList = await schools.findSchoolsByCompany(company);
       let provincesByCompany = await provincesController.getMostPopularProvincesbyCompany(companyId);
       schoolList = jadefunctions.trunkContentArray(schoolList, 'description', 300);

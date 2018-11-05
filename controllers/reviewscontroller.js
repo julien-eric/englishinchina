@@ -4,7 +4,7 @@
 const Review = require('../models/review');
 const moment = require('moment');
 
-const calculateAverage = function(review) {
+const calculateAverage = function (review) {
   return (Number(review.c1) +
     Number(review.c2) +
     Number(review.c3) +
@@ -15,7 +15,7 @@ const calculateAverage = function(review) {
     Number(review.c8)) / 8;
 };
 
-const convertCriteriaToOnFive = function(review) {
+const convertCriteriaToOnFive = function (review) {
   return {
     c1: review.cri_supportOnArrivalandVisa/2,
     c2: review.cri_managementAdministration/2,
@@ -25,10 +25,10 @@ const convertCriteriaToOnFive = function(review) {
     c6: review.cri_salaryVsCOLiving/2,
     c7: review.cri_respectForContract/2,
     c8: review.cri_dynamicTeachers/2
-  }
+  };
 };
 
-const checkUserForHelpful = function(reviews, userId) {
+const checkUserForHelpful = function (reviews, userId) {
   if (!reviews.length) {
     reviews = [reviews];
   }
@@ -47,7 +47,7 @@ const checkUserForHelpful = function(reviews, userId) {
 module.exports = {
 
 
-  insertReviewforSchool(req) {
+  insertReviewforSchool (req) {
 
     let user = null;
     if (req.user) {
@@ -71,9 +71,9 @@ module.exports = {
 
   },
 
-  async findReviews(schoolId, pageSize, page, populate, userId) {
+  async findReviews (schoolId, pageSize, page, populate, userId) {
 
-    let findReviewsQuery = Review.find({objectType: 0, foreignId: schoolId});
+    let findReviewsQuery = Review.find({ objectType: 0, foreignId: schoolId });
     if (pageSize && page) {
       findReviewsQuery.limit(pageSize).skip(pageSize * (page - 1));
     }
@@ -88,20 +88,20 @@ module.exports = {
 
   },
 
-  deleteReview(reviewId) {
-    return Review.find({_id: reviewId}).remove();
+  deleteReview (reviewId) {
+    return Review.find({ _id: reviewId }).remove();
   },
 
-  findNumberofReviews(schoolId) {
-    return Review.count({objectType: 0, foreignId: schoolId}).exec();
+  findNumberofReviews (schoolId) {
+    return Review.count({ objectType: 0, foreignId: schoolId }).exec();
   },
 
-  findReviewsByUser(userId) {
-    return Review.find({objectType: 0, user: userId}).populate('user').populate('school').exec();
+  findReviewsByUser (userId) {
+    return Review.find({ objectType: 0, user: userId }).populate('user').populate('school').exec();
   },
 
-  async findReviewById(reviewId, userId) {
-    let reviews = await Review.findOne({_id: reviewId}).populate('user').populate('foreignId').exec();
+  async findReviewById (reviewId, userId) {
+    let reviews = await Review.findOne({ _id: reviewId }).populate('user').populate('foreignId').exec();
     if (userId) {
       reviews = checkUserForHelpful(reviews, userId._id.id);
       return Promise.resolve(reviews[0]);
@@ -110,8 +110,8 @@ module.exports = {
     }
   },
 
-  selectSplashReview(reviews) {
-    let splashReview = {average_rating: -1};
+  selectSplashReview (reviews) {
+    let splashReview = { average_rating: -1 };
     reviews.forEach((review) => {
       if (review.average_rating > splashReview.average_rating && review.comment) {
         splashReview = review;
@@ -123,21 +123,21 @@ module.exports = {
     return splashReview;
   },
 
-  addHelpful(review, helpful) {
+  addHelpful (review, helpful) {
     return Review.findOneAndUpdate(
-      {_id: review._id},
-      {$push: {helpfuls: helpful}}
+      { _id: review._id },
+      { $push: { helpfuls: helpful } }
     ).exec();
   },
 
-  removeHelpful(review, helpful) {
+  removeHelpful (review, helpful) {
     return Review.findOneAndUpdate(
-      {_id: review._id},
-      {$pull: {helpfuls: {user: helpful.user._id}}}
+      { _id: review._id },
+      { $pull: { helpfuls: { user: helpful.user._id } } }
     ).exec();
   },
 
-  createReviewDistribution(reviews) {
+  createReviewDistribution (reviews) {
     const distribution = [0, 0, 0, 0, 0];
     for (const i in reviews) {
       const value = reviews[i].average_rating;

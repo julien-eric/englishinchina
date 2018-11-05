@@ -7,9 +7,9 @@ let SEARCH_WORD = 'stemming';
 let MAX_PAGES_TO_VISIT = 10;
 
 
-let JobCrawler = function() {};
+let JobCrawler = function () {};
 
-JobCrawler.prototype.init = function(pageToVisit) {
+JobCrawler.prototype.init = function (pageToVisit) {
 
   this.pagesToVisit = [];
   this.numPagesVisited = 0;
@@ -20,7 +20,7 @@ JobCrawler.prototype.init = function(pageToVisit) {
   this.crawl(pageToVisit);
 };
 
-JobCrawler.prototype.crawl = function(pageToVisit) {
+JobCrawler.prototype.crawl = function (pageToVisit) {
 
   if (this.numPagesVisited >= MAX_PAGES_TO_VISIT) {
     console.log('Reached max limit of number of pages to visit.');
@@ -39,7 +39,7 @@ JobCrawler.prototype.crawl = function(pageToVisit) {
   }
 };
 
-JobCrawler.prototype.visitPage = function(url, callback) {
+JobCrawler.prototype.visitPage = function (url, callback) {
   // Add page to our set
   this.pagesVisited[url] = true;
   this.numPagesVisited++;
@@ -68,12 +68,12 @@ JobCrawler.prototype.visitPage = function(url, callback) {
   });
 };
 
-JobCrawler.prototype.searchForWord = function($, word) {
+JobCrawler.prototype.searchForWord = function ($, word) {
   let bodyText = $('html > body').text().toLowerCase();
   return (bodyText.indexOf(word.toLowerCase()) !== -1);
 };
 
-JobCrawler.prototype.collectInternalLinks = function($) {
+JobCrawler.prototype.collectInternalLinks = function ($) {
   let that = this;
 
   // let relativeLinks = $('a[href^="/"]');
@@ -84,7 +84,7 @@ JobCrawler.prototype.collectInternalLinks = function($) {
 
   let absoluteLinks = $('a[href^="http://www.eslcafe.com/jobs/china/index.cgi?read="]');
   console.log('Found ' + absoluteLinks.length + ' absolute links on page');
-  absoluteLinks.each(function() {
+  absoluteLinks.each(function () {
     that.pagesToVisit.push($(this).attr('href'));
   });
 };

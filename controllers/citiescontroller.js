@@ -5,34 +5,34 @@ let _ = require('underscore');
 
 module.exports = {
 
-  async getAllCities() {
+  async getAllCities () {
     return City.find().populate('province', 'code').exec();
   },
 
-  async getProvinceCitiesByCode(provinceCode) {
+  async getProvinceCitiesByCode (provinceCode) {
     let province = await provincesController.getProvinceByCode(provinceCode);
     return City.find({ province }).sort({ pinyinName: 1 }).exec();
   },
 
-  async getProvinceCitiesById(provinceId) {
+  async getProvinceCitiesById (provinceId) {
     let province = await provincesController.getProvinceById(provinceId);
     return City.find({ province }).sort({ pinyinName: 1 }).exec();
   },
 
-  async getCityByCode(cityCode) {
+  async getCityByCode (cityCode) {
     return City.findOne({ code: cityCode }).populate('province', 'code').exec();
   },
 
-  async getCityByName(name) {
-    return City.findOne({ pinyinName: { $regex: new RegExp("^" + name.toLowerCase(), "i") } }).populate('province', 'code').exec();
+  async getCityByName (name) {
+    return City.findOne({ pinyinName: { $regex: new RegExp('^' + name.toLowerCase(), 'i') } }).populate('province', 'code').exec();
   },
 
-  async queryCityiesByPinyinName(name, limit) {
-    let cityResults = await City.find({ 'pinyinName': { "$regex": name, "$options": "i" } }).populate('province').exec();
-    return { total: cityResults.length, list: limit ? _.first(cityResults, limit) : cityResults }
+  async queryCityiesByPinyinName (name, limit) {
+    let cityResults = await City.find({ 'pinyinName': { '$regex': name, '$options': 'i' } }).populate('province').exec();
+    return { total: cityResults.length, list: limit ? _.first(cityResults, limit) : cityResults };
   },
 
-  async getCityPic(code) {
+  async getCityPic (code) {
     // At the moment picture is based on school with highest rating
     let cityId = await City.findOne({ code }).exec();
     let transactions = await School.aggregate([
@@ -50,7 +50,7 @@ module.exports = {
 
   },
 
-  async getMostPopularCities(callback) {
+  async getMostPopularCities (callback) {
 
     // At the moment featured schools are schools with the highest ratings
     let transactions = await School.aggregate([

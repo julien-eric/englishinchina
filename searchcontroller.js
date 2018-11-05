@@ -12,7 +12,7 @@ let SearchController = function () {
  * to be able to remove it from school terms.
  * @param  {String} searchString The string to be cross-checked in provinces and cities
  * @returns {Object} Location contains province or undefined and city or undefined, positiveTerms contains terms that were found that can be escaped in
- * the query search 
+ * the query search
  */
 SearchController.prototype.pluckLocationTerms = async function (searchString) {
     let searchTerms = utils.splitWords(searchString);

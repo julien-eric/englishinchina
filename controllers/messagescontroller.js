@@ -6,7 +6,7 @@ let MessageController = function () { };
 
 /**
  * @param  {Object|Number|String} id «Object|Number|String» value of _id to query by
- * @returns {Message} Returns object that will resolve to a Message, or undefined
+ * @return {Message} Returns object that will resolve to a Message, or undefined
  */
 MessageController.prototype.getMessageById = async (id) => {
   return Message.findById(id).exec();
@@ -16,7 +16,7 @@ MessageController.prototype.getMessageById = async (id) => {
  * @param  {User} user1 The user sending the message
  * @param  {User} user2 The user receiving the message
  * @param  {String} content The content of the message
- * @returns {Message} Returns newly created message
+ * @return {Message} Returns newly created message
  */
 MessageController.prototype.createMessage = async (user1, user2, content) => {
   let conversation = await conversationsController.getConversationByUsers(user1, user2);
@@ -37,13 +37,12 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
 /**
  * @param  {User} user1 User to get conversation ID with.
  * @param  {User} user2 User to get conversation ID with.
- * @returns {[Message]} Returns all messages from the conversation of these two users
+ * @return {[Message]} Returns all messages from the conversation of these two users
  */
 MessageController.prototype.getConversationMessages = async (user1, user2) => {
   let conversation = await conversationsController.getConversationByUsers(user1, user2);
   return Message.find({ conversation }).exec();
 };
-
 
 
 let messageController = new MessageController();

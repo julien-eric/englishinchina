@@ -22,7 +22,7 @@ const app = express();
  * @param {*} path Path
  * @return {*} Return function
  */
-function compile(str, path) {
+function compile (str, path) {
   return stylus(str)
     .set('filename', path);
 }
@@ -89,8 +89,8 @@ const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
 
 app.use(expressSession({
-  store: new MongoStore({mongooseConnection: mongoose.connection}),
-  cookie: {expires: new Date(Date.now() + (30 * 86400 * 1000))},
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000)) },
   secret: 'mySecretKey',
   resave: true,
   saveUninitialized: true
