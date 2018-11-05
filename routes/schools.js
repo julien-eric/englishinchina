@@ -364,7 +364,7 @@ module.exports = function (passport) {
       let city = utils.validateParam(req.query.city);
       const limit = parseInt(req.query.limit) || undefined;
 
-      let locationInfo = await searchController.pluckLocationTerms(queryInfo)
+      let locationInfo = await searchController.pluckLocationTerms(queryInfo);
 
       if (city == MISSING && locationInfo.location.city) {
         city = locationInfo.location.city;

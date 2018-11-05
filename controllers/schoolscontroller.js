@@ -9,7 +9,7 @@ const companiesController = require('./companiescontroller');
 const reviewsController = require('./reviewscontroller');
 const imagesController = require('./imagescontroller');
 const MISSING = -1;
-const SHORT_LIST = [{ $project: { name: 1, province: 1, city: 1 } }]
+const SHORT_LIST = [{ $project: { name: 1, province: 1, city: 1 } }];
 
 let SchoolsController = function () { };
 
@@ -230,9 +230,10 @@ SchoolsController.prototype.findSchoolsByCompanySortbyRating = function (company
  * @param  {String} queryInfo String to look for in the school's name
  * @param  {String} provinceInfo Look for the school in this province
  * @param  {String} cityInfo Look for the school in this city
- * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
  * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
  * @param  {Number} limit The number of records to keep from the list
+ * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
+ * @return {Object} An object containing a list of the schools return, the search information and the query
  */
 SchoolsController.prototype.searchSchools = async function (queryInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
 
@@ -301,7 +302,7 @@ SchoolsController.prototype.searchSchools = async function (queryInfo, provinceI
     console.log(error);
   }
   let searchQuery = this.getQueryMessage(searchInfo);
-  //Frontend Typeahead wrapper .limit() has bug (if result.number == limit), so this way we get both .count and limit in one query
+  // Frontend Typeahead wrapper .limit() has bug (if result.number == limit), so this way we get both .count and limit in one query
   return { list: schoolList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, queryInfo: queryInfo } };
 };
 

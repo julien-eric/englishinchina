@@ -9,13 +9,13 @@ let facebookStrategyParams = {
 };
 // profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender']
 
-let processFacebookReturn = function(accessToken, refreshToken, profile, done) {
+let processFacebookReturn = function (accessToken, refreshToken, profile, done) {
 
   // Asynchronous
   Promise.resolve().then(() => {
 
     // find the user in the database based on their facebook id
-    return User.findOne({'fb.id': profile.id});
+    return User.findOne({ 'fb.id': profile.id });
 
   }).then((user) => {
 
@@ -52,6 +52,6 @@ let processFacebookReturn = function(accessToken, refreshToken, profile, done) {
 
 };
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use('facebook', new FacebookStrategy(facebookStrategyParams, processFacebookReturn));
 };

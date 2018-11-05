@@ -8,22 +8,22 @@ let signupParams = {
   passReqToCallback: true
 };
 
-let createHash = function(password) {
+let createHash = function (password) {
   return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 };
 
-let processSignupReturn = function(req, username, password, done) {
+let processSignupReturn = function (req, username, password, done) {
   const res = req.res;
 
   // Find a user in Mongo with provided username
-  User.findOne({email: req.param('email')}).then((user) => {
+  User.findOne({ email: req.param('email') }).then((user) => {
 
     let anonymous = req.param('anonymous') ? true : false;
 
     // Already exists
     if (user) {
       res.flash('error', 'User already exists with email: ' + req.param('email'));
-      res.app.locals.responseInfo = {email: req.param('email'), username: username, anonymous: anonymous, password};
+      res.app.locals.responseInfo = { email: req.param('email'), username: username, anonymous: anonymous, password };
       return done(null, false);
     }
 
@@ -58,6 +58,6 @@ let processSignupReturn = function(req, username, password, done) {
 
 };
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use('signup', new LocalStrategy(signupParams, processSignupReturn));
 };

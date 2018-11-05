@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model('School', {
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   name: String,
   description: String,
   website: String,
   address: String,
   phone: String,
-  province: {type: mongoose.Schema.Types.ObjectId, ref: 'Province'},
-  city: {type: mongoose.Schema.Types.ObjectId, ref: 'City'},
-  company: {type: mongoose.Schema.Types.ObjectId, ref: 'Company'},
+  province: { type: mongoose.Schema.Types.ObjectId, ref: 'Province' },
+  city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
+  company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
   schoolType: Number,
   pictureUrl: String,
   criteria: {
@@ -24,5 +24,5 @@ module.exports = mongoose.model('School', {
   },
   averageRating: Number,
   validated: Boolean,
-  photos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}]
+  photos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }]
 });

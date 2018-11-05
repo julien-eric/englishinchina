@@ -6,7 +6,7 @@ const pictureinfo = require('../pictureinfo');
 const articlesController = require('../controllers/articlescontroller');
 const scripts = require('../public/scripts');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   router.route('/article/add')
     .get((req, res) => {

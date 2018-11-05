@@ -231,7 +231,7 @@ module.exports = function (passport) {
   });
 
   router.post('/message/:id', async (req, res) => {
-    
+
     let job = await jobsController.getJob(req.params.id);
     let messageToSend = await utils.validateParam(req.body.message);
     let message = await messagesController.createMessage(req.user, job.user, messageToSend);

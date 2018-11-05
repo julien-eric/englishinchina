@@ -26,15 +26,15 @@ let jobTemplate = {
   endDate: 'December 22nd 2017'
 };
 
-describe('Jobs', function() {
+describe('Jobs', function () {
 
-  describe('Adding', function() {
+  describe('Adding', function () {
 
-    afterEach(function() {
+    afterEach(function () {
       sampleJob = {};
     });
 
-    it('should add correctly when all values are present', async function() {
+    it('should add correctly when all values are present', async function () {
 
       let sampleUser = (await users.getAllUsers())[0];
 
@@ -49,7 +49,7 @@ describe('Jobs', function() {
     });
 
 
-    it('should add correctly when all values are present but the school', async function() {
+    it('should add correctly when all values are present but the school', async function () {
 
       let sampleUser = (await users.getAllUsers())[0];
 
@@ -74,7 +74,7 @@ describe('Jobs', function() {
     });
 
 
-    it('should add province and city', async function() {
+    it('should add province and city', async function () {
 
       let sampleUser = (await users.getAllUsers())[0];
 
@@ -89,7 +89,7 @@ describe('Jobs', function() {
       expect(addedJob.province._bsontype).to.be.equal('ObjectID');
     });
 
-    it('should add correctly when the endDate is not specified', async function() {
+    it('should add correctly when the endDate is not specified', async function () {
 
       let sampleUser = (await users.getAllUsers())[0];
 

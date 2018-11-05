@@ -6,7 +6,7 @@ const _ = require('underscore');
 
 module.exports = {
 
-  trunkContentArray(array, attribute, length) {
+  trunkContentArray (array, attribute, length) {
     array.forEach((element) => {
       if (element[attribute].length != 0) {
         if (length < element[attribute].length) {
@@ -20,7 +20,7 @@ module.exports = {
     return array;
   },
 
-  returnNameforSchoolType(code) {
+  returnNameforSchoolType (code) {
     switch (code) {
       case 0:
         return 'Training School';
@@ -31,7 +31,7 @@ module.exports = {
     }
   },
 
-  splitDescription(description, length) {
+  splitDescription (description, length) {
 
     return new Promise(function (resolve, reject) {
 
@@ -80,7 +80,7 @@ module.exports = {
    * @param {*} attribute The numerial property
    * @return {number}
    */
-  returnAverage(array, attribute) {
+  returnAverage (array, attribute) {
     let sum = 0;
     let length = 0;
     array.forEach((element) => {
@@ -97,18 +97,19 @@ module.exports = {
    * @param {*} rating to be rounded
    * @return {number}
    */
-  roundToPoint5(rating) {
+  roundToPoint5 (rating) {
     let number = (Math.round(rating * 2)) / 2;
     return number.toFixed(1);
   },
 
   /**
    *roundToPoint5 : Round to specified number of decimal places for any number.
-   * @param {*} number to be rounded
+   * @param {*} value number to be rounded
+   * @param {Number} precision Number of decimals to use
    * @return {number}
    */
-  roundToDecimalPlace(value, precision) {
-    var multiplier = Math.pow(10, precision || 0);
+  roundToDecimalPlace (value, precision) {
+    let multiplier = Math.pow(10, precision || 0);
     return (Math.round(value * multiplier) / multiplier).toFixed(precision || 0);
   },
 
@@ -117,7 +118,7 @@ module.exports = {
    * @param {*} unscaled Number to scale
    * @return {number} Scaled number
    */
-  scale1to4(unscaled) {
+  scale1to4 (unscaled) {
     let number = ((unscaled / 5) * 4) + 1;
     return number.toFixed(1);
   },
@@ -126,7 +127,7 @@ module.exports = {
    * @param {*} str String to be capitalized
    * @return {String} Capitalized string
    */
-  capitalize(str) {
+  capitalize (str) {
     let strVal = '';
     str = str.split(' ');
     for (let chr = 0; chr < str.length; chr++) {
@@ -135,14 +136,14 @@ module.exports = {
     return strVal;
   },
 
-  nl2br(str, isXhtml) {
+  nl2br (str, isXhtml) {
     // Adjust comment to avoid issue on phpjs.org display
     const breakTag = (isXhtml || typeof isXhtml === 'undefined') ? '<br ' + '/>' : '<br>';
     // str = str.replace("\r\n", "\n").replace("\r", "\n")
     return (`${str}`).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, `$1${breakTag}$2`);
   },
 
-  returnImageForUser(user) {
+  returnImageForUser (user) {
     if (user) {
       if (user.fb && user.useFacebookPic) {
         return pictureInfo.returnFacebookPicture(user.avatarUrl);
@@ -156,7 +157,7 @@ module.exports = {
     }
   },
 
-  ratingColor(rating, bgOrText) {
+  ratingColor (rating, bgOrText) {
     let colorClass = '';
 
     if (rating > 3.9) {

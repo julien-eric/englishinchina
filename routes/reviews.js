@@ -83,9 +83,9 @@ module.exports = function (passport) {
       let school = await schools.findSchoolById(req.body.schoolId);
       let schoolUrl = '/school/' + school._id;
       let token = tokensController.recuperateToken(req.body.submissionTokenVal);
-      
+
       if (token.state == tokensController.ALIVE) {
-        
+
         token.processing();
         token.setUrl(schoolUrl);
         await reviews.insertReviewforSchool(req);

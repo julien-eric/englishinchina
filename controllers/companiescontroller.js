@@ -4,46 +4,46 @@ const mongoose = require('mongoose');
 const _ = require('underscore');
 const ObjectId = mongoose.Types.ObjectId;
 
-let unpluck = function(array) {
-  return _.filter(array, function(element) {
+let unpluck = function (array) {
+  return _.filter(array, function (element) {
     return Object.getOwnPropertyNames(element).length != 0;
   });
 };
 
 module.exports = {
 
-  getAllCompanies() {
+  getAllCompanies () {
     return Company.find().exec();
   },
 
-  findCompanyById(id) {
-    return Company.findOne({_id: id}).populate('photos').exec();
+  findCompanyById (id) {
+    return Company.findOne({ _id: id }).populate('photos').exec();
   },
 
-  async findCompanyWithSchoolsAndReviews(id) {
+  async findCompanyWithSchoolsAndReviews (id) {
 
     let companies = await Company.aggregate([
-      {$match: {_id: ObjectId(id)}},
-      {$lookup: {from: 'schools', localField: '_id', foreignField: 'company', as: 'schools'}},
-      {$unwind: {path: '$schools', preserveNullAndEmptyArrays: true}},
-      {$lookup: {from: 'images', localField: 'schools.photos', foreignField: '_id', as: 'photos'}},
-      {$unwind: {path: '$photos'}},
-      {$lookup: {from: 'reviews', localField: 'schools._id', foreignField: 'foreignId', as: 'reviews'}},
-      {$unwind: {path: '$reviews', preserveNullAndEmptyArrays: true}},
-      {$lookup: {from: 'users', localField: 'reviews.user', foreignField: '_id', as: 'reviews.user'}},
-      {$unwind: {path: '$reviews.user', preserveNullAndEmptyArrays: true}},
+      { $match: { _id: ObjectId(id) } },
+      { $lookup: { from: 'schools', localField: '_id', foreignField: 'company', as: 'schools' } },
+      { $unwind: { path: '$schools', preserveNullAndEmptyArrays: true } },
+      { $lookup: { from: 'images', localField: 'schools.photos', foreignField: '_id', as: 'photos' } },
+      { $unwind: { path: '$photos' } },
+      { $lookup: { from: 'reviews', localField: 'schools._id', foreignField: 'foreignId', as: 'reviews' } },
+      { $unwind: { path: '$reviews', preserveNullAndEmptyArrays: true } },
+      { $lookup: { from: 'users', localField: 'reviews.user', foreignField: '_id', as: 'reviews.user' } },
+      { $unwind: { path: '$reviews.user', preserveNullAndEmptyArrays: true } },
       {
         $group: {
           _id: '$_id',
-          name: {$first: '$name'},
-          description: {$first: '$description'},
-          website: {$first: '$website'},
-          pictureUrl: {$first: '$pictureUrl'},
-          logoUrl: {$first: '$logoUrl'},
-          photos: {$first: '$photos'},
-          schools: {$addToSet: '$schools'},
-          reviews: {$addToSet: '$reviews'},
-          photos: {$addToSet: '$photos'}
+          name: { $first: '$name' },
+          description: { $first: '$description' },
+          website: { $first: '$website' },
+          pictureUrl: { $first: '$pictureUrl' },
+          logoUrl: { $first: '$logoUrl' },
+          photos: { $first: '$photos' },
+          schools: { $addToSet: '$schools' },
+          reviews: { $addToSet: '$reviews' },
+          photos: { $addToSet: '$photos' }
         }
       }
     ]).exec();
@@ -54,7 +54,7 @@ module.exports = {
     return company;
   },
 
-  findCompaniesWithSchoolsAndReviews(id) {
+  findCompaniesWithSchoolsAndReviews (id) {
     return Company.aggregate([
       {
         $lookup:
@@ -89,28 +89,28 @@ module.exports = {
       {
         $group: {
           _id: '$_id',
-          name: {$first: '$name'},
-          description: {$first: '$description'},
-          website: {$first: '$website'},
-          pictureUrl: {$first: '$pictureUrl'},
-          logoUrl: {$first: '$logoUrl'},
-          photos: {$first: '$photos'},
-          schools: {$addToSet: '$schools'},
-          reviews: {$addToSet: '$reviews'}
+          name: { $first: '$name' },
+          description: { $first: '$description' },
+          website: { $first: '$website' },
+          pictureUrl: { $first: '$pictureUrl' },
+          logoUrl: { $first: '$logoUrl' },
+          photos: { $first: '$photos' },
+          schools: { $addToSet: '$schools' },
+          reviews: { $addToSet: '$reviews' }
         }
       }
     ]).exec();
   },
 
-  editCompany(company) {
-    return Company.findOneAndUpdate({_id: company.id}, company).exec();
+  editCompany (company) {
+    return Company.findOneAndUpdate({ _id: company.id }, company).exec();
   },
 
-  async searchCompanies(companyInfo) {
+  async searchCompanies (companyInfo) {
 
     let transactions = Company.aggregate([
-      {$match: {name: new RegExp(companyInfo, 'i')}},
-      {$sort: {number: -1}},
+      { $match: { name: new RegExp(companyInfo, 'i') } },
+      { $sort: { number: -1 } },
       {
         $lookup:
         {
@@ -123,10 +123,10 @@ module.exports = {
     ]);
 
     let companies = await transactions.exec();
-    return {list: companies, query: companyInfo, searchInfo: {companyInfo: companyInfo}};
+    return { list: companies, query: companyInfo, searchInfo: { companyInfo: companyInfo } };
   },
 
-  findCompaniesWithSchools() {
+  findCompaniesWithSchools () {
     return Company.aggregate([
       {
         $lookup:
@@ -140,7 +140,7 @@ module.exports = {
     ]).exec();
   },
 
-  async addCompany(company) {
+  async addCompany (company) {
 
     try { // First create company then add images
 
@@ -173,13 +173,12 @@ module.exports = {
       const newCompany = createdCompany.toObject();
       newCompany.photos.push(logoImage);
       newCompany.photos.push(coverImage);
-      return Company.findOneAndUpdate({_id: newCompany._id}, newCompany);
+      return Company.findOneAndUpdate({ _id: newCompany._id }, newCompany);
 
     } catch (error) {
       return error;
     }
   }
 };
-
 
 

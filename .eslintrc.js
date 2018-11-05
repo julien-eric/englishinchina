@@ -9,6 +9,9 @@ module.exports = {
         "padded-blocks": OFF,
         "linebreak-style": ["error", "windows"],
         "comma-dangle": ["error", "never"],
+        "space-before-function-paren": ["error", "always"],
+        "object-curly-spacing": ["error", "always"],
+        "newIsCap": { "capIsNewExceptions": ["ObjectId"] }
     },
     "parserOptions": {
         "ecmaVersion": 2017

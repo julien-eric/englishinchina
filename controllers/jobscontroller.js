@@ -31,7 +31,7 @@ JobsController.prototype.getAllJobs = async () => {
 };
 
 JobsController.prototype.getFeaturedJobs = async () => {
-  let jobs = await Job.find().sort({dateCreated: 'descending'}).limit(3).populate('school').populate('province').populate('city').exec();
+  let jobs = await Job.find().sort({ dateCreated: 'descending' }).limit(3).populate('school').populate('province').populate('city').exec();
   jobs.forEach((job) => {
     findPicture(job);
   });
@@ -75,12 +75,13 @@ JobsController.prototype.addJob = async (user, job) => {
 };
 
 /**
- * @param  {String} queryInfo String to look for in the school's name
+ * @param  {String} jobInfo String to look for in the school's name
  * @param  {String} provinceInfo Look for the school in this province
  * @param  {String} cityInfo Look for the school in this city
- * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
  * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
  * @param  {Number} limit The number of records to keep from the list
+ * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
+ * @return {Object} an object containing a list of jobs, the query as well as the query information for this search
  */
 JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
 
@@ -131,9 +132,9 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
   return { list: jobList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, jobInfo: jobInfo } };
 };
 
-JobsController.prototype.getQueryMessage = function(queryInfo) {
+JobsController.prototype.getQueryMessage = function (queryInfo) {
   let queryMessage = '';
-  let exists = function(value) {
+  let exists = function (value) {
     if (value == MISSING || value == undefined || value == '') {
       return false;
     } else {}

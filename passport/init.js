@@ -4,7 +4,7 @@ const facebook = require('./facebook');
 // var twitter = require('./twitter');
 const User = require('../models/user');
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
   // Passport needs to be able to serialize and deserialize users to support persistent login sessions
   passport.serializeUser((user, done) => {
