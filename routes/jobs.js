@@ -7,9 +7,7 @@ const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const schoolsController = require('../controllers/schoolscontroller');
 const jobsController = require('../controllers/jobscontroller');
-const conversationsController = require('../controllers/conversationscontroller');
 const messagesController = require('../controllers/messagescontroller');
-const usersController = require('../controllers/usersController');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
@@ -207,7 +205,7 @@ module.exports = function (passport) {
     }
   });
 
-  router.get('/apply/:id', async (req, res) => {
+  router.get('/apply/:id', utils.isAuthenticated, async (req, res) => {
     res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=/job/message/' + req.params.id);
   });
 

@@ -14,8 +14,11 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     }
+
+    res.flash('info', 'Please login to use this feature.');
+
     // if the user is not authenticated then redirect him to the login page
-    res.redirect('/login');
+    res.redirect('/login?redirectUrl=' + req.originalUrl);
   },
 
   /**

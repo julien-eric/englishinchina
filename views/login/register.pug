@@ -1,33 +1,57 @@
 extends form-container
 block card
-    .border.border-pale-gray.border-radius-5.text-dark.my-5
         .my-5.text-left.px-3.px-md-5.py-1
                 .text-center
-                    h3.mt-1.mb-5.text-light.font-weight-bold Sign up 
-                if message.length > 0
-                        p.rounded.bg-light.text-danger.py-1.mb-5 #{message}            
-                form(class='form-signin', action='/signup', autocomplete="off", method='POST')
+                        h3.mt-1.mb-5.text-light.font-weight-bold Sign up     
+                           
+                form(class='form-signup', action='/signup', autocomplete="off", method='POST')
                         .md-form
-                                //- i.fa.prefix.mdi.mdi-account(aria-hidden='true')
-                                input.form-control(type='text', name='username', placeholder='Username',required, autocomplete="off", autofocus)
-                                label(for='username') Username
-                        .form-check.pl-0
-                                input#anonymous.form-check-input(type='checkbox' value="true" name="anonymous")
-                                label.form-check-label(for='anonymous') Make me anonymous across SLWorld
-                                p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.
+                                -var textInput = {}
+                                -textInput.id = 'username'
+                                -textInput.name = 'username'
+                                -textInput.placeholder = 'Username'
+                                -textInput.label = 'Username'
+                                -textInput.required = true;
+                                if responseInfo && responseInfo.username
+                                        -textInput.value = responseInfo.username
+                                include ../input-templates/text-input
+                        .form-check.pl-0                             
+                                -var formCheck = {}
+                                -formCheck.id = 'anonymous'
+                                -formCheck.name = 'anonymous'
+                                -formCheck.label = 'Make me anonymous across SLWorld'
+                                -formCheck.required = true;
+                                -formCheck.underText = 'This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.';
+                                if responseInfo && responseInfo.anonymous
+                                        -formCheck.value = responseInfo.anonymous
+                                include ../input-templates/form-check
                         .md-form.my-5
-                                //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
-                                input.form-control(type='email', name='email', placeholder='Email',required, autofocus)
-                                label(for='email') Email
+                                -var textInput = {}
+                                -textInput.id = 'email'
+                                -textInput.type = 'email'
+                                -textInput.name = 'email'
+                                -textInput.placeholder = 'Email'
+                                -textInput.label = 'Email'
+                                -textInput.required = true;
+                                if responseInfo && responseInfo.email
+                                        -textInput.value = responseInfo.email
+                                include ../input-templates/text-input
                         .md-form.mb-5
-                                //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
-                                input.form-control(type='password', name='password', placeholder='Password', required)
-                                label.control-label(for='password') Password
+                                -var textInput = {}
+                                -textInput.id = 'password'
+                                -textInput.type = 'password'
+                                -textInput.name = 'password'
+                                -textInput.placeholder = 'Password'
+                                -textInput.label = 'Password'
+                                -textInput.required = true;
+                                if responseInfo && responseInfo.password
+                                        -textInput.value = responseInfo.password
+                                include ../input-templates/text-input
                         .text-center
                                 button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Register
                         p.text-left.text-small
                                 |Already have an account?&nbsp;
                                 a(href="/login") Login
-        .border-0.bg-light.text-dark.py-3
+        .border-0.bg-light-secondary.text-dark.py-3
                 include social-login
             

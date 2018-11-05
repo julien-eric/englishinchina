@@ -1,28 +1,37 @@
 
 nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
-    .container
+    .container.font-weight-bold
         a.pb-0.text-uppercase.navbar-brand(href='/')
-            img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
-            .image-brand(alt='Second Language World')
+            //- img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
+            .image-brand.mr-3(alt='Second Language World')
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
             span.hamb-menu
                 i.mdi.mdi-menu(aria-hidden='true')
         #navbarNavDropdown.collapse.navbar-collapse.justify-content-right.mt-3.mt-lg-0
             ul.navbar-nav
-                li.nav-item.active
-                    a.nav-link(href='/')
-                        i.fa.prefix.mdi.mdi-home(aria-hidden='true')
-                        | Home 
-                        span.sr-only (current)
+                //- li.nav-item.active
+                //-     a.nav-link(href='/')
+                //-         i.fa.prefix.mdi.mdi-home(aria-hidden='true')
+                //-         | Home 
+                //-         span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='/job') 
+                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                        | Job Board
+                li.nav-item
+                    a.nav-link(href='/review') 
+                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                        //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
+                        | Review
                 li.nav-item
                     a.nav-link(href='/about') 
                         i.fa.prefix.mdi.mdi-question(aria-hidden="true")
-                        | About us
+                        | About
                 li.nav-item
-                    a.nav-link(href='/contact') 
+                    a.nav-link(href='/article') 
                         i.fa.prefix.mdi.mdi-question(aria-hidden="true")
                         //- i.fa.prefix.mdi.mdi-email(aria-hidden='true')
-                        | Contact
+                        | Blog
                 //- li.nav-item.dropdown
                 //-     a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                 //-         | Services
@@ -31,8 +40,8 @@ nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.coll
                 //-         a.dropdown-item(href='/school/search') Schools
                 //-         a.dropdown-item(href='/company/search') Companies 
             ul.navbar-nav.ml-auto.align-items-lg-center
-                li.nav-item
-                    a.my-0.btn.btn-sm.btn-mdb-color.no-drop-shadow.nav-link(href='/review') Write A Review  
-                li.nav-item
-                    a.my-0.btn.btn-sm.btn-warning.no-drop-shadow.nav-link(href='/job') Find A Job  
+                //- li.nav-item
+                //-     a.my-0.btn.btn-sm.btn-cool-purple.no-drop-shadow.nav-link(href='/review') Write A Review  
+                //- li.nav-item
+                //-     a.my-0.btn.btn-sm.btn-cool-purple.no-drop-shadow.nav-link(href='/job') Find A Job  
                 include ../gen-nav-login

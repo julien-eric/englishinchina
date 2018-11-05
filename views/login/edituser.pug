@@ -1,81 +1,93 @@
 extends form-container
 block card
-        .border.border-pale-gray.border-radius-5.text-dark.my-5
-                .my-5.text-left.px-3.px-md-5.py-1
-                        .text-center
-                                h3.mt-1.mb-5.text-light.font-weight-bold Edit
-                        form(class='form-signin', action='/user/edit', method='POST')
-                            .form-group
-                                input#id(type="hidden", name="id", value=user.id)
-                            .md-form
-                                input.form-control(type='text', name='username', placeholder='Username', value=user.username, required, autocomplete="off", autofocus)
-                                label(for='username') Username
-                            .form-check.pl-0.mb-5
-                                -var isChecked = user.anonymous;
-                                input#anonymous.form-check-input(checked=isChecked  type='checkbox' value='true' name="anonymous")
-                                label.form-check-label(for='anonymous') Make me anonymous on across SLWorld
-                                p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.
-                            .md-form.mb-5
-                                //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
-                                input.form-control(type='password', name='password', value='********', placeholder='Password', disabled, required)
-                                label.control-label(for='password') Password
-                                p.text-small.mt-1 
-                                    a(href="/forgot") Request password change
-                            
-                            .row.my-3
-                                .col-lg-6
-                                    .md-form
-                                        input.form-control(type='text', name='firstName', placeholder='First Name', value=user.firstName, autocomplete="off")
-                                        label(for='firstName') First Name
-                                .col-lg-6
-                                    .md-form
-                                        input.form-control(type='text', name='lastName', placeholder='Last Name', value=user.lastName, autocomplete="off")
-                                        label(for='lastName') Last Name
-
-                            .row
-                                .col-lg-6.form-group
-                                    -var select = {}
-                                    -select.options = countries 
-                                    -select.label = 'Country you live in'
-                                    -select.placeholder = 'Please select'
-                                    -select.name = 'livingCountry'
-                                    -select.id = 'livingCountrySelect'
-                                    -select.formName = 'teacher-details'
-                                    -select.errorMessage = 'Please select your country of citizenship'
-                                    -select.crossRefAttributeValue = 'code'
-                                    -select.crossRefAttributeName = 'name'
-                                    if user && user.livingCountry
-                                        - select.crossRefValue = user.livingCountry.code
-                                    include ../input-templates/generic-select 
+            .my-5.text-left.px-3.px-md-5.py-1
+                    .text-center
+                            h3.mt-1.mb-5.text-light.font-weight-bold Edit
+                    form(class='form-signin', action='/user/edit', method='POST')
+                        .form-group
+                            input#id(type="hidden", name="id", value=user.id)
+                        .md-form
+                            input.form-control(type='text', name='username', placeholder='Username', value=user.username, required, autocomplete="off", autofocus)
+                            label(for='username') Username
+                        .form-check.pl-0.mb-5
+                            -var isChecked = user.anonymous;
+                            input#anonymous.form-check-input(checked=isChecked  type='checkbox' value='true' name="anonymous")
+                            label.form-check-label(for='anonymous') Make me anonymous on across SLWorld
+                            p.text-small.mt-1 This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.
+                        .md-form.mb-5
+                            //- i.fa.prefix.mdi.mdi-lock(aria-hidden='true')
+                            input.form-control(type='password', name='password', value='********', placeholder='Password', disabled, required)
+                            label.control-label(for='password') Password
+                            p.text-small.mt-1 
+                                a(href="/forgot") Request password change
                         
-                                .col-lg-6.form-group
-                                    -var select = {}
-                                    -select.options = countries 
-                                    -select.label = 'Citizenship'
-                                    -select.placeholder = 'Please select'
-                                    -select.name = 'citizenship'
-                                    -select.id = 'citizenshipSelect'
-                                    -select.formName = 'teacher-details'
-                                    -select.errorMessage = 'Please select your country of citizenship'
-                                    -select.crossRefAttributeValue = 'code'
-                                    -select.crossRefAttributeName = 'name'
-                                    if user && user.citizenship
-                                        - select.crossRefValue = user.citizenship.code
-                                    include ../input-templates/generic-select 
+                         
 
-                            
-                            .row
-                                .col-lg-6
-                                    -var datepicker = {}
-                                    -datepicker.id = 'date-of-birth'
-                                    -datepicker.name = 'dateOfBirth'
-                                    -datepicker.formName = 'teacher-details'
-                                    -datepicker.placeholder = 'Please Select'
-                                    -datepicker.label = 'Date of Birth'
-                                    -datepicker.errorMessage = 'Please select a date'
-                                    if user.dateOfBirth
-                                        -datepicker.value = user.dateOfBirth
-                                    include ../input-templates/date-field
+                        .row.my-3
+                            .col-lg-12
+                                h3.mb-5.text-dark.font-weight-bold Personal Information
+                            .col-lg-6
+                                .md-form
+                                    input.form-control(type='text', name='firstName', placeholder='First Name', value=user.firstName, autocomplete="off")
+                                    label(for='firstName') First Name
+                            .col-lg-6
+                                .md-form
+                                    input.form-control(type='text', name='lastName', placeholder='Last Name', value=user.lastName, autocomplete="off")
+                                    label(for='lastName') Last Name
 
-                            .text-center.mt-5
-                                button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Save Changes
+                        .row
+                            .col-lg-6.form-group
+                                -var select = {}
+                                -select.options = countries 
+                                -select.label = 'Country you live in'
+                                -select.placeholder = 'Please select'
+                                -select.name = 'livingCountry'
+                                -select.id = 'livingCountrySelect'
+                                -select.errorMessage = 'Please select your country of citizenship'
+                                -select.crossRefAttributeValue = 'code'
+                                -select.crossRefAttributeName = 'name'
+                                if user && user.livingCountry
+                                    - select.crossRefValue = user.livingCountry.code
+                                include ../input-templates/generic-select 
+                    
+                            .col-lg-6.form-group
+                                -var select = {}
+                                -select.options = countries 
+                                -select.label = 'Citizenship'
+                                -select.placeholder = 'Please select'
+                                -select.name = 'citizenship'
+                                -select.id = 'citizenshipSelect'
+                                -select.errorMessage = 'Please select your country of citizenship'
+                                -select.crossRefAttributeValue = 'code'
+                                -select.crossRefAttributeName = 'name'
+                                if user && user.citizenship
+                                    - select.crossRefValue = user.citizenship.code
+                                include ../input-templates/generic-select 
+
+                        
+                        .row
+                            .col-lg-6
+                                -var datepicker = {}
+                                -datepicker.id = 'date-of-birth'
+                                -datepicker.name = 'dateOfBirth'
+                                -datepicker.placeholder = 'Please Select'
+                                -datepicker.label = 'Date of Birth'
+                                -datepicker.errorMessage = 'Please select a date'
+                                if user.dateOfBirth
+                                    -datepicker.value = user.dateOfBirth
+                                include ../input-templates/date-field
+
+                        .text-center.mt-5
+                            button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Save Changes
+
+            .footer.border-0.bg-light.text-dark.py-3.my-5.px-3.px-md-5.py-1
+                .row.text-center
+                    .col-sm-12.border-radius-5.text-dark.pb-5.px-3.px-md-5
+                        .col-lg-12
+                            h3.my-5.text-dark.font-weight-bold Teacher Information
+                        .col-lg-12
+                            if user.teachingDetails
+                                a.btn.btn-md.btn-block.btn-lg.btn-link.px-5.px-5.mb-1(href='/user/teacher-details/' + user.id) View my teacher profile
+                            else
+                                a.btn.btn-md.btn-block.btn-lg.btn-link.px-5.px-5.mb-1(href='/user/teacher-details/' + user.id) Create my teacher profile
+

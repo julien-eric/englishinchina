@@ -1,6 +1,15 @@
 .container
-      nav#search-navigation.navbar-expand-sm.bg-dark-transparent.border-radius-5
-            form#search-all.col-md-12.pt-lg-0(role='search', action='/search', method='GET')
-                  .row
-                        -var magnify = false;
-                        include ./search-all
+      .row.justify-content-center
+      
+            nav.col-md-12.col-lg-10#search-navigation.navbar-expand-lg.bg-dark-transparent.border-radius-5
+                  form#search-all.pt-lg-0(role='search', action='/search', method='GET')
+                        .row
+                              -var magnify = false;
+                              include ./search-all
+      .row.justify-content-center
+            a(href='#').btn.btn-link Popular Destinations:
+            a(href='/search/').btn.btn-link Beijing
+            a(href='#').btn.btn-link Shandong
+            a(href='#').btn.btn-link Guangdong
+            a(href='#').btn.btn-link Henan
+            //- p.col-md-12.col-lg-8.text-left Popular Destinations: 
