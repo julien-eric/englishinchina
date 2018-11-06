@@ -124,6 +124,7 @@ module.exports = function (passport) {
         cities,
         pictureInfo: pictureinfo,
         bannerPicture,
+        moment,
         jadefunctions,
         scripts: [scripts.util, scripts.typeahead, scripts.searchPage, scripts.typeaheadwrapper]
       });

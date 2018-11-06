@@ -79,6 +79,10 @@ body {
   background-color: #f1f1f1;
 }
 
+.card {
+  overflow: hidden;
+}
+
 .bg-inherit {
   background-color: inherit;
 }
@@ -259,6 +263,16 @@ footer .form-control:focus {
 
 .collapsed.transparent .image-brand {
   background-image: url('/images/logonameWhite.svg');
+}
+
+#company-list-collapse.collapse.show {
+  display: flex !important;
+}
+
+.collapsible .chevron {
+  -ms-transform: rotate(20deg); /* IE 9 */
+  -webkit-transform: rotate(20deg); /* Safari */
+  transform: rotate(20deg);
 }
 
 .transparent .image-brand {
