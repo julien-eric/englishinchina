@@ -1,13 +1,15 @@
 #school-header
     #jumbotron-background.jumbotron.jumbotron-fluid(style=pictureInfo.returnCSSBgImageAttr(bannerPicture) + 'margin-top: -4rem; margin-bottom: 0rem;')  
     #jumbotron-content.text-center.container-fluid
-        .py-5
+        .py-3
         if searchInfo.city
             h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.city.pinyinName}, #{searchInfo.province.name}
-        if !searchInfo.city && searchInfo.province
+        else if !searchInfo.city && searchInfo.province
             h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.province.name}
-        if !!searchInfo.queryInfo
+        else if !!searchInfo.queryInfo
             h2.text-white.text-shadow-dark.font-weight-bold "#{searchInfo.queryInfo}"
+        else 
+            h2.text-white.text-shadow-dark.font-weight-bold.display-3 Jobs
 
         .row.my-3.justify-content-center
             .col-lg-6

@@ -1,0 +1,8 @@
+if popularProvinces
+    .row
+        each popularProvince, index in popularProvinces
+            if index > 7
+            else if index > 4 && index <= 7
+                a.btn.btn-light-transparent.d-inline(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+            else if index <= 4
+                a.btn.btn-light-transparent(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}

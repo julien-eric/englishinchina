@@ -6,12 +6,4 @@
                         .row
                               -var magnify = false;
                               include ./search-all
-        if popularProvinces
-            .row.justify-content-center
-                a(href='#').btn.btn-link.d-none.d-lg-inline.disabled Popular Destinations:
-                each popularProvince, index in popularProvinces
-                    if index > 6
-                    else if index > 4 && index <= 6
-                        a.btn.btn-light-transparent.d-inline.d-lg-none(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
-                    else if index <= 4
-                        a.btn.btn-light-transparent(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+        include ../populargrid/popular-provinces-buttons

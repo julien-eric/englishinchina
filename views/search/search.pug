@@ -1,57 +1,55 @@
 extends ../layout
 block content
-      
-      include search-header
-      .bg-dark.py-2
-            include search-navigation-container
-      .bg-light.py-2.mb-5
-            include search-filter-container
 
-      .container.my-5  
-            .row
-                  .col-auto
-                        a(data-toggle='collapse', href='#job-list-collapse', role='button', aria-expanded='false', aria-controls='job-list-collapse')
-                              h4.text-uppercase.font-weight-bold 
-                                    | Jobs
-                                    i.job-list-chevron.mdi.mdi-chevron-up(aria-hidden='true') 
-                  .col.text-right
-                        a.btn.btn-sm.btn-link.pr-0(href="/job/add") Post a job offer 
-                              i.mdi.mdi-library-plus(aria-hidden='true')          
-            hr.mt-0
-            if jobs && jobs.length > 0
-                  include ../job/job-list
-            else
-                  p Sorry, we couldn't find any matches for the specified terms.
+    include search-header
+    .bg-darker.py-2
+        include search-navigation-container
+    .bg-dark.py-2.mb-5
+        .container
+            include ../populargrid/popular-provinces-buttons-dark
+        //- include search-filter-container
 
-      .container.mb-5   
-            .row
-                  .col-auto
-                        a(data-toggle='collapse', href='#school-list-collapse', role='button', aria-expanded='false', aria-controls='school-list-collapse')
-                               h4.text-uppercase.font-weight-bold 
-                                    | Schools
-                                    i.school-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')                        
-                  .col.text-right
-                        a.btn.btn-sm.btn-link.pr-0(href="/review") Add School 
-                              i.mdi.mdi-library-plus(aria-hidden='true')          
-            hr.mt-0
-            if schools && schools.length > 0
-                  include ../school/schoollist
-            else
-                  p Sorry, we couldn't find any matches for the specified terms.
+    .container 
+        .row.my-5 
+            .col-auto
+                a(data-toggle='collapse', href='#job-list-collapse', role='button', aria-expanded='false', aria-controls='job-list-collapse')
+                    h4.text-uppercase.font-weight-bold.text-dark
+                        | Jobs
+                        i.job-list-chevron.mdi.mdi-chevron-up(aria-hidden='true') 
+            .col.text-right
+                a.btn.btn-sm.btn-link.pr-0(href="/job/add") Post a job offer 
+                    i.mdi.mdi-library-plus(aria-hidden='true')          
+        hr.mt-0
+        if jobs && jobs.length > 0
+            include ../job/job-list
+        else
+            p Sorry, we couldn't find any matches for the specified terms.
+
+        .row.my-5 
+            .col-auto
+                a(data-toggle='collapse', href='#school-list-collapse', role='button', aria-expanded='false', aria-controls='school-list-collapse')
+                    h4.text-uppercase.font-weight-bold.text-dark
+                        | Schools
+                        i.school-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')                        
+            .col.text-right
+                a.btn.btn-sm.btn-link.pr-0(href="/review") Add School 
+                    i.mdi.mdi-library-plus(aria-hidden='true')          
+        hr.mt-0
+        if schools && schools.length > 0
+            include ../school/schoollist
+        else
+            p Sorry, we couldn't find any matches for the specified terms.
 
 
-      if companies && companies.length > 0
-            .container.mb-5   
-                  .row
-                        .col-auto
-                              a(data-toggle='collapse', href='#company-list-collapse', role='button', aria-expanded='false', aria-controls='company-list-collapse')
-                                     h4.text-uppercase.font-weight-bold 
-                                          |Companies
-                                          i.company-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')  
-                        //- .col.text-right
-                        //-       a.btn.btn-sm.btn-link.pr-0(href="#") Add Company 
-                        //-             i.mdi.mdi-library-plus(aria-hidden='true')
-                  hr.mt-0
-                  include ../company/companylist
-      //- if jobs
-      //-       h1 Jobs
+        if companies && companies.length > 0
+                .row.my-5 
+                    .col-auto
+                        a(data-toggle='collapse', href='#company-list-collapse', role='button', aria-expanded='false', aria-controls='company-list-collapse')
+                            h4.text-uppercase.font-weight-bold.text-dark 
+                                |Companies
+                                i.company-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')  
+                    //- .col.text-right
+                    //-       a.btn.btn-sm.btn-link.pr-0(href="#") Add Company 
+                    //-             i.mdi.mdi-library-plus(aria-hidden='true')
+                hr.mt-0
+                include ../company/companylist

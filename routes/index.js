@@ -111,6 +111,8 @@ module.exports = function (passport) {
                 cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
             }
 
+            let popularProvinces = await provincesController.getMostPopularProvinces();
+
             // title: `${searchResults.query} Schools - Second Language World`,
             res.render('search/search', {
                 title: `Schools - Second Language World`,
@@ -122,6 +124,7 @@ module.exports = function (passport) {
                 user: req.user,
                 provinces,
                 cities,
+                popularProvinces,
                 pictureInfo: pictureinfo,
                 bannerPicture,
                 moment,
@@ -171,7 +174,7 @@ module.exports = function (passport) {
         try {
             const searchInfo = req.query.searchInfo || undefined;
             const limit = parseInt(req.query.limit) || undefined;
-            let cities = await citiesController.queryCityiesByPinyinName(searchInfo, limit);
+            let cities = await citiesController.queryCitiesByPinyinName(searchInfo, limit);
             res.send(JSON.stringify({ query: 'cities', list: cities.list, total: cities.total }));
         } catch (error) {
             res.send(error);

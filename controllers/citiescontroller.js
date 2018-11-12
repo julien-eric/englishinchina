@@ -6,7 +6,7 @@ let _ = require('underscore');
 module.exports = {
 
     async getAllCities () {
-        return City.find().populate('province', 'code').exec();
+        return City.find().populate('province', ['name', 'code'] ).exec();
     },
 
     async getProvinceCitiesByCode (provinceCode) {

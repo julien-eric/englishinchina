@@ -265,7 +265,7 @@ $(document).ready(() => {
 
   $('.typeahead').typeahead({
     highlight: true,
-    minLength: 1
+    minLength: 2
   },
     typeaheadWrapper.dataSources
   ).blur(function () {

@@ -12,8 +12,8 @@
                   a.text-dark(href="/job/" + job._id)
                     | #{job.title}
               .col-md-5.col-lg-4.text-center.text-md-right
-                a.btn.btn-sm.btn-link(href='#') View Offer
-                a.btn.btn-sm.btn-lightgreen.mr-1(href='#') Apply
+                a.btn.btn-sm.btn-link(href="/job/" + job._id) View Offer
+                a.btn.btn-sm.btn-lightgreen.mr-1(href="/job/apply/" + job._id) Apply
             h6.card-subtitle.font-weight-light.mb-2.text-muted.text-capitalize #{job.kicker}
             //- h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize
             //-   i.mdi.mdi-map-marker(aria-hidden='true') 

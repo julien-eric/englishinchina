@@ -1,6 +1,6 @@
 form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
 
-    .col-lg-6.my-1.px-1
+    .col-lg-10.my-1.px-1
         .form-group.search-nav-form.mt-0
             -var queryInfo = ""
             -var schoolId = ""
@@ -9,12 +9,12 @@ form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
                 -schoolId = searchInfo.school._id
             if searchInfo && searchInfo.queryInfo
                 -queryInfo = searchInfo.queryInfo
-            input#queryInfo.typeahead.form-control.search-filter.form-form-0(name="queryInfo" datasets="schools jobs" placeholder="School Related Terms" value=queryInfo type="text")
+            input#queryInfo.typeahead.form-control.search-filter.form-form-0(name="queryInfo" datasets="jobs provinces cities schools " placeholder="Where do you want to go?" value=queryInfo type="text")
             //- label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
             input#schoolId.d-none(name="schoolId" value=schoolId)
 
     //- Provinces
-    .col-lg.my-1.px-1.form-group
+    //- .col-lg.my-1.px-1.form-group
         .search-nav-form
             select#provinceSelect.custom-select.search-filter.browser-default(name="province")
                 if searchInfo && searchInfo.provinceCode
@@ -28,7 +28,7 @@ form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
                         option(value=province.code) #{province.name} - #{province.chineseName}
 
     //- Cities
-    .col-lg.my-1.px-1
+    //- .col-lg.my-1.px-1
         .search-nav-form  
             if(cities)
                 select#citySelect.custom-select.search-filter.browser-default(name="city")
