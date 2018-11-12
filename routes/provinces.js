@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
 const companiesController = require('../controllers/companiescontroller');
@@ -10,7 +9,6 @@ const jobsController = require('../controllers/jobscontroller');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
-const url = require('url');
 
 module.exports = function (passport) {
 
