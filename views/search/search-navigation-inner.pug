@@ -1,53 +1,53 @@
 form.col-sm-12.px-0.pt-lg-0(role='search', action='/search', method='GET')
 
-      .col-lg-6.my-1.px-1
-            .form-group.search-nav-form.mt-0
-                  -var queryInfo = ""
-                  -var schoolId = ""
-                  if searchInfo && searchInfo.school
-                        -queryInfo = searchInfo.school.name
-                        -schoolId = searchInfo.school._id
-                  if searchInfo && searchInfo.queryInfo
-                        -queryInfo = searchInfo.queryInfo
-                  input#queryInfo.typeahead.form-control.search-filter.form-form-0(name="queryInfo" datasets="schools jobs" placeholder="School Related Terms" value=queryInfo type="text")
-                  //- label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
-                  input#schoolId.d-none(name="schoolId" value=schoolId)
+    .col-lg-6.my-1.px-1
+        .form-group.search-nav-form.mt-0
+            -var queryInfo = ""
+            -var schoolId = ""
+            if searchInfo && searchInfo.school
+                -queryInfo = searchInfo.school.name
+                -schoolId = searchInfo.school._id
+            if searchInfo && searchInfo.queryInfo
+                -queryInfo = searchInfo.queryInfo
+            input#queryInfo.typeahead.form-control.search-filter.form-form-0(name="queryInfo" datasets="schools jobs" placeholder="School Related Terms" value=queryInfo type="text")
+            //- label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly', data-success='Thank you.') School name
+            input#schoolId.d-none(name="schoolId" value=schoolId)
 
-      //- Provinces
-      .col-lg.my-1.px-1
-            .search-nav-form
-                  select#provinceSelect.custom-select.search-filter.browser-default(name="province")
-                        if searchInfo && searchInfo.provinceCode
-                              option(value='') Province
+    //- Provinces
+    .col-lg.my-1.px-1.form-group
+        .search-nav-form
+            select#provinceSelect.custom-select.search-filter.browser-default(name="province")
+                if searchInfo && searchInfo.provinceCode
+                    option(value='') Province
+                else
+                    option(value='', selected='') Province
+                each province,i in provinces
+                    if searchInfo && province.code == searchInfo.provinceCode 
+                        option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
+                    else
+                        option(value=province.code) #{province.name} - #{province.chineseName}
+
+    //- Cities
+    .col-lg.my-1.px-1
+        .search-nav-form  
+            if(cities)
+                select#citySelect.custom-select.search-filter.browser-default(name="city")
+                    if searchInfo && searchInfo.cityCode
+                        option(value='') City
+                    else
+                        option(value='', selected='') City
+                    each city in cities
+                        if searchInfo && city.code == searchInfo.cityCode
+                            option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
                         else
-                              option(value='', selected='') Province
-                        each province,i in provinces
-                              if searchInfo && province.code == searchInfo.provinceCode 
-                                    option(value=province.code, selected='true') #{province.name} - #{province.chineseName}
-                              else
-                                    option(value=province.code) #{province.name} - #{province.chineseName}
+                            option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
 
-      //- Cities
-      .col-lg.my-1.px-1
-            .search-nav-form  
-                  if(cities)
-                        select#citySelect.custom-select.search-filter.browser-default(name="city")
-                              if searchInfo && searchInfo.cityCode
-                                    option(value='') City
-                              else
-                                    option(value='', selected='') City
-                              each city in cities
-                                    if searchInfo && city.code == searchInfo.cityCode
-                                          option(value=city.code, selected='true') #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-                                    else
-                                          option(value=city.code) #{jadefunctions.capitalize(city.pinyinName)} - #{city.chineseName}
-
-                  else
-                        select#citySelect.custom-select.search-filter.browser-default(name="city", disabled='true')
-                              option(value='', selected='') City
+            else
+                select#citySelect.custom-select.search-filter.browser-default(name="city", disabled='true')
+                    option(value='', selected='') City
 
 
-      .col-lg-2.my-1.px-1
-            button.col-sm-12.btn.btn-rounded.btn-primary.border-0.my-0.mx-0(type='submit') 
-                  i.mdi.mdi-magnify(aria-hidden='true')
-                  span  Search
+    .col-lg-2.my-1.px-1
+        button.col-sm-12.btn.btn-rounded.btn-primary.border-0.my-0.mx-0(type='submit') 
+            i.mdi.mdi-magnify(aria-hidden='true')
+            span  Search

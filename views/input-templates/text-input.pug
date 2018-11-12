@@ -1,14 +1,26 @@
 if !textInput.type
     -textInput.type = 'text'
 
+if textInput.required
+    -textInput.class += ' validate'
+
+if responseInfo && !textInput.value
+
+    if !textInput.responseSubProperty && responseInfo[textInput.name]
+        -textInput.value = responseInfo[textInput.name]
+
+    if textInput.responseSubProperty 
+        if responseInfo[textInput.responseSubProperty] && responseInfo[textInput.responseSubProperty][textInput.name]
+            -textInput.value = responseInfo[textInput.responseSubProperty][textInput.name]
 
 if textInput.default 
-    .form-group
-        label(for=textInput.name) #{textInput.label}
-        input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
+    label(for=textInput.name)  #{textInput.label}
+    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
 else
-    .md-form
-        input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
-        label(for=textInput.name) #{textInput.label}
+    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
+    label(for=textInput.name)  #{textInput.label}
+
+if textInput    
+    p.text-small #{textInput.undertext}
 
 -textInput = {}

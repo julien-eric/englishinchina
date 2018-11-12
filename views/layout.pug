@@ -1,48 +1,53 @@
 doctype html
 html
-  head
-    if title
-      title #{title}
-    else
-      title= "Second Language World"
-    meta(property='og:url', content='https://www.facebook.com/englishinchinaco/')
-    meta(property='og:type', content='website')
-    meta(property='og:title', content='Second Language World')
-    meta(property='og:description', content='Second Language World catalogs every school, university and English organization in the country in a way that has never been done before. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations')
-    meta(property='og:image', content='http://englishinchina.co/images/chinag3.jpg')
-    
-    //- CSS 
-    link(rel='stylesheet', href='https://cdn.materialdesignicons.com/2.1.99/css/materialdesignicons.min.css')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bree+Serif|Raleway')
-    link(rel='stylesheet', href='/stylesheets/mdbootstappro.min.css')
-    link(rel='stylesheet', href='/stylesheets/custom.css')
-    link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
-    link(rel='stylesheet', href='/stylesheets/ekko-lightbox.css')
-    if analytics
-      include analytics
+    head
+        if title
+            title #{title}
+        else
+            title= "Second Language World"
+        meta(property='og:url', content='https://www.facebook.com/englishinchinaco/')
+        meta(property='og:type', content='website')
+        meta(property='og:title', content='Second Language World')
+        meta(property='og:description', content='Second Language World catalogs every school, university and English organization in the country in a way that has never been done before. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations')
+        meta(property='og:image', content='http://englishinchina.co/images/chinag3.jpg')
 
-  body
-    
-    include flash-errors
-    include ./header/header
-    block content
-    include ./footer/footer
-    include ./footer/copyright
-    include ./modal
-    
-    script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
-    //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
-    //- script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js')
-    script(type='text/javascript', src='/javascripts/libs/mdbootstrappro.min.js')
-    //- script(src='/javascripts/libs/jquery.smartWizard.min.js')
-    script(src='/javascripts/libs/nouislider.min.js')
-    script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b203a7f0116c6d1')
-    
-    if scripts
-      each js in scripts
-        script(src=js)
-    
-  meta(name="viewport", content="width=device-width, initial-scale=1")
+        //- CSS 
+        link(rel='stylesheet', href='https://cdn.materialdesignicons.com/2.1.99/css/materialdesignicons.min.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bree+Serif|Raleway')
+        link(rel='stylesheet', href='/stylesheets/custom.css')
+        link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
+        link(rel='stylesheet', href='/stylesheets/ekko-lightbox.css')
+        link(rel='stylesheet', href='/stylesheets/nouislider.min.css')
+        if analytics
+            include analytics
+        
+        script(async='', src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+        script.
+            (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6174405736141191",
+            enable_page_level_ads: true
+            });
+
+
+    body
+
+        include ./flash-errors
+        include ./header/header
+        block content
+        include ./footer/footer
+        include ./footer/copyright
+        include ./modal
+
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js", integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", crossorigin='anonymous')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+        script(src='/javascripts/libs/bootstrap.min.js')
+        script(src='/javascripts/libs/mdb.min.js')
+        script(src='/javascripts/libs/nouislider.min.js')
+        //- script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b203a7f0116c6d1')
+
+        if scripts
+            each js in scripts
+                script(src=js)
+
+    meta(name="viewport", content="width=device-width, initial-scale=1")
 

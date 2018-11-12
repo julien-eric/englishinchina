@@ -1,12 +1,29 @@
-// YEARS OF EXP SELECT INPUT
-//- each opt in select.options
-    h1 #{opt[select.crossRefAttributeValue] + ' ' + select.crossRefValue}
-select.mdb-select.add-school-form.validate(name=select.name, id=select.id, class=select.formName, form=select.formName, required=select.required)
+//- Set value to compare against in all select options if there's an object response from the server
+if responseInfo && !select.crossRefValue
+
+    if !select.responseSubProperty && responseInfo[select.name] != null
+        -select.crossRefValue = responseInfo[select.name]
+
+    if select.responseSubProperty
+        if responseInfo[select.responseSubProperty] && responseInfo[select.responseSubProperty][select.name] != null
+            -select.crossRefValue = responseInfo[select.responseSubProperty][select.name]
+
+//- Convert comparator to string if not so
+if typeof(select.crossRefValue) != "string"
+    -select.crossRefValue = JSON.stringify(select.crossRefValue)
+
+select.mdb-select.md-form.add-school-form.validate(name=select.name, id=select.id, class=select.formName, form=select.formName, required=select.required)
     option(value='', disabled='', selected='') #{select.placeholder}
     each opt in select.options
-        if select.crossRefValue && opt[select.crossRefAttributeValue] && opt[select.crossRefAttributeValue].toString() == select.crossRefValue.toString()
+
+        //- Also convert option value to string to avoid type mismatches returning false
+        if typeof(opt[select.crossRefAttributeValue]) != "string"
+            -opt[select.crossRefAttributeValue] = JSON.stringify(opt[select.crossRefAttributeValue])
+
+        if select.crossRefValue == opt[select.crossRefAttributeValue]
             option(value=opt[select.crossRefAttributeValue], selected='true') #{opt[select.crossRefAttributeName]}
         else
             option(value=opt[select.crossRefAttributeValue]) #{opt[select.crossRefAttributeName]}
+
 label.col-12.px-0(for=select.name, data-error=select.errorMessage, data-success='Thank you.') #{select.label}
 -var select = {}

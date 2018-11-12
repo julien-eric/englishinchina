@@ -11,7 +11,9 @@ $(document).ready(() => {
         });
       },
       plugins: 'link paste',
-      toolbar: 'link undo redo styleselect bold italic outdent indent bullist numlist'
+      toolbar: 'link undo redo styleselect bold italic bullist numlist',
+    //   toolbar: 'link undo redo styleselect bold italic outdent indent bullist numlist',
+      paste_as_text: true
     });
   });
   

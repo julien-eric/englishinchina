@@ -4,7 +4,10 @@
 -fileInput.previewId = 'preview-' + fileInput.id
 -fileInput.accept = ' image/*'
 
+if responseInfo
+    -fileInput.imagePreview = 'background-image: url(' + pictureInfo.returnLarge(responseInfo[fileInput.urlName]) + ');'  
+
 .col-lg-6
-        .image-container.image-container-default.bg-primary(id=fileInput.previewId)
+        .image-container.image-container-default.bg-primary(id=fileInput.previewId style=fileInput.imagePreview) 
 .col-lg-6
         include ./file-uploader

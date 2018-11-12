@@ -31,6 +31,10 @@ module.exports = {
     }
   },
 
+  splitString (str, char) {
+    return str.split(char);
+  },
+
   splitDescription (description, length) {
 
     return new Promise(function (resolve, reject) {

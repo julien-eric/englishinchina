@@ -1,0 +1,14 @@
+extends job-add-template
+
+block card
+    h3.mt-5.text-dark.font-weight-bold You're almost there
+    p.mb-3 We're giving you a chance to finalize your job offer before you submit it, at this point you can navigate back to any step and modify anything. You won't be able to edit a job offer after it is submitted so please make sure you have taken the time to check all the information you entered. Your taking the time to write this offer is very much appreciated!       
+
+    .row.mt-5
+        .col-lg-12
+            button.btn.btn-lg.btn-warning.btn-rounded.nextBtn.float-right(type='submit' for='job-form') 
+                | Submit
+                i.mdi.mdi-arrow-right(aria-hidden='true')
+            button.btn.btn-lg.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') 
+                i.mdi.mdi-arrow-left(aria-hidden='true')
+                | Previous

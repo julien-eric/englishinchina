@@ -8,29 +8,32 @@ if user
                             input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
 
             .row
-                .col-lg-6
-                    -var textInput = {}
-                    -textInput.id = 'first-name'
-                    -textInput.name = 'firstName'
-                    -textInput.formName = 'teacher-details'
-                    -textInput.placeholder = 'First Name'
-                    -textInput.label = 'First Name'
-                    -textInput.required = true
-                    if user && user.firstName
-                        -textInput.value = user.firstName
-                    include ../input-templates/text-input
-                        
-                .col-lg-6
-                    -var textInput = {}
-                    -textInput.id = 'last-name'
-                    -textInput.name = 'lastName'
-                    -textInput.formName = 'teacher-details'
-                    -textInput.placeholder = 'Last Name'
-                    -textInput.label = 'Last Name'
-                    -textInput.required = true
-                    if user && user.lastName
-                        -textInput.value = user.lastName
-                    include ../input-templates/text-input
+            
+                .col-lg-6.form-group
+                    .md-form
+                        -var textInput = {}
+                        -textInput.id = 'first-name'
+                        -textInput.name = 'firstName'
+                        -textInput.formName = 'teacher-details'
+                        -textInput.placeholder = 'First Name'
+                        -textInput.label = 'First Name'
+                        -textInput.required = true
+                        if user && user.firstName
+                            -textInput.value = user.firstName
+                        include ../input-templates/text-input
+            
+                .col-lg-6.form-group
+                    .md-form
+                        -var textInput = {}
+                        -textInput.id = 'last-name'
+                        -textInput.name = 'lastName'
+                        -textInput.formName = 'teacher-details'
+                        -textInput.placeholder = 'Last Name'
+                        -textInput.label = 'Last Name'
+                        -textInput.required = true
+                        if user && user.lastName
+                            -textInput.value = user.lastName
+                        include ../input-templates/text-input
 
             .row
                 .col-lg-6.form-group

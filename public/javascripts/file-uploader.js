@@ -22,6 +22,7 @@ var FileUploader = function () {
         urlPrefix,
         previewPrefix,
         progressPrefix,
+        currentPrefix: 'current',
         fdbPrefix
       }
       elements.push(newElement);
@@ -81,6 +82,7 @@ var FileUploader = function () {
     xhr.onload = function () {
       if (xhr.status === 200) {
         const preview = $('#' + element.previewPrefix + '-' + element.inputId);
+        const current = $('#' + element.currentPrefix + '-' + element.inputId);
         const fdbLabel = $('#' + element.fdbPrefix + '-' + element.inputId);
 
 
@@ -92,6 +94,11 @@ var FileUploader = function () {
         } else if (fdbLabel) {
           fdbLabel.removeClass('d-none');
         }
+        
+        if(current){
+            current.val(file.name);
+        }
+
         document.getElementById(element.urlPrefix + '-' + element.inputId).value = url;
 
         xhr2 = new XMLHttpRequest();
