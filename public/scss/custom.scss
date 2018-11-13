@@ -114,14 +114,12 @@ $enable-shadows: false;
 // $primary-color: $slw-primary;
 // $error-color:  $slw-danger;
 // $success-color:  $slw-primary;
-
 //When we're ready to have a right sidebar of some sort
 // @media (min-width: 1200px) {
 //     .container {
 //         max-width: 1240px;
 //     }
 // }
-
 @each $color,
 $value in $theme-colors {
     .text-shadow-#{$color} {
@@ -695,6 +693,11 @@ input[type=range]+.thumb {
 .dropdown .dropdown-menu .dropdown-item:active,
 .dropdown .dropdown-menu .dropdown-item:hover {
     background-color: $slw-primary;
+    color: black;
+}
+
+.dropdown .dropdown-menu .dropdown-item {
+    color: black !important;
 }
 
 #school-header {

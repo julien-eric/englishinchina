@@ -223,52 +223,49 @@ module.exports = function (passport) {
        *LOGIN :   GET : Root Path, login page.
        *          POST: Send user login request. redirect to home if sucessful, try again if failure
        ************************************************************************************************************ */
-    router.route('/login')
-        .get((req, res) => {
-            // Display the Login page with any flash message, if any
-            res.render('login/login', {
-                title: 'Login - Second Language World',
-                scripts: [scripts.util]
-            });
-        })
-        .post((req, res, next) => {
-            // custom callback allows us to redirect user to the same page he was on... (maybe better way?)
-            let redirect = '/';
-            if (req.body.redirecturl) {
-                redirect = req.body.redirecturl;
+    router.get('/login', (req, res) => {
+        // Display the Login page with any flash message, if any.
+        let responseInfo;
+        if (res.locals.flash.responseInfo) {
+            responseInfo = res.locals.flash.responseInfo[0];
+        }
+
+        res.render('login/login', {
+            title: 'Login - Second Language World',
+            redirectUrl: req.query.redirectUrl,
+            responseInfo,
+            scripts: [scripts.util]
+        });
+    });
+
+    router.post('/login', (req, res, next) => {
+
+        let redirectUrl = '/';
+        res.flash('responseInfo', { email: req.body.email, password: req.body.password });
+        if (req.body.redirectUrl) {
+            redirectUrl = req.body.redirectUrl;
+        }
+
+        passport.authenticate('login', (err, user, info) => {
+
+            if (err) {
+                return next(err);
             }
-            passport.authenticate('login', (err, user, info) => {
+            if (!user) {
+                let loginPage = '/login';
+                if (redirectUrl) {
+                    loginPage += '?redirectUrl=' + encodeURIComponent(redirectUrl);
+                }
+                return res.redirect(loginPage);
+            }
+            req.logIn(user, (err) => {
                 if (err) {
                     return next(err);
                 }
-                if (!user) {
-                    return res.redirect('/login');
-                }
-                req.logIn(user, (err) => {
-                    if (err) {
-                        return next(err);
-                    }
-                    return res.redirect(redirect);
-                });
-            })(req, res, next);
-        });
+                return res.redirect(redirectUrl);
+            });
+        })(req, res, next);
 
-    router.get('/loginajax', (req, res) => {
-        res.render(
-            'login/loginpanel', {
-                title: 'Login - Second Language World',
-                message: req.flash('message'),
-                redirecturl: req.query.url,
-                scripts: [scripts.util]
-            },
-            (err, html) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.send({ html });
-                }
-            },
-        );
     });
 
     /** **********************************************************************************************************
@@ -296,18 +293,50 @@ module.exports = function (passport) {
        *SIGNUP :   GET : Sign up page.
        *          POST: Send user registration request. redirect to home if sucessful, try again if failure
        ************************************************************************************************************ */
-    router.route('/signup')
-        .get((req, res) => {
-            res.render('login/register', {
-                title: 'Sign up - Second Language World',
-                scripts: [scripts.util]
+    router.get('/signup', (req, res) => {
+
+        let responseInfo;
+        if (res.locals.flash.responseInfo) {
+            responseInfo = res.locals.flash.responseInfo[0];
+        }
+
+        res.render('login/register', {
+            title: 'Sign up - Second Language World',
+            redirectUrl: req.query.redirectUrl,
+            responseInfo,
+            scripts: [scripts.util]
+        });
+    });
+
+    router.post('/signup', (req, res, next) => {
+
+        let redirectUrl = '/';
+        res.flash('responseInfo', { username: req.body.username, anonymous: req.body.anonymous, email: req.body.email, password: req.body.password });
+        if (req.body.redirectUrl) {
+            redirectUrl = req.body.redirectUrl;
+        }
+
+        passport.authenticate('signup', (err, user, info) => {
+
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                let signupPage = '/signup';
+                if (redirectUrl) {
+                    signupPage += '?redirectUrl=' + encodeURIComponent(redirectUrl);
+                }
+                return res.redirect(signupPage);
+            }
+            req.logIn(user, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect(redirectUrl);
             });
-        })
-        .post(passport.authenticate('signup', {
-            successRedirect: '/',
-            failureRedirect: '/signup',
-            failureFlash: false
-        }));
+        })(req, res, next);
+
+    });
 
 
     /** **********************************************************************************************************

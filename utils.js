@@ -1,6 +1,7 @@
 let _ = require('underscore');
 
 module.exports = {
+
     /**
    * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
    Passport adds this method to request object. A middleware is allowed to add properties to
@@ -18,7 +19,7 @@ module.exports = {
         res.flash('info', 'Please login to use this feature.');
 
         // if the user is not authenticated then redirect him to the login page
-        res.redirect('/login?redirectUrl=' + req.originalUrl);
+        res.redirect('/login?redirectUrl=' + encodeURIComponent(req.originalUrl));
     },
 
     /**

@@ -80,7 +80,7 @@ module.exports = function (passport) {
         res.redirect(url.format({ pathname: '/job/add' }));
     });
 
-    router.get('/add', async (req, res) => {
+    router.get('/add', utils.isAuthenticated, async (req, res) => {
 
         try {
 
@@ -191,7 +191,11 @@ module.exports = function (passport) {
     });
 
     router.get('/apply/:id', utils.isAuthenticated, async (req, res) => {
-        res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=/job/message/' + req.params.id);
+        if (!req.user.teachingDetails) {
+            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=/job/message/' + req.params.id);
+        } else {
+            res.redirect('/job/message/' + req.params.id);
+        }
     });
 
 
@@ -203,12 +207,19 @@ module.exports = function (passport) {
        ************************************************************************************************************ */
     router.get('/message/:id', async (req, res) => {
         let job = await jobsController.getJob(req.params.id);
+
+        let responseInfo;
+        if (res.locals.flash.responseInfo) {
+            responseInfo = res.locals.flash.responseInfo[0];
+        }
+
         res.render('job/application/message', {
             title: 'Apply - ' + job.title,
             user: req.user,
             job,
             moment,
             pictureInfo: pictureinfo,
+            responseInfo,
             jadefunctions,
             scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
             scripts.readMore, scripts.libtinyMCE, scripts.tinyMCE]
@@ -217,10 +228,35 @@ module.exports = function (passport) {
 
     router.post('/message/:id', async (req, res) => {
 
-        let job = await jobsController.getJob(req.params.id);
-        let messageToSend = await utils.validateParam(req.body.message);
-        await messagesController.createMessage(req.user, job.user, messageToSend);
-        res.redirect('/job/message/' + job.id);
+        try {
+            let job = await jobsController.getJob(req.params.id);
+            let messageToSend = await utils.validateParam(req.body.message);
+            res.flash('responseInfo', { message: messageToSend });
+            await messagesController.createMessage(req.user, job.user, messageToSend);
+            res.redirect('/job/thankyou/' + job.id);
+        } catch (error) {
+            res.flash('error', error.message);
+            res.redirect('/job/message/' + job.id);
+        }
+    });
+
+    router.get('/thankyou/:id', async (req, res) => {
+        try {
+            let job = await jobsController.getJob(req.params.id);
+            res.render('job/application/thank-you', {
+                title: 'Thank you from ' + job.title,
+                user: req.user,
+                job,
+                moment,
+                pictureInfo: pictureinfo,
+                jadefunctions,
+                scripts: [scripts.util]
+            });
+        } catch (error) {
+            res.flash('error', 'Sorry, there was a problem trying to send your message.');
+            res.flash('error', error.message);
+            res.redirect('/job/message/' + job.id);
+        }
     });
 
     router.get('/:id', async (req, res) => {
