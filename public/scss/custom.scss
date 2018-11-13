@@ -34,7 +34,8 @@ $theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker,
 @import "node_modules/mdbootstrap-pro/scss/core/bootstrap/functions";
 @import "node_modules/mdbootstrap-pro/scss/core/bootstrap/variables";
 @import "node_modules/mdbootstrap-pro/scss/core/mixins";
-@import "node_modules/mdbootstrap-pro/scss/core/colors";
+@import "./mdbcolors";
+$theme-colors: ( "primary": $slw-primary);
 @import "node_modules/mdbootstrap-pro/scss/core/variables";
 $link-color: $slw-primary;
 @import "node_modules/mdbootstrap-pro/scss/core/global";
