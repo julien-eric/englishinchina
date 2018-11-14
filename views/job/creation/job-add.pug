@@ -3,26 +3,26 @@ block content
     .container.stepper
         h1#write-review-title.py-5 Post a Job Offer
             
-        -var responseInfo = {contractDetails : {}, benefits: {}, teachingDetails: {}}
-        -responseInfo.title = "An incredible Job title"
-        -responseInfo.kicker = "Just too good to be true!"
-        -responseInfo.email = "An incredible email"
-        -responseInfo.pictureUrl = "fe4c5f90-e68f-11e8-91ff-fd3d4293f2c1.jpg"
-        -responseInfo.pictureFileName = "somefilefromyourcomputer.jpg"
-        -responseInfo.provinceCode = 30
-        -responseInfo.cityCode = 101010100
-        -responseInfo.description = "Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in."
-        -responseInfo.contractDetails.duration = 2
-        -responseInfo.contractDetails.salaryLower = 7000
-        -responseInfo.contractDetails.salaryHigher = 12000
-        -responseInfo.benefits.accomodation = 0
-        -responseInfo.benefits.airfare = 0
-        -responseInfo.benefits.teachingAssistant = 1
-        -responseInfo.benefits.vacationDays = 21
-        -responseInfo.teachingDetails.weeklyLoad = 21
-        -responseInfo.teachingDetails.institution = 'Public School'
-        -responseInfo.teachingDetails.classSize = 1
-        -responseInfo.teachingDetails.ageGroup = 1
+        //- -var responseInfo = {contractDetails : {}, benefits: {}, teachingDetails: {}}
+        //- -responseInfo.title = "An incredible Job title"
+        //- -responseInfo.kicker = "Just too good to be true!"
+        //- -responseInfo.email = "An incredible email"
+        //- -responseInfo.pictureUrl = "fe4c5f90-e68f-11e8-91ff-fd3d4293f2c1.jpg"
+        //- -responseInfo.pictureFileName = "somefilefromyourcomputer.jpg"
+        //- -responseInfo.provinceCode = 30
+        //- -responseInfo.cityCode = 101010100
+        //- -responseInfo.description = "Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in."
+        //- -responseInfo.contractDetails.duration = 2
+        //- -responseInfo.contractDetails.salaryLower = 7000
+        //- -responseInfo.contractDetails.salaryHigher = 12000
+        //- -responseInfo.benefits.accomodation = 0
+        //- -responseInfo.benefits.airfare = 0
+        //- -responseInfo.benefits.teachingAssistant = 1
+        //- -responseInfo.benefits.vacationDays = 21
+        //- -responseInfo.teachingDetails.weeklyLoad = 21
+        //- -responseInfo.teachingDetails.institution = 'Public School'
+        //- -responseInfo.teachingDetails.classSize = 1
+        //- -responseInfo.teachingDetails.ageGroup = 1
 
         .stepper-nested-forms
             form.validate-form(action='/', method='post')
