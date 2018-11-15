@@ -1,44 +1,44 @@
 .card
-      .row
+    .row
         .col-lg-3.col-md-12
-          a.view.overlay.card-img(href="/job/" + job._id)
-            .card-image-container(style='background-image: url(' + pictureInfo.returnLarge(job.pictureUrl) + ');')
-            //-   h4.text-white.mb-3 #{job.title}  
-        .col-lg-9.col-md-12.text-center.text-md-left.px-3.py-3
-          .card-block.px-3.mx-0
-            .row
-              .col-md-7.col-lg-8
-                h3.font-weight-bold.card-title.px-0 
-                  a.text-dark(href="/job/" + job._id)
-                    | #{job.title}
-              .col-md-5.col-lg-4.text-center.text-md-right
-                a.btn.btn-sm.btn-link(href="/job/" + job._id) View Offer
-                a.btn.btn-sm.btn-lightgreen.mr-1(href="/job/apply/" + job._id) Apply
-            h6.card-subtitle.font-weight-light.mb-2.text-muted.text-capitalize #{job.kicker}
-            //- h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize
-            //-   i.mdi.mdi-map-marker(aria-hidden='true') 
-            //-   | China / 
-            //-   a(href='/search?queryInfo=&province=' + job.province.code + '&city=-1') #{job.province.name} / 
-            //-   a(href='/search?queryInfo=&city=' + job.city.code) #{job.city.pinyinName} 
-              //- if(school.company)
-              //-   span &nbsp; | &nbsp;
-              //-   a(href='/company/' + school.company.id) #{school.company.name}        
-            p.text-small !{job.description}
-            //- .chip.chip-md
-            //-     i.mdi.mdi-image(aria-hidden='true')      
-            //-     |  #{school.photos.length} Photos
-            //- .chip.chip-md.mb-2
-            //-     i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-            //-     | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
-            .chip.chip-sm.mb-2
-                i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
-                | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
-            .chip.chip-sm.mb-2
-                i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-                | Posted on #{moment(job.createdDate).format("MMM YYYY")}
-            .chip.chip-sm.mb-2
-                i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
-                | #{job.salary} CNY/Month
-            //- .chip.chip-md.mb-2 
-            //-     i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
-            //-     | #{job.email}
+            a.view.overlay.card-img(href="/job/" + job._id)
+                .card-image-container(style='background-image: url(' + pictureInfo.returnLarge(job.pictureUrl) + ');')
+                //-   h4.text-white.mb-3 #{job.title}  
+        .col-lg-9.col-md-12.text--left.px-3.py-3
+            .card-block.px-3.mx-0
+                .row
+                    .col-md-7.col-lg-8
+                        h3.font-weight-bold.card-title.px-0 
+                            a.text-dark(href="/job/" + job._id)
+                                | #{job.title}
+                    .d-none.d-md-block.col-md-5.col-lg-4.text-left.mb-3.mb-lg-1
+                        a.btn.btn-sm.btn-link(href="/job/" + job._id) View Offer
+                        a.btn.btn-sm.btn-lightgreen.mr-1(href="/job/apply/" + job._id) Apply
+                h6.card-subtitle.font-weight-light.mb-2.text-muted.text-capitalize #{job.kicker}
+                //- h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize
+                //-   i.mdi.mdi-map-marker(aria-hidden='true') 
+                //-   | China / 
+                //-   a(href='/search?queryInfo=&province=' + job.province.code + '&city=-1') #{job.province.name} / 
+                //-   a(href='/search?queryInfo=&city=' + job.city.code) #{job.city.pinyinName} 
+                //- if(school.company)
+                //-   span &nbsp; | &nbsp;
+                //-   a(href='/company/' + school.company.id) #{school.company.name}        
+                p.text-small !{job.description}
+                //- .chip.chip-md
+                //-     i.mdi.mdi-image(aria-hidden='true')      
+                //-     |  #{school.photos.length} Photos
+                //- .chip.chip-md.mb-2
+                //-     i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+                //-     | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+                .chip.chip-sm.mb-2
+                    i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
+                    | #{moment(job.startDate).format("MMM YYYY") + " - " + moment(job.endDate).format("MMM YYYY")}
+                .chip.chip-sm.mb-2
+                    i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+                    | Posted on #{moment(job.createdDate).format("MMM YYYY")}
+                .chip.chip-sm.mb-2
+                    i.text-lightgreen.mdi.mdi-currency-usd.mr-2(aria-hidden='true')
+                    | #{job.salary} CNY/Month
+                //- .chip.chip-md.mb-2 
+                //-     i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
+                //-     | #{job.email}
