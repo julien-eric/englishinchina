@@ -261,7 +261,8 @@ module.exports = function (passport) {
 
     router.get('/:id', async (req, res) => {
         let job = await jobsController.getJob(req.params.id);
-        res.render('job/job', {
+        job = jobsController.fillInValues(job);
+        res.render('job/single-job-page/job', {
             title: 'SLW - ' + job.title,
             user: req.user,
             job,

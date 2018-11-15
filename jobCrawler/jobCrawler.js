@@ -79,7 +79,7 @@ JobCrawler.prototype.visitPage = function (url, callback) {
 
         let result;
         // Check status code (200 is HTTP OK)
-        if (response.statusCode !== 200) {
+        if (!response || response.statusCode !== 200) {
             console.log('Status code is ' + response.statusCode + '. Skipping.');
             callback();
             return;

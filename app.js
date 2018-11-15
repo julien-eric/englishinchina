@@ -11,14 +11,14 @@ const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
-const SCSS_DEBUG = true;
+const SCSS_DEBUG = false;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
-const jobCrawler = require('./jobCrawler/jobCrawler');
-const TWELVE_HOURS = 12 * 60 * 60 * 1000;
-jobCrawler.init(null, 10, 120000, 15000, TWELVE_HOURS);
+// const jobCrawler = require('./jobCrawler/jobCrawler');
+// const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+// jobCrawler.init(null, 10, 120000, 15000, TWELVE_HOURS);
 
 /**
  * Used by stylus

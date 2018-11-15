@@ -1,40 +1,22 @@
 $(document).ready(() => {
 
-    $('#school-list-collapse').on('show.bs.collapse', function () {
-        $('.school-list-chevron').toggleClass('mdi-chevron-down');
-        $('.school-list-chevron').toggleClass('mdi-chevron-up');
-    });
-
-    $('#school-list-collapse').on('hide.bs.collapse', function () {
-        $('.school-list-chevron').toggleClass('mdi-chevron-down');
-        $('.school-list-chevron').toggleClass('mdi-chevron-up');
-    });
-
-    $('#company-list-collapse').on('show.bs.collapse', function () {
-        $('.company-list-chevron').toggleClass('mdi-chevron-down');
-        $('.company-list-chevron').toggleClass('mdi-chevron-up');
-    });
-
-    $('#company-list-collapse').on('hide.bs.collapse', function () {
-        $('.company-list-chevron').toggleClass('mdi-chevron-down');
-        $('.company-list-chevron').toggleClass('mdi-chevron-up');
-    });
-
-    $('#job-list-collapse').on('show.bs.collapse', function () {
-        $('.job-list-chevron').toggleClass('mdi-chevron-down');
-        $('.job-list-chevron').toggleClass('mdi-chevron-up');
-    });
-
-    $('#job-list-collapse').on('hide.bs.collapse', function () {
-        $('.job-list-chevron').toggleClass('mdi-chevron-down');
-        $('.job-list-chevron').toggleClass('mdi-chevron-up');
+    $('.collapse-link').each(function (link) {
+        let id = $(this).attr('href');
+        $(id).on('show.bs.collapse', function () {
+            $(id + '-chevron').toggleClass('mdi-chevron-down');
+            $(id + '-chevron').toggleClass('mdi-chevron-up');
+        });
+        $(id).on('hide.bs.collapse', function () {
+            $(id + '-chevron').toggleClass('mdi-chevron-down');
+            $(id + '-chevron').toggleClass('mdi-chevron-up');
+        });
     });
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
 
-    function capitalize(str) {
+    function capitalize (str) {
         strVal = '';
         str = str.split(' ');
         for (let chr = 0; chr < str.length; chr++) {
@@ -136,7 +118,7 @@ $(document).ready(() => {
         $('#citySelect').siblings("input").prop('disabled', 'disabled');
         $.ajax({
             url: `/cities/${this.value}`,
-            success(results) {
+            success (results) {
                 const element = $('#citySelect');
                 element.prop('disabled', false);
                 element.siblings("input").prop('disabled', false);

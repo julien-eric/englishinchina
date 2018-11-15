@@ -8,6 +8,7 @@ const ContractDetails = new Schema({
     duration: { type: Number, required: [true, 'Please specify the length of the contract'] }
 });
 
+
 const TeachingDetails = new Schema({
     institution: { type: String, required: [true, 'Please specify the type of institution'] },
     weeklyLoad: { type: Number, required: [true, 'Please specify the weekly workload'] },
@@ -26,7 +27,7 @@ const validateEmail = function (email) {
     return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
 };
 
-module.exports = mongoose.model('Job', {
+const Job = new Schema({
     title: { type: String, required: [true, 'Please enter a job title'] },
     kicker: { type: String, required: [true, 'Please enter a kicker'] },
     pictureUrl: { type: String, required: [true, 'Please upload a picture'] },
@@ -60,3 +61,6 @@ module.exports = mongoose.model('Job', {
         default: () => ({})
     }
 });
+
+module.exports = mongoose.model('Job', Job);
+

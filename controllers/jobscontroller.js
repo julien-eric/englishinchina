@@ -202,5 +202,28 @@ JobsController.prototype.getQueryMessage = function (queryInfo) {
     return queryMessage;
 };
 
+JobsController.prototype.fillInValues = function (job) {
+
+    let jobInfo = job.toObject();
+
+    const jobParser = { teachingDetails: {}, benefits: {} };
+    jobParser.teachingDetails.classSize = ['0-10', '11-20', '21-30', '30+'];
+    jobParser.teachingDetails.ageGroup = ['Children', 'Teenagers', 'University', 'Adults'];
+    jobParser.benefits.accomodation = ['Not Provided', 'Provided', 'Partly Provided'];
+    jobParser.benefits.airfare = ['Paid', 'Not Paid', 'Inbound Flight Only', 'Partly Provided'];
+    jobParser.benefits.teachingAssistant = function (assistant) {
+        if (assistant) { return 'Yes'; }
+        else { return 'No'; }
+    };
+
+    jobInfo.teachingDetails.classSize = jobParser.teachingDetails.classSize[job.teachingDetails.classSize];
+    jobInfo.teachingDetails.ageGroup = jobParser.teachingDetails.ageGroup[job.teachingDetails.ageGroup];
+    jobInfo.benefits.accomodation = jobParser.benefits.accomodation[job.benefits.accomodation];
+    jobInfo.benefits.airfare = jobParser.benefits.airfare[job.benefits.airfare];
+    jobInfo.benefits.teachingAssistant = jobParser.benefits.teachingAssistant(job.benefits.teachingAssistant);
+
+    return jobInfo;
+};
+
 let jobsController = new JobsController();
 module.exports = jobsController;

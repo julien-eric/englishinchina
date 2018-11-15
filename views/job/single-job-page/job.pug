@@ -1,0 +1,40 @@
+extends ../../layout
+block content
+    .bg-dark
+        .container
+            .col-lg-12
+                include job-map-breadcrumb 
+
+    .container-fluid.bg-white
+        .container
+            .row
+                .col-lg-12.my-5
+                    h1.font-weight-bold #{job.title}
+                    h3 #{job.kicker}
+                    p.mb-0 
+                        i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+                        | Posted in #{moment(job.createdDate).format("MMMM YYYY")}
+
+    .container-fluid.bg-white.pb-5.mx-0
+        .row
+            .col-lg-6.mb-3.pl-0.ml-0.pr-0.pr-lg-3
+                img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
+            .col-lg-6.mb-3
+                include job-contract-details
+                include job-benefits
+                include job-teaching-details
+
+
+    .container-fluid.bg-pale-gray
+        .container.px-0.px-md-3
+            h4.text-uppercase.font-weight-bold.text-dark.mt-5 Description
+            .row.mt-5
+                .col-lg-12
+                    .show-more-container
+                        p.content-pre-wrap !{job.description}
+                    .show-more-link
+                        a(href='#') Show More
+                    .show-less-link.d-none
+                        a(href='#') Show Less
+                .col-lg-12.my-5
+                    include job-page-top-actions
