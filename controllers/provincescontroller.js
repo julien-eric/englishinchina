@@ -3,6 +3,7 @@
  */
 const Province = require('../models/province');
 const School = require('../models/school');
+const Job = require('../models/job');
 const companiesController = require('./companiescontroller');
 let _ = require('underscore');
 
@@ -82,7 +83,17 @@ module.exports = {
             { $limit: 9 }]).exec();
 
         return Province.populate(transactions, { path: '_id' });
+    },
 
+    async getMostPopularProvincesbyJobs () {
+
+        // At the moment featured schools are schools with the highest ratings
+        let transactions = await Job.aggregate([
+            { $group: { _id: '$province', number: { $sum: 1 }, pictureUrl: { $first: '$pictureUrl' } } },
+            { $sort: { number: -1 } },
+            { $limit: 9 }
+        ]).exec();
+        return Province.populate(transactions, { path: '_id' });
     }
 
 };

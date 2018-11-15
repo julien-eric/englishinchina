@@ -16,6 +16,10 @@ const SCSS_DEBUG = true;
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
+const jobCrawler = require('./jobCrawler/jobCrawler');
+const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+jobCrawler.init(null, 10, 120000, 15000, TWELVE_HOURS);
+
 /**
  * Used by stylus
  * @param {*} str String
@@ -23,20 +27,20 @@ const app = express();
  * @return {*} Return function
  */
 function compile (str, path) {
-  return stylus(str)
-    .set('filename', path);
+    return stylus(str)
+        .set('filename', path);
 }
 
 // Set variables used in views app-wide
 app.locals.fcbAppId = fcbAppId;
 if (environment == 'production') {
-  app.locals.analytics = true;
+    app.locals.analytics = true;
 } else {
-  process.on('unhandledRejection', (error, p) => {
-    // application specific logging, throwing an error, or other logic here
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', error);
-    console.log(error.stack);
-  });
+    process.on('unhandledRejection', (error, p) => {
+        // application specific logging, throwing an error, or other logic here
+        console.log('Unhandled Rejection at: Promise', p, 'reason:', error);
+        console.log(error.stack);
+    });
 }
 // let checkAdmin = function(req, res, next) {
 //   if (req.user && req.user.admin) {
@@ -56,25 +60,25 @@ app.use(favicon(`${__dirname}/public/favicon.ico`));
 // app.use(checkAdmin);
 
 app.use(stylus.middleware({
-  src: `${__dirname}/public`,
-  compile
+    src: `${__dirname}/public`,
+    compile
 }));
 
 const src = path.join(__dirname, 'public', 'scss');
 const dst = path.join(__dirname, 'public', 'stylesheets');
 
 if (!SCSS_DEBUG) {
-  console.log('WARNING: SCSS is not recompiling (not debug)');
+    console.log('WARNING: SCSS is not recompiling (not debug)');
 }
 
 app.use(sassMiddleware({
-  /* Options */
-  src: src,
-  dest: dst,
-  debug: SCSS_DEBUG,
-  outputStyle: 'compressed',
-  // indentedSyntax: true, // Add this to use SASS files
-  prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+    /* Options */
+    src: src,
+    dest: dst,
+    debug: SCSS_DEBUG,
+    outputStyle: 'compressed',
+    // indentedSyntax: true, // Add this to use SASS files
+    prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
 app.use(logger('dev'));
@@ -89,11 +93,11 @@ const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
 
 app.use(expressSession({
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000)) },
-  secret: 'mySecretKey',
-  resave: true,
-  saveUninitialized: true
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000)) },
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
 }));
 
 app.use(flash());
@@ -132,22 +136,22 @@ app.use('/province', provinceRoutes);
  catch 404 and forward to error handler
  ************************************************************** */
 app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use((err, req, res, next) => {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 module.exports = app;

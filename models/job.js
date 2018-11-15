@@ -36,7 +36,7 @@ module.exports = mongoose.model('Job', {
         type: String,
         validate: {
             validator: validateEmail,
-            message: '{VALUE} is not a valid email address!'
+            message: '"{VALUE}" is not a valid email address!'
         },
         required: [true, 'Please provide an email address']
     },

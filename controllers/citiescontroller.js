@@ -6,7 +6,7 @@ let _ = require('underscore');
 module.exports = {
 
     async getAllCities () {
-        return City.find().populate('province', ['name', 'code'] ).exec();
+        return City.find().populate('province', ['name', 'code']).exec();
     },
 
     async getProvinceCitiesByCode (provinceCode) {
@@ -27,7 +27,7 @@ module.exports = {
         return City.findOne({ pinyinName: { $regex: new RegExp('^' + name.toLowerCase(), 'i') } }).populate('province', 'code').exec();
     },
 
-    async queryCityiesByPinyinName (name, limit) {
+    async queryCitiesByPinyinName (name, limit) {
         let cityResults = await City.find({ 'pinyinName': { '$regex': name, '$options': 'i' } }).populate('province').exec();
         return { total: cityResults.length, list: limit ? _.first(cityResults, limit) : cityResults };
     },

@@ -23,6 +23,15 @@ JobsController.prototype.getJob = async (id) => {
     return job;
 };
 
+JobsController.prototype.getJobByTitle = async (title) => {
+    let titleUrl = utils.generateUrl(title);
+    let job = await Job.findOne({ url: titleUrl }).populate('user').populate('school').populate('province').populate('city').exec();
+    if (job) {
+        findPicture(job);
+    }
+    return job;
+};
+
 JobsController.prototype.getAllJobs = async () => {
     let jobs = await Job.find().populate('school').populate('province').populate('city').exec();
     jobs.forEach((job) => {

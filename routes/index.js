@@ -25,7 +25,7 @@ module.exports = function (passport) {
             let provinces = await provincesController.getAllProvinces();
             let popularCities = await citiesController.getMostPopularCities();
             let featuredJobs = await jobsController.getFeaturedJobs();
-            let popularProvinces = await provincesController.getMostPopularProvinces();
+            let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
             let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
             const splashText = require('../splash-text.json');
@@ -111,11 +111,11 @@ module.exports = function (passport) {
                 cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
             }
 
-            let popularProvinces = await provincesController.getMostPopularProvinces();
+            let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
 
             // title: `${searchResults.query} Schools - Second Language World`,
             res.render('search/search', {
-                title: `Schools - Second Language World`,
+                title: `Search - Second Language World`,
                 main: true,
                 schools: schools.list,
                 jobs: jobs.list,

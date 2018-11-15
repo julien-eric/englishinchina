@@ -14,7 +14,7 @@ block content
             .col-auto
                 a(data-toggle='collapse', href='#job-list-collapse', role='button', aria-expanded='false', aria-controls='job-list-collapse')
                     h4.text-uppercase.font-weight-bold.text-dark
-                        | Jobs
+                        | Jobs (#{jobs.length})
                         i.job-list-chevron.mdi.mdi-chevron-up(aria-hidden='true') 
             .col.text-right
                 a.btn.btn-sm.btn-link.pr-0(href="/job/add") Post a job offer 
@@ -29,7 +29,7 @@ block content
             .col-auto
                 a(data-toggle='collapse', href='#school-list-collapse', role='button', aria-expanded='false', aria-controls='school-list-collapse')
                     h4.text-uppercase.font-weight-bold.text-dark
-                        | Schools
+                        | Schools (#{schools.length})
                         i.school-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')                        
             .col.text-right
                 a.btn.btn-sm.btn-link.pr-0(href="/review") Add School 
@@ -46,7 +46,7 @@ block content
                     .col-auto
                         a(data-toggle='collapse', href='#company-list-collapse', role='button', aria-expanded='false', aria-controls='company-list-collapse')
                             h4.text-uppercase.font-weight-bold.text-dark 
-                                |Companies
+                                |Companies (#{companies.length})
                                 i.company-list-chevron.mdi.mdi-chevron-down(aria-hidden='true')  
                     //- .col.text-right
                     //-       a.btn.btn-sm.btn-link.pr-0(href="#") Add Company 
