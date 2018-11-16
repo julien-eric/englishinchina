@@ -11,14 +11,13 @@ const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
+const jobCrawler = require('./jobCrawler/jobCrawler');
 const SCSS_DEBUG = false;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
-// const jobCrawler = require('./jobCrawler/jobCrawler');
-// const TWELVE_HOURS = 12 * 60 * 60 * 1000;
-// jobCrawler.init(null, 10, 120000, 15000, TWELVE_HOURS);
+
 
 /**
  * Used by stylus
@@ -31,10 +30,21 @@ function compile (str, path) {
         .set('filename', path);
 }
 
+let getRandomArbitrary = function (min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+};
+
 // Set variables used in views app-wide
 app.locals.fcbAppId = fcbAppId;
 if (environment == 'production') {
     app.locals.analytics = true;
+
+    const HOURS_BETWEEN_SESSIONS = getRandomArbitrary(2, 3) * 60 * 60 * 1000;
+    const SUCCESS_COOLDOWN = getRandomArbitrary(30, 60) * 1000;
+    const FAILURE_COOLDOWN = getRandomArbitrary(5, 10) * 1000;
+    const INSERTS_PER_SESSION = getRandomArbitrary(5, 10) * 1000;
+    jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
+
 } else {
     process.on('unhandledRejection', (error, p) => {
         // application specific logging, throwing an error, or other logic here
@@ -42,15 +52,6 @@ if (environment == 'production') {
         console.log(error.stack);
     });
 }
-// let checkAdmin = function(req, res, next) {
-//   if (req.user && req.user.admin) {
-//     res.locals.admin = req.user.admin;
-//   } else {
-//     res.locals.admin = false;
-//   }
-//   next();
-// };
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -107,7 +107,7 @@ JobCrawler.prototype.visitPage = function (url, callback) {
     });
 };
 
-JobCrawler.prototype.fetchInformation = async function ($, word) {
+JobCrawler.prototype.fetchInformation = async function ($) {
 
     try {
 
@@ -115,6 +115,10 @@ JobCrawler.prototype.fetchInformation = async function ($, word) {
 
         let jobInfo = { contractDetails: {}, benefits: {}, teachingDetails: {} };
         jobInfo.title = $('.views-second-title').text().trim();
+        jobInfo.email = fieldProcessor.extractEmail($('.field-name-field-anon-email .field-items span').attr('data-cfemail'));
+        if (!jobInfo.email) {
+            jobInfo.email = 'secondlanguageworld@gmail.com';
+        }
 
         let job = await jobsController.getJobByTitle(jobInfo.title);
         if (job) {
@@ -155,7 +159,6 @@ JobCrawler.prototype.fetchInformation = async function ($, word) {
         jobInfo.teachingAssistant = fieldProcessor.extractAssistant($('.field-name-field-assistant .field-items').text().trim());
         jobInfo.vacationDays = Number($('.field-name-field-total-vacation .field-items').text().trim());
 
-        jobInfo.email = 'secondlanguageworld@gmail.com';
         let savedJob = await jobsController.addJob(undefined, jobInfo);
         if (savedJob) {
             console.log('ADDED: ' + savedJob.title);
@@ -202,6 +205,35 @@ FieldProcessor.prototype.extractSalary = function (salaryString) {
     } catch (error) {
         return new Error(error.message);
     }
+};
+
+FieldProcessor.prototype.extractEmail = function (encodedString) {
+    try {
+
+        let validateEmail = function (email) {
+            return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
+        };
+
+        let decodeEmail = function (encodedString) {
+            let email = '';
+            let r = parseInt(encodedString.substr(0, 2), 16);
+            let n;
+            let i;
+            for (n = 2; encodedString.length - n > 0; n += 2) {
+                i = parseInt(encodedString.substr(n, 2), 16) ^ r;
+                email += String.fromCharCode(i);
+            }
+            if (!validateEmail(email)) {
+                throw new Error('Email is not valid');
+            }
+            return email;
+        };
+        return decodeEmail(encodedString);
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+
 };
 
 FieldProcessor.prototype.extractDate = function (dateString) {
