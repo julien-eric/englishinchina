@@ -260,17 +260,26 @@ module.exports = function (passport) {
     });
 
     router.get('/:url', async (req, res) => {
-        let job = await jobsController.getJobByUrl(req.params.url);
-        job = jobsController.fillInValues(job);
-        res.render('job/single-job-page/job', {
-            title: 'SLW - ' + job.title,
-            user: req.user,
-            job,
-            moment,
-            pictureInfo: pictureinfo,
-            jadefunctions,
-            scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
-        });
+
+        try {
+            let job = await jobsController.getJobByUrl(req.params.url);
+            job = jobsController.fillInValues(job);
+            res.render('job/single-job-page/job', {
+                title: 'SLW - ' + job.title,
+                user: req.user,
+                job,
+                moment,
+                pictureInfo: pictureinfo,
+                jadefunctions,
+                scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+            });
+        } catch (error) {
+            res.render('error', {
+                message: error.message,
+                error: error
+            });
+        }
+
     });
 
     return router;
