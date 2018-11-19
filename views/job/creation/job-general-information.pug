@@ -14,8 +14,10 @@ block card
                 -textInput.label = 'Job Title'
                 -textInput.formName = formName
                 -textInput.class = formName
+                -textInput.max = 100
+                -textInput.min = 10
                 -textInput.required = true
-                -textInput.errorMessage = 'Please provide a title for your job'
+                -textInput.errorMessage = 'Please provide a title for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
                 include ../../input-templates/text-input
         .col-lg-6
             .md-form
@@ -26,9 +28,11 @@ block card
                 -textInput.label = 'Kicker'
                 -textInput.formName = formName
                 -textInput.class = formName
-                -textInput.required = true;
-                -textInput.errorMessage = 'Please provide a subtitle for your job'
-                -textInput.undertext = 'Also called "subtitle", this is supplementary information to add to the title';
+                -textInput.required = true
+                -textInput.min = 10
+                -textInput.max = 120
+                -textInput.errorMessage = 'Please provide a subtitle for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
+                -textInput.tooltip = 'Also called "subtitle", this is supplementary information to add to the title';
                 include ../../input-templates/text-input
     .row
         .col-lg-6
@@ -38,7 +42,7 @@ block card
                 -textInput.name = 'email'
                 -textInput.placeholder = 'Enter an email address...'
                 -textInput.label = 'Contact Email'
-                -textInput.required = true;
+                -textInput.required = true
                 -textInput.formName = formName
                 -textInput.class = formName
                 -textInput.type = email;

@@ -94,7 +94,7 @@ module.exports = function (passport) {
 
             jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
-                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 150);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
             }
 
             let bannerPicture;

@@ -54,7 +54,7 @@ module.exports = function (passport) {
             try {
 
                 let job = await jobsController.addJob(req.user, req.body);
-                res.redirect('/job/' + job.id);
+                res.redirect('/job/' + job.url);
 
             } catch (errorInfo) {
 
@@ -190,11 +190,11 @@ module.exports = function (passport) {
         }
     });
 
-    router.get('/apply/:id', utils.isAuthenticated, async (req, res) => {
+    router.get('/apply/:url', utils.isAuthenticated, async (req, res) => {
         if (!req.user.teachingDetails) {
-            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + req.params.id));
+            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + req.params.url));
         } else {
-            res.redirect('/job/message/' + req.params.id);
+            res.redirect('/job/message/' + req.params.url);
         }
     });
 
@@ -205,8 +205,8 @@ module.exports = function (passport) {
        * [Province] optional.
        * [City] optional
        ************************************************************************************************************ */
-    router.get('/message/:id', async (req, res) => {
-        let job = await jobsController.getJob(req.params.id);
+    router.get('/message/:url', async (req, res) => {
+        let job = await jobsController.getJobByUrl(req.params.url);
 
         let responseInfo;
         if (res.locals.flash.responseInfo) {
@@ -226,23 +226,23 @@ module.exports = function (passport) {
         });
     });
 
-    router.post('/message/:id', async (req, res) => {
+    router.post('/message/:url', async (req, res) => {
 
         try {
-            let job = await jobsController.getJob(req.params.id);
+            let job = await jobsController.getJobByUrl(req.params.url);
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
             await messagesController.createMessage(req.user, job.user, messageToSend);
-            res.redirect('/job/thankyou/' + job.id);
+            res.redirect('/job/thankyou/' + job.url);
         } catch (error) {
             res.flash('error', error.message);
-            res.redirect('/job/message/' + job.id);
+            res.redirect('/job/message/' + job.url);
         }
     });
 
-    router.get('/thankyou/:id', async (req, res) => {
+    router.get('/thankyou/:url', async (req, res) => {
         try {
-            let job = await jobsController.getJob(req.params.id);
+            let job = await jobsController.getJobByUrl(req.params.url);
             res.render('job/application/thank-you', {
                 title: 'Thank you from ' + job.title,
                 user: req.user,
@@ -255,12 +255,12 @@ module.exports = function (passport) {
         } catch (error) {
             res.flash('error', 'Sorry, there was a problem trying to send your message.');
             res.flash('error', error.message);
-            res.redirect('/job/message/' + job.id);
+            res.redirect('/job/message/' + job.url);
         }
     });
 
-    router.get('/:id', async (req, res) => {
-        let job = await jobsController.getJob(req.params.id);
+    router.get('/:url', async (req, res) => {
+        let job = await jobsController.getJobByUrl(req.params.url);
         job = jobsController.fillInValues(job);
         res.render('job/single-job-page/job', {
             title: 'SLW - ' + job.title,

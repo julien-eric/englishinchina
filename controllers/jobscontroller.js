@@ -32,8 +32,16 @@ JobsController.prototype.getJobByTitle = async (title) => {
     return job;
 };
 
+JobsController.prototype.getJobByUrl = async (url) => {
+    let job = await Job.findOne({ url }).populate('user').populate('school').populate('province').populate('city').exec();
+    if (job) {
+        findPicture(job);
+    }
+    return job;
+};
+
 JobsController.prototype.getAllJobs = async () => {
-    let jobs = await Job.find().populate('school').populate('province').populate('city').exec();
+    let jobs = await Job.find().sort({ dateCreated: -1 }).populate('school').populate('province').populate('city').exec();
     jobs.forEach((job) => {
         findPicture(job);
     });
@@ -137,7 +145,7 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
 
     let transactions = Job.aggregate([
         { $match: { title: { $regex: regex, $options: 'i' } } },
-        { $sort: { number: -1 } }
+        { $sort: { dateCreated: -1 } }
     ]);
 
     if (provinceInfo != MISSING) {

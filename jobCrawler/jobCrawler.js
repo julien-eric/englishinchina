@@ -241,7 +241,7 @@ FieldProcessor.prototype.extractDate = function (dateString) {
     if (Date.parse(date)) {
         return Date.parse(date);
     } else if (date == '' || date.indexOf('ASAP') != -1 || date.indexOf('continuous') != -1) {
-        return Date.now();
+        return new Date();
     }
 };
 

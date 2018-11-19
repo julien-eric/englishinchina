@@ -12,11 +12,10 @@ const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
 const jobCrawler = require('./jobCrawler/jobCrawler');
-const SCSS_DEBUG = false;
+let SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
-
 
 
 /**
@@ -38,6 +37,7 @@ let getRandomArbitrary = function (min, max) {
 app.locals.fcbAppId = fcbAppId;
 if (environment == 'production') {
     app.locals.analytics = true;
+    SCSS_DEBUG = false;
 
     const HOURS_BETWEEN_SESSIONS = getRandomArbitrary(2, 3) * 60 * 60 * 1000;
     const SUCCESS_COOLDOWN = getRandomArbitrary(30, 60) * 1000;
@@ -52,6 +52,8 @@ if (environment == 'production') {
         console.log(error.stack);
     });
 }
+
+// jobCrawler.init(null, 10, 1000, 1000, 10000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -14,11 +14,17 @@ if responseInfo && !textInput.value
             -textInput.value = responseInfo[textInput.responseSubProperty][textInput.name]
 
 if textInput.default 
-    label(for=textInput.name)  #{textInput.label}
-    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
+    label(for=textInput.name, data-error=textInput.errorMessage)  #{textInput.label}
+        if textInput.tooltip
+            i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title=textInput.tooltip )
+    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, required=textInput.required)
 else
-    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", required=textInput.required)
-    label(for=textInput.name)  #{textInput.label}
+    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, required=textInput.required)
+    label(for=textInput.name, data-error=textInput.errorMessage)  #{textInput.label}
+        if textInput.tooltip
+            i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title=textInput.tooltip )
+
+
 
 if textInput    
     p.text-small #{textInput.undertext}

@@ -115,11 +115,11 @@ $enable-shadows: false;
 // $error-color:  $slw-danger;
 // $success-color:  $slw-primary;
 //When we're ready to have a right sidebar of some sort
-// @media (min-width: 1200px) {
-//     .container {
-//         max-width: 1240px;
-//     }
-// }
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1240px;
+    }
+}
 @each $color,
 $value in $theme-colors {
     .text-shadow-#{$color} {

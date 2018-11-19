@@ -28,8 +28,8 @@ const validateEmail = function (email) {
 };
 
 const Job = new Schema({
-    title: { type: String, required: [true, 'Please enter a job title'] },
-    kicker: { type: String, required: [true, 'Please enter a kicker'] },
+    title: { type: String, required: [true, 'Please enter a job title'], minlength: [10, 'A title has to be at least 10 characters long'], maxlength: [120, 'A title can\'t be longer than 120 characters'] },
+    kicker: { type: String, required: [true, 'Please enter a kicker'], minlength: [10, 'A kicker has to be at least 10 characters long'], maxlength: [120, 'A kicker can\'t be longer than 120 characters'] },
     pictureUrl: { type: String, required: [true, 'Please upload a picture'] },
     pictureFileName: { type: String, required: [true, 'Please upload a picture'] },
     url: { type: String, required: [true, 'Job URL could not be formed from the title'] },
