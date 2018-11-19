@@ -192,7 +192,7 @@ module.exports = function (passport) {
 
     router.get('/apply/:id', utils.isAuthenticated, async (req, res) => {
         if (!req.user.teachingDetails) {
-            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=/job/message/' + req.params.id);
+            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + req.params.id));
         } else {
             res.redirect('/job/message/' + req.params.id);
         }
