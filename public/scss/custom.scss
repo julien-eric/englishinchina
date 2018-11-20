@@ -478,8 +478,8 @@ footer .form-control:focus {
     top: 0;
     bottom: 0; // margin-bottom: 50px;
     overflow-x: hidden;
-    -webkit-filter: brightness(65%);
-    filter: brightness(65%);
+    -webkit-filter: brightness(62%);
+    filter: brightness(62%);
 }
 
 .splash .splash-text {
@@ -650,6 +650,10 @@ input[type=range]+.thumb {
     color: inherit !important;
 }
 
+.btn-light-transparent:hover {
+    color: white;
+}
+
 .card-text {
     font-size: 0.9rem;
     color: #747373;
@@ -722,8 +726,8 @@ input[type=range]+.thumb {
     right: 0;
     top: 0;
     bottom: 0;
-    -webkit-filter: brightness(75%);
-    filter: brightness(75%);
+    -webkit-filter: brightness(70%);
+    filter: brightness(70%);
     background-position: center center;
     background-size: cover;
 }
