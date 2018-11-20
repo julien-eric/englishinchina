@@ -271,22 +271,45 @@ module.exports = function (passport) {
     /** **********************************************************************************************************
        *FACEBOOK LOGIN :   Facebook login will hit callback function below (login/facebook/callback)
        ************************************************************************************************************ */
-    router.get(
-        '/login/facebook',
-        passport.authenticate('facebook', { scope: 'email' }),
-    );
+    router.get('/login/facebook', (req, res, next) => {
+
+        if (req.query.redirectUrl) {
+            req.session.redirectUrl = req.query.redirectUrl;
+        }
+
+        passport.authenticate('facebook', { scope: 'email' })(req, res, next);
+    });
 
 
     /** **********************************************************************************************************
        *FACEBOOK LOGIN CALLBACK :   // handle the callback after facebook has authenticated the user
        ************************************************************************************************************ */
-    router.get(
-        '/login/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/'
-        }),
-    );
+    router.get('/login/facebook/callback', (req, res, next) => {
+
+        let redirectUrl = '/';
+        if (req.session.redirectUrl) {
+            redirectUrl = req.session.redirectUrl;
+        }
+        passport.authenticate('facebook', (err, user, info) => {
+
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                let loginPage = '/login';
+                if (redirectUrl) {
+                    loginPage += '?redirectUrl=' + encodeURIComponent(redirectUrl);
+                }
+                return res.redirect(loginPage);
+            }
+            req.logIn(user, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect(redirectUrl);
+            });
+        })(req, res, next);
+    });
 
 
     /** **********************************************************************************************************
