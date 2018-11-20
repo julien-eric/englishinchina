@@ -36,6 +36,7 @@ module.exports = function (passport) {
                 user: req.user,
                 provinces,
                 pictureInfo: pictureinfo,
+                moment,
                 jadefunctions,
                 featuredJobs,
                 popularCities,

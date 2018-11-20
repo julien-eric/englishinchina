@@ -343,6 +343,10 @@ footer .form-control:focus {
     width: 3.5rem;
 }
 
+.step.active .step-wrapper {
+    background-color: white !important;
+}
+
 .z-depth-1,
 .jumbotron,
 .md-form input[type=text].input-alternate,
@@ -1058,13 +1062,20 @@ $slw-inset-dark: #ebebeb;
 .img-caption {
     position: absolute;
     height: 100%;
-    top: 0px;
+    top: 145px;
     left: 0px;
     background-color: rgba(23, 23, 23, 0.38);
+    transition: top 0.6s ease;
 }
 
 .img-overlay:hover {
     transform: scale(1.01) rotate(0.1deg);
+}
+
+.img-overlay:hover > .img-caption { 
+    top: 0px;
+    background-color: rgba(23, 23, 23, 0.68);
+    transition: top 0.6s ease, background-color 0.6s ease; 
 }
 
 .bg-transparent {

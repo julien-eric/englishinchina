@@ -114,7 +114,7 @@ Stepper.prototype.goToPage = function (step) {
     $(that.contentSections).hide();
 
     $(that.contentSections[step]).show();
-    $(that.contentSections[step]).addClass('active');
+    $(that.navigationButtons[step]).addClass('active');
 
     that.currentStep = step;
 
@@ -157,6 +157,7 @@ Stepper.prototype.initNavigationButtons = function () {
         stepLink.attr('href', target);
 
         if ($(that.contentSections[index]).hasClass('active')) {
+            $(that.navigationButtons[index]).addClass('active');
             stepDiv.removeClass('disabled');
         } else if (index > 0 && $(that.contentSections[index - 1]).hasClass('active')) {
             stepDiv.removeClass('disabled');

@@ -31,16 +31,22 @@ block content
 
         //- Stepper
         nav.steps-form.mb-1
-                .row.steps-row.setup-panel.border-radius-5.bg-white
-                    .step.col-4
-                            a(href='#',  data-toggle='tooltip', data-placement='top', title='Inquirer Information') Job Information
-                                i.fa.fa-user(aria-hidden='true')
-                    .step.col-4
-                            a(href='#', data-toggle='tooltip', data-placement='top', title='Location') Job Details
-                                i.fa.fa-map-marker(aria-hidden='true')
-                    .step.col-4
-                            a(href='#', data-toggle='tooltip', data-placement='top', title='Finish') Confirmation
-                                i.fa.fa-check(aria-hidden='true')
+            .row.steps-row.setup-panel
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Job Information'
+                    -formTab.mdi = 'mdi-information'
+                    include form-tab
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Details'
+                    -formTab.mdi = 'mdi-file-document-box'
+                    include form-tab
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Confirmation'
+                    -formTab.mdi = 'mdi-check'
+                    include form-tab
 
 
         // Step content
