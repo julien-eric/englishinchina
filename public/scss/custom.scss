@@ -116,6 +116,16 @@ $enable-shadows: false;
 // $success-color:  $slw-primary;
 //When we're ready to have a right sidebar of some sort
 
+@font-face {
+    font-family: milkshake;
+    src: url('/font/Milkshake.otf');
+}
+
+.milkshake{
+    font-family: milkshake;
+    font-size: 6rem;
+}
+
 select {
     -webkit-appearance: none;
 }
@@ -495,11 +505,23 @@ footer .form-control:focus {
     .display-3 {
         font-size: 2.8rem;
     }
+    
+    .milkshake {
+        font-size: 3.6rem;
+    }
+
     .splash .splash-text {
         padding-top: 4rem;
     }
     #splash-kicker {
         font-size: 1.2rem;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+
+    .milkshake {
+        font-size: 3rem;
     }
 }
 
