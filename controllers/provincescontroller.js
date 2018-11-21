@@ -38,23 +38,33 @@ module.exports = {
      * @return {String} Returns a picture url in the form of a string, or undefined
      */
     async getProvincePic (code, random) {
+
         // At the moment picture is based on school with highest rating
         let provinceId = await Province.findOne({ code }).exec();
-        let transactions = await School.aggregate([
+
+        let schoolTransaction = await School.aggregate([
             { $group: { _id: '$province', number: { $sum: 1 }, pictureUrl: { $push: '$pictureUrl' } } },
             { $match: { _id: provinceId._id } },
             { $limit: 1 }
         ]).exec();
 
-        let province = await Province.populate(transactions, { path: '_id' });
-        if (province.length > 0 && province[0].pictureUrl.length > 0) {
+        let jobTransaction = await Job.aggregate([
+            { $group: { _id: '$province', number: { $sum: 1 }, pictureUrl: { $push: '$pictureUrl' } } },
+            { $match: { _id: provinceId._id } },
+            { $limit: 1 }
+        ]).exec();
 
-            let index = 0;
-            if (random) {
-                index = utils.getRandomArbitrary(0, province[0].pictureUrl.length - 1);
+        let province = await Province.populate(schoolTransaction, { path: '_id' });
+        province = province.concat(await Province.populate(jobTransaction, { path: '_id' }));
+
+        if (province.length > 0) {
+
+            let randomIndex = random ? utils.getRandomArbitrary(0, province.length - 1) : 0;
+            if (province[randomIndex].pictureUrl.length > 0) {
+
+                let pictureIndex = random ? utils.getRandomArbitrary(0, province[randomIndex].pictureUrl.length - 1) : 0;
+                return province[randomIndex].pictureUrl[pictureIndex];
             }
-
-            return province[0].pictureUrl[index];
 
         } else {
             return undefined;
