@@ -7,8 +7,8 @@ const provincesController = require('../controllers/provincescontroller');
 const citiesController = require('../controllers/citiescontroller');
 
 let PAGES_TO_VISIT = [
-    // 'https://teflsearch.com/job-results/country/china?page=1',
-    // 'https://teflsearch.com/job-results/country/china?page=2',
+    'https://teflsearch.com/job-results/country/china?page=1',
+    'https://teflsearch.com/job-results/country/china?page=2',
     'https://teflsearch.com/job-results/country/china?page=3',
     'https://teflsearch.com/job-results/country/china?page=4',
     'https://teflsearch.com/job-results/country/china?page=5',
@@ -138,7 +138,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
         if (location && location.province) {
             jobInfo.province = location.province;
             jobInfo.provinceCode = location.province.code;
-            jobInfo.pictureUrl = await provincesController.getProvincePic(location.city.province.code);
+            jobInfo.pictureUrl = await provincesController.getProvincePic(location.city.province.code, true);
             jobInfo.pictureFileName = 'not available';
         } else {
             throw new Error('Location could not be parsed');
@@ -295,8 +295,27 @@ FieldProcessor.prototype.extractWorkload = function (workload) {
         return workload.substring(0, workload.indexOf('+'));
     } else if (this.description) {
         let description = this.description.text().trim();
-        description.indexOf('per week');
+        return this.workloadRecognition(description);
     }
+};
+
+FieldProcessor.prototype.workloadRecognition = function (text) {
+    let workload;
+    let hasWeek = text.indexOf('week');
+    let hasHours = text.indexOf('hour');
+
+    if (hasWeek != -1 || hasHours != -1) {
+        let subText = text.substr(hasWeek - 30, hasWeek + 30);
+
+        // Match '32(2-digits) xxxxx(random string) hours'
+        let hoursReg = /\d\d+.?(\w*)+(.hours)/;
+        let match = hoursReg.exec(subText);
+        if (match) {
+            workload = subText.substring(match.index, match.index + 2)
+            console.log('Match found at ' + match.index);
+        }
+    }
+    return workload;
 };
 
 FieldProcessor.prototype.extractClassSize = function (classSize) {

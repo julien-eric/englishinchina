@@ -7,6 +7,7 @@ const flash = require('express-flash-2');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
 const sassMiddleware = require('node-sass-middleware');
+const utils = require('./utils');
 const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
@@ -29,20 +30,16 @@ function compile (str, path) {
         .set('filename', path);
 }
 
-let getRandomArbitrary = function (min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-};
-
 // Set variables used in views app-wide
 app.locals.fcbAppId = fcbAppId;
 if (environment == 'production') {
     app.locals.analytics = true;
     SCSS_DEBUG = false;
 
-    const HOURS_BETWEEN_SESSIONS = getRandomArbitrary(2, 3) * 60 * 60 * 1000;
-    const SUCCESS_COOLDOWN = getRandomArbitrary(30, 60) * 1000;
-    const FAILURE_COOLDOWN = getRandomArbitrary(15, 20) * 1000;
-    const INSERTS_PER_SESSION = getRandomArbitrary(2, 4) * 1000;
+    const HOURS_BETWEEN_SESSIONS = utils.getRandomArbitrary(2, 3) * 60 * 60 * 1000;
+    const SUCCESS_COOLDOWN = utils.getRandomArbitrary(30, 60) * 1000;
+    const FAILURE_COOLDOWN = utils.getRandomArbitrary(15, 20) * 1000;
+    const INSERTS_PER_SESSION = utils.getRandomArbitrary(2, 4) * 1000;
     jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
 
 } else {

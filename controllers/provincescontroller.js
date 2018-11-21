@@ -4,6 +4,7 @@
 const Province = require('../models/province');
 const School = require('../models/school');
 const Job = require('../models/job');
+const utils = require('../utils');
 const companiesController = require('./companiescontroller');
 let _ = require('underscore');
 
@@ -32,21 +33,29 @@ module.exports = {
 
     /**
      *
-     * @param {Int} code
+     * @param {Int} code The code of the province
+     * @param {Boolean} random Should it return a random picture or the first one
      * @return {String} Returns a picture url in the form of a string, or undefined
      */
-    async getProvincePic (code) {
+    async getProvincePic (code, random) {
         // At the moment picture is based on school with highest rating
         let provinceId = await Province.findOne({ code }).exec();
         let transactions = await School.aggregate([
-            { $group: { _id: '$province', number: { $sum: 1 }, pictureUrl: { $first: '$pictureUrl' } } },
+            { $group: { _id: '$province', number: { $sum: 1 }, pictureUrl: { $push: '$pictureUrl' } } },
             { $match: { _id: provinceId._id } },
             { $limit: 1 }
         ]).exec();
 
         let province = await Province.populate(transactions, { path: '_id' });
-        if (province.length > 0) {
-            return province[0].pictureUrl;
+        if (province.length > 0 && province[0].pictureUrl.length > 0) {
+
+            let index = 0;
+            if (random) {
+                index = utils.getRandomArbitrary(0, province[0].pictureUrl.length - 1);
+            }
+
+            return province[0].pictureUrl[index];
+
         } else {
             return undefined;
         }

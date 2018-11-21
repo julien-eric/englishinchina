@@ -122,6 +122,10 @@ module.exports = {
 
     generateUrl: function (string) {
         return string.replace(/[^a-z0-9_]+/gi, '-').replace(/^-|-$/g, '').toLowerCase();
+    },
+
+    getRandomArbitrary: function (min, max) {
+        return Math.round(Math.random() * (max - min) + min);
     }
 
 };
