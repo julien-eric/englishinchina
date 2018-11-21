@@ -41,8 +41,8 @@ if (environment == 'production') {
 
     const HOURS_BETWEEN_SESSIONS = getRandomArbitrary(2, 3) * 60 * 60 * 1000;
     const SUCCESS_COOLDOWN = getRandomArbitrary(30, 60) * 1000;
-    const FAILURE_COOLDOWN = getRandomArbitrary(5, 10) * 1000;
-    const INSERTS_PER_SESSION = getRandomArbitrary(5, 10) * 1000;
+    const FAILURE_COOLDOWN = getRandomArbitrary(15, 20) * 1000;
+    const INSERTS_PER_SESSION = getRandomArbitrary(2, 4) * 1000;
     jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
 
 } else {
@@ -53,7 +53,7 @@ if (environment == 'production') {
     });
 }
 
-// jobCrawler.init(null, 10, 1000, 1000, 10000);
+jobCrawler.init(null, 10, 1000, 1000, 10000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

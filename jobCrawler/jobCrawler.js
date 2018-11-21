@@ -247,8 +247,9 @@ FieldProcessor.prototype.extractDate = function (dateString) {
 
 FieldProcessor.prototype.extractDescription = function ($) {
 
+    this.description = $('.field-name-field-req-job-description .field-items .field-item.even');
     let description = '';
-    let impDescription = $('.field-name-field-req-job-description .field-items .field-item.even').html();
+    let impDescription = this.description.html();
 
     let about = $('.field-name-field-req-about-us .field-items .field-item.even').html();
     let offer = $('.field-name-field-req-salary-and-benefits .field-items .field-item.even').html();
@@ -292,6 +293,9 @@ FieldProcessor.prototype.extractWorkload = function (workload) {
         }
     } else if (workload.indexOf('+') != -1) {
         return workload.substring(0, workload.indexOf('+'));
+    } else if (this.description) {
+        let description = this.description.text().trim();
+        description.indexOf('per week');
     }
 };
 
