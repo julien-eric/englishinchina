@@ -1,34 +1,28 @@
 .py-5
     .container
         .row.justify-content-center
-            h1.display-4.text-center.font-weight-bold How does it work?
+            h1.display-4.text-center.font-weight-bold How Does It Work?
         .row.justify-content-center.my-5
-            .col-md-3
-                -var stepValue = 1
-                include step-indicator
-                .text-center.text-md-left
-                    h4.font-weight-bold Search our 
-                        a(href='/search') job board
-                    p Explore all our opportunities and see if there's one you like. 
-            .col-md-3
-                -var stepValue = 2
-                include step-indicator
-                .text-center.text-md-left
-                    h4.font-weight-bold Create a 
-                        a(href='/signup') profile
-                    p When you find a job, register to slworld and fill in your teacher information booklet.
-            .col-md-3
-                -var stepValue = 3
-                include step-indicator
-                .text-center.text-md-left
-                    h4.font-weight-bold Apply for a job
-                    p Apply to any job you're interested in! Just write the employer a message. 
-            .col-md-3
-                -var stepValue = 4
-                include step-indicator
-                .text-center.text-md-left
-                    h4.font-weight-bold Wait for a reply
-                    p Get your replies on here or by email.
+            .col-md-6
+                -var stepIcon = 'mdi-view-list'
+                -var stepTitle = 'Search our Job Board'
+                -var stepText = 'Find amazing ESL opportunities to teach across the world and read all about the offer and its location.'
+                include how-it-works-step
+            .col-md-6
+                -var stepIcon = 'mdi-map-marker'
+                -var stepTitle = 'Create A Profile'
+                -var stepText = 'When you find a job, register to Second Language World and fill in your teacher information booklet.'
+                include how-it-works-step
+            .col-md-6
+                -var stepIcon = 'mdi-briefcase-download'
+                -var stepTitle = 'Apply for a job'
+                -var stepText = 'Apply to any job you\'re interested in! Just write the employer a message and we\'ll forward your info.'
+                include how-it-works-step
+            .col-md-6
+                -var stepIcon = 'mdi-forum'
+                -var stepTitle = 'Wait for a reply'
+                -var stepText = 'Get your replies on here or by email. Also visit the companies and school profiles to see what other teachers had to say about it!'
+                include how-it-works-step
         .row.justify-content-center
             .col-md-12.text-center
                 a.btn.btn-lg.btn-primary(href='/search') get started!
