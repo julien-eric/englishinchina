@@ -7,8 +7,8 @@ const provincesController = require('../controllers/provincescontroller');
 const citiesController = require('../controllers/citiescontroller');
 
 let PAGES_TO_VISIT = [
-    'https://teflsearch.com/job-results/country/china?page=1',
-    'https://teflsearch.com/job-results/country/china?page=2',
+    // 'https://teflsearch.com/job-results/country/china?page=1',
+    // 'https://teflsearch.com/job-results/country/china?page=2',
     'https://teflsearch.com/job-results/country/china?page=3',
     'https://teflsearch.com/job-results/country/china?page=4',
     'https://teflsearch.com/job-results/country/china?page=5',

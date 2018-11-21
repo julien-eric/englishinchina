@@ -24,6 +24,10 @@ module.exports = {
         });
     },
 
+    renderTemplateHtml: function () {
+
+    },
+
     emailVerification: function (req, user) {
         let text = 'You\'re on your way! ' +
             'Let\'s confirm your email adress.\n\n' +
