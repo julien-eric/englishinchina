@@ -50,7 +50,7 @@ if (environment == 'production') {
     });
 }
 
-jobCrawler.init(null, 10, 1000, 1000, 10000);
+// jobCrawler.init(null, 10, 1000, 1000, 10000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
