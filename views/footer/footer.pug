@@ -10,7 +10,7 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                 h4.text-uppercase.text-small.text-lightgreen.mb-3 Explore
                 //- a.text-white(href='/about') secondlanguageworld@gmail.com
                 p.text-small.text-muted Second Language World is based in Montreal, Canada.    
-                
+
                 hr 
                 ul.list-unstyled
                     li.mb-1
@@ -29,15 +29,17 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
             .col-md-3.py-3
                 h4.text-uppercase.text-small.text-lightgreen.mb-3 Connect
                 p.text-small.text-muted Second Language World is happy to connect with users from all around the world on Facebook.    
-                ul.list-unstyled
-                    li.mb-1
-                        p.mb-1.text-white Email
-                        a.mt-1(href='mailto:secondlanguageworld@gmail.com') secondlanguageworld@gmail.com
-                    li.mb-1
-                        a.mb-1.text-white(href='https://www.facebook.com/secondlanguageworld/') Facebook
-                        .mt-1.fb-page.mb-3(data-href='https://www.facebook.com/secondlanguageworld/', data-tabs='timeline', data-height='70', data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
-                            blockquote.fb-xfbml-parse-ignore(cite='https://www.facebook.com/secondlanguageworld/')
-                                a(href='https://www.facebook.com/secondlanguageworld/') Second Language World
+                ul.list-unstyled.list-inline
+                    li.list-inline-item.mb-1
+                        a.text-center.mt-1(href='mailto:secondlanguageworld@gmail.com')
+                            .step-indicator-sm.border-radius-circle.border-1-primary.bg-primary
+                                p
+                                    i.text-white.mdi(aria-hidden='true', class='mdi-email')
+                    li.list-inline-item.mb-1
+                        a.text-center.mt-1(href='https://www.facebook.com/secondlanguageworld/')
+                            .step-indicator-sm.border-radius-circle.border-1-primary.bg-primary
+                                p
+                                    i.text-white.mdi(aria-hidden='true', class='mdi-facebook')
 
             .col-md-6.py-3
                 h4.text-uppercase.text-small.text-lightgreen.mb-3 Contact Us 
@@ -53,7 +55,7 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                         -textInput.required = true
                         -textInput.default = true;
                         include ../input-templates/text-input
-                        
+
                         -var textArea = {}
                         -textArea.id = 'textarea'
                         -textArea.name = 'message'

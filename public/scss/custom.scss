@@ -348,9 +348,19 @@ footer .form-control:focus {
     background-image: url('/images/logonameBlack.svg');
 }
 
-.step-indicator {
+.step-indicator-lg {
     height: 5rem;
     width: 5rem;
+}
+
+.step-indicator-md {
+    height: 3rem;
+    width: 3rem;
+}
+
+.step-indicator-sm {
+    height: 1.7rem;
+    width: 1.7rem;
 }
 
 .step.active .step-wrapper {
