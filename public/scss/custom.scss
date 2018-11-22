@@ -1094,6 +1094,11 @@ $slw-inset-dark: #ebebeb;
     transition: top 0.6s ease;
 }
 
+.img-caption.fixed {
+    top: 0;
+    background-color: rgba(23, 23, 23, 0.28);
+}
+
 .img-overlay:hover {
     transform: scale(1.01) rotate(0.1deg);
 }
