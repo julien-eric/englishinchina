@@ -1,0 +1,74 @@
+extends ../../templates/forms/form-card-container
+
+block card 
+    h3.mt-5.text-dark.font-weight-bold Your relationship with the school
+    //- p.mb-5 What is the name of the school you want to review?
+    #form-step-2(role='form', data-toggle='validator')
+        p Let us know about your relationship with the school. Getting an idea of when you worked there can be important to other teachers, the reputation of schools can change over time and it would be unfortunate if a bad review couldn't be overwritten by a pletora of positive ones. The position as a teacher and the salary won't ever be divulged in public and only serve to create an average of the school. 
+        .row.pt-3
+            .col-lg-6.form-group
+                -var select = {}
+                -select.options = [{'value': '', 'optionLabel': 'Position in School'}, {'value': 1, 'optionLabel': 'Teacher'}, {'value': 2, 'optionLabel': 'Teacher\'s Assistant(TA)'}, {'value': 3, 'optionLabel': 'Head Teacher'} ] 
+                -select.id = 'position'
+                -select.name = 'position'
+                -select.placeholder = 'Select one'
+                -select.label = 'Position in School'
+                -select.formName = formName
+                -select.class = formName
+                -select.required = true;
+                -select.crossRefAttributeValue = 'value'
+                -select.crossRefAttributeName = 'optionLabel'
+                -select.required = true
+                include ../../templates/inputs/generic-select
+        
+        .row
+            .col-lg-6.form-group
+                .md-form
+                    -var numberInput = {}
+                    -numberInput.id = 'salary'
+                    -numberInput.name = 'salary'
+                    -numberInput.label = 'Average Weekly Workload (hrs)'
+                    -numberInput.formName = formName
+                    -numberInput.class = formName
+                    -numberInput.placeholder = 'Monthly Salary'
+                    -numberInput.min = 1000    
+                    -numberInput.max = 100000
+                    -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+                    -numberInput.tooltip = 'Salaries are not saved as part of a review but simply aggregated anonymously to a school in order to calculate the average salary for a specific school (optional)'
+                    -numberInput.required = true
+                    include ../../templates/inputs/generic-number-input 
+
+        .row.pt-3
+
+            .col-lg-6.form-group
+                .md-form
+                    -var datepicker = {}
+                    -datepicker.id = 'start-date'
+                    -datepicker.name = 'dateEmployed'
+                    -datepicker.formName = formName
+                    -datepicker.class = formName
+                    -datepicker.placeholder = 'Please Select'
+                    -datepicker.label = 'Starting Date'
+                    -datepicker.errorMessage = 'Please select a date'
+                    -datepicker.required = true
+                    if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
+                        -datepicker.value = user.dateOfBirth
+                    include ../../templates/inputs/date-field
+            
+            .col-lg-6.form-group
+                .md-form
+                    -var datepicker = {}
+                    -datepicker.id = 'end-date'
+                    -datepicker.name = 'dateReleased'
+                    -datepicker.formName = formName
+                    -datepicker.class = formName
+                    -datepicker.placeholder = 'Please Select'
+                    -datepicker.label = 'End Date'
+                    -datepicker.errorMessage = 'Please select a date'
+                    -datepicker.required = true
+                    if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
+                        -datepicker.value = user.dateOfBirth
+                    include ../../templates/inputs/date-field
+
+        button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next
+        button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous

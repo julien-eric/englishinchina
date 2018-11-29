@@ -48,7 +48,7 @@ block card
                                 -select.crossRefAttributeName = 'name'
                                 if user && user.livingCountry
                                     - select.crossRefValue = user.livingCountry.code
-                                include ../input-templates/generic-select 
+                                include ../templates/inputs/generic-select 
                     
                             .col-lg-6.form-group
                                 -var select = {}
@@ -62,7 +62,7 @@ block card
                                 -select.crossRefAttributeName = 'name'
                                 if user && user.citizenship
                                     - select.crossRefValue = user.citizenship.code
-                                include ../input-templates/generic-select 
+                                include ../templates/inputs/generic-select 
 
                         
                         .row
@@ -75,7 +75,7 @@ block card
                                 -datepicker.errorMessage = 'Please select a date'
                                 if user.dateOfBirth
                                     -datepicker.value = user.dateOfBirth
-                                include ../input-templates/date-field
+                                include ../templates/inputs/date-field
 
                         .text-center.mt-5
                             button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Save Changes

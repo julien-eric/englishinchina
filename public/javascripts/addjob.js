@@ -15,17 +15,29 @@ let addSchoolCallback = function (data) {
         $('#noSchool').prop('disabled', true);
         validateField($('#queryInfo')[0]);
     }
-}
+};
 
 let ajaxAddSchool = function (url) {
-
     $.ajax({
         type: "POST",
         url: url,
         data: $("#add-school-form").serialize(), // serializes the form's elements.
         success: addSchoolCallback
     });
-}
+};
+
+function countChar (textArea) {
+    let charNumber = textArea.value.length;
+    let charNumberElem = $('#charNumber');
+    charNumberElem.text(charNumber);
+    if (charNumber < 140) {
+        charNumberElem.addClass('text-danger');
+        charNumberElem.removeClass('text-primary');
+    } else if (charNumber > 140) {
+        charNumberElem.addClass('text-primary');
+        charNumberElem.removeClass('text-danger');
+    }
+};
 
 let initDatePickers = function () {
 
@@ -56,7 +68,7 @@ let initDatePickers = function () {
             from_picker.set({ 'min': Date.now() });
             to_picker.set({ 'min': Date.now(), 'max': 1095 });
         }
-        
+
         from_picker.on('set', function (event) {
             if (event.select) {
                 to_picker.set('min', from_picker.get('select'))
@@ -81,18 +93,7 @@ let initDatePickers = function () {
 
 };
 
-$(document).ready(() => {
-
-    //If we have the school as a param we start on Page 2
-    if ($('#schoolId').val() == '') {
-        $('#step-0-indicator').trigger('click');
-    } else {
-        $('#step-1-indicator').trigger('click');
-        $('#step-1-indicator').parent().removeClass('disabled');
-    }
-
-    let stepper = new Stepper();
-    stepper.init();
+let initSliders = function () {
 
     let sliders = $('.slider');
     let outputs = $('.output');
@@ -102,26 +103,42 @@ $(document).ready(() => {
             outputs[item].innerHTML = this.value;
         }
     });
+};
 
-    initDatePickers();
+let initAddSchoolAjax = function () {
 
-    $('#citySelect').change(function () {
-        if ($(this).val() != '') {
-            $('#noSchool').prop('disabled', false);
-        } else {
-            $('#noSchool').prop('disabled', true);
-        }
-    });
+    if ($('#addSchool').length != 0) {
 
-    // On collapse, change school name input to be part of add-school-form
-    $('#addSchoolCollapsible').on('shown.bs.collapse', function () {
-        $('#provinceSelect').prop('required', true);
-        $('#citySelect').prop('required', true);
-    })
-    $('#addSchoolCollapsible').on('hidden.bs.collapse', function () {
-        $('#provinceSelect').prop('required', false);
-        $('#citySelect').prop('required', false);
-    })
+        // On collapse, change school name input to be part of add-school-form
+        $('#addSchoolCollapsible').on('shown.bs.collapse', function () {
+            $('#provinceSelect').prop('required', true);
+            $('#citySelect').prop('required', true);
+        })
+        $('#addSchoolCollapsible').on('hidden.bs.collapse', function () {
+            $('#provinceSelect').prop('required', false);
+            $('#citySelect').prop('required', false);
+        })
+
+        // Intercept create school form submission
+        $('#add-school-form').submit(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.currentTarget.checkValidity()) {
+                ajaxAddSchool('/school/addschool');
+            } else {
+                alert('not valid');
+            }
+        });
+
+        // Map create school button submission
+        $('#addSchool').click(function (event) {
+            $('#add-school-form').submit();
+        });
+    }
+
+};
+
+let initRange = function () {
 
     // this script will activate a range selector on every .nouirange element with a specific html structure with valid input. Options like minand max are taken from the html attributes.
     document.querySelectorAll('.nouirange').forEach(function (el) {
@@ -157,8 +174,6 @@ $(document).ready(() => {
             realmaxinput.value = String(values[1]);
             $('#salary-higher').val(Math.round(values[1]));
         });
-
-
     });
 
     $("#salary-lower").bind('keyup mouseup', function () {
@@ -168,23 +183,24 @@ $(document).ready(() => {
     $("#salary-higher").bind('keyup mouseup', function () {
         $('#salaryRange').noUiSlider.set($(this).val());
     });
+};
 
+$(document).ready(() => {
 
-    // Map create school button submission
-    $('#addSchool').click(function (event) {
+    let stepper = new Stepper();
+    stepper.init();
 
-        // Intercept create school form submission
-        $('#add-school-form').submit(function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            if (event.currentTarget.checkValidity()) {
-                ajaxAddSchool('/school/addschool');
-            } else {
-                alert('not valid');
-            }
-        });
+    initSliders();
+    initDatePickers();
+    initRange();
+    initAddSchoolAjax();
 
-        $('#add-school-form').submit();
+    $('#citySelect').change(function () {
+        if ($(this).val() != '') {
+            $('#noSchool').prop('disabled', false);
+        } else {
+            $('#noSchool').prop('disabled', true);
+        }
     });
 
     //Validation feedback for the user coming for a specific school (it's already selected)
@@ -194,16 +210,3 @@ $(document).ready(() => {
     }
 
 });
-
-function countChar(textArea) {
-    let charNumber = textArea.value.length;
-    let charNumberElem = $('#charNumber');
-    charNumberElem.text(charNumber);
-    if (charNumber < 140) {
-        charNumberElem.addClass('text-danger');
-        charNumberElem.removeClass('text-primary');
-    } else if (charNumber > 140) {
-        charNumberElem.addClass('text-primary');
-        charNumberElem.removeClass('text-danger');
-    }
-};

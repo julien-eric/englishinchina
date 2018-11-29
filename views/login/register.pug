@@ -15,7 +15,7 @@ block card
                                 -textInput.placeholder = 'Username'
                                 -textInput.label = 'Username'
                                 -textInput.required = true;
-                                include ../input-templates/text-input
+                                include ../templates/inputs/text-input
                         .form-check.pl-0                             
                                 -var formCheck = {}
                                 -formCheck.id = 'anonymous'
@@ -23,7 +23,7 @@ block card
                                 -formCheck.label = 'Make me anonymous across SLWorld'
                                 -formCheck.required = true;
                                 -formCheck.underText = 'This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.';
-                                include ../input-templates/form-check
+                                include ../templates/inputs/form-check
                         .md-form.my-5
                                 -var textInput = {}
                                 -textInput.id = 'email'
@@ -32,7 +32,7 @@ block card
                                 -textInput.placeholder = 'Email'
                                 -textInput.label = 'Email'
                                 -textInput.required = true;
-                                include ../input-templates/text-input
+                                include ../templates/inputs/text-input
                         .md-form.mb-5
                                 -var textInput = {}
                                 -textInput.id = 'password'
@@ -41,7 +41,7 @@ block card
                                 -textInput.placeholder = 'Password'
                                 -textInput.label = 'Password'
                                 -textInput.required = true;
-                                include ../input-templates/text-input
+                                include ../templates/inputs/text-input
                         .text-center
                                 button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Register
                         p.text-left.text-small

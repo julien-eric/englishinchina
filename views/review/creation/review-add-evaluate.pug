@@ -1,0 +1,49 @@
+extends ../../templates/forms/form-card-container
+
+block card
+
+    h3.mt-5.text-dark.font-weight-bold Evaluate
+    //- p.mb-5 What is the name of the school you want to review?
+    #form-step-1(role='form', data-toggle='validator')
+        .pb-5
+        each criterium,i in criteria
+                .pb-5
+                    h4 #{criterium.code}. #{criterium.name}
+                    p !{criterium.description}
+                    .row.justify-content-center
+
+                            .col-sm-8.pt-1.slidecontainer.range-field
+                                input.slider(id='slider'+i name=criterium.label form=formName class=formName type='range', min='1', max='10', value='2')
+                            .text-center.font-weight-light.col-sm-2(id='ex'+(i+1)+'CurrentSliderValLabel') Score:
+                                span.output(id='criteria'+i) 2
+                                span /10
+
+        h3.mt-5.text-dark.font-weight-bold Write about your experience
+        //- p.mb-5 What is the name of the school you want to review?
+        p.py-2 Is there anything else you wish to say about the school, or about the city in terms of how it affected your experience teaching abroad
+        //- .row
+        //-     .col-lg-12
+        //-         .md-form
+        //-             -var textArea = {}
+        //-             -textArea.id = 'comment'
+        //-             -textArea.name = 'comment'
+        //-             -textArea.rows = 10
+        //-             -textArea.formName = formName
+        //-             -textArea.class = formName
+        //-             -textArea.required = true
+        //-             include ../../templates/inputs/text-area
+        .md-form
+                textarea#schoolComment.form-control.md-textarea(rows='8' onkeyup="countChar(this)" form=formName name='comment' minlength=140 class=formName placeholder='Type your comment here' required)
+                label(for='schoolComment') Comment 
+                p.text-small Minimum 140 characters ( 
+                    span#charNumber.text-danger.font-weight-bold 0
+                    span /140)
+
+        .row.mt-5
+            .col-lg-12
+                button.btn.btn-lg.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
+                    | Next
+                    i.mdi.mdi-arrow-right(aria-hidden='true')
+                button.btn.btn-lg.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') 
+                    i.mdi.mdi-arrow-left(aria-hidden='true')
+                    | Previous

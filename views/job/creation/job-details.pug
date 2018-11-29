@@ -1,4 +1,4 @@
-extends job-add-template
+extends ../../templates/forms/form-card-container
 
 block card
     h3.mt-5.text-dark.font-weight-bold Job Details
@@ -35,7 +35,7 @@ block card
                         -numberInput.disabled = true
                         -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
                         -numberInput.required = true
-                        include ../../input-templates/generic-number-input 
+                        include ../../templates/inputs/generic-number-input 
 
                 .col-sm-6
                     .form-group.md-form.disabled
@@ -50,7 +50,7 @@ block card
                         -numberInput.disabled = true
                         -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
                         -numberInput.required = true
-                        include ../../input-templates/generic-number-input 
+                        include ../../templates/inputs/generic-number-input 
 
     .row.mt-3
         .col-lg-6.form-group
@@ -66,7 +66,7 @@ block card
                 -datepicker.required = true
                 if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
                     -datepicker.value = user.dateOfBirth
-                include ../../input-templates/date-field
+                include ../../templates/inputs/date-field
 
         .col-lg-6.form-group
             .md-form
@@ -83,7 +83,7 @@ block card
                 -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
                 -numberInput.tooltip = 'Duration of contract in years'
                 -numberInput.required = true
-                include ../../input-templates/generic-number-input 
+                include ../../templates/inputs/generic-number-input 
 
 
     h3.mt-5.text-dark.font-weight-bold Benefits
@@ -103,7 +103,7 @@ block card
             -select.required = true;
             -select.crossRefAttributeValue = 'value'
             -select.crossRefAttributeName = 'optionLabel'
-            include ../../input-templates/generic-select
+            include ../../templates/inputs/generic-select
 
                 
         .col-lg-6.form-group
@@ -119,7 +119,7 @@ block card
             -select.required = true;
             -select.crossRefAttributeValue = 'value'
             -select.crossRefAttributeName = 'optionLabel'
-            include ../../input-templates/generic-select
+            include ../../templates/inputs/generic-select
 
     .row
         .col-lg-6.form-group
@@ -135,7 +135,7 @@ block card
             -select.required = true;
             -select.crossRefAttributeValue = 'value'
             -select.crossRefAttributeName = 'optionLabel'
-            include ../../input-templates/generic-select
+            include ../../templates/inputs/generic-select
 
         .col-lg-6.form-group
                 .md-form
@@ -154,7 +154,7 @@ block card
                     -numberInput.required = true
                     if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
                         - numberInput.value = responseInfo.jobDetails.vacationDays
-                    include ../../input-templates/generic-number-input 
+                    include ../../templates/inputs/generic-number-input 
 
     h3.mt-5.text-dark.font-weight-bold Teaching Environment
     p.mb-3 What should the teachers be expecting in terms of the work environment
@@ -171,7 +171,7 @@ block card
                 -textInput.formName = formName
                 -textInput.class = formName
                 -textInput.required = true;
-                include ../../input-templates/text-input
+                include ../../templates/inputs/text-input
 
         .col-lg-6.form-group
             .md-form
@@ -188,7 +188,7 @@ block card
                 -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
                 //- -numberInput.tooltip = 'Number of vacation days yearly'
                 -numberInput.required = true
-                include ../../input-templates/generic-number-input 
+                include ../../templates/inputs/generic-number-input 
 
         .col-lg-6.form-group
             -var select = {}
@@ -204,7 +204,7 @@ block card
             -select.crossRefAttributeValue = 'value'
             -select.crossRefAttributeName = 'optionLabel'
             -select.required = true
-            include ../../input-templates/generic-select
+            include ../../templates/inputs/generic-select
 
         .col-lg-6.form-group
             -var select = {}
@@ -220,7 +220,7 @@ block card
             -select.crossRefAttributeValue = 'value'
             -select.crossRefAttributeName = 'optionLabel'
             -select.required = true
-            include ../../input-templates/generic-select
+            include ../../templates/inputs/generic-select
 
     .row.mt-5
         .col-lg-12

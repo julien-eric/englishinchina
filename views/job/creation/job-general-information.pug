@@ -1,4 +1,4 @@
-extends job-add-template
+extends ../../templates/forms/form-card-container
 
 block card
     h3.mt-5.text-dark.font-weight-bold General Information
@@ -18,7 +18,7 @@ block card
                 -textInput.min = 10
                 -textInput.required = true
                 -textInput.errorMessage = 'Please provide a title for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
-                include ../../input-templates/text-input
+                include ../../templates/inputs/text-input
         .col-lg-6
             .md-form
                 -var textInput = {}
@@ -33,7 +33,7 @@ block card
                 -textInput.max = 120
                 -textInput.errorMessage = 'Please provide a subtitle for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
                 -textInput.tooltip = 'Also called "subtitle", this is supplementary information to add to the title';
-                include ../../input-templates/text-input
+                include ../../templates/inputs/text-input
     .row
         .col-lg-6
             .md-form
@@ -49,12 +49,11 @@ block card
                 -textInput.undertext = 'This is the email that will be visible on the job offer page, more often than not this email is managed by HR or the recruitment departement, please be careful if you enter a personal email as this will be displayed publicly'
                 if responseInfo && !responseInfo[textInput.name] && user && user.email
                     -textInput.value = user.email
-                include ../../input-templates/text-input
+                include ../../templates/inputs/text-input
 
 
     h3.mt-5.text-dark.font-weight-bold School Location
     p.mb-3 Please specify which city and province the school targeted by this ad is located in?
-    //- hr
 
     .row
         .col-lg-6.form-group
@@ -69,12 +68,12 @@ block card
                 -select.crossRefAttributeValue = 'code'
                 -select.crossRefAttributeName = 'name'
                 -select.required = true
-                include ../../input-templates/generic-select 
+                include ../../templates/inputs/generic-select 
 
-        include cities
         .col-lg-6.form-group
                 -var select = {}
                 -select.options = cities 
+                -select.disabled = true 
                 -select.label = 'City'
                 -select.placeholder = 'City'
                 -select.name = 'cityCode'
@@ -84,7 +83,7 @@ block card
                 -select.crossRefAttributeValue = 'code'
                 -select.crossRefAttributeName = 'pinyinName'
                 -select.required = true
-                include ../../input-templates/generic-select 
+                include ../../templates/inputs/generic-select 
 
 
     h3.mt-5.mb-3.text-dark.font-weight-bold Description
@@ -99,7 +98,7 @@ block card
                 -textArea.formName = formName
                 -textArea.class = formName
                 -textArea.required = true
-                include ../../input-templates/text-area
+                include ../../templates/inputs/text-area
                 
     h3.mt-5.text-dark.font-weight-bold Picture
     p.mb-3 This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.
@@ -114,7 +113,7 @@ block card
         -fileInput.class = formName
         -fileInput.isPicture = true
         -fileInput.required = true
-        include ../../input-templates/file-uploader-picture
+        include ../../templates/inputs/file-uploader-picture
 
     .row.mt-5
         .col-lg-12

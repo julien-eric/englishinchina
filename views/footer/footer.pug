@@ -58,7 +58,7 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                         -textInput.label = 'Your Email'
                         -textInput.required = true
                         -textInput.default = true;
-                        include ../input-templates/text-input
+                        include ../templates/inputs/text-input
 
                         -var textArea = {}
                         -textArea.id = 'textarea'
@@ -67,5 +67,5 @@ footer.bg-dark.text-light-secondary.font-weight-light.py-5.border-top.border-gra
                         -textArea.placeholder = 'Your message'
                         -textArea.rows = 3
                         -textArea.required = true
-                        include ../input-templates/text-area
+                        include ../templates/inputs/text-area
                     button.btn.btn-primary.btn-sm.ml-0.mt-3(class='', type='submit') Submit

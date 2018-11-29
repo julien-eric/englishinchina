@@ -49,8 +49,8 @@ SchoolsController.prototype.getSchools = async function (pageSize, page) {
 SchoolsController.prototype.addSchool = async function (user, school) {
 
     let userId = user ? user._id : null;
-    let province = await provincesController.getProvinceByCode(school.province);
-    let city = await citiesController.getCityByCode(school.city);
+    let province = await provincesController.getProvinceByCode(school.provinceCode);
+    let city = await citiesController.getCityByCode(school.cityCode);
     let company = null;
     if (school.company !== '-1') {
         company = await companiesController.findCompanyById(school.company);

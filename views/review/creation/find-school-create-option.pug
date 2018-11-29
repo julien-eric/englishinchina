@@ -1,0 +1,11 @@
+#noSchoolGroup.form-group.d-none
+    .form-check.pl-0
+        if searchInfo.city
+            input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible')
+        else
+            input#noSchool.form-check-input(type='checkbox', data-toggle='collapse', data-target='#addSchoolCollapsible' disabled)
+        label.form-check-label(for='noSchool') Create school with this name
+
+#addSchoolCollapsible.collapse
+    -formName = 'add-school-form'
+    include add-school-review-form

@@ -16,7 +16,7 @@ let Stepper = function () {
 
 Stepper.prototype.init = function () {
 
-    this.finalForm = $('.stepper form').not('.stepper-nested-forms form');
+    this.finalForm = $('.stepper form').not('.stepper-nested-forms form, .stepper-extra-forms form');
     this.contentSections = this.finalForm.children('.setup-content');
     this.navigationButtons = $('.stepper nav .step');
     this.sectionForms = $('.stepper .stepper-nested-forms form');

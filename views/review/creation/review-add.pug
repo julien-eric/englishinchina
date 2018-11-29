@@ -1,27 +1,38 @@
 extends ../../layout
 block content
     .container.stepper
-        h1#write-review-title.py-5 Post a Job Offer
+        h1#write-review-title.py-5 Write A Review
             
-        include default-job-info
+        //- include default-job-info
 
         .stepper-nested-forms
             form.validate-form(action='/', method='post')
             form.validate-form(action='/', method='post')
+            form.validate-form(action='/', method='post')
+        .stepper-extra-forms
+            form#add-school-form.validate-form(action='/', method='post')
 
         //- Stepper
         nav.steps-form.mb-1
             .row.steps-row.setup-panel
                 .step.px-1.col-4
                     -var formTab = {}
-                    -formTab.text = 'Job Information'
-                    -formTab.mdi = 'mdi-information'
+                    -formTab.text = 'Location'
+                    -formTab.mdi = 'mdi-map-marker'
                     include ../../templates/forms/form-tab
+
                 .step.px-1.col-4
                     -var formTab = {}
-                    -formTab.text = 'Details'
+                    -formTab.text = 'Relationship'
                     -formTab.mdi = 'mdi-file-document-box'
                     include ../../templates/forms/form-tab
+
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Rating'
+                    -formTab.mdi = 'mdi-file-document-box'
+                    include ../../templates/forms/form-tab
+
                 .step.px-1.col-4
                     -var formTab = {}
                     -formTab.text = 'Confirmation'
@@ -30,18 +41,25 @@ block content
 
 
         // Step content
-        form#job-form(action='/job', method='POST' novalidate='')
+        form#review-form(action='/review', method='POST' novalidate='')
+
+            input#token.d-none(name="submissionTokenVal" value=tokenValue form=formName)
 
             // First Step
             .row.setup-content.active
                 -formName = 'form-0'
-                include job-general-information
+                include find-school
             
             // Second Step
             .row.setup-content
                 -formName = 'form-1'
-                include job-details
+                include review-add-relationship
+            
+            // Second Step
+            .row.setup-content
+                -formName = 'form-2'
+                include review-add-evaluate
                     
             // Submission Step
             .row.setup-content
-                include job-confirmation
+                include review-add-confirmation

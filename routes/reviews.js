@@ -17,9 +17,9 @@ const tokensController = require('../submissiontokens');
 module.exports = function (passport) {
 
     /** **********************************************************************************************************
-         *WriteReview : Page for users to write review for school specified by id
-         * Param : School id
-         ************************************************************************************************************ */
+    *WriteReview : Page for users to write review for school specified by id
+    * Param : School id
+    ************************************************************************************************************ */
     router.get('/', async (req, res) => {
 
         try {
@@ -48,7 +48,7 @@ module.exports = function (passport) {
             let token = tokensController.createToken();
             let companies = await companiesController.getAllCompanies();
             let provinces = await provincesController.getAllProvinces();
-            res.render('review/writereview', {
+            res.render('review/creation/review-add', {
                 title: `Write Review - SLW`,
                 user: req.user,
                 criteria,
@@ -60,7 +60,8 @@ module.exports = function (passport) {
                 searchInfo,
                 tokenValue: token.value,
                 jadefunctions,
-                scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
+                scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead,
+                scripts.addjob, scripts.libtinyMCE, scripts.tinyMCE, scripts.stepper, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
             });
 
         } catch (error) {

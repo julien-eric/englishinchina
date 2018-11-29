@@ -12,18 +12,19 @@ if responseInfo && !select.crossRefValue
 if typeof(select.crossRefValue) != "string"
     -select.crossRefValue = JSON.stringify(select.crossRefValue)
 
-select.mdb-select.md-form.add-school-form.validate(name=select.name, id=select.id, class=select.formName, form=select.formName, required=select.required)
+select.mdb-select.md-form.add-school-form.validate(name=select.name, id=select.id, class=select.formName, form=select.formName, disabled=select.disabled required=select.required)
     option(value='', disabled='', selected='') #{select.placeholder}
-    each opt in select.options
+    if select.options
+        each opt in select.options
 
-        //- Also convert option value to string to avoid type mismatches returning false
-        if typeof(opt[select.crossRefAttributeValue]) != "string"
-            -opt[select.crossRefAttributeValue] = JSON.stringify(opt[select.crossRefAttributeValue])
+            //- Also convert option value to string to avoid type mismatches returning false
+            if typeof(opt[select.crossRefAttributeValue]) != "string"
+                -opt[select.crossRefAttributeValue] = JSON.stringify(opt[select.crossRefAttributeValue])
 
-        if select.crossRefValue == opt[select.crossRefAttributeValue]
-            option(value=opt[select.crossRefAttributeValue], selected='true') #{opt[select.crossRefAttributeName]}
-        else
-            option(value=opt[select.crossRefAttributeValue]) #{opt[select.crossRefAttributeName]}
+            if select.crossRefValue == opt[select.crossRefAttributeValue]
+                option(value=opt[select.crossRefAttributeValue], selected='true') #{opt[select.crossRefAttributeName]}
+            else
+                option(value=opt[select.crossRefAttributeValue]) #{opt[select.crossRefAttributeName]}
 
 label.col-12.px-0(for=select.name, data-error=select.errorMessage, data-success='Thank you.') #{select.label}
 -var select = {}

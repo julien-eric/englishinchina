@@ -1,0 +1,126 @@
+h3.mt-5.text-dark.font-weight-bold Create a New School
+//- p.mb-5 What is the name of the school you want to review?
+#form-step-01(role='form', data-toggle='validator')
+    p.py-3.text-small Before considering this, please make sure you have looked thoroughly to make sure the school you are looking for doesn't exist by a similar yet different name somewhere on our site!
+    .row
+        .col-lg-12
+            .form-group
+
+                input#add-school-ajax.d-none(type='text', name='ajax', form="add-school-form", class='form-control', value='true')
+
+                .row
+                    .col-lg-6.form-group
+                        .md-form
+                            -var textInput = {}
+                            -textInput.id = 'name'
+                            -textInput.name = 'name'
+                            -textInput.placeholder = 'School Name'
+                            -textInput.label = 'School Name'
+                            -textInput.formName = formName
+                            -textInput.class = formName
+                            -textInput.required = true
+                            include ../../templates/inputs/text-input
+                    .col-lg-6.form-group
+                        -var select = {}
+                        -select.options = companies 
+                        -select.label = 'Company'
+                        -select.placeholder = 'Company'
+                        -select.name = 'company'
+                        -select.id = 'company'
+                        -select.formName = formName
+                        -select.class = formName
+                        -select.crossRefAttributeValue = 'id'
+                        -select.crossRefAttributeName = 'name'
+                        include ../../templates/inputs/generic-select 
+                .row
+                    .col-lg-6.form-group
+                        -var select = {}
+                        -select.options = provinces 
+                        -select.label = 'Province'
+                        -select.placeholder = 'Province'
+                        -select.name = 'provinceCode'
+                        -select.id = 'provinceSelect'
+                        -select.formName = formName
+                        -select.class = formName
+                        -select.crossRefAttributeValue = 'code'
+                        -select.crossRefAttributeName = 'name'
+                        -select.required = true
+                        include ../../templates/inputs/generic-select 
+
+                    .col-lg-6.form-group
+                        -var select = {}
+                        -select.options = cities 
+                        -select.label = 'City'
+                        -select.placeholder = 'City'
+                        -select.name = 'cityCode'
+                        -select.id = 'citySelect'
+                        -select.formName = formName
+                        -select.class = formName
+                        -select.crossRefAttributeValue = 'code'
+                        -select.crossRefAttributeName = 'pinyinName'
+                        -select.required = true
+                        include ../../templates/inputs/generic-select 
+
+                .row
+                    .col-lg-6
+                        .md-form
+                            -var textInput = {}
+                            -textInput.id = 'website'
+                            -textInput.name = 'website'
+                            -textInput.placeholder = 'Website URL(not required)'
+                            -textInput.label = 'Website URL'
+                            -textInput.formName = formName
+                            -textInput.class = formName
+                            include ../../templates/inputs/text-input
+                    .col-lg-6
+                        .md-form
+                            -var textInput = {}
+                            -textInput.id = 'address'
+                            -textInput.name = 'address'
+                            -textInput.placeholder = 'Address(not required)'
+                            -textInput.label = 'Address(not required)'
+                            -textInput.formName = formName
+                            -textInput.class = formName
+                            include ../../templates/inputs/text-input
+                    .col-lg-6
+                        .md-form
+                            -var textInput = {}
+                            -textInput.id = 'phone'
+                            -textInput.name = 'phone'
+                            -textInput.placeholder = 'Phone Number(not required)'
+                            -textInput.label = 'Phone Number(not required)'
+                            -textInput.formName = formName
+                            -textInput.class = formName
+                            include ../../templates/inputs/text-input
+
+                h3.mt-5.text-dark.font-weight-bold Picture
+                p.mb-3 This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.
+                .row
+                    -var fileInput = {}
+                    -fileInput.label = 'Choose photo'
+                    -fileInput.placeholder = 'Upload a picture'
+                    -fileInput.id = 'new-school-picture'
+                    -fileInput.name = 'pictureFileName'
+                    -fileInput.urlName = 'pictureUrl'
+                    -fileInput.formName = formName
+                    -fileInput.class = formName
+                    -fileInput.isPicture = true
+                    -fileInput.required = true
+                    include ../../templates/inputs/file-uploader-picture
+
+                h3.mt-5.mb-3.text-dark.font-weight-bold Description
+                p.mb-3 Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in.
+                .row
+                    .col-lg-12
+                        .md-form
+                            -var textArea = {}
+                            -textArea.id = 'tinymce-textarea'
+                            -textArea.name = 'description'
+                            -textArea.rows = 10
+                            -textArea.formName = formName
+                            -textArea.class = formName
+                            -textArea.required = true
+                            include ../../templates/inputs/text-area
+
+    button#addSchool.btn.btn-primary.btn-rounded.float-right(type='button', form="add-school-form") Create School
+    -formName = {}

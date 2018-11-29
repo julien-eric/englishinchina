@@ -15,7 +15,7 @@ block card
                                 -textInput.placeholder = 'Email'
                                 -textInput.label = 'Email'
                                 -textInput.required = true;
-                                include ../input-templates/text-input
+                                include ../templates/inputs/text-input
                         .md-form.form-group.mb-5
                                 -var textInput = {}
                                 -textInput.id = 'password'
@@ -24,7 +24,7 @@ block card
                                 -textInput.placeholder = 'Password'
                                 -textInput.label = 'Password'
                                 -textInput.required = true;
-                                include ../input-templates/text-input
+                                include ../templates/inputs/text-input
                                 p.text-primary.text-small.forgot-password
                                         a(href="/forgot") Forgot your 
                                                 span.font-weight-bold password?
