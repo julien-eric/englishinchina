@@ -54,17 +54,14 @@ module.exports = {
             { $limit: 1 }
         ]).exec();
 
-        let province = await Province.populate(schoolTransaction, { path: '_id' });
-        province = province.concat(await Province.populate(jobTransaction, { path: '_id' }));
+        let province = (await Province.populate(schoolTransaction, { path: '_id' }))[0].pictureUrl;
+        province = province.concat((await Province.populate(jobTransaction, { path: '_id' }))[0].pictureUrl);
+        province = _.uniq(province);
 
         if (province.length > 0) {
 
             let randomIndex = random ? utils.getRandomArbitrary(0, province.length - 1) : 0;
-            if (province[randomIndex].pictureUrl.length > 0) {
-
-                let pictureIndex = random ? utils.getRandomArbitrary(0, province[randomIndex].pictureUrl.length - 1) : 0;
-                return province[randomIndex].pictureUrl[pictureIndex];
-            }
+            return province[randomIndex];
 
         } else {
             return undefined;
