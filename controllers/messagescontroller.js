@@ -26,12 +26,26 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
             user2.email,
             'jobapplicant@secondlanguage.world',
             'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
-            message.content
+            message.content,
+            'text/html'
         );
         return Promise.resolve(message);
     } catch (error) {
         return error;
     }
+};
+
+/**
+ * @param  {User} applicant The user sending the message
+ * @param  {String} content The content of the message
+ * @return {String} Returns formatted email string
+ */
+MessageController.prototype.formatApplicationMessage = (applicant, content) => {
+    let emailContent = '';
+    emailContent += 'Applicant name: ' + applicant.firstName + ' ' + applicant.lastName + '<br>';
+    emailContent += 'Applicant email: ' + applicant.email + '<br><br>';
+    emailContent += 'Message: ' + content;
+    return emailContent;
 };
 
 /**

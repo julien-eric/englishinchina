@@ -6,7 +6,7 @@ block content
                 h1 Let's send a message
                 p This message will be sent to the employer along with your teaching experience information and your email. Review your 
                     a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=/job/message/' + job.id) teacher profile
-        form(id='message-employer', class='message-employer', action='/job/message/' + job.id, method='POST')
+        form(id='message-employer', class='message-employer', action='/job/message/' + job.url, method='POST')
             .row
                 .col-lg-12
                     -var textArea = {}

@@ -4,11 +4,11 @@ const sg = require('sendgrid')(settings.get('SENDGRID_API_KEY'));
 
 module.exports = {
 
-    sendEmail: function (to, from, subject, text) {
-
+    sendEmail: function (to, from, subject, text, contentType) {
+        let type = (contentType ? contentType : 'text/plain');
         let toEmail = new helper.Email(to);
         let fromEmail = new helper.Email(from);
-        let content = new helper.Content('text/plain', text);
+        let content = new helper.Content(type, text);
         let mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
         let request = sg.emptyRequest({

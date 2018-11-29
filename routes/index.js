@@ -552,6 +552,10 @@ module.exports = function (passport) {
 
                 let userParams = {};
                 userParams.id = utils.validateParam(req.params.id);
+
+                userParams.firstName = req.body.firstName;
+                userParams.lastName = req.body.lastName;
+
                 userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(req.body.livingCountry));
                 userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(req.body.citizenship));
                 userParams.dateOfBirth = new Date(moment(req.body.dateOfBirth, 'MMMM Do YYYY').format());

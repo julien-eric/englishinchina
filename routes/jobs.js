@@ -73,13 +73,6 @@ module.exports = function (passport) {
             }
         });
 
-    router.get('/test', async (req, res) => {
-
-        res.flash('error', 'this isnt what we are looking for.');
-        res.flash('error', 'Unavailable allocation of memory');
-        res.redirect(url.format({ pathname: '/job/add' }));
-    });
-
     router.get('/add', utils.isAuthenticated, async (req, res) => {
 
         try {
@@ -232,7 +225,7 @@ module.exports = function (passport) {
             let job = await jobsController.getJobByUrl(req.params.url);
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
-            await messagesController.createMessage(req.user, job.user, messageToSend);
+            await jobsController.sendApplicationMessage(job, req.user, job.user, messagesController.formatApplicationMessage(req.user, messageToSend));
             res.redirect('/job/thankyou/' + job.url);
         } catch (error) {
             res.flash('error', error.message);

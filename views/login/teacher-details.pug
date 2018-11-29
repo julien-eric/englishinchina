@@ -1,9 +1,14 @@
-extends ../layout
-block content
-    .container.py-5
-        .row
-            .col-lg-12
-                h1 Let's set up your teacher profile
-                p You are a few steps away from being eligible for job applications. Let's make sure you have the information employers are looking for before we send your profile
+extends form-container
+block card
+    .col-md-10.col-sm-12.col-lg-9
         include teacher-details-form
+    //- .container.py-5
+    //-     .row
+    //-         .col-lg-12
+    //-             h1 Let's set up your teacher profile
+    //-             p You are a few steps away from being eligible for job applications. Let's make sure you have the information employers are looking for before we send your profile
+    //- include teacher-details-form
+
+block dashboard
+    include user-dashboard
     

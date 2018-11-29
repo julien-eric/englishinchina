@@ -239,7 +239,7 @@ TypeaheadWrapper.prototype.handleSubmit = function (e) {
                 break;
 
             case 'jobs':
-                window.location.href = '/job/' + currentSelection._id;
+                window.location.href = '/job/' + currentSelection.url;
                 break;
 
             case 'provinces':

@@ -2,8 +2,10 @@ const _ = require('underscore');
 const Job = require('../models/job');
 const moment = require('moment');
 const provincesController = require('./provincescontroller');
+const messagesController = require('./messagescontroller');
 const citiesController = require('./citiescontroller');
 const imagesController = require('./imagescontroller');
+const emailsController = require('./emailscontroller');
 const utils = require('../utils');
 const MISSING = -1;
 
@@ -38,6 +40,20 @@ JobsController.prototype.getJobByUrl = async (url) => {
         findPicture(job);
     }
     return job;
+};
+
+JobsController.prototype.sendApplicationMessage = async (job, applicant, employer, content) => {
+
+    let message = await messagesController.createMessage(applicant, employer, content);
+    if (employer.email != job.email) {
+        emailsController.sendEmail(
+            job.email,
+            'jobapplicant@secondlanguage.world',
+            'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
+            message.content,
+            'text/html'
+        );
+    }
 };
 
 JobsController.prototype.getAllJobs = async () => {

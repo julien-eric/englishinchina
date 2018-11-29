@@ -15,10 +15,7 @@ module.exports = mongoose.model('User', {
     firstName: String,
     lastName: String,
     email: String,
-    teachingDetails: {
-        type: teachingDetailsSchema,
-        default: () => ({})
-    },
+    teachingDetails: { type: teachingDetailsSchema },
     livingCountry: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
     citizenship: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
     anonymous: { type: Boolean, default: false },

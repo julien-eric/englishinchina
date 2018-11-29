@@ -73,7 +73,9 @@ block card
         .col-lg-6.form-group
                 -var select = {}
                 -select.options = cities 
-                -select.disabled = true 
+                -select.disabled = true
+                if cities
+                    -select.disabled = false 
                 -select.label = 'City'
                 -select.placeholder = 'City'
                 -select.name = 'cityCode'
