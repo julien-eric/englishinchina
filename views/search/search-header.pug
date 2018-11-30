@@ -1,22 +1,31 @@
 #school-header
     #jumbotron-background.jumbotron.jumbotron-fluid(style=pictureInfo.returnCSSBgImageAttr(bannerPicture) + 'margin-top: -4rem; margin-bottom: 0rem;')  
-    #jumbotron-content.text-center.container-fluid
-        .py-5
-        if searchInfo.city
-            h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.city.pinyinName}, #{searchInfo.province.name}
-        if !searchInfo.city && searchInfo.province
-            h1.text-white.text-shadow-dark.font-weight-bold.display-3 #{searchInfo.province.name}
-        if !!searchInfo.queryInfo
-            h2.text-white.text-shadow-dark.font-weight-bold "#{searchInfo.queryInfo}"
+    #jumbotron-content.container-fluid
+        .container
+            .py-4
+            if searchInfo.city
+                -var location = searchInfo.city.pinyinName + ', ' + searchInfo.province.name
+                h1.text-white.text-uppercase.text-shadow-dark.font-weight-bold.text-uppercase #{location}
+                h4.text-white #{jobs.length} jobs, #{schools.length} schools in #{location}, China
+            else if !searchInfo.city && searchInfo.province
+                -var location = searchInfo.province.name
+                h1.text-white.text-shadow-dark.font-weight-bold.text-uppercase #{location}
+                h4.text-white #{jobs.length} jobs, #{schools.length} schools in #{location}, China
+            else if !!searchInfo.queryInfo
+                h2.text-white.text-shadow-dark.font-weight-bold "#{searchInfo.queryInfo}"
+                h4.text-white #{jobs.length} jobs, #{schools.length} schools for #{searchInfo.queryInfo}
+            else 
+                h2.text-white.text-shadow-dark.font-weight-bold.display-3 Jobs
+                //- h4.text-white #{jobs.length} jobs, #{schools.length} Schools.
 
-        .row.my-3.justify-content-center
-            .col-lg-6
-                .row.justify-content-center
-                        if schools.length > 0
-                            .chip.chip-md
-                                i.mdi.mdi-message-text(aria-hidden='true')      
-                                |  #{schools.length} Schools
-                        if jobs.length > 0
-                            .chip.chip-md
-                                i.mdi.mdi-image(aria-hidden='true')      
-                                |  #{jobs.length} Jobs
+            //- .row.my-3
+            //-     .col-lg-6
+            //-         .row
+            //-                 if schools.length > 0
+            //-                     .chip.chip-md
+            //-                         i.mdi.mdi-message-text(aria-hidden='true')      
+            //-                         |  #{schools.length} Schools
+            //-                 if jobs.length > 0
+            //-                     .chip.chip-md
+            //-                         i.mdi.mdi-image(aria-hidden='true')      
+            //-                         |  #{jobs.length} Jobs

@@ -1,0 +1,47 @@
+extends ../../layout
+block content
+    .container.stepper
+        h1#write-review-title.py-5 Post a Job Offer
+            
+        //- include default-job-info
+
+        .stepper-nested-forms
+            form.validate-form(action='/', method='post')
+            form.validate-form(action='/', method='post')
+
+        //- Stepper
+        nav.steps-form.mb-1
+            .row.steps-row.setup-panel
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Job Information'
+                    -formTab.mdi = 'mdi-information'
+                    include ../../templates/forms/form-tab
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Details'
+                    -formTab.mdi = 'mdi-file-document-box'
+                    include ../../templates/forms/form-tab
+                .step.px-1.col-4
+                    -var formTab = {}
+                    -formTab.text = 'Confirmation'
+                    -formTab.mdi = 'mdi-check'
+                    include ../../templates/forms/form-tab
+
+
+        // Step content
+        form#job-form(action='/job', method='POST' novalidate='')
+
+            // First Step
+            .row.setup-content.active
+                -formName = 'form-0'
+                include job-general-information
+            
+            // Second Step
+            .row.setup-content
+                -formName = 'form-1'
+                include job-details
+                    
+            // Submission Step
+            .row.setup-content
+                include job-confirmation

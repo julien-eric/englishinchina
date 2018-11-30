@@ -3,48 +3,48 @@ const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
 
 let loginParams = {
-  usernameField: 'email',
-  passReqToCallback: true
+    usernameField: 'email',
+    passReqToCallback: true
 };
 
 let isValidPassword = function (user, password) {
-  return bCrypt.compareSync(password, user.password);
+    return bCrypt.compareSync(password, user.password);
 };
 
 let processLoginReturn = function (req, email, password, done) {
-  const res = req.res;
+    const res = req.res;
 
-  User.findOne({ email }).then((user) => {
+    User.findOne({ email }).then((user) => {
 
-    // Email does not exist, log the error and redirect back
-    if (!user) {
-      console.log(`User Not Found with email ${email}`);
-      res.flash('error', 'User not found with email ' + req.param('email'));
-      res.app.locals.responseInfo = { email: req.param('email'), password };
-      return done(null, false);
-    }
+        // Email does not exist, log the error and redirect back
+        if (!user) {
+            console.log(`User Not Found with email ${email}`);
+            res.flash('error', 'User not found with email ' + req.param('email'));
+            res.app.locals.responseInfo = { email: req.param('email'), password };
+            return done(null, false);
+        }
 
-    // User exists but wrong password, log the error
-    if (!isValidPassword(user, password)) {
-      console.log('Invalid Password');
-      res.flash('error', 'Invalid Password');
-      res.app.locals.responseInfo = { email: req.param('email') };
-      return done(null, false); // redirect back to login page
-    }
+        // User exists but wrong password, log the error
+        if (!isValidPassword(user, password)) {
+            console.log('Invalid Password');
+            res.flash('error', 'Invalid Password');
+            res.app.locals.responseInfo = { email: req.param('email') };
+            return done(null, false); // redirect back to login page
+        }
 
-    // User and password both match, return user from done method
-    // which will be treated like success
-    return done(null, user);
-  }).catch((err) => {
+        // User and password both match, return user from done method
+        // which will be treated like success
+        return done(null, user);
+    }).catch((err) => {
 
-    // In case of any error, return using the done method
-    if (err) {
-      return done(err);
-    }
+        // In case of any error, return using the done method
+        if (err) {
+            return done(err);
+        }
 
-  });
+    });
 };
 
 module.exports = function (passport) {
-  passport.use('login', new LocalStrategy(loginParams, processLoginReturn));
+    passport.use('login', new LocalStrategy(loginParams, processLoginReturn));
 };

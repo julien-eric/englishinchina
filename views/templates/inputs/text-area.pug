@@ -1,0 +1,16 @@
+if responseInfo && !textArea.value
+
+    if !textArea.responseSubProperty && responseInfo[textArea.name]
+        -textArea.value = responseInfo[textArea.name]
+
+    if textArea.responseSubProperty 
+        if responseInfo[textArea.responseSubProperty] && responseInfo[textArea.responseSubProperty][textArea.name]
+            -select.crossRefValue = responseInfo[textArea.responseSubProperty][textArea.name]
+
+.form-group.mt-0
+    if textArea.label
+        label(for=textArea.name) #{textArea.label}
+    textarea.form-control(type='text', id=textArea.id, class=textArea.formName, placeholder=textArea.placeholder, name=textArea.name, form=textArea.formName, rows=textArea.rows, required=textArea.required) #{textArea.value}
+    p.text-small #{textArea.undertext}
+
+-textArea = {}

@@ -1,0 +1,18 @@
+-var classes = numberInput.formName
+if numberInput.disabled
+    -classes = classes + " disabled"
+
+if responseInfo && !numberInput.value
+
+    if !numberInput.responseSubProperty && responseInfo[numberInput.name]
+        -numberInput.value = responseInfo[numberInput.name]
+
+    if numberInput.responseSubProperty 
+        if responseInfo[numberInput.responseSubProperty] && responseInfo[numberInput.responseSubProperty][numberInput.name]
+            -numberInput.value = responseInfo[numberInput.responseSubProperty][numberInput.name]
+
+input.form-control.validate(type='number' id=numberInput.id, class=classes name=numberInput.name form=numberInput.formName placeholder=numberInput.placeholder aria-describedby='basic-addon2' min=numberInput.min max=numberInput.max value=numberInput.value required=numberInput.required)
+label.col-12.px-0(for=numberInput.name, data-error=numberInput.errorMessage, data-success='Thank you') #{numberInput.label}
+    if numberInput.tooltip
+        i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title=numberInput.tooltip )
+-var numberInput = {}

@@ -1,11 +1,11 @@
 $(document).ready(() => {
 
-  var height2 = $('#jumbotron-content').height() + 100;
+  var height2 = $('#jumbotron-content').height() + 50;
   $('#jumbotron-background').css('min-height', height2);
   $('#school-header').css('min-height', height2);
 
   $(window).on('resize', () => {
-    var height3 = $('#jumbotron-content').height() + 100;
+    var height3 = $('#jumbotron-content').height() + 50;
     $('#jumbotron-background').css('min-height', height3);
     $('#school-header').css('min-height', height3);
   });

@@ -1,0 +1,29 @@
+extends ../../templates/forms/form-card-container
+
+block card 
+
+    h3.mt-5.text-dark.font-weight-bold Find or Create School
+    p.mb-5 What is the name of the school you want to review? 
+    div(role='form', data-toggle='validator', id='form-step' + step)
+        p.py-3 First, let's find your school. Please take the time to thoroughly search for terms that might be related to the school after you've entered the province and city the school is located in. There's a lower chance that your comment will be read if it's posted on a newly created school rather than one that's already attracted some attention
+        .row
+            .col-lg-12
+                .form-group.md-form.mb-5
+                    -var queryInfo = ""
+                    -var schoolId = ""
+                    if searchInfo && searchInfo.school
+                        -queryInfo = searchInfo.school.name
+                        -schoolId = searchInfo.school.id
+                    input#queryInfo.typeahead.form-control(name="queryInfo" value=queryInfo datasets="schools" type="text", class=formName, form=formName, required)
+                    label.col-12.px-0(for='queryInfo', data-error='School has not been selected properly (start typing for results to appear)', data-success='Thank you.') School name
+                    input#schoolId.d-none(name="schoolId" value=schoolId form=formName class=formName)
+
+        include find-school-create-option
+
+        .row.mt-5
+            .col-lg-12
+                button.btn.btn-lg.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
+                    | Next
+                    i.mdi.mdi-arrow-right(aria-hidden='true')
+                //- button.btn.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') Previous
+

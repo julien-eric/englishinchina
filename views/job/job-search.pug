@@ -4,13 +4,12 @@ block content
             .container
                   .col-lg-12.py-3.text-center
                         p.my-0.text-light Find teachers from around the world by posting a job offer, it's fast and easy.
-                              a.btn.btn-sm.btn-lightgreen.text-darker(href="/job/add") Post a Job 
+                                a.btn.btn-sm.btn-lightgreen.text-darker(href="/job/add") Post a Job 
       include job-search-bar
       .container
             .pt-5.pb-2
             if jobs
                   .row
                         each job in jobs
-                              .col-sm-12.col-md-12.col-lg-12.mb-3
-                                    include job-card 
-                              //- .col-sm-12.col-md-6.col-lg-4.mb-3
+                                .col-sm-12.col-md-12.col-lg-12.mb-3
+                                    include job-card

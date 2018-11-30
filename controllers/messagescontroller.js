@@ -9,7 +9,7 @@ let MessageController = function () { };
  * @return {Message} Returns object that will resolve to a Message, or undefined
  */
 MessageController.prototype.getMessageById = async (id) => {
-  return Message.findById(id).exec();
+    return Message.findById(id).exec();
 };
 
 /**
@@ -19,19 +19,33 @@ MessageController.prototype.getMessageById = async (id) => {
  * @return {Message} Returns newly created message
  */
 MessageController.prototype.createMessage = async (user1, user2, content) => {
-  let conversation = await conversationsController.getConversationByUsers(user1, user2);
-  try {
-    let message = await Message.create({ conversation, user: user1, content });
-    emailsController.sendEmail(
-      user2.email,
-      'jobapplicant@secondlanguage.world',
-      'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
-      message.content
-    );
-    return Promise.resolve(message);
-  } catch (error) {
-    return error;
-  }
+    let conversation = await conversationsController.getConversationByUsers(user1, user2);
+    try {
+        let message = await Message.create({ conversation, user: user1, content });
+        emailsController.sendEmail(
+            user2.email,
+            'jobapplicant@secondlanguage.world',
+            'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
+            message.content,
+            'text/html'
+        );
+        return Promise.resolve(message);
+    } catch (error) {
+        return error;
+    }
+};
+
+/**
+ * @param  {User} applicant The user sending the message
+ * @param  {String} content The content of the message
+ * @return {String} Returns formatted email string
+ */
+MessageController.prototype.formatApplicationMessage = (applicant, content) => {
+    let emailContent = '';
+    emailContent += 'Applicant name: ' + applicant.firstName + ' ' + applicant.lastName + '<br>';
+    emailContent += 'Applicant email: ' + applicant.email + '<br><br>';
+    emailContent += 'Message: ' + content;
+    return emailContent;
 };
 
 /**
@@ -40,8 +54,8 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
  * @return {[Message]} Returns all messages from the conversation of these two users
  */
 MessageController.prototype.getConversationMessages = async (user1, user2) => {
-  let conversation = await conversationsController.getConversationByUsers(user1, user2);
-  return Message.find({ conversation }).exec();
+    let conversation = await conversationsController.getConversationByUsers(user1, user2);
+    return Message.find({ conversation }).exec();
 };
 
 

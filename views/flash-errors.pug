@@ -1,15 +1,22 @@
-.container.messages
-    if flash && flash.error
-      .row.justify-content-center
-        .alert.alert-danger.flash-messages-container.col-md-8.col-sm-10.text-center
-          .flash-messages.px-4.py-3 #{flash.error}
+if flash
+    .container.messages
+        .flash-messages-container
+            .row.justify-content-center
+                .col-12
+                    .row
+                        if flash.error
+                            for message in flash.error
+                                .alert.alert-danger.col-12.text-center
+                                    .flash-messages.px-4.py-3 #{message}
 
-    if flash && flash.info
-      .row.justify-content-center
-        .alert.alert-info.flash-messages-container.col-md-8.col-sm-10.text-center
-          .flash-messages.px-4.py-3 #{flash.info}
+                        if flash.info
+                            for message in flash.info
+                                .alert.alert-info.col-12.text-center
+                                    .flash-messages.px-4.py-3 #{message}
 
-    if flash && flash.success
-      .row.justify-content-center
-        .alert.alert-success.flash-messages-container.col-md-8.col-sm-10.text-center
-          .flash-messages.px-4.py-3 #{flash.success}
+                        if flash.success
+                            for message in flash.success
+                                .alert.alert-success.col-12.text-center
+                                    .flash-messages.px-4.py-3 #{message}
+
+//- if flash && (flash.error || flash.info || flash.success)

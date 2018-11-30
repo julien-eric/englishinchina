@@ -10,7 +10,7 @@ let messagesController = require('../controllers/messagescontroller');
 let usersController = require('../controllers/usersController');
 
 
-describe.only('Messaging', function () {
+describe('Messaging', function () {
 
   describe('Creation', function () {
 

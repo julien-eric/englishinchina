@@ -1,4 +1,8 @@
+-var link = '/login/facebook'
+if (redirectUrl)
+    -link += '?redirectUrl=' + encodeURIComponent(redirectUrl);
+
 .text-center.text-muted or sign in with:
   h1.form-group.mb-0
-    a.text-fcb-blue(href='/login/facebook')
+    a.text-fcb-blue(href=link)
       i.mdi.mdi-facebook-box(aria-hidden='true')

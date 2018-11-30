@@ -16,95 +16,96 @@ const tokensController = require('../submissiontokens');
 
 module.exports = function (passport) {
 
-  /** **********************************************************************************************************
-       *WriteReview : Page for users to write review for school specified by id
-       * Param : School id
-       ************************************************************************************************************ */
-  router.get('/', async (req, res) => {
+    /** **********************************************************************************************************
+    *WriteReview : Page for users to write review for school specified by id
+    * Param : School id
+    ************************************************************************************************************ */
+    router.get('/', async (req, res) => {
 
-    try {
+        try {
 
-      const searchInfo = {};
-      const schoolId = utils.validateParam(req.query.schoolId);
-      let cities = undefined;
+            const searchInfo = {};
+            const schoolId = utils.validateParam(req.query.schoolId);
+            let cities = undefined;
 
-      if (schoolId != -1) {
-        // If we have a school we have all the information we need
-        const school = await schoolsController.findSchoolById(schoolId);
-        searchInfo.school = { name: school.name, id: school._id };
-        searchInfo.province = school.province.code;
-        searchInfo.city = school.city.code;
-        cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
-      } else {
-        // If we don't have a school, we still might have a province-city
-        searchInfo.province = utils.validateParam(req.query.province);
-        searchInfo.city = utils.validateParam(req.query.city);
+            if (schoolId != -1) {
+                // If we have a school we have all the information we need
+                const school = await schoolsController.findSchoolById(schoolId);
+                searchInfo.school = { name: school.name, id: school._id };
+                searchInfo.province = school.province.code;
+                searchInfo.city = school.city.code;
+                cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
+            } else {
+                // If we don't have a school, we still might have a province-city
+                searchInfo.province = utils.validateParam(req.query.province);
+                searchInfo.city = utils.validateParam(req.query.city);
 
-        if (searchInfo.province) {
-          cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
+                if (searchInfo.province) {
+                    cities = await citiesController.getProvinceCitiesByCode(searchInfo.province);
+                }
+            }
+
+            let token = tokensController.createToken();
+            let companies = await companiesController.getAllCompanies();
+            let provinces = await provincesController.getAllProvinces();
+            res.render('review/creation/review-add', {
+                title: `Write Review - SLW`,
+                user: req.user,
+                criteria,
+                moment,
+                provinces,
+                cities,
+                companies,
+                pictureInfo: pictureinfo,
+                searchInfo,
+                tokenValue: token.value,
+                jadefunctions,
+                scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead,
+                scripts.addjob, scripts.libtinyMCE, scripts.tinyMCE, scripts.stepper, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
+            });
+
+        } catch (error) {
+            res.render('error', {
+                message: error.message,
+                error: error
+            });
         }
-      }
+    });
 
-      let token = tokensController.createToken();
-      let companies = await companiesController.getAllCompanies();
-      let provinces = await provincesController.getAllProvinces();
-      res.render('review/writereview', {
-        title: `Write Review - SLW`,
-        user: req.user,
-        criteria,
-        moment,
-        provinces,
-        cities,
-        companies,
-        pictureInfo: pictureinfo,
-        searchInfo,
-        tokenValue: token.value,
-        jadefunctions,
-        scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.writereview, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
-      });
+    /** **********************************************************************************************************
+       *insertCommentforSchool : POST insertreview on school
+       * userID : integer
+       * schoolID : integer
+       * review : string
+       ************************************************************************************************************ */
+    router.post('/', async (req, res) => {
+        try {
 
-    } catch (error) {
-      res.render('error', {
-        message: error.message,
-        error: error
-      });
-    }
-  });
+            let school = await schools.findSchoolById(req.body.schoolId);
+            let schoolUrl = '/school/' + school._id;
+            let token = tokensController.recuperateToken(req.body.submissionTokenVal);
 
-  /** **********************************************************************************************************
-     *insertCommentforSchool : POST insertreview on school
-     * userID : integer
-     * schoolID : integer
-     * review : string
-     ************************************************************************************************************ */
-  router.post('/', async (req, res) => {
-    try {
+            if (token.state == tokensController.ALIVE) {
 
-      let school = await schools.findSchoolById(req.body.schoolId);
-      let schoolUrl = '/school/' + school._id;
-      let token = tokensController.recuperateToken(req.body.submissionTokenVal);
+                token.processing();
+                token.setUrl(schoolUrl);
+                await reviews.insertReviewforSchool(req);
+                token.processed();
 
-      if (token.state == tokensController.ALIVE) {
+            } else if (token.state == tokensController.PROCESSING) {
+                console.log('Token ' + token.value + ' is already being processed');
+            } else if (token.state == tokensController.PROCESSED) {
+                console.log('Token ' + token.value + ' has already been processed');
+            } else if (token.state == tokensController.TIMED_OUT) {
+                console.log('Token ' + token.value + ' has timed out');
+            }
 
-        token.processing();
-        token.setUrl(schoolUrl);
-        await reviews.insertReviewforSchool(req);
-        token.processed();
+            res.redirect('/school/' + school._id);
 
-      } else if (token.state == tokensController.PROCESSING) {
-        console.log('Token ' + token.value + ' is already being processed');
-      } else if (token.state == tokensController.PROCESSED) {
-        console.log('Token ' + token.value + ' has already been processed');
-      } else if (token.state == tokensController.TIMED_OUT) {
-        console.log('Token ' + token.value + ' has timed out');
-      }
+        } catch (error) {
+            res.send(error);
+        }
+    });
 
-      res.redirect('/school/' + school._id);
-
-    } catch (error) {
-      res.send(error);
-    }
-  });
-
-  return router;
+    return router;
 };

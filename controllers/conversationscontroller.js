@@ -7,7 +7,7 @@ let ConversationController = function () { };
  * @return {Conversation} Returns object that will resolve to a conversation, or undefined
  */
 ConversationController.prototype.getConversationById = async function (id) {
-  return Conversation.findById(id).exec();
+    return Conversation.findById(id).exec();
 };
 
 /**
@@ -16,8 +16,8 @@ ConversationController.prototype.getConversationById = async function (id) {
  * @return {Conversation} Returns object that will resolve to a conversation, or undefined
  */
 ConversationController.prototype.getConversationByUsers = async function (user1, user2) {
-  let id = this.returnId(user1, user2);
-  return Conversation.findOneAndUpdate({ _id: id }, { verified: true }, { upsert: true, new: true }).exec();
+    let id = this.returnId(user1, user2);
+    return Conversation.findOneAndUpdate({ _id: id }, { verified: true }, { upsert: true, new: true }).exec();
 };
 
 /**
@@ -26,11 +26,11 @@ ConversationController.prototype.getConversationByUsers = async function (user1,
  * @return {String} The conversation ID based on the IDs of the two users.
  */
 ConversationController.prototype.returnId = function (user1, user2) {
-  if (user1.id < user2.id) {
-    return user1.id + user2.id;
-  } else {
-    return user2.id + user1.id;
-  }
+    if (user1.id < user2.id) {
+        return user1.id + user2.id;
+    } else {
+        return user2.id + user1.id;
+    }
 };
 
 let conversationController = new ConversationController();
