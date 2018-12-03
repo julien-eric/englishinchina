@@ -14,7 +14,7 @@ module.exports = function (passport) {
 
     passport.deserializeUser((id, done) => {
         User.findById(id, (err, user) => {
-            console.log('deserializing user:', user);
+            console.log('deserializing user:' + user.id);
             done(err, user);
         }).populate('livingCountry').populate('citizenship');
     });

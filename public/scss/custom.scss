@@ -400,6 +400,10 @@ footer .form-control:focus {
 
 // Adjusting number of cards per column and deck  
 .card-columns {
+    
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
     @include media-breakpoint-only(md) {
         column-count: 2;
     }
@@ -691,6 +695,11 @@ input[type=range]+.thumb {
 .card-text {
     font-size: 0.9rem;
     color: #747373;
+}
+
+.card-text.overflow-3 {
+    overflow: hidden;
+    height: 65px;
 }
 
 .card .btn-action {
@@ -1076,6 +1085,12 @@ $slw-inset-dark: #ebebeb;
     border-radius: 50%;
 }
 
+.img.border-radius-circle {
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+}
+
 .typeahead-header {
     background-color: $slw-cool-purple;
     color: white;
@@ -1109,4 +1124,26 @@ $slw-inset-dark: #ebebeb;
 
 .mce-panel.valid {
     border: 0 solid $slw-primary;
+}
+
+.article-body {
+    line-height: 30px;
+    font-size: 1.15rem;
+}
+
+.article-body:first-letter {
+    font-family: Times, 'Times New Roman', Tahoma;
+    font-size: 4.1em;
+    float: left;
+    margin-top: .25em;
+    margin-right: 0.4rem;
+}
+
+.article-body h2 {
+    margin: 2rem 0;
+}
+
+.sticky-under-nav {
+    top:70px;
+    z-index: 1;
 }

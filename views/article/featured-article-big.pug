@@ -1,0 +1,17 @@
+-var article = articles[0]
+.row.mb-5
+    .col-sm-12.col-lg-6
+        img.img-fluid.mb-2(src=article.featured_image)
+    .col-sm-12.col-lg-6
+        h3.font-weight-bold.card-title 
+            a.text-dark(href='/blog/' + article.slug)
+                | #{article.title}
+        p.text-small.font-weight-bold #{article.author.first_name} #{article.author.last_name} &middot; #{moment(article.created).format("MMMM Do")}
+        hr
+        p.text-dark.card-text.overflow-3 #{article.summary}
+        a.ml-0.btn.btn-sm.btn-lightgreen.mr-1(href="/blog/" + article.slug) Read Now
+        //- .text-muted
+        //-     each tag in article.tags
+        //-         .chip.chip-xs.mb-1.bg-light
+        //-             i.mdi.mdi-school(aria-hidden='true')      
+        //-             |  #{tag.name}
