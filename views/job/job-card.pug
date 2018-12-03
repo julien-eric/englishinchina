@@ -11,7 +11,7 @@
                         h4.font-weight-bold.card-title.px-0 
                             a.text-dark.text-capitalize(href="/job/" + job.url)
                                 | #{jadefunctions.formatString(job.title, 77)}
-                            
+  
                     .text-right.d-none.d-md-block.col-md-5.col-lg-4.text-left.mb-3.mb-lg-1
                         a.btn.btn-sm.btn-link(href="/job/" + job.url) View Offer
                         a.btn.btn-sm.btn-lightgreen.mr-1(href="/job/apply/" + job.url) Apply
@@ -25,9 +25,6 @@
                 //-   span &nbsp; | &nbsp;
                 //-   a(href='/company/' + school.company.id) #{school.company.name}        
                 p.text-small !{job.description}
-                //- .chip.chip-md
-                //-     i.mdi.mdi-image(aria-hidden='true')      
-                //-     |  #{school.photos.length} Photos
                 //- .chip.chip-md.mb-2
                 //-     i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
                 //-     | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}

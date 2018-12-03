@@ -1,18 +1,27 @@
 extends ../layout
 block content
+    .container-fluid.bg-white.pb-5.pt-1.mb-3
+        .container
+            .row.my-5
+                .col-auto.mx-auto
+                    each category, index in categories
+                        
+                        -var url = '/blog/category/' + category.slug
+                        if category.slug == 'all-articles'
+                            -url = '/blog'
+
+                        if index < 7
+                            if category.slug == currentCategory.slug
+                                a.btn.btn-md.btn-lightgreen.text-white.waves-effect.waves-light(href=url) #{category.name}
+                            else
+                                a.btn.btn-md.btn-pale-gray.text-dark.waves-effect.waves-light(href=url) #{category.name}
+
+            h1.text-muted.mb-5.mt-1.font-weight-bold Featured
+            include featured-article-big
+    
     .container
-        h3 Articles
-        hr.col-sm-12.col-md-8
-        div.row
-            div.col-sm-12.col-md-8
-                .school-list-wrapper
-                    ul.list-group
-                        each article in articles
-                            //declare variables then use generic *card*
-                            - var title = article.title;
-                            - var pictureUrl = article.pictureUrl;
-                            - var user = article.user;
-                            - var dateCreated = article.dateCreated;
-                            - var url = article.url;
-                            - var content = article.content;
-                            include card
+        h1.text-muted.my-5.font-weight-bold Latest
+        .card-columns
+            each article, index in articles
+                if index > 0
+                    include article-card

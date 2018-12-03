@@ -1,0 +1,18 @@
+.card.text-right.h-100
+    .display-grid
+        a.view.overlay.card-img(href='/blog/' + article.slug)
+            .image-container(style='background-image: url(' + article.featured_image + ');')             
+        //- a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href='/blog/' + article.slug)
+        //-     i.text-white.mdi.mdi-chevron-double-right(aria-hidden='true')
+        .card-body.text-left
+            h3.font-weight-bold.card-title 
+                a.text-dark(href='/blog/' + article.slug)
+                    | #{article.title}
+            p.text-small.font-weight-bold #{article.author.first_name} #{article.author.last_name} &middot; #{moment(article.created).format("MMMM Do")}
+            hr
+            p.card-text.overflow-3 #{article.summary}
+            //- .text-muted
+            //-     each tag in article.tags
+            //-         .chip.chip-xs.mb-1
+            //-             i.mdi.mdi-school(aria-hidden='true')      
+            //-             |  #{tag.name}
