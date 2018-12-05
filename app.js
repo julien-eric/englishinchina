@@ -1,6 +1,7 @@
 const express = require('express');
+const winstonWrapper = require('./config/winstonconfig');
 const path = require('path');
-const logger = require('morgan');
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const flash = require('express-flash-2');
@@ -13,11 +14,12 @@ const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
 const jobCrawler = require('./jobCrawler/jobCrawler');
-let SCSS_DEBUG = true;
+let SCSS_DEBUG = false;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
+app.use(morgan('combined', { 'stream': winstonWrapper.stream }));
 
 /**
  * Used by stylus
@@ -81,7 +83,6 @@ app.use(sassMiddleware({
     prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -110,6 +111,8 @@ const initPassport = require('./passport/init');
 
 initPassport(passport);
 
+
+
 /** *************************************************************
  * ROUTES, currently only has main routes and school's
  * @type {router|exports}
@@ -135,23 +138,34 @@ app.use('/province', provinceRoutes);
 /** *************************************************************
  catch 404 and forward to error handler
  ************************************************************** */
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use((error, req, res, next) => {
+
+    // set locals, only providing error in development
+    res.locals.message = error.message;
+    res.locals.error = req.app.get('env') === 'development' ? error : {};
+
+    // add this line to include winston logging
+    winstonWrapper.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
+    // render the error page
+    res.status(error.status || 500);
+    res.render('error', {
+        message: error.message,
+        error: error
+    });
 });
 
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// if (app.get('env') === 'development') {
+//     app.use((err, req, res, next) => {
+//         res.status(err.status || 500);
+//         res.render('error', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
 
 module.exports = app;

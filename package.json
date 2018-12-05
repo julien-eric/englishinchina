@@ -8,6 +8,7 @@
         "test": "mocha"
     },
     "dependencies": {
+        "app-root-path": "^2.1.0",
         "aws-sdk": "*",
         "bcrypt-nodejs": "*",
         "body-parser": "~1.13.2",
@@ -21,6 +22,7 @@
         "express": "~4.13.1",
         "express-flash-2": "^1.0.1",
         "express-session": "^1.0.2",
+        "express-winston": "^3.0.1",
         "getmdl-select": "^2.0.1",
         "gm": "*",
         "htmlparser": "^1.7.7",
@@ -52,7 +54,8 @@
         "stylus": "*",
         "underscore": "^1.8.3",
         "url-parse": "^1.4.0",
-        "uuid": "^3.2.1"
+        "uuid": "^3.2.1",
+        "winston": "^3.1.0"
     },
     "devDependencies": {
         "chai": "^4.1.2",

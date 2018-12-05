@@ -253,7 +253,7 @@ module.exports = function (passport) {
         }
     });
 
-    router.get('/:url', async (req, res) => {
+    router.get('/:url', async (req, res, next) => {
 
         try {
             let job = await jobsController.getJobByUrl(req.params.url);
@@ -274,10 +274,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util, scripts.libGoogleMaps(settings.get('GMAPS_API_KEY'), 'initMap'), scripts.libmoment, scripts.readMore]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
 
     });
