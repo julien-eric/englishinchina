@@ -25,6 +25,8 @@ module.exports = function (passport) {
             let provinces = await provincesController.getAllProvinces();
             let popularCities = await citiesController.getMostPopularCities();
             let featuredJobs = await jobsController.getFeaturedJobs();
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 170);
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
             let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
@@ -540,7 +542,7 @@ module.exports = function (passport) {
                     moment,
                     pictureInfo: pictureinfo,
                     jadefunctions,
-                    scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+                    scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libmoment, scripts.readMore]
                 });
             } catch (error) {
                 res.render('error', {

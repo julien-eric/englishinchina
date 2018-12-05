@@ -60,7 +60,7 @@ module.exports = function (passport) {
                 searchInfo,
                 tokenValue: token.value,
                 jadefunctions,
-                scripts: [scripts.util, scripts.libcalendar, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead,
+                scripts: [scripts.util, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead,
                 scripts.addjob, scripts.libtinyMCE, scripts.tinyMCE, scripts.stepper, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
             });
 

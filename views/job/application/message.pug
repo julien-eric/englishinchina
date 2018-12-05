@@ -5,7 +5,7 @@ block content
             .col-lg-12
                 h1 Let's send a message
                 p This message will be sent to the employer along with your teaching experience information and your email. Review your 
-                    a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=/job/message/' + job.id) teacher profile
+                    a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + job.url)) teacher profile
         form(id='message-employer', class='message-employer', action='/job/message/' + job.url, method='POST')
             .row
                 .col-lg-12
@@ -16,7 +16,11 @@ block content
                     -textArea.required = true
                     -textArea.formName = 'message-employer'
                     include ../../templates/inputs/text-area
-                    button.ml-0.my-3.btn.btn-md.btn-primary.btn-rounded.nextBtn(type='submit') Submit
+                .col-lg-12
+                    a.btn.btn-lg.btn-lightgreen.ml-0(href='/job/' + job.url)
+                        i.text-white.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
+                        | Offer
+                    button.btn.btn-lg.peach-gradient(type='submit') Send Message
                 
 
 

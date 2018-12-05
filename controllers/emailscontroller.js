@@ -115,6 +115,17 @@ module.exports = {
             emailBody,
             'text/html'
         );
+    },
+
+    /**
+     * @param {String} title This is the title in the email template (goes under the picture) 
+     * @param {String} content This is the main paragraph within the email template
+     * @param {String} linkName This is the tag for the call to action button
+     * @param {String} linkUrl This is the link for the call to action button
+     * @return {Object} Return the object that can be used for an email body
+     */
+    generateEmailBody: function (title, content, linkName, linkUrl) {
+        return { title, content, linkName, linkUrl };
     }
 
 };
