@@ -1141,9 +1141,14 @@ $slw-inset-dark: #ebebeb;
 
 .article-body h2 {
     margin: 2rem 0;
+    font-weight: bold;
 }
 
 .sticky-under-nav {
     top:70px;
     z-index: 1;
+}
+
+#map {
+    height:24rem;
 }

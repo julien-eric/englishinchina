@@ -1,40 +1,57 @@
 extends ../../layout
 block content
-    .bg-dark
-        .container
-            .col-lg-12
-                include job-map-breadcrumb 
 
-    .container-fluid.bg-white
+    .container-fluid.bg-white.py-3
         .container
             .row
-                .col-lg-12.my-5
-                    h1.font-weight-bold #{job.title}
-                    h3 #{job.kicker}
-                    p.mb-0 
-                        i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-                        | Posted in #{moment(job.createdDate).format("MMMM YYYY")}
-
-    .container-fluid.bg-white.pb-5.mx-0
-        .row
-            .col-lg-6.mb-3.pl-0.ml-0.pr-0.pr-lg-3
-                img.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
-            .col-lg-6.mb-3
-                include job-contract-details
-                include job-benefits
-                include job-teaching-details
-
-
-    .container-fluid.bg-pale-gray
-        .container.px-0.px-md-3
-            h4.text-uppercase.font-weight-bold.text-dark.mt-5 Description
-            .row.mt-5
                 .col-lg-12
+                    //- include job-map-breadcrumb 
+                    include job-page-top-actions
+                .col-lg-12.mt-5
+                    include ../job-tags
+                .col-lg-10.mb-5
+                    h1.display-4 #{job.title}
+
+        .container.pb-5
+            .row
+                .col-lg-8.col-sm-12.mb-3
+                    img.mb-3.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
+                    //- p.mt-1.font-weight-bold #{job.kicker}
                     .show-more-container
+                        h3.mt-1.font-weight-bold #{job.kicker}
                         p.content-pre-wrap !{job.description}
                     .show-more-link
                         a(href='#') Show More
                     .show-less-link.d-none
                         a(href='#') Show Less
-                .col-lg-12.my-5
+                .col-lg-4.col-sm-12.mb-3
+                    include job-contract-details
+                    include job-benefits
+                    include job-teaching-details
+
+            .row
+                .col-lg-8.my-5
                     include job-page-top-actions
+
+    .container-fluid.bg-light-secondary
+        .container  
+            .row
+                .col-auto
+                    a.collapse-link(data-toggle='collapse', href='#location-collapse', role='button', aria-expanded='false', aria-controls='location-collapse')
+                        h1.text-muted.my-5.font-weight-bold 
+                            | Location      
+                            i#location-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+                        //- p.text-small 
+                         
+        .row.collapse.show#location-collapse
+            .col-lg-12.mx-0.px-0
+                -var lat = job.city.x
+                -var long = job.city.y
+                -var address = job.city.pinyinName
+                include ../../utils/google-maps
+
+    .container    
+        .row.my-5
+            .col-lg-12
+                h1.text-muted.mb-5.mt-1.font-weight-bold Featured Jobs
+                include ../featured-jobs

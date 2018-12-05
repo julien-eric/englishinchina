@@ -99,7 +99,7 @@ module.exports = function (passport) {
                 responseInfo: responseInfo,
                 jadefunctions: jadefunctions,
                 pictureInfo: pictureinfo,
-                scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
+                scripts: [scripts.util, scripts.fileUploader, scripts.libmoment,
                 scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.addjob, scripts.stepper, scripts.nouislider,
                 scripts.libtinyMCE, scripts.tinyMCE, scripts.reviewvalidation, scripts.typeaheadwrapper]
             });
@@ -214,7 +214,7 @@ module.exports = function (passport) {
             pictureInfo: pictureinfo,
             responseInfo,
             jadefunctions,
-            scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment,
+            scripts: [scripts.util, scripts.fileUploader, scripts.libmoment,
             scripts.readMore, scripts.libtinyMCE, scripts.tinyMCE]
         });
     });
@@ -257,14 +257,20 @@ module.exports = function (passport) {
         try {
             let job = await jobsController.getJobByUrl(req.params.url);
             job = jobsController.fillInValues(job);
+
+            let featuredJobs = await jobsController.getFeaturedJobs();
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 250);
+
             res.render('job/single-job-page/job', {
                 title: 'SLW - ' + job.title,
                 user: req.user,
                 job,
                 moment,
+                featuredJobs,
                 pictureInfo: pictureinfo,
                 jadefunctions,
-                scripts: [scripts.util, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+                scripts: [scripts.util, scripts.libGoogleMaps, scripts.libmoment, scripts.readMore]
             });
         } catch (error) {
             res.render('error', {

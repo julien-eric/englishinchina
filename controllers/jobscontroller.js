@@ -3,9 +3,9 @@ const Job = require('../models/job');
 const moment = require('moment');
 const provincesController = require('./provincescontroller');
 const messagesController = require('./messagescontroller');
+const emailsController = require('./emailscontroller');
 const citiesController = require('./citiescontroller');
 const imagesController = require('./imagescontroller');
-const emailsController = require('./emailscontroller');
 const utils = require('../utils');
 const MISSING = -1;
 
@@ -45,12 +45,21 @@ JobsController.prototype.getJobByUrl = async (url) => {
 JobsController.prototype.sendApplicationMessage = async (job, applicant, employer, content) => {
 
     let message = await messagesController.createMessage(applicant, employer, content);
+
     if (employer.email != job.email) {
+
+        let emailBody = emailsController.generateEmailBody(
+            'Message from ' + applicant.firstName + ' ' + applicant.lastName,
+            content,
+            'View Teacher Profile',
+            'https://www.secondLanguage.world'
+        );
+
         emailsController.sendEmail(
             job.email,
             'jobapplicant@secondlanguage.world',
             'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
-            message.content,
+            emailBody,
             'text/html'
         );
     }

@@ -25,25 +25,4 @@
                 //-   span &nbsp; | &nbsp;
                 //-   a(href='/company/' + school.company.id) #{school.company.name}        
                 p.text-small !{job.description}
-                //- .chip.chip-md.mb-2
-                //-     i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-                //-     | #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
-                .chip.chip-sm.mb-2
-                    i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
-                    | Posted #{moment(job.createdDate).format("DD MMM YYYY")}
-                if job.contractDetails
-                    .chip.chip-sm.mb-2
-                        i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-                        | Start Date #{moment(job.contractDetails.startDate).format("DD MMM YYYY")}
-                    .chip.chip-sm.mb-2
-                        i.text-lightgreen.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-                        if( job.contractDetails.duration == 1)
-                            | 1 year
-                        else 
-                            | #{job.contractDetails.duration} years
-                    .chip.chip-sm.mb-2
-                        i.text-lightgreen.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
-                        | #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
-                //- .chip.chip-md.mb-2 
-                //-     i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
-                //-     | #{job.email}
+                include job-tags

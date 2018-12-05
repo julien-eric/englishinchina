@@ -49,7 +49,8 @@ let processSignupReturn = function (req, username, password, done) {
 
         console.log('User Registration successful');
         res.flash('success', 'Account created successfully');
-        emailController.emailVerification(req, savedUser);
+        let link = req.headers.origin + '/emailverification/' + savedUser.email + '?token=' + savedUser.token;
+        emailController.emailVerification(savedUser.email, link);
         return done(null, savedUser);
 
     }).catch((err) => {

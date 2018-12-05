@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const email = require('../controllers/emailscontroller');
+const emailsController = require('../controllers/emailscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
@@ -25,6 +25,8 @@ module.exports = function (passport) {
             let provinces = await provincesController.getAllProvinces();
             let popularCities = await citiesController.getMostPopularCities();
             let featuredJobs = await jobsController.getFeaturedJobs();
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
+            featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 170);
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
             let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
@@ -390,15 +392,18 @@ module.exports = function (passport) {
 
         let user = await usersController.findUserByEmail(req.body.email);
         if (!user) {
-            res.flash('error', 'No account with that email address exists.');
+            res.flash('error', 'Couldn\'t find a user with the email adress ' + req.body.email);
             return res.redirect('/forgot');
         }
 
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         await user.save();
-        await email.resetPassword(req, user, token, req);
+
+        let resetPasswordLink = req.headers.origin + '/reset/' + user.resetPasswordToken;
+        await emailsController.resetPassword(user.email, resetPasswordLink);
         res.flash('info', 'An email has been sent to reset your password.');
+
         return res.redirect('/forgot');
 
     });
@@ -406,7 +411,6 @@ module.exports = function (passport) {
     /** **********************************************************************************************************
      *PASSWORD RESET
     ************************************************************************************************************ */
-
     router.get('/reset/:token', async (req, res) => {
         let user = await usersController.findUserByToken(req.params.token, { $gt: Date.now() });
         if (!user) {
@@ -538,7 +542,7 @@ module.exports = function (passport) {
                     moment,
                     pictureInfo: pictureinfo,
                     jadefunctions,
-                    scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libcalendar, scripts.libmoment, scripts.readMore]
+                    scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libmoment, scripts.readMore]
                 });
             } catch (error) {
                 res.render('error', {
@@ -623,15 +627,8 @@ module.exports = function (passport) {
     });
 
     router.post('/contactus', (req, res) => {
-        const message = `Email: ${req.body.emailContact}\n${req.body.message}`;
-        const callbackMessage = 'Thank you, we will get back to you shortly';
-        email.sendEmail('julieneric11@gmail.com',
-            'contactusfeedback@secondlanguage.world',
-            'Feedback comment from user',
-            message,
-            callbackMessage,
-            req
-        );
+        res.flash('info', 'Thank you, we will get back to you shortly');
+        emailsController.contactUsForm(req.body.emailContact, req.body.message);
         res.redirect('/');
     });
 

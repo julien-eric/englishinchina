@@ -21,14 +21,24 @@ MessageController.prototype.getMessageById = async (id) => {
 MessageController.prototype.createMessage = async (user1, user2, content) => {
     let conversation = await conversationsController.getConversationByUsers(user1, user2);
     try {
+
         let message = await Message.create({ conversation, user: user1, content });
+
+        let emailBody = emailsController.generateEmailBody(
+            'Message from ' + user1.firstName + ' ' + user1.lastName,
+            content,
+            'View Teacher Profile',
+            'https://www.secondLanguage.world'
+        );
+
         emailsController.sendEmail(
             user2.email,
             'jobapplicant@secondlanguage.world',
             'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
-            message.content,
+            emailBody,
             'text/html'
         );
+
         return Promise.resolve(message);
     } catch (error) {
         return error;
