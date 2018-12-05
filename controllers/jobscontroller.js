@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const Job = require('../models/job');
 const moment = require('moment');
+const winston = require('../config/winstonconfig');
 const provincesController = require('./provincescontroller');
 const messagesController = require('./messagescontroller');
 const emailsController = require('./emailscontroller');
@@ -197,7 +198,7 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
         total = jobList.length;
         jobList = _.first(jobList, limit || 9999);
     } catch (error) {
-        console.log(error);
+        winston.error(`${error.status || 500} - ${error.message}`);
     }
     let searchQuery = this.getQueryMessage(queryInfo);
     return { list: jobList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, jobInfo: jobInfo } };

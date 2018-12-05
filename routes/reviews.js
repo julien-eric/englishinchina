@@ -4,6 +4,7 @@ const moment = require('moment');
 const criteria = require('../criteria').criteria;
 const schools = require('../controllers/schoolscontroller');
 const reviews = require('../controllers/reviewscontroller');
+const winston = require('../config/winstonconfig');
 const companiesController = require('../controllers/companiescontroller');
 const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
@@ -20,7 +21,7 @@ module.exports = function (passport) {
     *WriteReview : Page for users to write review for school specified by id
     * Param : School id
     ************************************************************************************************************ */
-    router.get('/', async (req, res) => {
+    router.get('/', async (req, res, next) => {
 
         try {
 
@@ -60,15 +61,13 @@ module.exports = function (passport) {
                 searchInfo,
                 tokenValue: token.value,
                 jadefunctions,
-                scripts: [scripts.util, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead,
-                scripts.addjob, scripts.libtinyMCE, scripts.tinyMCE, scripts.stepper, scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
+                scripts: [scripts.util, scripts.libmoment, scripts.libbsdatetimepicker, scripts.libslider,
+                scripts.typeahead, scripts.addjob, scripts.libtinyMCE, scripts.tinyMCE, scripts.stepper,
+                scripts.fileUploader, scripts.reviewvalidation, scripts.typeaheadwrapper]
             });
 
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -93,11 +92,11 @@ module.exports = function (passport) {
                 token.processed();
 
             } else if (token.state == tokensController.PROCESSING) {
-                console.log('Token ' + token.value + ' is already being processed');
+                winston.info('Token ' + token.value + ' is already being processed');
             } else if (token.state == tokensController.PROCESSED) {
-                console.log('Token ' + token.value + ' has already been processed');
+                winston.info('Token ' + token.value + ' has already been processed');
             } else if (token.state == tokensController.TIMED_OUT) {
-                console.log('Token ' + token.value + ' has timed out');
+                winston.info('Token ' + token.value + ' has timed out');
             }
 
             res.redirect('/school/' + school._id);

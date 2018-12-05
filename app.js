@@ -14,12 +14,20 @@ const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const environment = settings.get('ENV');
 const jobCrawler = require('./jobCrawler/jobCrawler');
-let SCSS_DEBUG = false;
+const SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
-app.use(morgan('combined', { 'stream': winstonWrapper.stream }));
+// morgan.token('status', function (req, res) { return res.body.status })
+// morgan.token('message', function (req, res) { return res.body.message })
+// morgan.token('fruit-name', function (req, res) { return res.body.fruit - name })
+// morgan.token('timestamp', function (req, res) { return res.body.timestamp })
+
+
+// app.use(morgan('Timestamp\: :timestamp fruit-name\: :fruit-name Status\: :status Message\: :message'))
+
+app.use(morgan('dev', { 'stream': winstonWrapper.stream }));
 
 /**
  * Used by stylus
@@ -47,8 +55,8 @@ if (environment == 'production') {
 } else {
     process.on('unhandledRejection', (error, p) => {
         // application specific logging, throwing an error, or other logic here
-        console.log('Unhandled Rejection at: Promise', p, 'reason:', error);
-        console.log(error.stack);
+        winstonWrapper.error('Unhandled Rejection at: Promise', p, 'reason:', error);
+        winstonWrapper.error(error.stack);
     });
 }
 
@@ -70,7 +78,7 @@ const src = path.join(__dirname, 'public', 'scss');
 const dst = path.join(__dirname, 'public', 'stylesheets');
 
 if (!SCSS_DEBUG) {
-    console.log('WARNING: SCSS is not recompiling (not debug)');
+    winstonWrapper.debug('WARNING: SCSS is not recompiling (not debug)');
 }
 
 app.use(sassMiddleware({
@@ -111,8 +119,6 @@ const initPassport = require('./passport/init');
 
 initPassport(passport);
 
-
-
 /** *************************************************************
  * ROUTES, currently only has main routes and school's
  * @type {router|exports}
@@ -142,7 +148,7 @@ app.use((error, req, res, next) => {
 
     // set locals, only providing error in development
     res.locals.message = error.message;
-    res.locals.error = req.app.get('env') === 'development' ? error : {};
+    res.locals.error = app.get('env') === 'development' ? error : {};
 
     // add this line to include winston logging
     winstonWrapper.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
@@ -155,17 +161,5 @@ app.use((error, req, res, next) => {
     });
 });
 
-
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-//     app.use((err, req, res, next) => {
-//         res.status(err.status || 500);
-//         res.render('error', {
-//             message: err.message,
-//             error: err
-//         });
-//     });
-// }
 
 module.exports = app;

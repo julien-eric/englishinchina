@@ -1,6 +1,7 @@
 const striptags = require('striptags');
 const htmlparser = require('htmlparser');
 const parsedToHtml = require('htmlparser-to-html');
+const winston = require('./config/winstonconfig');
 const pictureInfo = require('./pictureinfo');
 const _ = require('underscore');
 
@@ -53,7 +54,7 @@ module.exports = {
 
             let handle = function (error, dom) {
                 if (error) {
-                    console.log(error);
+                    winston.error(`${error.status || 500} - ${error.message}`);
                 } else {
                     handleDom(dom);
                 }

@@ -1,4 +1,5 @@
 const request = require('request');
+const winston = require('../config/winstonconfig');
 const cheerio = require('cheerio');
 const URL = require('url-parse');
 const _ = require('underscore');
@@ -48,7 +49,7 @@ JobCrawler.prototype.init = function (pagesArray, jobsPerSession, searchAddCoold
 JobCrawler.prototype.crawl = function (pageToVisit) {
 
     if (this.numJobsAdded >= this.JOBS_PER_SESSION) {
-        console.log('Reached desired number of jobs to add. Waiting ' + this.JOB_DONE_COOLDOWN + 'ms');
+        winston.silly('Reached desired number of jobs to add. Waiting ' + this.JOB_DONE_COOLDOWN + 'ms');
         this.numJobsAdded = 0;
         let crawl = _.bind(this.crawl, this);
         setTimeout(crawl, 10000);
@@ -63,7 +64,7 @@ JobCrawler.prototype.crawl = function (pageToVisit) {
         let visitPage = _.bind(this.visitPage, this, nextPage, this.crawl);
         visitPage();
     } else {
-        console.log('Initial page and relative links have been crawled');
+        winston.silly('Initial page and relative links have been crawled');
     }
 };
 
@@ -73,14 +74,14 @@ JobCrawler.prototype.visitPage = function (url, callback) {
     this.pagesVisited[url] = true;
 
     // Make the request
-    console.log('Visiting page ' + url);
+    winston.silly('Visiting page ' + url);
 
     request(url, async (error, response, body) => {
 
         let result;
         // Check status code (200 is HTTP OK)
         if (!response || response.statusCode !== 200) {
-            console.log('Status code is ' + response.statusCode + '. Skipping.');
+            winston.silly('Status code is ' + response.statusCode + '. Skipping.');
             callback();
             return;
         }
@@ -99,7 +100,7 @@ JobCrawler.prototype.visitPage = function (url, callback) {
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_PROBLEM);
         } else {
             this.numJobsAdded++;
-            console.log('Added Job, waiting ' + this.SEARCH_ADD_COOLDOWN_SUCCESS + 'ms');
+            winston.silly('Added Job, waiting ' + this.SEARCH_ADD_COOLDOWN_SUCCESS + 'ms');
             let crawl = _.bind(callback, this);
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_SUCCESS);
         }
@@ -161,7 +162,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
 
         let savedJob = await jobsController.addJob(undefined, jobInfo);
         if (savedJob) {
-            console.log('ADDED: ' + savedJob.title);
+            winston.silly('ADDED: ' + savedJob.title);
         }
         return { error: null, job: savedJob };
 
@@ -171,7 +172,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
             error = error.error;
         }
 
-        console.log(error.message);
+        winston.silly(error.message);
         return { error };
     }
 
@@ -182,7 +183,7 @@ JobCrawler.prototype.collectInternalLinks = function ($) {
     let that = this;
 
     let relativeLinks = $('a[href^="/"]');
-    console.log('Found ' + relativeLinks.length + ' relative links on page');
+    winston.silly('Found ' + relativeLinks.length + ' relative links on page');
     relativeLinks.each(function () {
         let href = $(this).attr('href');
         if (href.indexOf('job-advert') != -1) {
@@ -230,7 +231,7 @@ FieldProcessor.prototype.extractEmail = function (encodedString) {
         };
         return decodeEmail(encodedString);
     } catch (error) {
-        console.log(error);
+        winston.silly(error);
         return;
     }
 
@@ -311,8 +312,8 @@ FieldProcessor.prototype.workloadRecognition = function (text) {
         let hoursReg = /\d\d+.?(\w*)+(.hours)/;
         let match = hoursReg.exec(subText);
         if (match) {
-            workload = subText.substring(match.index, match.index + 2)
-            console.log('Match found at ' + match.index);
+            workload = subText.substring(match.index, match.index + 2);
+            winston.silly('Match found at ' + match.index);
         }
     }
     return workload;

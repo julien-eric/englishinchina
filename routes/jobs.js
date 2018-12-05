@@ -16,7 +16,7 @@ const url = require('url');
 module.exports = function (passport) {
 
     router.route('/')
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
 
             try {
 
@@ -44,10 +44,7 @@ module.exports = function (passport) {
                 });
 
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
         .post(async (req, res) => {
@@ -74,7 +71,7 @@ module.exports = function (passport) {
             }
         });
 
-    router.get('/add', utils.isAuthenticated, async (req, res) => {
+    router.get('/add', utils.isAuthenticated, async (req, res, next) => {
 
         try {
 
@@ -106,10 +103,7 @@ module.exports = function (passport) {
             });
 
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -119,7 +113,7 @@ module.exports = function (passport) {
        * [Province] optional.
        * [City] optional
        ************************************************************************************************************ */
-    router.get('/search/', async (req, res) => {
+    router.get('/search/', async (req, res, next) => {
 
         try {
             const jobInfo = req.query.jobInfo;
@@ -157,10 +151,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -226,7 +217,8 @@ module.exports = function (passport) {
             let job = await jobsController.getJobByUrl(req.params.url);
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
-            await jobsController.sendApplicationMessage(job, req.user, job.user, messagesController.formatApplicationMessage(req.user, messageToSend));
+            let formattedAppMessage = messagesController.formatApplicationMessage(req.user, messageToSend);
+            await jobsController.sendApplicationMessage(job, req.user, job.user, formattedAppMessage);
             res.redirect('/job/thankyou/' + job.url);
         } catch (error) {
             res.flash('error', error.message);
@@ -271,7 +263,8 @@ module.exports = function (passport) {
                 featuredJobs,
                 pictureInfo: pictureinfo,
                 jadefunctions,
-                scripts: [scripts.util, scripts.libGoogleMaps(settings.get('GMAPS_API_KEY'), 'initMap'), scripts.libmoment, scripts.readMore]
+                scripts: [scripts.util, scripts.libGoogleMaps(settings.get('GMAPS_API_KEY'), 'initMap'),
+                scripts.libmoment, scripts.readMore]
             });
         } catch (error) {
             next(error);

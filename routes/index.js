@@ -19,7 +19,7 @@ const utils = require('../utils');
 module.exports = function (passport) {
 
     // Home Page
-    router.get('/', async (req, res) => {
+    router.get('/', async (req, res, next) => {
 
         try {
             let provinces = await provincesController.getAllProvinces();
@@ -49,10 +49,7 @@ module.exports = function (passport) {
                 scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -60,7 +57,7 @@ module.exports = function (passport) {
        *search : Method for search site, it will return any school, company, job that has some of the information
        * Param : Query, string that will be looked for
        ************************************************************************************************************ */
-    router.get('/search/', async (req, res) => {
+    router.get('/search/', async (req, res, next) => {
 
         try {
 
@@ -136,10 +133,7 @@ module.exports = function (passport) {
             });
 
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -194,7 +188,7 @@ module.exports = function (passport) {
         }
     });
 
-    router.get('/about', async (req, res) => {
+    router.get('/about', async (req, res, next) => {
 
         try {
             let provinces = await provincesController.getAllProvinces();
@@ -215,10 +209,7 @@ module.exports = function (passport) {
                 scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -448,7 +439,7 @@ module.exports = function (passport) {
        *EMAIL VERIFICATION
        * If token is correct and not expired, this will redirect a logged in user to the main page
        ************************************************************************************************************ */
-    router.get('/emailverification/:email', async (req, res) => {
+    router.get('/emailverification/:email', async (req, res, next) => {
 
         try {
 
@@ -461,7 +452,7 @@ module.exports = function (passport) {
                 }
             }
         } catch (error) {
-            console.log(error);
+            next(error);
         }
 
         res.redirect('/');
@@ -487,7 +478,7 @@ module.exports = function (passport) {
        *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
        ************************************************************************************************************ */
     router.route('/user/edit', utils.isAuthenticated)
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
             try {
 
                 let user = await usersController.findUserById(req.user._id);
@@ -502,13 +493,10 @@ module.exports = function (passport) {
                     scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader]
                 });
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
-        .post(async (req, res) => {
+        .post(async (req, res, next) => {
             try {
 
                 let userParams = req.body;
@@ -519,10 +507,7 @@ module.exports = function (passport) {
                 await usersController.updateUser(userParams.id, userParams);
                 res.redirect('/user/edit');
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         });
 
@@ -530,7 +515,7 @@ module.exports = function (passport) {
        *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
       ************************************************************************************************************ */
     router.route('/user/teacher-details/:id')
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
             try {
                 let countries = await countriesController.getCountries();
                 let redirectUrl = req.query.redirectUrl;
@@ -545,13 +530,10 @@ module.exports = function (passport) {
                     scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libmoment, scripts.readMore]
                 });
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
-        .post(async (req, res) => {
+        .post(async (req, res, next) => {
             try {
 
                 let userParams = {};
@@ -589,17 +571,14 @@ module.exports = function (passport) {
                 }
 
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         });
 
     /** **********************************************************************************************************
        *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
        ************************************************************************************************************ */
-    router.get('/user/:id', utils.isAuthenticated, async (req, res) => {
+    router.get('/user/:id', utils.isAuthenticated, async (req, res, next) => {
 
         try { // Get user and reviews then render user page
             let usern = await usersController.findUserById(req.params.id);
@@ -615,7 +594,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util]
             });
         } catch (error) {
-            getLogger().error(error);
+            next(error);
         }
 
     });

@@ -29,7 +29,9 @@ let logger = createLogger({
         format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss'
         }),
-        format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
+        format.printf((info) => {
+            return `${info.timestamp} ${info.level.toUpperCase()}: ${info.message}`;
+        })
     ),
 
     transports: [
@@ -42,7 +44,7 @@ let logger = createLogger({
 logger.stream = {
     write: function (message, encoding) {
         // use the 'info' log level so the output will be picked up by both transports (file and console)
-        logger.info(message);
+        logger.info(message.slice(0, -1));
     }
 };
 

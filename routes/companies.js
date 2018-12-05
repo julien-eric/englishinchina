@@ -16,7 +16,7 @@ module.exports = function (passport) {
      *searchCompany : Method for search companies , it will return any company that has some of the information
      * Param : Query, string that will be looked for as part of the companys name
      ************************************************************************************************************ */
-    router.get('/search', async (req, res) => {
+    router.get('/search', async (req, res, next) => {
 
         try {
             const companyInfo = req.query.companyInfo;
@@ -37,10 +37,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -90,7 +87,7 @@ module.exports = function (passport) {
             });
         });
 
-    router.get('/:id', async (req, res) => {
+    router.get('/:id', async (req, res, next) => {
 
         try {
             let companyId = req.params.id;
@@ -120,10 +117,7 @@ module.exports = function (passport) {
                 scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
 
     });

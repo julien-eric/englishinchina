@@ -3,6 +3,7 @@ const utils = require('../utils');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const School = require('../models/school');
+const winston = require('../config/winstonconfig');
 const provincesController = require('./provincescontroller');
 const citiesController = require('./citiescontroller');
 const companiesController = require('./companiescontroller');
@@ -299,7 +300,7 @@ SchoolsController.prototype.searchSchools = async function (queryInfo, provinceI
         schoolList = _.first(schoolList, limit || 9999);
 
     } catch (error) {
-        console.log(error);
+        winston.error(`${error.status || 500} - ${error.message}`);
     }
     let searchQuery = this.getQueryMessage(searchInfo);
     // Frontend Typeahead wrapper .limit() has bug (if result.number == limit), so this way we get both .count and limit in one query
