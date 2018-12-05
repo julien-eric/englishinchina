@@ -7,6 +7,7 @@ const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const jobsController = require('../controllers/jobscontroller');
 const messagesController = require('../controllers/messagescontroller');
+const settings = require('simplesettings');
 const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const utils = require('../utils');
@@ -270,7 +271,7 @@ module.exports = function (passport) {
                 featuredJobs,
                 pictureInfo: pictureinfo,
                 jadefunctions,
-                scripts: [scripts.util, scripts.libGoogleMaps, scripts.libmoment, scripts.readMore]
+                scripts: [scripts.util, scripts.libGoogleMaps(settings.get('GMAPS_API_KEY'), 'initMap'), scripts.libmoment, scripts.readMore]
             });
         } catch (error) {
             res.render('error', {
