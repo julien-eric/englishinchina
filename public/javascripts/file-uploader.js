@@ -35,7 +35,7 @@ FileUploader.prototype.init = function (inputId, urlPrefix, previewPrefix, progr
             if (file == null) {
                 alert('No file selected.');
             } else {
-                getSignedRequest(file, getElementIndex(elements, inputId));
+                this.getSignedRequest(file, this.getElementIndex(inputId));
                 document.getElementById(urlPrefix + '-' + inputId).value = file.name;
             }
         };
@@ -60,7 +60,7 @@ FileUploader.prototype.getSignedRequest = function (file, index) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
-                uploadFile(file, index, response.signed_request, response.url);
+                this.uploadFile(file, index, response.signed_request, response.url);
             } else {
                 alert('Could not get signed URL.');
             }

@@ -1,4 +1,5 @@
 const splashContent = require('./splash-text');
+const awsManager = require('./awsmanager');
 
 module.exports = {
 
@@ -10,20 +11,12 @@ module.exports = {
         if (file == undefined) {
             return '/images/default-user.png';
         }
-        return `https://englishinchina.s3.amazonaws.com/${module.exports.THUMBNAIL}${file}`;
+        return `https://${awsManager.bucketName}.s3.amazonaws.com/${module.exports.THUMBNAIL}${file}`;
     },
 
     returnLarge (file) {
         if (file) {
-            return `https://englishinchina.s3.amazonaws.com/${module.exports.LARGE}${file}`;
-        } else {
-            return splashContent.image;
-        }
-    },
-
-    trunkFileName (file) {
-        if (file) {
-            return `https://englishinchina.s3.amazonaws.com/${module.exports.LARGE}${file}`;
+            return `https://${awsManager.bucketName}.s3.amazonaws.com/${module.exports.LARGE}${file}`;
         } else {
             return splashContent.image;
         }

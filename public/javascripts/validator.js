@@ -4,7 +4,7 @@ Validator.prototype.init = function () {
     var forms = $(".validate-form");
     forms.each((index, form) => {
         form.noValidate = true;
-        $('#' + form.getAttribute('id')).submit(validateForm);
+        $('#' + form.getAttribute('id')).submit(this.validateForm);
     });
 };
 
@@ -28,7 +28,7 @@ Validator.prototype.validateForm = function (event) {
         // Ignore buttons, fieldsets, etc.
         if (field.nodeName !== "INPUT" && field.nodeName !== "TEXTAREA" && field.nodeName !== "SELECT") continue;
 
-        let fieldValid = validateField(field);
+        let fieldValid = this.validateField(field);
 
         if (!fieldValid) {
             formvalid = false;
