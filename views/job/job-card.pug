@@ -2,7 +2,7 @@
     .row
         .col-lg-3.col-md-12
             a.view.overlay.card-img(href="/job/" + job.url)
-                .card-image-container(style='background-image: url(' + pictureInfo.returnLarge(job.pictureUrl) + ');')
+                .card-image-container.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')
                 //-   h4.text-white.mb-3 #{job.title}  
         .col-lg-9.col-md-12.text--left.px-3.py-3
             .card-block.px-3.mx-0

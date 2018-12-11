@@ -1,5 +1,42 @@
+let replaceAtIndex = function (str, index, replacement) {
+    return str.substr(0, index) + replacement + str.substr(index + replacement.length);
+}
+
+let initLazyLoading = function () {
+    var lazyBackgrounds = [].slice.call(document.querySelectorAll(".lazy-background"));
+
+    if ("IntersectionObserver" in window) {
+        let lazyBackgroundObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    let prefixIndex = entry.target.style.backgroundImage.indexOf('th_');
+                    entry.target.style.backgroundImage = replaceAtIndex(entry.target.style.backgroundImage, prefixIndex, 'lg_');
+                    // entry.target.classList.add("visible");
+                    lazyBackgroundObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        lazyBackgrounds.forEach(function (lazyBackground) {
+            lazyBackgroundObserver.observe(lazyBackground);
+        });
+    }
+};
+
+// if (document.readyState === 'complete') {
+//     console.log('document is already ready, just execute code here');
+//     initLazyLoading();
+// } else {
+//     document.addEventListener('DOMContentLoaded', function () {
+//         console.log('document was not ready, place code here');
+//         initLazyLoading();
+//     });
+// }
+
+
 $(document).ready(() => {
 
+    initLazyLoading();
 
     $('.collapse-link').each(function (link) {
         let id = $(this).attr('href');
