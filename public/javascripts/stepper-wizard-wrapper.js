@@ -179,3 +179,13 @@ Stepper.prototype.initSectionForms = function () {
     });
 
 };
+
+$(document).ready(() => {
+
+    //Init Stepper if we find the correct form
+    if ($('.stepper form')) {
+        let stepper = new Stepper();
+        stepper.init();
+    }
+
+});

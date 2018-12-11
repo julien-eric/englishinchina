@@ -1,0 +1,47 @@
+-var salaryLowerInitial = 5000
+if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.salaryLower
+    -salaryLowerInitial = responseInfo.jobDetails.salaryLower
+
+-var salaryHigherInitial = 15000
+if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.salaryHigher
+    -salaryHigherInitial = responseInfo.jobDetails.salaryHigher
+
+.row
+    .col-lg-12
+        label.col-12.px-0 Monthly Salary in RMB (元)
+        .row.justify-content-center
+            fieldset#salaryRange.nouirange.col-11
+                input.min(type='range', name='distmin', min='5000', max='25000', step='1000', value=salaryLowerInitial)
+                input.max(type='range', name='distmax', min='5000', max='25000', step='1000', value=salaryHigherInitial)
+//- .row.mt-5
+//-     .col-lg-12.border-radius-5.px-lg-5.py-3.mx-sm-3.bg-light
+//-         .row
+//-             .col-sm-6
+//-                 .form-group.md-form.disabled
+//-                     -var numberInput = {}
+//-                     -numberInput.id = 'salary-lower'
+//-                     -numberInput.label = 'Salary Lower Bracket'
+//-                     -numberInput.placeholder = 'Salary Lower Bracket'
+//-                     -numberInput.name = 'salaryLower'
+//-                     -numberInput.responseSubProperty = 'jobDetails'
+//-                     -numberInput.min = 1000
+//-                     -numberInput.max = 100000
+//-                     -numberInput.disabled = true
+//-                     -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+//-                     -numberInput.required = true
+//-                     include ../../templates/inputs/generic-number-input 
+
+//-             .col-sm-6
+//-                 .form-group.md-form.disabled
+//-                     -var numberInput = {}
+//-                     -numberInput.id = 'salary-higher'
+//-                     -numberInput.label = 'Salary Higher Bracket'
+//-                     -numberInput.placeholder = 'Salary Higher Bracket'
+//-                     -numberInput.name = 'salaryHigher'
+//-                     -numberInput.responseSubProperty = 'jobDetails'
+//-                     -numberInput.min = 1000
+//-                     -numberInput.max = 100000
+//-                     -numberInput.disabled = true
+//-                     -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+//-                     -numberInput.required = true
+//-                     include ../../templates/inputs/generic-number-input 

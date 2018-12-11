@@ -1,9 +1,9 @@
 if popularProvinces
-    .row
-        .col-12.px-lg-0
+    .row.py-2.overflow-scroll
+        .col-auto.mx-auto.px-lg-0
             each popularProvince, index in popularProvinces
                 if index > 6
                 else if index > 3 && index <= 6
-                    a.btn.btn-light-transparent.d-inline-block(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                    a.btn.btn-md.btn-lightgreen.text-white.waves-effect.waves-light(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
                 else if index <= 3
-                    a.btn.btn-light-transparent.d-inline-block(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                    a.btn.btn-md.btn-pale-gray.text-dark.waves-effect.waves-light(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}

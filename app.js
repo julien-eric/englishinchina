@@ -2,6 +2,7 @@ const express = require('express');
 const winstonWrapper = require('./config/winstonconfig');
 const path = require('path');
 const morgan = require('morgan');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const flash = require('express-flash-2');
@@ -12,12 +13,16 @@ const utils = require('./utils');
 const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
+const gmapsKey = settings.get('GMAPS_API_KEY');
 const environment = settings.get('ENV');
 const jobCrawler = require('./jobCrawler/jobCrawler');
 const SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
+
+// Use compression for faster load times
+app.use(compression());
 
 // morgan.token('status', function (req, res) { return res.body.status })
 // morgan.token('message', function (req, res) { return res.body.message })
@@ -42,6 +47,7 @@ function compile (str, path) {
 
 // Set variables used in views app-wide
 app.locals.fcbAppId = fcbAppId;
+app.locals.gmapsKey = gmapsKey;
 if (environment == 'production') {
     app.locals.analytics = true;
     SCSS_DEBUG = false;

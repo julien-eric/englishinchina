@@ -1,14 +1,14 @@
+let Validator = function () { };
 
-$(document).ready(() => {
+Validator.prototype.init = function () {
     var forms = $(".validate-form");
     forms.each((index, form) => {
         form.noValidate = true;
         $('#' + form.getAttribute('id')).submit(validateForm);
     });
-});
+};
 
-
-function validateForm(event) {
+Validator.prototype.validateForm = function (event) {
 
     // fetch cross-browser event object and form node
     event = (event ? event : window.event);
@@ -41,9 +41,9 @@ function validateForm(event) {
         if (event.preventDefault) event.preventDefault();
     }
     return formvalid;
-}
+};
 
-function validateField(field) {
+Validator.prototype.validateField = function (field) {
 
     // Is native browser validation available?
     if (typeof field.willValidate !== "undefined") {
@@ -54,8 +54,8 @@ function validateField(field) {
             field.setCustomValidity(LegacyValidation(field) ? "" : "error");
         }
 
-        if (isSpecialInput(field)) {
-            field.setCustomValidity(validateSpecialInputs(field) ? "" : "error");
+        if (this.isSpecialInput(field)) {
+            field.setCustomValidity(this.validateSpecialInputs(field) ? "" : "error");
         }
 
         field.checkValidity();
@@ -84,21 +84,21 @@ function validateField(field) {
         $field.removeClass('valid');
         return false;
     }
-}
+};
 
-function isSpecialInput(field) {
-    
+Validator.prototype.isSpecialInput = function (field) {
+
     let elementId = field.getAttribute('id');
     let elementClasses = field.className.split(/\s+/);
 
     let comparator = elementId;
-    if(elementClasses.includes('mdb-select')){
+    if (elementClasses.includes('mdb-select')) {
         comparator = 'select-element';
     }
-    if(elementClasses.includes('date-field')){
+    if (elementClasses.includes('date-field')) {
         comparator = 'date-field';
     }
-    
+
     switch (comparator) {
         case 'schoolId':
             return true;
@@ -120,21 +120,21 @@ function isSpecialInput(field) {
         default:
             return false;
     }
-}
+};
 
-function validateSpecialInputs(field) {
+Validator.prototype.validateSpecialInputs = function (field) {
     let valid = true;
     let elementId = field.getAttribute('id');
     let elementClasses = field.className.split(/\s+/);
 
     let comparator = elementId;
-    if(elementClasses.includes('mdb-select')){
+    if (elementClasses.includes('mdb-select')) {
         comparator = 'select-element';
     }
-    if(elementClasses.includes('date-field')){
+    if (elementClasses.includes('date-field')) {
         comparator = 'date-field';
     }
-    
+
 
     if (!field.required) {
         return true;
@@ -242,10 +242,10 @@ function validateSpecialInputs(field) {
             break;
     }
     return valid;
-}
+};
 
 // basic legacy validation checking
-function LegacyValidation(field) {
+Validator.prototype.LegacyValidation = function (field) {
 
     var
         valid = true,
@@ -279,4 +279,4 @@ function LegacyValidation(field) {
     }
 
     return valid;
-}
+};

@@ -235,8 +235,7 @@ module.exports = function (passport) {
                 job,
                 moment,
                 pictureInfo: pictureinfo,
-                jadefunctions,
-                scripts: [scripts.util]
+                jadefunctions
             });
         } catch (error) {
             res.flash('error', 'Sorry, there was a problem trying to send your message.');
@@ -262,9 +261,7 @@ module.exports = function (passport) {
                 moment,
                 featuredJobs,
                 pictureInfo: pictureinfo,
-                jadefunctions,
-                scripts: [scripts.util, scripts.libGoogleMaps(settings.get('GMAPS_API_KEY'), 'initMap'),
-                scripts.libmoment, scripts.readMore]
+                jadefunctions
             });
         } catch (error) {
             next(error);

@@ -40,7 +40,7 @@ $theme-colors: ( "primary": $slw-primary);
 $link-color: $slw-primary;
 @import "node_modules/mdbootstrap-pro/scss/core/global";
 @import "node_modules/mdbootstrap-pro/scss/core/helpers";
-@import "node_modules/mdbootstrap-pro/scss/core/typography";
+@import "./typography";
 @import "node_modules/mdbootstrap-pro/scss/core/masks";
 @import "node_modules/mdbootstrap-pro/scss/core/waves";
 @import "node_modules/mdbootstrap-pro/scss/free/forms";
@@ -250,12 +250,20 @@ body {
 
 .navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
     color: white;
+    font-family: "raleway";
 }
 
 .navbar.navbar-light .breadcrumb .nav-item .nav-link:hover,
 .navbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
     color: rgba(0, 0, 0, 0.50);
+    font-family: "raleway";
 }
+
+// .navbar.navbar-light .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+//     font-family: "raleway";
+//     color: #000;
+//     transition: .35s;
+// }
 
 .navbar.navbar-light.main-header.transparent.collapsed {
     box-shadow: none;
@@ -283,6 +291,10 @@ body {
 
 .text-small {
     font-size: 0.8rem;
+}
+
+.text-xsmall {
+    font-size: 0.6rem;
 }
 
 .image-brand {
@@ -1142,6 +1154,7 @@ $slw-inset-dark: #ebebeb;
 .article-body h2 {
     margin: 2rem 0;
     font-weight: bold;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
 .sticky-under-nav {
@@ -1151,4 +1164,14 @@ $slw-inset-dark: #ebebeb;
 
 #map {
     height:24rem;
+}
+
+.overflow-scroll {
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+.overflow-scroll::-webkit-scrollbar {
+    display: none;  // Safari and Chrome
 }

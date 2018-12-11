@@ -44,9 +44,7 @@ module.exports = function (passport) {
                 popularCities,
                 popularProvinces,
                 popularCompanies,
-                splashText,
-                currentPage: 1,
-                scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
+                splashText
             });
         } catch (error) {
             next(error);
@@ -116,7 +114,6 @@ module.exports = function (passport) {
             // title: `${searchResults.query} Schools - Second Language World`,
             res.render('search/search', {
                 title: `Search - Second Language World`,
-                main: true,
                 schools: schools.list,
                 jobs: jobs.list,
                 companies: companies.list,
@@ -128,8 +125,7 @@ module.exports = function (passport) {
                 pictureInfo: pictureinfo,
                 bannerPicture,
                 moment,
-                jadefunctions,
-                scripts: [scripts.util, scripts.typeahead, scripts.searchPage, scripts.typeaheadwrapper]
+                jadefunctions
             });
 
         } catch (error) {
