@@ -17,7 +17,7 @@ $slw-antique-white: #faebd7;
 $enable-gradients: false;
 $enable-shadows: false;
 $standard-height: 190px;
-$landing-page-height: 600px;
+$landing-page-height: 720px;
 $school-header-height: 380px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
@@ -110,11 +110,6 @@ $link-color: $slw-primary;
 @import "node_modules/mdbootstrap-pro/scss/addons-pro/timeline";
 @import "node_modules/mdbootstrap-pro/scss/addons-pro/cards-extended";
 // @import "node_modules/mdbootstrap-pro/scss/addons-pro/chat";
-$enable-shadows: false;
-// $primary-color: $slw-primary;
-// $error-color:  $slw-danger;
-// $success-color:  $slw-primary;
-//When we're ready to have a right sidebar of some sort
 
 @font-face {
     font-family: milkshake;
@@ -144,6 +139,7 @@ $value in $theme-colors {
 
 body {
     background-color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
 }
 
 .overflow-hidden {
@@ -207,10 +203,6 @@ $value in $theme-colors {
     }
 }
 
-.no-drop-shadow {
-    box-shadow: 0 0 !important;
-}
-
 @each $color,
 $value in $theme-colors {
     .swatch-#{$color} {
@@ -218,16 +210,40 @@ $value in $theme-colors {
     }
 }
 
-h1 {
-    font-family: 'Roboto Black', sans-serif;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
+.text-small {
+    font-size: 0.8rem;
 }
 
-.mb-12 {
-    margin-bottom: 12rem;
+.text-xsmall {
+    font-size: 0.6rem;
+}
+
+@include media-breakpoint-down(md) {
+    .display-3 {
+        font-size: 2.8rem;
+    }
+    
+    .milkshake {
+        font-size: 3.6rem;
+    }
+
+    .splash .splash-text {
+        padding-top: 4rem;
+    }
+    #splash-kicker {
+        font-size: 1.2rem;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+
+    .milkshake {
+        font-size: 3rem;
+    }
 }
 
 .zindex-pop {
@@ -259,12 +275,6 @@ body {
     font-family: "raleway";
 }
 
-// .navbar.navbar-light .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link {
-//     font-family: "raleway";
-//     color: #000;
-//     transition: .35s;
-// }
-
 .navbar.navbar-light.main-header.transparent.collapsed {
     box-shadow: none;
     background-color: transparent;
@@ -287,14 +297,6 @@ body {
     width: 0;
     overflow: hidden;
     transition: width 1s linear;
-}
-
-.text-small {
-    font-size: 0.8rem;
-}
-
-.text-xsmall {
-    font-size: 0.6rem;
 }
 
 .image-brand {
@@ -436,22 +438,6 @@ footer .form-control:focus {
     }
 }
 
-/////////////////////////////////////////////////////////////////////////////////////
-//PRE HEADER
-/////////////////////////////////////////////////////////////////////////////////////
-.pre-header {
-    padding: 0;
-    font-size: 13px;
-}
-
-.transparent-black {
-    background-color: rgba(0, 0, 0, .5);
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, .7);
-}
-
 .flash-messages-container {
     position: absolute;
     left: 10%;
@@ -461,24 +447,6 @@ footer .form-control:focus {
     opacity: 0.8;
 }
 
-// @media (min-width: 576px) {
-//     .flash-messages-container {
-//         left: 10%;
-//         right: 10%;
-//     }
-// }
-// @media (min-width: 768px) {
-//     .flash-messages-container {
-//         left: 15%;
-//         right: 15%;
-//     }
-// }
-// @media (min-width: 992px) {
-//     .flash-messages-container {
-//         left: 20%;
-//         right: 20%;
-//     }
-// }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //HOMEPAGE SPLASH LANDING
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -527,76 +495,6 @@ footer .form-control:focus {
     font-weight: 400;
 }
 
-@include media-breakpoint-down(md) {
-    .display-3 {
-        font-size: 2.8rem;
-    }
-    
-    .milkshake {
-        font-size: 3.6rem;
-    }
-
-    .splash .splash-text {
-        padding-top: 4rem;
-    }
-    #splash-kicker {
-        font-size: 1.2rem;
-    }
-}
-
-@include media-breakpoint-down(sm) {
-
-    .milkshake {
-        font-size: 3rem;
-    }
-}
-
-.shadow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 3px 3px 1000px 0 #000000; // border-radius: 20px;
-    top: 0;
-    left: 0;
-}
-
-.search-navigation-bar {
-    position: absolute;
-    bottom: 100px;
-}
-
-.width100 {
-    width: 100%;
-}
-
-.search-bar nav {
-    border-radius: 0;
-    margin: 0;
-    padding: 0;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
-    box-shadow: 0px 0px 10px 0px rgba(128, 128, 128, 1);
-}
-
-.search-bar {
-    margin: 0;
-    padding: 0;
-    background-color: #f2f2f2;
-    -webkit-box-shadow: 0px 0px 10px 0px #808080;
-    -moz-box-shadow: 0px 0px 10px 0px #808080;
-    box-shadow: 0px 0px 10px 0px #808080;
-    border-radius: 5px;
-}
-
-.search-bar form {
-    margin: 10px 0;
-    padding-left: 15px;
-}
-
-.search-bar .form-group {
-    padding: 0 15px 0 0;
-}
-
 .img-container {
     height: $standard-height;
 }
@@ -609,7 +507,10 @@ footer .form-control:focus {
     background-color: #eee;
 }
 
-//SLIDERS
+/************************************************************************
+************    SLIDERS
+*************************************************************************/
+
 .slidecontainer {
     width: 100%; /* Width of the outside container */
 }
@@ -746,9 +647,6 @@ input[type=range]+.thumb {
     width: inherit;
     text-align: center;
     color: #fff;
-}
-
-.btn-floating i {
     font-size: 1.25rem;
     line-height: 2.75rem;
 }
@@ -1174,4 +1072,24 @@ $slw-inset-dark: #ebebeb;
 
 .overflow-scroll::-webkit-scrollbar {
     display: none;  // Safari and Chrome
+}
+
+.arrow-section {
+    position: relative;
+}
+
+.arrow-section:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    transform: rotate(45deg);
+    background-color: inherit;
+    margin-top: 28px;
+    margin-left: -20px;
+    top: 100%;
+    left: 50%;
+    border-left-width: 0;
+    border-top-width: 0;
 }

@@ -1,4 +1,6 @@
 span.twitter-typeahead {
+    
+    display: block !important;
 
     .tt-menu {
         @extend .dropdown-menu;
@@ -28,6 +30,8 @@ span.twitter-typeahead {
         }
     }
     .typeahead-scrollable{
-        font-weight: bold;
+        font-size: 32px;
+        font-family: 'Roboto Black';
+        font-weight: bolder;
     }
 }

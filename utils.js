@@ -126,6 +126,51 @@ module.exports = {
 
     getRandomArbitrary: function (min, max) {
         return Math.round(Math.random() * (max - min) + min);
+    },
+
+    /**
+     * Generates an Object to be used in HTML generation for meta information of the page. Has default values.
+     * @param {String} title The Page Title, appears in tab and possibly on SEO
+     * @param {String} description The Meta Description, can be used by SEO
+     * @param {String} requestUrl URL of the page (Facebook, Twitter, Google+, LinkedIn)
+     * @param {String} imageUrl URL of an image to be used in open graph (Facebook, Twitter, Google+, LinkedIn)
+     * @return {Object} Object with all meta tags to be used
+     */
+    generateMeta: function (title, description, requestUrl, imageUrl) {
+        let completeTitle = title + ' | Second Language World';
+        return {
+            title: completeTitle,
+            description,
+            ogTitle: completeTitle,
+            ogDescription: description,
+            ogUrl: requestUrl,
+            ogImage: imageUrl
+        };
+    },
+
+    /**
+     * Generates a page title based on the search information.
+     * @param {Object} searchInfo The search parameters that were passed
+     * @return {String} A page title
+     */
+    titleFromSearchInfo: function (searchInfo) {
+        let title = 'Job opportunities';
+        if (searchInfo.city != null) {
+            let cityName = city.pinyinName.charAt(0).toUpperCase() + city.pinyinName.substring(1, city.pinyinName.length);
+            title += ' in ' + cityName;
+        } else if (searchInfo.province != null) {
+            title += ' in ' + province.name;
+        }
+        return title;
+    },
+
+    /**
+     * Produce the URL of a page using the request
+     * @param {Request} request The original Request Object
+     * @return {String} The webpage URL
+     */
+    getFullUrl: function (request) {
+        return request.protocol + '://' + request.get('host') + request.originalUrl;
     }
 
 };

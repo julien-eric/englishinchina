@@ -1,12 +1,22 @@
 extends ../layout
 block content
-    //- include carousel
-    //- include ../header/header
-    //- include ../searchnavigation
-    include join-banner
-    //- .container
-    //-     include ../populargrid/popularcategories
-    //-     .clearfix
+    .container-fluid.mx-0
+        img.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_af54e530-fe52-11e8-bd1f-9168a24e979d.jpeg')
+        .container.bg-white
+            .row
+                .col-8.mx-auto.mt-5.text-center
+                    h1.display-4
+                        i.mdi.mdi-trophy-variant(aria-hidden='true') 
+            .row
+                .col-8.mx-auto.mb-5.text-center
+                    h1 Our goal is to contribute to the growth of the TEFL mission around the world by connecting ESL teachers to those who want to learn. 
+    
+    .container-fluid.bg-pale-gray
+        .container.mb-5 
+            .row
+                .col-8.mx-auto.my-5.text-center
+                    h1 Our purpose is to facilitate communication between potential TEFL candidates and the world that they are trying to be a part of. 
+    
     include spotlight-information
 
     

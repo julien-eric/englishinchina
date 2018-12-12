@@ -4,7 +4,7 @@ const emailsController = require('../controllers/emailscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
-const schoolsController = require('../controllers/schoolscontroller');
+const splashText = require('../splash-text.json');
 const provincesController = require('../controllers/provincescontroller');
 const countriesController = require('../controllers/countriescontroller');
 const companiesController = require('../controllers/companiescontroller');
@@ -22,26 +22,29 @@ module.exports = function (passport) {
     router.get('/', async (req, res, next) => {
 
         try {
-            let provinces = await provincesController.getAllProvinces();
-            let popularCities = await citiesController.getMostPopularCities();
             let featuredJobs = await jobsController.getFeaturedJobs();
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 170);
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
             let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
-            const splashText = require('../splash-text.json');
             popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
+
+            let meta = utils.generateMeta(
+                'Discover, Learn, Teach. Explore job opportunities around the world',
+                splashText.description,
+                utils.getFullUrl(req),
+                splashText.image
+            );
+
             res.render('home/home', {
-                title: 'Second Language World',
+                meta,
                 main: true,
                 user: req.user,
-                provinces,
                 pictureInfo: pictureinfo,
                 moment,
                 jadefunctions,
                 featuredJobs,
-                popularCities,
                 popularProvinces,
                 popularCompanies,
                 splashText
@@ -76,20 +79,7 @@ module.exports = function (passport) {
 
             searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
 
-            let schools = [];
-            let companies = [];
             let jobs = [];
-
-            schools = await schoolsController.searchSchools(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, utils.getSchoolSortingObject(searchInfo.sort));
-            if (schools != undefined && schools.list != undefined && schools.list.length > 0) {
-                schools.list = jadefunctions.trunkContentArray(schools.list, 'description', 150);
-            }
-
-            companies = await companiesController.searchCompanies(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
-            if (companies != undefined && companies.list != undefined && companies.list.length > 0) {
-                companies.list = jadefunctions.trunkContentArray(companies.list, 'description', 150);
-            }
-
             jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
                 jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
@@ -103,7 +93,6 @@ module.exports = function (passport) {
             }
 
             // Fetch list of all provinces and cities.
-            let provinces = await provincesController.getAllProvinces();
             let cities = undefined;
             if (searchInfo.provinceCode != -1) {
                 cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
@@ -111,15 +100,19 @@ module.exports = function (passport) {
 
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
 
-            // title: `${searchResults.query} Schools - Second Language World`,
+            let title = utils.titleFromSearchInfo(searchInfo);
+            let meta = utils.generateMeta(
+                title,
+                splashText.description,
+                utils.getFullUrl(req),
+                bannerPicture || splashText.image
+            );
+
             res.render('search/search', {
-                title: `Search - Second Language World`,
-                schools: schools.list,
+                meta,
                 jobs: jobs.list,
-                companies: companies.list,
                 searchInfo,
                 user: req.user,
-                provinces,
                 cities,
                 popularProvinces,
                 pictureInfo: pictureinfo,
@@ -159,7 +152,7 @@ module.exports = function (passport) {
     });
 
     /** **********************************************************************************************************
-       *queryCities : Method for search all cities, it will return any city that has some of the information
+       *queryCities : Method to search all cities, it will return any city that has some of the information
        * Param : Query, string that will be looked for as part of the city's name
        ************************************************************************************************************ */
     router.get('/querycities', async (req, res) => {

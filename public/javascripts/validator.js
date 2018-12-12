@@ -4,7 +4,7 @@ Validator.prototype.init = function () {
     var forms = $(".validate-form");
     forms.each((index, form) => {
         form.noValidate = true;
-        $('#' + form.getAttribute('id')).submit(this.validateForm);
+        $('#' + form.getAttribute('id')).submit(this.validateForm.bind(this));
     });
 };
 
@@ -51,7 +51,7 @@ Validator.prototype.validateField = function (field) {
         // Native validation available
         if (field.nodeName === "INPUT" && field.type !== field.getAttribute("type")) {
             // Input type not supported! Use legacy JavaScript validation
-            field.setCustomValidity(LegacyValidation(field) ? "" : "error");
+            field.setCustomValidity(this.legacyValidation(field) ? "" : "error");
         }
 
         if (this.isSpecialInput(field)) {
@@ -66,7 +66,7 @@ Validator.prototype.validateField = function (field) {
         // native validation not available
         field.validity = field.validity || {};
         // set to result of validation function
-        field.validity.valid = LegacyValidation(field);
+        field.validity.valid = this.legacyValidation(field);
         // if "invalid" events are required, trigger it here
     }
 
@@ -245,7 +245,7 @@ Validator.prototype.validateSpecialInputs = function (field) {
 };
 
 // basic legacy validation checking
-Validator.prototype.LegacyValidation = function (field) {
+Validator.prototype.legacyValidation = function (field) {
 
     var
         valid = true,

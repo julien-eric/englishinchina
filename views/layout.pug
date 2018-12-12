@@ -1,25 +1,28 @@
 doctype html
 html
     head
-        if title
+        if meta && meta.title
+            title #{meta.title}
+            meta(name='description', content=meta.description)
+            meta(property='og:type', content='website')
+            meta(property='og:url', content=meta.ogUrl || 'https://www.facebook.com/secondlanguageworld')
+            meta(property='og:title', content=meta.title || 'Second Language World')
+            meta(property='og:description', content=meta.ogDescription)
+            meta(property='og:image', content=meta.ogImage)
+        else if title
             title #{title}
         else
-            title= "Second Language World"
-        meta(property='og:url', content='https://www.facebook.com/englishinchinaco/')
-        meta(property='og:type', content='website')
-        meta(property='og:title', content='Second Language World')
-        meta(property='og:description', content='Second Language World catalogs every school, university and English organization in the country in a way that has never been done before. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations')
-        meta(property='og:image', content='http://englishinchina.co/images/chinag3.jpg')
+            title= "Second Language World | Discover, Learn, Teach."
 
+        link(rel='stylesheet', href='//cdn.materialdesignicons.com/3.2.89/css/materialdesignicons.min.css')
         //- CSS 
-        link(rel='stylesheet', href='https://cdn.materialdesignicons.com/2.1.99/css/materialdesignicons.min.css')
-        //- link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto|Montserrat|Raleway|Bree+Serif')
-        //- link(rel='stylesheet', href='/stylesheets/custom.css')
-        //- link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
-        //- link(rel='stylesheet', href='/stylesheets/ekko-lightbox.css')
-        //- link(rel='stylesheet', href='/stylesheets/nouislider.min.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto|Montserrat|Raleway|Bree+Serif')
+        link(rel='stylesheet', href='/stylesheets/custom.css')
+        link(rel='stylesheet', href='/stylesheets/horizBarChart.css')
+        link(rel='stylesheet', href='/stylesheets/ekko-lightbox.css')
+        link(rel='stylesheet', href='/stylesheets/nouislider.min.css')
         //- OR 
-        link(rel='stylesheet', href='/stylesheets/dist/slworld.css')
+        //- link(rel='stylesheet', href='/stylesheets/dist/slworld.css')
         
         //- if analytics
             script(async=true, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
