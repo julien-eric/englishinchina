@@ -1,22 +1,50 @@
 extends ../layout
 block content
-    .container-fluid.mx-0
-        img.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_af54e530-fe52-11e8-bd1f-9168a24e979d.jpeg')
-        .container.bg-white
+    .container-fluid
+        #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+                #splash.splash.row.justify-content-center
+                    .splash-image-container
+                        .splash-image(style="background-image: url('" + splashText.image + "');")
+                    .splash-text.col-sm-12.col-md-10.col-lg-6.mb-5.mt-5
+                        .row
+                            .col-12.mx-auto.mt-5.text-center
+                                -var stepIcon = 'mdi-lightbulb-on'
+                                include step-indicator
+                        .row
+                            .col-12.mx-auto.mb-5.text-center
+                                h1.font-weight-bold Our goal is to contribute to the growth of the TEFL mission around the world by connecting ESL teachers to those who want to learn.     
+     
+    .bg-white
+        .container.arrow-section.bg-white
             .row
-                .col-8.mx-auto.mt-5.text-center
-                    h1.display-4
-                        i.mdi.mdi-trophy-variant(aria-hidden='true') 
+                .col-12.mx-auto.mt-5.text-center
+                    h1.col-lg-12.milkshake
+                        span.text-lightgreen How? 
             .row
                 .col-8.mx-auto.mb-5.text-center
-                    h1 Our goal is to contribute to the growth of the TEFL mission around the world by connecting ESL teachers to those who want to learn. 
-    
-    .container-fluid.bg-pale-gray
-        .container.mb-5 
-            .row
-                .col-8.mx-auto.my-5.text-center
-                    h1 Our purpose is to facilitate communication between potential TEFL candidates and the world that they are trying to be a part of. 
-    
-    include spotlight-information
+                    h2.font-weight-bold By facilitating communication between potential TEFL candidates and the world that they are trying to be a part of.  
+     
+    .bg-white.py-5
+        .container.arrow-section.bg-white
+            .row.justify-content-center.text-center
+                .col-sm-12.col-md-6.col-lg-6.py-3.text-md-left.text-dark
+                    img.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_4e525ba0-ff10-11e8-a68c-5bc4e15abe47.jpg')
+                .col-sm-12.col-md-6.col-lg-6.py-3.text-md-left.text-dark
+                    .mb-5
+                        h2.font-weight-bold Our motivation
+                        p We have done it. We have travelled around the world to teach in Asia and it was life-changing. 
+                            | And now we are trying to make it easier for others to have the same opportunity and partake in their own life-changing adventure.  
+                        //- a.mx-0.px-5.btn.btn-lightgreen(href='/search') Find a job
+                    div
+                        h2.font-weight-bold Your incentive
+                        p Having been there first-hand, we know what it's really like. 
+                            | There is the good but also the bad. What we try to do here is to gradually build reputation for schools with high satisfaction rates and 
+                            | slowly separate the wheat from the chaff. In all honesty, it is a process that will take time, and we can't do it alone. By following up on
+                            | job opportunities and working collectively, we can create a presence for schools around the world and have a positive impact on the transparency of TEFL around the world.
+                        //- a.px-5.mx-0.btn.btn-lightgreen(href='/job/add') Post a job offer
 
+            
+    
+    //- .container-fluid.bg-pale-gray
+    //-     .container.mb-5 
     

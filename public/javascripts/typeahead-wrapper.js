@@ -31,6 +31,7 @@ TypeaheadWrapper.prototype.init = function () {
     $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
 
     $('.typeahead').typeahead({
+        menu: $('#typeahead-target'),
         highlight: true,
         minLength: 2
     },

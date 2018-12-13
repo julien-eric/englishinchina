@@ -189,6 +189,7 @@ module.exports = function (passport) {
                 title: 'Second Language World',
                 user: req.user,
                 provinces,
+                main: true,
                 pictureInfo: pictureinfo,
                 jadefunctions,
                 popularCities,

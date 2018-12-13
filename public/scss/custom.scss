@@ -1001,12 +1001,6 @@ $slw-inset-dark: #ebebeb;
     background-size: cover;
 }
 
-.typeahead-header {
-    background-color: $slw-cool-purple;
-    color: white;
-    text-transform: capitalize;
-    height: 2rem;
-}
 
 .text-fcb-blue {
     color: #3b5998;
@@ -1092,4 +1086,12 @@ $slw-inset-dark: #ebebeb;
     left: 50%;
     border-left-width: 0;
     border-top-width: 0;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
 }

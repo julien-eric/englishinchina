@@ -1,9 +1,11 @@
 extends ../layout
 block content
     
-    .container-fluid.bg-white.border-bottom.border-pale-gray
-        .container.py-3
-            include search-navigation-container
+    .bg-white.border-bottom.border-light
+        .container
+            include ./typeahead-search/ta-search-form
+    //- .container-fluid.bg-white.border-bottom.border-pale-gray
+    //-     .container.py-3
 
     include ../job/job-filters
 
