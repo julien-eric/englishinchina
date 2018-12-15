@@ -1,7 +1,7 @@
 -var filters = []
 -var filterParent = 'job-filter-accordion'
 -filters.push({tag:'Salary', icon: 'mdi-currency-usd', collapsible:'salaryFilter', input:'salary'})
--filters.push({tag:'Date Range', icon: 'mdi-calendar', collapsible:'dateFilter'})
+-filters.push({tag:'Date Range', icon: 'mdi-calendar', collapsible:'dateFilter', input:'dateFilter'})
 -filters.push({tag:'Accomodation', icon: 'mdi-home', collapsible:'accomodationFilter'})
 -filters.push({tag:'Flight', icon: 'mdi-airplane', collapsible:'airfareFilter'})
 -filters.push({tag:'Institution', icon: 'mdi-school', collapsible:'institutionFilter'})
@@ -19,6 +19,40 @@
             .col-12(id=filterParent)
                 each filter in filters 
                     .collapse(id=filter.collapsible, data-parent='#' + filterParent)
-                        .card.card-body
+
                             if filter.input == 'salary'
                                 include ./creation/salary-range-input
+                        
+                            if filter.input == 'dateFilter'
+
+                            .row.mt-3
+                                .col-lg-4.form-group
+                                    .md-form
+                                        -var datepicker = {}
+                                        -datepicker.id = 'start-date'
+                                        -datepicker.name = 'startDate'
+                                        -datepicker.formName = formName
+                                        -datepicker.class = formName
+                                        -datepicker.placeholder = 'Please Select'
+                                        -datepicker.label = 'Start Date of Contract'
+                                        -datepicker.errorMessage = 'Please select a date'
+                                        -datepicker.required = true
+                                        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
+                                            -datepicker.value = user.dateOfBirth
+                                        include ../templates/inputs/date-field
+
+                                .col-lg-4.form-group
+                                    .md-form
+                                        -var datepicker = {}
+                                        -datepicker.id = 'end-date'
+                                        -datepicker.name = 'endDate'
+                                        -datepicker.formName = formName
+                                        -datepicker.class = formName
+                                        -datepicker.placeholder = 'Please Select'
+                                        -datepicker.label = 'End Date of Contract'
+                                        -datepicker.errorMessage = 'Please select a date'
+                                        -datepicker.required = true
+                                        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.endDate
+                                            -datepicker.value = user.dateOfBirth
+                                        include ../templates/inputs/date-field
+

@@ -12,14 +12,14 @@
             hr
             p.card-text #{company.description}
             .row.justify-content-center.text-muted
-                .chip.chip-md
+                .chip
                     i.mdi.mdi-school(aria-hidden='true')      
                     |  #{company.schools.length} Schools
                 -var averageRating = jadefunctions.roundToPoint5(jadefunctions.returnAverage(company.schools, 'averageRating'))
                 if averageRating != 'NaN'
-                    .chip.chip-md
+                    .chip
                         include ../genratingshort
                 if company.reviews && company.reviews.length > 0
-                    .chip.chip-md
+                    .chip
                             i.mdi.mdi-message-text(aria-hidden='true')      
                             |  #{company.reviews.length} Reviews

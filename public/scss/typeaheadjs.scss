@@ -55,9 +55,14 @@ span.twitter-typeahead {
         overflow-x: hidden;
         cursor: pointer;
     }
-    .tt-suggestion.tt-cursor {
-        @extend .dropdown-item.active;
-    }
+
+    // .tt-suggestion.tt-cursor {
+    //     @extend .dropdown-item.active;
+    // }
+
+    // .tt-suggestion.tt-cursor {
+    //     @extend .dropdown-item.active;
+    // }
 
     .typeahead-footer {
         color:#333;

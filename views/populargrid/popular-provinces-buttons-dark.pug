@@ -4,6 +4,6 @@ if popularProvinces
             each popularProvince, index in popularProvinces
                 if index > 6
                 else if index > 3 && index <= 6
-                    a.btn.btn-md.btn-lightgreen.text-white.waves-effect.waves-light(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                    a.btn.btn-md.btn-primary.text-white(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
                 else if index <= 3
-                    a.btn.btn-md.btn-pale-gray.text-dark.waves-effect.waves-light(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                    a.btn.btn-md.btn-pale-gray.text-dark(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}

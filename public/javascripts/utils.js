@@ -153,7 +153,7 @@ $(document).ready(() => {
     };
 
     // Material Select Initialization
-    $('.mdb-select').material_select();
+    // $('.mdb-select').material_select();
 
     $('#citySelect.empty').prop('disabled', 'disabled');
 

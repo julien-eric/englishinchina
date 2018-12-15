@@ -1,10 +1,10 @@
 
 if popularProvinces
     .row.justify-content-center
-        a(href='#').btn.btn-link.d-none.d-lg-inline.disabled Popular Destinations:
+        h6.d-none.d-lg-inline.text-white.pt-2.font-weight-bold Popular Destinations:
         each popularProvince, index in popularProvinces
             if index > 6
             else if index > 4 && index <= 6
-                a.btn.btn-light-transparent.d-inline.d-lg-none(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                a.ml-2.btn.btn-md.border-0.btn-light-transparent.d-inline.d-lg-none(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
             else if index <= 4
-                a.btn.btn-light-transparent(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+                a.ml-2.btn.btn-md.border-0.btn-light-transparent(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}

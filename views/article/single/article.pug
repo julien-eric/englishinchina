@@ -5,7 +5,7 @@ block content
             .row
                 .col-12
                     each category in article.categories
-                        a.btn.btn-sm.btn-lightgreen.text-white.waves-effect.waves-light #{category.name}
+                        a.mr-1.btn.btn-sm.btn-primary.text-white #{category.name}
                     .row
                         .col-md-8.col-sm-12
                             h1.display-4 #{article.title}
@@ -25,7 +25,7 @@ block content
                 .col-md-4
                     .sticky-top.sticky-under-nav.border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3
                         h2.font-weight-bold Looking for an opportunity to work abroad?
-                        a.btn.btn-block.btn-lightgreen(href='/search') Search Our Job Board!
+                        a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!
                     //- include featured-articles-sidebar-test
                     //- include ../../job/featured-jobs
 
@@ -38,7 +38,7 @@ block content
                 //- .col-md-4
                 //-     .sticky-top.sticky-under-nav.border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3
                 //-         h2.font-weight-bold Looking for an opportunity to work abroad?
-                //-         a.btn.btn-block.btn-lightgreen(href='/search') Search Our Job Board!
+                //-         a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!
                 //-     //- include featured-articles-sidebar-test
                 //-     //- include ../../job/featured-jobs
                 

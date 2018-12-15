@@ -9,7 +9,7 @@ block card
                             if(redirectUrl)
                                     .form-group.d-none
                                             input.form-control.form-control-lg(type='text', name='redirectUrl', placeholder='Username', value=redirectUrl)
-                            .md-form.mb-5
+                            .form-group.mb-5
                                     -var textInput = {}
                                     -textInput.id = 'email'
                                     -textInput.type = 'email'
@@ -18,7 +18,7 @@ block card
                                     -textInput.label = 'Email'
                                     -textInput.required = true;
                                     include ../templates/inputs/text-input
-                            .md-form.form-group.mb-5
+                            .form-group.mb-5
                                     -var textInput = {}
                                     -textInput.id = 'password'
                                     -textInput.type = 'password'

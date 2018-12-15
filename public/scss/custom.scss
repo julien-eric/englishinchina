@@ -1,115 +1,60 @@
-// Custom.scss
-// Your variable overrides
-$slw-primary: #447C1D;
-// $slw-lightgreen: #95D469;
-$slw-lightgreen: rgb(149, 202, 110);
+// Second Language World custom.scss
+
+// COLORS
+$slw-primary: #95ca6e;
 $slw-primary-darker: rgb(32, 65, 8);
 $slw-danger: #ff4136;
 $slw-secondary: #5bc0de;
 $slw-secondary-darker: #3691ad;
 $slw-cool-purple: #9d99c1;
 $slw-light-secondary: #d8d8d8;
-$slw-light-transparent: rgba(226, 226, 226, 0.20);
-$slw-dark: #1f1f1f;
+$slw-light-transparent: rgba(90, 90, 90, 0.5);
+$slw-dark: #3c3c3c;
+// $slw-dark: #1f1f1f;
 $slw-darker: #151515;
 $slw-dark-transparent: rgba(23, 23, 23, 0.58);
-$slw-antique-white: #faebd7;
+$slw-pale-gray: #f1f1f1;
+
+// RATING COLOR GRADE
+$rating-great:#47a347;
+$rating-good: #76bf33;
+$rating-medium: #87a56a;
+$rating-bad: #68745c;
+
+// BOOTSTRAP VARIABLES
 $enable-gradients: false;
 $enable-shadows: false;
+$link-color: $slw-primary;
+$card-border-width: 0;
+$border-radius-lg: 3px;
+
+$input-btn-padding-y: 0.5rem;
+$input-btn-padding-x: 1rem;
+
+$input-btn-padding-y-lg: 1rem;
+$input-btn-padding-x-lg: 1.5rem;
+
+// SLW MAGIC DIMENSIONS
 $standard-height: 190px;
 $landing-page-height: 720px;
 $school-header-height: 380px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
-$pale-gray: #f1f1f1;
-// Rating colors
-$rating-great:#47a347;
-$rating-good: #76bf33;
-$rating-medium: #87a56a;
-$rating-bad: #68745c;
-$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "light-transparent": $slw-light-transparent, "dark-transparent": $slw-dark-transparent, "antique-white": $slw-antique-white, "lightgreen": $slw-lightgreen, "pale-gray": $pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+
+$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "light-transparent": $slw-light-transparent, "dark-transparent": $slw-dark-transparent, "pale-gray": $slw-pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+
+
 @import "node_modules/bootstrap/scss/bootstrap";
-// CORE
-// Bootstrap & MDB
-@import "node_modules/mdbootstrap-pro/scss/core/bootstrap/functions";
-@import "node_modules/mdbootstrap-pro/scss/core/bootstrap/variables";
-@import "node_modules/mdbootstrap-pro/scss/core/mixins";
-@import "./mdbcolors";
-$theme-colors: ( "primary": $slw-primary);
-@import "node_modules/mdbootstrap-pro/scss/core/variables";
-$link-color: $slw-primary;
-@import "node_modules/mdbootstrap-pro/scss/core/global";
-@import "node_modules/mdbootstrap-pro/scss/core/helpers";
-@import "./typography";
-@import "node_modules/mdbootstrap-pro/scss/core/masks";
-@import "node_modules/mdbootstrap-pro/scss/core/waves";
-@import "node_modules/mdbootstrap-pro/scss/free/forms";
-@import "node_modules/mdbootstrap-pro/scss/free/animations-basic";
-@import "node_modules/mdbootstrap-pro/scss/free/modules/animations-extended/animations-extended";
-@import "node_modules/mdbootstrap-pro/scss/free/buttons";
-@import "node_modules/mdbootstrap-pro/scss/free/cards";
-@import "node_modules/mdbootstrap-pro/scss/free/dropdowns";
-@import "node_modules/mdbootstrap-pro/scss/free/navbars";
-@import "node_modules/mdbootstrap-pro/scss/free/pagination";
-@import "node_modules/mdbootstrap-pro/scss/free/badges";
-@import "node_modules/mdbootstrap-pro/scss/free/modals";
-@import "node_modules/mdbootstrap-pro/scss/free/carousels";
-@import "node_modules/mdbootstrap-pro/scss/free/forms";
-@import "node_modules/mdbootstrap-pro/scss/free/input-group";
-@import "node_modules/mdbootstrap-pro/scss/free/msc";
-@import "node_modules/mdbootstrap-pro/scss/free/footers";
-@import "node_modules/mdbootstrap-pro/scss/free/list-group";
-@import "node_modules/mdbootstrap-pro/scss/free/tables";
-@import "node_modules/mdbootstrap-pro/scss/free/switch";
-@import "node_modules/mdbootstrap-pro/scss/free/depreciated";
-@import "node_modules/mdbootstrap-pro/scss/free/steppers";
-@import "node_modules/mdbootstrap-pro/scss/free/loader";
-// PRO
-@import "node_modules/mdbootstrap-pro/scss/pro/variables";
-@import "node_modules/mdbootstrap-pro/scss/pro/buttons";
-@import "node_modules/mdbootstrap-pro/scss/pro/social-buttons";
-@import "node_modules/mdbootstrap-pro/scss/pro/tabs";
-@import "node_modules/mdbootstrap-pro/scss/pro/cards-basic";
-@import "node_modules/mdbootstrap-pro/scss/pro/dropdowns";
-@import "node_modules/mdbootstrap-pro/scss/pro/navbars";
-@import "node_modules/mdbootstrap-pro/scss/pro/scrollspy";
-@import "node_modules/mdbootstrap-pro/scss/pro/modules/lightbox/module";
-@import "node_modules/mdbootstrap-pro/scss/pro/chips";
-@import "node_modules/mdbootstrap-pro/scss/pro/msc";
-@import "node_modules/mdbootstrap-pro/scss/pro/forms";
-@import "node_modules/mdbootstrap-pro/scss/pro/radio";
-@import "node_modules/mdbootstrap-pro/scss/pro/checkbox";
-@import "node_modules/mdbootstrap-pro/scss/pro/material-select";
-@import "node_modules/mdbootstrap-pro/scss/pro/switch";
-@import "node_modules/mdbootstrap-pro/scss/pro/file-input";
-@import "node_modules/mdbootstrap-pro/scss/pro/range";
-@import "node_modules/mdbootstrap-pro/scss/pro/input-group";
-@import "node_modules/mdbootstrap-pro/scss/pro/autocomplete";
-@import "node_modules/mdbootstrap-pro/scss/pro/accordion-basic";
-@import "node_modules/mdbootstrap-pro/scss/pro/modules/accordion-extended/module";
-@import "node_modules/mdbootstrap-pro/scss/pro/modules/parallax/module";
-@import "node_modules/mdbootstrap-pro/scss/pro/sidenav";
-@import "node_modules/mdbootstrap-pro/scss/pro/ecommerce";
-@import "node_modules/mdbootstrap-pro/scss/pro/carousels";
-@import "node_modules/mdbootstrap-pro/scss/pro/blog";
-@import "node_modules/mdbootstrap-pro/scss/pro/toasts";
-@import "node_modules/mdbootstrap-pro/scss/pro/animations";
-@import "node_modules/mdbootstrap-pro/scss/pro/modules/charts/module";
-@import "node_modules/mdbootstrap-pro/scss/pro/progress";
-@import "node_modules/mdbootstrap-pro/scss/pro/scrollbar";
-@import "node_modules/mdbootstrap-pro/scss/pro/modules/megamenu/module";
-// Your custom skin
-// @import "pro/skins";
-// @import "pro/depreciated";
-// Picker
-@import "node_modules/mdbootstrap-pro/scss/pro/picker/default";
-@import "node_modules/mdbootstrap-pro/scss/pro/picker/default-time";
-@import "node_modules/mdbootstrap-pro/scss/pro/picker/default-date";
-// Pro addons
-@import "node_modules/mdbootstrap-pro/scss/addons-pro/steppers";
-@import "node_modules/mdbootstrap-pro/scss/addons-pro/timeline";
-@import "node_modules/mdbootstrap-pro/scss/addons-pro/cards-extended";
-// @import "node_modules/mdbootstrap-pro/scss/addons-pro/chat";
+
+// Change the chrome yellowish autofill
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+@import "./chips";
 
 @font-face {
     font-family: milkshake;
@@ -154,63 +99,7 @@ body {
     white-space: pre-wrap;
 }
 
-@each $color,
-$value in $theme-colors {
-    .border-0 {
-        border: none;
-    }
-    .border-1-#{$color} {
-        border: solid 1px $value;
-    }
-    .border-2-#{$color} {
-        border: solid 2px $value;
-    }
-    .border-3-#{$color} {
-        border: solid 3px $value;
-    }
-    .border-5-#{$color} {
-        border: solid 5px $value;
-    }
-    .border-bottom-0 {
-        border-bottom: none;
-    }
-    .border-bottom-1-#{$color} {
-        border-bottom: solid 1px $value;
-    }
-    .border-bottom-2-#{$color} {
-        border-bottom: solid 2px $value;
-    }
-    .border-bottom-3-#{$color} {
-        border-bottom: solid 3px $value;
-    }
-    .border-bottom-5-#{$color} {
-        border-bottom: solid 5px $value;
-    }
-    .border-top-0 {
-        border-top: none;
-    }
-    .border-top-1-#{$color} {
-        border-top: solid 1px $value;
-    }
-    .border-top-2-#{$color} {
-        border-top: solid 2px $value;
-    }
-    .border-top-3-#{$color} {
-        border-top: solid 3px $value;
-    }
-    .border-top-5-#{$color} {
-        border-top: solid 5px $value;
-    }
-}
-
-@each $color,
-$value in $theme-colors {
-    .swatch-#{$color} {
-        color: color-yiq($value);
-    }
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .btn {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -261,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar {
     box-shadow: none;
-    border-bottom: solid 1px $pale-gray;
+    border-bottom: solid 1px $slw-pale-gray;
 }
 
 .navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
@@ -285,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar.navbar-light.main-header.transparent {
     box-shadow: none;
     background-color: white;
-    border-bottom: solid 1px $pale-gray;
+    border-bottom: solid 1px $slw-pale-gray;
     transition: background-color 0.5s linear, border-bottom 0.5s linear;
 }
 
@@ -321,7 +210,7 @@ footer hr {
 }
 
 footer label {
-    font-size: 0.8rem; // text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 footer .form-group {
@@ -550,26 +439,7 @@ footer .form-control:focus {
     cursor: pointer; /* Cursor on hover */
 }
 
-
 input[type=range]+.thumb {
-    background-color: $slw-primary !important;
-}
-
-.picker__box .picker__header .picker__date-display .picker__weekday-display {
-    background-color: $slw-primary !important;
-}
-
-.picker__box .picker__header .picker__date-display {
-    background-color: $slw-primary !important;
-}
-
-.picker__date-display {
-    background-color: $slw-primary !important;
-}
-
-.picker__box .picker__table .picker--focused,
-.picker__box .picker__table .picker__day--selected,
-.picker__box .picker__table .picker__day--selected:hover {
     background-color: $slw-primary !important;
 }
 
@@ -578,30 +448,9 @@ input[type=range]+.thumb {
     height: $image-container-height;
 }
 
-.absolute {
-    position: absolute;
-    width: 100%;
-}
-
 @import "./typeaheadjs.scss";
-.btn {
-    padding: .84rem 0.74rem;
-    font-size: .81rem;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out; // margin: .375rem;
-    border: 0;
-    border-radius: .125rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    white-space: normal;
-    word-wrap: break-word; // color: inherit !important;
-}
 
-.btn.btn-link {
-    color: inherit !important;
-}
-
-.btn-light-transparent:hover {
+.btn.btn-primary, .btn.btn-light-transparent {
     color: white;
 }
 
@@ -615,11 +464,6 @@ input[type=range]+.thumb {
     height: 65px;
 }
 
-.card .btn-action {
-    margin-top: -1.44rem;
-    margin-bottom: -1.44rem;
-}
-
 .display-grid {
     display: grid;
 }
@@ -628,7 +472,7 @@ input[type=range]+.thumb {
     width: 2.75rem;
     height: 2.75rem; // position: relative;
     z-index: 1;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .22), 0 2px 10px 0 rgba(0, 0, 0, .18);
+    // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .22), 0 2px 10px 0 rgba(0, 0, 0, .18);
     vertical-align: middle;
     display: inline-block;
     overflow: hidden;
@@ -640,6 +484,8 @@ input[type=range]+.thumb {
     border-radius: 50%;
     padding: 0;
     cursor: pointer;
+    margin-top: -1.44rem;
+    margin-bottom: -1.44rem;
 }
 
 .btn-floating i {
@@ -656,15 +502,16 @@ input[type=range]+.thumb {
     color: $slw-primary;
 }
 
-.dropdown .dropdown-menu .dropdown-item:active,
-.dropdown .dropdown-menu .dropdown-item:hover {
-    background-color: $slw-primary;
-    color: black;
-}
-
 .dropdown .dropdown-menu .dropdown-item {
     color: black !important;
 }
+
+.dropdown .dropdown-menu .dropdown-item:active,
+.dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: $slw-primary;
+    color: white;
+}
+
 
 #school-header {
     position: relative;
@@ -874,7 +721,7 @@ fieldset.nouirange {
 }
 
 .classic-tabs li a.active {
-    color: $slw-lightgreen;
+    color: $slw-primary;
 }
 
 $slw-hollow-input: #f5f5f5;
@@ -1001,13 +848,8 @@ $slw-inset-dark: #ebebeb;
     background-size: cover;
 }
 
-
 .text-fcb-blue {
     color: #3b5998;
-}
-
-.anything {
-    color: black;
 }
 
 .mce-tinymce {
@@ -1095,3 +937,4 @@ $slw-inset-dark: #ebebeb;
 .relative {
     position: relative;
 }
+

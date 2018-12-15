@@ -2,7 +2,7 @@ let InputController = function () { };
 
 InputController.prototype.init = function () {
     this.initSliders();
-    this.initDatePickers();
+    // this.initDatePickers();
     this.initTinyMce();
     this.initRange();
 }

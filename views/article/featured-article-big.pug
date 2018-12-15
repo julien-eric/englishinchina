@@ -8,8 +8,8 @@
                 | #{article.title}
         p.text-small.font-weight-bold #{article.author.first_name} #{article.author.last_name} &middot; #{moment(article.created).format("MMMM Do")}
         hr
-        p.text-dark.card-text.overflow-3 #{article.summary}
-        a.ml-0.btn.btn-sm.btn-lightgreen.mr-1(href="/blog/" + article.slug) Read Now
+        p.text-dark.card-text.overflow-3-lines #{article.summary}
+        a.ml-0.btn.btn-sm.btn-primary.mr-1(href="/blog/" + article.slug) Read Now
         //- .text-muted
         //-     each tag in article.tags
         //-         .chip.chip-xs.mb-1.bg-light

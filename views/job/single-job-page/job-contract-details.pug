@@ -1,5 +1,5 @@
 .card.border-0.mb-3
-    #headingOne.card-header.text-center.border-top-5-primary.border-lightgreen.border-bottom-0
+    #headingOne.card-header.text-center.border-top-5-primary.border-primary.border-bottom-0
             h5.text-uppercase.mb-0
                 button.btn.btn-link.text-white(data-toggle='collapse', data-target='#job-details-collapse', aria-expanded='true', aria-controls='job-details-collapse') 
                     //-   i.mdi.mdi-star(aria-hidden='true')
@@ -10,13 +10,13 @@
                 .col-12.mb-5
                     if(job.school)
                         a.mb-2(href='/school/' + job.school._id)  
-                            i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
+                            i.text-primary.mdi.mdi-school.mr-2(aria-hidden='true')
                             | #{job.school.name}
                         hr.my-2
                     .row
                         .col-5
                             p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
+                                i.text-primary.mdi.mdi-map-marker.mr-2(aria-hidden='true')
                                 | Location
                         .col-7
                             p.mb-0 #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
@@ -26,7 +26,7 @@
                     .row
                         .col-5
                             p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
+                                i.text-primary.mdi.mdi-calendar.mr-2(aria-hidden='true')
                                 | Start Date
                         .col-7
                             p.mb-0 #{moment(job.startDate).format("MMMM YYYY")}
@@ -36,7 +36,7 @@
                     .row
                         .col-5
                             p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
+                                i.text-primary.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
                                 | Salary
                         .col-7
                             p.mb-0 #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
@@ -46,7 +46,7 @@
                     .row
                         .col-5
                             p.mb-0.font-weight-bold 
-                                i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
+                                i.text-primary.mdi.mdi-email.mr-2(aria-hidden='true')
                                 | Contact
                         .col-7
                             a.mb-0(href='mailto:' + job.email) #{job.email}

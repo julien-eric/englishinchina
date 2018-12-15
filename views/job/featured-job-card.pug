@@ -2,8 +2,6 @@
     .display-grid
         a.view.overlay.card-img(href='/job/' + job.url)
             .image-container.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')           
-        //- a.btn.btn-primary.btn-rounded.btn-floating.btn-action.ml-auto.mr-4(href='/blog/' + article.slug)
-        //-     i.text-white.mdi.mdi-chevron-double-right(aria-hidden='true')
         .card-body.text-left
             h4.font-weight-bold.card-title.px-0 
                 a.text-dark.text-capitalize(href="/job/" + job.url)
