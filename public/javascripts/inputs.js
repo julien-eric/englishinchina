@@ -3,6 +3,9 @@ let InputController = function () { };
 InputController.prototype.init = function () {
     this.initSliders();
     // this.initDatePickers();
+    $('.datepicker').datepicker({
+        format: 'MM dd yyyy'
+    });
     this.initTinyMce();
     this.initRange();
 }
@@ -122,9 +125,9 @@ InputController.prototype.initRange = function () {
 
         htmlinsert.noUiSlider.on('update', function (values) {
             realmininput.value = String(values[0]);
-            $('#salary-lower').val(Math.round(values[0]));
+            $('#salary-lower').val(Math.round(values[0]) * 1000);
             realmaxinput.value = String(values[1]);
-            $('#salary-higher').val(Math.round(values[1]));
+            $('#salary-higher').val(Math.round(values[1]) * 1000);
         });
     });
 

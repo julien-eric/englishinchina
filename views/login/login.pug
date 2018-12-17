@@ -4,7 +4,7 @@ block card
         .border.border-pale-gray.border-radius-5.text-dark.bg-white
             .my-5.text-left.px-3.px-md-5.py-1
                     .text-center
-                            h3.mt-1.mb-5.text-light.font-weight-bold Sign in 
+                            h3.mt-1.mb-5.font-weight-bold Sign in 
                     form(class='form-signin', action='/login', method='POST')
                             if(redirectUrl)
                                     .form-group.d-none
@@ -23,7 +23,7 @@ block card
                                     -textInput.id = 'password'
                                     -textInput.type = 'password'
                                     -textInput.name = 'password'
-                                    -textInput.placeholder = 'Password'
+                                    -textInput.placeholder = '********'
                                     -textInput.label = 'Password'
                                     -textInput.required = true;
                                     include ../templates/inputs/text-input

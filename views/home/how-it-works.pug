@@ -3,25 +3,32 @@
         .row.justify-content-center
             h1.display-4.text-center.font-weight-bold How does it work?
         .row.justify-content-center.my-5
-            .col-md-6
-                -var stepIcon = 'mdi-view-list'
-                -var stepTitle = 'Search our Job Board'
-                -var stepText = 'Find amazing ESL opportunities to teach across the world and read all about the offer and its location.'
+            .col-md-6.mb-3
+                -var step = {}
+                -step.icon = 'mdi-view-list'
+                -step.title = 'Search our Job Board'
+                -step.text = 'Find amazing ESL opportunities to teach across the world and read all about the offer and its location.'
+                -step.button = {text:'Job Board', link: '/jobs'}
                 include how-it-works-step
-            .col-md-6
-                -var stepIcon = 'mdi-map-marker'
-                -var stepTitle = 'Create A Profile'
-                -var stepText = 'When you find a job, register to Second Language World and fill in your teacher information booklet.'
+            .col-md-6.mb-3
+                -var step = {}
+                -step.icon = 'mdi-map-marker'
+                -step.title = 'Create A Profile'
+                -step.text = 'When you find a job, register to Second Language World and fill in your teacher information booklet.'
+                -step.button = {text:'Login', link: '/login'}
+                -step.button2 = {text:'Register', link: '/signup'}
                 include how-it-works-step
-            .col-md-6
-                -var stepIcon = 'mdi-briefcase-download'
-                -var stepTitle = 'Apply for a job'
-                -var stepText = 'Apply to any job you\'re interested in! Just write the employer a message and we\'ll forward your info.'
+            .col-md-6.mb-3
+                -var step = {}
+                -step.icon = 'mdi-briefcase-download'
+                -step.title = 'Apply for a job'
+                -step.text = 'Apply to any job you\'re interested in! Just write the employer a message and we\'ll forward your info.'
                 include how-it-works-step
-            .col-md-6
-                -var stepIcon = 'mdi-forum'
-                -var stepTitle = 'Wait for a reply'
-                -var stepText = 'Get your replies on here or by email. Then visit the company and school profiles to see what other teachers had to say about them!'
+            .col-md-6.mb-3
+                -var step = {}
+                -step.icon = 'mdi-forum'
+                -step.title = 'Wait for a reply'
+                -step.text = 'Get your replies on here or by email. Then visit the company and school profiles to see what other teachers had to say about them!'
                 include how-it-works-step
         .row.justify-content-center
             .col-md-12.text-center

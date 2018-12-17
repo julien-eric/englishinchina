@@ -37,6 +37,7 @@ FileUploader.prototype.init = function (inputId, urlPrefix, previewPrefix, progr
             } else {
                 this.getSignedRequest(file, this.getElementIndex(inputId));
                 document.getElementById(urlPrefix + '-' + inputId).value = file.name;
+                document.getElementById('label-' + inputId).innerHTML = file.name;
             }
         };
 

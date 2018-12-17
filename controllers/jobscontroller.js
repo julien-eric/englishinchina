@@ -111,7 +111,7 @@ JobsController.prototype.addJob = async (user, jobParams) => {
             contractDetails: {
                 salaryLower: jobParams.salaryLower,
                 salaryHigher: jobParams.salaryHigher,
-                startDate: new Date(moment(jobParams.startDate, 'MMMM Do YYYY').format()),
+                startDate: new Date(moment(jobParams.startDate, 'MMMM DD YYYY').format()),
                 duration: jobParams.duration
             },
             teachingDetails: {

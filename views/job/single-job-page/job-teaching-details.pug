@@ -1,9 +1,8 @@
 .card.border-0.mb-3
-    #headingOne.card-header.text-center.border-top-5-primary.border-primary.border-bottom-0
-            h5.text-uppercase.mb-0
-                button.btn.btn-link.text-white(data-toggle='collapse', data-target='#job-teaching-details-collapse', aria-expanded='true', aria-controls='job-teaching-details-collapse') 
-                    //-   i.mdi.mdi-star(aria-hidden='true')
-                    | Teaching Details
+
+    -var section = {label:'Teaching Details', collapsible: 'job-teaching-details-collapse'}
+    include job-section-details
+
     #job-teaching-details-collapse.collapse(aria-labelledby='headingOne', data-parent='#accordion')
         if job && job.teachingDetails
             .row.pt-3

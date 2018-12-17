@@ -2,5 +2,9 @@
     .col-3
         include step-indicator
     .col-9
-        h4.font-weight-bold #{stepTitle} 
-        p #{stepText} 
+        h4.font-weight-bold #{step.title} 
+        p.mb-1 #{step.text} 
+        if step.button
+            a.btn.btn-sm.btn-light(href=step.button.link) #{step.button.text}
+            if step.button2
+                a.ml-1.btn.btn-sm.btn-light(href=step.button2.link) #{step.button2.text}

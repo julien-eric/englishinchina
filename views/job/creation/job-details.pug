@@ -1,47 +1,47 @@
 extends ../../templates/forms/form-card-container
 
 block card
-    h3.mt-5.text-dark.font-weight-bold Job Details
-    p.mb-5 And now, about the contract!
-    
+    h3.mt-5.pt-5.text-dark.font-weight-bold Job Details
+    //- p.mb-5 And now, about the contract!
+    hr
+
     include salary-range-input
 
     .row.mt-3
         .col-lg-6.form-group
-            .md-form
-                -var datepicker = {}
-                -datepicker.id = 'start-date'
-                -datepicker.name = 'startDate'
-                -datepicker.formName = formName
-                -datepicker.class = formName
-                -datepicker.placeholder = 'Please Select'
-                -datepicker.label = 'Start Date of Contract'
-                -datepicker.errorMessage = 'Please select a date'
-                -datepicker.required = true
-                if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-                    -datepicker.value = user.dateOfBirth
-                include ../../templates/inputs/date-field
+            -var datepicker = {}
+            -datepicker.id = 'start-date'
+            -datepicker.name = 'startDate'
+            -datepicker.formName = formName
+            -datepicker.class = formName
+            -datepicker.placeholder = 'Please Select'
+            -datepicker.label = 'Start Date of Contract'
+            -datepicker.errorMessage = 'Please select a date'
+            -datepicker.required = true
+            if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
+                -datepicker.value = user.dateOfBirth
+            include ../../templates/inputs/date-field
 
         .col-lg-6.form-group
-            .md-form
-                -var numberInput = {}
-                -numberInput.id = 'duration'
-                -numberInput.label = 'Length of Contract'
-                -numberInput.formName = formName
-                -numberInput.class = formName
-                -numberInput.placeholder = 'Enter a number'
-                -numberInput.responseSubProperty = 'contractDetails'
-                -numberInput.name = 'duration'
-                -numberInput.min = 0
-                -numberInput.max = 6
-                -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-                -numberInput.tooltip = 'Duration of contract in years'
-                -numberInput.required = true
-                include ../../templates/inputs/generic-number-input 
+            -var numberInput = {}
+            -numberInput.id = 'duration'
+            -numberInput.label = 'Length of Contract'
+            -numberInput.formName = formName
+            -numberInput.class = formName
+            -numberInput.placeholder = 'Enter a number'
+            -numberInput.responseSubProperty = 'contractDetails'
+            -numberInput.name = 'duration'
+            -numberInput.min = 0
+            -numberInput.max = 6
+            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+            -numberInput.tooltip = 'Duration of contract in years'
+            -numberInput.required = true
+            include ../../templates/inputs/generic-number-input 
 
 
-    h3.mt-5.text-dark.font-weight-bold Benefits
-    p.mb-3 What are the perks!
+    h3.mt-5.pt-5.text-dark.font-weight-bold Benefits
+    //- p.mb-3 What are the perks!
+    hr
 
     .row
         .col-lg-6.form-group
@@ -92,57 +92,55 @@ block card
             include ../../templates/inputs/generic-select
 
         .col-lg-6.form-group
-                .md-form
-                    -var numberInput = {}
-                    -numberInput.id = 'vacation-days'
-                    -numberInput.label = 'Number of vacation days yearly'
-                    -numberInput.formName = formName
-                    -numberInput.class = formName
-                    -numberInput.placeholder = 'Enter a number'
-                    -numberInput.responseSubProperty = 'benefits'
-                    -numberInput.name = 'vacationDays'
-                    -numberInput.min = 0
-                    -numberInput.max = 183
-                    -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-                    //- -numberInput.tooltip = 'Number of vacation days yearly'
-                    -numberInput.required = true
-                    if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
-                        - numberInput.value = responseInfo.jobDetails.vacationDays
-                    include ../../templates/inputs/generic-number-input 
+            -var numberInput = {}
+            -numberInput.id = 'vacation-days'
+            -numberInput.label = 'Number of vacation days yearly'
+            -numberInput.formName = formName
+            -numberInput.class = formName
+            -numberInput.placeholder = 'Enter a number'
+            -numberInput.responseSubProperty = 'benefits'
+            -numberInput.name = 'vacationDays'
+            -numberInput.min = 0
+            -numberInput.max = 183
+            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+            //- -numberInput.tooltip = 'Number of vacation days yearly'
+            -numberInput.required = true
+            if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
+                - numberInput.value = responseInfo.jobDetails.vacationDays
+            include ../../templates/inputs/generic-number-input 
 
-    h3.mt-5.text-dark.font-weight-bold Teaching Environment
-    p.mb-3 What should the teachers be expecting in terms of the work environment
+    h3.mt-5.pt-5.text-dark.font-weight-bold Teaching Environment
+    //- p.mb-3 What should the teachers be expecting in terms of the work environment
+    hr
 
     .row
         .col-lg-6.form-group
-            .md-form
-                -var textInput = {}
-                -textInput.id = 'institution'
-                -textInput.name = 'institution'
-                -textInput.responseSubProperty = 'teachingDetails'
-                -textInput.placeholder = '(e.g. Public School, Training School, University, etc.)'
-                -textInput.label = 'Institution Type'
-                -textInput.formName = formName
-                -textInput.class = formName
-                -textInput.required = true;
-                include ../../templates/inputs/text-input
+            -var textInput = {}
+            -textInput.id = 'institution'
+            -textInput.name = 'institution'
+            -textInput.responseSubProperty = 'teachingDetails'
+            -textInput.placeholder = '(e.g. Public School, Training School, University, etc.)'
+            -textInput.label = 'Institution Type'
+            -textInput.formName = formName
+            -textInput.class = formName
+            -textInput.required = true;
+            include ../../templates/inputs/text-input
 
         .col-lg-6.form-group
-            .md-form
-                -var numberInput = {}
-                -numberInput.id = 'weeklyLoad'
-                -numberInput.label = 'Average Weekly Workload (hrs)'
-                -numberInput.formName = formName
-                -numberInput.class = formName
-                -numberInput.placeholder = 'Enter a number'
-                -numberInput.name = 'weeklyLoad'
-                -numberInput.responseSubProperty = 'teachingDetails'
-                -numberInput.min = 5    
-                -numberInput.max = 40
-                -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-                //- -numberInput.tooltip = 'Number of vacation days yearly'
-                -numberInput.required = true
-                include ../../templates/inputs/generic-number-input 
+            -var numberInput = {}
+            -numberInput.id = 'weeklyLoad'
+            -numberInput.label = 'Average Weekly Workload (hrs)'
+            -numberInput.formName = formName
+            -numberInput.class = formName
+            -numberInput.placeholder = 'Enter a number'
+            -numberInput.name = 'weeklyLoad'
+            -numberInput.responseSubProperty = 'teachingDetails'
+            -numberInput.min = 5    
+            -numberInput.max = 40
+            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+            //- -numberInput.tooltip = 'Number of vacation days yearly'
+            -numberInput.required = true
+            include ../../templates/inputs/generic-number-input 
 
         .col-lg-6.form-group
             -var select = {}
@@ -176,11 +174,13 @@ block card
             -select.required = true
             include ../../templates/inputs/generic-select
 
-    .row.mt-5
-        .col-lg-12
-            button.btn.btn-lg.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
-                | Next
-                i.mdi.mdi-arrow-right(aria-hidden='true')
-            button.btn.btn-lg.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') 
+    .row.mt-5.pt-5
+        hr
+        .col-6
+            button.btn.btn-lg.btn-block.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') 
                 i.mdi.mdi-arrow-left(aria-hidden='true')
                 | Previous
+        .col-6
+            button.btn.btn-lg.btn-block.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
+                | Next
+                i.mdi.mdi-arrow-right(aria-hidden='true')

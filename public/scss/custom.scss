@@ -22,17 +22,29 @@ $rating-medium: #87a56a;
 $rating-bad: #68745c;
 
 // BOOTSTRAP VARIABLES
+$standard-md-height-pad: 0.7rem;
+$standard-md-width-pad: 1.1rem;
+
 $enable-gradients: false;
 $enable-shadows: false;
 $link-color: $slw-primary;
 $card-border-width: 0;
 $border-radius-lg: 3px;
 
-$input-btn-padding-y: 0.5rem;
-$input-btn-padding-x: 1rem;
+// md-sized-stuff
+$input-btn-padding-y: $standard-md-height-pad;
+$input-btn-padding-x: $standard-md-width-pad;
+$input-padding-y: $standard-md-height-pad;
+$input-padding-x: $standard-md-width-pad;
 
+//btn-lg
 $input-btn-padding-y-lg: 1rem;
 $input-btn-padding-x-lg: 1.5rem;
+
+//form inputs
+$input-bg: $slw-pale-gray;
+$input-border-width: 0;
+$input-disabled-bg: $slw-light-secondary;
 
 // SLW MAGIC DIMENSIONS
 $standard-height: 190px;
@@ -51,7 +63,11 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px white inset;
+    -webkit-box-shadow: 0 0 0 30px lighten($slw-primary, 25%) inset;
+}
+
+.form-group label {
+    font-weight: bold;
 }
 
 @import "./chips";
@@ -66,19 +82,27 @@ input:-webkit-autofill:active  {
     font-size: 6rem;
 }
 
-select {
-    -webkit-appearance: none;
-}
+// select {
+//     -webkit-appearance: none;
+// }
 
 @media (min-width: 1200px) {
     .container {
         max-width: 1240px;
     }
 }
+
 @each $color,
 $value in $theme-colors {
     .text-shadow-#{$color} {
         text-shadow: 2px 2px 15px $value;
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .border-top-#{$color}-5 {
+        border-top: solid 5px $value;
     }
 }
 
@@ -125,6 +149,10 @@ h1, h2, h3, h4, h5, h6, .btn {
     }
     #splash-kicker {
         font-size: 1.2rem;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        text-align: center;
+        font-size:1.3rem;
     }
 }
 
@@ -272,18 +300,18 @@ footer .form-control:focus {
 
 .z-depth-1,
 .jumbotron,
-.md-form input[type=text].input-alternate,
-.md-form input[type=password].input-alternate,
-.md-form input[type=email].input-alternate,
-.md-form input[type=url].input-alternate,
-.md-form input[type=time].input-alternate,
-.md-form input[type=date].input-alternate,
-.md-form input[type=datetime-local].input-alternate,
-.md-form input[type=tel].input-alternate,
-.md-form input[type=number].input-alternate,
-.md-form input[type=search-md].input-alternate,
-.md-form input[type=search].input-alternate,
-.md-form textarea.md-textarea.input-alternate,
+input[type=text].input-alternate,
+input[type=password].input-alternate,
+input[type=email].input-alternate,
+input[type=url].input-alternate,
+input[type=time].input-alternate,
+input[type=date].input-alternate,
+input[type=datetime-local].input-alternate,
+input[type=tel].input-alternate,
+input[type=number].input-alternate,
+input[type=search-md].input-alternate,
+input[type=search].input-alternate,
+textarea.input-alternate,
 .btn,
 .btn.disabled:active,
 .btn.disabled:focus,
@@ -613,20 +641,11 @@ input[type=range]+.thumb {
     float: left;
 }
 
-.md-form label {
-    width: 100%;
-}
-
-.md-form .validate {
-    margin-bottom: .25rem;
-}
-
 .select-wrapper {
     margin-top: 0;
 }
 
-.form-group,
-.md-form {
+.form-group {
     margin-top: 1.5rem;
     margin-bottom: 0;
 }
@@ -648,17 +667,17 @@ fieldset.nouirange {
     .noUi-horizontal {
         height: 4px;
         .noUi-connects {
-            background: none;
+            background: #d3d3d3;
             .noUi-connect {
                 background: $slw-primary;
             }
         }
     }
     .noUi-handle {
-        height: 1.6em !important;
-        width: 1.6em !important;
-        top: -.8em !important;
-        right: -.8em !important;
+        height: 1.2em !important;
+        width: 1.2em !important;
+        top: -.6em !important;
+        right: -.6em !important;
         border-radius: 100%;
         background: $slw-primary;
         box-shadow: none;
@@ -667,6 +686,14 @@ fieldset.nouirange {
         &:after {
             display: none;
         }
+    }
+
+    .noUi-value-horizontal {
+        transform: translate(-50%,110%);
+    }
+
+    .noUi-value {
+        font-size: 10px;
     }
 }
 
