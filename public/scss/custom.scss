@@ -641,10 +641,6 @@ input[type=range]+.thumb {
     float: left;
 }
 
-.select-wrapper {
-    margin-top: 0;
-}
-
 .form-group {
     margin-top: 1.5rem;
     margin-bottom: 0;
@@ -786,13 +782,15 @@ $slw-inset-dark: #ebebeb;
     background-color: white;
 }
 
-.select-wrapper input.select-dropdown.invalid {
-    border-bottom: 1px solid #f44336;
+.form-control.invalid {
+    border: solid 1px red;
 }
 
-.select-wrapper input.select-dropdown.valid {
-    border-bottom: 1px solid #00c851;
-}
+.invalid + label { border: solid 1px red; }
+
+// .form-control.valid {
+//     border: solid 1px green;
+// }
 
 .show-more-container {
     max-height: 300px;
