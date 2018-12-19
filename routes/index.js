@@ -11,6 +11,7 @@ const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const usersController = require('../controllers/usersController');
 const jobsController = require('../controllers/jobscontroller');
+const winston = require('../config/winstonconfig');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
@@ -26,9 +27,6 @@ module.exports = function (passport) {
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 170);
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
-            let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
-
-            popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
 
             let meta = utils.generateMeta(
                 'Discover, Learn, Teach. Explore job opportunities around the world',
@@ -46,7 +44,7 @@ module.exports = function (passport) {
                 jadefunctions,
                 featuredJobs,
                 popularProvinces,
-                popularCompanies,
+                // popularCompanies,
                 splashText
             });
         } catch (error) {
@@ -71,7 +69,6 @@ module.exports = function (passport) {
             searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
             searchInfo.provinceCode = utils.validateParam(req.query.province);
 
-
             if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
                 searchInfo.provinceCode = searchInfo.city.province.code;
                 searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode);
@@ -79,47 +76,75 @@ module.exports = function (passport) {
 
             searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
 
+            let filters = {
+                salary: {
+                    lower: req.query.salaryLower,
+                    higher: req.query.salaryHigher
+                },
+                startDate: req.query.startDate,
+                accomodation: req.query.accomodation,
+                airfare: req.query.airfare
+            };
+
             let jobs = [];
-            jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
+            jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, filters);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
                 jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
             }
 
-            let bannerPicture;
-            if (searchInfo.city) {
-                bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
-            } else if (searchInfo.province) {
-                bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
+            if (req.query.ajax) {
+
+                res.render('job/job-list', {
+                    jobs: jobs.list,
+                    pictureInfo: pictureinfo,
+                    moment,
+                    jadefunctions
+                }, function (err, html) {
+                    if (err) {
+                        winston.error(err);
+                    } else {
+                        res.send(html);
+                    }
+                });
+
+            } else {
+
+                let bannerPicture;
+                if (searchInfo.city) {
+                    bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
+                } else if (searchInfo.province) {
+                    bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
+                }
+
+                // Fetch list of all provinces and cities.
+                let cities = undefined;
+                if (searchInfo.provinceCode != -1) {
+                    cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
+                }
+
+                let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
+
+                let title = utils.titleFromSearchInfo(searchInfo);
+                let meta = utils.generateMeta(
+                    title,
+                    splashText.description,
+                    utils.getFullUrl(req),
+                    bannerPicture || splashText.image
+                );
+
+                res.render('search/search', {
+                    meta,
+                    jobs: jobs.list,
+                    searchInfo,
+                    user: req.user,
+                    cities,
+                    popularProvinces,
+                    pictureInfo: pictureinfo,
+                    bannerPicture,
+                    moment,
+                    jadefunctions
+                });
             }
-
-            // Fetch list of all provinces and cities.
-            let cities = undefined;
-            if (searchInfo.provinceCode != -1) {
-                cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
-            }
-
-            let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
-
-            let title = utils.titleFromSearchInfo(searchInfo);
-            let meta = utils.generateMeta(
-                title,
-                splashText.description,
-                utils.getFullUrl(req),
-                bannerPicture || splashText.image
-            );
-
-            res.render('search/search', {
-                meta,
-                jobs: jobs.list,
-                searchInfo,
-                user: req.user,
-                cities,
-                popularProvinces,
-                pictureInfo: pictureinfo,
-                bannerPicture,
-                moment,
-                jadefunctions
-            });
 
         } catch (error) {
             next(error);

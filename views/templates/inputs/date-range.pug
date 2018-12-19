@@ -1,0 +1,15 @@
+-var timeValue;
+if dateRange.datePicker1.value
+    -timeValue1 = moment(datepicker.value).format('MMMM Do YYYY')
+
+if dateRange.datePicker2.value
+    -timeValue2 = moment(datepicker.value).format('MMMM Do YYYY')
+
+.form-group.dates
+    label(for=dateRange.datePicker1.name) #{dateRange.label}
+    #datepicker.input-daterange.input-group
+        input.form-control(id=dateRange.datePicker1.id, name=dateRange.datePicker1.name, class=dateRange.datePicker1.formName, placeholder=dateRange.datePicker1.placeholder, form=dateRange.datePicker1.formName, value=timeValue1, required=dateRange.datePicker1.required)
+        .input-group-append
+            span.input-group-text.start_date_calendar
+                i.mdi.mdi-calendar(aria-hidden='true ')
+        input.form-control(id=dateRange.datePicker2.id, name=dateRange.datePicker2.name, class=dateRange.datePicker2.formName, placeholder=dateRange.datePicker2.placeholder, form=dateRange.datePicker2.formName, value=timeValue2, required=dateRange.datePicker2.required)

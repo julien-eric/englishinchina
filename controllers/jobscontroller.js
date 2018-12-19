@@ -150,12 +150,12 @@ JobsController.prototype.addJob = async (user, jobParams) => {
  * @param  {String} jobInfo String to look for in the school's name
  * @param  {String} provinceInfo Look for the school in this province
  * @param  {String} cityInfo Look for the school in this city
- * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
+ * @param  {Object} filter  Which attributes to filter the list by
  * @param  {Number} limit The number of records to keep from the list
  * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
  * @return {Object} an object containing a list of jobs, the query as well as the query information for this search
  */
-JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
+JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, filter, limit, shortRecords) {
 
     let queryInfo = {};
     let jobList = undefined;
@@ -185,6 +185,37 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
         queryInfo.city = city.pinyinName;
         transactions._pipeline.push({ $match: { city: city._id } });
     }
+
+    if (filter.accomodation) {
+        transactions._pipeline.push({ $match: { 'benefits.accomodation': Number(filter.accomodation) } });
+    }
+
+    if (filter.airfare) {
+        transactions._pipeline.push({ $match: { 'benefits.airfare': Number(filter.airfare) } });
+    }
+
+    if (filter.startDate) {
+        let date = new Date(moment(filter.startDate, 'MMMM DD YYYY').format());
+        transactions._pipeline.push({ $match: { 'contractDetails.startDate': { $gte: date } } });
+    }
+
+    if (filter.salary.lower) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryLower': { $gte: Number(filter.salary.lower) } } });
+    }
+
+    if (filter.salary.higher) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryHigher': { $lte: Number(filter.salary.higher) } } });
+    }
+    // if (filter.salary.higher && filter.salary.lower) {
+    //     let salaryLower = { 'ContractDetails.salaryLower': { $lte: filter.salary.higher } };
+    //     let salaryHigher = { 'ContractDetails.salaryHigher': { $gte: filter.salary.higher } };
+    //     filters.push(salaryLower);
+    //     filters.push(salaryHigher);
+    // }
+    // if (filter.airfare) {
+    //     let airfare = { 'Benefits.airfare': { $eq: filter.airfare } };
+    //     filters.push(airfare);
+    // }
 
     transactions._pipeline = transactions._pipeline.concat([
         { $lookup: { from: 'provinces', localField: 'province', foreignField: '_id', as: 'province' } },

@@ -1,5 +1,6 @@
-input.form-check-input(type='checkbox' id=formCheck.id checked=formCheck.value name=formCheck.name)
-label.form-check-label(for=formCheck.name) #{formCheck.label}
-p.text-small.mt-1 #{formCheck.underText}
+.form-group.form-check
+    input.form-check-input(type='checkbox' id=formCheck.id checked=formCheck.value name=formCheck.name)
+    label.form-check-label(for=formCheck.name) #{formCheck.label}
+    p.text-small.mt-1 #{formCheck.underText}
 
 -formCheck = {}

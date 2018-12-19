@@ -1,0 +1,48 @@
+-var salaryLowerInitial = 5
+if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.salaryLower
+    -salaryLowerInitial = responseInfo.contractDetails.salaryLower / 1000
+
+-var salaryHigherInitial = 15
+if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.salaryHigher
+    -salaryHigherInitial = responseInfo.contractDetails.salaryHigher / 1000
+
+.row
+    .col-12.my-0
+        label.font-weight-bold Monthly Salary in Thousands of Chinese Yuan
+    .col-2
+        -var numberInput = {}
+        -numberInput.id = 'salary-lower'
+        //- -numberInput.label = 'Salary Lower Bracket'
+        -numberInput.placeholder = 'Salary Lower Bracket'
+        -numberInput.name = 'salaryLower'
+        -numberInput.responseSubProperty = 'contractDetails'
+        -numberInput.min = 5
+        -numberInput.max = 25
+        -numberInput.noMargin = true
+        -numberInput.disabled = true
+        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+        -numberInput.required = true
+        include ../../templates/inputs/generic-number-input 
+
+    .col-8
+        .form-group.mt-0
+            .row.justify-content-center
+                fieldset#salaryRange.nouirange.col-12
+                    input.min(type='range', name='distmin', min='5', max='25', step='1', value=salaryLowerInitial)
+                    input.max(type='range', name='distmax', min='5', max='25', step='1', value=salaryHigherInitial)
+
+    .col-2
+        -var numberInput = {}
+        -numberInput.id = 'salary-higher'
+        //- -numberInput.label = 'Salary Higher Bracket'
+        -numberInput.placeholder = 'Salary Higher Bracket'
+        -numberInput.name = 'salaryHigher'
+        -numberInput.responseSubProperty = 'contractDetails'
+        -numberInput.min = 5
+        -numberInput.max = 25
+        -numberInput.noMargin = true
+        -numberInput.disabled = true
+        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+        -numberInput.required = true
+        include ../../templates/inputs/generic-number-input 
+

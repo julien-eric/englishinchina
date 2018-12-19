@@ -17,6 +17,6 @@ if job.contractDetails
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
         | #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
-    //- .chip.chip-md.mb-2 
-    //-     i.text-primary.mdi.mdi-email.mr-2(aria-hidden='true')
-    //-     | #{job.email}
+    .chip.chip-sm.mb-2
+        i.text-primary.mdi.mdi-school.mr-2(aria-hidden='true')
+        | #{job.benefits.accomodation}

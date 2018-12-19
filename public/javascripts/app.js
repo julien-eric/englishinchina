@@ -26,9 +26,14 @@ SLWorld.prototype.init = function () {
     this.googleMapsWrapper = new GoogleMapsWrapper();
     // this.googleMapsWrapper.init();
 
+
     //inputs.js
     this.inputs = new InputController();
     this.inputs.init();
+
+    //search-filter-handler.js
+    this.searchFilterHandler = new SearchFilterHandler();
+    this.searchFilterHandler.init();
 
     //read-more.js
     this.readMoreController = new ReadMore();

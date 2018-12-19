@@ -3,8 +3,9 @@ let InputController = function () { };
 InputController.prototype.init = function () {
     this.initSliders();
     // this.initDatePickers();
-    $('.datepicker').datepicker({
-        format: 'MM dd yyyy'
+    $('.input-daterange').datepicker({
+        format: 'MM dd yyyy',
+        autoclose: true
     });
     this.initTinyMce();
     this.initRange();
@@ -97,7 +98,8 @@ InputController.prototype.initTinyMce = function () {
 InputController.prototype.initRange = function () {
     // this script will activate a range selector on every .nouirange element with a specific html structure with valid input. Options like minand max are taken from the html attributes.
     document.querySelectorAll('.nouirange').forEach(function (el) {
-        let htmlinsert = document.createElement('div');
+        let keypressSlider = document.createElement('div');
+        keypressSlider.setAttribute("id", "#rangeHandler");
         let realmininput = el.querySelector('.min');
         let realmaxinput = el.querySelector('.max');
         realmininput.style.display = "none ";
@@ -105,9 +107,9 @@ InputController.prototype.initRange = function () {
         let min = realmininput.getAttribute('min');
         let max = realmaxinput.getAttribute('max');
         let step = realmininput.getAttribute('step');
-        el.appendChild(htmlinsert);
+        el.appendChild(keypressSlider);
 
-        noUiSlider.create(htmlinsert, {
+        noUiSlider.create(keypressSlider, {
             pips: {
                 mode: 'count',
                 values: 5,
@@ -123,19 +125,31 @@ InputController.prototype.initRange = function () {
             }
         });
 
-        htmlinsert.noUiSlider.on('update', function (values) {
-            realmininput.value = String(values[0]);
-            $('#salary-lower').val(Math.round(values[0]) * 1000);
-            realmaxinput.value = String(values[1]);
-            $('#salary-higher').val(Math.round(values[1]) * 1000);
+        var input0 = document.getElementById('salary-lower');
+        var input1 = document.getElementById('salary-higher');
+        var inputs = [input0, input1];
+
+        keypressSlider.noUiSlider.on('update', function (values, handle) {
+            inputs[handle].value = values[handle];
+            // if (slworld && slworld.searchFilterHandler) {
+            //     if (handle == 0) {
+            //         slworld.searchFilterHandler.salary.lower = values[handle];
+            //     }
+            //     if (handle == 1) {
+            //         slworld.searchFilterHandler.salary.higher = values[handle];
+            //     }
+            // }
+        });
+
+        // Listen to keydown events on the input field.
+        inputs.forEach(function (input, handle) {
+
+            input.addEventListener('change', function () {
+                keypressSlider.noUiSlider.setHandle(handle, this.value);
+            });
+
         });
     });
 
-    $("#salary-lower").bind('keyup mouseup', function () {
-        $('#salaryRange').noUiSlider.set($(this).val());
-    });
 
-    $("#salary-higher").bind('keyup mouseup', function () {
-        $('#salaryRange').noUiSlider.set($(this).val());
-    });
 }

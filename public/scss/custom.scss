@@ -691,6 +691,25 @@ fieldset.nouirange {
     .noUi-value {
         font-size: 10px;
     }
+    
+    .noUi-target {
+        background: inherit;
+        border-radius: 4px;
+        border: none;
+        box-shadow: 0;
+    }
+
+    .noUi-connect {
+        height:105%
+    }
+}
+
+.job-filter.collapsed {
+    color: #6c757d;
+}
+
+.collapsing {
+    transition: height 0.1s;
 }
 
 .search-nav-form {

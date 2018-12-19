@@ -10,9 +10,15 @@ block content
     .container.mt-3 
         .row
             .col-12
-                p.mb-3.text-small You have not applied any filters.
+                #filter-state-clean
+                    p.mb-3.text-small You have not applied any filters.
+
+                #filter-state-dirty.d-none
+                    p.mb-3.text-small You have applied filters. 
+                        a(href='#')
+                            span#clear-all.text-warning Clear all.
         if jobs && jobs.length > 0
-            include ../job/job-list
+                include ../job/job-list
         else
             p Sorry, we couldn't find any matches for the specified terms.
 
