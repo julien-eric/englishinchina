@@ -16,6 +16,10 @@ let SearchFilterHandler = function () {
 };
 
 SearchFilterHandler.prototype.init = function () {
+
+    if (!document.getElementById('job-list'))
+        return;
+
     let that = this;
 
     $('.apply-filter').each(function (index) {

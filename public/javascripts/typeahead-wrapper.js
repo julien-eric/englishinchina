@@ -87,12 +87,12 @@ TypeaheadWrapper.prototype.init = function () {
     });
 
     $('#queryInfo').click(function (ev, suggestion, async, data) {
-        // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        let div = $('#queryInfo')
-        $('html,body').animate({
-            scrollTop: $(div).offset().top - 75
-        }, 'slow');
-        // }
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            let div = $('#queryInfo')
+            $('html,body').animate({
+                scrollTop: $(div).offset().top - 75
+            }, 'slow');
+        }
     });
 
     let pathname = window.location.pathname;
