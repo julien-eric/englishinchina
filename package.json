@@ -30,7 +30,6 @@
         "jade": "~1.11.0",
         "jquery-bar-rating": "*",
         "mdbootstrap": "^4.5.0",
-        "mdbootstrap-pro": "git+https://oauth2:Fwaj8XGWe8FZHpeEyxDh@git.mdbootstrap.com/mdb/jquery/jq-pro.git",
         "mime": "^1.3.6",
         "moment": "*",
         "mongoose": "^4.13.17",
