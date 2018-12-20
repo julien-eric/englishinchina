@@ -12,16 +12,16 @@
                 include filter-tab
 
 .container-fluid.bg-white.border-bottom.border-light-secondary
-    .container
-        .row
-            .col-12(id=filterParent)
-                each filter in filters 
-                    .collapse(id=filter.collapsible, data-parent='#' + filterParent)
-
+    div(id=filterParent)
+        each filter in filters 
+            .collapse(id=filter.collapsible, data-parent='#' + filterParent)
+                .container
+                    .row
+                        .col-12
                             if filter.input == 'salary'
                                 .my-3
                                     include ./creation/salary-range-input-horiz
-                                include job-filters-footer
+                                //- include job-filters-footer
                         
                             if filter.input == 'dateFilter'
                                 .row.mb-3
@@ -52,7 +52,7 @@
                                             -dateRange.datePicker2.value = user.dateOfBirth
 
                                         include ../templates/inputs/date-range
-                                include job-filters-footer
+                                //- include job-filters-footer
                         
                             if filter.input == 'benefitsFilter'
 
@@ -84,7 +84,7 @@
                                         -select.crossRefAttributeValue = 'value'
                                         -select.crossRefAttributeName = 'optionLabel'
                                         include ../templates/inputs/generic-select
-                                include job-filters-footer
+                include job-filters-footer
                         
                             //- if filter.input == 'classFilter'
 
