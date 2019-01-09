@@ -103,13 +103,6 @@ $(document).ready(() => {
         xhr.send();
     });
 
-
-    if ($('#triggerBack').length > 0) {
-        $('#triggerBack').click(function () {
-            history.back();
-        });
-    }
-
     // Navbar transparency removal
     if ($('#main-header').hasClass('transparent')) {
         var scroll_start = 0;

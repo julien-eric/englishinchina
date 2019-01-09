@@ -21,7 +21,6 @@
                             if filter.input == 'salary'
                                 .my-3
                                     include ./creation/salary-range-input-horiz
-                                //- include job-filters-footer
                         
                             if filter.input == 'dateFilter'
                                 .row.mb-3
@@ -34,25 +33,24 @@
                                         -dateRange.datePicker1.id = 'start-date-from'
                                         -dateRange.datePicker1.name = 'startDateFrom'
                                         -dateRange.datePicker1.formName = formName
-                                        -dateRange.datePicker1.class = formName
+                                        //- -dateRange.datePicker1.class = 'filter'
                                         -dateRange.datePicker1.placeholder = 'From'
                                         -dateRange.datePicker1.errorMessage = 'Please select a date'
                                         -dateRange.datePicker1.required = true
-                                        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-                                            -dateRange.datePicker1.value = user.dateOfBirth
+                                        if responseInfo && responseInfo.startDateFrom
+                                            -dateRange.datePicker1.value = responseInfo.startDateFrom
                                         
                                         -dateRange.datePicker2.id = 'start-date-to'
                                         -dateRange.datePicker2.name = 'startDateTo'
                                         -dateRange.datePicker2.formName = formName
-                                        -dateRange.datePicker2.class = formName
+                                        //- -dateRange.datePicker2.class = 'filter'
                                         -dateRange.datePicker2.placeholder = 'To'
                                         -dateRange.datePicker2.errorMessage = 'Please select a date'
                                         -dateRange.datePicker2.required = true
-                                        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.endDate
-                                            -dateRange.datePicker2.value = user.dateOfBirth
+                                        if responseInfo && responseInfo.startDateTo
+                                            -dateRange.datePicker2.value = responseInfo.startDateTo
 
                                         include ../templates/inputs/date-range
-                                //- include job-filters-footer
                         
                             if filter.input == 'benefitsFilter'
 
@@ -61,11 +59,10 @@
                                         -var select = {}
                                         -select.options = [{'value': -1, 'optionLabel': 'All'}, {'value': 1, 'optionLabel': 'Provided'}, {'value': 0, 'optionLabel': 'Not provided'} , {'value': 2, 'optionLabel': 'Partly provided'} ] 
                                         -select.id = 'accomodation'
-                                        -select.responseSubProperty = 'benefits'
                                         -select.name = 'accomodation'
                                         -select.label = 'Accomodation'
                                         -select.formName = formName
-                                        -select.class = formName
+                                        -select.class = 'filter'
                                         -select.required = true;
                                         -select.crossRefAttributeValue = 'value'
                                         -select.crossRefAttributeName = 'optionLabel'
@@ -75,11 +72,10 @@
                                         -var select = {}
                                         -select.options = [{'value': -1, 'optionLabel': 'All'}, {'value': 1, 'optionLabel': 'Reimbursed'}, {'value': 0, 'optionLabel': 'Not reimbursed'}, {'value': 3, 'optionLabel': 'Inbound Flight Only'}, {'value': 2, 'optionLabel': 'Partly'} ] 
                                         -select.id = 'airfare'
-                                        -select.responseSubProperty = 'benefits'
                                         -select.name = 'airfare'
                                         -select.label = 'Airfare'
                                         -select.formName = formName
-                                        -select.class = formName
+                                        -select.class = 'filter'
                                         -select.required = true;
                                         -select.crossRefAttributeValue = 'value'
                                         -select.crossRefAttributeName = 'optionLabel'

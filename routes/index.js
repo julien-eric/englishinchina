@@ -7,7 +7,6 @@ const pictureinfo = require('../pictureinfo');
 const splashText = require('../splash-text.json');
 const provincesController = require('../controllers/provincescontroller');
 const countriesController = require('../controllers/countriescontroller');
-const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const usersController = require('../controllers/usersController');
 const jobsController = require('../controllers/jobscontroller');
@@ -60,6 +59,7 @@ module.exports = function (passport) {
 
         try {
 
+            let queryInfo;
             const searchInfo = {};
             searchInfo.sort = req.query.sort;
 
@@ -77,11 +77,10 @@ module.exports = function (passport) {
             searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
 
             let filters = {
-                salary: {
-                    lower: req.query.salaryLower,
-                    higher: req.query.salaryHigher
-                },
-                startDate: req.query.startDate,
+                salaryLower: req.query.salaryLower,
+                salaryHigher: req.query.salaryHigher,
+                startDateFrom: req.query.startDateFrom,
+                startDateTo: req.query.startDateTo,
                 accomodation: req.query.accomodation,
                 airfare: req.query.airfare
             };
@@ -112,8 +111,10 @@ module.exports = function (passport) {
                 let bannerPicture;
                 if (searchInfo.city) {
                     bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
+                    queryInfo = searchInfo.city.pinyinName;
                 } else if (searchInfo.province) {
                     bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
+                    queryInfo = searchInfo.province.name;
                 }
 
                 // Fetch list of all provinces and cities.
@@ -122,8 +123,7 @@ module.exports = function (passport) {
                     cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
                 }
 
-                let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
-
+                // let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
                 let title = utils.titleFromSearchInfo(searchInfo);
                 let meta = utils.generateMeta(
                     title,
@@ -138,9 +138,10 @@ module.exports = function (passport) {
                     searchInfo,
                     user: req.user,
                     cities,
-                    popularProvinces,
                     pictureInfo: pictureinfo,
+                    queryInfo,
                     bannerPicture,
+                    responseInfo: filters,
                     moment,
                     jadefunctions
                 });
@@ -149,6 +150,13 @@ module.exports = function (passport) {
         } catch (error) {
             next(error);
         }
+    });
+
+    router.get('/cityrenametest/', async (req, res, next) => {
+        let cities = await citiesController.getAllCities();
+        cities.forEach(async (city) => {
+            await citiesController.updateCity({ code: city.code, pinyinName: city.pinyinName });
+        });
     });
 
     /** **********************************************************************************************************

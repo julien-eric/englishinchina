@@ -194,28 +194,23 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
         transactions._pipeline.push({ $match: { 'benefits.airfare': Number(filter.airfare) } });
     }
 
-    if (filter.startDate) {
-        let date = new Date(moment(filter.startDate, 'MMMM DD YYYY').format());
+    if (filter.startDateFrom) {
+        let date = new Date(moment(filter.startDateFrom, 'MMMM DD YYYY').format());
         transactions._pipeline.push({ $match: { 'contractDetails.startDate': { $gte: date } } });
     }
 
-    if (filter.salary.lower) {
-        transactions._pipeline.push({ $match: { 'contractDetails.salaryLower': { $gte: Number(filter.salary.lower) } } });
+    if (filter.startDateTo) {
+        let date = new Date(moment(filter.startDateTo, 'MMMM DD YYYY').format());
+        transactions._pipeline.push({ $match: { 'contractDetails.startDate': { $lte: date } } });
     }
 
-    if (filter.salary.higher) {
-        transactions._pipeline.push({ $match: { 'contractDetails.salaryHigher': { $lte: Number(filter.salary.higher) } } });
+    if (filter.salaryLower) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryLower': { $gte: Number(filter.salaryLower) } } });
     }
-    // if (filter.salary.higher && filter.salary.lower) {
-    //     let salaryLower = { 'ContractDetails.salaryLower': { $lte: filter.salary.higher } };
-    //     let salaryHigher = { 'ContractDetails.salaryHigher': { $gte: filter.salary.higher } };
-    //     filters.push(salaryLower);
-    //     filters.push(salaryHigher);
-    // }
-    // if (filter.airfare) {
-    //     let airfare = { 'Benefits.airfare': { $eq: filter.airfare } };
-    //     filters.push(airfare);
-    // }
+
+    if (filter.salaryHigher) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryHigher': { $lte: Number(filter.salaryHigher) } } });
+    }
 
     transactions._pipeline = transactions._pipeline.concat([
         { $lookup: { from: 'provinces', localField: 'province', foreignField: '_id', as: 'province' } },

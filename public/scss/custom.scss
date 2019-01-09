@@ -57,6 +57,8 @@ $theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker,
 
 
 @import "node_modules/bootstrap/scss/bootstrap";
+@import "./loadingspinner";
+@import "./chips";
 
 // Change the chrome yellowish autofill
 input:-webkit-autofill,
@@ -70,7 +72,9 @@ input:-webkit-autofill:active  {
     font-weight: bold;
 }
 
-@import "./chips";
+#clear-search{
+    cursor:pointer;
+}
 
 @font-face {
     font-family: milkshake;
@@ -880,6 +884,10 @@ $slw-inset-dark: #ebebeb;
 
 .border-radius-5 {
     border-radius: 5px !important;
+}
+
+.border-radius-top-5 {
+    border-radius: 5px 5px 0 0 !important;
 }
 
 .border-radius-circle {

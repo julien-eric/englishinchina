@@ -1,15 +1,21 @@
 extends ../layout
 block content
     
-    .bg-white.border-bottom.border-light
+    .bg-light.border-bottom.border-pale-gray
         .container
+            -var inlineSearch = 'true'
+            -var fullWidthSearch = 'true'
             include ./typeahead-search/ta-search-form
 
     include ../job/job-filters
 
     .container.mt-3 
-        .row
-            .col-12
+        .row.align-items-center
+            .col-auto#loading-spinner.pr-0.d-none
+                .lds-ripple
+                    div
+                    div
+            .col-9.py-1
                 #filter-state-clean
                     p.mb-3.text-small You have not applied any filters.
 
@@ -20,5 +26,6 @@ block content
         if jobs && jobs.length > 0
                 include ../job/job-list
         else
-            p Sorry, we couldn't find any matches for the specified terms.
+            #job-list
+                p Sorry, we couldn't find any matches for the specified terms.
 

@@ -1,10 +1,19 @@
 -var salaryLowerInitial = 5
-if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.salaryLower
-    -salaryLowerInitial = responseInfo.contractDetails.salaryLower / 1000
+-var salaryHigherInitial = 25
 
--var salaryHigherInitial = 15
-if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.salaryHigher
-    -salaryHigherInitial = responseInfo.contractDetails.salaryHigher / 1000
+if responseInfo
+    if responseInfo.contractDetails
+        if responseInfo.contractDetails.salaryLower
+            -salaryLowerInitial = responseInfo.contractDetails.salaryLower / 1000
+
+        if responseInfo.contractDetails.salaryHigher
+            -salaryHigherInitial = responseInfo.contractDetails.salaryHigher / 1000
+    
+    else 
+        if responseInfo.salaryLower
+            -salaryLowerInitial = responseInfo.salaryLower / 1000
+        if responseInfo.salaryHigher
+            -salaryHigherInitial = responseInfo.salaryHigher / 1000
 
 .row
     .col-12.my-0
@@ -15,7 +24,7 @@ if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.
         //- -numberInput.label = 'Salary Lower Bracket'
         -numberInput.placeholder = 'Salary Lower Bracket'
         -numberInput.name = 'salaryLower'
-        -numberInput.responseSubProperty = 'contractDetails'
+        -numberInput.class = 'filter'
         -numberInput.min = 5
         -numberInput.max = 25
         -numberInput.noMargin = true
@@ -37,7 +46,7 @@ if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.
         //- -numberInput.label = 'Salary Higher Bracket'
         -numberInput.placeholder = 'Salary Higher Bracket'
         -numberInput.name = 'salaryHigher'
-        -numberInput.responseSubProperty = 'contractDetails'
+        -numberInput.class = 'filter'
         -numberInput.min = 5
         -numberInput.max = 25
         -numberInput.noMargin = true

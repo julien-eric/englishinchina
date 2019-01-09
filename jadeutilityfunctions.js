@@ -188,6 +188,20 @@ module.exports = {
         } else {
             return 'text-' + colorClass;
         }
+    },
+
+    returnAccomodationTerm (code) {
+        switch (code) {
+            case 0:
+                return 'No Accomodation';
+            case 1:
+                return 'Accomodation Provided';
+            case 2:
+                return 'Accomodation Partly Provided';
+
+            default:
+                break;
+        }
     }
 
 };

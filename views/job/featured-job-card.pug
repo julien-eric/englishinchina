@@ -1,7 +1,7 @@
 .card.text-right.h-100
     .display-grid
         a.view.overlay.card-img(href='/job/' + job.url)
-            .image-container.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')           
+            .image-container.border-radius-top-5.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')           
         .card-body.text-left
             h4.font-weight-bold.card-title.px-0 
                 a.text-dark.text-capitalize(href="/job/" + job.url)

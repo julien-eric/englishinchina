@@ -3,7 +3,7 @@ let InputController = function () { };
 InputController.prototype.init = function () {
     this.initSliders();
     // this.initDatePickers();
-    $('.input-daterange').datepicker({
+    this.datepicker = $('.input-daterange').datepicker({
         format: 'MM dd yyyy',
         autoclose: true
     });
@@ -131,14 +131,12 @@ InputController.prototype.initRange = function () {
 
         keypressSlider.noUiSlider.on('update', function (values, handle) {
             inputs[handle].value = values[handle];
-            // if (slworld && slworld.searchFilterHandler) {
-            //     if (handle == 0) {
-            //         slworld.searchFilterHandler.salary.lower = values[handle];
-            //     }
-            //     if (handle == 1) {
-            //         slworld.searchFilterHandler.salary.higher = values[handle];
-            //     }
-            // }
+            // $('#' + inputs[handle].id).change();
+        });
+
+        keypressSlider.noUiSlider.on('change', function (values, handle) {
+            // inputs[handle].value = values[handle];
+            $('#' + inputs[handle].id).change();
         });
 
         // Listen to keydown events on the input field.

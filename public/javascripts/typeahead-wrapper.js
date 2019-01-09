@@ -28,7 +28,11 @@ TypeaheadWrapper.prototype.init = function () {
 
     let datasetNames = $('#queryInfo').attr('datasets').valueOf().split(' ');
     typeaheadWrapper.initDatasets(datasetNames);
-    $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
+
+    let inlineSearch = $('#queryInfo').attr('data-inline-search')
+    if (!inlineSearch) {
+        $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
+    }
 
     $('.typeahead').typeahead({
         menu: $('#typeahead-target'),
@@ -62,6 +66,8 @@ TypeaheadWrapper.prototype.init = function () {
         if (typeaheadWrapper.autoTriggerValidation) {
             slworld.validator.validateField($('#queryInfo')[0]);
         }
+        console.log('typeahead');
+
     });
 
     $('#queryInfo').on('keyup', function (ev, suggestion, async, data) {
