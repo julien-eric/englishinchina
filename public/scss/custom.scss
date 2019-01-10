@@ -48,7 +48,8 @@ $input-disabled-bg: $slw-light-secondary;
 
 // SLW MAGIC DIMENSIONS
 $standard-height: 190px;
-$landing-page-height: 720px;
+$landing-page-height: 520px;
+$search-landing-page-height: 320px;
 $school-header-height: 380px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
@@ -76,19 +77,6 @@ input:-webkit-autofill:active  {
     cursor:pointer;
 }
 
-@font-face {
-    font-family: milkshake;
-    src: url('/font/Milkshake.otf');
-}
-
-.milkshake{
-    font-family: milkshake;
-    font-size: 6rem;
-}
-
-// select {
-//     -webkit-appearance: none;
-// }
 
 @media (min-width: 1200px) {
     .container {
@@ -127,9 +115,61 @@ body {
     white-space: pre-wrap;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// TYPOGRAPHY
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+@font-face {
+    font-family: milkshake;
+    src: url('/font/Milkshake.otf');
+}
+
+.milkshake{
+    font-family: milkshake;
+}
+
 h1, h2, h3, h4, h5, h6, .btn {
     font-family: 'Raleway', sans-serif;
 }
+
+@include media-breakpoint-down(md) {
+    .navbar-light .navbar-nav .nav-link {
+        text-align: center;
+        font-size:1.3rem;
+    }
+}
+  
+@include media-breakpoint-down(md) {
+    .display-1 {
+        font-size: 4rem;
+    }
+    .display-2 {
+        font-size: 3.6rem;
+    }
+    .display-3 {
+        font-size: 3.2rem;
+    }
+    .display-4 {
+        font-size: 2.8rem;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .display-1 {
+        font-size: 2.6rem;
+    }
+    .display-2 {
+        font-size: 2.2rem;
+    }
+    .display-3 {
+        font-size: 1.8rem;
+    }
+    .display-4 {
+        font-size: 1.4rem;
+    }
+}
+  
+
 
 .text-small {
     font-size: 0.8rem;
@@ -138,34 +178,8 @@ h1, h2, h3, h4, h5, h6, .btn {
 .text-xsmall {
     font-size: 0.6rem;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-@include media-breakpoint-down(md) {
-    .display-3 {
-        font-size: 2.8rem;
-    }
-    
-    .milkshake {
-        font-size: 3.6rem;
-    }
-
-    .splash .splash-text {
-        padding-top: 4rem;
-    }
-    #splash-kicker {
-        font-size: 1.2rem;
-    }
-    .navbar-light .navbar-nav .nav-link {
-        text-align: center;
-        font-size:1.3rem;
-    }
-}
-
-@include media-breakpoint-down(sm) {
-
-    .milkshake {
-        font-size: 3rem;
-    }
-}
 
 .zindex-pop {
     z-index: $zindex-dropdown;
@@ -371,16 +385,16 @@ textarea.input-alternate,
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //HOMEPAGE SPLASH LANDING
 ////////////////////////////////////////////////////////////////////////////////////////////////
-.splash {
+.splash, .search-splash {
     min-height: $landing-page-height;
-    margin-top: -4rem;
-    padding-top: 4rem; // overflow: hidden;
     position: relative;
     color: #fff;
     text-align: center;
+    margin-top: -4rem;
+    padding-top: 4rem; // overflow: hidden;
 }
 
-.splash .splash-image {
+.splash .splash-image, .search-splash .search-splash-image {
     min-height: $landing-page-height;
     width: 110%;
     position: absolute;
@@ -394,7 +408,7 @@ textarea.input-alternate,
     background-size: cover;
 }
 
-.splash .splash-image-container {
+.splash .splash-image-container, .search-splash .search-splash-image-container {
     min-height: $landing-page-height;
     width: 100%;
     position: absolute;
@@ -408,7 +422,6 @@ textarea.input-alternate,
 }
 
 .splash .splash-text {
-    padding-top: 6rem;
     position: relative;
 }
 
@@ -427,6 +440,26 @@ textarea.input-alternate,
     background-repeat: no-repeat;
     background-color: #eee;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//SEARCH PAGE SPLASH LANDING
+////////////////////////////////////////////////////////////////////////////////////////////////
+.search-splash {
+    min-height: $search-landing-page-height;
+    margin-top: -4rem;
+    padding-top: 4rem;
+}
+
+.search-splash .search-splash-image {
+    min-height: $search-landing-page-height;
+}
+
+.search-splash .search-splash-image-container {
+    min-height: $search-landing-page-height;
+    -webkit-filter: brightness(62%);
+    filter: brightness(62%);
+}
+
 
 /************************************************************************
 ************    SLIDERS

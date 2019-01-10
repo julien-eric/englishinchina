@@ -34,6 +34,13 @@ TypeaheadWrapper.prototype.init = function () {
         $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
     }
 
+    let clearSearch = $('#clear-search');
+    if (clearSearch) {
+        clearSearch.click(function () {
+            $('.typeahead').typeahead('val', '');
+        });
+    }
+
     $('.typeahead').typeahead({
         menu: $('#typeahead-target'),
         highlight: true,

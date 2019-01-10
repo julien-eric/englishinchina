@@ -27,6 +27,12 @@ $(document).ready(() => {
 
     initLazyLoading();
 
+    $('#splash-padding').height($('#search-navigation').height());
+    $(window).resize(function () {
+        $('#splash-padding').height($('#search-navigation').height());
+    });
+
+
     $('.collapse-link').each(function (link) {
         let id = $(this).attr('href');
         $(id).on('show.bs.collapse', function () {

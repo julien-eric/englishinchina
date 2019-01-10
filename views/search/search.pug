@@ -1,6 +1,17 @@
 extends ../layout
 block content
-    
+
+    .container-fluid
+        #search-splash.search-splash.row.justify-content-center
+            .search-splash-image-container
+                .search-splash-image(style="background-image: url('https://englishinchina.s3.amazonaws.com/lg_71ebedd0-14ee-11e9-bfc0-af3be6fbf365.jpeg');")
+                //- .search-splash-image(style="background-image: url('https://englishinchina.s3.amazonaws.com/lg_e8098220-14ee-11e9-bfc0-af3be6fbf365.jpeg');")
+            .search-splash-text.col-sm-12.col-md-9.col-lg-9.my-auto
+                .row.justify-content-center
+                    h4.col-lg-12.milkshake.display-4
+                        span.text-primary Second Language World
+                    h2.font-weight-bold.display-3.col-lg-12 Job Board
+
     .bg-light.border-bottom.border-pale-gray
         .container
             -var inlineSearch = 'true'
