@@ -10,7 +10,12 @@
 if job.contractDetails
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
-        | #{moment(job.contractDetails.startDate).format("DD MMM YYYY")}
+        if moment(job.contractDetails.startDate).isAfter(moment())
+            | Starts #{moment(job.contractDetails.startDate).format("MMMM Do YYYY")}
+        else
+            | Starts ASAP
+            //- | Starts #{moment(job.contractDetails.startDate).format("DD MMM YYYY")}
+
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
         if( job.contractDetails.duration == 1)
@@ -22,4 +27,7 @@ if job.contractDetails
         | #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-home.mr-2(aria-hidden='true')
-        | #{jadefunctions.returnAccomodationTerm(job.benefits.accomodation)}
+        if job.benefits.accomodation.length > 1 
+            | #{job.benefits.accomodation}
+        else
+            | #{jadefunctions.returnAccomodationTerm(job.benefits.accomodation)}

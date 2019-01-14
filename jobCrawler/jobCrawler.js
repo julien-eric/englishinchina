@@ -1,11 +1,14 @@
 const request = require('request');
 const winston = require('../config/winstonconfig');
+const moment = require('moment');
 const cheerio = require('cheerio');
 const URL = require('url-parse');
 const _ = require('underscore');
 const jobsController = require('../controllers/jobscontroller');
 const provincesController = require('../controllers/provincescontroller');
 const citiesController = require('../controllers/citiescontroller');
+const USDTOCNY = 6.76;
+const PNDSTOCNY = 8.69;
 
 let PAGES_TO_VISIT = [
     'https://teflsearch.com/job-results/country/china?page=1',
@@ -147,7 +150,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
 
         jobInfo.salaryLower = fieldProcessor.extractSalary($('.field-name-field-salary-ranges .field-items .field-item.even').text());
         jobInfo.salaryHigher = fieldProcessor.extractSalary($('.field-name-field-salary-ranges .field-items .field-item.odd').text());
-        jobInfo.startDate = fieldProcessor.extractDate($('.field-name-field-start-date .field-items').text().trim());
+        jobInfo.startDate = fieldProcessor.extractDate($('.field-name-field-start-date .field-items').text().trim(), $('.field-name-field-date-options .field-items').text().trim());
         jobInfo.duration = fieldProcessor.extractDuration($('.field-name-field-contract-length .field-items').text().trim());
 
         jobInfo.institution = $('.field-name-field-institution .field-items').text().trim();
@@ -199,7 +202,9 @@ FieldProcessor.prototype.extractSalary = function (salaryString) {
         if (salaryString.indexOf('¥') != -1) {
             return Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('¥') + 1));
         } else if (salaryString.indexOf('$') != -1) {
-            return Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1));
+            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * USDTOCNY / 1000) * 1000;
+        } else if (salaryString.indexOf('£') != -1) {
+            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * PNDSTOCNY / 1000) * 1000;
         } else {
             return Number(salaryString);
         }
@@ -237,12 +242,16 @@ FieldProcessor.prototype.extractEmail = function (encodedString) {
 
 };
 
-FieldProcessor.prototype.extractDate = function (dateString) {
-    let date = dateString.toLowerCase();
-    if (Date.parse(date)) {
-        return Date.parse(date);
-    } else if (date == '' || date.indexOf('ASAP') != -1 || date.indexOf('continuous') != -1) {
+FieldProcessor.prototype.extractDate = function (stringExtract1, stringExtract2) {
+    let date = stringExtract1.toLowerCase();
+    if (date == '') {
+        date = stringExtract2.toLowerCase();
+    }
+
+    if (date == '' || date.indexOf('asap') != -1 || date.indexOf('continuous') != -1) {
         return new Date();
+    } else {
+        return moment(date);
     }
 };
 
