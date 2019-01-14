@@ -17,14 +17,14 @@ if job.contractDetails
             //- | Starts #{moment(job.contractDetails.startDate).format("DD MMM YYYY")}
 
     .chip.chip-sm.mb-2
-        i.text-primary.mdi.mdi-calendar-check.mr-2(aria-hidden='true')
+        i.text-primary.mdi.mdi-history.mr-2(aria-hidden='true')
         if( job.contractDetails.duration == 1)
             | 1 year
         else 
             | #{job.contractDetails.duration} years
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
-        | #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
+        | #{jadefunctions.returnSalary(job.contractDetails.salaryLower)} - #{jadefunctions.returnSalary(job.contractDetails.salaryHigher)}  CNY/Month
     .chip.chip-sm.mb-2
         i.text-primary.mdi.mdi-home.mr-2(aria-hidden='true')
         if job.benefits.accomodation.length > 1 

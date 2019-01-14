@@ -5,7 +5,9 @@
 slworld = {};
 typeaheadWrapper = {};
 
-let SLWorld = function () { };
+let SLWorld = function () {
+    this.googleMapsWrapper = new GoogleMapsWrapper();
+};
 
 SLWorld.prototype.init = function () {
 
@@ -25,7 +27,6 @@ SLWorld.prototype.init = function () {
     //google-maps-wrapper
     this.googleMapsWrapper = new GoogleMapsWrapper();
     // this.googleMapsWrapper.init();
-
 
     //inputs.js
     this.inputs = new InputController();
@@ -58,9 +59,9 @@ SLWorld.prototype.init = function () {
 
 };
 
+slworld = new SLWorld();
 
 $(document).ready(() => {
-    slworld = new SLWorld();
     slworld.init();
 });
 

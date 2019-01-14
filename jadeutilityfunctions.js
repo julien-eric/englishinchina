@@ -202,6 +202,10 @@ module.exports = {
             default:
                 break;
         }
+    },
+
+    returnSalary (number) {
+        return Math.round(Number(number) / 1000) + 'K';
     }
 
 };

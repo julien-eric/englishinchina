@@ -69,8 +69,7 @@ html
         include ./utils/slworld-script-links
         //- OR
         //- script(async=true, defer=true, src='/javascripts/dist/slworld.js')
-
-        //- script(defer=true, src='https://maps.googleapis.com/maps/api/js?key=' + gmapsKey + '&callback=slworld.googleMapsWrapper.init')
+        script(async=true, defer=true, src='https://maps.googleapis.com/maps/api/js?key=' + gmapsKey + '&callback=slworld.googleMapsWrapper.init')
 
     meta(name="viewport", content="width=device-width, initial-scale=1")
 
