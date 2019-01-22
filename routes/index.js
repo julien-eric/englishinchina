@@ -35,7 +35,6 @@ module.exports = function (passport) {
             );
 
             res.render('home/home', {
-                cache: true,
                 meta,
                 main: true,
                 user: req.user,
@@ -136,7 +135,6 @@ module.exports = function (passport) {
                 );
 
                 res.render('search/search', {
-                    cache: true,
                     meta,
                     jobs: jobs.list,
                     searchInfo,

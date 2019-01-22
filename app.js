@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash-2');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
-const sassMiddleware = require('node-sass-middleware');
 const utils = require('./utils');
+const sassMiddleware = require('node-sass-middleware');
 const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
@@ -23,14 +23,6 @@ const app = express();
 
 // Use compression for faster load times
 app.use(compression());
-
-// morgan.token('status', function (req, res) { return res.body.status })
-// morgan.token('message', function (req, res) { return res.body.message })
-// morgan.token('fruit-name', function (req, res) { return res.body.fruit - name })
-// morgan.token('timestamp', function (req, res) { return res.body.timestamp })
-
-
-// app.use(morgan('Timestamp\: :timestamp fruit-name\: :fruit-name Status\: :status Message\: :message'))
 
 app.use(morgan('dev', { 'stream': winstonWrapper.stream }));
 

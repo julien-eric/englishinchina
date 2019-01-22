@@ -152,7 +152,6 @@ module.exports = function (passport) {
         }
 
         res.render('job/application/message', {
-            cache: true,
             title: 'Apply - ' + job.title,
             user: req.user,
             job,
