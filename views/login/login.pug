@@ -1,6 +1,9 @@
 extends form-container
 block card
-    .col-md-10.col-sm-12.col-lg-7
+    .col-md-10.col-sm-12.col-lg-6.order-2.order-md-1
+        include value-prop
+
+    .col-md-10.col-sm-12.col-lg-6.order-1.order-md-2
         .border.border-pale-gray.border-radius-5.text-dark.bg-white
             .my-5.text-left.px-3.px-md-5.py-1
                     .text-center
@@ -31,7 +34,7 @@ block card
                                             a(href="/forgot") Forgot your 
                                                     span.font-weight-bold password?
                             .text-center
-                                    button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Login
+                                    button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Login
                             -var signupUrl = '/signup'
                             if(redirectUrl)
                                 -signupUrl = signupUrl + '?redirectUrl=' + encodeURIComponent(redirectUrl)
@@ -39,7 +42,7 @@ block card
                                     |Don't have an account yet?&nbsp;
                                     a(href=signupUrl) Sign up
 
-            .footer.border-0.bg-light-secondary.text-dark.py-3
+            .footer.border-0.bg-light-secondary.text-dark.py-3.mt-5.text-left.px-3.px-md-5.pb-5
                     include social-login
 
 

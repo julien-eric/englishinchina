@@ -8,49 +8,21 @@
             .row.pt-3
                 .col-12.mb-5
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-school.mr-2(aria-hidden='true')
-                                | Institution
-                        .col-7
-                            p.mb-0 #{job.teachingDetails.institution}
+                    -var feature = {name:'Institution', value: job.teachingDetails.institution, icon:'mdi-school'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-briefcase.mr-2(aria-hidden='true')
-                                | Weekly workload
-                        .col-7
-                            p.mb-0 #{job.teachingDetails.weeklyLoad}
+                    -var feature = {name:'Weekly workload', value:job.teachingDetails.weeklyLoad, icon:'mdi-briefcase'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-account-multiple.mr-2(aria-hidden='true')
-                                | Class Size
-                        .col-7
-                            p.mb-0 #{job.teachingDetails.classSize}
+                    -var feature = {name:'Class Size', value: job.teachingDetails.classSize, icon:'mdi-account-multiple'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold 
-                                i.text-primary.mdi.mdi-account-box.mr-2(aria-hidden='true')
-                                | Student Age Group
-                        .col-7
-                            p.mb-0 #{job.teachingDetails.ageGroup}
+                    -var feature = {name:'Student Age Group', value: job.teachingDetails.ageGroup, icon:'mdi-account-box'}
+                    include benefit-table-row
 
-//- .row
-//-     .col-auto
-//-         a.collapse-link(data-toggle='collapse', href='#job-teaching-details-collapse', role='button', aria-expanded='false', aria-controls='job-teaching-details-collapse')
-//-             h4.font-weight-bold.text-dark Teaching Details      
-//-     .col.text-right
-//-         h1
-//-             i#job-teaching-details-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true') 
-//- hr.mt-0

@@ -52,6 +52,14 @@ SLWorld.prototype.init = function () {
     this.stepperWizard = new Stepper();
     this.stepperWizard.init();
 
+    //user-dashboard.js
+    this.dashboard = new Dashboard();
+    this.dashboard.init();
+
+    //user-dashboard.js
+    this.applicationMessage = new ApplicationMessage();
+    this.applicationMessage.init();
+
     //typeahead-wrapper.js
     typeaheadWrapper = new TypeaheadWrapper();
     this.typeaheadWrapper = typeaheadWrapper;

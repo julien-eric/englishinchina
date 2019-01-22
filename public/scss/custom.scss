@@ -2,11 +2,14 @@
 
 // COLORS
 $slw-primary: #95ca6e;
+// $slw-secondary: #95ca6e;
 $slw-primary-darker: rgb(32, 65, 8);
 $slw-danger: #ff4136;
-$slw-secondary: #5bc0de;
+// $slw-secondary: #5bc0de;
+$slw-secondary: adjust-hue(#95ca6e, 15deg);
 $slw-secondary-darker: #3691ad;
 $slw-cool-purple: #9d99c1;
+$fcb-blue: #3b5998;
 $slw-light-secondary: #d8d8d8;
 $slw-light-transparent: rgba(90, 90, 90, 0.5);
 $slw-dark: #3c3c3c;
@@ -48,13 +51,13 @@ $input-disabled-bg: $slw-light-secondary;
 
 // SLW MAGIC DIMENSIONS
 $standard-height: 190px;
-$landing-page-height: 520px;
+$landing-page-height: 580px;
 $search-landing-page-height: 320px;
 $school-header-height: 380px;
 $review-image-dimension: 60px;
 $image-container-height: 12rem;
 
-$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "light-transparent": $slw-light-transparent, "dark-transparent": $slw-dark-transparent, "pale-gray": $slw-pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad);
+$theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "light-transparent": $slw-light-transparent, "dark-transparent": $slw-dark-transparent, "pale-gray": $slw-pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad, "fcb-blue": $fcb-blue);
 
 
 @import "node_modules/bootstrap/scss/bootstrap";
@@ -144,7 +147,7 @@ h1, h2, h3, h4, h5, h6, .btn {
     //     font-size: 4rem;
     // }
     .display-2 {
-        font-size: 3rem;
+        font-size: 3.2rem;
     }
     .display-3 {
         font-size: 2.6rem;
@@ -152,8 +155,14 @@ h1, h2, h3, h4, h5, h6, .btn {
     .display-4 {
         font-size: 2.2rem;
     }
+    .img-prompt {
+        height: 300px;
+    }
+    .img-prompt-small {
+        height: 60px;
+    }
 }
-  
+
 @include media-breakpoint-down(md) {
     .display-1 {
         font-size: 4rem;
@@ -167,9 +176,18 @@ h1, h2, h3, h4, h5, h6, .btn {
     .display-4 {
         font-size: 1.8rem;
     }
+    .img-prompt {
+        height: 200px;
+    }
+    .img-prompt-small {
+        height: 60px;
+    }
 }
 
 @include media-breakpoint-down(sm) {
+    h1 {
+        font-size: 1.8rem;
+    }
     .display-1 {
         font-size: 2.6rem;
     }
@@ -181,6 +199,12 @@ h1, h2, h3, h4, h5, h6, .btn {
     }
     .display-4 {
         font-size: 1rem;
+    }
+    .img-prompt{
+        height: 150px;
+    }
+    .img-prompt-small {
+        height: 60px;
     }
 }
   
@@ -216,13 +240,13 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 .navbar.navbar-light.main-header.transparent.collapsed .navbar-nav a {
     color: white;
-    font-family: "raleway";
+    // font-family: "raleway";
 }
 
 .navbar.navbar-light .breadcrumb .nav-item .nav-link:hover,
 .navbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
     color: rgba(0, 0, 0, 0.50);
-    font-family: "raleway";
+    // font-family: "raleway";
 }
 
 .navbar.navbar-light.main-header.transparent.collapsed {
@@ -261,13 +285,13 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 
 footer .image-brand {
-    background-image: url('/images/logonameWhite.svg');
+    background-image: url('/images/logonameBlack.svg');
     width: 140px;
     height: 48px;
 }
 
 footer hr {
-    border-top: 1px solid #555555;
+    border-top: 1px solid #e6e6e6;
 }
 
 footer label {
@@ -279,15 +303,15 @@ footer .form-group {
 }
 
 footer .form-control {
-    color: #b6c3cf;
-    background-color: rgb(36, 36, 36);
-    border: 1px solid #5d5d5d;
+    color: $slw-darker;
+    background-color: $slw-pale-gray;
+    border: 1px solid lighten($slw-pale-gray, 25%);
     border-radius: .25rem;
 }
 
 footer .form-control:focus {
-    color: #b6c3cf;
-    background-color: rgb(44, 44, 44);
+    color: $slw-darker;
+    background-color: $slw-pale-gray;
     border-color: #80d445;
     box-shadow: 0 0 0 0.2rem rgba(68, 124, 29, 0.25);
 }
@@ -952,6 +976,13 @@ $slw-inset-dark: #ebebeb;
     color: #3b5998;
 }
 
+.mce-panel {
+    border-radius: 5px;
+    border: 1px solid #f3f3f3 !important;
+    /* border: 0 solid #c5c5c5; */
+    background-color: #f3f3f3 !important;
+}
+
 .mce-tinymce {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
@@ -1038,3 +1069,38 @@ $slw-inset-dark: #ebebeb;
     position: relative;
 }
 
+.list-display li{
+    margin-bottom:.4rem;
+    font-size:1.1rem;
+}
+
+.list-checkmarks {
+    padding-left:1.5rem;
+}
+
+.list-checkmarks li {
+    list-style-type:none;
+    padding-left:1rem;
+}
+.list-checkmarks li:before {    
+    font: normal normal normal 24px/1 "Material Design Icons";
+    content: "\F790";
+    margin: 0 10px 0 -35px;
+    color: $slw-primary;
+}
+
+.list-checkmarks-thumbs li:before {    
+    content: "\F513";
+}
+
+.list-checkmarks-pointers li:before {    
+    content: "\F1B7";
+}
+
+.vp-x {
+    font-size: 22px;
+    position: absolute;
+    top: 13px;
+    right: 30px;
+    cursor: pointer;
+}

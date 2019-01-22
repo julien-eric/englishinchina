@@ -2,6 +2,11 @@ extends form-container
 block card
     .col-md-10.col-sm-12.col-lg-9
         .border.border-pale-gray.border-radius-5.text-dark.bg-white
+            a.collapse-link(data-toggle='collapse', href='#teacher-profile-collapse', role='button', aria-expanded='false', aria-controls='teacher-profile-collapse')
+                h1.text-muted.my-5.font-weight-bold 
+                    | Teacher Profile      
+                    i#teacher-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+        .collapse.show#teacher-profile-collapse     
 
             .my-5.text-left.px-3.px-md-5.py-1
                 h3.mb-5.text-dark.font-weight-bold My Profile

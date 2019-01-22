@@ -1,5 +1,11 @@
 #job-list
     .row.collapse.show#job-list-collapse
-        each job in jobs
-            .col-sm-12.col-md-12.col-lg-12.mb-3
-                include job-card 
+        .col-sm-12.col-md-12.col-lg-9
+            each job in jobs
+                .row
+                    .col-sm-12.col-md-12.col-lg-12.mb-3
+                        include job-card 
+        .col-lg-3
+            .sticky-top.sticky-under-nav.border.border-pale-gray.border-radius-5.text-dark.bg-white.p-3
+                h2.font-weight-bold Looking for an opportunity to work abroad?
+                a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!

@@ -35,6 +35,7 @@ module.exports = function (passport) {
             );
 
             res.render('home/home', {
+                cache: true,
                 meta,
                 main: true,
                 user: req.user,
@@ -88,7 +89,9 @@ module.exports = function (passport) {
             let jobs = [];
             jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, filters);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
-                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 200);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'title', 120);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'kicker', 75);
             }
 
             if (req.query.ajax) {
@@ -133,6 +136,7 @@ module.exports = function (passport) {
                 );
 
                 res.render('search/search', {
+                    cache: true,
                     meta,
                     jobs: jobs.list,
                     searchInfo,

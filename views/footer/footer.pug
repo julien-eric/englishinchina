@@ -1,53 +1,50 @@
-footer.bg-dark.text-light-secondary-secondary.font-weight-light.py-5.border-top.border-gray
+footer.bg-light.text-darker.py-5.border-top.border-gray
     .container
         .row.justify-content-center
             .col-auto
-                a.text-uppercase.navbar-brand.mb-3(href='/')
+                a.navbar-brand.mb-3(href='/')
                     .image-brand.mr-3(alt='Second Language World')
 
-        .row.text-light-secondary
+        .row.text-darker
             .col-md-3.py-3
-                h4.text-uppercase.text-small.text-primary.mb-3 Explore
-                //- a.text-light-secondary(href='/about') secondlanguageworld@gmail.com
-                p.text-small.text-light-secondary Second Language World is based in Montreal, Canada.    
+                h4.text-small.font-weight-bold.text-primary.mb-3 Explore
+                //- a.text-darker(href='/about') secondlanguageworld@gmail.com
+                p.text-small.text-darker Second Language World is based in Montreal, Canada.    
 
                 hr 
                 ul.list-unstyled
                     li.mb-1
-                        a.text-light-secondary(href='/search') Job Board
+                        a.text-darker(href='/search') Job Board
                         hr
                     li.mb-1
-                        a.text-light-secondary(href='/review') Review
+                        a.text-darker(href='/about') About
                         hr
                     li.mb-1
-                        a.text-light-secondary(href='/about') About
-                        hr
-                    li.mb-1
-                        a.text-light-secondary(href='/article') Blog
+                        a.text-darker(href='/article') Blog
                         hr
 
             .col-md-3.py-3
-                h4.text-uppercase.text-small.text-primary.mb-3 Our goal
-                p.text-small.text-light-secondary To contribute to the growth of the TEFL mission around the world by connecting ESL teachers to those who want to learn.    
-                h4.text-uppercase.text-small.text-primary.mb-3 Our purpose
-                p.text-small.text-light-secondary To facilitate communication between potential TEFL candidates and the world that they are trying to be a part of.    
-                h4.text-uppercase.text-small.text-primary.mb-3 Connect
-                p.text-small.text-light-secondary Second Language World is happy to connect with users from all around the world on Facebook.    
+                h4.text-small.font-weight-bold.text-primary.mb-3 Our goal
+                p.text-small.text-darker To contribute to the growth of the TEFL mission around the world by connecting ESL teachers to those who want to learn.    
+                h4.text-small.font-weight-bold.text-primary.mb-3 Our purpose
+                p.text-small.text-darker To facilitate communication between potential TEFL candidates and the world that they are trying to be a part of.    
+                h4.text-small.font-weight-bold.text-primary.mb-3 Connect
+                p.text-small.text-darker Second Language World is happy to connect with users from all around the world on Facebook.    
                 ul.list-unstyled.list-inline
                     li.list-inline-item.mb-1
                         a.text-center.mt-1(href='mailto:secondlanguageworld@gmail.com')
                             .step-indicator-sm.border-radius-circle.border-1-primary.bg-primary
                                 p
-                                    i.text-light-secondary.mdi(aria-hidden='true', class='mdi-email')
+                                    i.text-white.mdi(aria-hidden='true', class='mdi-email')
                     li.list-inline-item.mb-1
                         a.text-center.mt-1(href='https://www.facebook.com/secondlanguageworld/')
                             .step-indicator-sm.border-radius-circle.border-1-primary.bg-primary
                                 p
-                                    i.text-light-secondary.mdi(aria-hidden='true', class='mdi-facebook')
+                                    i.text-white.mdi(aria-hidden='true', class='mdi-facebook')
 
             .col-md-6.py-3
-                h4.text-uppercase.text-small.text-primary.mb-3 Contact Us 
-                p.text-small.text-light-secondary For business inquiries or to learn more about Second Language World, feel free to contact us. An email address and a concise message is all you need. Our team will be more than happy to assist you!    
+                h4.text-small.font-weight-bold.text-primary.mb-3 Contact Us 
+                p.text-small.text-darker For business inquiries or to learn more about Second Language World, feel free to contact us. An email address and a concise message is all you need. Our team will be more than happy to assist you!    
                 form#form-contact-us(action='/contactus', method='POST')
                     .form-group
                         -var textInput = {}
@@ -68,4 +65,4 @@ footer.bg-dark.text-light-secondary-secondary.font-weight-light.py-5.border-top.
                         -textArea.rows = 3
                         -textArea.required = true
                         include ../templates/inputs/text-area
-                    button.btn.btn-primary.btn-md.ml-0.mt-0(class='', type='submit') Submit
+                    button.btn.btn-primary.btn-sm.ml-0.mt-0(class='', type='submit') Submit
