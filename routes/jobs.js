@@ -4,6 +4,7 @@ const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
 const companiesController = require('../controllers/companiescontroller');
+const usersController = require('../controllers/userscontroller');
 const citiesController = require('../controllers/citiescontroller');
 const jobsController = require('../controllers/jobscontroller');
 const messagesController = require('../controllers/messagescontroller');
