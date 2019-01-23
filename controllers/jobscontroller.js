@@ -43,10 +43,6 @@ JobsController.prototype.getJobByUrl = async (url) => {
     return job;
 };
 
-JobsController.prototype.updateJob = async (jobId, jobFields) => {
-    return Job.findOneAndUpdate({ _id: jobId }, jobFields).exec();
-};
-
 JobsController.prototype.sendApplicationMessage = async (job, applicant, employer, content) => {
 
     let message = await messagesController.createMessage(applicant, employer, content);
@@ -70,8 +66,8 @@ JobsController.prototype.sendApplicationMessage = async (job, applicant, employe
     }
 };
 
-JobsController.prototype.getAllJobs = async (options) => {
-    let jobs = await Job.find(options).sort({ dateCreated: -1 }).populate('school').populate('province').populate('city').exec();
+JobsController.prototype.getAllJobs = async () => {
+    let jobs = await Job.find().sort({ dateCreated: -1 }).populate('school').populate('province').populate('city').exec();
     jobs.forEach((job) => {
         findPicture(job);
     });
