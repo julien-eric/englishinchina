@@ -89,6 +89,8 @@ module.exports = function (passport) {
             jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, filters);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
                 jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'title', 120);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'kicker', 75);
             }
 
             if (req.query.ajax) {
