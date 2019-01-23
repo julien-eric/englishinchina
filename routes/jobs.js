@@ -5,7 +5,6 @@ const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
 const usersController = require('../controllers/userscontroller');
 const companiesController = require('../controllers/companiescontroller');
-const usersController = require('../controllers/userscontroller');
 const citiesController = require('../controllers/citiescontroller');
 const jobsController = require('../controllers/jobscontroller');
 const messagesController = require('../controllers/messagescontroller');

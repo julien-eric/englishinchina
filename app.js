@@ -50,11 +50,6 @@ if (environment == 'production') {
     const INSERTS_PER_SESSION = utils.getRandomArbitrary(2, 4) * 1000;
     jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
 
-    process.on('unhandledRejection', (error, p) => {
-        // application specific logging, throwing an error, or other logic here
-        winstonWrapper.error('Unhandled Rejection at: Promise', p, 'reason:', error);
-        winstonWrapper.error(error.stack);
-    });
 } else {
     process.on('unhandledRejection', (error, p) => {
         // application specific logging, throwing an error, or other logic here
