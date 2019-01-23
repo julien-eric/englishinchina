@@ -7,6 +7,7 @@ const _ = require('underscore');
 const jobsController = require('../controllers/jobscontroller');
 const provincesController = require('../controllers/provincescontroller');
 const citiesController = require('../controllers/citiescontroller');
+const usersController = require('../controllers/userscontroller');
 const USDTOCNY = 6.76;
 const PNDSTOCNY = 8.69;
 
@@ -163,7 +164,8 @@ JobCrawler.prototype.fetchInformation = async function ($) {
         jobInfo.teachingAssistant = fieldProcessor.extractAssistant($('.field-name-field-assistant .field-items').text().trim());
         jobInfo.vacationDays = Number($('.field-name-field-total-vacation .field-items').text().trim());
 
-        let savedJob = await jobsController.addJob(undefined, jobInfo);
+        let user = await usersController.findUserByEmail('secondlanguageworld@gmail.com');
+        let savedJob = await jobsController.addJob(user, jobInfo);
         if (savedJob) {
             winston.silly('ADDED: ' + savedJob.title);
         }
