@@ -225,6 +225,15 @@ module.exports = function (passport) {
         }
     });
 
+    router.get('/fixuserless', async (req, res) => {
+        let options = { user: null };
+        let jobs = await jobsController.getAllJobs(options);
+        let user = await usersController.findUserByEmail('secondlanguageworld@gmail.com');
+        jobs.forEach(async (job) => {
+            await jobsController.updateJob(job.id, { user });
+        });
+    });
+
     router.get('/thankyou/:url', async (req, res) => {
         try {
             let job = await jobsController.getJobByUrl(req.params.url);
