@@ -144,6 +144,7 @@ module.exports = function (passport) {
        ************************************************************************************************************ */
     router.get('/message/:url', async (req, res) => {
         let job = await jobsController.getJobByUrl(req.params.url);
+        job = jadefunctions.trunkContentElement(job, 'description', 250);
 
         let responseInfo;
         if (res.locals.flash.responseInfo) {
@@ -164,9 +165,10 @@ module.exports = function (passport) {
     });
 
     router.post('/message/:url', async (req, res) => {
+        let job;
 
         try {
-            let job = await jobsController.getJobByUrl(req.params.url);
+            job = await jobsController.getJobByUrl(req.params.url);
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
             let formattedAppMessage = messagesController.formatApplicationMessage(req.user, messageToSend);
