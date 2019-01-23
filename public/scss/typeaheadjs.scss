@@ -19,6 +19,13 @@ span.twitter-typeahead {
         font-family: 'Roboto Black';
         font-weight: bolder;
     }
+
+    @include media-breakpoint-down(sm) {
+        .typeahead-scrollable{
+            font-size: 22px;
+        }
+    }
+
     .typeahead-scrollable:focus {
         // color: #495057;
         background-color: #f1f1f1;
