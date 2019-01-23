@@ -107,54 +107,6 @@ module.exports = function (passport) {
     });
 
     /** **********************************************************************************************************
-       *searchJob : Method for search all jobs, it will return any job that has some of the information
-       * Param : Query, string that will be looked for as part of the jobs name
-       * [Province] optional.
-       * [City] optional
-       ************************************************************************************************************ */
-    router.get('/search/', async (req, res, next) => {
-
-        try {
-            const jobInfo = req.query.jobInfo;
-            const province = utils.validateParam(req.query.province);
-            const city = utils.validateParam(req.query.city);
-
-            let searchResults = await jobsController.searchJobs(jobInfo, province, city);
-            if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
-                searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
-            }
-
-            // let popularCities = await citiesController.getMostPopularCities();
-            // let popularProvinces = await provincesController.getMostPopularProvinces();
-            let popularCities = undefined;
-            let popularProvinces = undefined;
-
-            let provinces = await provincesController.getAllProvinces();
-            let cities = undefined;
-            if (province) {
-                cities = await citiesController.getProvinceCitiesByCode(province);
-            }
-            res.render('job/job-search', {
-                title: `${searchResults.query} Jobs - Second Language World`,
-                jobs: searchResults.list,
-                user: req.user,
-                provinces,
-                cities,
-                pictureInfo: pictureinfo,
-                popularCities,
-                popularProvinces,
-                moment,
-                searchMessage: `You searched for ${searchResults.query}`,
-                searchInfo: searchResults.searchInfo,
-                jadefunctions,
-                scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
-            });
-        } catch (error) {
-            next(error);
-        }
-    });
-
-    /** **********************************************************************************************************
        *queryJob : Method for search all jobs, it will return any job that has some of the information
        * Param : Query, string that will be looked for as part of the jobs name
        * [Province] optional.
