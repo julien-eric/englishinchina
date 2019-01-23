@@ -29,18 +29,6 @@ module.exports = {
         return array;
     },
 
-    trunkContentElement (element, attribute, length) {
-        if (element[attribute].length != 0) {
-            if (length < element[attribute].length) {
-                let content = element[attribute];
-                content = striptags(content);
-                content = content.substring(0, length);
-                element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
-            }
-        }
-        return element;
-    },
-
     returnNameforSchoolType (code) {
         switch (code) {
             case 0:
