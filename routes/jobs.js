@@ -5,6 +5,7 @@ const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
 const usersController = require('../controllers/userscontroller');
 const companiesController = require('../controllers/companiescontroller');
+const usersController = require('../controllers/userscontroller');
 const citiesController = require('../controllers/citiescontroller');
 const jobsController = require('../controllers/jobscontroller');
 const messagesController = require('../controllers/messagescontroller');
@@ -169,11 +170,6 @@ module.exports = function (passport) {
 
         try {
             job = await jobsController.getJobByUrl(req.params.url);
-
-            if (!job.user) {
-                job.user = {}
-            }
-
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
             let formattedAppMessage = messagesController.formatApplicationMessage(req.user, messageToSend);

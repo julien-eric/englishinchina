@@ -19,12 +19,10 @@ InputController.prototype.initSliders = function () {
 }
 
 InputController.prototype.initDatePickers = function () {
-
-    let dateRange = $('.input-daterange').datepicker({
+    this.datepicker = $('.input-daterange').datepicker({
         format: 'MM dd yyyy',
         autoclose: true
     });
-
 
     let dateOfBirth = $('.datepicker').datepicker({
         format: 'MM dd yyyy',

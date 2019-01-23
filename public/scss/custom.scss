@@ -5,7 +5,6 @@ $slw-primary: #95ca6e;
 // $slw-secondary: #95ca6e;
 $slw-primary-darker: rgb(32, 65, 8);
 $slw-danger: #ff4136;
-// $slw-secondary: #5bc0de;
 $slw-secondary: adjust-hue(#95ca6e, 15deg);
 $slw-secondary-darker: #3691ad;
 $slw-cool-purple: #9d99c1;
@@ -58,7 +57,6 @@ $review-image-dimension: 60px;
 $image-container-height: 12rem;
 
 $theme-colors: ( "primary": $slw-primary, "primary-darker": $slw-primary-darker, "light-transparent": $slw-light-transparent, "dark-transparent": $slw-dark-transparent, "pale-gray": $slw-pale-gray, "secondary": $slw-secondary, "cool-purple": $slw-cool-purple, "danger": $slw-danger, "slw-green": $slw-primary, "light-secondary": $slw-light-secondary, "dark": $slw-dark, "darker": $slw-darker, "rating-great": $rating-great, "rating-good": $rating-good, "rating-medium": $rating-medium, "rating-bad": $rating-bad, "fcb-blue": $fcb-blue);
-
 
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "./loadingspinner";

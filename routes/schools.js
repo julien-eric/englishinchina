@@ -2,12 +2,11 @@ const express = require('express');
 const moment = require('moment');
 const email = require('../controllers/emailscontroller');
 const winston = require('../config/winstonconfig');
-
 const router = express.Router();
 const schools = require('../controllers/schoolscontroller');
 const reviews = require('../controllers/reviewscontroller');
 const images = require('../controllers/imagescontroller');
-const usersController = require('../controllers/usersController');
+const usersController = require('../controllers/userscontroller');
 const provincesController = require('../controllers/provincescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const companiesController = require('../controllers/companiescontroller');

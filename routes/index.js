@@ -8,7 +8,7 @@ const splashText = require('../splash-text.json');
 const provincesController = require('../controllers/provincescontroller');
 const countriesController = require('../controllers/countriescontroller');
 const citiesController = require('../controllers/citiescontroller');
-const usersController = require('../controllers/usersController');
+const usersController = require('../controllers/userscontroller');
 const jobsController = require('../controllers/jobscontroller');
 const winston = require('../config/winstonconfig');
 const crypto = require('crypto');
@@ -88,9 +88,10 @@ module.exports = function (passport) {
             let jobs = [];
             jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, filters);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
-                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 200);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
                 jobs.list = jadefunctions.trunkContentArray(jobs.list, 'title', 120);
                 jobs.list = jadefunctions.trunkContentArray(jobs.list, 'kicker', 75);
+
             }
 
             if (req.query.ajax) {
