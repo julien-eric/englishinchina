@@ -133,6 +133,13 @@ h1, h2, h3, h4, h5, h6, .btn {
     font-family: 'Raleway', sans-serif;
 }
 
+.navbar-light .navbar-nav .nav-item:hover {
+    background-color: lighten($color: $slw-primary, $amount: 20%)
+}
+.navbar-light.transparent .navbar-nav .nav-item:hover {
+    background-color: inherit;
+}
+
 @include media-breakpoint-down(md) {
     .navbar-light .navbar-nav .nav-link {
         text-align: center;
