@@ -12,50 +12,22 @@
                             i.text-primary.mdi.mdi-school.mr-2(aria-hidden='true')
                             | #{job.school.name}
                         hr.my-2
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-                                | Location
-                        .col-7
-                            p.mb-0 #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+                    
+                    -var feature = {name:'Location', value: job.province.name + ' - ' + jadefunctions.capitalize(job.city.pinyinName), icon:'mdi-map-marker'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-calendar.mr-2(aria-hidden='true')
-                                | Start Date
-                        .col-7
-                            p.mb-0 #{moment(job.contractDetails.startDate).format("MMMM Do YYYY")}
+                    -var feature = {name:'Start Date', value: moment(job.contractDetails.startDate).format("MMMM Do YYYY"), icon:'mdi-calendar'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-primary.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
-                                | Salary
-                        .col-7
-                            p.mb-0 #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
+                    -var feature = {name:'Salary', value: job.contractDetails.salaryLower + ' - ' + job.contractDetails.salaryHigher + ' CNY/Month', icon:'mdi-currency-jpy'}
+                    include benefit-table-row
                     
                     hr.my-2
-                    
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold 
-                                i.text-primary.mdi.mdi-email.mr-2(aria-hidden='true')
-                                | Contact
-                        .col-7
-                            a.mb-0(href='mailto:' + job.email) #{job.email}
 
-//- .row
-//-     .col-auto
-//-         a.collapse-link(data-toggle='collapse', href='#job-details-collapse', role='button', aria-expanded='false', aria-controls='job-details-collapse')
-//-             h4.font-weight-bold.text-dark Job Details      
-//-     .col.text-right
-//-         h1
-//-             i#job-details-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true') 
-//- hr.mt-0
+                    -var feature = {name:'Contact', value: job.email, icon:'mdi-email'}
+                    include benefit-table-row
 

@@ -3,10 +3,33 @@
     #splash.splash.row.justify-content-center
         .splash-image-container
             .splash-image(style="background-image: url('" + splashText.image + "');")
-        .splash-text.col-sm-12.col-md-9.col-lg-9.my-auto
-            .row.justify-content-center
-                //- h3.col-lg-12.mt-1.mb-5 Discover what opportunities lie ahead. Right here, right now.
-                h1.col-lg-12.display-1.milkshake
-                    | Teach around the    
-                    span.text-primary world 
-            include ../search/typeahead-search/splash-search
+        .splash-text.col-sm-12.col-md-12.col-lg-12.my-auto
+            .container
+                .row.justify-content-start
+                    .col-lg-6
+                        .row.text-center.text-md-left
+                            .col-12.my-3.mx-auto.text-center
+                                -var step = {}
+                                -step.icon = 'mdi-lightbulb-on'
+                                include step-indicator
+                        .row.text-center.text-md-left
+                            h1.col-12.mb-3.font-weight-bold
+                                | Find amazing opportunities to teach around the world
+                        .row.text-center.text-md-left
+                            .col-12
+                                p.mb-1 
+                                    span.font-weight-bold Second Language World 
+                                    | is your first and only step to find opportunities abroad. Search the most responsive job board for ESL positions around the world and 
+                                    | filter through thousands of jobs posted by legitimate employers such as schools and agencies. Take your first step today.
+                        .row
+                            .col-sm-6.mt-3
+                                a.btn.btn-secondary.text-white.btn-lg.btn-block.mr-2.mdi.mdi-briefcase(href="/register") Offer Job
+                            .col-sm-6.mt-3
+                                a.btn.btn-primary.btn-lg.btn-block.mr-2(href="/search") Search Job Board
+                                    i.mdi.mdi-arrow-right(aria-hidden="true")
+.bg-light.border-bottom.border-pale-gray
+    .container
+        -var inlineSearch = 'true'
+        -var fullWidthSearch = false
+        -var placeHolder = "Where do you want to go?"
+        include ../search/typeahead-search/ta-search-form 

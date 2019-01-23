@@ -1,0 +1,54 @@
+.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+    a.collapse-link(data-toggle='collapse', href='#my-account-collapse', role='button', aria-expanded='false', aria-controls='my-account-collapse')
+        h1.text-muted.my-5.font-weight-bold 
+            | My Account      
+            i#my-account-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true')
+    .collapse#my-account-collapse  
+        h3.mb-3.text-dark.font-weight-bold My Profile
+        form(class='form-signin', action='/user/edit', method='POST')
+
+            if(redirectUrl)
+                .form-group.d-none
+                        input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
+
+            .form-group
+                input#id(type="hidden", name="id", value=user.id)
+
+            .row
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'username'
+                    -textInput.name = 'username'
+                    -textInput.placeholder = 'Username'
+                    -textInput.label = 'Username'
+                    -textInput.required = true;
+                    -textInput.value = user.username
+                    include ../templates/inputs/text-input
+
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'password'
+                    -textInput.name = 'password'
+                    -textInput.type = 'password'
+                    -textInput.placeholder = '********'
+                    -textInput.label = 'Password'
+                    -textInput.required = true;
+                    -textInput.disabled = true;
+                    include ../templates/inputs/text-input
+                    p.text-small
+                        a(href="/forgot") Request password change
+
+            .row
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'email'
+                    -textInput.name = 'email'
+                    -textInput.placeholder = 'Email'
+                    -textInput.label = 'Email'
+                    -textInput.required = true;
+                    -textInput.value = user.email
+                    include ../templates/inputs/text-input
+
+            .row
+                .col-lg-6.text-center.mt-3.mb-5
+                    button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Save Changes

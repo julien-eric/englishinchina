@@ -1,35 +1,41 @@
-
-nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
-    .container.font-weight-bold
-        a.pb-0.text-uppercase.navbar-brand(href='/')
-            //- img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
-            .image-brand.mr-3(alt='Second Language World')
-        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
-            span.hamb-menu
-                i.mdi.mdi-menu(aria-hidden='true')
-        #navbarNavDropdown.collapse.navbar-collapse.justify-content-right.mt-3.mt-lg-0
-            ul.navbar-nav
-                //- li.nav-item.active
-                //-     a.nav-link(href='/')
-                //-         i.fa.prefix.mdi.mdi-home(aria-hidden='true')
-                //-         | Home 
-                //-         span.sr-only (current)
-                li.nav-item
-                    a.nav-link(href='/search') 
-                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
-                        | Job board
-                //- li.nav-item
-                //-     a.nav-link(href='/review') 
-                //-         i.fa.prefix.mdi.mdi-question(aria-hidden="true")
-                //-         | Review
-                li.nav-item
-                    a.nav-link(href='/about') 
-                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
-                        | About
-                li.nav-item
-                    a.nav-link(href='/blog') 
-                        i.fa.prefix.mdi.mdi-question(aria-hidden="true")
-                        | Blog
-
-            ul.navbar-nav.ml-auto.align-items-lg-center
-                include ../gen-nav-login
+//- -var conversion = true
+if conversion
+    nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
+        .container.font-weight-bold
+            a.mx-auto.pb-0.text-uppercase.navbar-brand(href='/')
+                //- img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
+                .image-brand.mr-3(alt='Second Language World')
+else 
+    nav#main-header.main-header.sticky-top.navbar.navbar-expand-lg.navbar-light.collapsed(data-spy="affix" class=main? 'transparent' : 'bg-white')
+        .container
+            a.pb-0.text-uppercase.navbar-brand(href='/')
+                //- img.mr-2(src='/images/logo.svg', width='', height='40', alt='Second Language World')
+                .image-brand.mr-3(alt='Second Language World')
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+                span.hamb-menu
+                    i.mdi.mdi-menu(aria-hidden='true')
+            #navbarNavDropdown.collapse.navbar-collapse.justify-content-right.mt-3.mt-lg-0
+                ul.navbar-nav
+                    //- li.nav-item.active
+                    //-     a.nav-link(href='/')
+                    //-         i.fa.prefix.mdi.mdi-home(aria-hidden='true')
+                    //-         | Home 
+                    //-         span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href='/search') 
+                            i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                            | Job board
+                    //- li.nav-item
+                    //-     a.nav-link(href='/review') 
+                    //-         i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                    //-         | Review
+                    li.nav-item
+                        a.nav-link(href='/about') 
+                            i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                            | About
+                    li.nav-item
+                        a.nav-link(href='/blog') 
+                            i.fa.prefix.mdi.mdi-question(aria-hidden="true")
+                            | Blog
+                ul.navbar-nav.ml-auto.align-items-lg-center
+                    include ../gen-nav-login 

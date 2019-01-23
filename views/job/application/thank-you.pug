@@ -1,15 +1,33 @@
 extends ../../layout
 block content
-    .container.py-5
+    .container.pb-5
+        .row.py-3
+            .col-md-12.col-sm-12.col-lg-12
+                -var bread1 = {title: 'Home', url:'/'}
+                -var bread2 = {title: job.title.substring(0, 30) + '...', url:'job/' + job.url}
+                -var bread3 = {title: 'Message', url:'job/message/' + job.url}
+                include ../../breadcrumb
         .row
-            .col-lg-12
-                h1.milkshake Thank you!
-                h2 Your message has been sent, the employer will receive it shortly.
-                a.btn.btn-md.btn-primary.btn-rounded.nextBtn(href='/search') 
-                    | Back to job board
-                a.btn.btn-md.btn-mdb-color.btn-rounded.prevBtn(href='/job/' + job.url) 
-                    | View Job Offer
-
-
-        
-    
+            .col-md-12.col-sm-12.col-lg-12
+                .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3   
+                    .row.align-items-center
+                        #write-message-prompt.col-lg-6.order-1.order-lg-2
+                            h1.milkshake Thank you!
+                            p.font-weight-bold Your message has been sent, the employer will receive it shortly.
+                            p
+                                span.font-weight-bold What now?
+                                |  You know what they say! Don't put all your eggs in one basket. There are thousands of opportunities out there. 
+                                | Go back to our job board to find out if there's anything else that interests you. You will be notified by email if the 
+                                | employer replies to your message.
+                            .row
+                                .col-lg-6.col-sm-6.mb-2
+                                    a.btn.btn-outline-primary.btn-block(href='/user/teacher-details/' + user.id )
+                                        i.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
+                                        | Back to Job Board
+                                .col-lg-6.col-sm-6.mb-2
+                                    a#write-button.btn.btn-outline-primary.btn-block(href='#') Back to Offer
+                        .col-lg-6.text-center.order-2.order-lg-1.mb-3
+                            img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_a1f5b640-1e81-11e9-a91e-bd7ecede5081.jpg')
+        //- .row
+        //-     .col-md-12.col-sm-12.col-lg-12
+        //-         .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3  
