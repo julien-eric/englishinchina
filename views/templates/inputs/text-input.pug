@@ -1,6 +1,9 @@
 if !textInput.type
     -textInput.type = 'text'
 
+if !textInput.disabled
+    -textInput.disabled = false;
+
 if textInput.required
     -textInput.class += ' validate'
 
@@ -12,21 +15,14 @@ if responseInfo && !textInput.value
     if textInput.responseSubProperty 
         if responseInfo[textInput.responseSubProperty] && responseInfo[textInput.responseSubProperty][textInput.name]
             -textInput.value = responseInfo[textInput.responseSubProperty][textInput.name]
-
-if textInput.default 
+.form-group
     label(for=textInput.name, data-error=textInput.errorMessage)  #{textInput.label}
         if textInput.tooltip
             i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title=textInput.tooltip )
-    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, required=textInput.required)
-else
-    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, required=textInput.required)
-    label(for=textInput.name, data-error=textInput.errorMessage)  #{textInput.label}
-        if textInput.tooltip
-            i.mdi.mdi-help-circle(aria-hidden='true' data-toggle="tooltip" data-placement="top" title=textInput.tooltip )
-
-
-
+    input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, disabled=textInput.disabled, required=textInput.required)
+    .invalid-feedback
+        | #{textInput.errorMessage}
 if textInput    
-    p.text-small #{textInput.undertext}
+    small.form-text.text-muted #{textInput.undertext}
 
 -textInput = {}

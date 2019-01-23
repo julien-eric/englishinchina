@@ -1,3 +1,4 @@
+const winston = require('../config/winstonconfig');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -32,13 +33,13 @@ const Review = new Schema({
 });
 
 Review.post('save', async (document) => {
-    console.log('Inserted review : %s : (%s)', document._id, document.comment);
+    winston.debug('Inserted review : %s : (%s)', document._id, document.comment);
     const schools = require('../controllers/schoolscontroller');
     await schools.updateAverageRating(document.foreignId);
 });
 
 Review.post('remove', (document) => {
-    console.log('Removed review : %s : (%s)', document._id, document.comment);
+    winston.debug('Removed review : %s : (%s)', document._id, document.comment);
     const schools = require('../controllers/schoolscontroller');
     schools.updateAverageRating(document.foreignId);
 });

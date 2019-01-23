@@ -1,5 +1,6 @@
 const helper = require('sendgrid').mail;
 const settings = require('simplesettings');
+const winston = require('../config/winstonconfig');
 const pug = require('pug');
 const sg = require('sendgrid')(settings.get('SENDGRID_API_KEY'));
 const path = require('path');
@@ -32,9 +33,11 @@ module.exports = {
         });
 
         sg.API(request, function (error, response) {
-            console.log(response.statusCode);
-            console.log(response.body);
-            console.log(response.headers);
+            if (error) {
+                winston.error(`${error.status || 500} - ${error.message}`);
+            } else {
+                winston.debug(`${response.statusCode || 500} - ${response.body}`);
+            }
         });
     },
 
@@ -118,7 +121,7 @@ module.exports = {
     },
 
     /**
-     * @param {String} title This is the title in the email template (goes under the picture) 
+     * @param {String} title This is the title in the email template (goes under the picture)
      * @param {String} content This is the main paragraph within the email template
      * @param {String} linkName This is the tag for the call to action button
      * @param {String} linkUrl This is the link for the call to action button

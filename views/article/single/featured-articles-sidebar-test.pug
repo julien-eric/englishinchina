@@ -12,7 +12,7 @@
                             a.text-dark(href='/blog/' + featuredArticle.slug)
                                 | #{featuredArticle.title}
                         hr
-                        //- p.card-text.overflow-3 #{featuredArticle.summary}
+                        //- p.card-text.overflow-3-lines #{featuredArticle.summary}
                         p.card-text 
                             span.font-weight-bold #{featuredArticle.author.first_name} #{featuredArticle.author.last_name} | 
                             | #{moment(featuredArticle.created).format("MMMM DD YYYY")}

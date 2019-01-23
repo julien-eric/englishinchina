@@ -11,8 +11,16 @@ module.exports = function (passport) {
        * pictureURL : string
        ************************************************************************************************************ */
     router.post('/pictureuploaded', (req, res) => {
-        pictures.createResponsivePictures(req.query.url, req.query.filesize, () => {
-        });
+        let filename = req.query.url;
+        if (filename.indexOf('.jpg') != -1 ||
+            filename.indexOf('.png') != -1 ||
+            filename.indexOf('.gif') != -1 ||
+            filename.indexOf('.tif') != -1 ||
+            filename.indexOf('.jpeg') != -1) {
+
+            pictures.createResponsivePictures(req.query.url, req.query.filesize, () => { });
+
+        }
     });
 
     /** **********************************************************************************************************

@@ -4,43 +4,49 @@ block content
     include ../fcb-js-sdk
 
 
-    .bg-dark.py-5
-        .container
+    .bg-white.py-5
+        .container.arrow-section.bg-white
             .row.justify-content-center.text-center
-                .col-sm-12.col-md-6.col-lg-4.py-3.text-md-left.text-white
-                    h2.text-white.font-weight-bold Looking for a job?
-                    p.text-white Find amazing opportunities to teach around the world while immersing yourself in a new culture. Explore an endless job board and read reviews from other teachers to see if the options fit your needs.
-                    a.mx-0.px-5.btn.btn-lightgreen(href='/search') Find a job
-                .col-sm-12.col-md-6.col-lg-4.py-3.text-md-left.text-white
-                    h2.text-white.font-weight-bold Looking for teachers?
-                    p.text-white Take advantage of a wide availibility of teachers from all around the world in just one place. Benefit from considerate exposure and go get all the information you need about teachers all on just one site.
-                    a.px-5.mx-0.btn.btn-lightgreen(href='/job/add') Post a job offer
+                .col-sm-12.col-md-6.col-lg-6.py-3.text-md-left.text-dark
+                    img.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_1eb599d0-fe65-11e8-9d13-3fba87c76b3a.jpg')
+                .col-sm-12.col-md-6.col-lg-6.py-3.text-md-left.text-dark
+                    .mb-5
+                        h2.font-weight-bold Looking for a job?
+                        p Find amazing opportunities to teach around the world while immersing yourself in a new culture. Explore an endless job board and read reviews from other teachers to see if the options fit your needs.
+                        a.mx-0.px-5.btn.btn-lg.btn-primary(href='/search') Find a job
+                    .mb-5
+                        h2.font-weight-bold Looking for teachers?
+                        p Take advantage of a wide availibility of teachers from all around the world in just one place. Benefit from considerate exposure and go get all the information you need about teachers all on just one site.
+                        a.px-5.mx-0.btn.btn-lg.btn-primary(href='/job/add') Post a job offer
 
-    .container.my-3
-        .pt-5.mt-5.pb-2
-            h1.display-4.text-center.font-weight-bold Find Jobs In China!
-            p.text-center.text-muted Find out about schools in beautiful locations around the World 
-            //- hr
-        include ../job/featured-jobs
-        
+    .bg-pale-gray.py-5
+        .container.arrow-section.bg-pale-gray
+            .row.pt-5.mt-5.pb-2
+                .col-12
+                    h1.display-4.text-center.font-weight-bold Find jobs in China!
+                    p.text-center.text-muted Find out about schools in beautiful locations around the World 
+                //- hr
+            include ../job/featured-jobs
+            
+    .bg-white.py-5
+        .container.arrow-section.bg-white
+            //- .pt-5.mt-5
+            include how-it-works
 
-    .container-fluid.bg-white.pt-5.mt-5
-        include how-it-works
-
-    .container
+    .container.mb-3
         .pt-5.mt-5.pb-2
             h1.display-4.text-center.font-weight-bold Discover amazing new places!
             p.text-center.text-muted Find out about schools in beautiful locations around the World 
             //- hr
         include ../populargrid/popularprovinces
 
-    .container
-        .pt-5.mt-5.pb-2
-            h1.display-4.text-center.font-weight-bold Work for these 
-                span.text-muted(data-toggle='tooltip', data-placement='right', title='These are franchises whose schools are scattered around the World. For unaffiliated schools use the search function or find the company') companies*
-            p.text-center.text-muted Check out their locations around the World 
+    //- .container
+    //-     .pt-5.mt-5.pb-2
+    //-         h1.display-4.text-center.font-weight-bold Work for these 
+    //-             span.text-muted(data-toggle='tooltip', data-placement='right', title='These are franchises whose schools are scattered around the World. For unaffiliated schools use the search function or find the company') companies*
+    //-         p.text-center.text-muted Check out their locations around the World 
             
-        -var companies = popularCompanies
-        -var visibility = 'show';
-        include ../company/companylist
+    //-     -var companies = popularCompanies
+    //-     -var visibility = 'show';
+    //-     include ../company/companylist
     

@@ -13,7 +13,7 @@ const utils = require('../utils');
 module.exports = function (passport) {
 
     router.route('/:code')
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
 
             try {
 
@@ -61,10 +61,7 @@ module.exports = function (passport) {
                 });
 
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         });
 

@@ -1,16 +1,19 @@
 const express = require('express');
+const winstonWrapper = require('./config/winstonconfig');
 const path = require('path');
-const logger = require('morgan');
+const morgan = require('morgan');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const flash = require('express-flash-2');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
-const sassMiddleware = require('node-sass-middleware');
 const utils = require('./utils');
+const sassMiddleware = require('node-sass-middleware');
 const favicon = require('serve-favicon');
 const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
+const gmapsKey = settings.get('GMAPS_API_KEY');
 const environment = settings.get('ENV');
 const jobCrawler = require('./jobCrawler/jobCrawler');
 let SCSS_DEBUG = true;
@@ -18,6 +21,10 @@ let SCSS_DEBUG = true;
 mongoose.connect(settings.get('DB_URL'));
 const app = express();
 
+// Use compression for faster load times
+app.use(compression());
+
+app.use(morgan('dev', { 'stream': winstonWrapper.stream }));
 
 /**
  * Used by stylus
@@ -32,6 +39,7 @@ function compile (str, path) {
 
 // Set variables used in views app-wide
 app.locals.fcbAppId = fcbAppId;
+app.locals.gmapsKey = gmapsKey;
 if (environment == 'production') {
     app.locals.analytics = true;
     SCSS_DEBUG = false;
@@ -42,11 +50,16 @@ if (environment == 'production') {
     const INSERTS_PER_SESSION = utils.getRandomArbitrary(2, 4) * 1000;
     jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
 
+    process.on('unhandledRejection', (error, p) => {
+        // application specific logging, throwing an error, or other logic here
+        winstonWrapper.error('Unhandled Rejection at: Promise', p, 'reason:', error);
+        winstonWrapper.error(error.stack);
+    });
 } else {
     process.on('unhandledRejection', (error, p) => {
         // application specific logging, throwing an error, or other logic here
-        console.log('Unhandled Rejection at: Promise', p, 'reason:', error);
-        console.log(error.stack);
+        winstonWrapper.error('Unhandled Rejection at: Promise', p, 'reason:', error);
+        winstonWrapper.error(error.stack);
     });
 }
 
@@ -68,7 +81,7 @@ const src = path.join(__dirname, 'public', 'scss');
 const dst = path.join(__dirname, 'public', 'stylesheets');
 
 if (!SCSS_DEBUG) {
-    console.log('WARNING: SCSS is not recompiling (not debug)');
+    winstonWrapper.debug('WARNING: SCSS is not recompiling (not debug)');
 }
 
 app.use(sassMiddleware({
@@ -81,7 +94,6 @@ app.use(sassMiddleware({
     prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -135,23 +147,22 @@ app.use('/province', provinceRoutes);
 /** *************************************************************
  catch 404 and forward to error handler
  ************************************************************** */
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use((error, req, res, next) => {
+
+    // set locals, only providing error in development
+    res.locals.message = error.message;
+    res.locals.error = app.get('env') === 'development' ? error : {};
+
+    // add this line to include winston logging
+    winstonWrapper.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
+    // render the error page
+    res.status(error.status || 500);
+    res.render('error', {
+        message: error.message,
+        error: error
+    });
 });
 
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
 
 module.exports = app;

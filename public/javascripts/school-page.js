@@ -111,33 +111,4 @@ $(document).ready(() => {
         var modal = $(this)
         modal.find('.modal-title').text('User Review')
     })
-
-    // $('#load-more-reviews').click(() => {
-    //   const schoolid = $('#schoolid').attr('value');
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open('GET', `/school/reviews/${schoolid}/${page}`);
-    //   xhr.onreadystatechange = function() {
-    //     if (xhr.readyState === 4) {
-    //       if (xhr.status === 200) {
-    //         const response = JSON.parse(xhr.responseText);
-    //         // alert("success." + response.html);
-    //         const elements = $($.parseHTML(response.html));
-    //         $.each(elements, (index, element) => {
-    //           $(element).appendTo('#reviews');
-    //         });
-    //         $('.rating').rate({
-    //           readonly: false,
-    //         });
-    //         $('.rating').rate('destroy');
-    //         $('.readmore').unbind();
-    //         $('.school-img-list-item').unbind();
-    //         $('#lightbox').unbind();
-    //         page++;
-    //       } else {
-    //         alert('Problem.');
-    //       }
-    //     }
-    //   };
-    //   xhr.send();
-    // });
 });

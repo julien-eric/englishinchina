@@ -1,10 +1,15 @@
 const request = require('request');
+const winston = require('../config/winstonconfig');
+const moment = require('moment');
 const cheerio = require('cheerio');
 const URL = require('url-parse');
 const _ = require('underscore');
 const jobsController = require('../controllers/jobscontroller');
 const provincesController = require('../controllers/provincescontroller');
+const usersController = require('../controllers/userscontroller');
 const citiesController = require('../controllers/citiescontroller');
+const USDTOCNY = 6.76;
+const PNDSTOCNY = 8.69;
 
 let PAGES_TO_VISIT = [
     'https://teflsearch.com/job-results/country/china?page=1',
@@ -48,7 +53,7 @@ JobCrawler.prototype.init = function (pagesArray, jobsPerSession, searchAddCoold
 JobCrawler.prototype.crawl = function (pageToVisit) {
 
     if (this.numJobsAdded >= this.JOBS_PER_SESSION) {
-        console.log('Reached desired number of jobs to add. Waiting ' + this.JOB_DONE_COOLDOWN + 'ms');
+        winston.silly('Reached desired number of jobs to add. Waiting ' + this.JOB_DONE_COOLDOWN + 'ms');
         this.numJobsAdded = 0;
         let crawl = _.bind(this.crawl, this);
         setTimeout(crawl, 10000);
@@ -63,7 +68,7 @@ JobCrawler.prototype.crawl = function (pageToVisit) {
         let visitPage = _.bind(this.visitPage, this, nextPage, this.crawl);
         visitPage();
     } else {
-        console.log('Initial page and relative links have been crawled');
+        winston.silly('Initial page and relative links have been crawled');
     }
 };
 
@@ -73,14 +78,14 @@ JobCrawler.prototype.visitPage = function (url, callback) {
     this.pagesVisited[url] = true;
 
     // Make the request
-    console.log('Visiting page ' + url);
+    winston.silly('Visiting page ' + url);
 
     request(url, async (error, response, body) => {
 
         let result;
         // Check status code (200 is HTTP OK)
         if (!response || response.statusCode !== 200) {
-            console.log('Status code is ' + response.statusCode + '. Skipping.');
+            winston.silly('Status code is ' + response.statusCode + '. Skipping.');
             callback();
             return;
         }
@@ -99,7 +104,7 @@ JobCrawler.prototype.visitPage = function (url, callback) {
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_PROBLEM);
         } else {
             this.numJobsAdded++;
-            console.log('Added Job, waiting ' + this.SEARCH_ADD_COOLDOWN_SUCCESS + 'ms');
+            winston.silly('Added Job, waiting ' + this.SEARCH_ADD_COOLDOWN_SUCCESS + 'ms');
             let crawl = _.bind(callback, this);
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_SUCCESS);
         }
@@ -146,7 +151,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
 
         jobInfo.salaryLower = fieldProcessor.extractSalary($('.field-name-field-salary-ranges .field-items .field-item.even').text());
         jobInfo.salaryHigher = fieldProcessor.extractSalary($('.field-name-field-salary-ranges .field-items .field-item.odd').text());
-        jobInfo.startDate = fieldProcessor.extractDate($('.field-name-field-start-date .field-items').text().trim());
+        jobInfo.startDate = fieldProcessor.extractDate($('.field-name-field-start-date .field-items').text().trim(), $('.field-name-field-date-options .field-items').text().trim());
         jobInfo.duration = fieldProcessor.extractDuration($('.field-name-field-contract-length .field-items').text().trim());
 
         jobInfo.institution = $('.field-name-field-institution .field-items').text().trim();
@@ -159,9 +164,11 @@ JobCrawler.prototype.fetchInformation = async function ($) {
         jobInfo.teachingAssistant = fieldProcessor.extractAssistant($('.field-name-field-assistant .field-items').text().trim());
         jobInfo.vacationDays = Number($('.field-name-field-total-vacation .field-items').text().trim());
 
-        let savedJob = await jobsController.addJob(undefined, jobInfo);
+        let user = await usersController.findUserByEmail('secondlanguageworld@gmail.com');
+
+        let savedJob = await jobsController.addJob(user, jobInfo);
         if (savedJob) {
-            console.log('ADDED: ' + savedJob.title);
+            winston.silly('ADDED: ' + savedJob.title);
         }
         return { error: null, job: savedJob };
 
@@ -171,7 +178,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
             error = error.error;
         }
 
-        console.log(error.message);
+        winston.silly(error.message);
         return { error };
     }
 
@@ -182,7 +189,7 @@ JobCrawler.prototype.collectInternalLinks = function ($) {
     let that = this;
 
     let relativeLinks = $('a[href^="/"]');
-    console.log('Found ' + relativeLinks.length + ' relative links on page');
+    winston.silly('Found ' + relativeLinks.length + ' relative links on page');
     relativeLinks.each(function () {
         let href = $(this).attr('href');
         if (href.indexOf('job-advert') != -1) {
@@ -198,7 +205,9 @@ FieldProcessor.prototype.extractSalary = function (salaryString) {
         if (salaryString.indexOf('¥') != -1) {
             return Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('¥') + 1));
         } else if (salaryString.indexOf('$') != -1) {
-            return Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1));
+            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * USDTOCNY / 1000) * 1000;
+        } else if (salaryString.indexOf('£') != -1) {
+            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * PNDSTOCNY / 1000) * 1000;
         } else {
             return Number(salaryString);
         }
@@ -230,18 +239,22 @@ FieldProcessor.prototype.extractEmail = function (encodedString) {
         };
         return decodeEmail(encodedString);
     } catch (error) {
-        console.log(error);
+        winston.silly(error);
         return;
     }
 
 };
 
-FieldProcessor.prototype.extractDate = function (dateString) {
-    let date = dateString.toLowerCase();
-    if (Date.parse(date)) {
-        return Date.parse(date);
-    } else if (date == '' || date.indexOf('ASAP') != -1 || date.indexOf('continuous') != -1) {
+FieldProcessor.prototype.extractDate = function (stringExtract1, stringExtract2) {
+    let date = stringExtract1.toLowerCase();
+    if (date == '') {
+        date = stringExtract2.toLowerCase();
+    }
+
+    if (date == '' || date.indexOf('asap') != -1 || date.indexOf('continuous') != -1) {
         return new Date();
+    } else {
+        return moment(date);
     }
 };
 
@@ -311,8 +324,8 @@ FieldProcessor.prototype.workloadRecognition = function (text) {
         let hoursReg = /\d\d+.?(\w*)+(.hours)/;
         let match = hoursReg.exec(subText);
         if (match) {
-            workload = subText.substring(match.index, match.index + 2)
-            console.log('Match found at ' + match.index);
+            workload = subText.substring(match.index, match.index + 2);
+            winston.silly('Match found at ' + match.index);
         }
     }
     return workload;

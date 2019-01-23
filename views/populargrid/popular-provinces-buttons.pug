@@ -1,10 +1,22 @@
 
 if popularProvinces
-    .row.justify-content-center
-        a(href='#').btn.btn-link.d-none.d-lg-inline.disabled Popular Destinations:
-        each popularProvince, index in popularProvinces
-            if index > 6
-            else if index > 4 && index <= 6
-                a.btn.btn-light-transparent.d-inline.d-lg-none(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
-            else if index <= 4
-                a.btn.btn-light-transparent(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}
+    .row.mt-2
+        .col-auto.mx-auto
+            each popularProvince, index in popularProvinces
+
+                if index < 3
+                    a.text-dark.btn.btn-md.bg-pale-gray.font-weight-bold.mr-2(href='/search?province=' + popularProvince._id.code)
+                        i.mdi.mdi-earth.mr-2.text-primary(aria-hidden='true')
+                        | #{popularProvince._id.name}
+                else if index < 6
+                    a.text-dark.btn.btn-md.bg-pale-gray.font-weight-bold.d-none.d-lg-inline-block.mr-2(href='/search?province=' + popularProvince._id.code) 
+                        i.mdi.mdi-earth.mr-2.text-primary(aria-hidden='true')
+                        | #{popularProvince._id.name}
+    //- .row.mt-2
+    //-     .btn-group
+    //-         //- h6.d-none.mt-1.d-lg-inline.text-white.pt-2.font-weight-bold.mr-2 Look for jobs in:
+        
+    //-         each popularProvince, index in popularProvinces
+    //-             if index > 6
+    //-             else
+    //-                 a.text-dark.mb-2.btn.btn-md.border-0.btn-light-secondary.font-weight-bold(href='/search?province=' + popularProvince._id.code) #{popularProvince._id.name}

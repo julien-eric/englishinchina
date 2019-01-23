@@ -1,0 +1,14 @@
+.mt-3.border-top.border-pale-gray
+    .container
+        .row.my-3
+            .col-12.text-right
+                //- hr
+                //- a.btn.btn-sm.btn-link.text-primary.apply-filter(data-filter-tag=filter.collapsible href='#')
+                //-     | Apply
+                //-     i.mdi.mdi-checkbox-marked-outline(aria-hidden='true')
+                a.btn.btn-sm.btn-link.text-warning.clear-filter(data-filter-clear=filter.tag, href='#')
+                    | Clear
+                    i.mdi.mdi-close(aria-hidden='true')
+                a.btn.btn-sm.btn-link.text-dark(data-toggle='collapse', href='#' + filter.collapsible, role='button', aria-expanded='false', aria-controls=filter.collapsible)
+                    | Close tab
+                    i.mdi.mdi-minus(aria-hidden='true')

@@ -1,15 +1,35 @@
 .container-fluid
   #carouselExampleIndicators.carousel.slide(data-ride='carousel')
     #splash.splash.row.justify-content-center
-      .splash-image-container
-        .splash-image(style="background-image: url('" + splashText.image + "');")
-      .splash-text.col-sm-12.col-md-9.col-lg-9.mb-5
-        //- p#splash-kicker.text-antique-white.text-shadow-darker.font-weight-light.col-sm-8.offset-sm-2.col-md-8.offset-md-2.col-lg-8.offset-lg-2 #{splashText.text}
-        //- h1.display-3 #{splashText.title}
-        .row.justify-content-center
-          //- p.col-lg-8.mt-3 Second Language World catalogs every school, university and English organization in the World. Discover schools and cities through the words of teachers who have already experienced them and find which environment better fulfills your expectations 
-          h1.col-lg-12.milkshake
-            | Teach in    
-            span.text-lightgreen China 
-          h2.col-lg-12.mt-1.mb-3 Discover what opportunities lie ahead. Right here, right now.
-        include splash-search
+        .splash-image-container
+            .splash-image(style="background-image: url('" + splashText.image + "');")
+        .splash-text.col-sm-12.col-md-12.col-lg-12.my-auto
+            .container
+                .row.justify-content-start
+                    .col-lg-6
+                        .row.text-center.text-md-left
+                            .col-12.my-3.mx-auto.text-center
+                                -var step = {}
+                                -step.icon = 'mdi-lightbulb-on'
+                                include step-indicator
+                        .row.text-center.text-md-left
+                            h1.col-12.mb-3.font-weight-bold
+                                | Find amazing opportunities to teach around the world
+                        .row.text-center.text-md-left
+                            .col-12
+                                p.mb-1 
+                                    span.font-weight-bold Second Language World 
+                                    | is your first and only step to find opportunities abroad. Search the most responsive job board for ESL positions around the world and 
+                                    | filter through thousands of jobs posted by legitimate employers such as schools and agencies. Take your first step today.
+                        .row
+                            .col-sm-6.mt-3
+                                a.btn.btn-secondary.text-white.btn-lg.btn-block.mr-2.mdi.mdi-briefcase(href="/register") Offer Job
+                            .col-sm-6.mt-3
+                                a.btn.btn-primary.btn-lg.btn-block.mr-2(href="/search") Search Job Board
+                                    i.mdi.mdi-arrow-right(aria-hidden="true")
+.bg-light.border-bottom.border-pale-gray
+    .container
+        -var inlineSearch = 'true'
+        -var fullWidthSearch = false
+        -var placeHolder = "Where do you want to go?"
+        include ../search/typeahead-search/ta-search-form

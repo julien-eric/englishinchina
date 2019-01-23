@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const Job = require('../models/job');
 const moment = require('moment');
+const winston = require('../config/winstonconfig');
 const provincesController = require('./provincescontroller');
 const messagesController = require('./messagescontroller');
 const emailsController = require('./emailscontroller');
@@ -42,6 +43,10 @@ JobsController.prototype.getJobByUrl = async (url) => {
     return job;
 };
 
+JobsController.prototype.updateJob = async (jobId, jobFields) => {
+    return Job.findOneAndUpdate({ _id: jobId }, jobFields).exec();
+};
+
 JobsController.prototype.sendApplicationMessage = async (job, applicant, employer, content) => {
 
     let message = await messagesController.createMessage(applicant, employer, content);
@@ -65,8 +70,8 @@ JobsController.prototype.sendApplicationMessage = async (job, applicant, employe
     }
 };
 
-JobsController.prototype.getAllJobs = async () => {
-    let jobs = await Job.find().sort({ dateCreated: -1 }).populate('school').populate('province').populate('city').exec();
+JobsController.prototype.getAllJobs = async (options) => {
+    let jobs = await Job.find(options).sort({ dateCreated: -1 }).populate('school').populate('province').populate('city').exec();
     jobs.forEach((job) => {
         findPicture(job);
     });
@@ -110,7 +115,7 @@ JobsController.prototype.addJob = async (user, jobParams) => {
             contractDetails: {
                 salaryLower: jobParams.salaryLower,
                 salaryHigher: jobParams.salaryHigher,
-                startDate: new Date(moment(jobParams.startDate, 'MMMM Do YYYY').format()),
+                startDate: new Date(moment(jobParams.startDate, 'MMMM DD YYYY').format()),
                 duration: jobParams.duration
             },
             teachingDetails: {
@@ -149,12 +154,12 @@ JobsController.prototype.addJob = async (user, jobParams) => {
  * @param  {String} jobInfo String to look for in the school's name
  * @param  {String} provinceInfo Look for the school in this province
  * @param  {String} cityInfo Look for the school in this city
- * @param  {Object} sorting  Which attributes to sort the list by (rating or name)
+ * @param  {Object} filter  Which attributes to filter the list by
  * @param  {Number} limit The number of records to keep from the list
  * @param  {Boolean} shortRecords Get a few attributes or the complete object (short->autocomplete, complete->school list)
  * @return {Object} an object containing a list of jobs, the query as well as the query information for this search
  */
-JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, sorting, limit, shortRecords) {
+JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cityInfo, filter, limit, shortRecords) {
 
     let queryInfo = {};
     let jobList = undefined;
@@ -185,6 +190,32 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
         transactions._pipeline.push({ $match: { city: city._id } });
     }
 
+    if (filter.accomodation) {
+        transactions._pipeline.push({ $match: { 'benefits.accomodation': Number(filter.accomodation) } });
+    }
+
+    if (filter.airfare) {
+        transactions._pipeline.push({ $match: { 'benefits.airfare': Number(filter.airfare) } });
+    }
+
+    if (filter.startDateFrom) {
+        let date = new Date(moment(filter.startDateFrom, 'MMMM DD YYYY').format());
+        transactions._pipeline.push({ $match: { 'contractDetails.startDate': { $gte: date } } });
+    }
+
+    if (filter.startDateTo) {
+        let date = new Date(moment(filter.startDateTo, 'MMMM DD YYYY').format());
+        transactions._pipeline.push({ $match: { 'contractDetails.startDate': { $lte: date } } });
+    }
+
+    if (filter.salaryLower) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryLower': { $gte: Number(filter.salaryLower) } } });
+    }
+
+    if (filter.salaryHigher) {
+        transactions._pipeline.push({ $match: { 'contractDetails.salaryHigher': { $lte: Number(filter.salaryHigher) } } });
+    }
+
     transactions._pipeline = transactions._pipeline.concat([
         { $lookup: { from: 'provinces', localField: 'province', foreignField: '_id', as: 'province' } },
         { $unwind: '$province' },
@@ -197,7 +228,7 @@ JobsController.prototype.searchJobs = async function (jobInfo, provinceInfo, cit
         total = jobList.length;
         jobList = _.first(jobList, limit || 9999);
     } catch (error) {
-        console.log(error);
+        winston.error(`${error.status || 500} - ${error.message}`);
     }
     let searchQuery = this.getQueryMessage(queryInfo);
     return { list: jobList, total, query: searchQuery, searchInfo: { province: provinceInfo, city: cityInfo, jobInfo: jobInfo } };

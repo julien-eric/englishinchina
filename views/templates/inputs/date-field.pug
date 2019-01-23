@@ -1,4 +1,12 @@
-.md-form
-    input.form-control.datepicker.validate.date-field(id=datepicker.id, name=datepicker.name, placeholder=datepicker.placeholder, class=datepicker.formName, form=datepicker.formName, type='text', value=moment(datepicker.value).format('MMMM Do YYYY'), onblur='validateField(this)' required=datepicker.required)
-    label(for=datepicker.name, data-error=datepicker.errorMessage, data-success='Thank you' ) #{datepicker.label}
+-var timeValue;
+if datepicker.value
+    -timeValue = moment(datepicker.value).format('MMMM Do YYYY')
+.form-group.dates
+    label(for=datepicker.name) #{datepicker.label}
+    .input-group
+        input.pl-3.datepicker.form-control(id=datepicker.id, name=datepicker.name, class=datepicker.formName, placeholder=datepicker.placeholder, form=datepicker.formName, value=timeValue, onblur='slworld.validator.validateField(this)' required=datepicker.required)
+        .input-group-append
+            span.input-group-text.start_date_calendar
+                i.mdi.mdi-calendar(aria-hidden='true ')
+
 -var datepicker = {}

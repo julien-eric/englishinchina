@@ -2,7 +2,6 @@
 /***********************
  * TYPEAHEAD 
  ***********************/
-let typeaheadWrapper;
 let resultList = false;
 let notFoundTemplate;
 let currentQuery;
@@ -19,6 +18,105 @@ let TypeaheadWrapper = function () {
 
     if (pathname.indexOf('review') != -1 || pathname.indexOf('job') != -1) {
         this.autoTriggerValidation = true;
+    }
+};
+
+TypeaheadWrapper.prototype.init = function () {
+
+    if ($('#queryInfo').length == 0)
+        return;
+
+    let datasetNames = $('#queryInfo').attr('datasets').valueOf().split(' ');
+    typeaheadWrapper.initDatasets(datasetNames);
+
+    let inlineSearch = $('#queryInfo').attr('data-inline-search')
+    if (!inlineSearch) {
+        $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
+    }
+
+    let clearSearch = $('#clear-search');
+    if (clearSearch) {
+        clearSearch.click(function () {
+            $('.typeahead').typeahead('val', '');
+        });
+    }
+
+    $('.typeahead').typeahead({
+        menu: $('#typeahead-target'),
+        highlight: true,
+        minLength: 2
+    },
+        typeaheadWrapper.dataSources
+    ).blur(function () {
+
+        // If page requires this input's validation, trigger it
+        if (typeaheadWrapper.autoTriggerValidation) {
+            let valid = slworld.validator.validateField($('#queryInfo')[0]);
+            if (!valid) {
+                $('#noSchoolGroup').removeClass('d-none');
+            }
+        }
+
+    });
+
+    $('.typeahead').bind('typeahead:select', function (ev, suggestion) {
+
+        // Set the schoolId to hidden input
+        $('#schoolId').val(suggestion._id);
+        currentSelection = suggestion;
+
+        $('#noSchool').prop('checked', false);
+        $('#addSchoolCollapsible').collapse('hide');
+        $('#noSchoolGroup').addClass('d-none');
+
+        // If page requires this input's validation, trigger it
+        if (typeaheadWrapper.autoTriggerValidation) {
+            slworld.validator.validateField($('#queryInfo')[0]);
+        }
+        console.log('typeahead');
+
+    });
+
+    $('#queryInfo').on('keyup', function (ev, suggestion, async, data) {
+
+        // get keycode of current keypress event
+        let code = (ev.keyCode || ev.which);
+
+        // do nothing if it's an arrow key or enter
+        if (code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
+            return;
+        }
+
+        if (typeaheadWrapper.autoTriggerValidation) {
+            $('#schoolId').val('');
+            $('#noSchoolGroup').removeClass('d-none');
+        }
+
+        // If page requires this input's validation, trigger it
+        if (typeaheadWrapper.autoTriggerValidation) {
+            slworld.validator.validateField($('#queryInfo')[0]);
+            $('#addSchoolName').val($(this).val());
+        }
+    });
+
+    $('#queryInfo').click(function (ev, suggestion, async, data) {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            let div = $('#queryInfo')
+            $('html,body').animate({
+                scrollTop: $(div).offset().top - 75
+            }, 'slow');
+        }
+    });
+
+    let pathname = window.location.pathname;
+    if (pathname.indexOf('review') == -1 && pathname.indexOf('job') == -1) {
+        $('#queryInfo').focus();
+    }
+
+    //Validation feedback for the user coming for a specific school (it's already selected)
+    let searchAll = $('#queryInfo')[0];
+    if (searchAll) {
+        slworld.validator.validateField(searchAll)
     }
 };
 
@@ -255,83 +353,3 @@ TypeaheadWrapper.prototype.handleSubmit = function (e) {
         }
     }
 }
-
-$(document).ready(() => {
-
-    typeaheadWrapper = new TypeaheadWrapper();
-    let datasetNames = $('#queryInfo').attr('datasets').valueOf().split(' ');
-    typeaheadWrapper.initDatasets(datasetNames);
-    $('#search-all').on('submit', typeaheadWrapper.handleSubmit);
-
-    $('.typeahead').typeahead({
-        highlight: true,
-        minLength: 2
-    },
-        typeaheadWrapper.dataSources
-    ).blur(function () {
-
-        // If page requires this input's validation, trigger it
-        if (typeaheadWrapper.autoTriggerValidation) {
-            let valid = validateField($('#queryInfo')[0]);
-            if (!valid) {
-                $('#noSchoolGroup').removeClass('d-none');
-            }
-        }
-
-    });
-
-    $('.typeahead').bind('typeahead:select', function (ev, suggestion) {
-
-        // Set the schoolId to hidden input
-        $('#schoolId').val(suggestion._id);
-        currentSelection = suggestion;
-
-        $('#noSchool').prop('checked', false);
-        $('#addSchoolCollapsible').collapse('hide');
-        $('#noSchoolGroup').addClass('d-none');
-
-        // If page requires this input's validation, trigger it
-        if (typeaheadWrapper.autoTriggerValidation) {
-            validateField($('#queryInfo')[0]);
-        }
-    });
-
-    $('#queryInfo').on('keyup', function (ev, suggestion, async, data) {
-
-        // get keycode of current keypress event
-        let code = (ev.keyCode || ev.which);
-
-        // do nothing if it's an arrow key or enter
-        if (code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {
-            return;
-        }
-
-        if (typeaheadWrapper.autoTriggerValidation) {
-            $('#schoolId').val('');
-            $('#noSchoolGroup').removeClass('d-none');
-        }
-
-        // If page requires this input's validation, trigger it
-        if (typeaheadWrapper.autoTriggerValidation) {
-            validateField($('#queryInfo')[0]);
-            $('#addSchoolName').val($(this).val());
-        }
-    });
-
-    $('#queryInfo').click(function (ev, suggestion, async, data) {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            let div = $('#queryInfo')
-            $('html,body').animate({
-                scrollTop: $(div).offset().top - 75
-            }, 'slow');
-        }
-    });
-
-
-    let pathname = window.location.pathname;
-    if (pathname.indexOf('review') == -1 && pathname.indexOf('job') == -1) {
-        $('#queryInfo').focus();
-    }
-
-
-});

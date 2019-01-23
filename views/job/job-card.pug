@@ -1,8 +1,8 @@
-.card
+.card.overflow-hidden
     .row
-        .col-lg-3.col-md-12
+        .col-lg-3.pr-lg-0.col-md-12
             a.view.overlay.card-img(href="/job/" + job.url)
-                .card-image-container(style='background-image: url(' + pictureInfo.returnLarge(job.pictureUrl) + ');')
+                .card-image-container.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')
                 //-   h4.text-white.mb-3 #{job.title}  
         .col-lg-9.col-md-12.text--left.px-3.py-3
             .card-block.px-3.mx-0
@@ -12,9 +12,9 @@
                             a.text-dark.text-capitalize(href="/job/" + job.url)
                                 | #{jadefunctions.formatString(job.title, 77)}
   
-                    .text-right.d-none.d-md-block.col-md-5.col-lg-4.text-left.mb-3.mb-lg-1
+                    .col-md-5.col-lg-4.text-right.d-none.d-md-block.text-left.mb-3.mb-lg-1
                         a.btn.btn-sm.btn-link(href="/job/" + job.url) View Offer
-                        a.btn.btn-sm.btn-lightgreen.mr-1(href="/job/apply/" + job.url) Apply
+                        a.btn.btn-sm.btn-primary.mr-1(href="/job/apply/" + job.url) Apply
                 h6.card-subtitle.font-weight-light.mb-2.text-muted.text-capitalize #{jadefunctions.formatString(job.kicker, 85)}
                 //- h6.card-subtitle.font-weight-light.my-2.text-muted.text-capitalize
                 //-   i.mdi.mdi-map-marker(aria-hidden='true') 

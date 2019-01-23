@@ -3,6 +3,7 @@ const router = express.Router();
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('../controllers/provincescontroller');
+const usersController = require('../controllers/userscontroller');
 const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const jobsController = require('../controllers/jobscontroller');
@@ -15,7 +16,7 @@ const url = require('url');
 module.exports = function (passport) {
 
     router.route('/')
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
 
             try {
 
@@ -43,10 +44,7 @@ module.exports = function (passport) {
                 });
 
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
         .post(async (req, res) => {
@@ -73,7 +71,7 @@ module.exports = function (passport) {
             }
         });
 
-    router.get('/add', utils.isAuthenticated, async (req, res) => {
+    router.get('/add', utils.isAuthenticated, async (req, res, next) => {
 
         try {
 
@@ -105,61 +103,7 @@ module.exports = function (passport) {
             });
 
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
-        }
-    });
-
-    /** **********************************************************************************************************
-       *searchJob : Method for search all jobs, it will return any job that has some of the information
-       * Param : Query, string that will be looked for as part of the jobs name
-       * [Province] optional.
-       * [City] optional
-       ************************************************************************************************************ */
-    router.get('/search/', async (req, res) => {
-
-        try {
-            const jobInfo = req.query.jobInfo;
-            const province = utils.validateParam(req.query.province);
-            const city = utils.validateParam(req.query.city);
-
-            let searchResults = await jobsController.searchJobs(jobInfo, province, city);
-            if (searchResults != undefined && searchResults.list != undefined && searchResults.list.length > 0) {
-                searchResults.list = jadefunctions.trunkContentArray(searchResults.list, 'description', 150);
-            }
-
-            // let popularCities = await citiesController.getMostPopularCities();
-            // let popularProvinces = await provincesController.getMostPopularProvinces();
-            let popularCities = undefined;
-            let popularProvinces = undefined;
-
-            let provinces = await provincesController.getAllProvinces();
-            let cities = undefined;
-            if (province) {
-                cities = await citiesController.getProvinceCitiesByCode(province);
-            }
-            res.render('job/job-search', {
-                title: `${searchResults.query} Jobs - Second Language World`,
-                jobs: searchResults.list,
-                user: req.user,
-                provinces,
-                cities,
-                pictureInfo: pictureinfo,
-                popularCities,
-                popularProvinces,
-                moment,
-                searchMessage: `You searched for ${searchResults.query}`,
-                searchInfo: searchResults.searchInfo,
-                jadefunctions,
-                scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
-            });
-        } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -200,6 +144,7 @@ module.exports = function (passport) {
        ************************************************************************************************************ */
     router.get('/message/:url', async (req, res) => {
         let job = await jobsController.getJobByUrl(req.params.url);
+        job = jadefunctions.trunkContentElement(job, 'description', 250);
 
         let responseInfo;
         if (res.locals.flash.responseInfo) {
@@ -220,17 +165,33 @@ module.exports = function (passport) {
     });
 
     router.post('/message/:url', async (req, res) => {
+        let job;
 
         try {
-            let job = await jobsController.getJobByUrl(req.params.url);
+            job = await jobsController.getJobByUrl(req.params.url);
+
+            if (!job.user) {
+                job.user = {}
+            }
+
             let messageToSend = await utils.validateParam(req.body.message);
             res.flash('responseInfo', { message: messageToSend });
-            await jobsController.sendApplicationMessage(job, req.user, job.user, messagesController.formatApplicationMessage(req.user, messageToSend));
+            let formattedAppMessage = messagesController.formatApplicationMessage(req.user, messageToSend);
+            await jobsController.sendApplicationMessage(job, req.user, job.user, formattedAppMessage);
             res.redirect('/job/thankyou/' + job.url);
         } catch (error) {
             res.flash('error', error.message);
             res.redirect('/job/message/' + job.url);
         }
+    });
+
+    router.get('/fixuserless', async (req, res) => {
+        let options = { user: null };
+        let jobs = await jobsController.getAllJobs(options);
+        let user = await usersController.findUserByEmail('secondlanguageworld@gmail.com');
+        jobs.forEach(async (job) => {
+            await jobsController.updateJob(job.id, { user });
+        });
     });
 
     router.get('/thankyou/:url', async (req, res) => {
@@ -242,17 +203,16 @@ module.exports = function (passport) {
                 job,
                 moment,
                 pictureInfo: pictureinfo,
-                jadefunctions,
-                scripts: [scripts.util]
+                jadefunctions
             });
         } catch (error) {
             res.flash('error', 'Sorry, there was a problem trying to send your message.');
             res.flash('error', error.message);
-            res.redirect('/job/message/' + job.url);
+            res.redirect('job/message/' + job.url);
         }
     });
 
-    router.get('/:url', async (req, res) => {
+    router.get('/:url', async (req, res, next) => {
 
         try {
             let job = await jobsController.getJobByUrl(req.params.url);
@@ -269,14 +229,10 @@ module.exports = function (passport) {
                 moment,
                 featuredJobs,
                 pictureInfo: pictureinfo,
-                jadefunctions,
-                scripts: [scripts.util, scripts.libGoogleMaps, scripts.libmoment, scripts.readMore]
+                jadefunctions
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
 
     });

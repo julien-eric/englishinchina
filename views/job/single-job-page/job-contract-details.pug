@@ -1,62 +1,34 @@
-.card.border-0
-    #headingOne.card-header.text-center.border-top-5-primary.border-bottom-0
-            h5.text-uppercase.mb-0
-                button.btn.btn-link.text-white(data-toggle='collapse', data-target='#job-details-collapse', aria-expanded='true', aria-controls='job-details-collapse') 
-                    //-   i.mdi.mdi-star(aria-hidden='true')
-                    | Job Details
+.card.border-0.mb-3
+
+    -var section = {label:'Job Details', collapsible: 'job-details-collapse'}
+    include job-section-details
+
     #job-details-collapse.collapse.show(aria-labelledby='headingOne', data-parent='#accordion')
         if job && job.contractDetails
             .row.pt-3
                 .col-12.mb-5
                     if(job.school)
                         a.mb-2(href='/school/' + job.school._id)  
-                            i.text-lightgreen.mdi.mdi-school.mr-2(aria-hidden='true')
+                            i.text-primary.mdi.mdi-school.mr-2(aria-hidden='true')
                             | #{job.school.name}
                         hr.my-2
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-map-marker.mr-2(aria-hidden='true')
-                                | Location
-                        .col-7
-                            p.mb-0 #{job.province.name} - #{jadefunctions.capitalize(job.city.pinyinName)}
+                    
+                    -var feature = {name:'Location', value: job.province.name + ' - ' + jadefunctions.capitalize(job.city.pinyinName), icon:'mdi-map-marker'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-calendar.mr-2(aria-hidden='true')
-                                | Start Date
-                        .col-7
-                            p.mb-0 #{moment(job.startDate).format("MMMM YYYY")}
+                    -var feature = {name:'Start Date', value: moment(job.contractDetails.startDate).format("MMMM Do YYYY"), icon:'mdi-calendar'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-currency-jpy.mr-2(aria-hidden='true')
-                                | Salary
-                        .col-7
-                            p.mb-0 #{job.contractDetails.salaryLower} - #{job.contractDetails.salaryHigher}  CNY/Month
+                    -var feature = {name:'Salary', value: job.contractDetails.salaryLower + ' - ' + job.contractDetails.salaryHigher + ' CNY/Month', icon:'mdi-currency-jpy'}
+                    include benefit-table-row
                     
                     hr.my-2
-                    
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold 
-                                i.text-lightgreen.mdi.mdi-email.mr-2(aria-hidden='true')
-                                | Contact
-                        .col-7
-                            a.mb-0(href='mailto:' + job.email) #{job.email}
 
-//- .row
-//-     .col-auto
-//-         a.collapse-link(data-toggle='collapse', href='#job-details-collapse', role='button', aria-expanded='false', aria-controls='job-details-collapse')
-//-             h4.font-weight-bold.text-dark Job Details      
-//-     .col.text-right
-//-         h1
-//-             i#job-details-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true') 
-//- hr.mt-0
+                    -var feature = {name:'Contact', value: job.email, icon:'mdi-email'}
+                    include benefit-table-row
+
 

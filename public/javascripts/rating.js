@@ -1,9 +1,12 @@
-$(document).ready(() => {
-  $('.rating').rate({
-    readonly: false,
-  });
+let Rating = function () { }
 
-  $('.rating').rate('destroy');
-  // Destroy makes it uninteractive, but doesn't remove the DOM elements.
-});
+Rating.prototype.init = function () {
+    $('.rating').rate({
+        readonly: false,
+    });
+
+    // Destroy makes it uninteractive, but doesn't remove the DOM elements.
+    $('.rating').rate('destroy');
+};
+
 

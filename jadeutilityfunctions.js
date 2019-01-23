@@ -1,6 +1,7 @@
 const striptags = require('striptags');
 const htmlparser = require('htmlparser');
 const parsedToHtml = require('htmlparser-to-html');
+const winston = require('./config/winstonconfig');
 const pictureInfo = require('./pictureinfo');
 const _ = require('underscore');
 
@@ -28,6 +29,18 @@ module.exports = {
         return array;
     },
 
+    trunkContentElement (element, attribute, length) {
+        if (element[attribute].length != 0) {
+            if (length < element[attribute].length) {
+                let content = element[attribute];
+                content = striptags(content);
+                content = content.substring(0, length);
+                element[attribute] = `${content.substring(0, content.lastIndexOf(' '))}...`;
+            }
+        }
+        return element;
+    },
+
     returnNameforSchoolType (code) {
         switch (code) {
             case 0:
@@ -53,7 +66,7 @@ module.exports = {
 
             let handle = function (error, dom) {
                 if (error) {
-                    console.log(error);
+                    winston.error(`${error.status || 500} - ${error.message}`);
                 } else {
                     handleDom(dom);
                 }
@@ -187,6 +200,24 @@ module.exports = {
         } else {
             return 'text-' + colorClass;
         }
+    },
+
+    returnAccomodationTerm (code) {
+        switch (code) {
+            case 0:
+                return 'No Accomodation';
+            case 1:
+                return 'Accomodation Provided';
+            case 2:
+                return 'Accomodation Partly Provided';
+
+            default:
+                break;
+        }
+    },
+
+    returnSalary (number) {
+        return Math.round(Number(number) / 1000) + 'K';
     }
 
 };

@@ -3,6 +3,7 @@ const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
 const uuidv1 = require('uuid/v1');
 const emailController = require('../controllers/emailscontroller');
+const winston = require('../config/winstonconfig');
 
 let signupParams = {
     passReqToCallback: true
@@ -47,7 +48,7 @@ let processSignupReturn = function (req, username, password, done) {
 
     }).then((savedUser) => {
 
-        console.log('User Registration successful');
+        winston.debug('User Registration successful');
         res.flash('success', 'Account created successfully');
         let link = req.headers.origin + '/emailverification/' + savedUser.email + '?token=' + savedUser.token;
         emailController.emailVerification(savedUser.email, link);

@@ -1,57 +1,27 @@
-.card.border-0
-    #headingOne.card-header.text-center.border-top-5-primary.border-bottom-0
-            h5.text-uppercase.mb-0
-                button.btn.btn-link.text-white(data-toggle='collapse', data-target='#job-benefits-collapse', aria-expanded='true', aria-controls='job-benefits-collapse') 
-                    //-   i.mdi.mdi-star(aria-hidden='true')
-                    | Benefits
+.card.border-0.mb-3
+
+    -var section = {label:'Benefits', collapsible: 'job-benefits-collapse'}
+    include job-section-details
+
     #job-benefits-collapse.collapse(aria-labelledby='headingOne', data-parent='#accordion')
         if job && job.benefits
             .row.pt-3
                 .col-12.mb-5
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-home.mr-2(aria-hidden='true')
-                                | Accomodation
-                        .col-7
-                            p.mb-0 #{job.benefits.accomodation}
+                    -var feature = {name:'Accomodation', value:job.benefits.accomodation, icon:'mdi-home'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-airplane.mr-2(aria-hidden='true')
-                                | Airfare
-                        .col-7
-                            p.mb-0 #{job.benefits.airfare}
+                    -var feature = {name:'Airfare', value:job.benefits.airfare, icon:'mdi-airplane'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold         
-                                i.text-lightgreen.mdi.mdi-account-check.mr-2(aria-hidden='true')
-                                | Assistant
-                        .col-7
-                            p.mb-0 #{job.benefits.teachingAssistant}
+                    -var feature = {name:'Assistant', value:job.benefits.teachingAssistant, icon:'mdi-account-check'}
+                    include benefit-table-row
 
                     hr.my-2
 
-                    .row
-                        .col-5
-                            p.mb-0.font-weight-bold 
-                                i.text-lightgreen.mdi.mdi-beach.mr-2(aria-hidden='true')
-                                | Vacation Days
-                        .col-7
-                            p.mb-0 #{job.benefits.vacationDays}
-
-//- .row 
-//-     .col-auto
-//-         a.collapse-link(data-toggle='collapse', href='#job-benefits-collapse', role='button', aria-expanded='false', aria-controls='job-benefits-collapse')
-//-             h4.font-weight-bold.text-dark Benefits
-//-     .col.text-right
-//-         h1 
-//-             i#job-benefits-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true') 
-//- hr.mt-0
+                    -var feature = {name:'Vacation Days', value:job.benefits.vacationDays, icon:'mdi-beach'}
+                    include benefit-table-row

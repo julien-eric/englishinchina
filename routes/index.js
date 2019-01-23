@@ -4,13 +4,13 @@ const emailsController = require('../controllers/emailscontroller');
 const moment = require('moment');
 const jadefunctions = require('../jadeutilityfunctions');
 const pictureinfo = require('../pictureinfo');
-const schoolsController = require('../controllers/schoolscontroller');
+const splashText = require('../splash-text.json');
 const provincesController = require('../controllers/provincescontroller');
 const countriesController = require('../controllers/countriescontroller');
-const companiesController = require('../controllers/companiescontroller');
 const citiesController = require('../controllers/citiescontroller');
 const usersController = require('../controllers/usersController');
 const jobsController = require('../controllers/jobscontroller');
+const winston = require('../config/winstonconfig');
 const crypto = require('crypto');
 const scripts = require('../public/scripts');
 const bCrypt = require('bcrypt-nodejs');
@@ -19,40 +19,35 @@ const utils = require('../utils');
 module.exports = function (passport) {
 
     // Home Page
-    router.get('/', async (req, res) => {
+    router.get('/', async (req, res, next) => {
 
         try {
-            let provinces = await provincesController.getAllProvinces();
-            let popularCities = await citiesController.getMostPopularCities();
             let featuredJobs = await jobsController.getFeaturedJobs();
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'title', 120);
             featuredJobs = jadefunctions.trunkContentArray(featuredJobs, 'description', 170);
             let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
-            let popularCompanies = await companiesController.findCompaniesWithSchoolsAndReviews();
 
-            const splashText = require('../splash-text.json');
-            popularCompanies = jadefunctions.trunkContentArray(popularCompanies, 'description', 180);
+            let meta = utils.generateMeta(
+                'Discover, Learn, Teach. Explore job opportunities around the world',
+                splashText.description,
+                utils.getFullUrl(req),
+                splashText.image
+            );
+
             res.render('home/home', {
-                title: 'Second Language World',
+                meta,
                 main: true,
                 user: req.user,
-                provinces,
                 pictureInfo: pictureinfo,
                 moment,
                 jadefunctions,
                 featuredJobs,
-                popularCities,
                 popularProvinces,
-                popularCompanies,
-                splashText,
-                currentPage: 1,
-                scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
+                // popularCompanies,
+                splashText
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -60,10 +55,11 @@ module.exports = function (passport) {
        *search : Method for search site, it will return any school, company, job that has some of the information
        * Param : Query, string that will be looked for
        ************************************************************************************************************ */
-    router.get('/search/', async (req, res) => {
+    router.get('/search/', async (req, res, next) => {
 
         try {
 
+            let queryInfo;
             const searchInfo = {};
             searchInfo.sort = req.query.sort;
 
@@ -73,7 +69,6 @@ module.exports = function (passport) {
             searchInfo.cityCode ? searchInfo.city = await citiesController.getCityByCode(searchInfo.cityCode) : null;
             searchInfo.provinceCode = utils.validateParam(req.query.province);
 
-
             if (searchInfo.cityCode != -1 && searchInfo.provinceCode == -1) {
                 searchInfo.provinceCode = searchInfo.city.province.code;
                 searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode);
@@ -81,66 +76,89 @@ module.exports = function (passport) {
 
             searchInfo.provinceCode ? searchInfo.province = await provincesController.getProvinceByCode(searchInfo.provinceCode) : null;
 
-            let schools = [];
-            let companies = [];
+            let filters = {
+                salaryLower: req.query.salaryLower,
+                salaryHigher: req.query.salaryHigher,
+                startDateFrom: req.query.startDateFrom,
+                startDateTo: req.query.startDateTo,
+                accomodation: req.query.accomodation,
+                airfare: req.query.airfare
+            };
+
             let jobs = [];
-
-            schools = await schoolsController.searchSchools(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, utils.getSchoolSortingObject(searchInfo.sort));
-            if (schools != undefined && schools.list != undefined && schools.list.length > 0) {
-                schools.list = jadefunctions.trunkContentArray(schools.list, 'description', 150);
-            }
-
-            companies = await companiesController.searchCompanies(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
-            if (companies != undefined && companies.list != undefined && companies.list.length > 0) {
-                companies.list = jadefunctions.trunkContentArray(companies.list, 'description', 150);
-            }
-
-            jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode);
+            jobs = await jobsController.searchJobs(searchInfo.queryInfo, searchInfo.provinceCode, searchInfo.cityCode, filters);
             if (jobs != undefined && jobs.list != undefined && jobs.list.length > 0) {
-                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 280);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'description', 200);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'title', 120);
+                jobs.list = jadefunctions.trunkContentArray(jobs.list, 'kicker', 75);
             }
 
-            let bannerPicture;
-            if (searchInfo.city) {
-                bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
-            } else if (searchInfo.province) {
-                bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
+            if (req.query.ajax) {
+
+                res.render('job/job-list', {
+                    jobs: jobs.list,
+                    pictureInfo: pictureinfo,
+                    moment,
+                    jadefunctions
+                }, function (err, html) {
+                    if (err) {
+                        winston.error(err);
+                    } else {
+                        res.send(html);
+                    }
+                });
+
+            } else {
+
+                let bannerPicture;
+                if (searchInfo.city) {
+                    bannerPicture = await citiesController.getCityPic(searchInfo.cityCode);
+                    queryInfo = searchInfo.city.pinyinName;
+                } else if (searchInfo.province) {
+                    bannerPicture = await provincesController.getProvincePic(searchInfo.provinceCode);
+                    queryInfo = searchInfo.province.name;
+                }
+
+                // Fetch list of all provinces and cities.
+                let cities = undefined;
+                if (searchInfo.provinceCode != -1) {
+                    cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
+                }
+
+                // let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
+                let title = utils.titleFromSearchInfo(searchInfo);
+                let meta = utils.generateMeta(
+                    title,
+                    splashText.description,
+                    utils.getFullUrl(req),
+                    bannerPicture || splashText.image
+                );
+
+                res.render('search/search', {
+                    meta,
+                    jobs: jobs.list,
+                    searchInfo,
+                    user: req.user,
+                    cities,
+                    pictureInfo: pictureinfo,
+                    queryInfo,
+                    bannerPicture,
+                    responseInfo: filters,
+                    moment,
+                    jadefunctions
+                });
             }
-
-            // Fetch list of all provinces and cities.
-            let provinces = await provincesController.getAllProvinces();
-            let cities = undefined;
-            if (searchInfo.provinceCode != -1) {
-                cities = await citiesController.getProvinceCitiesByCode(searchInfo.provinceCode);
-            }
-
-            let popularProvinces = await provincesController.getMostPopularProvincesbyJobs();
-
-            // title: `${searchResults.query} Schools - Second Language World`,
-            res.render('search/search', {
-                title: `Search - Second Language World`,
-                main: true,
-                schools: schools.list,
-                jobs: jobs.list,
-                companies: companies.list,
-                searchInfo,
-                user: req.user,
-                provinces,
-                cities,
-                popularProvinces,
-                pictureInfo: pictureinfo,
-                bannerPicture,
-                moment,
-                jadefunctions,
-                scripts: [scripts.util, scripts.typeahead, scripts.searchPage, scripts.typeaheadwrapper]
-            });
 
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
+    });
+
+    router.get('/cityrenametest/', async (req, res, next) => {
+        let cities = await citiesController.getAllCities();
+        cities.forEach(async (city) => {
+            await citiesController.updateCity({ code: city.code, pinyinName: city.pinyinName });
+        });
     });
 
     /** **********************************************************************************************************
@@ -169,7 +187,7 @@ module.exports = function (passport) {
     });
 
     /** **********************************************************************************************************
-       *queryCities : Method for search all cities, it will return any city that has some of the information
+       *queryCities : Method to search all cities, it will return any city that has some of the information
        * Param : Query, string that will be looked for as part of the city's name
        ************************************************************************************************************ */
     router.get('/querycities', async (req, res) => {
@@ -194,7 +212,7 @@ module.exports = function (passport) {
         }
     });
 
-    router.get('/about', async (req, res) => {
+    router.get('/about', async (req, res, next) => {
 
         try {
             let provinces = await provincesController.getAllProvinces();
@@ -206,6 +224,7 @@ module.exports = function (passport) {
                 title: 'Second Language World',
                 user: req.user,
                 provinces,
+                main: true,
                 pictureInfo: pictureinfo,
                 jadefunctions,
                 popularCities,
@@ -215,10 +234,7 @@ module.exports = function (passport) {
                 scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -448,7 +464,7 @@ module.exports = function (passport) {
        *EMAIL VERIFICATION
        * If token is correct and not expired, this will redirect a logged in user to the main page
        ************************************************************************************************************ */
-    router.get('/emailverification/:email', async (req, res) => {
+    router.get('/emailverification/:email', async (req, res, next) => {
 
         try {
 
@@ -461,7 +477,7 @@ module.exports = function (passport) {
                 }
             }
         } catch (error) {
-            console.log(error);
+            next(error);
         }
 
         res.redirect('/');
@@ -487,7 +503,7 @@ module.exports = function (passport) {
        *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
        ************************************************************************************************************ */
     router.route('/user/edit', utils.isAuthenticated)
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
             try {
 
                 let user = await usersController.findUserById(req.user._id);
@@ -502,13 +518,10 @@ module.exports = function (passport) {
                     scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader]
                 });
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
-        .post(async (req, res) => {
+        .post(async (req, res, next) => {
             try {
 
                 let userParams = req.body;
@@ -519,10 +532,7 @@ module.exports = function (passport) {
                 await usersController.updateUser(userParams.id, userParams);
                 res.redirect('/user/edit');
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         });
 
@@ -530,7 +540,7 @@ module.exports = function (passport) {
        *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
       ************************************************************************************************************ */
     router.route('/user/teacher-details/:id')
-        .get(async (req, res) => {
+        .get(async (req, res, next) => {
             try {
                 let countries = await countriesController.getCountries();
                 let redirectUrl = req.query.redirectUrl;
@@ -545,13 +555,10 @@ module.exports = function (passport) {
                     scripts: [scripts.util, scripts.reviewvalidation, scripts.writereview, scripts.fileUploader, scripts.libmoment, scripts.readMore]
                 });
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
-        .post(async (req, res) => {
+        .post(async (req, res, next) => {
             try {
 
                 let userParams = {};
@@ -589,17 +596,14 @@ module.exports = function (passport) {
                 }
 
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         });
 
     /** **********************************************************************************************************
        *VIEW USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
        ************************************************************************************************************ */
-    router.get('/user/:id', utils.isAuthenticated, async (req, res) => {
+    router.get('/user/:id', utils.isAuthenticated, async (req, res, next) => {
 
         try { // Get user and reviews then render user page
             let usern = await usersController.findUserById(req.params.id);
@@ -615,7 +619,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util]
             });
         } catch (error) {
-            getLogger().error(error);
+            next(error);
         }
 
     });

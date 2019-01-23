@@ -4,33 +4,32 @@ block content
     .container-fluid.bg-white.py-3
         .container
             .row
-                .col-lg-12
+                //- .col-lg-8
                     //- include job-map-breadcrumb 
-                    include job-page-top-actions
-                .col-lg-12.mt-5
+                    //- include job-page-top-actions
+                .col-lg-8.mt-5
                     include ../job-tags
-                .col-lg-10.mb-5
-                    h1.display-4 #{job.title}
+                .col-lg-12.mb-3
+                    h1.display-2.font-weight-bold #{job.title}
+
+        .row
+            .col-lg-10.px-0.col-sm-12.mb-3
+                img.mb-3.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
 
         .container.pb-5
             .row
-                .col-lg-8.col-sm-12.mb-3
-                    img.mb-3.img-fluid(src=pictureInfo.returnLarge(job.pictureUrl), alt="Teach English Overseas")
-                    //- p.mt-1.font-weight-bold #{job.kicker}
-                    .show-more-container
-                        h3.mt-1.font-weight-bold #{job.kicker}
-                        p.content-pre-wrap !{job.description}
-                    .show-more-link
-                        a(href='#') Show More
-                    .show-less-link.d-none
-                        a(href='#') Show Less
                 .col-lg-4.col-sm-12.mb-3
                     include job-contract-details
                     include job-benefits
                     include job-teaching-details
-
-            .row
-                .col-lg-8.my-5
+                .col-lg-8.col-sm-12.mb-3
+                    .show-more-container
+                        h5.mb-3.font-weight-bold #{job.kicker}
+                        p.content-pre-wrap !{job.description}
+                    .show-more-link.my-3
+                        a(href='#') Show More
+                    .show-less-link.d-none.mb-3
+                        a(href='#') Show Less
                     include job-page-top-actions
 
     .container-fluid.bg-light-secondary
@@ -41,7 +40,6 @@ block content
                         h1.text-muted.my-5.font-weight-bold 
                             | Location      
                             i#location-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
-                        //- p.text-small 
                          
         .row.collapse.show#location-collapse
             .col-lg-12.mx-0.px-0

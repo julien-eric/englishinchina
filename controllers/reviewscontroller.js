@@ -63,8 +63,8 @@ module.exports = {
             comment: req.body.comment,
             anonymous: req.body.anonymous,
             position: req.body.position,
-            dateEmployed: new Date(moment(req.body.dateEmployed, 'MMMM Do YYYY').format()),
-            dateReleased: new Date(moment(req.body.dateReleased, 'MMMM Do YYYY').format()),
+            dateEmployed: new Date(moment(req.body.dateEmployed, 'MMMM DD YYYY').format()),
+            dateReleased: new Date(moment(req.body.dateReleased, 'MMMM DD YYYY').format()),
             criteria: criteria,
             average_rating: calculateAverage(criteria)
         });

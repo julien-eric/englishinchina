@@ -1,6 +1,7 @@
 const express = require('express');
 const moment = require('moment');
 const email = require('../controllers/emailscontroller');
+const winston = require('../config/winstonconfig');
 
 const router = express.Router();
 const schools = require('../controllers/schoolscontroller');
@@ -46,10 +47,7 @@ module.exports = function (passport) {
                     scripts: [scripts.util, scripts.fileUploader, scripts.typeahead, scripts.typeaheadwrapper, scripts.libtinyMCE, scripts.tinyMCE]
                 });
             } catch (error) {
-                res.render('error', {
-                    message: error.message,
-                    error: error
-                });
+                next(error);
             }
         })
         .post(async (req, res) => {
@@ -93,9 +91,9 @@ module.exports = function (passport) {
                 title: 'Upload Picture - Second Language World',
                 school
             },
-            (err, html) => {
-                if (err) {
-                    console.log(err);
+            (error, html) => {
+                if (error) {
+                    winston.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
                 } else {
                     res.send({ html });
                 }
@@ -176,7 +174,7 @@ module.exports = function (passport) {
     /** **************************************************************************************************************
        * getmorereviews
        ************************************************************************************************************** */
-    router.get('/reviews/:schoolid/:page', async (req, res) => {
+    router.get('/reviews/:schoolid/:page', async (req, res, next) => {
         try {
             const page = req.params.page;
             const schoolId = req.params.schoolid;
@@ -189,10 +187,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -220,9 +215,9 @@ module.exports = function (passport) {
                 criteria,
                 moment,
                 criteriaScore: review.criteria
-            }, (err, html) => {
-                if (err) {
-                    console.log(err);
+            }, (error, html) => {
+                if (error) {
+                    winston.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
                 } else {
                     res.send({ html });
                 }
@@ -248,7 +243,7 @@ module.exports = function (passport) {
        * This review was helpful
        ************************************************************************************************************** */
     // router.post('/helpfuls/:type/:id', async (req, res) => {
-    router.post('/helpfuls/:type/:id', utils.isAuthenticated, async (req, res) => {
+    router.post('/helpfuls/:type/:id', utils.isAuthenticated, async (req, res, next) => {
 
         try {
 
@@ -269,9 +264,9 @@ module.exports = function (passport) {
             res.render('helpfulshort', {
                 review: updatedReview,
                 loggedin: 'true'
-            }, (err, html) => {
-                if (err) {
-                    console.log(err);
+            }, (error, html) => {
+                if (error) {
+                    winston.error(`${error.status || 500} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
                 } else {
                     res.send({ html, result: '1', reviewId: updatedReview.id });
                 }
@@ -292,7 +287,7 @@ module.exports = function (passport) {
                 });
             }
         } catch (error) {
-            console.log(error);
+            next(error);
         }
 
     });
@@ -304,7 +299,7 @@ module.exports = function (passport) {
        * [Province] optional.
        * [City] optional
        ************************************************************************************************************ */
-    router.get('/search/', async (req, res) => {
+    router.get('/search/', async (req, res, next) => {
 
         try {
             const queryInfo = req.query.queryInfo;
@@ -342,10 +337,7 @@ module.exports = function (passport) {
                 scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 
@@ -417,11 +409,10 @@ module.exports = function (passport) {
         });
     });
 
-    router.post('/edit', (req, res) => {
-        schools.editSchool(req.body, (err, editedSchool) => {
-            if (err) {
-                console.log('error');
-                return handleError(err);
+    router.post('/edit', (req, res, next) => {
+        schools.editSchool(req.body, (error, editedSchool) => {
+            if (error) {
+                next(error);
             }
 
             res.redirect(`/school/${editedSchool._id}`);
@@ -462,7 +453,7 @@ module.exports = function (passport) {
        *getSchoolById : Method to search for specific school by its ID. will return school and render page.
        * ID: school's id.
        ************************************************************************************************************ */
-    router.get('/:id', async (req, res) => {
+    router.get('/:id', async (req, res, next) => {
 
         try {
             let school = await schools.findSchoolById(req.params.id);
@@ -497,10 +488,7 @@ module.exports = function (passport) {
                 scripts: [scripts.librater, scripts.rating, scripts.libbarchart, scripts.util, scripts.libekkolightbox, scripts.schoolPage]
             });
         } catch (error) {
-            res.render('error', {
-                message: error.message,
-                error: error
-            });
+            next(error);
         }
     });
 

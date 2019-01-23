@@ -1,28 +1,64 @@
 extends ../../layout
 block content
-    .container.py-5
+
+    #apply-to-job
+    .container.pb-5
+        .row.py-3
+            .col-md-12.col-sm-12.col-lg-12
+                -var bread1 = {title: 'Home', url:'/'}
+                -var bread2 = {title: job.title.substring(0, 30) + '...', url:'job/' + job.url}
+                -var bread3 = {title: 'Message', url:'job/message/' + job.url}
+                include ../../breadcrumb
         .row
-            .col-lg-12
-                h1 Let's send a message
-                p This message will be sent to the employer along with your teaching experience information and your email. Review your 
-                    a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + job.url)) teacher profile
-        form(id='message-employer', class='message-employer', action='/job/message/' + job.url, method='POST')
-            .row
-                .col-lg-12
-                    -var textArea = {}
-                    -textArea.id = 'tinymce-textarea'
-                    -textArea.name = 'message'
-                    -textArea.rows = 10
-                    -textArea.required = true
-                    -textArea.formName = 'message-employer'
-                    include ../../templates/inputs/text-area
-                .col-lg-12
-                    a.btn.btn-lg.btn-lightgreen.ml-0(href='/job/' + job.url)
-                        i.text-white.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
-                        | Offer
-                    button.btn.btn-lg.peach-gradient(type='submit') Send Message
+            .col-md-12.col-sm-12.col-lg-12
+                .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3   
+                    .row
+                        #write-message-prompt.col-lg-6.order-2.order-lg-1
+                            h1 Let's send a message
+                            p This message will be sent to the employer along with your teaching experience information and your email. Review your 
+                                a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + job.url)) teacher profile
+                            p
+                                span.font-weight-bold What should I write?
+                                |  This is completely up to you. Employers like to receive a personalized message. They want to know why they should hire you. Based
+                                | on the description of the position, what do you think makes you a valuable candidate and what previous experience puts you in a good position to handle the responsibilities of this job?
+                            .row
+                                .col-lg-6.col-sm-6.mb-2
+                                    a.btn.btn-outline-primary.btn-block(href='/user/teacher-details/' + user.id )
+                                        i.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
+                                        | View Teacher Profile
+                                .col-lg-6.col-sm-6.mb-2
+                                    a#write-button.btn.btn-outline-primary.btn-block(href='#') Write!
+                        .col-lg-6.text-center.order-1.order-lg-2.mb-3
+                            img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_b8604ec0-1dbb-11e9-9ef8-4fcb4d192528.jpg')
+        .row
+            .col-lg-12.mb-3
+                include ../job-card
+
+        .row
+            .col-md-12.col-sm-12.col-lg-12
+                #write-message-area.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3  
+                    form(id='message-employer', class='message-employer', action='/job/message/' + job.url, method='POST')
+                        .row
+                            .col-lg-12 
+                                h3.my-3 Application Message
+                        .row
+                            .col-lg-12
+                                -var textArea = {}
+                                -textArea.id = 'tinymce-textarea'
+                                -textArea.name = 'message'
+                                -textArea.rows = 10
+                                -textArea.required = true
+                                -textArea.formName = 'message-employer'
+                                include ../../templates/inputs/text-area
+                            .col-sm-12.col-lg-12
+                                .row
+                                    .col-lg-6.col-sm-6.mb-2
+                                        a.btn.btn-outline-primary.btn-block(href='/job/' + job.url)
+                                            i.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
+                                            | Back to Offer
+                                    .col-lg-6.col-sm-6.mb-2
+                                        button.btn.btn-primary.btn-block(type='submit') Send Message
+
+
                 
-
-
-        
     

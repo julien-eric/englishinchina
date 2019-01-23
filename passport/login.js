@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const bCrypt = require('bcrypt-nodejs');
+const winston = require('../config/winstonconfig');
 
 let loginParams = {
     usernameField: 'email',
@@ -18,7 +19,7 @@ let processLoginReturn = function (req, email, password, done) {
 
         // Email does not exist, log the error and redirect back
         if (!user) {
-            console.log(`User Not Found with email ${email}`);
+            winston.debug(`User Not Found with email ${email}`);
             res.flash('error', 'User not found with email ' + req.param('email'));
             res.app.locals.responseInfo = { email: req.param('email'), password };
             return done(null, false);
@@ -26,7 +27,7 @@ let processLoginReturn = function (req, email, password, done) {
 
         // User exists but wrong password, log the error
         if (!isValidPassword(user, password)) {
-            console.log('Invalid Password');
+            winston.debug('Invalid Password');
             res.flash('error', 'Invalid Password');
             res.app.locals.responseInfo = { email: req.param('email') };
             return done(null, false); // redirect back to login page

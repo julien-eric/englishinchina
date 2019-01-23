@@ -27,6 +27,12 @@ module.exports = {
         return City.findOne({ pinyinName: { $regex: new RegExp('^' + name.toLowerCase(), 'i') } }).populate('province', 'code').exec();
     },
 
+    async updateCity (cityInfo) {
+        let name = cityInfo.pinyinName;
+        name = name[0].toUpperCase() + name.substring(1, name.length);
+        return City.update({ code: cityInfo.code }, { pinyinName: name }).exec();
+    },
+
     async queryCitiesByPinyinName (name, limit) {
         let cityResults = await City.find({ 'pinyinName': { '$regex': name, '$options': 'i' } }).populate('province').exec();
         return { total: cityResults.length, list: limit ? _.first(cityResults, limit) : cityResults };

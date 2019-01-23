@@ -1,16 +1,19 @@
 extends form-container
 block card
-    .col-md-10.col-sm-12.col-lg-7
+    .col-md-10.col-sm-12.col-lg-6.order-2.order-md-1
+        include value-prop
+
+    .col-md-10.col-sm-12.col-lg-6.order-1.order-md-2
         .border.border-pale-gray.border-radius-5.text-dark.bg-white
             .my-5.text-left.px-3.px-md-5.py-1
                     .text-center
-                            h3.mt-1.mb-5.text-light.font-weight-bold Sign up     
+                            h3.mt-1.mb-5.font-weight-bold Sign up     
                             
                     form(class='form-signup', action='/signup', autocomplete="off", method='POST')
                             if(redirectUrl)
                                 .form-group.d-none
                                     input.form-control.form-control-lg(type='text', name='redirectUrl', placeholder='Username', value=redirectUrl)
-                            .md-form
+                            .form-group
                                     -var textInput = {}
                                     -textInput.id = 'username'
                                     -textInput.name = 'username'
@@ -18,15 +21,7 @@ block card
                                     -textInput.label = 'Username'
                                     -textInput.required = true;
                                     include ../templates/inputs/text-input
-                            .form-check.pl-0                             
-                                    -var formCheck = {}
-                                    -formCheck.id = 'anonymous'
-                                    -formCheck.name = 'anonymous'
-                                    -formCheck.label = 'Make me anonymous across SLWorld'
-                                    -formCheck.required = true;
-                                    -formCheck.underText = 'This can be changed at a later time on your profile page. Keep in mind that reviews that you wrote with this setting on will still show your display name if you choose to turn it off later on.';
-                                    include ../templates/inputs/form-check
-                            .md-form.my-5
+                            .form-group.my-5
                                     -var textInput = {}
                                     -textInput.id = 'email'
                                     -textInput.type = 'email'
@@ -35,20 +30,21 @@ block card
                                     -textInput.label = 'Email'
                                     -textInput.required = true;
                                     include ../templates/inputs/text-input
-                            .md-form.mb-5
+                            .form-group.mb-5
                                     -var textInput = {}
                                     -textInput.id = 'password'
                                     -textInput.type = 'password'
                                     -textInput.name = 'password'
-                                    -textInput.placeholder = 'Password'
+                                    -textInput.placeholder = '********'
                                     -textInput.label = 'Password'
                                     -textInput.required = true;
                                     include ../templates/inputs/text-input
                             .text-center
-                                    button.btn.btn-md.btn-block.btn-primary.btn-lg.px-5.px-5.mb-1(type='submit') Register
+                                    button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Create my account
                             p.text-left.text-small
                                     |Already have an account?&nbsp;
                                     a(href="/login") Login
-            .border-0.bg-light-secondary.text-dark.py-3
+            
+            .footer.border-0.bg-light-secondary.text-dark.py-3.mt-5.text-left.px-3.px-md-5.pb-5
                     include social-login
             
