@@ -1,5 +1,5 @@
 if locals.user
-    li.nav-item.dropdown.mb-0.mb-lg-2.p-2
+    li.nav-item.dropdown.mb-2.mb-lg-0.p-2
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             span.caret
                 | #{user.username}
@@ -21,5 +21,5 @@ else
         a.nav-link(href=loginUrl) 
             i.d-none.d-lg-inline.fa.prefix.mdi.mdi-account(aria-hidden='true')
             |  Login
-    li.nav-item.p-2.mb-0.mb-lg-2
+    li.nav-item.p-2.mb-2.mb-lg-0
         a.nav-link(href=signupUrl) Register
