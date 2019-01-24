@@ -7,10 +7,11 @@
                 .row.justify-content-start
                     .col-lg-6
                         .row
-                            .col-12.mb-2.mx-auto.ml-lg-0.ml-xl-auto
-                                -var step = {}
-                                -step.icon = 'mdi-lightbulb-on'
-                                include step-indicator
+                            .col-12.mb-2
+                                .text-center
+                                    .step-indicator-lg.mx-auto.ml-lg-0.ml-xl-auto.my-3.border-radius-circle.border-1-primary.border-primary.bg-primary
+                                        h1.pt-3 
+                                            i.text-white.mdi.mdi-lightbulb-on(aria-hidden='true')
                         .row.text-center.text-md-left
                             h1.col-12.mb-3.font-weight-bold
                                 | Find amazing opportunities to teach around the world
