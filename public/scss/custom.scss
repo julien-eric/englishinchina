@@ -252,10 +252,12 @@ h1, h2, h3, h4, h5, h6, .btn {
     // font-family: "raleway";
 }
 
+
+.navbar-light .navbar-nav .nav-link,
 .navbar.navbar-light .breadcrumb .nav-item .nav-link:hover,
 .navbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
-    color: rgba(0, 0, 0, 0.50);
-    // font-family: "raleway";
+    color: rgba(0, 0, 0, 1);
+    font-family: "raleway";
 }
 
 .navbar.navbar-light.main-header.transparent.collapsed {
