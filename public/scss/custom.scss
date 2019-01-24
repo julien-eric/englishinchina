@@ -211,8 +211,12 @@ h1, h2, h3, h4, h5, h6, .btn {
     .img-prompt-small {
         height: 60px;
     }
+    .splash-text p {
+        font-size: 0.92rem;
+    }
 }
   
+
 
 
 .text-small {
@@ -344,6 +348,10 @@ footer .form-control:focus {
 .step-indicator-lg {
     height: 5rem;
     width: 5rem;
+}
+
+.step-indicator-lg h1 {
+    font-size: 2.5rem;
 }
 
 .step-indicator-md {

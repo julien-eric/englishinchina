@@ -1,14 +1,13 @@
 .container-fluid
-  #carouselExampleIndicators.carousel.slide(data-ride='carousel')
-    #splash.splash.row.justify-content-center
-        .splash-image-container
+    .row#splash.splash.justify-content-center
+        .col-12.splash-image-container
             .splash-image(style="background-image: url('" + splashText.image + "');")
         .splash-text.col-sm-12.col-md-12.col-lg-12.my-auto
             .container
                 .row.justify-content-start
                     .col-lg-6
-                        .row.text-center.text-md-left
-                            .col-12.mb-2.mx-auto.text-center
+                        .row
+                            .col-12.mb-2.mx-auto.ml-lg-0.ml-xl-auto
                                 -var step = {}
                                 -step.icon = 'mdi-lightbulb-on'
                                 include step-indicator
@@ -22,10 +21,12 @@
                                     | is your first and only step to find opportunities abroad. Search the most responsive job board for ESL positions around the world and 
                                     | filter through thousands of jobs posted by legitimate employers such as schools and agencies. Take your first step today.
                         .row
-                            .col-sm-6.mt-3
-                                a.btn.btn-secondary.text-white.btn-lg.btn-block.mr-2.mdi.mdi-briefcase(href="/register")  Offer Job
-                            .col-sm-6.my-3
-                                a.btn.btn-primary.btn-lg.btn-block.mr-2(href="/search") Search Job Board
+                            .col-sm-12.col-md-6.mt-1.mt-md-3
+                                a.btn.btn-secondary.text-white.btn-lg.btn-block.d-none.d-md-block.mr-2.mdi.mdi-briefcase(href="/register")  Offer Job
+                            .col-sm-12.col-md-6.mt-1.mt-md-3
+                                a.btn.btn-primary.btn-lg.btn-block.mr-2(href="/search") 
+                                    span.d-inline.d-lg-none.d-xl-inline Search 
+                                    | Job Board
                                     i.mdi.mdi-arrow-right(aria-hidden="true")
 .bg-light.border-bottom.border-pale-gray
     .container
