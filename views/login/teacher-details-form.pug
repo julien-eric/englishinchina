@@ -3,11 +3,12 @@ if user
     .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
         a.collapse-link(data-toggle='collapse', href='#teacher-profile-collapse', role='button', aria-expanded='false', aria-controls='teacher-profile-collapse')
             h1.text-muted.my-5.font-weight-bold 
-                | Teacher Profile      
+                i.mdi.mdi-book-open-outline(aria-hidden='true')
+                |  Teacher Profile      
                 i#teacher-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
         .collapse.show#teacher-profile-collapse        
             h3.my-5.text-dark.font-weight-bold Personal Information 
-            form(id='teacher-details', class='teacher-details', action='/user/teacher-details/' + user.id, method='POST')
+            form(id='teacher-details', class='teacher-details', action='/user/teacher-profile', method='POST')
 
                 if(redirectUrl)
                         .form-group.d-none

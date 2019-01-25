@@ -5,8 +5,6 @@ if locals.user
                 | #{user.username}
         .dropdown-menu.text-center(aria-labelledby='navbarDropdownMenuLink')
             a.dropdown-item.py-3(href='/user/edit') My Profile
-            if user.teachingDetails
-                a.dropdown-item.py-3(href='/user/teacher-details/' + user.id ) Teacher Profile
             a.dropdown-item.py-3(href='/signout') Sign Out
 
 else

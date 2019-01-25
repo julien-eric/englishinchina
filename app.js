@@ -123,6 +123,7 @@ initPassport(passport);
  ************************************************************** */
 const routes = require('./routes/index')(passport);
 const awsRoutes = require('./routes/aws')(passport);
+const usersRoutes = require('./routes/users')(passport);
 const schoolRoutes = require('./routes/schools')(passport);
 const companyRoutes = require('./routes/companies')(passport);
 const blogRoutes = require('./routes/blog')(passport);
@@ -132,6 +133,7 @@ const provinceRoutes = require('./routes/provinces')(passport);
 
 app.use('/', routes);
 app.use('/', awsRoutes);
+app.use('/', usersRoutes);
 app.use('/school', schoolRoutes);
 app.use('/company', companyRoutes);
 app.use('/blog', blogRoutes);

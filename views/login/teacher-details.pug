@@ -2,8 +2,7 @@ extends form-container
 
 block dashboard
 
-    //- if !user.teachingDetails
-    if true
+    if !user.teachingDetails
         .col-12
             #teacher-profile-vp.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3
                 #vp-close.vp-x.mdi.mdi-close-circle.text-light-secondary
@@ -37,8 +36,6 @@ block dashboard
     //- include user-dashboard
 block card
     #user-profile
-    .col-md-12.col-sm-12.col-lg-12.mb-3
-        include edit-user
     
     .col-md-12.col-sm-12.col-lg-12.mb-3
         include my-account
