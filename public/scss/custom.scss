@@ -133,6 +133,14 @@ h1, h2, h3, h4, h5, h6, .btn {
     font-family: 'Raleway', sans-serif;
 }
 
+a.collapse-link:hover {
+    text-decoration: none;
+}
+
+a.collapse-link:hover h1 {
+    color:#000 !important;
+}
+
 .navbar-light .navbar-nav .nav-item:hover {
     background-color: lighten($color: $slw-primary, $amount: 20%)
 }
