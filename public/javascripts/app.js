@@ -56,7 +56,7 @@ SLWorld.prototype.init = function () {
     this.dashboard = new Dashboard();
     this.dashboard.init();
 
-    //user-dashboard.js
+    //application-message.js
     this.applicationMessage = new ApplicationMessage();
     this.applicationMessage.init();
 
