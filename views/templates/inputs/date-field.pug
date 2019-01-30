@@ -4,7 +4,7 @@ if datepicker.value
 .form-group.dates
     label(for=datepicker.name) #{datepicker.label}
     .input-group
-        input.pl-3.datepicker.form-control(id=datepicker.id, name=datepicker.name, class=datepicker.formName, placeholder=datepicker.placeholder, form=datepicker.formName, value=timeValue, onblur='slworld.validator.validateField(this)' required=datepicker.required)
+        input.pl-3.datepicker.form-control(id=datepicker.id, name=datepicker.name, class=datepicker.formName, placeholder=datepicker.placeholder, form=datepicker.formName, value=timeValue, onblur='slworld.validator.validateField(this)', autocomplete='off', required=datepicker.required)
         .input-group-append
             span.input-group-text.start_date_calendar
                 i.mdi.mdi-calendar(aria-hidden='true ')
