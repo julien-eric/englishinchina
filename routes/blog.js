@@ -7,6 +7,7 @@ const pictureinfo = require('../pictureinfo');
 const scripts = require('../public/scripts');
 const settings = require('simplesettings');
 const butter = require('buttercms')(settings.get('BUTTER_CMS_API'));
+const utils = require('../utils');
 
 module.exports = function (passport) {
 
@@ -65,10 +66,17 @@ module.exports = function (passport) {
         response = await butter.post.list({ page: 1, page_size: 3, exclude_body: true });
         let featuredArticles = response.data.data;
 
-
         let featuredJobs = await jobsController.getFeaturedJobs();
 
+        let meta = utils.generateMeta(
+            article.title,
+            article.summary,
+            utils.getFullUrl(req),
+            article.featured_image
+        );
+
         res.render('article/single/article', {
+            meta,
             title: `Blog - Second Language World`,
             user: req.user,
             article,
