@@ -1127,3 +1127,13 @@ $slw-inset-dark: #ebebeb;
     right: 30px;
     cursor: pointer;
 }
+
+.mce-notification {
+    display: none !important;
+}
+
+.danger-light{
+    background-color: rgba(200, 20, 20, 0.1) !important;
+    color: rgb(200, 20, 20);
+
+}

@@ -103,7 +103,7 @@ JobsController.prototype.addJob = async (user, jobParams) => {
             pictureUrl: jobParams.pictureUrl,
             pictureFileName: jobParams.pictureFileName,
             url: utils.generateUrl(jobParams.title),
-            email: jobParams.email,
+            email: user.email,
             description: jobParams.description,
             user,
             school: jobParams.schoolId,

@@ -8,5 +8,6 @@ if datepicker.value
         .input-group-append
             span.input-group-text.start_date_calendar
                 i.mdi.mdi-calendar(aria-hidden='true ')
-
+    .invalid-feedback
+        | #{textInput.errorMessage}
 -var datepicker = {}

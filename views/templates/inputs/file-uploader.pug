@@ -21,16 +21,11 @@ if fileInput.value
 
 //- Start of HTML Input
 if fileInput.value
-    #previousFile.form-group.mt-0
+    #previousFile.mt-0
         label(id='previous-label-' + fileInput.id, for='exampleInputFile')
             | Current File
         input.form-control.validate(id=fileInput.currentId, type='text', name=fileInput.name + 'Previous', placeholder=fileInput.placeholder, value=fileInput.value)
         input.d-none(name=fileInput.urlName + 'Previous', class=fileInput.formName, form=fileInput.formName, accept=fileInput.accept, value=fileInput.urlValue)
-    //- .file-field
-    //-     .file-path-wrapper.pl-0
-    //-         input.file-path.validate.disabled(id=fileInput.currentId, type='text', name=fileInput.name + 'Previous', placeholder=fileInput.placeholder, value=fileInput.value)
-    //-         input.d-none(name=fileInput.urlName + 'Previous', class=fileInput.formName, form=fileInput.formName, accept=fileInput.accept, value=fileInput.urlValue)
-    //-         label.text-small.text-primary.px-0 Current document 
 if !fileInput.required
     -showCollapsible = ''
     button.btn.btn-link.ml-0.pl-0(type="button" data-toggle="collapse" data-target='#' + fileInput.name + ' collapsible' aria-expanded="false" aria-controls=fileInput.name + ' collapsible') Replace Photo
@@ -41,7 +36,7 @@ if !fileInput.required
         input.d-none(name=fileInput.urlName, class=fileInput.formName, id=fileInput.urlId, form=fileInput.formName accept=fileInput.accept required=fileInput.required)
         label.custom-file-label(id='label-' + fileInput.id, for='exampleInputFile')
             | Select file...
-    .progress.mb-0.mt-1.pb-0(style='height: 12px')
+    .progress.mb-2.mt-1.pb-0(style='height: 12px')
         .progress-bar.bg-primary(role='progressbar', id=fileInput.progressId style=progressInfoStyle, aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
         span.sr-only 0% Complete
     label.text-small.text-primary.px-0(for=fileInput.progressId, id=fileInput.labelFeedback, data-error=fileInput.errorMessage, data-success='Thank you' class=labelVisibility) Thank you

@@ -1,184 +1,164 @@
-extends ../../templates/forms/form-card-container
+h3.mt-5.py-3.text-dark.font-weight-bold Job Details
 
-block card
-    h3.mt-5.pt-5.text-dark.font-weight-bold Job Details
-    //- p.mb-5 And now, about the contract!
-    hr
+include salary-range-input-horiz
 
-    include salary-range-input
+.row.mt-3
+    .col-lg-6.form-group
+        -var datepicker = {}
+        -datepicker.id = 'start-date'
+        -datepicker.name = 'startDate'
+        -datepicker.formName = formName
+        -datepicker.class = formName
+        -datepicker.placeholder = 'Please Select'
+        -datepicker.label = 'Start Date of Contract'
+        -datepicker.errorMessage = 'Please select a date'
+        -datepicker.required = true
+        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
+            -datepicker.value = user.dateOfBirth
+        include ../../templates/inputs/date-field
 
-    .row.mt-3
-        .col-lg-6.form-group
-            -var datepicker = {}
-            -datepicker.id = 'start-date'
-            -datepicker.name = 'startDate'
-            -datepicker.formName = formName
-            -datepicker.class = formName
-            -datepicker.placeholder = 'Please Select'
-            -datepicker.label = 'Start Date of Contract'
-            -datepicker.errorMessage = 'Please select a date'
-            -datepicker.required = true
-            if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-                -datepicker.value = user.dateOfBirth
-            include ../../templates/inputs/date-field
-
-        .col-lg-6.form-group
-            -var numberInput = {}
-            -numberInput.id = 'duration'
-            -numberInput.label = 'Length of Contract'
-            -numberInput.formName = formName
-            -numberInput.class = formName
-            -numberInput.placeholder = 'Enter a number'
-            -numberInput.responseSubProperty = 'contractDetails'
-            -numberInput.name = 'duration'
-            -numberInput.min = 0
-            -numberInput.max = 6
-            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-            -numberInput.tooltip = 'Duration of contract in years'
-            -numberInput.required = true
-            include ../../templates/inputs/generic-number-input 
+    .col-lg-6.form-group
+        -var numberInput = {}
+        -numberInput.id = 'duration'
+        -numberInput.label = 'Length of Contract'
+        -numberInput.formName = formName
+        -numberInput.class = formName
+        -numberInput.placeholder = 'Enter a number'
+        -numberInput.responseSubProperty = 'contractDetails'
+        -numberInput.name = 'duration'
+        -numberInput.min = 0
+        -numberInput.max = 6
+        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+        -numberInput.tooltip = 'Duration of contract in years'
+        -numberInput.required = true
+        include ../../templates/inputs/generic-number-input 
 
 
-    h3.mt-5.pt-5.text-dark.font-weight-bold Benefits
-    //- p.mb-3 What are the perks!
-    hr
+h3.mt-5.py-3.text-dark.font-weight-bold Benefits
 
-    .row
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'} , {'value': 2, 'optionLabel': 'Partly'} ] 
-            -select.id = 'accomodation'
-            -select.responseSubProperty = 'benefits'
-            -select.name = 'accomodation'
-            -select.placeholder = 'Select your answer'
-            -select.label = 'Is accomodation provided by the school?'
-            -select.formName = formName
-            -select.class = formName
-            -select.required = true;
-            -select.crossRefAttributeValue = 'value'
-            -select.crossRefAttributeName = 'optionLabel'
-            include ../../templates/inputs/generic-select
+.row
+    .col-lg-6
+        -var select = {}
+        -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'} , {'value': 2, 'optionLabel': 'Partly'} ] 
+        -select.id = 'accomodation'
+        -select.responseSubProperty = 'benefits'
+        -select.name = 'accomodation'
+        -select.placeholder = 'Select your answer'
+        -select.label = 'Is accomodation provided by the school?'
+        -select.formName = formName
+        -select.class = formName
+        -select.required = true;
+        -select.crossRefAttributeValue = 'value'
+        -select.crossRefAttributeName = 'optionLabel'
+        include ../../templates/inputs/generic-select
 
-                
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'}, {'value': 3, 'optionLabel': 'Inbound Flight Only'}, {'value': 2, 'optionLabel': 'Partly'} ] 
-            -select.id = 'airfare'
-            -select.responseSubProperty = 'benefits'
-            -select.name = 'airfare'
-            -select.placeholder = 'Select your answer'
-            -select.label = 'Is the flight reimbursed?'
-            -select.formName = formName
-            -select.class = formName
-            -select.required = true;
-            -select.crossRefAttributeValue = 'value'
-            -select.crossRefAttributeName = 'optionLabel'
-            include ../../templates/inputs/generic-select
+            
+    .col-lg-6
+        -var select = {}
+        -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'}, {'value': 3, 'optionLabel': 'Inbound Flight Only'}, {'value': 2, 'optionLabel': 'Partly'} ] 
+        -select.id = 'airfare'
+        -select.responseSubProperty = 'benefits'
+        -select.name = 'airfare'
+        -select.placeholder = 'Select your answer'
+        -select.label = 'Is the flight reimbursed?'
+        -select.formName = formName
+        -select.class = formName
+        -select.required = true;
+        -select.crossRefAttributeValue = 'value'
+        -select.crossRefAttributeName = 'optionLabel'
+        include ../../templates/inputs/generic-select
 
-    .row
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'} ] 
-            -select.id = 'teaching-assistant'
-            -select.responseSubProperty = 'benefits'
-            -select.name = 'teachingAssistant'
-            -select.placeholder = 'Select your answer'
-            -select.label = 'Are there assistants for the classes?'
-            -select.formName = formName
-            -select.class = formName
-            -select.required = true;
-            -select.crossRefAttributeValue = 'value'
-            -select.crossRefAttributeName = 'optionLabel'
-            include ../../templates/inputs/generic-select
+.row
+    .col-lg-6
+        -var select = {}
+        -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'} ] 
+        -select.id = 'teaching-assistant'
+        -select.responseSubProperty = 'benefits'
+        -select.name = 'teachingAssistant'
+        -select.placeholder = 'Select your answer'
+        -select.label = 'Are there assistants for the classes?'
+        -select.formName = formName
+        -select.class = formName
+        -select.required = true;
+        -select.crossRefAttributeValue = 'value'
+        -select.crossRefAttributeName = 'optionLabel'
+        include ../../templates/inputs/generic-select
 
-        .col-lg-6.form-group
-            -var numberInput = {}
-            -numberInput.id = 'vacation-days'
-            -numberInput.label = 'Number of vacation days yearly'
-            -numberInput.formName = formName
-            -numberInput.class = formName
-            -numberInput.placeholder = 'Enter a number'
-            -numberInput.responseSubProperty = 'benefits'
-            -numberInput.name = 'vacationDays'
-            -numberInput.min = 0
-            -numberInput.max = 183
-            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-            //- -numberInput.tooltip = 'Number of vacation days yearly'
-            -numberInput.required = true
-            if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
-                - numberInput.value = responseInfo.jobDetails.vacationDays
-            include ../../templates/inputs/generic-number-input 
+    .col-lg-6
+        -var numberInput = {}
+        -numberInput.id = 'vacation-days'
+        -numberInput.label = 'Number of vacation days yearly'
+        -numberInput.formName = formName
+        -numberInput.class = formName
+        -numberInput.placeholder = 'Enter a number'
+        -numberInput.responseSubProperty = 'benefits'
+        -numberInput.name = 'vacationDays'
+        -numberInput.min = 0
+        -numberInput.max = 183
+        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+        //- -numberInput.tooltip = 'Number of vacation days yearly'
+        -numberInput.required = true
+        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
+            - numberInput.value = responseInfo.jobDetails.vacationDays
+        include ../../templates/inputs/generic-number-input 
 
-    h3.mt-5.pt-5.text-dark.font-weight-bold Teaching Environment
-    //- p.mb-3 What should the teachers be expecting in terms of the work environment
-    hr
+h3.mt-5.pt-3.text-dark.font-weight-bold Teaching Environment
 
-    .row
-        .col-lg-6.form-group
-            -var textInput = {}
-            -textInput.id = 'institution'
-            -textInput.name = 'institution'
-            -textInput.responseSubProperty = 'teachingDetails'
-            -textInput.placeholder = '(e.g. Public School, Training School, University, etc.)'
-            -textInput.label = 'Institution Type'
-            -textInput.formName = formName
-            -textInput.class = formName
-            -textInput.required = true;
-            include ../../templates/inputs/text-input
+.row.py-3
+    .col-lg-6
+        -var textInput = {}
+        -textInput.id = 'institution'
+        -textInput.name = 'institution'
+        -textInput.responseSubProperty = 'teachingDetails'
+        -textInput.placeholder = '(e.g. Public School, Training School, University, etc.)'
+        -textInput.label = 'Institution Type'
+        -textInput.formName = formName
+        -textInput.class = formName
+        -textInput.required = true;
+        include ../../templates/inputs/text-input
 
-        .col-lg-6.form-group
-            -var numberInput = {}
-            -numberInput.id = 'weeklyLoad'
-            -numberInput.label = 'Average Weekly Workload (hrs)'
-            -numberInput.formName = formName
-            -numberInput.class = formName
-            -numberInput.placeholder = 'Enter a number'
-            -numberInput.name = 'weeklyLoad'
-            -numberInput.responseSubProperty = 'teachingDetails'
-            -numberInput.min = 5    
-            -numberInput.max = 40
-            -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-            //- -numberInput.tooltip = 'Number of vacation days yearly'
-            -numberInput.required = true
-            include ../../templates/inputs/generic-number-input 
+    .col-lg-6
+        -var numberInput = {}
+        -numberInput.id = 'weeklyLoad'
+        -numberInput.label = 'Average Weekly Workload (hrs)'
+        -numberInput.formName = formName
+        -numberInput.class = formName
+        -numberInput.placeholder = 'Enter a number'
+        -numberInput.name = 'weeklyLoad'
+        -numberInput.responseSubProperty = 'teachingDetails'
+        -numberInput.min = 5    
+        -numberInput.max = 40
+        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+        //- -numberInput.tooltip = 'Number of vacation days yearly'
+        -numberInput.required = true
+        include ../../templates/inputs/generic-number-input 
 
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = [{'value': 0, 'optionLabel': '0 - 10 students'}, {'value': 1, 'optionLabel': '11 - 20 students'}, {'value': 2, 'optionLabel': '21 - 30 students'}, {'value': 3, 'optionLabel': 'More than 30 students'} ] 
-            -select.id = 'class-size'
-            -select.name = 'classSize'
-            -select.responseSubProperty = 'teachingDetails'
-            -select.placeholder = 'Select one'
-            -select.label = 'What is the typical class size'
-            -select.formName = formName
-            -select.class = formName
-            -select.required = true;
-            -select.crossRefAttributeValue = 'value'
-            -select.crossRefAttributeName = 'optionLabel'
-            include ../../templates/inputs/generic-select
+    .col-lg-6
+        -var select = {}
+        -select.options = [{'value': 0, 'optionLabel': '0 - 10 students'}, {'value': 1, 'optionLabel': '11 - 20 students'}, {'value': 2, 'optionLabel': '21 - 30 students'}, {'value': 3, 'optionLabel': 'More than 30 students'} ] 
+        -select.id = 'class-size'
+        -select.name = 'classSize'
+        -select.responseSubProperty = 'teachingDetails'
+        -select.placeholder = 'Select one'
+        -select.label = 'What is the typical class size'
+        -select.formName = formName
+        -select.class = formName
+        -select.required = true;
+        -select.crossRefAttributeValue = 'value'
+        -select.crossRefAttributeName = 'optionLabel'
+        include ../../templates/inputs/generic-select
 
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = [{'value': 0, 'optionLabel': 'Children'}, {'value': 1, 'optionLabel': 'Teens'}, {'value': 2, 'optionLabel': 'University'}, {'value': 3, 'optionLabel': 'Adults'} ] 
-            -select.id = 'age-group'
-            -select.name = 'ageGroup'
-            -select.responseSubProperty = 'teachingDetails'
-            -select.placeholder = 'Please select on'
-            -select.label = 'What age group do the students belong to?'
-            -select.formName = formName
-            -select.class = formName
-            -select.required = true;
-            -select.crossRefAttributeValue = 'value'
-            -select.crossRefAttributeName = 'optionLabel'
-            include ../../templates/inputs/generic-select
-
-    .row.mt-5.pt-5
-        hr
-        .col-6
-            button.btn.btn-lg.btn-block.btn-mdb-color.btn-rounded.prevBtn.float-right(type='button') 
-                i.mdi.mdi-arrow-left(aria-hidden='true')
-                | Previous
-        .col-6
-            button.btn.btn-lg.btn-block.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
-                | Next
-                i.mdi.mdi-arrow-right(aria-hidden='true')
+    .col-lg-6
+        -var select = {}
+        -select.options = [{'value': 0, 'optionLabel': 'Children'}, {'value': 1, 'optionLabel': 'Teenagers'}, {'value': 2, 'optionLabel': 'University'}, {'value': 3, 'optionLabel': 'Adults'} ] 
+        -select.id = 'age-group'
+        -select.name = 'ageGroup'
+        -select.responseSubProperty = 'teachingDetails'
+        -select.placeholder = 'Please select on'
+        -select.label = 'What age group do the students belong to?'
+        -select.formName = formName
+        -select.class = formName
+        -select.required = true;
+        -select.crossRefAttributeValue = 'value'
+        -select.crossRefAttributeName = 'optionLabel'
+        include ../../templates/inputs/generic-select

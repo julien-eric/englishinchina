@@ -7,10 +7,10 @@ if responseInfo && !textArea.value
         if responseInfo[textArea.responseSubProperty] && responseInfo[textArea.responseSubProperty][textArea.name]
             -select.crossRefValue = responseInfo[textArea.responseSubProperty][textArea.name]
 
-.form-group.mt-0
+.form-group
     if textArea.label
         label(for=textArea.name) #{textArea.label}
+    p.mt-1.text-small #{textArea.undertext}
     textarea.form-control(type='text', id=textArea.id, class=textArea.formName, placeholder=textArea.placeholder, name=textArea.name, form=textArea.formName, rows=textArea.rows, required=textArea.required) #{textArea.value}
-    p.text-small #{textArea.undertext}
 
 -textArea = {}

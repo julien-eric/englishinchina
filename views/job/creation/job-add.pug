@@ -1,49 +1,68 @@
 extends ../../layout
 block content
-    .container.stepper
-        .row
-            .col-md-12.col-lg-10.mx-auto
-                h1#write-review-title.py-5 Post a Job Offer
-                    
-                //- include default-job-info
-
-                .stepper-nested-forms
-                    form.validate-form(action='/', method='post')
-                    form.validate-form(action='/', method='post')
-
-                //- Stepper
-                nav.steps-form.mb-1
-                    .row.steps-row.setup-panel
-                        .step.px-1.col-4
-                            -var formTab = {}
-                            -formTab.text = 'Job Information'
-                            -formTab.mdi = 'mdi-information'
-                            include ../../templates/forms/form-tab
-                        .step.px-1.col-4
-                            -var formTab = {}
-                            -formTab.text = 'Details'
-                            -formTab.mdi = 'mdi-file-document-box'
-                            include ../../templates/forms/form-tab
-                        .step.px-1.col-4
-                            -var formTab = {}
-                            -formTab.text = 'Confirmation'
-                            -formTab.mdi = 'mdi-check'
-                            include ../../templates/forms/form-tab
-
-
-                // Step content
-                form#job-form(action='/job', method='POST' novalidate='')
-
-                    // First Step
-                    .row.setup-content.active
-                        -formName = 'form-0'
-                        include job-general-information
-                    
-                    // Second Step
-                    .row.setup-content
-                        -formName = 'form-1'
-                        include job-details
-                            
-                    // Submission Step
-                    .row.setup-content
-                        include job-confirmation
+    form#job-form(action='/job', method='POST' novalidate='')
+        .container
+    
+            include default-job-info
+            //- .row
+            //-     .col-12
+            //-         #teacher-profile-vp.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mt-3
+            //-             #vp-close.vp-x.mdi.mdi-close-circle.text-light-secondary
+            //-             .row.justify-content-center.align-items-center
+            //-                 .col-lg-6.order-2.text-center.text-lg-left
+            //-                     h1 Thank you for signing up!
+            //-                     h5.font-weight-bold.mb-3 Let's create a teacher profile. Why?
+            //-                     ul.col-lg-12.list-checkmarks.list-checkmarks-thumbs.text-left
+            //-                         li.mb-3
+            //-                             span.font-weight-bold You'll only need to do this once.
+            //-                             |  After you have completed this we will use the information along with your document and send it to any employer you want to reach out to.
+            //-                         li.mb-3
+            //-                             span.font-weight-bold Personalize your messages. 
+            //-                             | All you'll have to do is to write a personalized application message.
+            //-                         li.mb-3
+            //-                             span.font-weight-bold Update your profile. 
+            //-                             | Of course you can always come back to this page and update your information and document if anything changes!
+            //-                     .row
+            //-                         .col-lg-12.col-sm-12.mb-2
+            //-                             a#gotit-vp.btn.btn-outline-primary.px-3.btn-block(href='#') I got it!
+            //-                 .col-lg-6.text-center.order-1
+            //-                     img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_d2a8a480-1de3-11e9-9ef8-4fcb4d192528.jpg')
+            .row
+                .col-md-12.col-sm-12.col-lg-12.my-3
+                    .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+                        a.collapse-link(data-toggle='collapse', href='#job-general-info-collapse', role='button', aria-expanded='false', aria-controls='job-general-info-collapse')
+                            h1.text-muted.my-5.font-weight-bold 
+                                i.mdi.mdi-numeric-1-circle-outline(aria-hidden='true')
+                                |  Job Information      
+                                i#job-general-info-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true')
+                        .collapse#job-general-info-collapse  
+                            -formName = 'job-form'
+                            include job-general-information
+            .row
+                .col-md-12.col-sm-12.col-lg-12.mb-3
+                    .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+                        a.collapse-link(data-toggle='collapse', href='#job-details-collapse', role='button', aria-expanded='false', aria-controls='job-details-collapse')
+                            h1.text-muted.my-5.font-weight-bold 
+                                i.mdi.mdi-numeric-2-circle-outline(aria-hidden='true')
+                                |  Job Details      
+                                i#job-details-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true')
+                        .collapse#job-details-collapse  
+                            -formName = 'job-form'
+                            include job-details
+            
+            .row
+                .col-md-12.col-sm-12.col-lg-12.mb-3
+                    .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+                        .row.py-3
+                            //- .col-6
+                            //-     button.btn.btn-lg.btn-block.btn-outline-primary(type='button') 
+                            //-         i.mdi.mdi-content-save(aria-hidden='true')
+                            //-         |  Save Draft
+                            .col-12.col-md-6
+                                button#submit-job.btn.btn-lg.btn-block.btn-primary(type='submit') 
+                                    i.mdi.mdi-publish(aria-hidden='true')
+                                    |  Publish Job Offer
+                                    
+                                #job-creation-error-box.danger-light.d-none.border.border-pale-gray.border-radius-5.bg-white.text-dark.mt-2.px-2.text-error.text-small
+                                    p.mt-2.text-red#form-invalid There are fields that weren't filled properly, please take a look and retry!
+                                    ul#job-creation-error-list

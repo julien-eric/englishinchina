@@ -49,8 +49,8 @@ SLWorld.prototype.init = function () {
     this.validator.init();
 
     //stepper-wizard-wrapper.js
-    this.stepperWizard = new Stepper();
-    this.stepperWizard.init();
+    this.jobCreationWizard = new JobCreationWizard();
+    this.jobCreationWizard.init();
 
     //user-dashboard.js
     this.dashboard = new Dashboard();
