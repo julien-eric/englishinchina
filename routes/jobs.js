@@ -44,6 +44,10 @@ module.exports = function (passport) {
 
         try {
 
+            if (!req.user.employerDetails) {
+                res.redirect('/user?type=employer&redirectUrl=' + encodeURIComponent('/job/add'));
+            }
+
             let responseInfo;
             if (res.locals.flash.responseInfo) {
                 responseInfo = res.locals.flash.responseInfo[0];

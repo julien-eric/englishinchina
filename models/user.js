@@ -11,7 +11,7 @@ const teachingDetailsSchema = new Schema({
     dateOfBirth: Date,
     urlResume: String,
     fileNameResume: String,
-    yearsOfExperience: Number,
+    yearsOfExperience: Number
 });
 
 const employerDetailsSchema = new Schema({

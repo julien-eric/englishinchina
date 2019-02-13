@@ -1,11 +1,10 @@
-.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+.col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
     a.collapse-link(data-toggle='collapse', href='#my-account-collapse', role='button', aria-expanded='false', aria-controls='my-account-collapse')
         h1.text-muted.my-5.font-weight-bold 
             i.mdi.mdi-account-box-outline(aria-hidden='true')
             |  My Account      
             i#my-account-collapse-chevron.mdi.mdi-chevron-down(aria-hidden='true')
     .collapse#my-account-collapse  
-        h3.mb-3.text-dark.font-weight-bold My Profile
         form(class='form-signin', action='/user', method='POST')
 
             if(redirectUrl)

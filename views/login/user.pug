@@ -1,0 +1,22 @@
+extends ../layout
+block content
+    .container.pt-5.pb-3
+
+        if !user.teachingDetails && !user.employerDetails && userType == -1
+            -var freshUser = true;
+
+        if freshUser
+            include account-type-value-prop
+
+        .row.justify-content-center.mb-2
+            include my-account
+
+        if user.teachingDetails || userType == 'teacher'
+            .row.justify-content-center.mb-2
+                include teacher-details-form
+
+        if user.employerDetails || userType == 'employer'
+            .row.justify-content-center.mb-2
+                include employer-details-form
+
+        

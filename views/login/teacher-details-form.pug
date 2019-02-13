@@ -1,147 +1,146 @@
-if user
+.col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+    
+    a.collapse-link(data-toggle='collapse', href='#teacher-profile-collapse', role='button', aria-expanded='false', aria-controls='teacher-profile-collapse')
+        h1.text-muted.my-5.font-weight-bold 
+            i.mdi.mdi-book-open-outline(aria-hidden='true')
+            |  Teacher Profile      
+            i#teacher-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+    .collapse.show#teacher-profile-collapse        
+        h3.my-5.text-dark.font-weight-bold Personal Information 
+        form(id='teacher-details', class='teacher-details', action='/user/teacher-profile', method='POST')
 
-    .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
-        a.collapse-link(data-toggle='collapse', href='#teacher-profile-collapse', role='button', aria-expanded='false', aria-controls='teacher-profile-collapse')
-            h1.text-muted.my-5.font-weight-bold 
-                i.mdi.mdi-book-open-outline(aria-hidden='true')
-                |  Teacher Profile      
-                i#teacher-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
-        .collapse.show#teacher-profile-collapse        
-            h3.my-5.text-dark.font-weight-bold Personal Information 
-            form(id='teacher-details', class='teacher-details', action='/user/teacher-profile', method='POST')
+            if(redirectUrl)
+                    .form-group.d-none
+                            input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
 
-                if(redirectUrl)
-                        .form-group.d-none
-                                input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
-
-                .row
-                
-                    .col-lg-6
-                        -var textInput = {}
-                        -textInput.id = 'full-name'
-                        -textInput.name = 'fullName'
-                        -textInput.formName = 'teacher-details'
-                        -textInput.placeholder = 'Full Name'
-                        -textInput.label = 'Full Name'
-                        -textInput.required = true
-                        if user && user.teachingDetails && user.teachingDetails.fullName
-                            -textInput.value = user.teachingDetails.fullName
-                        include ../templates/inputs/text-input
-
-                    .col-lg-6
-                        -var datepicker = {}
-                        -datepicker.id = 'date-of-birth'
-                        -datepicker.name = 'dateOfBirth'
-                        -datepicker.formName = 'teacher-details'
-                        -datepicker.placeholder = 'Please Select'
-                        -datepicker.label = 'Date of Birth'
-                        -datepicker.errorMessage = 'Please select a date'
-                        -datepicker.required = true
-                        if user && user.teachingDetails && user.teachingDetails.dateOfBirth
-                            -datepicker.value = user.teachingDetails.dateOfBirth
-                        include ../templates/inputs/date-field
-
-                .row
-                    .col-lg-6
-                        -var select = {}
-                        -select.options = countries 
-                        -select.label = 'Country you live in'
-                        -select.placeholder = 'Please select'
-                        -select.name = 'livingCountry'
-                        -select.id = 'livingCountrySelect'
-                        -select.formName = 'teacher-details'
-                        -select.errorMessage = 'Please select your country of citizenship'
-                        -select.crossRefAttributeValue = 'code'
-                        -select.crossRefAttributeName = 'name'
-                        -select.required = true
-                        if user && user.teachingDetails && user.teachingDetails.livingCountry
-                            - select.crossRefValue = user.teachingDetails.livingCountry.code
-                        include ../templates/inputs/generic-select 
+            .row
             
-                    .col-lg-6
-                        -var select = {}
-                        -select.options = countries 
-                        -select.label = 'Citizenship'
-                        -select.placeholder = 'Please select'
-                        -select.name = 'citizenship'
-                        -select.id = 'citizenshipSelect'
-                        -select.formName = 'teacher-details'
-                        -select.errorMessage = 'Please select your country of citizenship'
-                        -select.crossRefAttributeValue = 'code'
-                        -select.crossRefAttributeName = 'name'
-                        -select.required = true
-                        if user && user.teachingDetails && user.teachingDetails.citizenship
-                            - select.crossRefValue = user.teachingDetails.citizenship.code
-                        include ../templates/inputs/generic-select 
+                .col-lg-6
+                    -var textInput = {}
+                    -textInput.id = 'full-name'
+                    -textInput.name = 'fullName'
+                    -textInput.formName = 'teacher-details'
+                    -textInput.placeholder = 'Full Name'
+                    -textInput.label = 'Full Name'
+                    -textInput.required = true
+                    if user && user.teachingDetails && user.teachingDetails.fullName
+                        -textInput.value = user.teachingDetails.fullName
+                    include ../templates/inputs/text-input
 
-                h3.my-5.text-dark.font-weight-bold Teaching Experience
+                .col-lg-6
+                    -var datepicker = {}
+                    -datepicker.id = 'date-of-birth'
+                    -datepicker.name = 'dateOfBirth'
+                    -datepicker.formName = 'teacher-details'
+                    -datepicker.placeholder = 'Please Select'
+                    -datepicker.label = 'Date of Birth'
+                    -datepicker.errorMessage = 'Please select a date'
+                    -datepicker.required = true
+                    if user && user.teachingDetails && user.teachingDetails.dateOfBirth
+                        -datepicker.value = user.teachingDetails.dateOfBirth
+                    include ../templates/inputs/date-field
+
+            .row
+                .col-lg-6
+                    -var select = {}
+                    -select.options = countries 
+                    -select.label = 'Country you live in'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'livingCountry'
+                    -select.id = 'livingCountrySelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please select your country of citizenship'
+                    -select.crossRefAttributeValue = 'code'
+                    -select.crossRefAttributeName = 'name'
+                    -select.required = true
+                    if user && user.teachingDetails && user.teachingDetails.livingCountry
+                        - select.crossRefValue = user.teachingDetails.livingCountry.code
+                    include ../templates/inputs/generic-select 
+        
+                .col-lg-6
+                    -var select = {}
+                    -select.options = countries 
+                    -select.label = 'Citizenship'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'citizenship'
+                    -select.id = 'citizenshipSelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please select your country of citizenship'
+                    -select.crossRefAttributeValue = 'code'
+                    -select.crossRefAttributeName = 'name'
+                    -select.required = true
+                    if user && user.teachingDetails && user.teachingDetails.citizenship
+                        - select.crossRefValue = user.teachingDetails.citizenship.code
+                    include ../templates/inputs/generic-select 
+
+            h3.my-5.text-dark.font-weight-bold Teaching Experience
+            
+            .row
+                .col-lg-6
+                    -var select = {}
+                    -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
+                    -select.label = 'Do you have a Teaching License?'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'teachingLicense'
+                    -select.id = 'teachingLicenseSelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please specify whether you have a teaching license that recognizes you as a teacher'
+                    -select.crossRefAttributeValue = 'value'
+                    -select.crossRefAttributeName = 'optionLabel'
+                    -select.required = true
+                    if user && user.teachingDetails && user.teachingDetails.teachingLicense
+                        - select.crossRefValue = user.teachingDetails.teachingLicense
+                    include ../templates/inputs/generic-select 
+
+                .col-lg-6
+                    -var select = {}
+                    -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
+                    -select.label = 'Do you have an ESL Teaching Certificate?'
+                    -select.placeholder = 'Please select'
+                    -select.name = 'eslCertificate'
+                    -select.id = 'eslCertificateSelect'
+                    -select.formName = 'teacher-details'
+                    -select.errorMessage = 'Please specify whether you have an ESL teaching certificate (e.g. ESL, TEFL, CELTA, DELTA)'
+                    -select.crossRefAttributeValue = 'value'
+                    -select.crossRefAttributeName = 'optionLabel'
+                    -select.required = true
+                    if user && user.teachingDetails && user.teachingDetails.eslCertificate
+                        - select.crossRefValue = user.teachingDetails.eslCertificate
+                    include ../templates/inputs/generic-select 
                 
-                .row
-                    .col-lg-6
-                        -var select = {}
-                        -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
-                        -select.label = 'Do you have a Teaching License?'
-                        -select.placeholder = 'Please select'
-                        -select.name = 'teachingLicense'
-                        -select.id = 'teachingLicenseSelect'
-                        -select.formName = 'teacher-details'
-                        -select.errorMessage = 'Please specify whether you have a teaching license that recognizes you as a teacher'
-                        -select.crossRefAttributeValue = 'value'
-                        -select.crossRefAttributeName = 'optionLabel'
-                        -select.required = true
-                        if user && user.teachingDetails && user.teachingDetails.teachingLicense
-                            - select.crossRefValue = user.teachingDetails.teachingLicense
-                        include ../templates/inputs/generic-select 
+                .col-lg-6
+                    -var numberInput = {}
+                    -numberInput.id = 'yearsOfExperience'
+                    -numberInput.label = 'Years of Experience'
+                    -numberInput.placeholder = 'Enter a number'
+                    -numberInput.name = 'yearsOfExperience'
+                    -numberInput.min = 0
+                    -numberInput.max = 60
+                    -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
+                    -numberInput.tooltip = 'How many years of experience do you have teaching, whether in ESL or as a public/private school teacher'
+                    -numberInput.required = true
+                    if user && user.teachingDetails && user.teachingDetails.yearsOfExperience
+                        - numberInput.value = user.teachingDetails.yearsOfExperience
+                    include ../templates/inputs/generic-number-input 
 
-                    .col-lg-6
-                        -var select = {}
-                        -select.options = [{'value': 'true', 'optionLabel': 'Yes'}, {'value': 'false', 'optionLabel': 'No'}] 
-                        -select.label = 'Do you have an ESL Teaching Certificate?'
-                        -select.placeholder = 'Please select'
-                        -select.name = 'eslCertificate'
-                        -select.id = 'eslCertificateSelect'
-                        -select.formName = 'teacher-details'
-                        -select.errorMessage = 'Please specify whether you have an ESL teaching certificate (e.g. ESL, TEFL, CELTA, DELTA)'
-                        -select.crossRefAttributeValue = 'value'
-                        -select.crossRefAttributeName = 'optionLabel'
-                        -select.required = true
-                        if user && user.teachingDetails && user.teachingDetails.eslCertificate
-                            - select.crossRefValue = user.teachingDetails.eslCertificate
-                        include ../templates/inputs/generic-select 
-                    
-                    .col-lg-6
-                        -var numberInput = {}
-                        -numberInput.id = 'yearsOfExperience'
-                        -numberInput.label = 'Years of Experience'
-                        -numberInput.placeholder = 'Enter a number'
-                        -numberInput.name = 'yearsOfExperience'
-                        -numberInput.min = 0
-                        -numberInput.max = 60
-                        -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-                        -numberInput.tooltip = 'How many years of experience do you have teaching, whether in ESL or as a public/private school teacher'
-                        -numberInput.required = true
-                        if user && user.teachingDetails && user.teachingDetails.yearsOfExperience
-                            - numberInput.value = user.teachingDetails.yearsOfExperience
-                        include ../templates/inputs/generic-number-input 
+            h3.my-5.text-dark.font-weight-bold Documents
 
-                h3.my-5.text-dark.font-weight-bold Documents
+            .row
+                .col-lg-6
+                    -var fileInput = {}
+                    -fileInput.label = 'Choose file'
+                    -fileInput.placeholder = 'Upload your resume'
+                    -fileInput.id = 'resume'
+                    -fileInput.name = 'fileNameResume'
+                    -fileInput.formName = 'teacher-details'
+                    -fileInput.urlName = 'urlResume'
+                    -fileInput.required = true
+                    if user.teachingDetails && user.teachingDetails.fileNameResume
+                        -fileInput.value = user.teachingDetails.fileNameResume
+                        -fileInput.label = 'Change file'
+                        -fileInput.required = false
+                    include ../templates/inputs/file-uploader
 
-                .row
-                    .col-lg-6
-                        -var fileInput = {}
-                        -fileInput.label = 'Choose file'
-                        -fileInput.placeholder = 'Upload your resume'
-                        -fileInput.id = 'resume'
-                        -fileInput.name = 'fileNameResume'
-                        -fileInput.formName = 'teacher-details'
-                        -fileInput.urlName = 'urlResume'
-                        -fileInput.required = true
-                        if user.teachingDetails && user.teachingDetails.fileNameResume
-                            -fileInput.value = user.teachingDetails.fileNameResume
-                            -fileInput.label = 'Change file'
-                            -fileInput.required = false
-                        include ../templates/inputs/file-uploader
-
-                .row.my-3.pb-5  
-                    .col-sm-12.col-lg-6.text-center.mt-5
-                            button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Save Changes
+            .row.my-3.pb-5  
+                .col-sm-12.col-lg-6.text-center.mt-5
+                        button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Save Changes

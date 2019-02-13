@@ -10,7 +10,8 @@ if responseInfo && !textArea.value
 .form-group
     if textArea.label
         label(for=textArea.name) #{textArea.label}
-    p.mt-1.text-small #{textArea.undertext}
+    if textArea.undertext
+        p.mt-1.text-small #{textArea.undertext}
     textarea.form-control(type='text', id=textArea.id, class=textArea.formName, placeholder=textArea.placeholder, name=textArea.name, form=textArea.formName, rows=textArea.rows, required=textArea.required) #{textArea.value}
 
 -textArea = {}
