@@ -28,6 +28,19 @@ if user
                             -textInput.value = user.teachingDetails.fullName
                         include ../templates/inputs/text-input
 
+                    .col-lg-6
+                        -var datepicker = {}
+                        -datepicker.id = 'date-of-birth'
+                        -datepicker.name = 'dateOfBirth'
+                        -datepicker.formName = 'teacher-details'
+                        -datepicker.placeholder = 'Please Select'
+                        -datepicker.label = 'Date of Birth'
+                        -datepicker.errorMessage = 'Please select a date'
+                        -datepicker.required = true
+                        if user && user.teachingDetails && user.teachingDetails.dateOfBirth
+                            -datepicker.value = user.teachingDetails.dateOfBirth
+                        include ../templates/inputs/date-field
+
                 .row
                     .col-lg-6
                         -var select = {}
@@ -61,20 +74,6 @@ if user
                             - select.crossRefValue = user.teachingDetails.citizenship.code
                         include ../templates/inputs/generic-select 
 
-                .row
-                    .col-lg-6
-                        -var datepicker = {}
-                        -datepicker.id = 'date-of-birth'
-                        -datepicker.name = 'dateOfBirth'
-                        -datepicker.formName = 'teacher-details'
-                        -datepicker.placeholder = 'Please Select'
-                        -datepicker.label = 'Date of Birth'
-                        -datepicker.errorMessage = 'Please select a date'
-                        -datepicker.required = true
-                        if user && user.teachingDetails && user.teachingDetails.dateOfBirth
-                            -datepicker.value = user.teachingDetails.dateOfBirth
-                        include ../templates/inputs/date-field
-                
                 h3.my-5.text-dark.font-weight-bold Teaching Experience
                 
                 .row
