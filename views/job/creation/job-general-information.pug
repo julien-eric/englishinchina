@@ -1,120 +1,96 @@
-extends ../../templates/forms/form-card-container
 
-block card
-    h3.mt-5.text-dark.font-weight-bold General Information
-    p.mb-5 First stop, your job ad! 
+//- h3.mt-5.text-dark.font-weight-bold.mb-2 Title & Location
+//- p.mb-2 First stop, your job ad! 
 
-    .row
-        .col-lg-6
-            -var textInput = {}
-            -textInput.id = 'title'
-            -textInput.name = 'title'
-            -textInput.placeholder = 'Enter a title...'
-            -textInput.label = 'Job Title'
-            -textInput.formName = formName
-            -textInput.class = formName
-            -textInput.max = 100
-            -textInput.min = 10
-            -textInput.required = true
-            -textInput.errorMessage = 'Please provide a title for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
-            include ../../templates/inputs/text-input
-        .col-lg-6
-            -var textInput = {}
-            -textInput.id = 'kicker'
-            -textInput.name = 'kicker'
-            -textInput.placeholder = 'Enter a kicker...'
-            -textInput.label = 'Kicker'
-            -textInput.formName = formName
-            -textInput.class = formName
-            -textInput.required = true
-            -textInput.min = 10
-            -textInput.max = 120
-            -textInput.errorMessage = 'Please provide a subtitle for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
-            -textInput.tooltip = 'Also called "subtitle", this is supplementary information to add to the title';
-            include ../../templates/inputs/text-input
-    .row
-        .col-lg-6
-            -var textInput = {}
-            -textInput.id = 'email'
-            -textInput.name = 'email'
-            -textInput.placeholder = 'Enter an email address...'
-            -textInput.label = 'Contact Email'
-            -textInput.required = true
-            -textInput.formName = formName
-            -textInput.class = formName
-            -textInput.type = email;
-            -textInput.undertext = 'This is the email that will be visible on the job offer page, more often than not this email is managed by HR or the recruitment departement, please be careful if you enter a personal email as this will be displayed publicly'
-            if responseInfo && !responseInfo[textInput.name] && user && user.email
-                -textInput.value = user.email
-            include ../../templates/inputs/text-input
+.row
+    .col-lg-6
+        -var textInput = {}
+        -textInput.id = 'title'
+        -textInput.name = 'title'
+        -textInput.placeholder = 'Enter a title...'
+        -textInput.label = 'Job Title'
+        -textInput.formName = formName
+        -textInput.class = formName
+        -textInput.max = 100
+        -textInput.min = 10
+        -textInput.required = true
+        -textInput.errorMessage = 'Please provide a title for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
+        include ../../templates/inputs/text-input
+    .col-lg-6
+        -var textInput = {}
+        -textInput.id = 'kicker'
+        -textInput.name = 'kicker'
+        -textInput.placeholder = 'Enter a kicker...'
+        -textInput.label = 'Kicker'
+        -textInput.formName = formName
+        -textInput.class = formName
+        -textInput.required = true
+        -textInput.min = 10
+        -textInput.max = 120
+        -textInput.errorMessage = 'Please provide a subtitle for your job (between ' + textInput.min + ' and ' + textInput.max + ' characters)'
+        -textInput.tooltip = 'Also called "subtitle", this is supplementary information to add to the title';
+        include ../../templates/inputs/text-input
 
+.row
+    .col-lg-6
+        -var select = {}
+        -select.options = provinces 
+        -select.label = 'Province'
+        -select.placeholder = 'Province'
+        -select.name = 'provinceCode'
+        -select.id = 'provinceSelect'
+        -select.formName = formName
+        -select.class = formName
+        -select.crossRefAttributeValue = 'code'
+        -select.crossRefAttributeName = 'name'
+        -select.required = true
+        include ../../templates/inputs/generic-select 
 
-    h3.mt-5.text-dark.font-weight-bold School Location
-    p.mb-3 Please specify which city and province the school targeted by this ad is located in?
-
-    .row
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = provinces 
-            -select.label = 'Province'
-            -select.placeholder = 'Province'
-            -select.name = 'provinceCode'
-            -select.id = 'provinceSelect'
-            -select.formName = formName
-            -select.class = formName
-            -select.crossRefAttributeValue = 'code'
-            -select.crossRefAttributeName = 'name'
-            -select.required = true
-            include ../../templates/inputs/generic-select 
-
-        .col-lg-6.form-group
-            -var select = {}
-            -select.options = cities 
-            -select.disabled = true
-            if cities
-                -select.disabled = false 
-            -select.label = 'City'
-            -select.placeholder = 'City'
-            -select.name = 'cityCode'
-            -select.id = 'citySelect'
-            -select.formName = formName
-            -select.class = formName
-            -select.crossRefAttributeValue = 'code'
-            -select.crossRefAttributeName = 'pinyinName'
-            -select.required = true
-            include ../../templates/inputs/generic-select 
+    .col-lg-6
+        -var select = {}
+        -select.options = cities 
+        -select.disabled = true
+        if cities
+            -select.disabled = false 
+        -select.label = 'City'
+        -select.placeholder = 'City'
+        -select.name = 'cityCode'
+        -select.id = 'citySelect'
+        -select.formName = formName
+        -select.class = formName
+        -select.crossRefAttributeValue = 'code'
+        -select.crossRefAttributeName = 'pinyinName'
+        -select.required = true
+        include ../../templates/inputs/generic-select 
 
 
-    h3.mt-5.mb-3.text-dark.font-weight-bold Description
-    p.mb-3 Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in.
-    .row
-        .col-lg-12
-            -var textArea = {}
-            -textArea.id = 'tinymce-textarea'
-            -textArea.name = 'description'
-            -textArea.rows = 10
-            -textArea.formName = formName
-            -textArea.class = formName
-            -textArea.required = true
-            include ../../templates/inputs/text-area
-                
-    h3.mt-5.text-dark.font-weight-bold Picture
-    p.mb-3 This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.
-    .row
-        -var fileInput = {}
-        -fileInput.label = 'Choose photo'
-        -fileInput.placeholder = 'Upload a picture'
-        -fileInput.name = 'pictureFileName'
-        -fileInput.id = 'job-offer-picture'
-        -fileInput.urlName = 'pictureUrl'
-        -fileInput.formName = formName
-        -fileInput.class = formName
-        -fileInput.isPicture = true
-        -fileInput.required = true
-        include ../../templates/inputs/file-uploader-picture
-
-    .row.mt-5.justify-content-end
-        .col-6
-            button.btn.btn-lg.btn-block.btn-primary.btn-rounded.nextBtn.float-right(type='button') 
-                | Next
-                i.mdi.mdi-arrow-right(aria-hidden='true')
+//- h3.mt-5.mb-3.text-dark.font-weight-bold Description
+//- p.mb-3 Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in.
+.row
+    .col-lg-12
+        -var textArea = {}
+        -textArea.id = 'tinymce-textarea'
+        -textArea.label = 'Description'
+        -textArea.name = 'description'
+        -textArea.undertext = 'Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in.'
+        -textArea.rows = 10
+        -textArea.formName = formName
+        -textArea.class = formName
+        -textArea.required = true
+        include ../../templates/inputs/text-area
+            
+//- h3.mt-5.text-dark.font-weight-bold Picture
+//- p.mb-3 This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.
+.row
+    -var fileInput = {}
+    -fileInput.label = 'Choose photo'
+    -fileInput.undertext = 'This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.'
+    -fileInput.placeholder = 'Upload a picture'
+    -fileInput.name = 'pictureFileName'
+    -fileInput.id = 'job-offer-picture'
+    -fileInput.urlName = 'pictureUrl'
+    -fileInput.formName = formName
+    -fileInput.class = formName
+    -fileInput.isPicture = true
+    -fileInput.required = true
+    include ../../templates/inputs/file-uploader-picture

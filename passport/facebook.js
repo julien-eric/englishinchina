@@ -33,8 +33,6 @@ let processFacebookReturn = function (accessToken, refreshToken, profile, done) 
 
         // Facebook can return multiple emails so we'll take the first
         newUser.email = (typeof profile.emails !== 'undefined' && profile.emails instanceof Array) ? profile.emails[0].value : '';
-        newUser.firstName = profile.name.givenName;
-        newUser.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
         newUser.username = profile.displayName;
         // newUser.gender = profile.gender;
         newUser.useFacebookPic = true;

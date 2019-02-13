@@ -2,43 +2,32 @@ extends form-container
 
 block dashboard
 
-    //- if !user.teachingDetails
-    if true
+    if !user.teachingDetails
         .col-12
             #teacher-profile-vp.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3
                 #vp-close.vp-x.mdi.mdi-close-circle.text-light-secondary
                 .row.justify-content-center.align-items-center
-                    //- .col-12
-                    .col-md-6.order-2.order-lg-1.text-center.text-md-left
+                    .col-lg-6.order-2.text-center.text-lg-left
                         h1 Thank you for signing up!
-                        //- h3 You're almost there.
                         h5.font-weight-bold.mb-3 Let's create a teacher profile. Why?
                         ul.col-lg-12.list-checkmarks.list-checkmarks-thumbs.text-left
                             li.mb-3
-                                //- i.mdi.mdi-checkbox-marked-circle.text-primary(aria-hidden="true")
                                 span.font-weight-bold You'll only need to do this once.
                                 |  After you have completed this we will use the information along with your document and send it to any employer you want to reach out to.
                             li.mb-3
-                                //- i.mdi.mdi-check-circle.text-primary(aria-hidden="true")
                                 span.font-weight-bold Personalize your messages. 
                                 | All you'll have to do is to write a personalized application message.
                             li.mb-3
-                                //- i.mdi.mdi-check-circle.text-primary(aria-hidden="true")
                                 span.font-weight-bold Update your profile. 
                                 | Of course you can always come back to this page and update your information and document if anything changes!
                         .row
                             .col-lg-12.col-sm-12.mb-2
                                 a#gotit-vp.btn.btn-outline-primary.px-3.btn-block(href='#') I got it!
-                    .col-md-6.text-center.order-1.order-lg-2
-                        //- img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_dd8c19f0-1d01-11e9-ae8e-d33779845c2c.jpg')
-                        //- img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_d2a8a480-1de3-11e9-9ef8-4fcb4d192528.jpg') GLOBE
-                        img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_be9d0ab0-1de5-11e9-9ef8-4fcb4d192528.jpeg')
+                    .col-lg-6.text-center.order-1
+                        img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_d2a8a480-1de3-11e9-9ef8-4fcb4d192528.jpg')
 
-    //- include user-dashboard
 block card
     #user-profile
-    .col-md-12.col-sm-12.col-lg-12.mb-3
-        include edit-user
     
     .col-md-12.col-sm-12.col-lg-12.mb-3
         include my-account

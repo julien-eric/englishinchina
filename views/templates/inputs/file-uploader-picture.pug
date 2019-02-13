@@ -7,7 +7,13 @@
 if responseInfo
     -fileInput.imagePreview = 'background-image: url(' + pictureInfo.returnLarge(responseInfo[fileInput.urlName]) + ');'  
 
-.col-lg-6.mb-3
-        .image-container.image-container-default.bg-primary(id=fileInput.previewId style=fileInput.imagePreview) 
-.col-lg-6
-        include ./file-uploader
+.form-group
+    .col-12
+        if fileInput.label
+            label(for=fileInput.name) #{fileInput.label}
+        p.mt-1.text-small #{fileInput.undertext}
+        .row
+            .col-6.col-lg-12.mb-3
+                    .image-container.image-container-default.bg-primary(id=fileInput.previewId style=fileInput.imagePreview) 
+            .col-6.col-lg-12
+                    include ./file-uploader

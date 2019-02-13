@@ -170,9 +170,7 @@ $(document).ready(() => {
                     element.append($('<option></option>')
                         .attr('value', results[i].code).text(`${capitalize(results[i].pinyinName)} - ${results[i].chineseName}`));
                 }
-                element.material_select('destroy');
-                element.material_select();
-            },
+            }
         });
     });
 });

@@ -48,6 +48,7 @@ const Job = new Schema({
     province: { type: mongoose.Schema.Types.ObjectId, ref: 'Province' },
     city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
     dateCreated: { type: Date, default: Date.now },
+    datePublished: { type: Date },
     contractDetails: {
         type: ContractDetails,
         default: () => ({})

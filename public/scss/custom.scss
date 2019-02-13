@@ -133,6 +133,14 @@ h1, h2, h3, h4, h5, h6, .btn {
     font-family: 'Raleway', sans-serif;
 }
 
+a.collapse-link:hover {
+    text-decoration: none;
+}
+
+a.collapse-link:hover h1 {
+    color:#000 !important;
+}
+
 .navbar-light .navbar-nav .nav-item:hover {
     background-color: lighten($color: $slw-primary, $amount: 20%)
 }
@@ -1115,7 +1123,17 @@ $slw-inset-dark: #ebebeb;
 .vp-x {
     font-size: 22px;
     position: absolute;
-    top: 13px;
+    top: 25px;
     right: 30px;
     cursor: pointer;
+}
+
+.mce-notification {
+    display: none !important;
+}
+
+.danger-light{
+    background-color: rgba(200, 20, 20, 0.1) !important;
+    color: rgb(200, 20, 20);
+
 }

@@ -16,37 +16,6 @@ const url = require('url');
 module.exports = function (passport) {
 
     router.route('/')
-        .get(async (req, res, next) => {
-
-            try {
-
-                const province = utils.validateParam(req.query.province);
-
-                let jobs = await jobsController.getAllJobs();
-                let provinces = await provincesController.getAllProvinces();
-                let cities = undefined;
-                if (province) {
-                    cities = await citiesController.getProvinceCitiesByCode(province);
-                }
-
-                jobs = jadefunctions.trunkContentArray(jobs, 'title', 120);
-                jobs = jadefunctions.trunkContentArray(jobs, 'description', 250);
-                res.render('job/job-home', {
-                    title: `Jobs - Second Language World`,
-                    jobs,
-                    provinces,
-                    cities,
-                    moment,
-                    user: req.user,
-                    pictureInfo: pictureinfo,
-                    jadefunctions,
-                    scripts: [scripts.util, scripts.typeahead, scripts.typeaheadwrapper]
-                });
-
-            } catch (error) {
-                next(error);
-            }
-        })
         .post(async (req, res) => {
 
             try {
@@ -129,7 +98,7 @@ module.exports = function (passport) {
 
     router.get('/apply/:url', utils.isAuthenticated, async (req, res) => {
         if (!req.user.teachingDetails) {
-            res.redirect('/user/teacher-details/' + req.user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + req.params.url));
+            res.redirect('/user' + '?redirectUrl=' + encodeURIComponent('/job/message/' + req.params.url));
         } else {
             res.redirect('/job/message/' + req.params.url);
         }

@@ -22,7 +22,12 @@ if responseInfo && !textInput.value
     input.form-control(type=textInput.type, id=textInput.id, class=textInput.class, name=textInput.name, form=textInput.formName, placeholder=textInput.placeholder, value=textInput.value, autocomplete="off", maxlength=textInput.max, minlength=textInput.min, disabled=textInput.disabled, required=textInput.required)
     .invalid-feedback
         | #{textInput.errorMessage}
-if textInput    
-    small.form-text.text-muted #{textInput.undertext}
+
+if textInput.undertext    
+    if textInput.undertext.link
+        small.form-text.text-muted 
+            a(href=textInput.undertext.link) #{textInput.undertext.value}
+    else 
+        small.form-text.text-muted #{textInput.undertext}
 
 -textInput = {}

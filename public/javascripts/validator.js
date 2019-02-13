@@ -17,6 +17,7 @@ Validator.prototype.validateForm = function (event) {
     let f;
     let field;
     let formvalid = true;
+    let invalidFields = [];
 
 
     // Loop all fields
@@ -31,6 +32,7 @@ Validator.prototype.validateForm = function (event) {
         let fieldValid = this.validateField(field);
 
         if (!fieldValid) {
+            invalidFields.push(field);
             formvalid = false;
         }
 
@@ -40,7 +42,8 @@ Validator.prototype.validateForm = function (event) {
     if (!formvalid) {
         if (event.preventDefault) event.preventDefault();
     }
-    return formvalid;
+
+    return { valid: formvalid, invalidFields };
 };
 
 Validator.prototype.validateField = function (field) {

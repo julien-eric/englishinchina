@@ -16,14 +16,14 @@ block content
                         #write-message-prompt.col-lg-6.order-2.order-lg-1
                             h1 Let's send a message
                             p This message will be sent to the employer along with your teaching experience information and your email. Review your 
-                                a.font-weight-bold(href='/user/teacher-details/' + user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + job.url)) teacher profile
+                                a.font-weight-bold(href='/user/' + user.id + '?redirectUrl=' + encodeURIComponent('/job/message/' + job.url)) teacher profile
                             p
                                 span.font-weight-bold What should I write?
                                 |  This is completely up to you. Employers like to receive a personalized message. They want to know why they should hire you. Based
                                 | on the description of the position, what do you think makes you a valuable candidate and what previous experience puts you in a good position to handle the responsibilities of this job?
                             .row
                                 .col-lg-6.col-sm-6.mb-2
-                                    a.btn.btn-outline-primary.btn-block(href='/user/teacher-details/' + user.id )
+                                    a.btn.btn-outline-primary.btn-block(href='/user/' )
                                         i.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
                                         | View Teacher Profile
                                 .col-lg-6.col-sm-6.mb-2
@@ -50,7 +50,7 @@ block content
                                 -textArea.required = true
                                 -textArea.formName = 'message-employer'
                                 include ../../templates/inputs/text-area
-                            .col-sm-12.col-lg-12
+                            .col-12.mt-3
                                 .row
                                     .col-lg-6.col-sm-6.mb-2
                                         a.btn.btn-outline-primary.btn-block(href='/job/' + job.url)
