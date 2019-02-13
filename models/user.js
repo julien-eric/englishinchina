@@ -2,41 +2,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const teachingDetailsSchema = new Schema({
+    fullName: String,
+    gender: String,
     eslCertificate: Boolean,
     teachingLicense: Boolean,
-    yearsOfExperience: Number,
+    livingCountry: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
+    citizenship: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
+    dateOfBirth: Date,
     urlResume: String,
-    fileNameResume: String
+    fileNameResume: String,
+    yearsOfExperience: Number,
+});
+
+const employerDetailsSchema = new Schema({
+    name: String
 });
 
 module.exports = mongoose.model('User', {
     username: String,
     password: String,
-    firstName: String,
-    lastName: String,
     email: String,
+    verified: { type: Boolean, default: false },
     teachingDetails: { type: teachingDetailsSchema },
+    employerDetails: { type: employerDetailsSchema },
+
     livingCountry: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
     citizenship: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
-    anonymous: { type: Boolean, default: false },
-    verified: { type: Boolean, default: false },
-    token: String,
-    gender: String,
-    avatarUrl: String,
-    admin: Boolean,
     dateOfBirth: Date,
+    firstName: String,
+    lastName: String,
+
+    token: String,
+    avatarUrl: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     useFacebookPic: Boolean,
     fb: {
         id: String,
         access_token: String
-    },
-    twitter: {
-        id: String,
-        token: String,
-        username: String,
-        displayName: String,
-        lastStatus: String
     }
 });

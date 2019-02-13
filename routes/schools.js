@@ -136,15 +136,6 @@ module.exports = function (passport) {
         });
     });
 
-    router.get('/deletephoto/:photoid/:schoolid', utils.isAdmin, (req, res) => {
-        const photoId = req.params.photoid;
-        const schoolId = req.params.schoolid;
-
-        images.deleteImage(photoId, (err, numberOfPhotosDeleted) => {
-            res.redirect(`/school/${schoolId}`);
-        });
-    });
-
     router.get('/updatecoverphoto/:photoid/:schoolid', (req, res) => {
         const photoId = req.params.photoid;
         const schoolId = req.params.schoolid;
@@ -153,20 +144,6 @@ module.exports = function (passport) {
             schools.updateCoverPicture(schoolId, photolist[0].url, (editedschool) => {
                 res.redirect('/');
             });
-        });
-    });
-
-    /** **********************************************************************************************************
-       *deleteReview : Delete Review
-       * userID : integer
-       * schoolID : integer
-       * review : string
-       ************************************************************************************************************ */
-    router.get('/deletereview/:reviewid/:schoolid', utils.isAdmin, (req, res) => {
-        const reviewId = req.params.reviewid;
-        const schoolId = req.params.schoolid;
-        reviews.deleteReview(reviewId, (err, document, result) => {
-            res.redirect(`/school/${schoolId}`);
         });
     });
 
@@ -419,36 +396,6 @@ module.exports = function (passport) {
     });
 
     /** **********************************************************************************************************
-       *  validateSchool: School should be validated before appearing in list
-       * Param : SchoolID, id of school to validate
-       ************************************************************************************************************ */
-    router.get('/validate/:id', utils.isAdmin, (req, res) => {
-        schools.validateSchool(req.params.id, (err, editedSchool) => {
-            res.redirect('/');
-        });
-    });
-
-    /** **********************************************************************************************************
-       *  devalidateSchool: Devalidate School
-       * Param : SchoolID, id of school to validate
-       ************************************************************************************************************ */
-    router.get('/invalidate/:id', utils.isAdmin, (req, res) => {
-        schools.validateSchool(req.params.id, (err, editedSchool) => {
-            res.redirect('/');
-        }, false);
-    });
-
-    /** **********************************************************************************************************
-       *  removeSchool: Remove school if user is admin
-       * Param : SchoolID, id of school to remove
-       ************************************************************************************************************ */
-    router.get('/remove/:id', utils.isAdmin, (req, res) => {
-        schools.deleteSchool(req.params.id, (err, deletedSchool) => {
-            res.redirect('/');
-        });
-    });
-
-    /** **********************************************************************************************************
        *getSchoolById : Method to search for specific school by its ID. will return school and render page.
        * ID: school's id.
        ************************************************************************************************************ */
@@ -465,7 +412,7 @@ module.exports = function (passport) {
             let splashReview = reviews.selectSplashReview(school.reviews);
 
             let schoolOwner = false;
-            if ((req.user && school && school.user && school.user.equals(req.user._id)) || (res.locals.admin)) {
+            if ((req.user && school && school.user && school.user.equals(req.user._id))) {
                 schoolOwner = true;
             }
             const reviewDistribution = reviews.createReviewDistribution(school.reviews);

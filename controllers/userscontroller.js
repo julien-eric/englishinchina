@@ -10,7 +10,7 @@ module.exports = {
     },
 
     findUserById (id) {
-        return User.findOne({ _id: id }).populate('livingCountry').populate('citizenship').exec();
+        return User.findOne({ _id: id }).populate('teachingDetails.livingCountry').populate('teachingDetails.citizenship').exec();
     },
 
     findUserByEmail (email) {

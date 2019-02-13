@@ -25,7 +25,7 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
         let message = await Message.create({ conversation, user: user1, content });
 
         let emailBody = emailsController.generateEmailBody(
-            'Message from ' + user1.firstName + ' ' + user1.lastName,
+            'Message from ' + user1.teachingDetails.fullName,
             content,
             'View Teacher Profile',
             'https://www.secondLanguage.world'
@@ -34,7 +34,7 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
         emailsController.sendEmail(
             user2.email,
             'jobapplicant@secondlanguage.world',
-            'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
+            'Job Application from ' + message.user.teachingDetails.fullName,
             emailBody,
             'text/html'
         );
@@ -52,7 +52,7 @@ MessageController.prototype.createMessage = async (user1, user2, content) => {
  */
 MessageController.prototype.formatApplicationMessage = (applicant, content) => {
     let emailContent = '';
-    emailContent += 'Applicant name: ' + applicant.firstName + ' ' + applicant.lastName + '<br>';
+    emailContent += 'Applicant name: ' + applicant.teachingDetails.fullName + '<br>';
     emailContent += 'Applicant email: ' + applicant.email + '<br><br>';
     emailContent += 'Message: ' + content;
     return emailContent;

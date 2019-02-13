@@ -54,7 +54,7 @@ JobsController.prototype.sendApplicationMessage = async (job, applicant, employe
     if (employer.email != job.email) {
 
         let emailBody = emailsController.generateEmailBody(
-            'Message from ' + applicant.firstName + ' ' + applicant.lastName,
+            'Message from ' + applicant.teachingDetails.fullName,
             content,
             'View Teacher Profile',
             'https://www.secondLanguage.world'
@@ -63,7 +63,7 @@ JobsController.prototype.sendApplicationMessage = async (job, applicant, employe
         emailsController.sendEmail(
             job.email,
             'jobapplicant@secondlanguage.world',
-            'Job Application from ' + message.user.firstName + ' ' + message.user.lastName,
+            'Job Application from ' + message.user.teachingDetails.fullName,
             emailBody,
             'text/html'
         );

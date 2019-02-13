@@ -4,7 +4,7 @@ block content
         .row.py-3
             .col-md-12.col-sm-12.col-lg-12
                 -var bread1 = {title: 'Home', url:'/'}
-                -var bread2 = {title: job.title.substring(0, 30) + '...', url:'job/' + job.url}
+                -var bread2 = {title: job.title.substring(0, 30) + '...', url:'/job/' + job.url}
                 -var bread3 = {title: 'Message', url:'job/message/' + job.url}
                 include ../../breadcrumb
         .row
@@ -21,13 +21,10 @@ block content
                                 | employer replies to your message.
                             .row
                                 .col-lg-6.col-sm-6.mb-2
-                                    a.btn.btn-outline-primary.btn-block(href='/user/teacher-details/' + user.id )
+                                    a.btn.btn-outline-primary.btn-block(href='/search' )
                                         i.mdi.mdi-arrow-left.mr-2(aria-hidden='true')
                                         | Back to Job Board
                                 .col-lg-6.col-sm-6.mb-2
-                                    a#write-button.btn.btn-outline-primary.btn-block(href='#') Back to Offer
+                                    a#write-button.btn.btn-outline-primary.btn-block(href='/job/' + job.url) Back to Offer
                         .col-lg-6.text-center.order-2.order-lg-1.mb-3
                             img.img-prompt.img-fluid(src='https://englishinchina.s3.amazonaws.com/lg_a1f5b640-1e81-11e9-a91e-bd7ecede5081.jpg')
-        //- .row
-        //-     .col-md-12.col-sm-12.col-lg-12
-        //-         .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3  

@@ -15,8 +15,8 @@ block content
                      .profile-img.image-holder.rounded-circle.th(style="background-image: url('#{pictureInfo.returnThumbnail(photo.user.avatarUrl)}');")
                .user-information
                   if photo.user
-                     if photo.user.firstName && photo.user.lastName
-                        a.name(href="/user/#{photo.user._id}") #{photo.user.firstName} #{photo.user.lastName}
+                     if photo.user.teachingDetails.fullName
+                        a.name(href="/user/#{photo.user._id}") #{photo.user.teachingDetails.fullName}
                      else
                         a.name(href="/user/#{photo.user._id}") #{photo.user.username}
                      .date #{photo.date.getDate()}/#{photo.date.getUTCMonth()+1}/#{photo.date.getUTCFullYear()}

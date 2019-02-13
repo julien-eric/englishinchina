@@ -18,26 +18,14 @@ if user
                 
                     .col-lg-6
                         -var textInput = {}
-                        -textInput.id = 'first-name'
-                        -textInput.name = 'firstName'
+                        -textInput.id = 'full-name'
+                        -textInput.name = 'fullName'
                         -textInput.formName = 'teacher-details'
-                        -textInput.placeholder = 'First Name'
-                        -textInput.label = 'First Name'
+                        -textInput.placeholder = 'Full Name'
+                        -textInput.label = 'Full Name'
                         -textInput.required = true
-                        if user && user.firstName
-                            -textInput.value = user.firstName
-                        include ../templates/inputs/text-input
-                
-                    .col-lg-6
-                        -var textInput = {}
-                        -textInput.id = 'last-name'
-                        -textInput.name = 'lastName'
-                        -textInput.formName = 'teacher-details'
-                        -textInput.placeholder = 'Last Name'
-                        -textInput.label = 'Last Name'
-                        -textInput.required = true
-                        if user && user.lastName
-                            -textInput.value = user.lastName
+                        if user && user.teachingDetails && user.teachingDetails.fullName
+                            -textInput.value = user.teachingDetails.fullName
                         include ../templates/inputs/text-input
 
                 .row
@@ -53,8 +41,8 @@ if user
                         -select.crossRefAttributeValue = 'code'
                         -select.crossRefAttributeName = 'name'
                         -select.required = true
-                        if user && user.livingCountry
-                            - select.crossRefValue = user.livingCountry.code
+                        if user && user.teachingDetails && user.teachingDetails.livingCountry
+                            - select.crossRefValue = user.teachingDetails.livingCountry.code
                         include ../templates/inputs/generic-select 
             
                     .col-lg-6
@@ -69,8 +57,8 @@ if user
                         -select.crossRefAttributeValue = 'code'
                         -select.crossRefAttributeName = 'name'
                         -select.required = true
-                        if user && user.citizenship
-                            - select.crossRefValue = user.citizenship.code
+                        if user && user.teachingDetails && user.teachingDetails.citizenship
+                            - select.crossRefValue = user.teachingDetails.citizenship.code
                         include ../templates/inputs/generic-select 
 
                 .row
@@ -83,8 +71,8 @@ if user
                         -datepicker.label = 'Date of Birth'
                         -datepicker.errorMessage = 'Please select a date'
                         -datepicker.required = true
-                        if user.dateOfBirth
-                            -datepicker.value = user.dateOfBirth
+                        if user && user.teachingDetails && user.teachingDetails.dateOfBirth
+                            -datepicker.value = user.teachingDetails.dateOfBirth
                         include ../templates/inputs/date-field
                 
                 h3.my-5.text-dark.font-weight-bold Teaching Experience
@@ -102,7 +90,7 @@ if user
                         -select.crossRefAttributeValue = 'value'
                         -select.crossRefAttributeName = 'optionLabel'
                         -select.required = true
-                        if user.teachingDetails
+                        if user && user.teachingDetails && user.teachingDetails.teachingLicense
                             - select.crossRefValue = user.teachingDetails.teachingLicense
                         include ../templates/inputs/generic-select 
 
@@ -118,7 +106,7 @@ if user
                         -select.crossRefAttributeValue = 'value'
                         -select.crossRefAttributeName = 'optionLabel'
                         -select.required = true
-                        if user.teachingDetails
+                        if user && user.teachingDetails && user.teachingDetails.eslCertificate
                             - select.crossRefValue = user.teachingDetails.eslCertificate
                         include ../templates/inputs/generic-select 
                     
@@ -133,7 +121,7 @@ if user
                         -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
                         -numberInput.tooltip = 'How many years of experience do you have teaching, whether in ESL or as a public/private school teacher'
                         -numberInput.required = true
-                        if user.teachingDetails
+                        if user && user.teachingDetails && user.teachingDetails.yearsOfExperience
                             - numberInput.value = user.teachingDetails.yearsOfExperience
                         include ../templates/inputs/generic-number-input 
 

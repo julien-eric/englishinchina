@@ -14,7 +14,7 @@ include salary-range-input-horiz
         -datepicker.errorMessage = 'Please select a date'
         -datepicker.required = true
         if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-            -datepicker.value = user.dateOfBirth
+            -datepicker.value = responseInfo.jobDetails.startDate
         include ../../templates/inputs/date-field
 
     .col-lg-6.form-group

@@ -52,7 +52,7 @@ block card
                     -datepicker.errorMessage = 'Please select a date'
                     -datepicker.required = true
                     if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-                        -datepicker.value = user.dateOfBirth
+                        -datepicker.value = responseInfo.jobDetails.startDate
                     include ../../templates/inputs/date-field
             
             .col-lg-6.form-group
@@ -66,8 +66,8 @@ block card
                     -datepicker.label = 'End Date'
                     -datepicker.errorMessage = 'Please select a date'
                     -datepicker.required = true
-                    if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-                        -datepicker.value = user.dateOfBirth
+                    if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.endDate
+                        -datepicker.value = responseInfo.jobDetails.endDate
                     include ../../templates/inputs/date-field
 
         button.btn.btn-primary.btn-rounded.nextBtn.float-right(type='button') Next

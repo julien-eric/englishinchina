@@ -31,6 +31,74 @@ module.exports = function (passport) {
         });
     });
 
+    router.get('/fixuserbase', async (req, res) => {
+        let user = await usersController.findUserByEmail('samaman@mailinator.com');
+        if (user.teachingDetails) {
+            let newUser = {
+                username: user.username,
+                password: user.password,
+                email: user.email,
+                verified: user.verified,
+                token: user.token,
+                avatarUrl: user.avatarUrl,
+                resetPasswordToken: user.resetPasswordToken,
+                resetPasswordExpires: user.resetPasswordExpires,
+                fb: user.fb,
+                useFacebookPic: user.useFacebookPic,
+
+                teachingDetails: {
+                    fullName: user.firstName + ' ' + user.lastName,
+                    gender: user.gender,
+                    dateOfBirth: user.dateOfBirth,
+                    livingCountry: user.livingCountry,
+                    citizenship: user.citizenship,
+
+                    eslCertificate: user.teachingDetails.eslCertificate,
+                    teachingLicense: user.teachingDetails.teachingLicense,
+                    yearsOfExperience: user.teachingDetails.yearsOfExperience,
+                    urlResume: user.teachingDetails.urlResume,
+                    fileNameResume: user.teachingDetails.fileNameResume,
+                }
+            }
+            let savedUser = await usersController.updateUser(user.id, newUser);
+            res.redirect('/');
+        }
+
+        // let users = await usersController.getAllUsers();
+        // users.forEach(async (user) => {
+        //     if (user.teachingDetails) {
+        //         let newUser = {
+        //             username: user.username,
+        //             password: user.password,
+        //             email: user.email,
+        //             verified: user.verified,
+        //             token: user.token,
+        //             avatarUrl: user.avatarUrl,
+        //             resetPasswordToken: user.resetPasswordToken,
+        //             resetPasswordExpires: user.resetPasswordExpires,
+        //             fb: user.fb,
+        //             useFacebookPic: user.useFacebookPic,
+
+        //             teachingDetails: {
+        //                 fullName: user.firstName + ' ' + user.lastName,
+        //                 gender: user.gender,
+        //                 dateOfBirth: user.dateOfBirth,
+        //                 livingCountry: user.livingCountry,
+        //                 citizenship: user.citizenship,
+
+        //                 eslCertificate: user.teachingDetails.eslCertificate,
+        //                 teachingLicense: user.teachingDetails.teachingLicense,
+        //                 yearsOfExperience: user.teachingDetails.yearsOfExperience,
+        //                 urlResume: user.teachingDetails.urlResume,
+        //                 fileNameResume: user.teachingDetails.fileNameResume,
+        //             }
+        //         }
+        //         let savedUser = await usersController.updateUser(user.id, newUser);
+        //     }
+        // });
+        // res.redirect('/');
+    });
+
     router.post('/login', (req, res, next) => {
 
         let redirectUrl = '/';
@@ -256,8 +324,8 @@ module.exports = function (passport) {
     /** **********************************************************************************************************
          *EDIT USER :   GET : Show profile for a different user, show reviews and possible schools created by user.
         ************************************************************************************************************ */
-    router.route('/user', utils.isAuthenticated)
-        .get(async (req, res, next) => {
+    router.route('/user')
+        .get(utils.isAuthenticated, async (req, res, next) => {
             try {
                 let countries = await countriesController.getCountries();
                 let redirectUrl = req.query.redirectUrl;
@@ -275,7 +343,7 @@ module.exports = function (passport) {
                 next(error);
             }
         })
-        .post(async (req, res, next) => {
+        .post(utils.isAuthenticated, async (req, res, next) => {
             try {
 
                 let userParams = req.body;
@@ -299,14 +367,11 @@ module.exports = function (passport) {
                 let userParams = {};
                 userParams.id = utils.validateParam(req.user.id);
 
-                userParams.firstName = req.body.firstName;
-                userParams.lastName = req.body.lastName;
-
-                userParams.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(req.body.livingCountry));
-                userParams.citizenship = await countriesController.getCountryFromCode(utils.validateParam(req.body.citizenship));
-                userParams.dateOfBirth = new Date(moment(req.body.dateOfBirth, 'MMMM Do YYYY').format());
-
                 userParams.teachingDetails = {};
+                userParams.teachingDetails.fullName = req.body.fullName;
+                userParams.teachingDetails.livingCountry = await countriesController.getCountryFromCode(utils.validateParam(req.body.livingCountry));
+                userParams.teachingDetails.citizenship = await countriesController.getCountryFromCode(utils.validateParam(req.body.citizenship));
+                userParams.teachingDetails.dateOfBirth = new Date(moment(req.body.dateOfBirth, 'MMMM Do YYYY').format());
                 userParams.teachingDetails.eslCertificate = utils.validateParam(req.body.eslCertificate);
                 userParams.teachingDetails.teachingLicense = utils.validateParam(req.body.teachingLicense);
                 userParams.teachingDetails.yearsOfExperience = utils.validateParam(req.body.yearsOfExperience);
@@ -331,7 +396,8 @@ module.exports = function (passport) {
                 }
 
             } catch (error) {
-                next(error);
+                res.flash('error', error.message);
+                res.redirect(req.url);
             }
         });
 
