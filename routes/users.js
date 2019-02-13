@@ -159,7 +159,7 @@ module.exports = function (passport) {
 
     router.post('/signup', (req, res, next) => {
 
-        let redirectUrl = '/';
+        let redirectUrl;
         res.flash('responseInfo', { username: req.body.username, anonymous: req.body.anonymous, email: req.body.email, password: req.body.password });
         if (req.body.redirectUrl) {
             redirectUrl = req.body.redirectUrl;
@@ -181,10 +181,35 @@ module.exports = function (passport) {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect(redirectUrl);
+
+                let url = '/thankyou';
+                if (redirectUrl) {
+                    url += '?redirectUrl=' + encodeURIComponent(redirectUrl);
+                }
+                return res.redirect(url);
             });
         })(req, res, next);
 
+    });
+
+
+    /** **********************************************************************************************************
+         *OPTED-IN :   GET : Sign out and redirect to Home Page
+    ************************************************************************************************************ */
+    router.get('/thankyou', (req, res) => {
+
+        let redirectUrl;
+        if (req.query.redirectUrl) {
+            redirectUrl = req.query.redirectUrl;
+        }
+
+        res.render('login/thank-you', {
+            title: 'Thank you for signing up!',
+            user: req.user,
+            redirectUrl,
+            pictureInfo: pictureinfo,
+            scripts: [scripts.util]
+        });
     });
 
 

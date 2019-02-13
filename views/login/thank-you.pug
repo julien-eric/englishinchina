@@ -1,0 +1,46 @@
+extends ../layout
+block content
+    .container.pb-5
+        .row.py-3
+            .col-md-12.col-sm-12.col-lg-12
+                -var bread1 = {title: 'Home', url:'/'}
+                -var bread2 = {title: 'Signup', url:'/register'}
+                -var bread3 = {title: 'Thank you', url:'/thankyou'}
+                include ../breadcrumb
+        .row
+            .col-md-12.col-sm-12.col-lg-12
+                .border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.py-5.px-md-5.mb-3   
+                    .row.align-items-center
+                        #write-message-prompt.col-lg-12
+                            .row.justify-content-center.text-center
+                                .col-lg-6.col-md-8.col-12
+                                    h1.milkshake Thank you!
+                                    p.font-weight-bold For your contribution to Second Language World. 
+                                    p
+                                        span.font-weight-bold What now?
+                                        |  It's up to you. Are you on the hunt for opportunities out there or are you looking for a new member to join your team?
+                            
+                            .row.justify-content-center.text-center
+                                .col-lg-4.col-md-8.col-12
+                                    if redirectUrl
+                                        a.btn.btn-lg.btn-outline-primary.btn-block(href=redirectUrl) 
+                                            | Continue Application
+                                            i.mdi.mdi-arrow-right(aria-hidden='true')
+
+                            .row
+                                .col-12
+                                    hr.my-5
+                            .row
+                                .col-lg-4.col-sm-12.mb-2
+                                    a.btn.btn-primary.btn-block(href='/search' )
+                                        i.mdi.mdi-account-plus.mr-2(aria-hidden='true')
+                                        | Create Teacher Profile
+                                    p.text-small.text-left.mt-1 Create a teacher profile. Enter some information regarding your experience as a teacher and upload your resume.
+                                .col-lg-4.col-sm-12.mb-2
+                                    a#write-button.btn.btn-primary.btn-block.mdi.mdi-briefcase(href='#')  Post Offer
+                                    p.text-small.mt-1 This is for employers. Here you will be able to fill in our job form and share it with all the teachers on Second Language World
+                                .col-lg-4.col-sm-12.mb-2
+                                    a#write-button.btn.btn-primary.btn-block(href='#') 
+                                        | Search Jobs
+                                        i.mdi.mdi-arrow-right(aria-hidden="true")
+                                    p.text-small.mt-1 See all job opportunities on our Job Board. Create a teacher profile only if you find something that interests you
