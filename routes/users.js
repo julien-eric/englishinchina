@@ -137,7 +137,6 @@ module.exports = function (passport) {
         })(req, res, next);
     });
 
-
     /** **********************************************************************************************************
         *SIGNUP :   GET : Sign up page.
     *               POST: Send user registration request. redirect to home if sucessful, try again if failure
@@ -321,12 +320,14 @@ module.exports = function (passport) {
     router.route('/user')
         .get(utils.isAuthenticated, async (req, res, next) => {
             try {
+                let userType = utils.validateParam(req.query.type);
                 let countries = await countriesController.getCountries();
                 let redirectUrl = req.query.redirectUrl;
-                res.render('login/teacher-details', {
+                res.render('login/user', {
                     title: 'Teacher Profile',
                     user: req.user,
                     redirectUrl,
+                    userType,
                     countries,
                     moment,
                     pictureInfo: pictureinfo,
@@ -380,6 +381,30 @@ module.exports = function (passport) {
                     userParams.teachingDetails.fileNameResume = user.teachingDetails.fileNameResume;
                 }
 
+                await usersController.updateUser(userParams.id, userParams);
+
+                let redirectUrl = utils.validateParam(req.body.redirectUrl);
+                if (redirectUrl != -1) {
+                    res.redirect(redirectUrl);
+                } else {
+                    res.redirect('/user');
+                }
+
+            } catch (error) {
+                res.flash('error', error.message);
+                res.redirect(req.url);
+            }
+        });
+
+    router.route('/user/employer-profile')
+        .post(async (req, res, next) => {
+
+            try {
+
+                let userParams = {};
+                userParams.id = utils.validateParam(req.user.id);
+                userParams.employerDetails = {};
+                userParams.employerDetails.name = req.body.name;
                 await usersController.updateUser(userParams.id, userParams);
 
                 let redirectUrl = utils.validateParam(req.body.redirectUrl);
