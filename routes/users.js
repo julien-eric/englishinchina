@@ -32,71 +32,40 @@ module.exports = function (passport) {
     });
 
     router.get('/fixuserbase', async (req, res) => {
-        let user = await usersController.findUserByEmail('samaman@mailinator.com');
-        if (user.teachingDetails) {
-            let newUser = {
-                username: user.username,
-                password: user.password,
-                email: user.email,
-                verified: user.verified,
-                token: user.token,
-                avatarUrl: user.avatarUrl,
-                resetPasswordToken: user.resetPasswordToken,
-                resetPasswordExpires: user.resetPasswordExpires,
-                fb: user.fb,
-                useFacebookPic: user.useFacebookPic,
 
-                teachingDetails: {
-                    fullName: user.firstName + ' ' + user.lastName,
-                    gender: user.gender,
-                    dateOfBirth: user.dateOfBirth,
-                    livingCountry: user.livingCountry,
-                    citizenship: user.citizenship,
+        let users = await usersController.getAllUsers();
+        users.forEach(async (user) => {
+            if (user.teachingDetails) {
+                let newUser = {
+                    username: user.username,
+                    password: user.password,
+                    email: user.email,
+                    verified: user.verified,
+                    token: user.token,
+                    avatarUrl: user.avatarUrl,
+                    resetPasswordToken: user.resetPasswordToken,
+                    resetPasswordExpires: user.resetPasswordExpires,
+                    fb: user.fb,
+                    useFacebookPic: user.useFacebookPic,
 
-                    eslCertificate: user.teachingDetails.eslCertificate,
-                    teachingLicense: user.teachingDetails.teachingLicense,
-                    yearsOfExperience: user.teachingDetails.yearsOfExperience,
-                    urlResume: user.teachingDetails.urlResume,
-                    fileNameResume: user.teachingDetails.fileNameResume,
+                    teachingDetails: {
+                        fullName: user.firstName + ' ' + user.lastName,
+                        gender: user.gender,
+                        dateOfBirth: user.dateOfBirth,
+                        livingCountry: user.livingCountry,
+                        citizenship: user.citizenship,
+
+                        eslCertificate: user.teachingDetails.eslCertificate,
+                        teachingLicense: user.teachingDetails.teachingLicense,
+                        yearsOfExperience: user.teachingDetails.yearsOfExperience,
+                        urlResume: user.teachingDetails.urlResume,
+                        fileNameResume: user.teachingDetails.fileNameResume,
+                    }
                 }
+                let savedUser = await usersController.updateUser(user.id, newUser);
             }
-            let savedUser = await usersController.updateUser(user.id, newUser);
-            res.redirect('/');
-        }
-
-        // let users = await usersController.getAllUsers();
-        // users.forEach(async (user) => {
-        //     if (user.teachingDetails) {
-        //         let newUser = {
-        //             username: user.username,
-        //             password: user.password,
-        //             email: user.email,
-        //             verified: user.verified,
-        //             token: user.token,
-        //             avatarUrl: user.avatarUrl,
-        //             resetPasswordToken: user.resetPasswordToken,
-        //             resetPasswordExpires: user.resetPasswordExpires,
-        //             fb: user.fb,
-        //             useFacebookPic: user.useFacebookPic,
-
-        //             teachingDetails: {
-        //                 fullName: user.firstName + ' ' + user.lastName,
-        //                 gender: user.gender,
-        //                 dateOfBirth: user.dateOfBirth,
-        //                 livingCountry: user.livingCountry,
-        //                 citizenship: user.citizenship,
-
-        //                 eslCertificate: user.teachingDetails.eslCertificate,
-        //                 teachingLicense: user.teachingDetails.teachingLicense,
-        //                 yearsOfExperience: user.teachingDetails.yearsOfExperience,
-        //                 urlResume: user.teachingDetails.urlResume,
-        //                 fileNameResume: user.teachingDetails.fileNameResume,
-        //             }
-        //         }
-        //         let savedUser = await usersController.updateUser(user.id, newUser);
-        //     }
-        // });
-        // res.redirect('/');
+        });
+        res.redirect('/');
     });
 
     router.post('/login', (req, res, next) => {
