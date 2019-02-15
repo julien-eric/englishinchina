@@ -15,14 +15,12 @@ block content
                     p We'll be looking into this, we get bugs as they happen, no need to send us anything... Feel free to contact us for any support using the form below in the footer. We will try to get back to you ASAP.
 
     .row.mt-2
-        .col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5    
-            a.collapse-link(data-toggle='collapse', href='#employer-error-details-collapse', role='button', aria-expanded='false', aria-controls='employer-error-details-collapse')
-                h1.text-muted.my-5.font-weight-bold 
-                    i.mdi.mdi-bug-outline(aria-hidden='true')
-                    |  Details      
-                    i#employer-error-details-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
-            .collapse#employer-error-details-collapse  
-                .col-12.pb-3
-                    p= message
-                    h2= error.status
-                    pre #{error.stack}
+        -var collapser = {}
+        -collapser.name = 'Details'
+        -collapser.slug = 'error-details'
+        -collapser.mdi = 'mdi-bug-outline'
+        include ./templates/collapsible-header
+            .col-12.pb-3
+                p= message
+                h2= error.status
+                pre #{error.stack}

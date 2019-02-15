@@ -1,0 +1,8 @@
+.col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
+    a.collapse-link(data-toggle='collapse', href='#' + collapser.slug + '-collapse', role='button', aria-expanded='false', aria-controls=collapser.slug + '-collapse')
+        h3.text-muted.my-5.font-weight-bold 
+            i.mdi(class=collapser.mdi, aria-hidden='true')
+            |  #{collapser.name}     
+            i.mdi.mdi-chevron-up(id=collapser.slug + '-collapse-chevron', aria-hidden='true')
+    .collapse(id=collapser.slug + '-collapse', class=collapser.show) 
+        -collapser = {};
