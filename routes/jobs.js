@@ -80,6 +80,94 @@ module.exports = function (passport) {
         }
     });
 
+    router.get('/edit/:url', utils.isAuthenticated, async (req, res, next) => {
+
+        try {
+
+            if (!req.user.employerDetails) {
+                res.redirect('/user?type=employer&redirectUrl=' + encodeURIComponent('/job/add'));
+            }
+
+            let job = await jobsController.getJobByUrl(req.params.url);
+
+            if (req.user.id != job.user.id) {
+                throw new Error('Unauthorized access');
+            }
+
+            // If it's a failed attempt to edit a job, prioritize flashed jobs from failed attempt.
+            if (res.locals.flash.responseInfo) {
+                job = res.locals.flash.responseInfo[0];
+            }
+
+            let cities = undefined;
+            let provinces = await provincesController.getAllProvinces();
+            let companies = await companiesController.getAllCompanies();
+            if (job.province && job.province.code) {
+                cities = await citiesController.getProvinceCitiesByCode(job.province.code);
+                job.provinceCode = job.province.code;
+                if (job.city && job.city.code) {
+                    job.cityCode = job.city.code;
+                }
+            }
+
+            res.render('job/creation/job-edit', {
+                title: ` Edit Job | Second Language World`,
+                user: req.user,
+                moment,
+                companies,
+                provinces,
+                cities,
+                responseInfo: job,
+                jadefunctions: jadefunctions,
+                pictureInfo: pictureinfo,
+                scripts: [scripts.util, scripts.fileUploader, scripts.libmoment,
+                scripts.libbsdatetimepicker, scripts.libslider, scripts.typeahead, scripts.addjob, scripts.stepper, scripts.nouislider,
+                scripts.libtinyMCE, scripts.tinyMCE, scripts.reviewvalidation, scripts.typeaheadwrapper]
+            });
+
+        } catch (error) {
+            next(error);
+        }
+
+    });
+
+    router.route('/edit')
+        .post(async (req, res) => {
+
+            try {
+                let jobId = req.body.jobId;
+                let job = await jobsController.updateJob(req.user, jobId, req.body);
+                res.redirect('/job/' + job.url);
+
+            } catch (errorInfo) {
+
+                let jobInsertError = errorInfo.error;
+                let jobInfo = errorInfo.jobInfo;
+
+                for (let field in jobInsertError.errors) {
+                    if (jobInsertError.errors.hasOwnProperty(field)) {
+                        res.flash('error', jobInsertError.errors[field].message);
+                    }
+                }
+
+                res.flash('responseInfo', jobInfo);
+                res.redirect(url.format({ pathname: '/job/edit' }));
+
+            }
+        });
+
+    router.route('/delete/:url')
+        .post(async (req, res) => {
+
+            try {
+                jobsController.deleteJob(req.params.url);
+                res.send({ success: true });
+
+            } catch (errorInfo) {
+                next(errorInfo);
+            }
+        });
+
     /** **********************************************************************************************************
        *queryJob : Method for search all jobs, it will return any job that has some of the information
        * Param : Query, string that will be looked for as part of the jobs name

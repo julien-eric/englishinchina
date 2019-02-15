@@ -13,12 +13,12 @@ const PNDSTOCNY = 8.69;
 
 let PAGES_TO_VISIT = [
     'https://teflsearch.com/job-results/country/china?page=1',
+    'https://teflsearch.com/job-results/country/china?page=7',
     'https://teflsearch.com/job-results/country/china?page=2',
+    'https://teflsearch.com/job-results/country/china?page=6',
     'https://teflsearch.com/job-results/country/china?page=3',
     'https://teflsearch.com/job-results/country/china?page=4',
-    'https://teflsearch.com/job-results/country/china?page=5',
-    'https://teflsearch.com/job-results/country/china?page=6',
-    'https://teflsearch.com/job-results/country/china?page=7'
+    'https://teflsearch.com/job-results/country/china?page=5'
 ];
 
 let JobCrawler = function () { };
@@ -203,11 +203,23 @@ let FieldProcessor = function () { };
 FieldProcessor.prototype.extractSalary = function (salaryString) {
     try {
         if (salaryString.indexOf('¥') != -1) {
-            return Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('¥') + 1));
+            let salary = Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('¥') + 1));
+            if (salary >= 1000) {
+                return salary / 1000;
+            }
+            return salary;
         } else if (salaryString.indexOf('$') != -1) {
-            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * USDTOCNY / 1000) * 1000;
+            let salary = Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * USDTOCNY / 1000) * 1000;
+            if (salary >= 1000) {
+                return salary / 1000;
+            }
+            return salary;
         } else if (salaryString.indexOf('£') != -1) {
-            return Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * PNDSTOCNY / 1000) * 1000;
+            let salary = Math.round(Number(salaryString.replace(/,/g, '').substring(salaryString.indexOf('$') + 1)) * PNDSTOCNY / 1000) * 1000;
+            if (salary >= 1000) {
+                return salary / 1000;
+            }
+            return salary;
         } else {
             return Number(salaryString);
         }

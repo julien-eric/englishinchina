@@ -6,7 +6,6 @@
             |  Employer Profile      
             i#employer-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
     .collapse.show#employer-profile-collapse        
-        //- h3.my-5.text-dark.font-weight-bold Personal Information 
         form(id='employer-details', class='employer-details', action='/user/employer-profile', method='POST')
 
             if(redirectUrl)
@@ -15,7 +14,7 @@
 
             .row
             
-                .col-lg-6
+                .col-lg-12
                     -var textInput = {}
                     -textInput.id = 'name'
                     -textInput.name = 'name'
@@ -26,6 +25,18 @@
                     if user && user.employerDetails && user.employerDetails.name
                         -textInput.value = user.employerDetails.name
                     include ../templates/inputs/text-input
+
+                .col-lg-12
+                    -var textArea = {}
+                    -textArea.id = 'description'
+                    -textArea.name = 'description'
+                    -textArea.label = 'Description'
+                    -textArea.placeholder = 'Description'
+                    -textArea.rows = 5
+                    -textArea.required = true
+                    if user && user.employerDetails && user.employerDetails.description
+                        -textArea.value = user.employerDetails.description
+                    include ../templates/inputs/text-area
 
             .row.my-3.pb-5  
                 .col-sm-12.col-lg-6.text-center.mt-5

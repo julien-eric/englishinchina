@@ -11,10 +11,11 @@ include salary-range-input-horiz
         -datepicker.class = formName
         -datepicker.placeholder = 'Please Select'
         -datepicker.label = 'Start Date of Contract'
+        -numberInput.responseSubProperty = 'contractDetails'
         -datepicker.errorMessage = 'Please select a date'
         -datepicker.required = true
-        if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.startDate
-            -datepicker.value = responseInfo.jobDetails.startDate
+        if responseInfo && responseInfo.contractDetails && responseInfo.contractDetails.startDate
+            -datepicker.value = responseInfo.contractDetails.startDate
         include ../../templates/inputs/date-field
 
     .col-lg-6.form-group
@@ -32,7 +33,6 @@ include salary-range-input-horiz
         -numberInput.tooltip = 'Duration of contract in years'
         -numberInput.required = true
         include ../../templates/inputs/generic-number-input 
-
 
 h3.mt-5.py-3.text-dark.font-weight-bold Benefits
 
@@ -71,7 +71,7 @@ h3.mt-5.py-3.text-dark.font-weight-bold Benefits
 .row
     .col-lg-6
         -var select = {}
-        -select.options = [{'value': 1, 'optionLabel': 'Yes'}, {'value': 0, 'optionLabel': 'No'} ] 
+        -select.options = [{'value': true, 'optionLabel': 'Yes'}, {'value': false, 'optionLabel': 'No'} ] 
         -select.id = 'teaching-assistant'
         -select.responseSubProperty = 'benefits'
         -select.name = 'teachingAssistant'
@@ -96,7 +96,6 @@ h3.mt-5.py-3.text-dark.font-weight-bold Benefits
         -numberInput.min = 0
         -numberInput.max = 183
         -numberInput.errorMessage = 'Please enter a number between ' + numberInput.min + ' and ' + numberInput.max
-        //- -numberInput.tooltip = 'Number of vacation days yearly'
         -numberInput.required = true
         if responseInfo && responseInfo.jobDetails && responseInfo.jobDetails.vacationDays
             - numberInput.value = responseInfo.jobDetails.vacationDays

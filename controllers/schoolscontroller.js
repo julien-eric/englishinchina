@@ -84,7 +84,7 @@ SchoolsController.prototype.addSchool = async function (user, school) {
 };
 
 SchoolsController.prototype.deleteSchool = function (id) {
-    return School.find({ _id: id }).remove();
+    return School.find({ _id: id }).remove().exec();
 };
 
 SchoolsController.prototype.editSchool = async function (queryInfo) {

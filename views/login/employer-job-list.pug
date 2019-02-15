@@ -1,0 +1,25 @@
+.col-12.border.border-pale-gray.border-radius-5.bg-light.text-dark.px-3.px-md-5
+    
+    a.collapse-link(data-toggle='collapse', href='#employer-job-list-collapse', role='button', aria-expanded='false', aria-controls='employer-job-list-collapse')
+        h1.text-muted.my-5.font-weight-bold 
+            i.mdi.mdi-briefcase-outline(aria-hidden='true')
+            |  Jobs (#{jobs.length})
+            i#employer-job-list-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+    .collapse.show#employer-job-list-collapse  
+        -jobs.noApply = true;
+        each job in jobs
+            .row
+                .col-sm-12.col-md-12.col-lg-12.mb-3
+                    include ../job/job-card    
+                .col-sm-12.col-md-12.col-lg-12.mb-3
+                    .row
+                        .col-12
+                            a.mr-1.btn.btn-sm.btn-primary.text-white.mdi.mdi-eye.mb-0.px-3.px-lg-5(href='/job/' + job.url)  View
+                            a#edit-job.mr-1.btn.btn-sm.btn-primary.text-white.mdi.mdi-pencil.mb-0.px-3.px-lg-5(href='/job/edit/' + job.url)  Change
+                            button.delete-job.mr-1.btn.btn-sm.btn-warning.text-white.mdi.mdi-delete.mb-0.px-3.px-lg-5(type='button', data-url=job.url, data-title=job.title)  Delete
+                .col-sm-12.col-md-12.col-lg-12.mt-0.mb-1
+                    hr
+        .row.mb-3
+            .col-12.col-lg-4
+                a.btn.btn-outline-primary.btn-block.mdi.mdi-plus(href='job/add')  Create Job
+
