@@ -1142,6 +1142,11 @@ $slw-inset-dark: #ebebeb;
 
 }
 
+.two-lines {
+    max-height:44px;
+    line-height:22px;
+    overflow-y: hidden;
+}
 .read-more {
     max-height: 800px;
     overflow-y: hidden;
