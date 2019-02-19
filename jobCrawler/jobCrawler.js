@@ -8,6 +8,7 @@ const jobsController = require('../controllers/jobscontroller');
 const provincesController = require('../controllers/provincescontroller');
 const usersController = require('../controllers/userscontroller');
 const citiesController = require('../controllers/citiescontroller');
+const pagesController = require('../controllers/pagescontroller');
 const USDTOCNY = 6.76;
 const PNDSTOCNY = 8.69;
 
@@ -72,13 +73,23 @@ JobCrawler.prototype.crawl = function (pageToVisit) {
     }
 };
 
-JobCrawler.prototype.visitPage = function (url, callback) {
+JobCrawler.prototype.visitPage = async function (url, callback) {
 
     // Add page to our set
     this.pagesVisited[url] = true;
 
+    if (response.req.path.indexOf('job-advert') != -1) {
+        let page = await pagesController.getPage(url);
+        if (page) {
+            return;
+        } else {
+            pagesController.createPage(url);
+        }
+    }
+
     // Make the request
     winston.silly('Visiting page ' + url);
+
 
     request(url, async (error, response, body) => {
 
