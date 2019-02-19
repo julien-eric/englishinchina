@@ -13,8 +13,8 @@ const USDTOCNY = 6.76;
 const PNDSTOCNY = 8.69;
 
 let PAGES_TO_VISIT = [
-    'https://teflsearch.com/job-results/country/china?page=1',
     'https://teflsearch.com/job-results/country/china?page=7',
+    'https://teflsearch.com/job-results/country/china?page=1',
     'https://teflsearch.com/job-results/country/china?page=2',
     'https://teflsearch.com/job-results/country/china?page=6',
     'https://teflsearch.com/job-results/country/china?page=3',
@@ -33,10 +33,10 @@ let JobCrawler = function () { };
  */
 JobCrawler.prototype.init = function (pagesArray, jobsPerSession, searchAddCooldownSuccess, searchAddCooldownProblem, jobDoneCooldown) {
 
-    this.JOBS_PER_SESSION = jobsPerSession;
-    this.SEARCH_ADD_COOLDOWN_SUCCESS = searchAddCooldownSuccess;
-    this.SEARCH_ADD_COOLDOWN_PROBLEM = searchAddCooldownProblem;
-    this.JOB_DONE_COOLDOWN = jobDoneCooldown;
+    this.JOBS_PER_SESSION = jobsPerSession || 10;
+    this.SEARCH_ADD_COOLDOWN_SUCCESS = searchAddCooldownSuccess || 1000;
+    this.SEARCH_ADD_COOLDOWN_PROBLEM = searchAddCooldownProblem || 1000;
+    this.JOB_DONE_COOLDOWN = jobDoneCooldown || 2000;
 
     this.pagesToVisit = [];
     this.numJobsAdded = 0;
@@ -78,7 +78,7 @@ JobCrawler.prototype.visitPage = async function (url, callback) {
     // Add page to our set
     this.pagesVisited[url] = true;
 
-    if (response.req.path.indexOf('job-advert') != -1) {
+    if (url.indexOf('job-advert') != -1) {
         let page = await pagesController.getPage(url);
         if (page) {
             return;
@@ -105,7 +105,7 @@ JobCrawler.prototype.visitPage = async function (url, callback) {
         let $ = cheerio.load(body);
 
         if (response.req.path.indexOf('job-advert') != -1) {
-            result = await this.fetchInformation($);
+            result = await this.fetchInformation(response.request.href, $);
         } else {
             this.collectInternalLinks($);
         }
@@ -123,7 +123,7 @@ JobCrawler.prototype.visitPage = async function (url, callback) {
     });
 };
 
-JobCrawler.prototype.fetchInformation = async function ($) {
+JobCrawler.prototype.fetchInformation = async function (url, $) {
 
     try {
 
@@ -133,11 +133,21 @@ JobCrawler.prototype.fetchInformation = async function ($) {
         jobInfo.title = $('.views-second-title').text().trim();
         jobInfo.email = fieldProcessor.extractEmail($('.field-name-field-anon-email .field-items span').attr('data-cfemail'));
         if (!jobInfo.email) {
-            jobInfo.email = 'secondlanguageworld@gmail.com';
+
+            let linkNodes = $('.field-name-field-req-how-to-apply .field-items .field-item.even').find('a');
+            jobInfo.email = fieldProcessor.extractEmailFromLinks($, fieldProcessor, linkNodes);
+            if (!jobInfo.email) {
+                linkNodes = $('.field-name-field-req-job-description .field-items .field-item.even').find('a');
+                jobInfo.email = fieldProcessor.extractEmailFromLinks($, fieldProcessor, linkNodes);
+                if (!jobInfo.email) {
+                    throw new Error('Couldn\'t find contact information');
+                }
+            }
         }
 
         let job = await jobsController.getJobByTitle(jobInfo.title);
         if (job) {
+            pagesController.setPageSucceeded(url);
             throw new Error('Job already exists in the system');
         }
 
@@ -180,6 +190,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
         let savedJob = await jobsController.addJob(user, jobInfo);
         if (savedJob) {
             winston.silly('ADDED: ' + savedJob.title);
+            pagesController.setPageSucceeded(url);
         }
         return { error: null, job: savedJob };
 
@@ -189,7 +200,7 @@ JobCrawler.prototype.fetchInformation = async function ($) {
             error = error.error;
         }
 
-        winston.silly(error.message);
+        winston.silly('Error' + error + '  ===   ' + error.message);
         return { error };
     }
 
@@ -210,6 +221,20 @@ JobCrawler.prototype.collectInternalLinks = function ($) {
 };
 
 let FieldProcessor = function () { };
+
+FieldProcessor.prototype.extractEmailFromLinks = function ($, fieldProcessor, linkNodes) {
+    for (let index = 0; index < linkNodes.length; ++index) {
+        try {
+            let link = $(linkNodes[index]).attr('href');
+            if (link.indexOf('#') != -1) {
+                let rawEmail = link.substring(link.indexOf('#') + 1, link.length);
+                return fieldProcessor.extractEmail(rawEmail);
+            }
+        } catch (error) {
+            winston.silly('Error fetching email');
+        }
+    }
+};
 
 FieldProcessor.prototype.extractSalary = function (salaryString) {
     try {
@@ -262,7 +287,7 @@ FieldProcessor.prototype.extractEmail = function (encodedString) {
         };
         return decodeEmail(encodedString);
     } catch (error) {
-        winston.silly(error);
+        winston.silly('Error fetching email ' + error);
         return;
     }
 

@@ -13,7 +13,7 @@ let options = {
         colorize: false
     },
     console: {
-        level: 'info',
+        level: 'silly',
         format: format.combine(
             format.colorize(),
             format.printf(
