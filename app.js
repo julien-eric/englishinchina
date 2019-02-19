@@ -14,7 +14,7 @@ const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const gmapsKey = settings.get('GMAPS_API_KEY');
 const environment = settings.get('ENV');
-const jobCrawler = require('./jobCrawler/jobCrawler');
+const jobCrawler = require('./crawler/jobcrawler');
 let SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
