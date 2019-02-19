@@ -89,8 +89,7 @@ app.use(sassMiddleware({
     prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -129,6 +128,7 @@ const companyRoutes = require('./routes/companies')(passport);
 const blogRoutes = require('./routes/blog')(passport);
 const reviewRoutes = require('./routes/reviews')(passport);
 const jobRoutes = require('./routes/jobs')(passport);
+const payRoutes = require('./routes/pay')(passport);
 const provinceRoutes = require('./routes/provinces')(passport);
 
 app.use('/', routes);
@@ -139,6 +139,7 @@ app.use('/company', companyRoutes);
 app.use('/blog', blogRoutes);
 app.use('/review', reviewRoutes);
 app.use('/job', jobRoutes);
+app.use('/pay', payRoutes);
 app.use('/province', provinceRoutes);
 
 /** *************************************************************

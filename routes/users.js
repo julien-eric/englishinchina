@@ -331,7 +331,7 @@ module.exports = function (passport) {
                 }
 
                 res.render('login/user', {
-                    title: 'Teacher Profile',
+                    title: 'My Profile | Second Language World',
                     user: req.user,
                     jobs,
                     redirectUrl,

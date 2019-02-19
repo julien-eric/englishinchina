@@ -16,7 +16,8 @@ const teachingDetailsSchema = new Schema({
 
 const employerDetailsSchema = new Schema({
     name: String,
-    description: String
+    description: String,
+    availableListings: { type: Number, default: 1 }
 });
 
 module.exports = mongoose.model('User', {
