@@ -32,6 +32,15 @@ $(document).ready(() => {
         $('#splash-padding').height($('#search-navigation').height());
     });
 
+    let readMore = $('#read-more-container');
+    if (readMore) {
+        $('#read-more-button').click(function (event) {
+            event.preventDefault();
+            $('#read-more-container').addClass('show');
+            $('#read-more-button').remove();
+
+        });
+    }
 
     $('.collapse-link').each(function (link) {
         let id = $(this).attr('href');

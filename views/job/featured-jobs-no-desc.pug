@@ -1,0 +1,13 @@
+.row
+    each job in featuredJobs
+        .col-lg-12.mb-3
+            
+            .card.text-right.h-100
+                .display-grid
+                    a.view.overlay.card-img(href='/job/' + job.url)
+                        .image-container.small.border-radius-top-5.lazy-background(style='background-image: url(' + pictureInfo.returnThumbnail(job.pictureUrl) + ');')           
+                    .card-body.bg-light.text-left
+                        h5.font-weight-bold.card-title.px-0 
+                            a.text-dark.text-capitalize(href="/job/" + job.url)
+                                | #{jadefunctions.formatString(job.title, 55)}
+                        p.mb-0.text-capitalize.text-small.font-weight-bold #{job.city.pinyinName} - #{job.province.name} &middot; #{moment(job.contractDetails.startDate).format("MMMM Do")}

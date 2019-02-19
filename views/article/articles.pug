@@ -1,23 +1,24 @@
 extends ../layout
 block content
     .container-fluid.bg-white.pb-5.pt-1.mb-3
-        .container
-            .row.my-5
-                .col-auto.mx-auto
-                    each category, index in categories
-                        
-                        -var url = '/blog/category/' + category.slug
-                        if category.slug == 'all-articles'
-                            -url = '/blog'
+        .row
+            .container
+                .row.my-5
+                    .col-auto.mx-auto
+                        each category, index in categories
+                            
+                            -var url = '/blog/category/' + category.slug
+                            if category.slug == 'all-articles'
+                                -url = '/blog'
 
-                        if index < 7
-                            if category.slug == currentCategory.slug
-                                a.mr-1.btn.btn-md.btn-primary.text-white.mb-1.mb-0(href=url) #{category.name}
-                            else
-                                a.mr-1.btn.btn-md.btn-pale-gray.text-dark.mb-1.mb-0(href=url) #{category.name}
+                            if index < 7
+                                if category.slug == currentCategory.slug
+                                    a.mr-1.btn.btn-md.btn-primary.text-white.mb-1.mb-0(href=url) #{category.name}
+                                else
+                                    a.mr-1.btn.btn-md.btn-pale-gray.text-dark.mb-1.mb-0(href=url) #{category.name}
 
-            h1.text-muted.mb-5.mt-1.font-weight-bold Featured
-            include featured-article-big
+                h1.text-muted.mb-5.mt-1.font-weight-bold Featured
+                include featured-article-big
     
     .container
         h1.text-muted.my-5.font-weight-bold Latest
