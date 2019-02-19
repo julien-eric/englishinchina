@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash-2');
 const mongoose = require('mongoose');
 const stylus = require('stylus');
+const utils = require('./utils');
 const sassMiddleware = require('node-sass-middleware');
 const favicon = require('serve-favicon');
 const settings = require('simplesettings');
