@@ -2,9 +2,14 @@ if locals.user
     li.nav-item.dropdown.mb-2.mb-lg-0.p-2
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             span.caret
-                | #{user.username}
+                -var mdi = 'mdi-account-box-outline'
+                if user.employerDetails
+                    -mdi = 'mdi-briefcase-outline'
+                i.mdi.text-primary(class=mdi, aria-hidden='true')
+                |  #{user.username}
         .dropdown-menu.text-center(aria-labelledby='navbarDropdownMenuLink')
-            a.dropdown-item.py-3(href='/user') My Profile
+            a.dropdown-item.py-3(href='/user') 
+                |  My Profile
             if user.employerDetails
                 a.dropdown-item.py-3(href='/job/add') Add Job
                 a.dropdown-item.py-3(href='/user') Jobs

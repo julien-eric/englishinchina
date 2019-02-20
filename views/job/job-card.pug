@@ -10,7 +10,7 @@
                         h4.font-weight-bold.card-title.px-0 
                             a.text-dark.text-capitalize(href="/job/" + job.url)
                                 | #{jadefunctions.formatString(job.title, 77)}
-                    if (!jobs.noApply)
+                    if (jobs && !jobs.noApply)
                         .col-md-5.col-lg-4.text-right.d-none.d-md-block.text-left.mb-3.mb-lg-1
                             a.btn.btn-sm.btn-link(href="/job/" + job.url) View Offer
                             a.btn.btn-sm.btn-primary.mr-1(href="/job/apply/" + job.url) Apply
