@@ -1,6 +1,7 @@
 const Message = require('../models/message');
 const conversationsController = require('./conversationscontroller');
 const emailsController = require('./emailscontroller');
+const awsManager = require('../awsmanager');
 
 let MessageController = function () { };
 
@@ -54,6 +55,8 @@ MessageController.prototype.formatApplicationMessage = (applicant, content) => {
     let emailContent = '';
     emailContent += 'Applicant name: ' + applicant.teachingDetails.fullName + '<br>';
     emailContent += 'Applicant email: ' + applicant.email + '<br><br>';
+    let resumeLink = `https://${awsManager.bucketName}.s3.amazonaws.com/${applicant.teachingDetails.urlResume}`;
+    emailContent += 'Applicant resume: <a href="' + resumeLink + '">' + applicant.teachingDetails.fileNameResume + '</a><br><br>';
     emailContent += 'Message: ' + content;
     return emailContent;
 };
