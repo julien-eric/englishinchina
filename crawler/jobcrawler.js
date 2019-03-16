@@ -140,7 +140,7 @@ JobCrawler.prototype.fetchInformation = async function (url, $) {
                 linkNodes = $('.field-name-field-req-job-description .field-items .field-item.even').find('a');
                 jobInfo.email = fieldProcessor.extractEmailFromLinks($, fieldProcessor, linkNodes);
                 if (!jobInfo.email) {
-                    throw new Error('Couldn\'t find contact information');
+                    jobInfo.email = 'secondlanguageworld@gmail.com';
                 }
             }
         }
