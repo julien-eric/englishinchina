@@ -696,6 +696,10 @@ input[type=range]+.thumb {
     cursor: pointer;
 }
 
+.image-container.small {
+    height: 4rem;
+}
+
 .image-container-default {
     background-image: url("https://cdn3.volusion.com/tyzky.ynqff/v/vspfiles/photos/432-2.jpg");
     border-radius: 5px;
@@ -1136,4 +1140,30 @@ $slw-inset-dark: #ebebeb;
     background-color: rgba(200, 20, 20, 0.1) !important;
     color: rgb(200, 20, 20);
 
+}
+
+.two-lines {
+    max-height:44px;
+    line-height:22px;
+    overflow-y: hidden;
+}
+.read-more {
+    max-height: 800px;
+    overflow-y: hidden;
+    transition: max-height 1s linear;
+    &:after{
+        content:'';
+        display:block;
+        box-shadow: inset 0px -15px 15px 0px white;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+}
+
+.read-more.show {
+    max-height: inherit;
+    transition: max-height 1s linear;
 }

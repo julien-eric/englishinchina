@@ -2,6 +2,7 @@ const _ = require('underscore');
 const Job = require('../models/job');
 const moment = require('moment');
 const winston = require('../config/winstonconfig');
+const jadefunctions = require('../jadeutilityfunctions');
 const provincesController = require('./provincescontroller');
 const messagesController = require('./messagescontroller');
 const emailsController = require('./emailscontroller');
@@ -43,10 +44,6 @@ JobsController.prototype.getJobByUrl = async (url) => {
     return job;
 };
 
-JobsController.prototype.updateJob = async (jobId, jobFields) => {
-    return Job.findOneAndUpdate({ _id: jobId }, jobFields).exec();
-};
-
 JobsController.prototype.sendApplicationMessage = async (job, applicant, employer, content) => {
 
     let message = await messagesController.createMessage(applicant, employer, content);
@@ -86,52 +83,90 @@ JobsController.prototype.getFeaturedJobs = async () => {
     return jobs;
 };
 
-JobsController.prototype.addJob = async (user, jobParams) => {
+JobsController.prototype.getJobsByUser = async (userId) => {
+    let jobs = await Job.find().where({ user: userId }).populate('school').populate('province').populate('city').exec();
+    jobs.forEach((job) => {
+        findPicture(job);
+        job = jadefunctions.trunkContentElement(job, 'title', 120);
+        job = jadefunctions.trunkContentElement(job, 'description', 170);
+    });
+    return jobs;
+};
+
+JobsController.prototype.prepareJobInfo = async function (user, jobParams) {
+
+    let city = await citiesController.getCityByCode(jobParams.cityCode);
+    let province = await provincesController.getProvinceByCode(jobParams.provinceCode);
+    if (jobParams.pictureUrlPrevious && !jobParams.pictureUrl) {
+        jobParams.pictureUrl = jobParams.pictureUrlPrevious;
+        jobParams.pictureFileName = jobParams.pictureFileNamePrevious;
+    }
+
+    return {
+        title: jobParams.title,
+        kicker: jobParams.kicker,
+        pictureUrl: jobParams.pictureUrl,
+        pictureFileName: jobParams.pictureFileName,
+        url: utils.generateUrl(jobParams.title),
+        email: user.email,
+        description: jobParams.description,
+        user,
+        school: jobParams.schoolId,
+        province,
+        provinceCode: province.code,
+        city,
+        cityCode: city.code,
+        company: jobParams.companyId,
+        contractDetails: {
+            salaryLower: jobParams.salaryLower * 1000,
+            salaryHigher: jobParams.salaryHigher * 1000,
+            startDate: new Date(moment(jobParams.startDate, 'MMMM DD YYYY').format()),
+            duration: jobParams.duration
+        },
+        teachingDetails: {
+            institution: jobParams.institution,
+            weeklyLoad: jobParams.weeklyLoad,
+            classSize: jobParams.classSize,
+            ageGroup: jobParams.ageGroup
+        },
+        benefits: {
+            accomodation: jobParams.accomodation,
+            airfare: jobParams.airfare,
+            teachingAssistant: jobParams.teachingAssistant,
+            vacationDays: jobParams.vacationDays
+        }
+    };
+};
+
+JobsController.prototype.updateJob = async function (user, jobId, jobParams) {
     let jobInfo;
     try {
 
-        let city = await citiesController.getCityByCode(jobParams.cityCode);
-        let province = await provincesController.getProvinceByCode(jobParams.provinceCode);
-        if (jobParams.pictureUrlPrevious && !jobParams.pictureUrl) {
-            jobParams.pictureUrl = jobParams.pictureUrlPrevious;
-            jobParams.pictureFileName = jobParams.pictureFileNamePrevious;
-        }
+        jobInfo = await this.prepareJobInfo(user, jobParams);
+        let updatedJob = await Job.findOneAndUpdate({ _id: jobId }, jobInfo, { new: true }).exec();
 
-        jobInfo = {
-            title: jobParams.title,
-            kicker: jobParams.kicker,
-            pictureUrl: jobParams.pictureUrl,
-            pictureFileName: jobParams.pictureFileName,
-            url: utils.generateUrl(jobParams.title),
-            email: user.email,
-            description: jobParams.description,
-            user,
-            school: jobParams.schoolId,
-            province,
-            provinceCode: province.code,
-            city,
-            cityCode: city.code,
-            company: jobParams.companyId,
-            contractDetails: {
-                salaryLower: jobParams.salaryLower,
-                salaryHigher: jobParams.salaryHigher,
-                startDate: new Date(moment(jobParams.startDate, 'MMMM DD YYYY').format()),
-                duration: jobParams.duration
-            },
-            teachingDetails: {
-                institution: jobParams.institution,
-                weeklyLoad: jobParams.weeklyLoad,
-                classSize: jobParams.classSize,
-                ageGroup: jobParams.ageGroup
-            },
-            benefits: {
-                accomodation: jobParams.accomodation,
-                airfare: jobParams.airfare,
-                teachingAssistant: jobParams.teachingAssistant,
-                vacationDays: jobParams.vacationDays
-            }
-        };
+        await imagesController.addImage({
+            type: 5,
+            user: null,
+            school: null,
+            description: updatedJob.title,
+            url: updatedJob.pictureUrl,
+            date: Date.now()
+        });
 
+        return Promise.resolve(updatedJob);
+
+    } catch (error) {
+        return Promise.reject({ error: error, jobInfo: jobInfo });
+    }
+
+};
+
+JobsController.prototype.addJob = async function (user, jobParams) {
+    let jobInfo;
+    try {
+
+        jobInfo = await this.prepareJobInfo(user, jobParams);
         let savedJob = await Job.create(jobInfo);
 
         await imagesController.addImage({
@@ -148,6 +183,11 @@ JobsController.prototype.addJob = async (user, jobParams) => {
     } catch (error) {
         return Promise.reject({ error: error, jobInfo: jobInfo });
     }
+};
+
+
+JobsController.prototype.deleteJob = async function (url) {
+    return Job.find({ url }).remove().exec();
 };
 
 /**

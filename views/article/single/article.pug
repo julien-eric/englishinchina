@@ -1,49 +1,52 @@
 extends ../../layout
 block content
     .container-fluid.bg-white.py-5
-        .container
-            .row
-                .col-12
-                    each category in article.categories
-                        a.mr-1.btn.btn-sm.btn-primary.text-white #{category.name}
-                    .row
-                        .col-md-8.col-sm-12
-                            h1.display-2.font-weight-bold #{article.title}
-                            hr
-                            .row.align-items-center.mb-3
-                                .col-auto.pr-0
-                                    .img.border-radius-circle(style="background-image: url('" + article.author.profile_image + "');",  alt=article.author.slug)
-                                .col-auto
-                                    h5.my-0.font-weight-bold #{article.author.first_name} #{article.author.last_name}
-                                    p.my-0.text-small #{article.author.title}
-                                    p.my-0.text-small Posted on #{moment(article.created).format("MMMM Do YYYY")}
+        .row
+            .container
+                .row
+                    .col-12
+                        each category in article.categories
+                            a.mr-1.btn.btn-sm.btn-primary.text-white #{category.name}
+                        .row
+                            .col-lg-8.col-sm-12
+                                h1.display-2.font-weight-bold #{article.title}
+                                hr
+                                .row.align-items-center.mb-3
+                                    .col-auto.pr-0
+                                        .img.border-radius-circle(style="background-image: url('" + article.author.profile_image + "');",  alt=article.author.slug)
+                                    .col-auto
+                                        h5.my-0.font-weight-bold #{article.author.first_name} #{article.author.last_name}
+                                        p.my-0.text-small #{article.author.title}
+                                        p.my-0.text-small Posted on #{moment(article.created).format("MMMM Do YYYY")}
 
-            .row
-                .col-md-8.col-sm-12
-                    img.img-fluid.mb-2(src=article.featured_image)
-                    p.font-weight-bold.text-small #{article.meta_description}
-                .col-md-4
-                    .sticky-top.sticky-under-nav.border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3
-                        h2.font-weight-bold Looking for an opportunity to work abroad?
-                        a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!
-                    //- include featured-articles-sidebar-test
-                    //- include ../../job/featured-jobs
+                .row
+                    .col-lg-8.col-sm-12.mb-3
+                        img.img-fluid.mb-2(src=article.featured_image)
+                        p.font-weight-bold.text-small #{article.meta_description}
+                        .row
+                            .col-12
+                                #read-more-container.mt-3.article-body.read-more !{article.body}
+                        a#read-more-button.btn.btn-lg.btn-link.btn-block(href='#') Continue Reading
 
-            .row
-                .col-md-8.col-sm-12
-                    .my-3.article-body !{article.body}
-                    hr.my-5
-                    include author-bio
-                    hr.my-5
-                //- .col-md-4
-                //-     .sticky-top.sticky-under-nav.border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3
-                //-         h2.font-weight-bold Looking for an opportunity to work abroad?
-                //-         a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!
-                //-     //- include featured-articles-sidebar-test
-                //-     //- include ../../job/featured-jobs
-                
-            .row
-                include featured-articles
-                
+                    .col-lg-4
+                        .border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3.mb-3
+                            h2.font-weight-bold Looking for an opportunity to work abroad?
+                            a.btn.btn-block.btn-primary(href='/search') Search Our Job Board!
+                        
+                        .border.border-pale-gray.border-radius-5.text-dark.bg-pale-gray.p-3
+                            include ../../job/featured-jobs-no-desc
+
+                .row
+                    .col-md-8.col-sm-12
+                        hr.my-5
+                        include author-bio
+                        hr.mt-5
+                    
+                //-     .col-md-4
+                        
+                    
+                .row.mt-5
+                    include featured-articles
+                    
 
 

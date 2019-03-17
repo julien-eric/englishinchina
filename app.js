@@ -15,7 +15,7 @@ const settings = require('simplesettings');
 const fcbAppId = settings.get('FCB_APP_ID');
 const gmapsKey = settings.get('GMAPS_API_KEY');
 const environment = settings.get('ENV');
-const jobCrawler = require('./jobCrawler/jobCrawler');
+const jobCrawler = require('./crawler/jobcrawler');
 let SCSS_DEBUG = true;
 
 mongoose.connect(settings.get('DB_URL'));
@@ -44,21 +44,20 @@ if (environment == 'production') {
     app.locals.analytics = true;
     SCSS_DEBUG = false;
 
-    const HOURS_BETWEEN_SESSIONS = utils.getRandomArbitrary(2, 3) * 60 * 60 * 1000;
-    const SUCCESS_COOLDOWN = utils.getRandomArbitrary(30, 60) * 1000;
-    const FAILURE_COOLDOWN = utils.getRandomArbitrary(15, 20) * 1000;
-    const INSERTS_PER_SESSION = utils.getRandomArbitrary(2, 4) * 1000;
+    const HOURS_BETWEEN_SESSIONS = utils.getRandomArbitrary(1, 2) * 60 * 60 * 1000;
+    const SUCCESS_COOLDOWN = utils.getRandomArbitrary(20, 40) * 1000;
+    const FAILURE_COOLDOWN = utils.getRandomArbitrary(10, 15) * 1000;
+    const INSERTS_PER_SESSION = utils.getRandomArbitrary(3, 6) * 1000;
     jobCrawler.init(null, INSERTS_PER_SESSION, SUCCESS_COOLDOWN, FAILURE_COOLDOWN, HOURS_BETWEEN_SESSIONS);
 
 } else {
+    // jobCrawler.init(null);
     process.on('unhandledRejection', (error, p) => {
         // application specific logging, throwing an error, or other logic here
         winstonWrapper.error('Unhandled Rejection at: Promise', p, 'reason:', error);
         winstonWrapper.error(error.stack);
     });
 }
-
-// jobCrawler.init(null, 10, 1000, 1000, 10000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -89,8 +88,7 @@ app.use(sassMiddleware({
     prefix: '/stylesheets'// Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
 }));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -129,6 +127,7 @@ const companyRoutes = require('./routes/companies')(passport);
 const blogRoutes = require('./routes/blog')(passport);
 const reviewRoutes = require('./routes/reviews')(passport);
 const jobRoutes = require('./routes/jobs')(passport);
+const payRoutes = require('./routes/pay')(passport);
 const provinceRoutes = require('./routes/provinces')(passport);
 
 app.use('/', routes);
@@ -139,6 +138,7 @@ app.use('/company', companyRoutes);
 app.use('/blog', blogRoutes);
 app.use('/review', reviewRoutes);
 app.use('/job', jobRoutes);
+app.use('/pay', payRoutes);
 app.use('/province', provinceRoutes);
 
 /** *************************************************************
@@ -156,6 +156,7 @@ app.use((error, req, res, next) => {
     // render the error page
     res.status(error.status || 500);
     res.render('error', {
+        user: req.user,
         message: error.message,
         error: error
     });

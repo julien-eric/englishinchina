@@ -1,0 +1,18 @@
+-var collapser = {}
+-collapser.name = 'Purchase Listing'
+-collapser.slug = 'purchase-listing'
+-collapser.mdi = 'mdi-credit-card'
+-collapser.show = 'show'
+
+include ../templates/collapsible-header
+    .row.mb-5.justify-content-center
+        .col-lg-6.text-center
+            h1.milkshake Premium!
+            p 
+                span.font-weight-bold The first posting is free.
+                |  How did it go? Did you get any applications from teachers? We surely hope so. If you want to post anymore offers you will need to set up a payment method. Find out what the options are by clicking on the button below.
+            //- a.btn.btn-lg.btn-block.btn-outline-primary.mdi.mdi-credit-card-plus(href='/pay')  Set Up Payment Method
+    .row.mb-5
+        each productSku in stripeInfo.productSkus
+            .col-lg-6
+                include checkout-redirect-button

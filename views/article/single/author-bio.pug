@@ -1,8 +1,15 @@
 .row.align-items-center.mb-3
-    .col-lg-3.col-md-4.col-sm-5.pr-0
-        .img.border-radius-circle(style="background-image: url('" + article.author.profile_image + "'); width:140px; height:140px;",  alt=article.author.slug)
-    .col
+    .col-lg-3.col-4.pr-0
+        .img.border-radius-circle.d-none.d-sm-block(style="background-image: url('" + article.author.profile_image + "'); width:140px; height:140px;",  alt=article.author.slug)
+        .img.border-radius-circle.d-block.d-sm-none(style="background-image: url('" + article.author.profile_image + "'); width:100px; height:100px;",  alt=article.author.slug)
+        //- .img.border-radius-circle(style="background-image: url('" + article.author.profile_image + "');",  alt=article.author.slug)
+    .col-lg-9.col-8.pr-0
         h5.font-weight-bold.my-0 #{article.author.first_name} #{article.author.last_name}
         p.font-weight-bold.my-0.text-small #{article.author.title}
         p.my-0.text-small #{article.author.bio}
-        //- p.font-weight-bold.my-0.text-small #{article.author.email}
+//- .row.align-items-center.mb-3
+//-     .col-lg-3.col-md-4.col-sm-5.pr-0
+//-     .col
+//-         h5.font-weight-bold.my-0 #{article.author.first_name} #{article.author.last_name}
+//-         p.font-weight-bold.my-0.text-small #{article.author.title}
+//-         p.my-0.text-small #{article.author.bio}

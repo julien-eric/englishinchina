@@ -3,14 +3,26 @@ let _ = require('underscore');
 module.exports = {
 
     /**
-   * isAuthenticated :  If user is authenticated in the session, call the next() to call the next request handler
-   Passport adds this method to request object. A middleware is allowed to add properties to
-   request and response objects
+   * addRawBody :  Adds the unparsed raw body to the request object
    * @param {*} req HTTP Request
    * @param {*} res HTTP Request
    * @param {*} next callback
-   * @return {Object} The return of the callback function
    */
+    addRawBody: function (req, res, next) {
+        req.setEncoding('utf8');
+
+        let data = '';
+
+        req.on('data', function (chunk) {
+            data += chunk;
+        });
+
+        req.on('end', function () {
+            req.rawBody = data;
+            next();
+        });
+    },
+
     isAuthenticated: function (req, res, next) {
         if (req.isAuthenticated()) {
             return next();

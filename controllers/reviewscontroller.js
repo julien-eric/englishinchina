@@ -89,7 +89,7 @@ module.exports = {
     },
 
     deleteReview (reviewId) {
-        return Review.find({ _id: reviewId }).remove();
+        return Review.find({ _id: reviewId }).remove().exec();
     },
 
     findNumberofReviews (schoolId) {

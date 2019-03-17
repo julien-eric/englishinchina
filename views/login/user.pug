@@ -16,7 +16,15 @@ block content
                 include teacher-details-form
 
         if user.employerDetails || userType == 'employer'
+            //- .row.justify-content-center.mb-2
+            //-     include paid-subscription
+
             .row.justify-content-center.mb-2
                 include employer-details-form
+            
+            if jobs
+                #user-job-list.row.justify-content-center.mb-2
+                    include employer-job-list
+
 
         

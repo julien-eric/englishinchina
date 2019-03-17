@@ -1,32 +1,42 @@
-.col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5
-    
-    a.collapse-link(data-toggle='collapse', href='#employer-profile-collapse', role='button', aria-expanded='false', aria-controls='employer-profile-collapse')
-        h1.text-muted.my-5.font-weight-bold 
-            i.mdi.mdi-book-open-outline(aria-hidden='true')
-            |  Employer Profile      
-            i#employer-profile-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
-    .collapse.show#employer-profile-collapse        
-        //- h3.my-5.text-dark.font-weight-bold Personal Information 
-        form(id='employer-details', class='employer-details', action='/user/employer-profile', method='POST')
+-var collapser = {}
+-collapser.name = 'Employer Profile'
+-collapser.slug = 'employer-profile'
+-collapser.mdi = 'mdi-briefcase-outline'
+-collapser.show = 'show'
 
-            if(redirectUrl)
-                    .form-group.d-none
-                            input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
+include ../templates/collapsible-header        
+    form(id='employer-details', class='employer-details', action='/user/employer-profile', method='POST')
 
-            .row
-            
-                .col-lg-6
-                    -var textInput = {}
-                    -textInput.id = 'name'
-                    -textInput.name = 'name'
-                    -textInput.formName = 'employer-details'
-                    -textInput.placeholder = 'Company Name'
-                    -textInput.label = 'Company Name'
-                    -textInput.required = true
-                    if user && user.employerDetails && user.employerDetails.name
-                        -textInput.value = user.employerDetails.name
-                    include ../templates/inputs/text-input
+        if(redirectUrl)
+                .form-group.d-none
+                        input(type='text', name='redirectUrl', placeholder='redirect', value=redirectUrl)
 
-            .row.my-3.pb-5  
-                .col-sm-12.col-lg-6.text-center.mt-5
-                        button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Save Changes
+        .row
+        
+            .col-lg-12
+                -var textInput = {}
+                -textInput.id = 'name'
+                -textInput.name = 'name'
+                -textInput.formName = 'employer-details'
+                -textInput.placeholder = 'Company Name'
+                -textInput.label = 'Company Name'
+                -textInput.required = true
+                if user && user.employerDetails && user.employerDetails.name
+                    -textInput.value = user.employerDetails.name
+                include ../templates/inputs/text-input
+
+            .col-lg-12
+                -var textArea = {}
+                -textArea.id = 'description'
+                -textArea.name = 'description'
+                -textArea.label = 'Description'
+                -textArea.placeholder = 'Description'
+                -textArea.rows = 5
+                -textArea.required = true
+                if user && user.employerDetails && user.employerDetails.description
+                    -textArea.value = user.employerDetails.description
+                include ../templates/inputs/text-area
+
+        .row.my-3.pb-5  
+            .col-sm-12.col-lg-6.text-center.mt-5
+                    button.btn.btn-md.btn-block.btn-primary.px-5.px-5.mb-1(type='submit') Save Changes

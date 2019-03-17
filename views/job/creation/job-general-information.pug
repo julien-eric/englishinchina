@@ -1,7 +1,3 @@
-
-//- h3.mt-5.text-dark.font-weight-bold.mb-2 Title & Location
-//- p.mb-2 First stop, your job ad! 
-
 .row
     .col-lg-6
         -var textInput = {}
@@ -63,9 +59,10 @@
         -select.required = true
         include ../../templates/inputs/generic-select 
 
+.row.mt-3
+    .col-lg-12
+        hr
 
-//- h3.mt-5.mb-3.text-dark.font-weight-bold Description
-//- p.mb-3 Please provide a description for the job. For example this could include things such as the work environment and the responsibilities of teachers in the school, as well as the size of the school and the amenities. Teachers might also be interested in learning a little bit about the city it is located in.
 .row
     .col-lg-12
         -var textArea = {}
@@ -79,8 +76,10 @@
         -textArea.required = true
         include ../../templates/inputs/text-area
             
-//- h3.mt-5.text-dark.font-weight-bold Picture
-//- p.mb-3 This picture will be featured both on the job ad in multiple lists accross Second Language World, but also as a center piece of the job advertisement page. It is recommended to upload a high resolution picture.
+.row.mt-3
+    .col-lg-12
+        hr
+
 .row
     -var fileInput = {}
     -fileInput.label = 'Choose photo'

@@ -1,16 +1,15 @@
-.row
-    each featuredArticle in featuredArticles
-        .col-lg-4
-            .card.text-right.h-100.border-0
-                .display-grid
-                    a.view.overlay.card-img(href='/blog/' + featuredArticle.slug)
-                        .image-container(style='background-image: url(' + featuredArticle.featured_image + ');')             
-                    .card-body.text-left.px-0
-                        h4.font-weight-bold.card-title 
-                            a.text-dark(href='/blog/' + featuredArticle.slug)
-                                | #{featuredArticle.title}
-                        hr
-                        p.card-text.overflow-3-lines #{featuredArticle.summary}
-                        p.card-text 
-                            span.font-weight-bold #{featuredArticle.author.first_name} #{featuredArticle.author.last_name} | 
-                            | #{moment(featuredArticle.created).format("MMMM DD YYYY")}
+each featuredArticle in featuredArticles
+    .col-lg-4
+        .card.text-right.h-100.border-0
+            .display-grid
+                a.view.overlay.card-img(href='/blog/' + featuredArticle.slug)
+                    .image-container(style='background-image: url(' + featuredArticle.featured_image + ');')             
+                .card-body.text-left.px-0
+                    h4.font-weight-bold.card-title 
+                        a.text-dark(href='/blog/' + featuredArticle.slug)
+                            | #{featuredArticle.title}
+                    hr
+                    p.card-text.overflow-3-lines #{featuredArticle.summary}
+                    p.card-text 
+                        span.font-weight-bold #{featuredArticle.author.first_name} #{featuredArticle.author.last_name} | 
+                        | #{moment(featuredArticle.created).format("MMMM DD YYYY")}

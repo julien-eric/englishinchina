@@ -1,0 +1,38 @@
+extends ../../layout
+block content
+    form#job-form(action='/job/edit', method='POST' novalidate='')
+        .form-group.d-none
+            input.form-control.form-control-lg(type='text', name='jobId', placeholder='ID', value=responseInfo.id)
+        .container
+
+            .row.mt-3
+                -var collapser = {}
+                -collapser.name = 'Job Information'
+                -collapser.slug = 'job-general-info'
+                -collapser.mdi = 'mdi-numeric-1-circle-outline'
+
+                include ../../templates/collapsible-header                           
+                    -formName = 'job-form'
+                    include job-general-information
+
+
+            .row.mt-3
+                -var collapser = {}
+                -collapser.name = 'Job Details'
+                -collapser.slug = 'job-details'
+                -collapser.mdi = 'mdi-numeric-2-circle-outline'
+
+                include ../../templates/collapsible-header     
+                    -formName = 'job-form'
+                    include job-details
+            
+            .row.mt-3
+                .col-12.mb-3.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5.py-3
+
+                    button#submit-job.btn.btn-lg.btn-block.btn-primary(type='submit') 
+                        i.mdi.mdi-autorenew(aria-hidden='true')
+                        |  Publish Changes
+                        
+                    #job-creation-error-box.danger-light.d-none.border.border-pale-gray.border-radius-5.bg-white.text-dark.mt-2.px-2.text-error.text-small
+                        p.mt-2.text-red#form-invalid There are fields that weren't filled properly, please take a look and retry!
+                        ul#job-creation-error-list

@@ -1,0 +1,32 @@
+-var collapser = {}
+-collapser.name = 'Jobs (' + jobs.length + ')'
+-collapser.slug = 'employer-job-list'
+-collapser.mdi = 'mdi-view-list'
+-collapser.show = 'show'
+
+include ../templates/collapsible-header 
+    -jobs.noApply = true;
+    each job in jobs
+        .row
+            .col-sm-12.col-md-12.col-lg-12.mb-3
+                include ../job/job-card    
+            .col-sm-12.col-md-12.col-lg-12.mb-3
+                .row
+                    .col-12
+                        a.mr-1.btn.btn-sm.btn-primary.text-white.mdi.mdi-eye.mb-0.px-3.px-lg-5(href='/job/' + job.url)  View
+                        a#edit-job.mr-1.btn.btn-sm.btn-primary.text-white.mdi.mdi-pencil.mb-0.px-3.px-lg-5(href='/job/edit/' + job.url)  Change
+                        button.delete-job.mr-1.btn.btn-sm.btn-warning.text-white.mdi.mdi-delete.mb-0.px-3.px-lg-5(type='button', data-url=job.url, data-title=job.title)  Delete
+            .col-sm-12.col-md-12.col-lg-12.mt-0.mb-1
+                hr
+    
+    .row.mb-3
+
+        .col-12.col-lg-6.mb-2
+            -var classes = ''
+            if user.employerDetails.availableListings <= 0 
+                -classes += 'disabled'
+            a.btn.btn-outline-primary.btn-block.mdi.mdi-plus(href='/job/add', class=classes)  Create Job (#{user.employerDetails.availableListings})
+    
+        .col-12.col-lg-6.mb-2
+            a.btn.btn-outline-primary.btn-block.mdi.mdi-credit-card-plus(href='/pay')  Purchase Job Listing
+

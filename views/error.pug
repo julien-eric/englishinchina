@@ -3,7 +3,24 @@ extends layout
 block content
   .container.my-5
     .row
-      .col-12
-        p= message
-        h2= error.status
-        pre #{error.stack}
+        .col-12.border.border-pale-gray.border-radius-5.bg-white.text-dark.px-3.px-md-5.py-5.text-center
+            h1.milkshake Sorry!
+            h1
+                i.text-primary.mdi.mdi-bug(aria-hidden='hidden')
+                i.text-primary.mdi.mdi-bug(aria-hidden='hidden')
+                i.text-primary.mdi.mdi-bug(aria-hidden='hidden')
+            h2.font-weight-bold Something went wrong!
+            .row.justify-content-center
+                .col-12.col-md-8.col-lg-6
+                    p We'll be looking into this, we get bugs as they happen, no need to send us anything... Feel free to contact us for any support using the form below in the footer. We will try to get back to you ASAP.
+
+    .row.mt-2
+        -var collapser = {}
+        -collapser.name = 'Details'
+        -collapser.slug = 'error-details'
+        -collapser.mdi = 'mdi-bug-outline'
+        include ./templates/collapsible-header
+            .col-12.pb-3
+                p= message
+                h2= error.status
+                pre #{error.stack}

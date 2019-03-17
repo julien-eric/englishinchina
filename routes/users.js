@@ -8,6 +8,7 @@ const scripts = require('../public/scripts');
 const utils = require('../utils');
 const countriesController = require('../controllers/countriescontroller');
 const usersController = require('../controllers/userscontroller');
+const jobsController = require('../controllers/jobscontroller');
 const crypto = require('crypto');
 const bCrypt = require('bcrypt-nodejs');
 
@@ -323,9 +324,16 @@ module.exports = function (passport) {
                 let userType = utils.validateParam(req.query.type);
                 let countries = await countriesController.getCountries();
                 let redirectUrl = req.query.redirectUrl;
+                let jobs;
+
+                if (req.user && req.user.employerDetails) {
+                    jobs = await jobsController.getJobsByUser(req.user.id);
+                }
+
                 res.render('login/user', {
-                    title: 'Teacher Profile',
+                    title: 'My Profile | Second Language World',
                     user: req.user,
+                    jobs,
                     redirectUrl,
                     userType,
                     countries,
@@ -405,6 +413,7 @@ module.exports = function (passport) {
                 userParams.id = utils.validateParam(req.user.id);
                 userParams.employerDetails = {};
                 userParams.employerDetails.name = req.body.name;
+                userParams.employerDetails.description = req.body.description;
                 await usersController.updateUser(userParams.id, userParams);
 
                 let redirectUrl = utils.validateParam(req.body.redirectUrl);
