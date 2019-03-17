@@ -81,6 +81,8 @@ JobCrawler.prototype.visitPage = async function (url, callback) {
     if (url.indexOf('job-advert') != -1) {
         let page = await pagesController.getPage(url);
         if (page) {
+            let crawl = _.bind(callback, this);
+            setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_SUCCESS);
             return;
         } else {
             pagesController.createPage(url);
@@ -110,13 +112,12 @@ JobCrawler.prototype.visitPage = async function (url, callback) {
             this.collectInternalLinks($);
         }
 
+        let crawl = _.bind(callback, this);
         if (result && result.error) {
-            let crawl = _.bind(callback, this);
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_PROBLEM);
         } else {
             this.numJobsAdded++;
             winston.silly('Added Job, waiting ' + this.SEARCH_ADD_COOLDOWN_SUCCESS + 'ms');
-            let crawl = _.bind(callback, this);
             setTimeout(crawl, this.SEARCH_ADD_COOLDOWN_SUCCESS);
         }
 
