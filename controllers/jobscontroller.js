@@ -102,13 +102,18 @@ JobsController.prototype.prepareJobInfo = async function (user, jobParams) {
         jobParams.pictureFileName = jobParams.pictureFileNamePrevious;
     }
 
+    let email = user.email;
+    if (jobParams.email != user.email) {
+        email = jobParams.email;
+    }
+
     return {
         title: jobParams.title,
         kicker: jobParams.kicker,
         pictureUrl: jobParams.pictureUrl,
         pictureFileName: jobParams.pictureFileName,
         url: utils.generateUrl(jobParams.title),
-        email: user.email,
+        email,
         description: jobParams.description,
         user,
         school: jobParams.schoolId,

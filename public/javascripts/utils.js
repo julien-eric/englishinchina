@@ -182,5 +182,21 @@ $(document).ready(() => {
             }
         });
     });
+
+    $('#button-copy').tooltip({ trigger: 'manual', animation: true })
+    $('.copy-to-clip').on('click', function () {
+        const el = document.createElement('textarea');
+        el.value = 'SECONDLANGUAGE';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        $('#button-copy').tooltip('show');
+        setTimeout(function () {
+            $('#button-copy').tooltip('hide');
+
+        }, 2000);
+    });
+
 });
 

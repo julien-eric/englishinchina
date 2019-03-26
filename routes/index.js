@@ -209,6 +209,33 @@ module.exports = function (passport) {
         }
     });
 
+    router.get('/tefl-express', async (req, res, next) => {
+
+        try {
+
+            let provinces = await provincesController.getAllProvinces();
+            let popularCities = await citiesController.getMostPopularCities();
+            let popularProvinces = await provincesController.getMostPopularProvinces();
+
+            const splashText = require('../splash-text.json');
+            res.render('home/tefl-express', {
+                title: 'Second Language World',
+                user: req.user,
+                provinces,
+                main: true,
+                pictureInfo: pictureinfo,
+                jadefunctions,
+                popularCities,
+                popularProvinces,
+                splashText,
+                currentPage: 1,
+                scripts: [scripts.librater, scripts.util, scripts.rating, scripts.typeahead, scripts.typeaheadwrapper]
+            });
+        } catch (error) {
+            next(error);
+        }
+    });
+
     router.get('/cities/:provincecode', async (req, res) => {
         const provCode = req.params.provincecode;
         let cities = await citiesController.getProvinceCitiesByCode(provCode);

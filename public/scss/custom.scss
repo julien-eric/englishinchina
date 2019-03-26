@@ -696,6 +696,11 @@ input[type=range]+.thumb {
     cursor: pointer;
 }
 
+.image-container.contain { 
+    background-size: 42%;
+    background-color: $slw-pale-gray;
+}
+
 .image-container.small {
     height: 4rem;
 }

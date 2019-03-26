@@ -1,0 +1,17 @@
+.col-lg-8.mb-5
+    .row
+        .col-12.col-md-4.mb-3
+            a.view.overlay.card-img(href=tefl.link)
+                .d-none.d-md-block.image-container.border-radius-top-5.lazy-background(style='background-image: url(' + tefl.img + ');')           
+                .d-block.d-md-none.image-container.contain.border-radius-top-5.lazy-background(style='background-image: url(' + tefl.img + ');')           
+        .col-12.col-md-8.text-left
+            h4.font-weight-bold.card-title.px-0 
+                a.text-dark.text-capitalize(href=tefl.link)
+                    | #{tefl.title}
+                    span.badge.badge-warning.ml-2 #{tefl.price}
+            hr
+            p.text-small #{tefl.description}
+            if tefl.linkbuy
+                a.btn.btn-primary.btn-white.mr-2(href=tefl.linkbuy) Buy Now!
+            a.btn.btn-outline-primary.btn-white.mr-2(href=tefl.link) More Info
+            
