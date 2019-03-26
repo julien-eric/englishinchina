@@ -1,0 +1,126 @@
+extends ../layout
+block content
+    .container-fluid
+        #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+                #splash.splash.row.justify-content-center
+                    .splash-image-container
+                        .splash-image(style="background-image: url('./images/teflexpress.jpg');")
+                    .splash-text.col-sm-12.col-md-10.col-lg-6.mb-5.mt-5
+                        .row
+                            .col-12.mx-auto.mt-5.text-center
+                                -var step = {}
+                                -step.icon = 'mdi-school'
+                                include step-indicator
+                        .row
+                            .col-12.mx-auto.mb-2.text-center
+                                h1.font-weight-bold TEFL Certificate Partners
+                            .col-12.mx-auto.mb-2.text-center
+                                h3.font-weight-bold Widely Accepted and Highly Accredited Online TEFL Certification Courses     
+                        
+     
+    .bg-white
+        .container.bg-white
+            .row.justify-content-center
+                .col-10.col-lg-4.mx-auto.text-center
+                    h1.font-weight-bold
+                        img.img-fluid(src='./images/teflexpresslogo.png')
+                        //- span.text-primary TEFL Express
+                        
+            .row.justify-content-center
+                //- .col-lg-8.col-sm-12.col-md-10.mx-auto.text-center
+                //-     p You don't need to have any previous teaching experience before taking this course, and after graduation you'll be able to apply for thousands of TEFL jobs worldwide. This reputable course is your passport to a new career, teaching and travelling the globe.
+                .col-12.col-md-10.text-center
+                    h3 Use our 
+                        span.font-weight-bold Voucher Code 
+                        | to get 15% discount on TEFL Express courses!
+                .col-10.col-md-10.mb-3.text-center
+                    p Enter this code during signup or before payment on teflexpress.com when you are ready to purchase a TEFL class to obtain a 15% discount on the listed prices.
+                .col-12.col-md-8.mx-auto.mb-5.text-center
+                    .input-group.input-group-lg.mb-3
+                        .input-group-prepend
+                            span#addon-wrapping.input-group-text 
+                                i.mdi.mdi-ticket-percent(aria-hidden='true')
+                        input.copy-to-clip.text-center.font-weight-bold.form-control.bg-light-secondary(type='text',value='SECONDLANGUAGE', placeholder="SECONDLANGUAGE", aria-label="Recipient's username", aria-describedby='button-addon2')
+                        .input-group-append
+                            button#button-copy.copy-to-clip.btn.btn-primary(type='button', data-toggle="tooltip" data-placement="top" title="Copied to clipboard") Copy
+
+    .container-fluid.bg-pale-gray
+        .container  
+            .row.justify-content-center
+                .col-auto
+                    a.collapse-link(data-toggle='collapse', href='#location-collapse', role='button', aria-expanded='false', aria-controls='location-collapse')
+                        h1.text-muted.my-5.font-weight-bold 
+                            | Video Based Courses      
+                            i#location-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+    .container-fluid.bg-white
+        .container.pt-5                  
+            .row.collapse.show#location-collapse.justify-content-center
+                        
+                -var tefl = {};
+                -tefl.img = './images/tefl-express-course-150-tefl-deluxe.jpg';
+                -tefl.title = '150 hour Comprehensive Teacher Kit';
+                -tefl.description = 'The 150 Hour Comprehensive Teacher Kit provides training for both new and experienced teachers to enhance the quality of their teaching and to update them on the current trends in TEFL. This kit includes video-based instruction with essential modules on Lesson Planning, Approach & Methodology, among others. In addition to your online course, you receive 5 e-books to continue your professional development.';
+                -tefl.link = 'https://www.teflexpress.co.uk/accredited-tefl-courses/tefl-courses-description.php/150-hour-comprehensive-teacher-kit';
+                -tefl.linkbuy = 'https://www.teflexpress.co.uk/tefl-online-course-registration.php?type=WWpJMWMyRlhOV3c9&cid=VFZSck1nPT0=';
+                -tefl.price = '£ 379';
+                include tefl-express-item
+                
+                -var tefl = {};
+                -tefl.img = './images/150-hour-teyl-professional-course-icon.jpg';
+                -tefl.title = '150 hour TEYL Professional Course';
+                -tefl.description = 'This course is designed to prepare you for any student. It comes with our 125 hour TEFL Essentials content, which includes all you need to jump into your first day teaching, plus our new 25 hour Teaching English to Young Learners Course. If you\'re interested in teaching in Asia, or want to stand out from the other applicants in other markets, this TEYL Course addition is a must-have!';
+                -tefl.link = 'https://www.teflexpress.co.uk/accredited-tefl-courses/tefl-courses-description.php/150-hour-teyl-professional-course';
+                -tefl.linkbuy = 'https://www.teflexpress.co.uk/tefl-online-course-registration.php?type=WWpJMWMyRlhOV3c9&cid=VFZSck5BPT0=';
+                -tefl.price = '£ 190';
+                include tefl-express-item
+                
+                -var tefl = {};
+                -tefl.img = './images/tefl-express-course-125-tefl-essentials.jpg';
+                -tefl.title = '125 hour TEFL Essentials';
+                -tefl.description = 'The 125 Hour TEFL Essentials Course is a solid introduction to the world of TEFL. This video-based course will teach you about various aspects of this career including classroom management, teaching lexis & phonology, a grammar refresher, among others.';
+                -tefl.link = 'https://www.teflexpress.co.uk/accredited-tefl-courses/tefl-courses-description.php/125-hour-tefl-essentials-accredited';
+                -tefl.linkbuy = 'https://www.teflexpress.co.uk/tefl-online-course-registration.php?type=WWpJMWMyRlhOV3c9&cid=VFZSak1BPT0=';
+                -tefl.price = '£ 145';
+                include tefl-express-item
+
+    .container-fluid.bg-pale-gray
+        .container  
+            .row.justify-content-center
+                .col-auto
+                    a.collapse-link(data-toggle='collapse', href='#standard-collapse', role='button', aria-expanded='false', aria-controls='standard-collapse')
+                        h1.text-muted.my-5.font-weight-bold 
+                            | Standard TEFL Courses      
+                            i#standard-collapse-chevron.mdi.mdi-chevron-up(aria-hidden='true')
+                         
+    .container-fluid.bg-white
+        .container.pt-5  
+            .row.collapse.show#standard-collapse.justify-content-center
+
+                    -var tefl = {};
+                    -tefl.img = './images/te-standard-160-hr.jpg';
+                    -tefl.title = '160 hour Premier Plus TEFL Course';
+                    -tefl.description = 'This course will make you a TEFL expert. You will learn about using textbooks to their fullest potential, how to teach...';
+                    -tefl.link = 'https://www.teflexpress.co.uk/accredited-tefl-courses/tefl-courses-description.php/160-hour-premier-plus-tefl-course';
+                    -tefl.price = '£ 219';
+                    include tefl-express-item
+                    
+                    -var tefl = {};
+                    -tefl.img = './images/te-standard-140-hr.jpg';
+                    -tefl.title = 'Scholar Level 5 140 hour TEFL Cambridge Course';
+                    -tefl.description = 'TEFL Cambridge offers a 140 hour TEFL course featuring in-depth content, resources and sample lesson plans. You\'ll learn fundamentals, teaching kids & teens, teaching advanced students, teaching with imagination, and modules on the Cambridge ESOL TKT test.';
+                    -tefl.link = 'https://www.teflcambridge.com/coursedetail/Scholar_Level_5_140_Hour_TEFL_Course';
+                    include tefl-express-item
+                    
+                    -var tefl = {};
+                    -tefl.img = './images/te-standard-120-hr.jpg';
+                    -tefl.title = '120 hour Advanced TEFL Course';
+                    -tefl.description = 'Our 120 hour TEFL course presents in-depth content in a simple and straightforward manner with text and images. You will...';
+                    -tefl.link = 'https://www.teflexpress.co.uk/accredited-tefl-courses/tefl-courses-description.php/120-hour-advanced-tefl-course';
+                    -tefl.price = '£ 199';
+                    include tefl-express-item
+    
+
+
+            
+
+    
